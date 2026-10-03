@@ -1,0 +1,188 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "Linkora player"
+    },
+    {
+      "name": "entry_ability_desc",
+      "value": "Linkora main ability"
+    },
+    {
+      "name": "entry_ability_label",
+      "value": "Linkora"
+    },
+    {
+      "name": "internet_permission_reason",
+      "value": "用于访问您主动添加的网络媒体地址"
+    },
+    {
+      "name": "media_library_permission_reason",
+      "value": "用于读取并展示设备中的视频，建立本地媒体库"
+    },
+    {
+      "name": "nav_library",
+      "value": "媒体库"
+    },
+    {
+      "name": "nav_local",
+      "value": "本地"
+    },
+    {
+      "name": "nav_stream",
+      "value": "串流"
+    },
+    {
+      "name": "nav_network",
+      "value": "网络"
+    },
+    {
+      "name": "nav_history",
+      "value": "播放记录"
+    },
+    {
+      "name": "nav_settings",
+      "value": "设置"
+    },
+    {
+      "name": "page_network_title",
+      "value": "网络资源"
+    },
+    {
+      "name": "page_network_subtitle",
+      "value": "直链播放与远程媒体位置"
+    },
+    {
+      "name": "page_history_title",
+      "value": "播放记录"
+    },
+    {
+      "name": "page_history_subtitle",
+      "value": "最近打开的本地与网络媒体"
+    },
+    {
+      "name": "page_settings_title",
+      "value": "设置"
+    },
+    {
+      "name": "page_settings_subtitle",
+      "value": "播放体验与网络策略"
+    },
+    {
+      "name": "section_media_sources",
+      "value": "媒体来源"
+    },
+    {
+      "name": "section_recent_media",
+      "value": "最近播放"
+    },
+    {
+      "name": "section_local_media",
+      "value": "本机视频"
+    },
+    {
+      "name": "source_local_title",
+      "value": "本地媒体"
+    },
+    {
+      "name": "source_local_description",
+      "value": "选择设备中的视频文件"
+    },
+    {
+      "name": "source_network_title",
+      "value": "网络资源"
+    },
+    {
+      "name": "source_network_description",
+      "value": "直链与远程服务器"
+    },
+    {
+      "name": "player_now_playing",
+      "value": "正在播放"
+    },
+    {
+      "name": "player_unavailable",
+      "value": "无法播放"
+    },
+    {
+      "name": "player_generic_error",
+      "value": "播放器未能打开媒体。"
+    },
+    {
+      "name": "player_fullscreen",
+      "value": "全屏"
+    },
+    {
+      "name": "player_exit_fullscreen",
+      "value": "退出"
+    },
+    {
+      "name": "player_volume",
+      "value": "音量"
+    },
+    {
+      "name": "player_mute",
+      "value": "静音"
+    },
+    {
+      "name": "player_gesture_seek",
+      "value": "播放进度"
+    },
+    {
+      "name": "player_gesture_brightness",
+      "value": "亮度"
+    },
+    {
+      "name": "player_gesture_volume",
+      "value": "音量"
+    },
+    {
+      "name": "player_gesture_fast_playback",
+      "value": "2× 快速播放"
+    },
+    {
+      "name": "player_connection_status",
+      "value": "连接状态"
+    },
+    {
+      "name": "player_video_size",
+      "value": "视频尺寸"
+    },
+    {
+      "name": "status_failed",
+      "value": "失败"
+    },
+    {
+      "name": "status_buffering",
+      "value": "缓冲中"
+    },
+    {
+      "name": "status_playing",
+      "value": "播放中"
+    },
+    {
+      "name": "status_paused",
+      "value": "已暂停"
+    },
+    {
+      "name": "status_ready",
+      "value": "已就绪"
+    },
+    {
+      "name": "status_completed",
+      "value": "播放完成"
+    },
+    {
+      "name": "status_closed",
+      "value": "已关闭"
+    },
+    {
+      "name": "status_idle",
+      "value": "等待播放"
+    },
+    {
+      "name": "status_connecting",
+      "value": "正在连接"
+    }
+  ]
+}

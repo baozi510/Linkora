@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "linkora_core",
+    "type": "har",
+    "deviceTypes": [
+      "phone",
+      "tablet"
+    ]
+  }
+}

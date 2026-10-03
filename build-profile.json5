@@ -1,0 +1,74 @@
+﻿{
+    "app":  {
+                "signingConfigs":  [
+
+                                   ],
+                "products":  [
+                                 {
+                                     "name":  "default",
+                                     "compileSdkVersion":  "26.0.0",
+                                     "compatibleSdkVersion":  "6.0.0(20)",
+                                     "runtimeOS":  "HarmonyOS",
+                                     "targetSdkVersion":  "26.0.0"
+                                 }
+                             ],
+                "buildModeSet":  [
+                                     {
+                                         "name":  "debug"
+                                     },
+                                     {
+                                         "name":  "release"
+                                     }
+                                 ]
+            },
+    "modules":  [
+                    {
+                        "name":  "linkora_media_probe",
+                        "srcPath":  "./linkora_media_probe",
+                        "targets":  [
+                                        {
+                                            "name":  "default",
+                                            "applyToProducts":  [
+                                                                    "default"
+                                                                ]
+                                        }
+                                    ]
+                    },
+                    {
+                        "name":  "entry",
+                        "srcPath":  "./entry",
+                        "targets":  [
+                                        {
+                                            "name":  "default",
+                                            "applyToProducts":  [
+                                                                    "default"
+                                                                ]
+                                        }
+                                    ]
+                    },
+                    {
+                        "name":  "linkora_core",
+                        "srcPath":  "./linkora_core",
+                        "targets":  [
+                                        {
+                                            "name":  "default",
+                                            "applyToProducts":  [
+                                                                    "default"
+                                                                ]
+                                        }
+                                    ]
+                    },
+                    {
+                        "name":  "linkora_proxy",
+                        "srcPath":  "./linkora_proxy",
+                        "targets":  [
+                                        {
+                                            "name":  "default",
+                                            "applyToProducts":  [
+                                                                    "default"
+                                                                ]
+                                        }
+                                    ]
+                    }
+                ]
+}

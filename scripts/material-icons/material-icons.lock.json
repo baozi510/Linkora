@@ -1,0 +1,24 @@
+{
+  "source": {
+    "fontUrl": "https://raw.githubusercontent.com/google/material-design-icons/master/variablefont/MaterialSymbolsOutlined%5BFILL%2CGRAD%2Copsz%2Cwght%5D.ttf",
+    "codepointsUrl": "https://raw.githubusercontent.com/google/material-design-icons/master/variablefont/MaterialSymbolsOutlined%5BFILL%2CGRAD%2Copsz%2Cwght%5D.codepoints",
+    "weight": 400,
+    "grade": 0,
+    "opticalSize": 24
+  },
+  "sourceFontSha256": "9370e7137b1a952fb00c5caf770291ea24be807dc0940983f0e3fd81dab0c054",
+  "sourceCodepointsSha256": "cbea7bfbd34d1d4f8dd2628c34587e447f935cf4f2219b264988da48736eca75",
+  "iconCount": 48,
+  "outputs": [
+    {
+      "file": "entry\\src\\main\\resources\\rawfile\\font\\linkora_material_symbols_outlined.ttf",
+      "bytes": 8320,
+      "fill": 0
+    },
+    {
+      "file": "entry\\src\\main\\resources\\rawfile\\font\\linkora_material_symbols_filled.ttf",
+      "bytes": 1732,
+      "fill": 1
+    }
+  ]
+}

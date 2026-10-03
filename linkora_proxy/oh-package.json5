@@ -1,0 +1,1 @@
+{"name":"linkora_proxy","version":"0.1.0","description":"Experimental loopback network file proxy.","main":"Index.ets","license":"Proprietary","dependencies":{"linkora_core":"file:../linkora_core"}}

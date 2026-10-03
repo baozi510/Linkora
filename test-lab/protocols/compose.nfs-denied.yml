@@ -1,0 +1,4 @@
+services:
+  nfs-readonly:
+    environment:
+      PERMITTED: 192.0.2.*

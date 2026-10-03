@@ -1,0 +1,4 @@
+data/media/*
+!data/media/.gitkeep
+secrets/*
+!secrets/.gitkeep

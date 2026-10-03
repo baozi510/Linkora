@@ -1,0 +1,6 @@
+{
+  "name": "liblinkora_ftp.so",
+  "version": "1.0.0",
+  "description": "Linkora native FTP client",
+  "main": "index.d.ts"
+}

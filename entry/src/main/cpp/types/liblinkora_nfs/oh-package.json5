@@ -1,0 +1,6 @@
+{
+  "name": "liblinkora_nfs.so",
+  "version": "1.0.0",
+  "description": "Linkora native NFS client",
+  "main": "index.d.ts"
+}

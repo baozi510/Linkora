@@ -1,0 +1,112 @@
+name: linkora-protocol-lab
+
+services:
+  webdav-auth:
+    image: ghcr.io/hacdias/webdav@sha256:ec929cdb51f884a0ea826679258bbf8edd28b66c9dc93614a5a60fa71e0ada19
+    command: ["-c", "/config.yml"]
+    ports:
+      - "19080:6065"
+    volumes:
+      - ./configs/webdav-auth.yml:/config.yml:ro
+      - ./data/media:/data:ro
+    restart: unless-stopped
+
+  webdav-guest:
+    image: ghcr.io/hacdias/webdav@sha256:ec929cdb51f884a0ea826679258bbf8edd28b66c9dc93614a5a60fa71e0ada19
+    command: ["-c", "/config.yml"]
+    ports:
+      - "19081:6065"
+    volumes:
+      - ./configs/webdav-guest.yml:/config.yml:ro
+      - ./data/media:/data:ro
+    restart: unless-stopped
+
+  smb-auth:
+    image: dockurr/samba@sha256:404f91bdf317d390241a41165579cd25199f34171b44677d877c75dc40184042
+    environment:
+      NAME: Media
+      USER: linkora
+      PASS: LinkoraTest123!
+      RW: "false"
+    ports:
+      - "1445:445"
+    volumes:
+      - ./data/media:/shared:ro
+    restart: unless-stopped
+
+  smb-guest:
+    image: dockurr/samba@sha256:404f91bdf317d390241a41165579cd25199f34171b44677d877c75dc40184042
+    environment:
+      NAME: GuestMedia
+      USER: labinternal
+      PASS: LabInternalOnly123!
+      RW: "false"
+    ports:
+      - "1446:445"
+    volumes:
+      - ./configs/samba-guest.conf:/etc/samba/smb.conf:ro
+      - ./data/media:/shared:ro
+    restart: unless-stopped
+
+  sftp-password:
+    image: atmoz/sftp@sha256:0960390462a4441dbb63698d7c185b76a41ffcee7b78ff4adf275f3e66f9c475
+    command: "linkora:LinkoraTest123!:1000:1000:media"
+    ports:
+      - "12222:22"
+    volumes:
+      - ./data/media:/home/linkora/media:ro
+      - ${SFTP_SECRET_DIR:-/var/lib/linkora-protocol-lab/secrets}/ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key:ro
+    restart: unless-stopped
+
+  sftp-key:
+    image: atmoz/sftp@sha256:0960390462a4441dbb63698d7c185b76a41ffcee7b78ff4adf275f3e66f9c475
+    command: "linkora::1000:1000:media"
+    ports:
+      - "12223:22"
+    volumes:
+      - ./data/media:/home/linkora/media:ro
+      - ${SFTP_SECRET_DIR:-/var/lib/linkora-protocol-lab/secrets}/sftp_client_ed25519.pub:/home/linkora/.ssh/keys/sftp_client_ed25519.pub:ro
+      - ${SFTP_SECRET_DIR:-/var/lib/linkora-protocol-lab/secrets}/ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key:ro
+    restart: unless-stopped
+
+  ftp-password:
+    image: fauria/vsftpd@sha256:6d71d7c7f1b0ab2844ec7dc7999a30aef6d758b6d8179cf5967513f87c79c177
+    environment:
+      FTP_USER: linkora
+      FTP_PASS: LinkoraTest123!
+      PASV_ADDRESS: ${LAB_HOST_IP:-127.0.0.1}
+      PASV_MIN_PORT: 21100
+      PASV_MAX_PORT: 21109
+      REVERSE_LOOKUP_ENABLE: "NO"
+      LOG_STDOUT: enabled
+    ports:
+      - "12121:21"
+      - "21100-21109:21100-21109"
+    volumes:
+      - ./data/media:/home/vsftpd/linkora:ro
+    restart: unless-stopped
+
+  ftp-guest:
+    build:
+      context: ./docker/ftp-anonymous
+    environment:
+      PASV_ADDRESS: ${LAB_HOST_IP:-127.0.0.1}
+    ports:
+      - "12122:21"
+      - "21200-21209:21200-21209"
+    volumes:
+      - ./data/media:/srv/ftp:ro
+    restart: unless-stopped
+
+  nfs-readonly:
+    image: itsthenetwork/nfs-server-alpine@sha256:7fa99ae65c23c5af87dd4300e543a86b119ed15ba61422444207efc7abd0ba20
+    privileged: true
+    environment:
+      SHARED_DIRECTORY: /nfsshare
+      READ_ONLY: "true"
+      SYNC: "true"
+    ports:
+      - "12049:2049"
+    volumes:
+      - ${NFS_DATA_DIR:-/var/lib/linkora-protocol-lab/media}:/nfsshare:ro
+    restart: unless-stopped

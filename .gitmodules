@@ -1,0 +1,9 @@
+[submodule "entry/src/main/cpp/third_party/libnfs"]
+	path = entry/src/main/cpp/third_party/libnfs
+	url = https://github.com/sahlberg/libnfs.git
+[submodule "entry/src/main/cpp/third_party/libsmb2"]
+	path = entry/src/main/cpp/third_party/libsmb2
+	url = https://github.com/sahlberg/libsmb2.git
+[submodule "entry/src/main/cpp/third_party/mbedtls/framework"]
+	path = entry/src/main/cpp/third_party/mbedtls/framework
+	url = https://github.com/Mbed-TLS/mbedtls-framework.git

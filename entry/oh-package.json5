@@ -1,0 +1,16 @@
+{
+  "name": "entry",
+  "version": "1.0.0",
+  "description": "Linkora entry module.",
+  "main": "",
+  "author": "",
+  "license": "Proprietary",
+  "dependencies": {"linkora_media_probe":"file:../linkora_media_probe",
+    "linkora_core": "file:../linkora_core",
+    "liblinkora_smb.so": "file:./src/main/cpp/types/liblinkora_smb",
+    "liblinkora_sftp.so": "file:./src/main/cpp/types/liblinkora_sftp",
+    "liblinkora_nfs.so": "file:./src/main/cpp/types/liblinkora_nfs",
+    "liblinkora_ftp.so": "file:./src/main/cpp/types/liblinkora_ftp",
+    "linkora_proxy": "file:../linkora_proxy"
+  }
+}

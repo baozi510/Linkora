@@ -1,0 +1,6 @@
+{
+  "name": "liblinkora_sftp.so",
+  "version": "1.0.0",
+  "description": "Linkora SFTP native adapter",
+  "types": "./index.d.ts"
+}

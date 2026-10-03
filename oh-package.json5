@@ -1,0 +1,13 @@
+{
+  "modelVersion": "5.0.0",
+  "name": "linkora",
+  "version": "0.1.0",
+  "description": "A native HarmonyOS network media player.",
+  "main": "",
+  "author": "",
+  "license": "Proprietary",
+  "dependencies": {},
+  "devDependencies": {
+    "@ohos/hypium": "1.0.18"
+  }
+}

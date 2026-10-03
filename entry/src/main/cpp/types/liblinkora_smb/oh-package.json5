@@ -1,0 +1,7 @@
+{
+  "name": "liblinkora_smb.so",
+  "version": "1.0.0",
+  "description": "Linkora SMB2/3 native adapter",
+  "types": "./index.d.ts"
+}
+

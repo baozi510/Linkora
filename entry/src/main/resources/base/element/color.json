@@ -1,0 +1,140 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "player_background",
+      "value": "#0B0D12"
+    },
+    {
+      "name": "navigation_background",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "surface",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "surface_raised",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "surface_input",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "control_surface",
+      "value": "#E7EAEE"
+    },
+    {
+      "name": "track",
+      "value": "#D9DDE2"
+    },
+    {
+      "name": "primary",
+      "value": "#1E88E5"
+    },
+    {
+      "name": "primary_soft",
+      "value": "#1E88E5"
+    },
+    {
+      "name": "accent_blue",
+      "value": "#0A59F7"
+    },
+    {
+      "name": "accent_purple",
+      "value": "#7357D9"
+    },
+    {
+      "name": "accent_green",
+      "value": "#16855B"
+    },
+    {
+      "name": "accent_orange",
+      "value": "#C85D12"
+    },
+    {
+      "name": "accent_pink",
+      "value": "#C43D75"
+    },
+    {
+      "name": "accent_system_foreground",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "accent_blue_foreground",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "accent_purple_foreground",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "accent_green_foreground",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "accent_orange_foreground",
+      "value": "#000000"
+    },
+    {
+      "name": "accent_pink_foreground",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "text_primary",
+      "value": "#171A21"
+    },
+    {
+      "name": "text_secondary",
+      "value": "#626A77"
+    },
+    {
+      "name": "text_muted",
+      "value": "#737B88"
+    },
+    {
+      "name": "text_disabled",
+      "value": "#9198A4"
+    },
+    {
+      "name": "text_control",
+      "value": "#303640"
+    },
+    {
+      "name": "text_status",
+      "value": "#454C58"
+    },
+    {
+      "name": "success",
+      "value": "#147A46"
+    },
+    {
+      "name": "warning_text",
+      "value": "#9A5B00"
+    },
+    {
+      "name": "error_text",
+      "value": "#D32F2F"
+    },
+    {
+      "name": "destructive_action",
+      "value": "#A8241A"
+    },
+    {
+      "name": "error_muted",
+      "value": "#9F3A38"
+    },
+    {
+      "name": "error_surface",
+      "value": "#FFF1F1"
+    },
+    {
+      "name": "error_border",
+      "value": "#F2A7A7"
+    }
+  ]
+}

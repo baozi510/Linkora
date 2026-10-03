@@ -1,0 +1,9 @@
+{
+  "name": "linkora_core",
+  "version": "1.0.0",
+  "description": "Portable Linkora media and source feature contracts.",
+  "main": "Index.ets",
+  "author": "",
+  "license": "Proprietary",
+  "dependencies": {}
+}
