@@ -8,6 +8,7 @@ function walk(dir) {
   if (!fs.existsSync(dir)) return [];
   const result = [];
   for (const name of fs.readdirSync(dir)) {
+    if (['.test', 'build', 'oh_modules'].includes(name)) continue;
     const full = path.join(dir, name);
     const stat = fs.statSync(full);
     if (stat.isDirectory()) result.push(...walk(full));
