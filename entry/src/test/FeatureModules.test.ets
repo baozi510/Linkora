@@ -36,6 +36,7 @@ import {
   PlaybackPort,
   PlaybackPortObserver,
   PlaybackStatus,
+  PlayerBackendPreference,
   PlayerFeatureController,
   PortPlaybackState,
   RecentMediaItem,
@@ -1133,7 +1134,9 @@ export default function featureModulesTest(): void {
       expect(repository.settings.accentColor).assertEqual(AppAccentColor.SYSTEM);
       controller.setLocalVideoExtensions(['mkv', '.MP4']);
       controller.setLocalSubtitleExtensions(['SRT', '.ass']);
+      controller.setPlayerBackendPreference(PlayerBackendPreference.MPV);
       await settle();
+      expect(repository.settings.playerBackendPreference).assertEqual(PlayerBackendPreference.MPV);
       expect(repository.settings.localVideoExtensions[0]).assertEqual('.mkv');
       expect(repository.settings.localSubtitleExtensions[0]).assertEqual('.srt');
       controller.dispose();

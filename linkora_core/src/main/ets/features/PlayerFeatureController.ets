@@ -168,7 +168,8 @@ export class PlayerFeatureController {
   }
 
   private async open(requestId: number): Promise<void> {
-    if (this.source.kind === MediaSourceKind.NETWORK_LINK && this.accessPolicy !== null) {
+    if ((this.source.kind === MediaSourceKind.NETWORK_LINK || this.source.kind === MediaSourceKind.REMOTE_FILE) &&
+      this.accessPolicy !== null) {
       const failure: AppFailure | null = await this.accessPolicy.check();
       if (!this.active || requestId !== this.requestId) {
         return;

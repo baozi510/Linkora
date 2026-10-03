@@ -1,11 +1,15 @@
 import { describe, expect, it } from '@ohos/hypium';
 import {
   HdrType,
+  MediaFormat,
   MediaInfo,
   MediaProbeDiagnostics,
   MediaSource,
   MediaSourceKind,
+  PlaybackBackendSelector,
   PlayerBackendCapabilities,
+  PlayerBackendKind,
+  PlayerBackendPreference,
   ProbeCompleteness,
   ProbeFieldOrigin,
   ProbeResult,
@@ -109,6 +113,19 @@ export default function architectureContractsTest(): void {
       expect(result.isUsable()).assertTrue();
       expect(result.info!.videoTracks[0].hdrType).assertEqual(HdrType.HDR10);
       expect(result.fieldOrigins.length).assertEqual(2);
+    });
+
+    it('selectsBaselineBackendsAndHonorsExplicitPreference', 0, () => {
+      const selector = new PlaybackBackendSelector();
+      const mp4 = new MediaSource(MediaSourceKind.LOCAL_DOCUMENT, 'file://movie.mp4',
+        'movie.mp4', 'local', MediaFormat.MP4);
+      const mkv = new MediaSource(MediaSourceKind.LOCAL_DOCUMENT, 'file://movie.mkv',
+        'movie.mkv', 'local', MediaFormat.MATROSKA);
+
+      expect(selector.select(mp4, PlayerBackendPreference.AUTO)).assertEqual(PlayerBackendKind.SYSTEM);
+      expect(selector.select(mkv, PlayerBackendPreference.AUTO)).assertEqual(PlayerBackendKind.MPV);
+      expect(selector.select(mp4, PlayerBackendPreference.MPV)).assertEqual(PlayerBackendKind.MPV);
+      expect(selector.fallback(PlayerBackendKind.SYSTEM)).assertEqual(PlayerBackendKind.MPV);
     });
 
     it('definesStableThumbnailAndBackendDefaults', 0, () => {

@@ -48,6 +48,7 @@ export { AdapterRuntime, DiscoveryMethod, NETWORK_PROTOCOL_CAPABILITIES, Protoco
 export { PlaybackEngine } from './src/main/ets/playback/PlaybackEngine';
 export { PlayerBackendCapabilities, PlayerBackendKind, PlayerBackendPreference,
   PlaybackBackend } from './src/main/ets/playback/PlaybackBackend';
+export { PlaybackBackendSelector } from './src/main/ets/playback/PlaybackBackendSelector';
 export { PlaybackObserver, PlaybackSnapshot, PlaybackStatus } from './src/main/ets/playback/PlaybackModels';
 export { PlaybackPort, PlaybackPortError, PlaybackPortFactory, PlaybackPortObserver,
   PortBufferingEvent, PortPlaybackState } from './src/main/ets/playback/PlaybackPort';
@@ -60,4 +61,4 @@ export { RemoteConnectionOptions, RemoteEntry, RemoteEntryKind, RemoteReadSessio
 export { DefaultThumbnailTimePolicy, ThumbnailPlan,
   ThumbnailTimePolicy } from './src/main/ets/thumbnail/ThumbnailPolicy';
 
-export const LINKORA_CORE_VERSION: string = '1.3.0';
+export const LINKORA_CORE_VERSION: string = '1.4.0';
