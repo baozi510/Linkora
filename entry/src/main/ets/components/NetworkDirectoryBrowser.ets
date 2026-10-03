@@ -1,13 +1,11 @@
 import { common } from '@kit.AbilityKit';
 import { ComponentContent } from '@kit.ArkUI';
 import { deviceInfo } from '@kit.BasicServicesKit';
-import { fileIo } from '@kit.CoreFileKit';
 import { image } from '@kit.ImageKit';
 import { FileSizeFormatter, LocalFileCategory, LocalFileFilter, LocalMediaAsset, MediaFormatDetector,
-  MediaSource, MediaSourceKind, RemoteProtocol } from 'linkora_core';
+  MediaSource } from 'linkora_core';
 import { NetworkDirectoryEntry, NetworkDirectoryEntryKind,
   NetworkDirectoryLoadGuard } from '../models/NetworkDirectoryState';
-import { ProgressiveDownloadRegistry } from '../playback/ProgressiveDownloadRegistry';
 import { NetworkDirectoryService } from '../services/NetworkDirectoryService';
 import { NetworkDirectorySummary, NetworkDirectorySummaryCache } from
   '../services/NetworkDirectorySummaryCache';
@@ -27,6 +25,7 @@ import { LinkoraFeatures } from '../foundation/LinkoraFeatures';
 import { NetworkMediaLoader } from '../services/NetworkMediaLoader';
 import { CachedNetworkMedia } from '../services/NetworkMediaCache';
 import { AppLifecycleEvents } from '../services/AppLifecycleEvents';
+import { NetworkMediaSourceFactory } from '../services/NetworkMediaSourceFactory';
 
 class NetworkRefreshIndicatorParams {
   accentColor: string;
@@ -533,38 +532,14 @@ export struct NetworkDirectoryBrowser {
     if (this.service === null) {
       return;
     }
-    if (this.server.protocol === RemoteProtocol.WEBDAV) {
-      this.mediaLoader?.reset(this.entries, false);
-      this.onOpenSource(new MediaSource(MediaSourceKind.NETWORK_LINK, this.service.directFileUrl(entry.path),
-        entry.displayName, this.server.titleLabel(), MediaFormatDetector.detect(entry.displayName)));
-      return;
-    }
-    if (this.preparingPath.length > 0) {
-      return;
-    }
     const category: LocalFileCategory = this.fileFilter.categoryOf(entry.displayName);
     if (category !== LocalFileCategory.VIDEO && category !== LocalFileCategory.AUDIO) {
       this.showToast('当前文件类型暂不支持直接打开');
       return;
     }
-    this.preparingPath = entry.path;
+
     this.mediaLoader?.reset(this.entries, false);
-    try {
-      const context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
-      const safeName: string = entry.displayName.replace(/[\\/:*?"<>|]/g, '_');
-      const localPath: string = `${context.cacheDir}/${this.service.cachePrefix()}-${Date.now()}-${safeName}`;
-      const cacheFile: fileIo.File = fileIo.openSync(localPath,
-        fileIo.OpenMode.READ_WRITE | fileIo.OpenMode.CREATE | fileIo.OpenMode.TRUNC);
-      fileIo.closeSync(cacheFile.fd);
-      const download: Promise<number> = this.service.download(entry.path, localPath);
-      const progressiveKey: string = ProgressiveDownloadRegistry.start(localPath, entry.size, download);
-      this.onOpenSource(new MediaSource(MediaSourceKind.LOCAL_DOCUMENT, localPath, entry.displayName,
-        this.server.titleLabel(), MediaFormatDetector.detect(entry.displayName), category, entry.size, progressiveKey));
-    } catch (error) {
-      this.showToast(error instanceof Error ? error.message : '远程文件读取失败');
-    } finally {
-      this.preparingPath = '';
-    }
+    this.onOpenSource(NetworkMediaSourceFactory.fromEntry(this.server, entry));
   }
 
   private showToast(message: string): void {
