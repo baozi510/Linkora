@@ -7,7 +7,9 @@ import {
   PlaybackPortFactory,
   PlaybackPortObserver,
   PortBufferingEvent,
-  PortPlaybackState
+  PortPlaybackState,
+  PortTrack,
+  PortVideoInfo
 } from './PlaybackPort';
 import { PlaybackObserver, PlaybackSnapshot, PlaybackStatus } from './PlaybackModels';
 
@@ -18,13 +20,20 @@ export class PlaybackEngine {
   private sessionId: number = 0;
   private status: PlaybackStatus = PlaybackStatus.IDLE;
   private statusBeforeBuffering: PlaybackStatus = PlaybackStatus.READY;
+  private statusBeforeSeeking: PlaybackStatus = PlaybackStatus.READY;
   private position: number = 0;
   private duration: number = 0;
   private bufferedPercent: number = 0;
+  private bufferedDuration: number = 0;
   private videoWidth: number = 0;
   private videoHeight: number = 0;
   private failure: AppFailure | null = null;
   private firstFrameRendered: boolean = false;
+  private backend: string = '';
+  private tracks: PortTrack[] = [];
+  private videoInfo: PortVideoInfo = new PortVideoInfo();
+  private surfaceWidth: number = 0;
+  private surfaceHeight: number = 0;
 
   constructor(observer: PlaybackObserver, portFactory: PlaybackPortFactory) {
     this.observer = observer;
@@ -47,6 +56,9 @@ export class PlaybackEngine {
 
       this.port = port;
       port.configure(source, surfaceId);
+      if (this.surfaceWidth > 0 && this.surfaceHeight > 0) {
+        port.setSurfaceSize(this.surfaceWidth, this.surfaceHeight);
+      }
       await port.prepare();
       if (!this.isCurrent(sessionId) || this.port !== port) {
         return;
@@ -59,7 +71,18 @@ export class PlaybackEngine {
     } catch (error) {
       if (this.isCurrent(sessionId)) {
         await this.releaseCurrentPort();
-        this.fail(error as PlaybackPortError);
+        this.fail(this.portError(error));
+      }
+    }
+  }
+
+  setSurfaceSize(width: number, height: number): void {
+    this.surfaceWidth = Math.max(0, Math.round(width));
+    this.surfaceHeight = Math.max(0, Math.round(height));
+    if (this.surfaceWidth > 0 && this.surfaceHeight > 0) {
+      try {
+        this.port?.setSurfaceSize(this.surfaceWidth, this.surfaceHeight);
+      } catch (_error) {
       }
     }
   }
@@ -94,6 +117,9 @@ export class PlaybackEngine {
     }
     const target: number = Math.max(0, Math.min(Math.round(position), this.duration));
     try {
+      this.statusBeforeSeeking = this.status === PlaybackStatus.BUFFERING ?
+        this.statusBeforeBuffering : this.status;
+      this.status = PlaybackStatus.SEEKING;
       port.seek(target);
       this.position = target;
       this.notify();
@@ -170,14 +196,41 @@ export class PlaybackEngine {
       },
       (width: number, height: number) => {
         if (this.isCurrent(sessionId)) {
-          this.videoWidth = width;
-          this.videoHeight = height;
+          this.videoWidth = Math.max(0, width);
+          this.videoHeight = Math.max(0, height);
           this.notify();
         }
       },
       () => {
         if (this.isCurrent(sessionId)) {
           this.pauseForInterruption();
+        }
+      },
+      (position: number) => {
+        if (this.isCurrent(sessionId)) {
+          this.position = Math.max(0, position);
+          if (this.status === PlaybackStatus.SEEKING) {
+            this.status = this.statusBeforeSeeking;
+          }
+          this.notify();
+        }
+      },
+      (tracks: PortTrack[]) => {
+        if (this.isCurrent(sessionId)) {
+          this.tracks = tracks.slice();
+          this.notify();
+        }
+      },
+      (info: PortVideoInfo) => {
+        if (this.isCurrent(sessionId)) {
+          this.videoInfo = info;
+          this.notify();
+        }
+      },
+      (backend: string) => {
+        if (this.isCurrent(sessionId)) {
+          this.backend = backend;
+          this.notify();
         }
       }
     );
@@ -202,9 +255,17 @@ export class PlaybackEngine {
     } else if (state === PortPlaybackState.PREPARED) {
       this.status = PlaybackStatus.READY;
     } else if (state === PortPlaybackState.PLAYING) {
-      this.status = PlaybackStatus.PLAYING;
+      if (this.status !== PlaybackStatus.SEEKING) {
+        this.status = PlaybackStatus.PLAYING;
+      } else {
+        this.statusBeforeSeeking = PlaybackStatus.PLAYING;
+      }
     } else if (state === PortPlaybackState.PAUSED) {
-      this.status = PlaybackStatus.PAUSED;
+      if (this.status !== PlaybackStatus.SEEKING) {
+        this.status = PlaybackStatus.PAUSED;
+      } else {
+        this.statusBeforeSeeking = PlaybackStatus.PAUSED;
+      }
     } else if (state === PortPlaybackState.COMPLETED) {
       this.status = PlaybackStatus.COMPLETED;
       this.position = this.duration;
@@ -221,12 +282,18 @@ export class PlaybackEngine {
 
   private handleBufferingChange(event: PortBufferingEvent, value: number): void {
     if (event === PortBufferingEvent.START && this.status !== PlaybackStatus.BUFFERING) {
-      this.statusBeforeBuffering = this.status;
-      this.status = PlaybackStatus.BUFFERING;
+      if (this.status === PlaybackStatus.SEEKING) {
+        this.statusBeforeSeeking = PlaybackStatus.BUFFERING;
+      } else {
+        this.statusBeforeBuffering = this.status;
+        this.status = PlaybackStatus.BUFFERING;
+      }
     } else if (event === PortBufferingEvent.END && this.status === PlaybackStatus.BUFFERING) {
       this.status = this.statusBeforeBuffering;
     } else if (event === PortBufferingEvent.PERCENT) {
       this.bufferedPercent = Math.max(0, Math.min(value, 100));
+    } else if (event === PortBufferingEvent.CACHED_DURATION) {
+      this.bufferedDuration = Math.max(0, value);
     }
     this.notify();
   }
@@ -277,13 +344,18 @@ export class PlaybackEngine {
   private resetSnapshot(): void {
     this.status = PlaybackStatus.IDLE;
     this.statusBeforeBuffering = PlaybackStatus.READY;
+    this.statusBeforeSeeking = PlaybackStatus.READY;
     this.position = 0;
     this.duration = 0;
     this.bufferedPercent = 0;
+    this.bufferedDuration = 0;
     this.videoWidth = 0;
     this.videoHeight = 0;
     this.failure = null;
     this.firstFrameRendered = false;
+    this.backend = '';
+    this.tracks = [];
+    this.videoInfo = new PortVideoInfo();
   }
 
   private notify(): void {
@@ -295,7 +367,11 @@ export class PlaybackEngine {
       this.videoWidth,
       this.videoHeight,
       this.failure,
-      this.firstFrameRendered
+      this.firstFrameRendered,
+      this.bufferedDuration,
+      this.backend,
+      this.tracks,
+      this.videoInfo
     ));
   }
 }
