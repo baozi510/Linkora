@@ -52,72 +52,79 @@ export class AppSettings {
   }
 
   withRememberPlaybackPosition(enabled: boolean): AppSettings {
-    return this.copy({ rememberPlaybackPosition: enabled });
+    return new AppSettings(enabled, this.keepScreenOnDuringPlayback, this.allowCellularPlayback,
+      this.localMediaFolderFilter, this.themeMode, this.accentColor,
+      this.localVideoExtensions, this.localSubtitleExtensions, this.experimentalNetworkStorage,
+      this.playerBackendPreference);
   }
 
   withKeepScreenOnDuringPlayback(enabled: boolean): AppSettings {
-    return this.copy({ keepScreenOnDuringPlayback: enabled });
+    return new AppSettings(this.rememberPlaybackPosition, enabled, this.allowCellularPlayback,
+      this.localMediaFolderFilter, this.themeMode, this.accentColor,
+      this.localVideoExtensions, this.localSubtitleExtensions, this.experimentalNetworkStorage,
+      this.playerBackendPreference);
   }
 
   withAllowCellularPlayback(enabled: boolean): AppSettings {
-    return this.copy({ allowCellularPlayback: enabled });
+    return new AppSettings(this.rememberPlaybackPosition, this.keepScreenOnDuringPlayback, enabled,
+      this.localMediaFolderFilter, this.themeMode, this.accentColor,
+      this.localVideoExtensions, this.localSubtitleExtensions, this.experimentalNetworkStorage,
+      this.playerBackendPreference);
   }
 
   withLocalMediaFolderFilter(filter: LocalMediaFolderFilter): AppSettings {
-    return this.copy({ localMediaFolderFilter: filter });
+    return new AppSettings(this.rememberPlaybackPosition, this.keepScreenOnDuringPlayback,
+      this.allowCellularPlayback, filter, this.themeMode, this.accentColor,
+      this.localVideoExtensions, this.localSubtitleExtensions, this.experimentalNetworkStorage,
+      this.playerBackendPreference);
   }
 
   withThemeMode(mode: AppThemeMode): AppSettings {
-    return this.copy({ themeMode: mode });
+    return new AppSettings(this.rememberPlaybackPosition, this.keepScreenOnDuringPlayback,
+      this.allowCellularPlayback, this.localMediaFolderFilter, mode, this.accentColor,
+      this.localVideoExtensions, this.localSubtitleExtensions, this.experimentalNetworkStorage,
+      this.playerBackendPreference);
   }
 
   withAccentColor(accentColor: AppAccentColor): AppSettings {
-    return this.copy({ accentColor });
+    return new AppSettings(this.rememberPlaybackPosition, this.keepScreenOnDuringPlayback,
+      this.allowCellularPlayback, this.localMediaFolderFilter, this.themeMode, accentColor,
+      this.localVideoExtensions, this.localSubtitleExtensions, this.experimentalNetworkStorage,
+      this.playerBackendPreference);
   }
 
   withLocalVideoExtensions(extensions: string[]): AppSettings {
-    return this.copy({ localVideoExtensions: extensions });
+    return new AppSettings(this.rememberPlaybackPosition, this.keepScreenOnDuringPlayback,
+      this.allowCellularPlayback, this.localMediaFolderFilter, this.themeMode, this.accentColor,
+      extensions, this.localSubtitleExtensions, this.experimentalNetworkStorage,
+      this.playerBackendPreference);
   }
 
   withLocalSubtitleExtensions(extensions: string[]): AppSettings {
-    return this.copy({ localSubtitleExtensions: extensions });
+    return new AppSettings(this.rememberPlaybackPosition, this.keepScreenOnDuringPlayback,
+      this.allowCellularPlayback, this.localMediaFolderFilter, this.themeMode, this.accentColor,
+      this.localVideoExtensions, extensions, this.experimentalNetworkStorage,
+      this.playerBackendPreference);
   }
 
   withLocalFileExtensions(videoExtensions: string[], subtitleExtensions: string[]): AppSettings {
-    return this.copy({ localVideoExtensions: videoExtensions, localSubtitleExtensions: subtitleExtensions });
+    return new AppSettings(this.rememberPlaybackPosition, this.keepScreenOnDuringPlayback,
+      this.allowCellularPlayback, this.localMediaFolderFilter, this.themeMode, this.accentColor,
+      videoExtensions, subtitleExtensions, this.experimentalNetworkStorage,
+      this.playerBackendPreference);
   }
 
   withExperimentalNetworkStorage(enabled: boolean): AppSettings {
-    return this.copy({ experimentalNetworkStorage: enabled });
+    return new AppSettings(this.rememberPlaybackPosition, this.keepScreenOnDuringPlayback,
+      this.allowCellularPlayback, this.localMediaFolderFilter, this.themeMode, this.accentColor,
+      this.localVideoExtensions, this.localSubtitleExtensions, enabled,
+      this.playerBackendPreference);
   }
 
   withPlayerBackendPreference(preference: PlayerBackendPreference): AppSettings {
-    return this.copy({ playerBackendPreference: preference });
-  }
-
-  private copy(change: {
-    rememberPlaybackPosition?: boolean;
-    keepScreenOnDuringPlayback?: boolean;
-    allowCellularPlayback?: boolean;
-    localMediaFolderFilter?: LocalMediaFolderFilter;
-    themeMode?: AppThemeMode;
-    accentColor?: AppAccentColor;
-    localVideoExtensions?: string[];
-    localSubtitleExtensions?: string[];
-    experimentalNetworkStorage?: boolean;
-    playerBackendPreference?: PlayerBackendPreference;
-  }): AppSettings {
-    return new AppSettings(
-      change.rememberPlaybackPosition ?? this.rememberPlaybackPosition,
-      change.keepScreenOnDuringPlayback ?? this.keepScreenOnDuringPlayback,
-      change.allowCellularPlayback ?? this.allowCellularPlayback,
-      change.localMediaFolderFilter ?? this.localMediaFolderFilter,
-      change.themeMode ?? this.themeMode,
-      change.accentColor ?? this.accentColor,
-      change.localVideoExtensions ?? this.localVideoExtensions,
-      change.localSubtitleExtensions ?? this.localSubtitleExtensions,
-      change.experimentalNetworkStorage ?? this.experimentalNetworkStorage,
-      change.playerBackendPreference ?? this.playerBackendPreference
-    );
+    return new AppSettings(this.rememberPlaybackPosition, this.keepScreenOnDuringPlayback,
+      this.allowCellularPlayback, this.localMediaFolderFilter, this.themeMode, this.accentColor,
+      this.localVideoExtensions, this.localSubtitleExtensions, this.experimentalNetworkStorage,
+      preference);
   }
 }
