@@ -1,4 +1,9 @@
 ﻿{
+    "buildOption": {
+        "strictMode": {
+            "useNormalizedOHMUrl": true
+        }
+    },
     "app":  {
                 "signingConfigs":  [
 
