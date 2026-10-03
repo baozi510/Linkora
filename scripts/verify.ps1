@@ -55,6 +55,9 @@ try {
   & $node (Join-Path $PSScriptRoot 'check-network-media-list.cjs')
   if ($LASTEXITCODE -ne 0) { throw 'Network media list/cache regression checks failed.' }
 
+  & $node (Join-Path $PSScriptRoot 'check-mpv-playback-port.cjs') $StudioRoot
+  if ($LASTEXITCODE -ne 0) { throw 'MPV adapter event-mapping regression checks failed.' }
+
   & $hvigor test --mode module -p module=entry@default -p product=default --no-daemon
   if ($LASTEXITCODE -ne 0) {
     throw 'Unit-test compilation failed.'

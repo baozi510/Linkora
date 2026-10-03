@@ -3,6 +3,13 @@
 > 2026-10-04（Asia/Shanghai）。构建/单测门槛 PASS；真机及性能门槛 NOT RUN。
 > 第 14 次完整 verify 已通过，Debug/Release arm64 HAP 均构建成功。停止代码扩展，交回架构审查。
 
+## Post-validation 修正（本轮进行中）
+
+已完整阅读 `CODEX_POST_VALIDATION_ACTIONS.md`，同步至 `145c6ed` 后按 A→B→C→D 执行。下文原验证记录保留为历史证据，本轮结果以本节后续更新为准。
+
+- A：四个实际 MPV Adapter 的桌面 VM 回归修复前全部 FAIL（prepare 被日志提前拒绝、timeout 被取消、post-prepare onError）；现在 error stream 仅保存最近诊断，FILE_LOADED/12 秒 timeout 保持成功/失败依据。测试使用 wrapper double/受控时钟，无新增生产注入接口；不等于 native MPV 实测。新增检查加入 verify，原检查全部保留。
+- B/C/D、完整 verify、模拟器安装结果：PENDING。
+
 ## Git 与执行范围
 
 - 仓库：`baozi510/Linkora`。
