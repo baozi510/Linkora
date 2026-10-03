@@ -1,0 +1,103 @@
+{
+  "validatedSHA": "7621608b4acce6daa5d7d399bb1feb8ddc384524",
+  "artifacts": [
+    {
+      "module": "linkora_core",
+      "mode": "debug",
+      "result": "PASS",
+      "path": "D:\\Linkora-validation\\artifacts\\validation\\post-build\\debug\\linkora_core.har",
+      "bytes": 139315,
+      "sha256": "0823d6a1e141e3b9440e0c45f2c861acbb3521fba19f8d9b51a92aac039ca370",
+      "debug": true,
+      "libraries": []
+    },
+    {
+      "module": "linkora_proxy",
+      "mode": "debug",
+      "result": "PASS",
+      "path": "D:\\Linkora-validation\\artifacts\\validation\\post-build\\debug\\linkora_proxy.har",
+      "bytes": 23169,
+      "sha256": "8abe5a0fd6b6a3f28596b212793ca33cc3d104c2f955c5862da8db37c55ac937",
+      "debug": true,
+      "libraries": []
+    },
+    {
+      "module": "linkora_media_probe",
+      "mode": "debug",
+      "result": "PASS",
+      "path": "D:\\Linkora-validation\\artifacts\\validation\\post-build\\debug\\linkora_media_probe.har",
+      "bytes": 22460,
+      "sha256": "c24cba298a955feec21599b3aa85e9cf2dddc624586c834f0c09c27dd6046267",
+      "debug": true,
+      "libraries": []
+    },
+    {
+      "module": "entry",
+      "mode": "debug",
+      "result": "PASS",
+      "path": "D:\\Linkora-validation\\artifacts\\validation\\post-build\\debug\\entry-default-unsigned.hap",
+      "bytes": 49842320,
+      "sha256": "f0b9929498040cdc94b465b9d5f405ebec229159d1ef2a594902016e42adcc1b",
+      "debug": true,
+      "libraries": [
+        "libs/arm64-v8a/libaki_jsbind.so",
+        "libs/arm64-v8a/libc++_shared.so",
+        "libs/arm64-v8a/liblinkora_ftp.so",
+        "libs/arm64-v8a/liblinkora_nfs.so",
+        "libs/arm64-v8a/liblinkora_sftp.so",
+        "libs/arm64-v8a/liblinkora_smb.so",
+        "libs/arm64-v8a/libmpv.so",
+        "libs/arm64-v8a/libmpv_wrapper.so"
+      ]
+    },
+    {
+      "module": "linkora_core",
+      "mode": "release",
+      "result": "PASS",
+      "path": "D:\\Linkora-validation\\artifacts\\validation\\post-build\\release\\linkora_core.har",
+      "bytes": 84179,
+      "sha256": "e26abd4a267786ab8f3a6d4761c3e494a1e8a2b70e7aafa5842b1504a20c7839",
+      "debug": false,
+      "libraries": []
+    },
+    {
+      "module": "linkora_proxy",
+      "mode": "release",
+      "result": "PASS",
+      "path": "D:\\Linkora-validation\\artifacts\\validation\\post-build\\release\\linkora_proxy.har",
+      "bytes": 14805,
+      "sha256": "0727dd0b036f9103b6ee73f9067ef83be37d01e2971238aa1a286778aaec2fb3",
+      "debug": false,
+      "libraries": []
+    },
+    {
+      "module": "linkora_media_probe",
+      "mode": "release",
+      "result": "PASS",
+      "path": "D:\\Linkora-validation\\artifacts\\validation\\post-build\\release\\linkora_media_probe.har",
+      "bytes": 15647,
+      "sha256": "2ebec799e5a2470b8f8bc57c0ac2f1642bef4bdf4ea7b82668566e3fa4b2826c",
+      "debug": false,
+      "libraries": []
+    },
+    {
+      "module": "entry",
+      "mode": "release",
+      "result": "PASS",
+      "path": "D:\\Linkora-validation\\artifacts\\validation\\post-build\\release\\entry-default-unsigned.hap",
+      "bytes": 46380424,
+      "sha256": "083284e5cc6b92bfb61dbb42e444c37b28e2fef82da8edcff02e78da4a236404",
+      "debug": false,
+      "libraries": [
+        "libs/arm64-v8a/libaki_jsbind.so",
+        "libs/arm64-v8a/libc++_shared.so",
+        "libs/arm64-v8a/liblinkora_ftp.so",
+        "libs/arm64-v8a/liblinkora_nfs.so",
+        "libs/arm64-v8a/liblinkora_sftp.so",
+        "libs/arm64-v8a/liblinkora_smb.so",
+        "libs/arm64-v8a/libmpv.so",
+        "libs/arm64-v8a/libmpv_wrapper.so"
+      ]
+    }
+  ]
+}

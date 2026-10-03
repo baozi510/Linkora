@@ -1,0 +1,9 @@
+Target: 127.0.0.1:5555; model=emulator; ABI=x86_64
+Command: hdc.exe -t 127.0.0.1:5555 install D:\Linkora-validation\artifacts\validation\post-build\debug\entry-default-unsigned.hap
+[Info]App install path:D:\Linkora-validation\artifacts\validation\post-build\debug\entry-default-unsigned.hap msg:error: failed to install bundle. code:9568347 error: install parse native so failed. In the module named entry, the Abi type supported by the device does not match the Abi type configured in the C++ project.
+AppMod finish
+HDC process exit: 0
+
+Application install: FAIL (9568347 ABI mismatch)
+Simulator runtime: BLOCKED — ABI mismatch
+aa start: NOT RUN; no newly installed validation app to launch.

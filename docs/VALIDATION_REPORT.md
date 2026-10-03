@@ -1,11 +1,12 @@
 # Player Architecture Validation Report
 
 > 2026-10-04（Asia/Shanghai）。构建/单测门槛 PASS；真机及性能门槛 NOT RUN。
-> 第 14 次完整 verify 已通过，Debug/Release arm64 HAP 均构建成功。停止代码扩展，交回架构审查。
+> 本轮 post-validation 完整 verify exit 0；145/145 Hypium、10/10 新桌面回归、八个构建 PASS。
+> Simulator runtime: BLOCKED — ABI mismatch。达到 CODEX_POST_VALIDATION_ACTIONS Case A，停止并交回架构审查。
 
-## Post-validation 修正（本轮进行中）
+## Post-validation 修正（本轮最终结果）
 
-已完整阅读 `CODEX_POST_VALIDATION_ACTIONS.md`，同步至 `145c6ed` 后按 A→B→C→D 执行。下文原验证记录保留为历史证据，本轮结果以本节后续更新为准。
+已完整阅读 `CODEX_POST_VALIDATION_ACTIONS.md`，fetch/checkout/ff-only pull 同步至 `145c6ed` 后按 A→B→C→D 执行。下文初轮记录保留为历史证据；当前最终结果以本节为准。原 `D:\Linkora` 用户工作区保持不动。
 
 - A：四个实际 MPV Adapter 的桌面 VM 回归修复前全部 FAIL（prepare 被日志提前拒绝、timeout 被取消、post-prepare onError）；现在 error stream 仅保存最近诊断，FILE_LOADED/12 秒 timeout 保持成功/失败依据。测试使用 wrapper double/受控时钟，无新增生产注入接口；不等于 native MPV 实测。新增检查加入 verify，原检查全部保留。
 - A 回归：4/4 PASS；commit `ffe02c6`。修复前原始输出 `artifacts/validation/post-A-before.log`，修复后 `post-A-after.log`。
@@ -18,15 +19,89 @@
 - D：五个受控 Node fixture，修复前 4 PASS / 1 FAIL，`src/main/ets/build/Bad.ets` 被跳过（exit 0 而预期 1）。移除按任意目录名跳过，core/probe 只扫描生产 `src/main/ets` 加模块 `Index.ets`，UI/player 仍扫描既有明确生产根。生成 .test 在根外被忽略，真实源码/实现 import 及 build 子目录都必须拒绝；fixtures 加入完整 verify。
 - D 修复后：5/5 fixtures PASS，生产 architecture guard PASS；日志 `artifacts/validation/post-D-before.log` / `post-D-after.log`。
 - D commit：`3bc32b4`。
-- 文档 §6：MPV 未经设备实测的 advanced booleans 使用现有默认 false，native Dolby Vision/audio passthrough 继续 false；不改变公共模型或 Auto 选择规则。新增桌面能力测试修复前 FAIL（assSubtitle=true），修复后待验证。
-- 完整 verify、模拟器安装结果：PENDING。
+- 文档 §6：MPV 未经设备实测的 advanced booleans 使用现有默认 false，native Dolby Vision/audio passthrough 继续 false；不改变公共模型或 Auto 选择规则。新增桌面能力测试修复前 FAIL（assSubtitle=true），修复后 Adapter 5/5 PASS，commit `7621608`。
+
+### 本轮修复提交与失败命令
+
+| 修正 | 最小修改文件 | Commit SHA | 针对性验证结果 |
+| --- | --- | --- | --- |
+| A：log severity 与 fatal contract 混淆 | MpvPlaybackPort.ets；check-mpv-playback-port.cjs；verify.ps1；报告 | `ffe02c613d736372dac414e4be11dd6fbf4b54ad` | 4/4 桌面事件回归 PASS |
+| B：UI/controller 尺寸链缺失 | PlayerPage.ets；PlayerFeatureController.ets；PlaybackEngine.test.ets；FeatureModules.test.ets；报告 | `0d78d17767861af594d840f0901c1b647ddcfe24` | 141/141 Hypium PASS |
+| C：BT2020 primaries 误当 HDR | PlaybackPort.ets；ArchitectureContracts.test.ets；报告 | `ff8ec750a5fec4c0264b93aafa0b4bea4e934173` | 145/145 Hypium PASS |
+| D：walker 按目录名漏扫生产源码 | check-architecture-boundaries.cjs / .test.cjs；verify.ps1；报告 | `3bc32b4e45651a14802c6d216ce5ae814d07763c` | 5/5 fixtures + 生产 guard PASS |
+| §6：未实测高级能力保持保守 | MpvPlaybackPort.ets；check-mpv-playback-port.cjs；报告 | `7621608b4acce6daa5d7d399bb1feb8ddc384524` | 5/5 Adapter 回归 PASS |
+
+A/§6 失败命令：`node scripts/check-mpv-playback-port.cjs`。D 失败命令：`node scripts/check-architecture-boundaries.test.cjs`。
+
+B/C 针对性命令：`hvigorw.bat test --mode module -p module=entry@default -p product=default --no-daemon`（使用表中 DevEco/SDK 环境）。这些是四项审查发现的复现与修复验证，不是完整 verify 失败。A 测试桩第一次载入时路径写错产生 ENOENT，修正为实际 playback/PlaybackBackend.ets 后才取得上列真实 red 结果；未将测试桩路径错误当作生产 root cause。
+
+[原始失败/重试摘录](validation/post-correction-results.txt)。完整针对性日志保存在 `artifacts/validation/post-{A,B,C,D}-{before,after}.log` 和 `post-capabilities-{before,after}.log`。每项修复均单独提交，最终完整重试如下。
+
+### 本轮完整 verify、单测与 build matrix
+
+- 最终已验证代码 SHA：`7621608b4acce6daa5d7d399bb1feb8ddc384524`。后续提交仅报告/证据，不改生产源码或测试。
+- 命令：`./scripts/verify.ps1`，本轮首次完整执行 **PASS / exit 0**，无失败项跳过。原检查全部保留，新增两项桌面检查。
+- 架构 guard/fixtures、ArkUI V1 guard、persistence、HTTP/probe、media-list/cache 回归、MPV Adapter、Hypium、八个 HAR/HAP 构建全部通过。仍有既有 API/deprecation/第三方 bytecode/unsigned warnings，不视为 runtime PASS。
+- Hypium：18 suites，**145 total / 145 PASS / 0 Failure / 0 Error / 0 Ignore**。原 137 项保留，新增 8 项；ArchitectureContracts 10、PlaybackEngine 12、FeatureModules 37，其余 suite 数量不变。
+- 新 Node 回归：MPV Adapter 5/5（含能力保守值），架构 fixtures 5/5，合计 **10/10 PASS**，独立于 Hypium 数量。
+- [完整 verify 摘录](validation/post-verify-summary.txt)，[Hypium 原始逐项结果](validation/post-hypium-results.txt)，[结构化计数](validation/post-hypium-summary.json)。本地完整日志：`artifacts/validation/post-verify-01.log`。
+
+| Target | Debug | Release | Debug bytes | Release bytes |
+| --- | --- | --- | ---: | ---: |
+| linkora_core HAR | PASS | PASS | 139315 | 84179 |
+| linkora_proxy HAR | PASS | PASS | 23169 | 14805 |
+| linkora_media_probe HAR | PASS | PASS | 22460 | 15647 |
+| entry arm64 HAP | PASS（unsigned） | PASS（unsigned） | 49842320 | 46380424 |
+
+Debug 在其 HAP 构建成功后、Release 覆盖前保存。八个产物逐个读取 metadata/app.debug，确认 Debug=true、Release=false。两个 HAP native .so 均为 arm64-v8a，包括实际 MPV/协议库。[产物 SHA256、模式与 native 库清单](validation/post-build-artifacts.json)。二进制位于 `D:\Linkora-validation\artifacts\validation\post-build\debug` / `release`，不提交二进制。
+
+### 本轮模拟器可行性
+
+完整 verify 通过后，再确认 HDC 唯一目标 `127.0.0.1:5555`，model=emulator，`const.product.cpu.abilist=x86_64`。按文档原样安装本轮 Debug HAP：
+
+```text
+hdc.exe -t 127.0.0.1:5555 install D:\Linkora-validation\artifacts\validation\post-build\debug\entry-default-unsigned.hap
+error: failed to install bundle. code:9568347 error: install parse native so failed. In the module named entry, the Abi type supported by the device does not match the Abi type configured in the C++ project.
+AppMod finish
+HDC process exit: 0
+```
+
+**安装 FAIL（9568347）；Simulator runtime: BLOCKED — ABI mismatch。** HDC 的 exit 0 不代表 bundle 安装成功。未执行 `aa start`，因为本轮 validation HAP 没有成功安装；不启动旧安装包冒充新结果。未改变生产 ABI/依赖，未造 x86 MPV 库，未加模拟器条件路径。按 §8 ABI 停止条件结束模拟器运行工作。
+
+[原始安装输出与命令](validation/post-emulator-install.txt)。System/MPV/Auto 应用 runtime 均 **NOT RUN**。
+
+| Simulator System smoke case | 结果 |
+| --- | --- |
+| app launch/navigation | NOT RUN |
+| local H264/AAC MP4 | NOT RUN |
+| HTTPS H264/AAC MP4 | NOT RUN |
+| WebDAV H264/AAC MP4 | NOT RUN |
+| first frame | NOT RUN |
+| play/pause | NOT RUN |
+| 50% seek | NOT RUN |
+| 90% seek | NOT RUN |
+| completion/replay | NOT RUN |
+| background/foreground | NOT RUN |
+| retry/error UI | NOT RUN |
+
+### 当前剩余 blocker 与停止决定
+
+应用协议播放、真实 MediaProxy diagnostics/70% seek 读取轨迹、实际 WebP 生成、高级媒体输出、性能仍 **NOT RUN / NOT COLLECTED**。初轮五协议服务端 lab 结果保留 PASS，本轮未重复运行服务端，未外推成应用 PASS；core proxy/policy 测试与既有桌面缩略图回归在完整 verify 中再次通过。
+
+Benchmark 仍无实际 NDJSON/report，每 case 五次的要求未执行；没有运行 summarize-benchmark，没有调整 Auto。FFmpeg blocker 保持，未开始 FFmpeg、AVIO/OH_AVDataSource 或 libmpv stream callbacks。
+
+剩余需要真实 arm64 HarmonyOS 设备及可部署签名 HAP，之后才可验证 native MPV、System/Auto、网络播放、资源回收、缩略图、HDR/DV/passthrough 与 benchmark。本轮没有暴露需要修改公共 Architecture Contract 的冲突。
+
+**停止决定：CODEX_POST_VALIDATION_ACTIONS §10 Case A 已满足（四项修正完成、完整 verify PASS、模拟器 ABI blocker 已记录）。提交结果等待架构审查；不 merge，不开始下一阶段。** 最终分支 SHA 由本报告的最终归档提交确定，在交付消息给出；自引用 SHA 不写入报告正文。
+
+## 初轮验证历史（下列记录对应 post-validation 修正前）
 
 ## Git 与执行范围
 
 - 仓库：`baozi510/Linkora`。
 - 唯一工作分支：`test/player-architecture-validation`。
 - 起始 SHA：`f46ffeec9afafe16e946b0636fbc4a13563a5e4a`。
-- 最终已验证代码 SHA：`f3730df81239177711e68099c34a8648deb4b2b4`；此后的提交只归档报告/证据。
+- 初轮已验证代码 SHA：`f3730df81239177711e68099c34a8648deb4b2b4`；当前本轮 SHA 见上节。
 - 包含本报告的最终分支提交：以本报告所在的 Git commit 为准，交付消息给出完整 SHA；本地可执行 `git log -1 --format=%H -- docs/VALIDATION_REPORT.md` 定位。
 - 干净检出：`D:\Linkora-validation`。原 `D:\Linkora` 位于 main，有大量用户未提交改动且没有 remote；原目录及其分支未修改。
 - 已按用户顺序阅读 SESSION_HANDOFF、IMPLEMENTATION_STATUS、CODEX_TEST_RUNBOOK、TEST_MANUAL、FFMPEG_INTEGRATION_BLOCKER、ARCHITECTURE_TARGET、ARCHITECTURE_MIGRATION、PHASE4–8_REPORT。
@@ -213,7 +288,7 @@ Auto one-shot fallback、失败 candidate duration/tracks/HDR/error 隔离、强
 1. 真实 arm64 HarmonyOS 设备、对应 OS/build、签名/安装流程及固定媒体样本。当前仅 x86_64 emulator，两个 HAP unsigned；smoke、runtime proxy、真实 WebP、高级 AV/长稳/故障注入/性能均待实测。
 2. Benchmark 缺实测 NDJSON 和每 case 至少 5 次数据，不能决定 Auto policy。
 3. FFmpeg 仍为明确 blocker：缺 pinned reproducible arm64 build、headers/libav artifacts、license manifest、真实工具链 CMake integration 和 local MP4 / proxy MKV smoke 全套 exit criteria；本任务不开始实现。
-4. MPV error stream 是否所有 error-level 行都应视为 fatal、first-frame/output/event 行为仍需要真实媒体/设备确认。Common track/external subtitle selection 是既有未实现项，本任务不扩展。
+4. 初轮提出的 MPV error stream 映射问题已由本轮 A 修正并通过确定性回归；first-frame/output/native event 行为仍需要真实媒体/设备确认。Common track/external subtitle selection 是既有未实现项，本任务不扩展。
 
 **Handoff decision: BLOCKED — TOOLCHAIN/DEVICE REQUIRED（具体缺少 arm64 目标设备/部署验证，已安装 SDK 构建可用）。**
 
