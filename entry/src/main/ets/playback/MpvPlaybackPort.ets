@@ -2,7 +2,9 @@ import {
   EventObserver,
   Media,
   MpvEvent,
-  Player
+  Player,
+  Track,
+  Tracks
 } from '@mpv-ohos/mpv-arkts';
 import {
   MediaSource,
@@ -13,7 +15,10 @@ import {
   PlayerBackendCapabilities,
   PlayerBackendKind,
   PortBufferingEvent,
-  PortPlaybackState
+  PortPlaybackState,
+  PortTrack,
+  PortTrackKind,
+  PortVideoInfo
 } from 'linkora_core';
 
 const MPV_PREPARE_TIMEOUT_MS: number = 12000;
@@ -29,6 +34,7 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
   private prepareResolve: (() => void) | null = null;
   private prepareReject: ((error: PlaybackPortError) => void) | null = null;
   private prepareTimer: number = -1;
+  private seekPending: boolean = false;
 
   private constructor(observer: PlaybackPortObserver) {
     this.observer = observer;
@@ -81,6 +87,14 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
     }
   }
 
+  setSurfaceSize(width: number, height: number): void {
+    const safeWidth: number = Math.max(1, Math.round(width));
+    const safeHeight: number = Math.max(1, Math.round(height));
+    if (!this.released && this.surfaceAttached) {
+      this.player.native.setProperty('ohos-surface-size', `${safeWidth}x${safeHeight}`);
+    }
+  }
+
   getDuration(): number {
     return Math.max(0, Math.round(this.player.state.duration * 1000));
   }
@@ -120,6 +134,7 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
 
   seek(position: number): void {
     this.ensureReady();
+    this.seekPending = true;
     this.player.seek(Math.max(0, position) / 1000);
   }
 
@@ -173,9 +188,15 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
       this.clearPrepareTimer();
       this.observer.onStateChange(PortPlaybackState.PREPARED);
       resolve?.();
-    } else if (id === MpvEvent.MPV_EVENT_PLAYBACK_RESTART && !this.firstFrameSignaled) {
-      this.firstFrameSignaled = true;
-      this.observer.onFirstFrame();
+    } else if (id === MpvEvent.MPV_EVENT_PLAYBACK_RESTART) {
+      if (!this.firstFrameSignaled) {
+        this.firstFrameSignaled = true;
+        this.observer.onFirstFrame();
+      }
+      if (this.seekPending) {
+        this.seekPending = false;
+        this.observer.onSeekComplete(Math.max(0, Math.round(this.player.state.position * 1000)));
+      }
     }
   }
 
@@ -221,6 +242,21 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
       if (width > 0 && height > 0) {
         this.observer.onVideoSizeChange(width, height);
       }
+      this.observer.onVideoInfoChange(new PortVideoInfo(
+        params.pixelFormat,
+        params.hwPixelFormat,
+        params.colormatrix,
+        params.colorLevels,
+        params.primaries,
+        params.gamma,
+        params.light
+      ));
+    });
+    this.player.stream.tracks.listen((tracks: Tracks) => {
+      this.observer.onTracksChange(this.mapTracks(tracks, this.player.state.track));
+    });
+    this.player.stream.track.listen((track: Track) => {
+      this.observer.onTracksChange(this.mapTracks(this.player.state.tracks, track));
     });
     this.player.stream.error.listen((detail: string) => {
       const error = new PlaybackPortError(0, detail || 'MPV playback error');
@@ -230,6 +266,23 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
         this.observer.onError(error);
       }
     });
+  }
+
+  private mapTracks(tracks: Tracks, selected: Track): PortTrack[] {
+    const result: PortTrack[] = [];
+    for (const track of tracks.video) {
+      result.push(new PortTrack(track.id, PortTrackKind.VIDEO, track.codec, track.lang,
+        track.title, selected.video.id === track.id));
+    }
+    for (const track of tracks.audio) {
+      result.push(new PortTrack(track.id, PortTrackKind.AUDIO, track.codec, track.lang,
+        track.title, selected.audio.id === track.id));
+    }
+    for (const track of tracks.subs) {
+      result.push(new PortTrack(track.id, PortTrackKind.SUBTITLE, track.codec, track.lang,
+        track.title, selected.subs.id === track.id));
+    }
+    return result;
   }
 
   private failPrepare(error: PlaybackPortError): void {

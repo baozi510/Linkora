@@ -1,4 +1,5 @@
 import { AppFailure } from '../errors/AppFailure';
+import { PortTrack, PortVideoInfo } from './PlaybackPort';
 
 export enum PlaybackStatus {
   IDLE = 'idle',
@@ -6,6 +7,7 @@ export enum PlaybackStatus {
   READY = 'ready',
   PLAYING = 'playing',
   PAUSED = 'paused',
+  SEEKING = 'seeking',
   BUFFERING = 'buffering',
   COMPLETED = 'completed',
   ERROR = 'error',
@@ -21,9 +23,15 @@ export class PlaybackSnapshot {
   readonly videoHeight: number;
   readonly failure: AppFailure | null;
   readonly firstFrameRendered: boolean;
+  readonly bufferedDuration: number;
+  readonly backend: string;
+  readonly tracks: PortTrack[];
+  readonly videoInfo: PortVideoInfo;
 
   constructor(status: PlaybackStatus, position: number, duration: number, bufferedPercent: number,
-    videoWidth: number, videoHeight: number, failure: AppFailure | null, firstFrameRendered: boolean) {
+    videoWidth: number, videoHeight: number, failure: AppFailure | null, firstFrameRendered: boolean,
+    bufferedDuration: number = 0, backend: string = '', tracks: PortTrack[] = [],
+    videoInfo: PortVideoInfo = new PortVideoInfo()) {
     this.status = status;
     this.position = position;
     this.duration = duration;
@@ -32,6 +40,10 @@ export class PlaybackSnapshot {
     this.videoHeight = videoHeight;
     this.failure = failure;
     this.firstFrameRendered = firstFrameRendered;
+    this.bufferedDuration = bufferedDuration;
+    this.backend = backend;
+    this.tracks = tracks;
+    this.videoInfo = videoInfo;
   }
 }
 
