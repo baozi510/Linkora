@@ -2,6 +2,7 @@ import networkMediaProbeTest from './NetworkMediaProbe.test';
 import networkLinkParserTest from './NetworkLinkParser.test';
 import mediaSourceTest from './MediaSource.test';
 import architectureContractsTest from './ArchitectureContracts.test';
+import networkStorageProviderTest from './NetworkStorageProvider.test';
 import playbackEngineTest from './PlaybackEngine.test';
 import playbackBookmarkTest from './PlaybackBookmark.test';
 import failureCatalogTest from './FailureCatalog.test';
@@ -18,6 +19,7 @@ export default function testsuite(): void {
   networkLinkParserTest();
   mediaSourceTest();
   architectureContractsTest();
+  networkStorageProviderTest();
   playbackEngineTest();
   playbackBookmarkTest();
   failureCatalogTest();
