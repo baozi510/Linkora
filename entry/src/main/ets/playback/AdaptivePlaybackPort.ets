@@ -9,7 +9,9 @@ import {
   PlayerBackendKind,
   PlayerBackendPreference,
   PortBufferingEvent,
-  PortPlaybackState
+  PortPlaybackState,
+  PortTrack,
+  PortVideoInfo
 } from 'linkora_core';
 import { NetworkFileProxy } from 'linkora_proxy';
 import { MpvPlaybackPort } from './MpvPlaybackPort';
@@ -21,9 +23,16 @@ type BackendFactory = (observer: PlaybackPortObserver) => Promise<PlaybackBacken
 class CandidateObserver {
   committed: boolean = false;
   error: PlaybackPortError | null = null;
+  private readonly target: PlaybackPortObserver;
+  private duration: number = 0;
+  private videoWidth: number = 0;
+  private videoHeight: number = 0;
+  private tracks: PortTrack[] = [];
+  private videoInfo: PortVideoInfo = new PortVideoInfo();
   readonly observer: PlaybackPortObserver;
 
   constructor(target: PlaybackPortObserver) {
+    this.target = target;
     this.observer = new PlaybackPortObserver(
       (state: PortPlaybackState) => {
         if (this.committed) target.onStateChange(state);
@@ -36,6 +45,7 @@ class CandidateObserver {
         }
       },
       (value: number) => {
+        this.duration = value;
         if (this.committed) target.onDurationChange(value);
       },
       (value: number) => {
@@ -48,12 +58,39 @@ class CandidateObserver {
         if (this.committed) target.onFirstFrame();
       },
       (width: number, height: number) => {
+        this.videoWidth = width;
+        this.videoHeight = height;
         if (this.committed) target.onVideoSizeChange(width, height);
       },
       () => {
         if (this.committed) target.onInterruptionPause();
+      },
+      (position: number) => {
+        if (this.committed) target.onSeekComplete(position);
+      },
+      (tracks: PortTrack[]) => {
+        this.tracks = tracks.slice();
+        if (this.committed) target.onTracksChange(tracks);
+      },
+      (info: PortVideoInfo) => {
+        this.videoInfo = info;
+        if (this.committed) target.onVideoInfoChange(info);
+      },
+      (backend: string) => {
+        if (this.committed) target.onBackendChange(backend);
       }
     );
+  }
+
+  commit(backend: string): void {
+    this.committed = true;
+    this.target.onBackendChange(backend);
+    if (this.duration > 0) this.target.onDurationChange(this.duration);
+    if (this.videoWidth > 0 && this.videoHeight > 0) {
+      this.target.onVideoSizeChange(this.videoWidth, this.videoHeight);
+    }
+    if (this.tracks.length > 0) this.target.onTracksChange(this.tracks);
+    this.target.onVideoInfoChange(this.videoInfo);
   }
 }
 
@@ -69,6 +106,8 @@ export class AdaptivePlaybackPort implements PlaybackPort {
   private resolved: ResolvedPlaybackSource | null = null;
   private backend: PlaybackBackend | null = null;
   private released: boolean = false;
+  private surfaceWidth: number = 0;
+  private surfaceHeight: number = 0;
 
   constructor(context: common.UIAbilityContext, proxy: NetworkFileProxy,
     observer: PlaybackPortObserver, preference: PlayerBackendPreference,
@@ -90,6 +129,14 @@ export class AdaptivePlaybackPort implements PlaybackPort {
     this.source = source;
     this.surfaceId = surfaceId;
     this.observer.onStateChange(PortPlaybackState.INITIALIZED);
+  }
+
+  setSurfaceSize(width: number, height: number): void {
+    this.surfaceWidth = Math.max(0, Math.round(width));
+    this.surfaceHeight = Math.max(0, Math.round(height));
+    if (this.surfaceWidth > 0 && this.surfaceHeight > 0) {
+      this.backend?.setSurfaceSize(this.surfaceWidth, this.surfaceHeight);
+    }
   }
 
   getDuration(): number {
@@ -151,7 +198,9 @@ export class AdaptivePlaybackPort implements PlaybackPort {
     this.backend = null;
     await backend?.release().catch(() => {});
     await this.releaseResolved();
-    this.observer.onStateChange(PortPlaybackState.RELEASED);
+    if (backend === null) {
+      this.observer.onStateChange(PortPlaybackState.RELEASED);
+    }
   }
 
   private async prepareBackend(kind: PlayerBackendKind, source: MediaSource): Promise<PlaybackBackend> {
@@ -161,11 +210,14 @@ export class AdaptivePlaybackPort implements PlaybackPort {
     const backend: PlaybackBackend = await factory(gate.observer);
     try {
       backend.configure(source, this.surfaceId);
+      if (this.surfaceWidth > 0 && this.surfaceHeight > 0) {
+        backend.setSurfaceSize(this.surfaceWidth, this.surfaceHeight);
+      }
       await backend.prepare();
       if (gate.error !== null) {
         throw gate.error;
       }
-      gate.committed = true;
+      gate.commit(backend.backendKind());
       return backend;
     } catch (error) {
       await backend.release().catch(() => {});

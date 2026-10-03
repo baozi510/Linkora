@@ -68,6 +68,10 @@ export class SystemPlaybackPort implements PlaybackBackend {
     }
   }
 
+  setSurfaceSize(_width: number, _height: number): void {
+    // AVPlayer uses the XComponent surface size directly.
+  }
+
   getDuration(): number {
     return this.player.duration;
   }
@@ -146,6 +150,9 @@ export class SystemPlaybackPort implements PlaybackBackend {
     });
     this.player.on('timeUpdate', (position: number) => {
       this.observer.onPositionChange(position);
+    });
+    this.player.on('seekDone', (position: number) => {
+      this.observer.onSeekComplete(position);
     });
     this.player.on('bufferingUpdate', (type: media.BufferingInfoType, value: number) => {
       this.observer.onBufferingChange(this.bufferingEvent(type), value);
