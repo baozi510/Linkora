@@ -309,6 +309,8 @@ class FakePlaybackPort implements PlaybackPort {
     this.observer.onStateChange(PortPlaybackState.INITIALIZED);
   }
 
+  setSurfaceSize(_width: number, _height: number): void {}
+
   getDuration(): number {
     return 120000;
   }
