@@ -14,7 +14,10 @@
 - B commit：`0d78d17`。
 - C：新增 4 个 Hypium metadata-label 测试。修复前 Hvigor test 返回 exit 0，但 Hypium 为 145 total / 144 PASS / 1 Failure（`doesNotLabelBt2020SdrAsHdr: expect HDR equals [empty]`），因此不认定为通过。移除 primaries-only HDR 分支，保留 colorPrimaries 数据；PQ/2084→HDR10，HLG→HLG，其余空值，不声明 native HDR 输出。
 - C 修复后：Hvigor test exit 0，145/145 PASS，0 Failure/Error/Ignore；原始日志 `artifacts/validation/post-C-before.log` / `post-C-after.log`。
-- D、完整 verify、模拟器安装结果：PENDING。
+- C commit：`ff8ec75`。
+- D：五个受控 Node fixture，修复前 4 PASS / 1 FAIL，`src/main/ets/build/Bad.ets` 被跳过（exit 0 而预期 1）。移除按任意目录名跳过，core/probe 只扫描生产 `src/main/ets` 加模块 `Index.ets`，UI/player 仍扫描既有明确生产根。生成 .test 在根外被忽略，真实源码/实现 import 及 build 子目录都必须拒绝；fixtures 加入完整 verify。
+- D 修复后：5/5 fixtures PASS，生产 architecture guard PASS；日志 `artifacts/validation/post-D-before.log` / `post-D-after.log`。
+- 完整 verify、模拟器安装结果：PENDING。
 
 ## Git 与执行范围
 

@@ -25,6 +25,9 @@ try {
     throw 'Architecture boundary checks failed.'
   }
 
+  & $node (Join-Path $PSScriptRoot 'check-architecture-boundaries.test.cjs')
+  if ($LASTEXITCODE -ne 0) { throw 'Architecture guard fixture checks failed.' }
+
   $uiSource = Get-ChildItem -LiteralPath 'entry\src\main\ets' -Recurse -Filter '*.ets'
   $legacyPatterns = @(
     '^\s*@Component\s*$',

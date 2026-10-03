@@ -8,7 +8,6 @@ function walk(dir) {
   if (!fs.existsSync(dir)) return [];
   const result = [];
   for (const name of fs.readdirSync(dir)) {
-    if (['.test', 'build', 'oh_modules'].includes(name)) continue;
     const full = path.join(dir, name);
     const stat = fs.statSync(full);
     if (stat.isDirectory()) result.push(...walk(full));
@@ -25,7 +24,13 @@ function fail(file, rule, detail) {
   violations.push({ file: rel(file), rule, detail });
 }
 
-for (const file of walk(path.join(root, 'linkora_core'))) {
+function moduleSources(name) {
+  const index = path.join(root, name, 'Index.ets');
+  return [...(fs.existsSync(index) ? [index] : []),
+    ...walk(path.join(root, name, 'src', 'main', 'ets'))];
+}
+
+for (const file of moduleSources('linkora_core')) {
   const text = fs.readFileSync(file, 'utf8');
   if (/from\s+['"]@kit\./.test(text) || /from\s+['"]@ohos\./.test(text)) {
     fail(file, 'core-platform-free', 'linkora_core must not depend on HarmonyOS platform kits');
@@ -42,7 +47,7 @@ for (const file of walk(path.join(root, 'entry', 'src', 'main', 'ets', 'playback
   }
 }
 
-for (const file of walk(path.join(root, 'linkora_media_probe'))) {
+for (const file of moduleSources('linkora_media_probe')) {
   const text = fs.readFileSync(file, 'utf8');
   if (/(WebDavBrowserService|SmbBrowserService|SftpBrowserService|NetworkMediaCache|NetworkThumbnailCache)/.test(text)) {
     fail(file, 'probe-no-storage-cache', 'media probe must not depend on storage protocol/cache implementations');
