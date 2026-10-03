@@ -2,14 +2,14 @@ import { BusinessError } from '@kit.BasicServicesKit';
 import { fileIo } from '@kit.CoreFileKit';
 import { media } from '@kit.MediaKit';
 import { audio } from '@kit.AudioKit';
-import { MediaSource, MediaSourceKind, PlaybackPort, PlaybackPortError, PlaybackPortObserver,
-  PortBufferingEvent, PortPlaybackState } from 'linkora_core';
+import { MediaSource, MediaSourceKind, PlaybackBackend, PlaybackPortError, PlaybackPortObserver,
+  PlayerBackendCapabilities, PlayerBackendKind, PortBufferingEvent, PortPlaybackState } from 'linkora_core';
 import { ProgressiveDownloadRegistry, ProgressiveDownloadTask } from './ProgressiveDownloadRegistry';
 
 const INITIALIZATION_TIMEOUT: number = 12000;
 const ERROR_EVENT_GRACE_PERIOD: number = 80;
 
-export class SystemPlaybackPort implements PlaybackPort {
+export class SystemPlaybackPort implements PlaybackBackend {
   private player: media.AVPlayer;
   private observer: PlaybackPortObserver;
   private sourceFile: fileIo.File | null = null;
@@ -33,13 +33,21 @@ export class SystemPlaybackPort implements PlaybackPort {
     this.registerEvents();
   }
 
-  static async create(observer: PlaybackPortObserver): Promise<PlaybackPort> {
+  static async create(observer: PlaybackPortObserver): Promise<PlaybackBackend> {
     try {
       const player: media.AVPlayer = await media.createAVPlayer();
       return new SystemPlaybackPort(player, observer);
     } catch (error) {
       throw SystemPlaybackPort.platformError(error);
     }
+  }
+
+  backendKind(): PlayerBackendKind {
+    return PlayerBackendKind.SYSTEM;
+  }
+
+  capabilities(): PlayerBackendCapabilities {
+    return new PlayerBackendCapabilities(true, true, true, false, false, false, false, false, false, false);
   }
 
   configure(source: MediaSource, surfaceId: string): void {
