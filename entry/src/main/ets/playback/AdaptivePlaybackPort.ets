@@ -221,7 +221,7 @@ export class AdaptivePlaybackPort implements PlaybackPort {
       return backend;
     } catch (error) {
       await backend.release().catch(() => {});
-      throw error;
+      throw error as Error;
     }
   }
 
