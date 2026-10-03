@@ -1,7 +1,7 @@
 import { common } from '@kit.AbilityKit';
 import { preferences } from '@kit.ArkData';
 import { AppAccentColor, AppSettings, AppThemeMode, DEFAULT_SUBTITLE_EXTENSIONS,
-  DEFAULT_VIDEO_EXTENSIONS, LocalMediaFolderFilter, SettingsRepository } from 'linkora_core';
+  DEFAULT_VIDEO_EXTENSIONS, LocalMediaFolderFilter, PlayerBackendPreference, SettingsRepository } from 'linkora_core';
 
 const STORE_NAME: string = 'app_settings';
 const KEY_SCHEMA_VERSION: string = 'schema_version';
@@ -14,7 +14,8 @@ const KEY_ACCENT_COLOR: string = 'accent_color';
 const KEY_LOCAL_VIDEO_EXTENSIONS: string = 'local_video_extensions';
 const KEY_LOCAL_SUBTITLE_EXTENSIONS: string = 'local_subtitle_extensions';
 const KEY_EXPERIMENTAL_NETWORK_STORAGE: string = 'experimental_network_storage';
-const SCHEMA_VERSION: number = 7;
+const KEY_PLAYER_BACKEND: string = 'player_backend';
+const SCHEMA_VERSION: number = 8;
 
 export class AppSettingsStore implements SettingsRepository {
   private context: common.UIAbilityContext;
@@ -39,6 +40,8 @@ export class AppSettingsStore implements SettingsRepository {
         DEFAULT_SUBTITLE_EXTENSIONS.join(','));
       const experimentalNetworkStorage: preferences.ValueType =
         await store.get(KEY_EXPERIMENTAL_NETWORK_STORAGE, false);
+      const playerBackend: preferences.ValueType =
+        await store.get(KEY_PLAYER_BACKEND, PlayerBackendPreference.AUTO);
       return new AppSettings(
         typeof remember === 'boolean' ? remember : true,
         typeof keepScreenOn === 'boolean' ? keepScreenOn : true,
@@ -48,7 +51,8 @@ export class AppSettingsStore implements SettingsRepository {
         AppSettingsStore.accentColor(accentColor),
         AppSettingsStore.extensions(videoExtensions, DEFAULT_VIDEO_EXTENSIONS),
         AppSettingsStore.extensions(subtitleExtensions, DEFAULT_SUBTITLE_EXTENSIONS),
-        typeof experimentalNetworkStorage === 'boolean' ? experimentalNetworkStorage : false
+        typeof experimentalNetworkStorage === 'boolean' ? experimentalNetworkStorage : false,
+        AppSettingsStore.playerBackendPreference(playerBackend)
       );
     } catch (_error) {
       return new AppSettings();
@@ -68,6 +72,7 @@ export class AppSettingsStore implements SettingsRepository {
       await store.put(KEY_LOCAL_VIDEO_EXTENSIONS, settings.localVideoExtensions.join(','));
       await store.put(KEY_LOCAL_SUBTITLE_EXTENSIONS, settings.localSubtitleExtensions.join(','));
       await store.put(KEY_EXPERIMENTAL_NETWORK_STORAGE, settings.experimentalNetworkStorage);
+      await store.put(KEY_PLAYER_BACKEND, settings.playerBackendPreference);
       await store.flush();
     } catch (_error) {
       throw new Error('Unable to persist application settings');
@@ -94,6 +99,16 @@ export class AppSettingsStore implements SettingsRepository {
       return value;
     }
     return AppAccentColor.BLUE;
+  }
+
+  private static playerBackendPreference(value: preferences.ValueType): PlayerBackendPreference {
+    if (value === PlayerBackendPreference.SYSTEM) {
+      return PlayerBackendPreference.SYSTEM;
+    }
+    if (value === PlayerBackendPreference.MPV) {
+      return PlayerBackendPreference.MPV;
+    }
+    return PlayerBackendPreference.AUTO;
   }
 
   private static extensions(value: preferences.ValueType, fallback: string[]): string[] {

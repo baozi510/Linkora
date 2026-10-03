@@ -7,8 +7,7 @@ import {
 import { NetworkFileProxy, ProxyUrlLease } from 'linkora_proxy';
 import { NetworkDirectoryService } from '../services/NetworkDirectoryService';
 import { NetworkServerEntry, NetworkServerStore } from '../services/NetworkServerStore';
-
-const NETWORK_SERVER_PREFIX: string = 'network-server:';
+import { NetworkMediaSourceFactory } from '../services/NetworkMediaSourceFactory';
 
 export class ResolvedPlaybackSource {
   readonly source: MediaSource;
@@ -43,7 +42,7 @@ export class NetworkPlaybackSourceResolver {
       return new ResolvedPlaybackSource(source);
     }
 
-    const serverId: number = this.serverId(source.sourceId);
+    const serverId: number = NetworkMediaSourceFactory.serverId(source);
     if (serverId <= 0) {
       throw new Error('Remote media source has no valid server identity');
     }
@@ -78,18 +77,6 @@ export class NetworkPlaybackSourceResolver {
       await randomAccess.close().catch(() => {});
       throw error;
     }
-  }
-
-  static sourceId(serverId: number): string {
-    return `${NETWORK_SERVER_PREFIX}${serverId}`;
-  }
-
-  private serverId(sourceId: string): number {
-    if (!sourceId.startsWith(NETWORK_SERVER_PREFIX)) {
-      return 0;
-    }
-    const value: number = Number(sourceId.substring(NETWORK_SERVER_PREFIX.length));
-    return Number.isSafeInteger(value) && value > 0 ? value : 0;
   }
 
   private contentType(format: MediaFormat): string {

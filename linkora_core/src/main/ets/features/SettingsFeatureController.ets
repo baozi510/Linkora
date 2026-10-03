@@ -1,5 +1,6 @@
 import { SettingsRepository } from '../contracts/FeaturePorts';
 import { AppAccentColor, AppSettings, AppThemeMode } from '../models/AppSettings';
+import { PlayerBackendPreference } from '../playback/PlaybackBackend';
 import { LocalMediaFolderFilter } from '../models/LocalMediaFolder';
 
 export class SettingsFeatureState {
@@ -56,6 +57,10 @@ export class SettingsFeatureController {
 
   setExperimentalNetworkStorage(enabled: boolean): void {
     this.update(this.state.settings.withExperimentalNetworkStorage(enabled));
+  }
+
+  setPlayerBackendPreference(preference: PlayerBackendPreference): void {
+    this.update(this.state.settings.withPlayerBackendPreference(preference));
   }
 
   setLocalMediaFolderFilter(filter: LocalMediaFolderFilter): void {
