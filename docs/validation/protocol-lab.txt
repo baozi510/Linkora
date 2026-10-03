@@ -1,0 +1,6 @@
+PASS WebDAV auth, guest, 401 and Range
+PASS SMB password, guest and invalid password
+PASS SFTP password, key and host fingerprint
+PASS FTP password, anonymous and invalid password
+PASS NFS v4 read-only export
+All Linkora protocol lab checks passed. Host IP: 172.19.89.109

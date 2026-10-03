@@ -1,0 +1,42 @@
+[
+  {
+    "path": "D:\\Linkora-validation\\artifacts\\validation\\build\\debug\\entry-default-unsigned.hap",
+    "bytes": 49842031,
+    "sha256": "90ef1ddc0c4df91ef35e4eafbb5bc281a7d3da1452cc97e72793614b849aea4f"
+  },
+  {
+    "path": "D:\\Linkora-validation\\artifacts\\validation\\build\\debug\\linkora_core.har",
+    "bytes": 139340,
+    "sha256": "af1a55049a7d0a8ce0208e0b67cc6dd079757ba9f491f3fd967e236e9441b568"
+  },
+  {
+    "path": "D:\\Linkora-validation\\artifacts\\validation\\build\\debug\\linkora_media_probe.har",
+    "bytes": 22460,
+    "sha256": "7bd2fb4f5a898ec860daf0cd55d2a968137f310cab83970f87fcedb5f6f2cd9e"
+  },
+  {
+    "path": "D:\\Linkora-validation\\artifacts\\validation\\build\\debug\\linkora_proxy.har",
+    "bytes": 23155,
+    "sha256": "a3fbcb105883f36fe52a72a91815b0c81218f4aa7d3496d332c76f5be780aa48"
+  },
+  {
+    "path": "D:\\Linkora-validation\\artifacts\\validation\\build\\release\\entry-default-unsigned.hap",
+    "bytes": 46380428,
+    "sha256": "e0344c66afa17477c68f5f2f8d0e920eeceac13f71e4b2541164ba604b3704eb"
+  },
+  {
+    "path": "D:\\Linkora-validation\\artifacts\\validation\\build\\release\\linkora_core.har",
+    "bytes": 84207,
+    "sha256": "512fdd04765f650ca56e91fb02537042c5bd3930079cc1db5619afcad0382de5"
+  },
+  {
+    "path": "D:\\Linkora-validation\\artifacts\\validation\\build\\release\\linkora_media_probe.har",
+    "bytes": 15637,
+    "sha256": "a7d92def0dbc01ffbdbfd277c89105475b5db524f7ca75e0908413a2b51a45f5"
+  },
+  {
+    "path": "D:\\Linkora-validation\\artifacts\\validation\\build\\release\\linkora_proxy.har",
+    "bytes": 14803,
+    "sha256": "c8abd9bd890eaab97ae32b67563c04a0bf6145ed613b0f593af69ac832e5ad15"
+  }
+]

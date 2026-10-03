@@ -1,0 +1,445 @@
+ATTEMPT 01: ./scripts/verify.ps1; exit 1
+TypeError: SystemMediaProbe_1.SystemMediaProbe is not a constructor
+    at new NetworkMediaProbe (D:\Linkora-validation\linkora_media_probe\src\main\ets\NetworkMediaProbe.ets:51:108)
+    at unitChecks (D:\Linkora-validation\scripts\check-network-media-probe.cjs:59:17)
+
+ATTEMPT 02: ./scripts/verify.ps1; exit 1
+TypeError: linkora_core_1.DefaultThumbnailTimePolicy is not a constructor
+    at <instance_members_initializer> (D:\Linkora-validation\entry\src\main\ets\services\NetworkMediaLoader.ets:60:23)
+    at new NetworkMediaLoader (D:\Linkora-validation\entry\src\main\ets\services\NetworkMediaLoader.ets:75:16)
+
+ATTEMPT 03: ./scripts/verify.ps1; exit 1
+> hvigor ERROR: Failed :entry:default@GenerateLoaderJson...
+> hvigor ERROR: 00306046 Specification Limit Violation
+Error Message: Bytecode HAR [@mpv-ohos/mpv-arkts] not supported when useNormalizedOHMUrl is not true.
+> hvigor ERROR: 00306046 Specification Limit Violation
+Error Message: Bytecode HAR [@mpv-ohos/mpv-arkts] not supported when useNormalizedOHMUrl is not true.
+
+Error Message: Bytecode HAR [@mpv-ohos/mpv-arkts] not supported when useNormalizedOHMUrl is not true.
+
+* Try the following:
+> hvigor ERROR: BUILD FAILED in 1 s 703 ms
+
+23 tasks in total: 23 executed, 0 up-to-date
+
+ATTEMPT 04: ./scripts/verify.ps1; exit 1
+Architecture boundary violations:
+- linkora_core/.test/testability/pages/Index.ets [core-platform-free] linkora_core must not depend on HarmonyOS platform kits
+- linkora_core/.test/testability/TestAbility.ets [core-platform-free] linkora_core must not depend on HarmonyOS platform kits
+
+ATTEMPT 05: ./scripts/verify.ps1; exit 1
+> hvigor ERROR: 00303038 Configuration Error
+Error Message: Schema validate failed, at file: D:\Linkora-validation\build-profile.json5
+
+Error Message: Schema validate failed, at file: D:\Linkora-validation\build-profile.json5
+
+* Try the following:
+> hvigor ERROR: BUILD FAILED in 1 s 252 ms
+
+0 task in total: 0 executed, 0 up-to-date.
+
+ATTEMPT 06: ./scripts/verify.ps1; exit 1
+> hvigor ERROR: 00303038 Configuration Error
+Error Message: Schema validate failed, at file: D:\Linkora-validation\build-profile.json5
+
+Error Message: Schema validate failed, at file: D:\Linkora-validation\build-profile.json5
+
+* Try the following:
+> hvigor ERROR: BUILD FAILED in 1 s 217 ms
+
+0 task in total: 0 executed, 0 up-to-date.
+
+ATTEMPT 07: ./scripts/verify.ps1; exit 1
+> hvigor ERROR: Failed :entry:default@BuildNativeWithCmake...
+> hvigor ERROR: 00303300 Configuration Error
+Error Message: Exceptions happened while executing C:\Program Files\Huawei\DevEco Studio\sdk\default\openharmony\native\build-tools\cmake\bin\cmake.exe -HD:\Linkora-validation\entry\src\main\cpp -BD:\Linkora-validation\entry\.cxx\default\default\debug\arm64-v8a -DOHOS_ARCH=arm64-v8a -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=D:\Linkora-validation\entry\.test\default\intermediates\cmake\default\obj\arm64-v8a -DCMAKE_BUILD_TYPE=Debug -DOHOS_SDK_NATIVE=C:\Program Files\Huawei\DevEco Studio\sdk\default\openharmony\native -DCMAKE_SYSTEM_NAME=OHOS -DCMAKE_OHOS_ARCH_ABI=arm64-v8a -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_TOOLCHAIN_FILE=C:\Program Files\Huawei\DevEco Studio\sdk\default\hms\native\build\cmake\hmos.toolchain.cmake -GNinja -DCMAKE_MAKE_PROGRAM=C:\Program Files\Huawei\DevEco Studio\sdk\default\openharmony\native\build-tools\cmake\bin\ninja.exe -DCMAKE_FIND_ROOT_PATH=D:\Linkora-validation\entry\.cxx\default\default\debug\hvigor\arm64-v8a -DPACKAGE_FIND_FILE=D:\Linkora-validation\entry\.cxx\default\default\debug\hvigor\arm64-v8a\summary.cmake --no-warn-unused-cli -DOHOS_TEST_COVERAGE=FALSE -DHMOS_SDK_NATIVE=C:\Program Files\Huawei\DevEco Studio\sdk\default\hms\native.
+> hvigor ERROR: 00303300 Configuration Error
+Error Message: Exceptions happened while executing C:\Program Files\Huawei\DevEco Studio\sdk\default\openharmony\native\build-tools\cmake\bin\cmake.exe -HD:\Linkora-validation\entry\src\main\cpp -BD:\Linkora-validation\entry\.cxx\default\default\debug\arm64-v8a -DOHOS_ARCH=arm64-v8a -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=D:\Linkora-validation\entry\.test\default\intermediates\cmake\default\obj\arm64-v8a -DCMAKE_BUILD_TYPE=Debug -DOHOS_SDK_NATIVE=C:\Program Files\Huawei\DevEco Studio\sdk\default\openharmony\native -DCMAKE_SYSTEM_NAME=OHOS -DCMAKE_OHOS_ARCH_ABI=arm64-v8a -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_TOOLCHAIN_FILE=C:\Program Files\Huawei\DevEco Studio\sdk\default\hms\native\build\cmake\hmos.toolchain.cmake -GNinja -DCMAKE_MAKE_PROGRAM=C:\Program Files\Huawei\DevEco Studio\sdk\default\openharmony\native\build-tools\cmake\bin\ninja.exe -DCMAKE_FIND_ROOT_PATH=D:\Linkora-validation\entry\.cxx\default\default\debug\hvigor\arm64-v8a -DPACKAGE_FIND_FILE=D:\Linkora-validation\entry\.cxx\default\default\debug\hvigor\arm64-v8a\summary.cmake --no-warn-unused-cli -DOHOS_TEST_COVERAGE=FALSE -DHMOS_SDK_NATIVE=C:\Program Files\Huawei\DevEco Studio\sdk\default\hms\native.
+Not searching for unused variables given on the command line.
+Error Message: Exceptions happened while executing C:\Program Files\Huawei\DevEco Studio\sdk\default\openharmony\native\build-tools\cmake\bin\cmake.exe -HD:\Linkora-validation\entry\src\main\cpp -BD:\Linkora-validation\entry\.cxx\default\default\debug\arm64-v8a -DOHOS_ARCH=arm64-v8a -DCMAKE_LIBRARY_OUTPUT_DIRECTORY=D:\Linkora-validation\entry\.test\default\intermediates\cmake\default\obj\arm64-v8a -DCMAKE_BUILD_TYPE=Debug -DOHOS_SDK_NATIVE=C:\Program Files\Huawei\DevEco Studio\sdk\default\openharmony\native -DCMAKE_SYSTEM_NAME=OHOS -DCMAKE_OHOS_ARCH_ABI=arm64-v8a -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_TOOLCHAIN_FILE=C:\Program Files\Huawei\DevEco Studio\sdk\default\hms\native\build\cmake\hmos.toolchain.cmake -GNinja -DCMAKE_MAKE_PROGRAM=C:\Program Files\Huawei\DevEco Studio\sdk\default\openharmony\native\build-tools\cmake\bin\ninja.exe -DCMAKE_FIND_ROOT_PATH=D:\Linkora-validation\entry\.cxx\default\default\debug\hvigor\arm64-v8a -DPACKAGE_FIND_FILE=D:\Linkora-validation\entry\.cxx\default\default\debug\hvigor\arm64-v8a\summary.cmake --no-warn-unused-cli -DOHOS_TEST_COVERAGE=FALSE -DHMOS_SDK_NATIVE=C:\Program Files\Huawei\DevEco Studio\sdk\default\hms\native.
+Not searching for unused variables given on the command line.
+-- The C compiler identification is Clang 15.0.4
+> hvigor ERROR: BUILD FAILED in 7 s 530 ms
+
+25 tasks in total: 21 executed, 4 up-to-date
+
+ATTEMPT 08: ./scripts/verify.ps1; exit 1
+> hvigor ERROR: Failed :entry:default@UnitTestArkTS...
+> hvigor WARN:
+1 WARN: ArkTS:WARN File: D:/Linkora-validation/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/MpvLib.d.ets:2:1
+> hvigor ERROR: ArkTS Compiler Error
+1 ERROR: 10605040 ArkTS Compiler Error
+Error Message: Object literals cannot be used as type declarations (arkts-no-obj-literals-as-types) At File: D:/Linkora-validation/linkora_core/src/main/ets/thumbnail/ThumbnailPolicy.ets:53:59
+1 ERROR: 10605040 ArkTS Compiler Error
+Error Message: Object literals cannot be used as type declarations (arkts-no-obj-literals-as-types) At File: D:/Linkora-validation/linkora_core/src/main/ets/thumbnail/ThumbnailPolicy.ets:53:59
+
+Error Message: Object literals cannot be used as type declarations (arkts-no-obj-literals-as-types) At File: D:/Linkora-validation/linkora_core/src/main/ets/thumbnail/ThumbnailPolicy.ets:53:59
+
+
+Error Message: Object literal must correspond to some explicitly declared class or interface (arkts-no-untyped-obj-literals) At File: D:/Linkora-validation/linkora_core/src/main/ets/thumbnail/ThumbnailPolicy.ets:57:14
+
+
+Error Message: Object literal must correspond to some explicitly declared class or interface (arkts-no-untyped-obj-literals) At File: D:/Linkora-validation/linkora_core/src/main/ets/thumbnail/ThumbnailPolicy.ets:60:12
+
+
+Error Message: Using "this" inside stand-alone functions is not supported (arkts-no-standalone-this) At File: D:/Linkora-validation/entry/src/main/ets/services/NetworkMediaSourceFactory.ets:9:30
+
+
+Error Message: "throw" statements cannot accept values of arbitrary types (arkts-limited-throw) At File: D:/Linkora-validation/entry/src/main/ets/playback/NetworkPlaybackSourceResolver.ets:78:7
+
+
+Error Message: "throw" statements cannot accept values of arbitrary types (arkts-limited-throw) At File: D:/Linkora-validation/entry/src/main/ets/playback/AdaptivePlaybackPort.ets:224:7
+
+
+Error Message: Using "this" inside stand-alone functions is not supported (arkts-no-standalone-this) At File: D:/Linkora-validation/entry/src/main/ets/foundation/LinkoraFeatures.ets:30:9
+
+
+Error Message: Using "this" inside stand-alone functions is not supported (arkts-no-standalone-this) At File: D:/Linkora-validation/entry/src/main/ets/foundation/LinkoraFeatures.ets:31:7
+
+
+Error Message: Using "this" inside stand-alone functions is not supported (arkts-no-standalone-this) At File: D:/Linkora-validation/entry/src/main/ets/foundation/LinkoraFeatures.ets:33:12
+
+
+Error Message: Using "this" inside stand-alone functions is not supported (arkts-no-standalone-this) At File: D:/Linkora-validation/entry/src/main/ets/foundation/LinkoraFeatures.ets:39:59
+
+
+Error Message: Using "this" inside stand-alone functions is not supported (arkts-no-standalone-this) At File: D:/Linkora-validation/entry/src/main/ets/foundation/LinkoraFeatures.ets:52:44
+
+
+Error Message: Using "this" inside stand-alone functions is not supported (arkts-no-standalone-this) At File: D:/Linkora-validation/entry/src/main/ets/foundation/LinkoraFeatures.ets:53:5
+
+
+Error Message: Using "this" inside stand-alone functions is not supported (arkts-no-standalone-this) At File: D:/Linkora-validation/entry/src/main/ets/foundation/LinkoraFeatures.ets:79:43
+
+
+Error Message: Type 'number | undefined' is not assignable to type 'number'.
+  Type 'undefined' is not assignable to type 'number'. At File: D:/Linkora-validation/entry/src/test/SystemMediaStages.test.ets:27:5
+
+Error Message: Type 'number | undefined' is not assignable to type 'number'.
+  Type 'undefined' is not assignable to type 'number'. At File: D:/Linkora-validation/entry/src/test/SystemMediaStages.test.ets:28:5
+
+Error Message: Class 'FakePlaybackPort' incorrectly implements interface 'PlaybackPort'.
+  Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:12:7
+
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:89:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:107:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:130:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:146:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:168:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:186:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:202:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:220:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FailingPreparePort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FailingPreparePort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FailingPreparePort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:243:13
+Error Message: Class 'FakePlaybackPort' incorrectly implements interface 'PlaybackPort'.
+  Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/FeatureModules.test.ets:300:7
+
+Error Message: Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/FeatureModules.test.ets:1093:13
+
+
+Error Message: Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/FeatureModules.test.ets:1153:13
+
+
+> hvigor ERROR: BUILD FAILED in 50 s 498 ms
+
+37 tasks in total: 21 executed, 16 up-to-date
+
+ATTEMPT 09: ./scripts/verify.ps1; exit 1
+> hvigor ERROR: Failed :entry:default@UnitTestArkTS...
+> hvigor WARN:
+1 WARN: ArkTS:WARN File: D:/Linkora-validation/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/MpvLib.d.ets:2:1
+> hvigor ERROR: ArkTS Compiler Error
+1 ERROR: 10605093 ArkTS Compiler Error
+Error Message: Using "this" inside stand-alone functions is not supported (arkts-no-standalone-this) At File: D:/Linkora-validation/entry/src/main/ets/services/NetworkMediaSourceFactory.ets:9:30
+1 ERROR: 10605093 ArkTS Compiler Error
+Error Message: Using "this" inside stand-alone functions is not supported (arkts-no-standalone-this) At File: D:/Linkora-validation/entry/src/main/ets/services/NetworkMediaSourceFactory.ets:9:30
+
+Error Message: Using "this" inside stand-alone functions is not supported (arkts-no-standalone-this) At File: D:/Linkora-validation/entry/src/main/ets/services/NetworkMediaSourceFactory.ets:9:30
+
+
+Error Message: "throw" statements cannot accept values of arbitrary types (arkts-limited-throw) At File: D:/Linkora-validation/entry/src/main/ets/playback/NetworkPlaybackSourceResolver.ets:78:7
+
+
+Error Message: "throw" statements cannot accept values of arbitrary types (arkts-limited-throw) At File: D:/Linkora-validation/entry/src/main/ets/playback/AdaptivePlaybackPort.ets:224:7
+
+
+Error Message: Using "this" inside stand-alone functions is not supported (arkts-no-standalone-this) At File: D:/Linkora-validation/entry/src/main/ets/foundation/LinkoraFeatures.ets:30:9
+
+
+Error Message: Using "this" inside stand-alone functions is not supported (arkts-no-standalone-this) At File: D:/Linkora-validation/entry/src/main/ets/foundation/LinkoraFeatures.ets:31:7
+
+
+Error Message: Using "this" inside stand-alone functions is not supported (arkts-no-standalone-this) At File: D:/Linkora-validation/entry/src/main/ets/foundation/LinkoraFeatures.ets:33:12
+
+
+Error Message: Using "this" inside stand-alone functions is not supported (arkts-no-standalone-this) At File: D:/Linkora-validation/entry/src/main/ets/foundation/LinkoraFeatures.ets:39:59
+
+
+Error Message: Using "this" inside stand-alone functions is not supported (arkts-no-standalone-this) At File: D:/Linkora-validation/entry/src/main/ets/foundation/LinkoraFeatures.ets:52:44
+
+
+Error Message: Using "this" inside stand-alone functions is not supported (arkts-no-standalone-this) At File: D:/Linkora-validation/entry/src/main/ets/foundation/LinkoraFeatures.ets:53:5
+
+
+Error Message: Using "this" inside stand-alone functions is not supported (arkts-no-standalone-this) At File: D:/Linkora-validation/entry/src/main/ets/foundation/LinkoraFeatures.ets:79:43
+
+
+Error Message: Type 'number | undefined' is not assignable to type 'number'.
+  Type 'undefined' is not assignable to type 'number'. At File: D:/Linkora-validation/entry/src/test/SystemMediaStages.test.ets:27:5
+
+Error Message: Type 'number | undefined' is not assignable to type 'number'.
+  Type 'undefined' is not assignable to type 'number'. At File: D:/Linkora-validation/entry/src/test/SystemMediaStages.test.ets:28:5
+
+Error Message: Class 'FakePlaybackPort' incorrectly implements interface 'PlaybackPort'.
+  Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:12:7
+
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:89:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:107:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:130:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:146:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:168:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:186:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:202:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:220:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FailingPreparePort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FailingPreparePort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FailingPreparePort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:243:13
+Error Message: Class 'FakePlaybackPort' incorrectly implements interface 'PlaybackPort'.
+  Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/FeatureModules.test.ets:300:7
+
+Error Message: Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/FeatureModules.test.ets:1093:13
+
+
+Error Message: Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/FeatureModules.test.ets:1153:13
+
+
+> hvigor ERROR: BUILD FAILED in 14 s 269 ms
+
+37 tasks in total: 15 executed, 22 up-to-date
+
+ATTEMPT 10: ./scripts/verify.ps1; exit 1
+> hvigor ERROR: Failed :entry:default@UnitTestArkTS...
+> hvigor WARN:
+1 WARN: ArkTS:WARN File: D:/Linkora-validation/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/MpvLib.d.ets:2:1
+> hvigor ERROR: ArkTS Compiler Error
+1 ERROR: 10605087 ArkTS Compiler Error
+Error Message: "throw" statements cannot accept values of arbitrary types (arkts-limited-throw) At File: D:/Linkora-validation/entry/src/main/ets/playback/NetworkPlaybackSourceResolver.ets:78:7
+1 ERROR: 10605087 ArkTS Compiler Error
+Error Message: "throw" statements cannot accept values of arbitrary types (arkts-limited-throw) At File: D:/Linkora-validation/entry/src/main/ets/playback/NetworkPlaybackSourceResolver.ets:78:7
+
+Error Message: "throw" statements cannot accept values of arbitrary types (arkts-limited-throw) At File: D:/Linkora-validation/entry/src/main/ets/playback/NetworkPlaybackSourceResolver.ets:78:7
+
+
+Error Message: "throw" statements cannot accept values of arbitrary types (arkts-limited-throw) At File: D:/Linkora-validation/entry/src/main/ets/playback/AdaptivePlaybackPort.ets:224:7
+
+
+Error Message: Type 'number | undefined' is not assignable to type 'number'.
+  Type 'undefined' is not assignable to type 'number'. At File: D:/Linkora-validation/entry/src/test/SystemMediaStages.test.ets:27:5
+
+Error Message: Type 'number | undefined' is not assignable to type 'number'.
+  Type 'undefined' is not assignable to type 'number'. At File: D:/Linkora-validation/entry/src/test/SystemMediaStages.test.ets:28:5
+
+Error Message: Class 'FakePlaybackPort' incorrectly implements interface 'PlaybackPort'.
+  Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:12:7
+
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:89:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:107:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:130:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:146:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:168:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:186:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:202:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:220:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FailingPreparePort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FailingPreparePort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FailingPreparePort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:243:13
+Error Message: Class 'FakePlaybackPort' incorrectly implements interface 'PlaybackPort'.
+  Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/FeatureModules.test.ets:300:7
+
+Error Message: Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/FeatureModules.test.ets:1093:13
+
+
+Error Message: Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/FeatureModules.test.ets:1153:13
+
+
+> hvigor ERROR: BUILD FAILED in 11 s 902 ms
+
+37 tasks in total: 16 executed, 21 up-to-date
+
+ATTEMPT 11: ./scripts/verify.ps1; exit 1
+> hvigor ERROR: Failed :entry:default@UnitTestArkTS...
+> hvigor WARN:
+1 WARN: ArkTS:WARN File: D:/Linkora-validation/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/MpvLib.d.ets:2:1
+> hvigor ERROR: ArkTS Compiler Error
+1 ERROR: 10605999 ArkTS Compiler Error
+Error Message: Type 'number | undefined' is not assignable to type 'number'.
+1 ERROR: 10605999 ArkTS Compiler Error
+Error Message: Type 'number | undefined' is not assignable to type 'number'.
+  Type 'undefined' is not assignable to type 'number'. At File: D:/Linkora-validation/entry/src/test/SystemMediaStages.test.ets:27:5
+Error Message: Type 'number | undefined' is not assignable to type 'number'.
+  Type 'undefined' is not assignable to type 'number'. At File: D:/Linkora-validation/entry/src/test/SystemMediaStages.test.ets:27:5
+
+Error Message: Type 'number | undefined' is not assignable to type 'number'.
+  Type 'undefined' is not assignable to type 'number'. At File: D:/Linkora-validation/entry/src/test/SystemMediaStages.test.ets:28:5
+
+Error Message: Class 'FakePlaybackPort' incorrectly implements interface 'PlaybackPort'.
+  Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:12:7
+
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:89:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:107:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:130:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:146:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:168:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:186:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:202:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:220:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FailingPreparePort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FailingPreparePort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FailingPreparePort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:243:13
+Error Message: Class 'FakePlaybackPort' incorrectly implements interface 'PlaybackPort'.
+  Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/FeatureModules.test.ets:300:7
+
+Error Message: Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/FeatureModules.test.ets:1093:13
+
+
+Error Message: Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/FeatureModules.test.ets:1153:13
+
+
+> hvigor ERROR: BUILD FAILED in 11 s 709 ms
+
+37 tasks in total: 15 executed, 22 up-to-date
+
+ATTEMPT 12: ./scripts/verify.ps1; exit 1
+> hvigor ERROR: Failed :entry:default@UnitTestArkTS...
+> hvigor WARN:
+1 WARN: ArkTS:WARN File: D:/Linkora-validation/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/MpvLib.d.ets:2:1
+> hvigor ERROR: ArkTS Compiler Error
+1 ERROR: 10505001 ArkTS Compiler Error
+Error Message: Class 'FakePlaybackPort' incorrectly implements interface 'PlaybackPort'.
+1 ERROR: 10505001 ArkTS Compiler Error
+Error Message: Class 'FakePlaybackPort' incorrectly implements interface 'PlaybackPort'.
+  Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:12:7
+Error Message: Class 'FakePlaybackPort' incorrectly implements interface 'PlaybackPort'.
+  Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:12:7
+
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:89:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:107:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:130:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:146:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:168:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:186:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:202:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FakePlaybackPort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FakePlaybackPort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:220:13
+Error Message: Type '(observer: PlaybackPortObserver) => Promise<FailingPreparePort>' is not assignable to type 'PlaybackPortFactory'.
+  Type 'Promise<FailingPreparePort>' is not assignable to type 'Promise<PlaybackPort>'.
+    Property 'setSurfaceSize' is missing in type 'FailingPreparePort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/PlaybackEngine.test.ets:243:13
+Error Message: Class 'FakePlaybackPort' incorrectly implements interface 'PlaybackPort'.
+  Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/FeatureModules.test.ets:300:7
+
+Error Message: Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/FeatureModules.test.ets:1093:13
+
+
+Error Message: Property 'setSurfaceSize' is missing in type 'FakePlaybackPort' but required in type 'PlaybackPort'. At File: D:/Linkora-validation/entry/src/test/FeatureModules.test.ets:1153:13
+
+
+> hvigor ERROR: BUILD FAILED in 11 s 915 ms
+
+37 tasks in total: 16 executed, 21 up-to-date
+
+ATTEMPT 13: ./scripts/verify.ps1; exit 1
+> hvigor ERROR: Error in pausesSeeksAndClampsVolume, expect seeking equals paused
+> hvigor ERROR:     at AssertException (oh_modules/.ohpm/@ohos+hypium@1.0.18/oh_modules/@ohos/hypium/src/main/service.js:23:9)
+> hvigor ERROR:     at anonymous (oh_modules/.ohpm/@ohos+hypium@1.0.18/oh_modules/@ohos/hypium/src/main/service.js:1084:45)
+> hvigor ERROR:     at AssertException (oh_modules/.ohpm/@ohos+hypium@1.0.18/oh_modules/@ohos/hypium/src/main/service.js:23:9)
+> hvigor ERROR:     at anonymous (oh_modules/.ohpm/@ohos+hypium@1.0.18/oh_modules/@ohos/hypium/src/main/service.js:1084:45)
+> hvigor ERROR:     at anonymous (entry/src/test/PlaybackEngine.test.ets:123:40)
+> hvigor ERROR:     at anonymous (oh_modules/.ohpm/@ohos+hypium@1.0.18/oh_modules/@ohos/hypium/src/main/service.js:1084:45)
+> hvigor ERROR:     at anonymous (entry/src/test/PlaybackEngine.test.ets:123:40)
+[32m[2026-10-04T03:40:04.551] [INFO] default - [39mFinished write html report
+> hvigor ERROR:     at anonymous (entry/src/test/PlaybackEngine.test.ets:123:40)
+[32m[2026-10-04T03:40:04.551] [INFO] default - [39mFinished write html report
+> hvigor [32mFinished :entry:default@GenerateUnitTestResult... after 2 s 560 ms [39m
+
+ATTEMPT 14: ./scripts/verify.ps1; exit 0
+Verification completed: architecture boundaries, persistence checks, unit tests, HAR and HAP builds passed.

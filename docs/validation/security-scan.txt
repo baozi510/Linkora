@@ -1,0 +1,1 @@
+PASS curated evidence and changed-file scan: 20 files; no private-key blocks, signing-password assignments, real authorization tokens or cookie values matched. Device runtime log security: NOT RUN.
