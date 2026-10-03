@@ -5,7 +5,7 @@ import {
   DefaultThumbnailTimePolicy,
   LocalFileCategory,
   LocalFileFilter,
-  RemoteReadSession,
+  RandomAccessSource,
   ThumbnailPlan
 } from 'linkora_core';
 import { NetworkFileProxy, ProxyUrlLease } from 'linkora_proxy';
@@ -48,14 +48,19 @@ class MediaLoadJob {
   info: CachedNetworkMedia | null = null;
   setupSettled: Promise<void> = Promise.resolve();
   probe: NetworkMediaProbe | null = null;
-  reader: RemoteReadSession | null = null;
+  source: RandomAccessSource | null = null;
   lease: ProxyUrlLease | null = null;
+
   constructor(entry: NetworkDirectoryEntry, key: string, generation: number) {
     this.entry = entry; this.key = key; this.generation = generation;
     this.result = new Promise((resolve) => { this.resolve = resolve; });
   }
+
   cancel(): void {
-    this.cancelled = true; this.resolve(null); this.probe?.cancel(); this.reader?.cancel();
+    this.cancelled = true;
+    this.resolve(null);
+    this.probe?.cancel();
+    this.source?.cancel();
     this.lease?.release().catch(() => {});
   }
 }
@@ -67,6 +72,8 @@ export class NetworkMediaLoader {
   private readonly thumbnailPolicy: DefaultThumbnailTimePolicy = new DefaultThumbnailTimePolicy();
   private readonly webpEncoder: SystemWebPEncoder = new SystemWebPEncoder();
   private readonly service: NetworkDirectoryService;
+  private readonly proxy: NetworkFileProxy;
+  private readonly ownsProxy: boolean;
   private readonly onMetadata: (entry: NetworkDirectoryEntry, info: CachedNetworkMedia) => void;
   private readonly jobs: Map<string, MediaLoadJob> = new Map();
   private readonly failures: Map<string, number> = new Map();
@@ -79,11 +86,15 @@ export class NetworkMediaLoader {
   private running: boolean = false;
 
   constructor(context: common.UIAbilityContext, server: NetworkServerEntry,
-    onMetadata: (entry: NetworkDirectoryEntry, info: CachedNetworkMedia) => void) {
-    this.server = server; this.service = new NetworkDirectoryService(server);
+    onMetadata: (entry: NetworkDirectoryEntry, info: CachedNetworkMedia) => void,
+    proxy: NetworkFileProxy | null = null) {
+    this.server = server;
+    this.service = new NetworkDirectoryService(server);
     this.cache = new NetworkMediaCache(context, server.id);
     this.thumbnails = new NetworkThumbnailCache(context, server.id);
     this.onMetadata = onMetadata;
+    this.proxy = proxy ?? new NetworkFileProxy();
+    this.ownsProxy = proxy === null;
   }
 
   reset(entries: NetworkDirectoryEntry[], forceRefresh: boolean): void {
@@ -126,7 +137,6 @@ export class NetworkMediaLoader {
         }
       } catch (_error) {}
 
-      // Legacy read compatibility only. New thumbnail generation never writes JPEG.
       if (cached.imageData !== null) {
         const thumbnail = await this.decode(cached, consumer);
         if (!this.isCurrent(consumer)) return null;
@@ -135,6 +145,7 @@ export class NetworkMediaLoader {
           new CachedNetworkMedia(cached.durationMs, cached.width, cached.height, null, cached.savedAt));
       }
     }
+
     if (!this.isCurrent(consumer)) return null;
     if (Date.now() - (this.failures.get(key) ?? 0) < 30000) return null;
     let job: MediaLoadJob | undefined = this.jobs.get(entry.path);
@@ -171,7 +182,11 @@ export class NetworkMediaLoader {
     if (!interested && job !== undefined) { job.cancel(); this.jobs.delete(path); }
   }
 
-  close(): void { this.stopped = true; this.reset([], false); }
+  close(): void {
+    this.stopped = true;
+    this.reset([], false);
+    if (this.ownsProxy) this.proxy.close().catch(() => {});
+  }
 
   private isCurrent(consumer: MediaConsumer): boolean {
     return consumer.active && !this.stopped && consumer.generation === this.generation;
@@ -179,14 +194,19 @@ export class NetworkMediaLoader {
 
   private expire(job: MediaLoadJob): void {
     if (job.cancelled || job.expired) return;
-    job.expired = true; this.rememberFailure(job.key);
-    job.probe?.cancel(); job.reader?.cancel(); job.lease?.release().catch(() => {});
+    job.expired = true;
+    this.rememberFailure(job.key);
+    job.probe?.cancel();
+    job.source?.cancel();
+    job.lease?.release().catch(() => {});
     if (job.info !== null) {
       if (job.generation === this.generation && !this.stopped) {
         this.cache.put(job.key, job.info).catch(() => {});
       }
       job.resolve(job.info);
-    } else if (!job.inspecting) job.resolve(null);
+    } else if (!job.inspecting) {
+      job.resolve(null);
+    }
   }
 
   private pump(): void {
@@ -196,22 +216,27 @@ export class NetworkMediaLoader {
     this.running = true;
     this.run(job).finally(() => {
       if (this.jobs.get(job.entry.path) === job) this.jobs.delete(job.entry.path);
-      this.running = false; this.pump();
+      this.running = false;
+      this.pump();
     }).catch(() => {});
   }
 
   private async run(job: MediaLoadJob): Promise<void> {
-    const proxy = new NetworkFileProxy();
-    const probe = new NetworkMediaProbe(); job.probe = probe;
+    const probe = new NetworkMediaProbe();
+    job.probe = probe;
     const timer: number = setTimeout(() => this.expire(job), 8000);
     let thumbnail: image.PixelMap | null = null;
     const sourceStarted: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP);
+    const proxyBefore = this.proxy.diagnostics();
+
     try {
-      job.reader = await this.service.openReader(job.entry.path, '',
+      job.source = await this.service.openSource(job.entry.path, '',
         (settled: Promise<void>) => { job.setupSettled = settled; });
       if (job.cancelled || job.expired) return;
-      job.lease = await proxy.buildProxyUrl(job.reader, 'video/mp4');
+
+      job.lease = await this.proxy.buildSourceUrl(job.source, 'video/mp4');
       if (job.cancelled || job.expired) return;
+
       const sourcePrepareMs: number =
         systemDateTime.getUptime(systemDateTime.TimeType.STARTUP) - sourceStarted;
       job.inspecting = true;
@@ -256,14 +281,14 @@ export class NetworkMediaLoader {
         }
         imageEncodingMs = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP) - encodingStarted;
       }
+
       if (job.cancelled || job.generation !== this.generation || this.stopped) return;
       if (job.expired) encoded = null;
       if (encoded !== null) {
         const thumbnailKey: string = await this.thumbnails.key(this.server, job.entry, plan);
-        if (!this.thumbnails.put(thumbnailKey, encoded)) {
-          encoded = null;
-        }
+        if (!this.thumbnails.put(thumbnailKey, encoded)) encoded = null;
       }
+
       const metadataOnly = new CachedNetworkMedia(
         info.durationMs, info.width, info.height, null, Date.now(), 'webp');
       await this.cache.put(job.key, metadataOnly);
@@ -271,20 +296,30 @@ export class NetworkMediaLoader {
       if (encoded === null) this.rememberFailure(job.key);
       const value = new CachedNetworkMedia(
         info.durationMs, info.width, info.height, encoded, Date.now(), 'webp');
+      const proxyAfter = this.proxy.diagnostics();
       console.info(`Network media timing: ${JSON.stringify({
         mode,
         sourcePrepareMs,
         probe: result.timings,
         imageEncodingMs,
-        thumbnailPlan: plan.cacheIdentity()
+        thumbnailPlan: plan.cacheIdentity(),
+        proxyBytesRead: Math.max(0, proxyAfter.bytesRead - proxyBefore.bytesRead),
+        proxyReadRequests: Math.max(0, proxyAfter.readRequests - proxyBefore.readRequests)
       })}`);
       if (!job.cancelled && !this.stopped && job.generation === this.generation) job.resolve(value);
     } catch (_error) {
       if (!job.cancelled) this.rememberFailure(job.key);
     } finally {
-      clearTimeout(timer); job.resolve(null); probe.cancel(); job.reader?.cancel();
-      await Promise.allSettled([thumbnail?.release() ?? Promise.resolve(), probe.close(),
-        job.lease?.release() ?? job.reader?.close() ?? Promise.resolve(), proxy.close(), job.setupSettled]);
+      clearTimeout(timer);
+      job.resolve(null);
+      probe.cancel();
+      job.source?.cancel();
+      await Promise.allSettled([
+        thumbnail?.release() ?? Promise.resolve(),
+        probe.close(),
+        job.lease?.release() ?? job.source?.close() ?? Promise.resolve(),
+        job.setupSettled
+      ]);
     }
   }
 
@@ -297,7 +332,8 @@ export class NetworkMediaLoader {
   }
 
   private rememberFailure(key: string): void {
-    this.failures.delete(key); this.failures.set(key, Date.now());
+    this.failures.delete(key);
+    this.failures.set(key, Date.now());
     while (this.failures.size > 128) this.failures.delete(this.failures.keys().next().value);
   }
 }

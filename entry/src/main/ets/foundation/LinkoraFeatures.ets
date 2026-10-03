@@ -21,16 +21,39 @@ import { NetworkDirectoryEntry } from '../models/NetworkDirectoryState';
 import { CachedNetworkMedia } from '../services/NetworkMediaCache';
 import { NetworkServerEntry } from '../services/NetworkServerStore';
 
-// Production integration switch. Disabling extraction does not disable linkora_proxy.
 const NETWORK_MEDIA_ENABLED: boolean = true;
 
 export class LinkoraFeatures {
+  private static mediaProxy: NetworkFileProxy | null = null;
+
+  private static sharedMediaProxy(): NetworkFileProxy {
+    if (this.mediaProxy === null) {
+      this.mediaProxy = new NetworkFileProxy();
+    }
+    return this.mediaProxy;
+  }
+
   static createNetworkMediaLoader(context: common.UIAbilityContext, server: NetworkServerEntry,
     onMetadata: (entry: NetworkDirectoryEntry, info: CachedNetworkMedia) => void): NetworkMediaLoader | null {
-    return NETWORK_MEDIA_ENABLED ? new NetworkMediaLoader(context, server, onMetadata) : null;
+    return NETWORK_MEDIA_ENABLED ?
+      new NetworkMediaLoader(context, server, onMetadata, this.sharedMediaProxy()) : null;
   }
-  static createNetworkMediaProbe(): NetworkMediaProbe { return new NetworkMediaProbe(); }
-  static createNetworkFileProxy(): NetworkFileProxy { return new NetworkFileProxy(); }
+
+  static createNetworkMediaProbe(): NetworkMediaProbe {
+    return new NetworkMediaProbe();
+  }
+
+  /** Creates an isolated proxy for explicit tests/tools. Production media loaders use a shared proxy. */
+  static createNetworkFileProxy(): NetworkFileProxy {
+    return new NetworkFileProxy();
+  }
+
+  static async closeSharedMediaProxy(): Promise<void> {
+    const proxy: NetworkFileProxy | null = this.mediaProxy;
+    this.mediaProxy = null;
+    await proxy?.close();
+  }
+
   static createLibrary(context: common.UIAbilityContext,
     observer: LibraryFeatureObserver): LibraryFeatureController {
     const playbackStore: PlaybackBookmarkStore = new PlaybackBookmarkStore(context);

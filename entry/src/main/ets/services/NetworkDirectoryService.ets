@@ -57,12 +57,18 @@ export class NetworkDirectoryService {
     return this.provider.directFileUrl(path);
   }
 
-  async openReader(path: string, expectedFingerprint: string = '',
-    setupObserver: (settled: Promise<void>) => void = () => {}): Promise<RemoteReadSession> {
-    const source: RandomAccessSource = await this.provider.openWithOptions(
+  openSource(path: string, expectedFingerprint: string = '',
+    setupObserver: (settled: Promise<void>) => void = () => {}): Promise<RandomAccessSource> {
+    return this.provider.openWithOptions(
       path,
       new NetworkStorageOpenOptions(expectedFingerprint, setupObserver)
     );
+  }
+
+  async openReader(path: string, expectedFingerprint: string = '',
+    setupObserver: (settled: Promise<void>) => void = () => {}): Promise<RemoteReadSession> {
+    const source: RandomAccessSource =
+      await this.openSource(path, expectedFingerprint, setupObserver);
     return new RandomAccessSourceSessionAdapter(source);
   }
 

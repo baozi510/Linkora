@@ -1,25 +1,71 @@
 import { socket } from '@kit.NetworkKit';
 import { util } from '@kit.ArkTS';
-import { RemoteReadSession } from 'linkora_core';
+import {
+  RandomAccessSource,
+  RemoteReadSession,
+  RemoteReadSessionAdapter
+} from 'linkora_core';
 import { HttpByteRange, resolveHttpByteRange } from './HttpByteRange';
 
-const BLOCK_SIZE: number = 256 * 1024;
+const MAX_UPSTREAM_READ: number = 256 * 1024;
 const HEADER_LIMIT: number = 16 * 1024;
-const TIMEOUT: number = 8000;
+
+export class NetworkFileProxyConfig {
+  readonly blockSizeBytes: number;
+  readonly timeoutMs: number;
+  readonly maxSources: number;
+  readonly maxClients: number;
+
+  constructor(blockSizeBytes: number = MAX_UPSTREAM_READ, timeoutMs: number = 8000,
+    maxSources: number = 8, maxClients: number = 16) {
+    this.blockSizeBytes = Math.max(1, Math.min(MAX_UPSTREAM_READ, Math.floor(blockSizeBytes)));
+    this.timeoutMs = Math.max(1000, Math.floor(timeoutMs));
+    this.maxSources = Math.max(1, Math.floor(maxSources));
+    this.maxClients = Math.max(1, Math.floor(maxClients));
+  }
+}
+
+export class NetworkFileProxyDiagnostics {
+  readonly activeSources: number;
+  readonly activeClients: number;
+  readonly readRequests: number;
+  readonly bytesRead: number;
+  readonly releasedSources: number;
+
+  constructor(activeSources: number, activeClients: number, readRequests: number,
+    bytesRead: number, releasedSources: number) {
+    this.activeSources = Math.max(0, activeSources);
+    this.activeClients = Math.max(0, activeClients);
+    this.readRequests = Math.max(0, readRequests);
+    this.bytesRead = Math.max(0, bytesRead);
+    this.releasedSources = Math.max(0, releasedSources);
+  }
+}
 
 class ProxySource {
-  readonly reader: RemoteReadSession;
+  readonly source: RandomAccessSource;
   readonly contentType: string;
   active: boolean = true;
   tail: Promise<void> = Promise.resolve();
-  constructor(reader: RemoteReadSession, contentType: string) {
-    this.reader = reader;
+  readRequests: number = 0;
+  bytesRead: number = 0;
+
+  constructor(source: RandomAccessSource, contentType: string) {
+    this.source = source;
     this.contentType = contentType;
   }
+
+  size(): number {
+    return this.source.size();
+  }
+
   read(offset: number, length: number): Promise<ArrayBuffer> {
-    const operation: Promise<ArrayBuffer> = this.tail.then(() => {
+    const operation: Promise<ArrayBuffer> = this.tail.then(async (): Promise<ArrayBuffer> => {
       if (!this.active) throw new Error('Proxy source closed');
-      return this.reader.read(offset, length);
+      const data: ArrayBuffer = await this.source.readAt(offset, length);
+      this.readRequests++;
+      this.bytesRead += data.byteLength;
+      return data;
     });
     this.tail = operation.then(() => {}, () => {});
     return operation;
@@ -33,58 +79,110 @@ class ProxyClient {
   closed: boolean = false;
   source: ProxySource | null = null;
   timer: number = -1;
-  constructor(connection: socket.TCPSocketConnection) { this.connection = connection; }
+
+  constructor(connection: socket.TCPSocketConnection) {
+    this.connection = connection;
+  }
 }
 
 export class ProxyUrlLease {
   readonly url: string;
+  readonly sourceId: string;
   private readonly releaseSource: () => Promise<void>;
   private releasing: Promise<void> | null = null;
-  constructor(url: string, releaseSource: () => Promise<void>) {
+
+  constructor(url: string, sourceId: string, releaseSource: () => Promise<void>) {
     this.url = url;
+    this.sourceId = sourceId;
     this.releaseSource = releaseSource;
   }
+
   release(): Promise<void> {
     if (this.releasing === null) this.releasing = this.releaseSource();
     return this.releasing;
   }
 }
 
-/** Optional loopback transport. It owns readers after buildProxyUrl is called. */
+/**
+ * Loopback Range transport.
+ *
+ * The primary API owns RandomAccessSource. buildProxyUrl(RemoteReadSession)
+ * remains as a migration facade for existing callers.
+ */
 export class NetworkFileProxy {
+  private readonly config: NetworkFileProxyConfig;
   private server: socket.TCPSocketServer | null = null;
   private starting: Promise<void> | null = null;
   private closing: Promise<void> | null = null;
   private closed: boolean = false;
   private port: number = 0;
   private pending: number = 0;
+  private releasedReadRequests: number = 0;
+  private releasedBytesRead: number = 0;
+  private releasedSources: number = 0;
   private readonly sources: Map<string, ProxySource> = new Map();
   private readonly clients: Map<number, ProxyClient> = new Map();
   private readonly releases: Set<Promise<void>> = new Set();
 
-  async buildProxyUrl(reader: RemoteReadSession, contentType: string): Promise<ProxyUrlLease> {
-    if (this.closed || this.sources.size + this.pending >= 8 ||
-      !Number.isSafeInteger(reader.size()) || reader.size() < 0 ||
+  constructor(config: NetworkFileProxyConfig = new NetworkFileProxyConfig()) {
+    this.config = config;
+  }
+
+  async buildSourceUrl(source: RandomAccessSource, contentType: string): Promise<ProxyUrlLease> {
+    const capabilities = source.capabilities();
+    if (this.closed || this.sources.size + this.pending >= this.config.maxSources ||
+      !capabilities.seekable || !capabilities.sizeKnown ||
+      !Number.isSafeInteger(source.size()) || source.size() < 0 ||
       !/^[a-zA-Z0-9!#$&^_.+-]+\/[a-zA-Z0-9!#$&^_.+-]+$/.test(contentType)) {
-      reader.cancel();
-      await reader.close();
+      source.cancel();
+      await source.close();
       throw new Error('Proxy registration rejected');
     }
+
     this.pending++;
     try {
       if (this.starting === null) this.starting = this.start();
       await this.starting;
       if (this.closed) throw new Error('Proxy closed');
       const token: string = util.generateRandomUUID(true);
-      const source: ProxySource = new ProxySource(reader, contentType);
-      this.sources.set(token, source);
-      return new ProxyUrlLease(`http://127.0.0.1:${this.port}/${token}`,
-        () => this.release(token, source));
+      const proxySource: ProxySource = new ProxySource(source, contentType);
+      this.sources.set(token, proxySource);
+      return new ProxyUrlLease(
+        `http://127.0.0.1:${this.port}/${token}`,
+        source.id(),
+        () => this.release(token, proxySource)
+      );
     } catch (_error) {
-      reader.cancel();
-      await reader.close();
+      source.cancel();
+      await source.close();
       throw new Error('Proxy registration failed');
-    } finally { this.pending--; }
+    } finally {
+      this.pending--;
+    }
+  }
+
+  async buildProxyUrl(reader: RemoteReadSession, contentType: string): Promise<ProxyUrlLease> {
+    const adapter = new RemoteReadSessionAdapter(
+      `legacy:${util.generateRandomUUID(true)}`,
+      reader
+    );
+    return this.buildSourceUrl(adapter, contentType);
+  }
+
+  diagnostics(): NetworkFileProxyDiagnostics {
+    let activeReadRequests: number = 0;
+    let activeBytesRead: number = 0;
+    this.sources.forEach((source: ProxySource) => {
+      activeReadRequests += source.readRequests;
+      activeBytesRead += source.bytesRead;
+    });
+    return new NetworkFileProxyDiagnostics(
+      this.sources.size,
+      this.clients.size,
+      this.releasedReadRequests + activeReadRequests,
+      this.releasedBytesRead + activeBytesRead,
+      this.releasedSources
+    );
   }
 
   close(): Promise<void> {
@@ -113,13 +211,13 @@ export class NetworkFileProxy {
   }
 
   private accept(connection: socket.TCPSocketConnection): void {
-    if (this.closed || this.clients.size >= 16) {
+    if (this.closed || this.clients.size >= this.config.maxClients) {
       connection.close().catch(() => {});
       return;
     }
     const client: ProxyClient = new ProxyClient(connection);
     this.clients.set(connection.clientId, client);
-    client.timer = setTimeout(() => { this.disconnect(client); }, TIMEOUT);
+    client.timer = setTimeout(() => { this.disconnect(client); }, this.config.timeoutMs);
     connection.on('close', () => this.forget(client));
     connection.on('error', () => { this.disconnect(client); });
     connection.on('message', (message: socket.SocketMessageInfo) => {
@@ -152,6 +250,7 @@ export class NetworkFileProxy {
     if (request[0] !== 'GET' && request[0] !== 'HEAD') {
       await this.respond(client, 405, 0, '', 'application/octet-stream', 'Allow: GET, HEAD\r\n'); return;
     }
+
     let range: string = '';
     let seenRange: boolean = false;
     for (let i: number = 1; i < lines.length; i++) {
@@ -161,38 +260,55 @@ export class NetworkFileProxy {
       const value: string = lines[i].substring(colon + 1).trim();
       if (name === 'range') {
         if (seenRange) { await this.respond(client, 400); return; }
-        seenRange = true; range = value;
+        seenRange = true;
+        range = value;
       }
       if (name === 'transfer-encoding' || (name === 'content-length' && value !== '0')) {
         await this.respond(client, 400); return;
       }
     }
-    const source: ProxySource | undefined = this.sources.get(request[1].substring(1));
-    if (!request[1].startsWith('/') || source === undefined || !source.active) {
+
+    const proxySource: ProxySource | undefined = this.sources.get(request[1].substring(1));
+    if (!request[1].startsWith('/') || proxySource === undefined || !proxySource.active) {
       await this.respond(client, 404); return;
     }
-    client.source = source;
-    const result: HttpByteRange = resolveHttpByteRange(request[0] === 'HEAD' ? '' : range, source.reader.size());
+
+    client.source = proxySource;
+    const result: HttpByteRange =
+      resolveHttpByteRange(request[0] === 'HEAD' ? '' : range, proxySource.size());
     if (result.status === 400 || result.status === 416) {
       await this.respond(client, result.status, 0, result.contentRange); return;
     }
+
     let position: number = result.offset;
     let remaining: number = result.length;
     let first: ArrayBuffer | null = null;
     try {
-      if (request[0] === 'GET' && remaining > 0) first = await source.read(position, Math.min(BLOCK_SIZE, remaining));
-      if (first !== null && (first.byteLength === 0 || first.byteLength > Math.min(BLOCK_SIZE, remaining))) {
+      if (request[0] === 'GET' && remaining > 0) {
+        first = await proxySource.read(position, Math.min(this.config.blockSizeBytes, remaining));
+      }
+      if (first !== null &&
+        (first.byteLength === 0 || first.byteLength > Math.min(this.config.blockSizeBytes, remaining))) {
         throw new Error('Invalid remote read');
       }
-    } catch (_error) { if (!client.closed) await this.respond(client, 502); return; }
-    if (client.closed || !source.active) return;
-    await this.respond(client, result.status, result.length, result.contentRange, source.contentType);
+    } catch (_error) {
+      if (!client.closed) await this.respond(client, 502);
+      return;
+    }
+
+    if (client.closed || !proxySource.active) return;
+    await this.respond(client, result.status, result.length, result.contentRange, proxySource.contentType);
     if (request[0] === 'HEAD') return;
-    while (remaining > 0 && !client.closed && source.active) {
-      const block: ArrayBuffer = first ?? await source.read(position, Math.min(BLOCK_SIZE, remaining));
+
+    while (remaining > 0 && !client.closed && proxySource.active) {
+      const block: ArrayBuffer = first ??
+        await proxySource.read(position, Math.min(this.config.blockSizeBytes, remaining));
       first = null;
-      if (block.byteLength === 0 || block.byteLength > Math.min(BLOCK_SIZE, remaining)) throw new Error('Remote EOF');
-      if (client.closed || !source.active) return;
+      if (block.byteLength === 0 ||
+        block.byteLength > Math.min(this.config.blockSizeBytes, remaining)) {
+        throw new Error('Remote EOF');
+      }
+      if (client.closed || !proxySource.active) return;
       await this.send(client, block);
       position += block.byteLength;
       remaining -= block.byteLength;
@@ -209,8 +325,12 @@ export class NetworkFileProxy {
 
   private async send(client: ProxyClient, data: ArrayBuffer): Promise<void> {
     if (client.closed) throw new Error('Client closed');
-    const timer: number = setTimeout(() => { this.disconnect(client); }, TIMEOUT);
-    try { await client.connection.send({ data }); } finally { clearTimeout(timer); }
+    const timer: number = setTimeout(() => { this.disconnect(client); }, this.config.timeoutMs);
+    try {
+      await client.connection.send({ data });
+    } finally {
+      clearTimeout(timer);
+    }
   }
 
   private forget(client: ProxyClient): void {
@@ -218,34 +338,44 @@ export class NetworkFileProxy {
     clearTimeout(client.timer);
     this.clients.delete(client.connection.clientId);
   }
+
   private async disconnect(client: ProxyClient): Promise<void> {
     if (client.closed) return;
     this.forget(client);
     await client.connection.close().catch(() => {});
   }
 
-  private release(token: string, source: ProxySource): Promise<void> {
-    if (!source.active) return Promise.resolve();
-    source.active = false;
+  private release(token: string, proxySource: ProxySource): Promise<void> {
+    if (!proxySource.active) return Promise.resolve();
+    proxySource.active = false;
     this.sources.delete(token);
-    source.reader.cancel();
-    const operation: Promise<void> = this.dispose(source);
+    this.releasedReadRequests += proxySource.readRequests;
+    this.releasedBytesRead += proxySource.bytesRead;
+    this.releasedSources++;
+    proxySource.source.cancel();
+    const operation: Promise<void> = this.dispose(proxySource);
     this.releases.add(operation);
     operation.then(() => this.releases.delete(operation), () => this.releases.delete(operation));
     return operation;
   }
-  private async dispose(source: ProxySource): Promise<void> {
+
+  private async dispose(proxySource: ProxySource): Promise<void> {
     const clients: ProxyClient[] = [];
-    this.clients.forEach((client: ProxyClient) => { if (client.source === source) clients.push(client); });
+    this.clients.forEach((client: ProxyClient) => {
+      if (client.source === proxySource) clients.push(client);
+    });
     await Promise.all(clients.map((client: ProxyClient) => this.disconnect(client)));
-    await source.tail;
-    await source.reader.close();
+    await proxySource.tail;
+    await proxySource.source.close();
   }
+
   private async shutdown(): Promise<void> {
     await this.starting?.catch(() => {});
     const operations: Promise<void>[] = [];
-    this.sources.forEach((source: ProxySource, token: string) => operations.push(this.release(token, source)));
-    this.clients.forEach((client: ProxyClient) => operations.push(this.disconnect(client)));
+    this.sources.forEach((source: ProxySource, token: string) =>
+      operations.push(this.release(token, source)));
+    this.clients.forEach((client: ProxyClient) =>
+      operations.push(this.disconnect(client)));
     this.releases.forEach((operation: Promise<void>) => operations.push(operation));
     if (this.server !== null) operations.push(this.server.close().catch(() => {}));
     await Promise.all(operations);
