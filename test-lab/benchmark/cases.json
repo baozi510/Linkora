@@ -1,0 +1,22 @@
+[
+  {"id":"mp4-h264-aac","container":"mp4","video":"h264","audio":"aac"},
+  {"id":"mp4-hevc-aac","container":"mp4","video":"hevc","audio":"aac"},
+  {"id":"mkv-h264","container":"matroska","video":"h264"},
+  {"id":"mkv-hevc","container":"matroska","video":"hevc"},
+  {"id":"mkv-hevc-main10","container":"matroska","video":"hevc-main10"},
+  {"id":"hdr10-hevc","container":"matroska","video":"hevc-main10","hdr":"hdr10"},
+  {"id":"hlg-hevc","container":"matroska","video":"hevc-main10","hdr":"hlg"},
+  {"id":"dolby-vision","container":"mp4-or-matroska","hdr":"dolby-vision"},
+  {"id":"ac3","audio":"ac3"},
+  {"id":"eac3","audio":"eac3"},
+  {"id":"dts","audio":"dts"},
+  {"id":"dts-hd-ma","audio":"dts-hd-ma"},
+  {"id":"truehd","audio":"truehd"},
+  {"id":"ass","subtitle":"ass"},
+  {"id":"pgs","subtitle":"pgs"},
+  {"id":"multi-audio","features":["multiple-audio-tracks"]},
+  {"id":"multi-subtitle","features":["multiple-subtitle-tracks"]},
+  {"id":"long-gop","features":["long-gop"]},
+  {"id":"4k-remux","features":["4k","high-bitrate","remux"]},
+  {"id":"broken-index","features":["damaged-or-unusual-index"]}
+]
