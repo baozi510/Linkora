@@ -120,6 +120,8 @@ export default function playbackEngineTest(): void {
       engine.setVolume(-1);
 
       const port: FakePlaybackPort = ports[0];
+      expect(latest(snapshots).status).assertEqual(PlaybackStatus.SEEKING);
+      port.observer.onSeekComplete(port.seekPosition);
       expect(latest(snapshots).status).assertEqual(PlaybackStatus.PAUSED);
       expect(port.seekPosition).assertEqual(120000);
       expect(port.playbackRate).assertEqual(1.5);
