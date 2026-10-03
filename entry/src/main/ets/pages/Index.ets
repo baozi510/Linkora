@@ -3,7 +3,7 @@ import { window } from '@kit.ArkUI';
 import { AppAccentColor, AppFailure, AppSettings, AppThemeMode, LibraryFeatureController,
   LibraryFeatureState, LocalBrowseMode, LocalFileFilter, LocalMediaAsset,
   LocalMediaFolder, LocalMediaFolderFilter, LocalMediaPlaybackProgress, LocalMediaScanState,
-  MediaSource, RecentMediaItem,
+  MediaSource, PlayerBackendPreference, RecentMediaItem,
   SettingsFeatureController, SettingsFeatureState } from 'linkora_core';
 import { AdaptiveAppShell } from '../components/AdaptiveAppShell';
 import { AppSection } from '../models/AppRoute';
@@ -344,6 +344,9 @@ struct Index {
       },
       onExperimentalNetworkStorageChange: (enabled: boolean) => {
         this.settingsController?.setExperimentalNetworkStorage(enabled);
+      },
+      onPlayerBackendPreferenceChange: (preference: PlayerBackendPreference) => {
+        this.settingsController?.setPlayerBackendPreference(preference);
       },
       onThemeModeChange: (mode: AppThemeMode) => {
         this.settingsController?.setThemeMode(mode);

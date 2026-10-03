@@ -1,6 +1,6 @@
 import { common } from '@kit.AbilityKit';
 import { AppAccentColor, AppSettings, AppThemeMode, DEFAULT_SUBTITLE_EXTENSIONS,
-  DEFAULT_VIDEO_EXTENSIONS } from 'linkora_core';
+  DEFAULT_VIDEO_EXTENSIONS, PlayerBackendPreference } from 'linkora_core';
 import { AppIcon, AppIconName } from '../components/AppIcon';
 import { AppToolbar } from '../components/AppToolbar';
 import { SettingsDetail } from '../models/AppNavigation';
@@ -18,6 +18,7 @@ export struct SettingsPage {
   @Event onKeepScreenOnChange: (enabled: boolean) => void = () => {};
   @Event onCellularPlaybackChange: (enabled: boolean) => void = () => {};
   @Event onExperimentalNetworkStorageChange: (enabled: boolean) => void = () => {};
+  @Event onPlayerBackendPreferenceChange: (preference: PlayerBackendPreference) => void = () => {};
   @Event onThemeModeChange: (mode: AppThemeMode) => void = () => {};
   @Event onAccentColorChange: (accentColor: AppAccentColor) => void = () => {};
   @Event onLocalFileExtensionsChange: (videoExtensions: string[], subtitleExtensions: string[]) => void = () => {};
@@ -238,6 +239,37 @@ export struct SettingsPage {
     .width('100%')
     .height(56)
     .padding({ left: 14, right: 14 })
+  }
+
+  @Builder
+  private backendChoice(preference: PlayerBackendPreference, title: string, description: string) {
+    Button() {
+      Row({ space: 12 }) {
+        Column({ space: 3 }) {
+          Text(title)
+            .fontSize(AppTypography.BODY)
+            .fontColor(AppColors.TEXT_PRIMARY)
+          Text(description)
+            .fontSize(AppTypography.META)
+            .fontColor(AppColors.TEXT_MUTED)
+        }
+        .alignItems(HorizontalAlign.Start)
+        .layoutWeight(1)
+        if (this.settings.playerBackendPreference === preference) {
+          AppIcon({ name: AppIconName.CHECK_CIRCLE, iconSize: 20,
+            color: AppColors.accent(this.accentColor) })
+        }
+      }
+      .width('100%')
+    }
+    .type(ButtonType.Normal)
+    .width('100%')
+    .height(58)
+    .padding({ left: 14, right: 14 })
+    .backgroundColor(Color.Transparent)
+    .onClick(() => {
+      this.onPlayerBackendPreferenceChange(preference);
+    })
   }
 
   @Builder
@@ -527,19 +559,38 @@ export struct SettingsPage {
       }
       .width('100%')
     } else if (this.detail === SettingsDetail.PLAYER) {
-      Column() {
-        this.toggleRow('记住播放位置', '再次打开时从上次位置继续',
-          this.settings.rememberPlaybackPosition, (value: boolean) => {
-            this.onRememberPositionChange(value);
-          })
-        this.toggleRow('播放时保持亮屏', '播放视频期间不自动锁屏',
-          this.settings.keepScreenOnDuringPlayback, (value: boolean) => {
-            this.onKeepScreenOnChange(value);
-          })
+      Column({ space: 10 }) {
+        Text('播放器内核')
+          .fontSize(AppTypography.CAPTION)
+          .fontColor(AppColors.TEXT_SECONDARY)
+          .width('100%')
+        Column() {
+          this.backendChoice(PlayerBackendPreference.AUTO, '自动',
+            '根据媒体类型选择内核；打开失败时最多回退一次')
+          this.backendChoice(PlayerBackendPreference.SYSTEM, '系统播放器',
+            '优先使用 HarmonyOS AVPlayer')
+          this.backendChoice(PlayerBackendPreference.MPV, 'MPV',
+            '优先使用 libmpv，兼容复杂封装、字幕与音轨')
+        }
+        .width('100%')
+        .backgroundColor(AppColors.SURFACE_RAISED)
+        .borderRadius(AppRadius.CONTROL)
+
+        Column() {
+          this.toggleRow('记住播放位置', '再次打开时从上次位置继续',
+            this.settings.rememberPlaybackPosition, (value: boolean) => {
+              this.onRememberPositionChange(value);
+            })
+          this.toggleRow('播放时保持亮屏', '播放视频期间不自动锁屏',
+            this.settings.keepScreenOnDuringPlayback, (value: boolean) => {
+              this.onKeepScreenOnChange(value);
+            })
+        }
+        .width('100%')
+        .backgroundColor(AppColors.SURFACE_RAISED)
+        .borderRadius(AppRadius.CONTROL)
       }
       .width('100%')
-      .backgroundColor(AppColors.SURFACE_RAISED)
-      .borderRadius(AppRadius.CONTROL)
     } else if (this.detail === SettingsDetail.NETWORK) {
       Column() {
         this.toggleRow('实验性网络存储', '启用 WebDAV、SMB、SFTP、FTP 与 NFS；首发默认关闭',
