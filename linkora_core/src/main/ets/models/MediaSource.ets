@@ -4,7 +4,8 @@ import { LocalFileCategory, LocalFileFilter } from './LocalFileFilter';
 
 export enum MediaSourceKind {
   NETWORK_LINK = 'network_link',
-  LOCAL_DOCUMENT = 'local_document'
+  LOCAL_DOCUMENT = 'local_document',
+  REMOTE_FILE = 'remote_file'
 }
 
 export class MediaSource {
@@ -15,12 +16,17 @@ export class MediaSource {
   readonly format: MediaFormat;
   readonly localCategory: LocalFileCategory;
   readonly sizeBytes: number;
+  /** Legacy migration field. New remote-file flows must use RandomAccessSource/ResolvedMediaInput. */
   readonly progressiveKey: string;
+  readonly sourceId: string;
+  readonly credentialRef: string;
+  readonly fingerprint: string;
 
   constructor(kind: MediaSourceKind, locator: string, displayName: string,
     originLabel: string, format: MediaFormat,
     localCategory: LocalFileCategory = LocalFileCategory.UNSUPPORTED,
-    sizeBytes: number = 0, progressiveKey: string = '') {
+    sizeBytes: number = 0, progressiveKey: string = '', sourceId: string = '',
+    credentialRef: string = '', fingerprint: string = '') {
     this.kind = kind;
     this.locator = locator;
     this.displayName = displayName;
@@ -29,6 +35,9 @@ export class MediaSource {
     this.localCategory = localCategory;
     this.sizeBytes = sizeBytes;
     this.progressiveKey = progressiveKey;
+    this.sourceId = sourceId;
+    this.credentialRef = credentialRef;
+    this.fingerprint = fingerprint;
   }
 
   static empty(): MediaSource {
@@ -75,6 +84,25 @@ export class MediaSource {
     );
   }
 
+  static fromRemoteFile(locator: string, displayName: string, originLabel: string,
+    sizeBytes: number = 0, sourceId: string = '', credentialRef: string = '',
+    fingerprint: string = ''): MediaSource {
+    const resolvedName: string = displayName.length > 0 ? displayName : MediaSource.fileName(locator);
+    return new MediaSource(
+      MediaSourceKind.REMOTE_FILE,
+      locator,
+      resolvedName,
+      originLabel,
+      MediaFormatDetector.detect(resolvedName),
+      new LocalFileFilter().categoryOf(resolvedName),
+      Math.max(0, sizeBytes),
+      '',
+      sourceId,
+      credentialRef,
+      fingerprint
+    );
+  }
+
   private static networkDisplayName(value: string): string {
     const queryStart: number = value.indexOf('?');
     const fragmentStart: number = value.indexOf('#');
@@ -107,5 +135,4 @@ export class MediaSource {
     }
     return '本地视频';
   }
-
 }
