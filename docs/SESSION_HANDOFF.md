@@ -324,3 +324,25 @@ Use the latest repository documents as the source of truth.
 Continue from the documented current branch/status.
 Do not redesign or merge branches until you have reviewed the validation evidence.
 ```
+
+
+## Post-validation review update
+
+Architecture review after the first validation pass is complete.
+
+Before any further runtime testing or feature work, read:
+
+`docs/CODEX_POST_VALIDATION_ACTIONS.md`
+
+Current next action is:
+
+1. keep the accepted validation fixes;
+2. correct MPV error-log handling;
+3. wire surface size from PlayerPage -> PlayerFeatureController -> PlaybackEngine;
+4. correct HDR labeling so BT.2020 alone is not treated as HDR;
+5. tighten the architecture-boundary scanner;
+6. rerun the full verify.ps1;
+7. attempt the current HAP on the available x86_64 emulator without production ABI hacks;
+8. update VALIDATION_REPORT.md and stop for architecture review.
+
+Do not start FFmpeg or Auto-policy tuning before this review loop is complete.
