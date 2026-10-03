@@ -18,16 +18,23 @@ export class SystemThumbnailResult {
 /**
  * System thumbnail extraction stage.
  *
- * This class only chooses/seeks/decodes a frame. It deliberately does not
- * encode WebP, write cache files or decide the long-term thumbnail policy.
+ * This class only seeks/decodes a frame. It deliberately does not encode WebP,
+ * write cache files or decide the long-term thumbnail policy.
  */
 export class SystemThumbnailExtractor {
   async extract(extractor: media.AVMetadataExtractor, durationMs: number,
     width: number = 224, height: number = 126): Promise<SystemThumbnailResult> {
-    const targetWidth: number = Math.max(1, width);
-    const targetHeight: number = Math.max(1, height);
-    const timeUs: number = durationMs > 0 ?
-      Math.min(1000000, Math.max(0, (durationMs - 1) * 1000)) : 0;
+    const timeMs: number = durationMs > 0 ?
+      Math.min(1000, Math.max(0, durationMs - 1)) : 0;
+    return this.extractAt(extractor, timeMs, width, height);
+  }
+
+  async extractAt(extractor: media.AVMetadataExtractor, timeMs: number,
+    width: number, height: number): Promise<SystemThumbnailResult> {
+    const targetWidth: number = Math.max(1, Math.floor(width));
+    const targetHeight: number = Math.max(1, Math.floor(height));
+    const safeTimeMs: number = Number.isFinite(timeMs) && timeMs > 0 ? Math.floor(timeMs) : 0;
+    const timeUs: number = safeTimeMs * 1000;
     const thumbnail: image.PixelMap = await extractor.fetchFrameByTime(
       timeUs,
       media.AVImageQueryOptions.AV_IMAGE_QUERY_CLOSEST_SYNC,

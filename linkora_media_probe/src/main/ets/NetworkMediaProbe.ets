@@ -10,9 +10,19 @@ export enum ProbeStatus {
   CANCELLED = 'cancelled', TIMEOUT = 'timeout'
 }
 export enum ProbeMode { BOTH = 'both', METADATA = 'metadata', THUMBNAIL = 'thumbnail' }
+
+export interface ProbeThumbnailPlan {
+  readonly timeMs: number;
+  readonly width: number;
+  readonly height: number;
+}
+
 export interface MediaProbeOptions {
   mode?: ProbeMode;
   durationHintMs?: number;
+  widthHint?: number;
+  heightHint?: number;
+  thumbnailPlan?: (durationMs: number, width: number, height: number) => ProbeThumbnailPlan;
   onMetadata?: (result: MediaProbeResult) => void;
 }
 /** Milliseconds. null means not started; interrupted stages include time spent before cancellation. */
@@ -55,13 +65,6 @@ class ProbeJob {
   thumbnailMs: number | null = null;
 }
 
-/**
- * Compatibility facade for one explicit inspection.
- *
- * Metadata and frame extraction are delegated to separate system stages while
- * this facade keeps shared extractor ownership so a BOTH request still opens
- * the remote source only once.
- */
 export class NetworkMediaProbe {
   private current: ProbeJob | null = null;
   private closed: boolean = false;
@@ -131,12 +134,28 @@ export class NetworkMediaProbe {
         if (!job.active || options.mode === ProbeMode.METADATA) return;
       } else {
         const duration: number = options.durationHintMs ?? 0;
+        const width: number = options.widthHint ?? 0;
+        const height: number = options.heightHint ?? 0;
         job.durationMs = Number.isFinite(duration) && duration > 0 ? duration : 0;
+        job.width = Number.isFinite(width) && width > 0 ? width : 0;
+        job.height = Number.isFinite(height) && height > 0 ? height : 0;
       }
+
       job.phase = 'thumbnail';
       job.phaseStarted = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP);
-      const frame: SystemThumbnailResult =
-        await this.thumbnailExtractor.extract(job.extractor, job.durationMs, 224, 126);
+      let frame: SystemThumbnailResult;
+      if (options.thumbnailPlan !== undefined) {
+        const plan: ProbeThumbnailPlan =
+          options.thumbnailPlan(job.durationMs, job.width, job.height);
+        frame = await this.thumbnailExtractor.extractAt(
+          job.extractor,
+          plan.timeMs,
+          plan.width,
+          plan.height
+        );
+      } else {
+        frame = await this.thumbnailExtractor.extract(job.extractor, job.durationMs, 224, 126);
+      }
       job.thumbnail = frame.thumbnail;
       this.endPhase(job);
       if (job.active) job.status = ProbeStatus.COMPLETE;
