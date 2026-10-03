@@ -27,16 +27,16 @@ export class LinkoraFeatures {
   private static mediaProxy: NetworkFileProxy | null = null;
 
   private static sharedMediaProxy(): NetworkFileProxy {
-    if (this.mediaProxy === null) {
-      this.mediaProxy = new NetworkFileProxy();
+    if (LinkoraFeatures.mediaProxy === null) {
+      LinkoraFeatures.mediaProxy = new NetworkFileProxy();
     }
-    return this.mediaProxy;
+    return LinkoraFeatures.mediaProxy;
   }
 
   static createNetworkMediaLoader(context: common.UIAbilityContext, server: NetworkServerEntry,
     onMetadata: (entry: NetworkDirectoryEntry, info: CachedNetworkMedia) => void): NetworkMediaLoader | null {
     return NETWORK_MEDIA_ENABLED ?
-      new NetworkMediaLoader(context, server, onMetadata, this.sharedMediaProxy()) : null;
+      new NetworkMediaLoader(context, server, onMetadata, LinkoraFeatures.sharedMediaProxy()) : null;
   }
 
   static createNetworkMediaProbe(): NetworkMediaProbe {
@@ -49,8 +49,8 @@ export class LinkoraFeatures {
   }
 
   static async closeSharedMediaProxy(): Promise<void> {
-    const proxy: NetworkFileProxy | null = this.mediaProxy;
-    this.mediaProxy = null;
+    const proxy: NetworkFileProxy | null = LinkoraFeatures.mediaProxy;
+    LinkoraFeatures.mediaProxy = null;
     await proxy?.close();
   }
 
@@ -76,7 +76,7 @@ export class LinkoraFeatures {
     settings: AppSettings, observer: PlayerFeatureObserver): PlayerFeatureController {
     const engineFactory: PlaybackEngineFactory = (playbackObserver: PlaybackObserver) =>
       new PlaybackEngine(playbackObserver, async (portObserver) =>
-        new AdaptivePlaybackPort(context, this.sharedMediaProxy(), portObserver,
+        new AdaptivePlaybackPort(context, LinkoraFeatures.sharedMediaProxy(), portObserver,
           settings.playerBackendPreference));
     return new PlayerFeatureController(
       source,

@@ -6,7 +6,7 @@ const NETWORK_SERVER_PREFIX: string = 'network-server:';
 
 export class NetworkMediaSourceFactory {
   static fromEntry(server: NetworkServerEntry, entry: NetworkDirectoryEntry): MediaSource {
-    const identity: string = this.sourceId(server.id);
+    const identity: string = NetworkMediaSourceFactory.sourceId(server.id);
     const fingerprint: string =
       [server.updatedAt, entry.size, entry.modifiedAt].join(':');
     return MediaSource.fromRemoteFile(
