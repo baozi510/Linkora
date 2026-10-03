@@ -6,7 +6,8 @@ export { LocalFilePickerGateway, LocalMediaPermissionResult, LocalMediaPickResul
   SettingsRepository } from './src/main/ets/contracts/FeaturePorts';
 export { NetworkAccessPolicyPort, NetworkProbePort, NetworkProbeResult,
   ProtocolTestAdapter, ProtocolTestRequest, ProtocolTestResult } from './src/main/ets/contracts/NetworkPorts';
-export { RandomAccessSource, RemoteReadSessionAdapter, SourceCapabilities, StorageEntry, StorageEntryKind,
+export { RandomAccessSource, RandomAccessSourceSessionAdapter, RemoteReadSessionAdapter,
+  SourceCapabilities, StorageEntry, StorageEntryKind, StorageListOptions,
   StorageProvider } from './src/main/ets/contracts/StoragePorts';
 export { RequestPolicy, ResolvedMediaInput, ResolvedMediaInputKind } from './src/main/ets/contracts/MediaInput';
 export { IMediaProbe, MediaProbeDiagnostics, ProbeCompleteness, ProbeFieldOrigin, ProbeRequirement,
@@ -57,4 +58,4 @@ export { DiscoveredService, DiscoveryObserver, DiscoveryPlugin, DiscoveryRequest
 export { RemoteConnectionOptions, RemoteEntry, RemoteEntryKind, RemoteReadSession,
   SourceConnection, SourcePlugin, SourcePluginRegistry } from './src/main/ets/sources/SourcePlugin';
 
-export const LINKORA_CORE_VERSION: string = '1.1.0';
+export const LINKORA_CORE_VERSION: string = '1.2.0';

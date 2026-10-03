@@ -1,4 +1,3 @@
-import { MediaSource } from '../models/MediaSource';
 import { RemoteReadSession } from '../sources/SourcePlugin';
 
 export class SourceCapabilities {
@@ -67,6 +66,34 @@ export class RemoteReadSessionAdapter implements RandomAccessSource {
   }
 }
 
+/**
+ * Migration adapter for existing call sites that still consume RemoteReadSession.
+ * New code should prefer RandomAccessSource directly.
+ */
+export class RandomAccessSourceSessionAdapter implements RemoteReadSession {
+  private readonly source: RandomAccessSource;
+
+  constructor(source: RandomAccessSource) {
+    this.source = source;
+  }
+
+  size(): number {
+    return this.source.size();
+  }
+
+  read(offset: number, length: number): Promise<ArrayBuffer> {
+    return this.source.readAt(offset, length);
+  }
+
+  cancel(): void {
+    this.source.cancel();
+  }
+
+  close(): Promise<void> {
+    return this.source.close();
+  }
+}
+
 export enum StorageEntryKind {
   FILE = 'file',
   DIRECTORY = 'directory'
@@ -89,10 +116,21 @@ export class StorageEntry {
   }
 }
 
+export class StorageListOptions {
+  readonly forceRefresh: boolean;
+
+  constructor(forceRefresh: boolean = false) {
+    this.forceRefresh = forceRefresh;
+  }
+}
+
+/**
+ * A provider is already bound to one logical storage account/server.
+ * Locators are provider-relative paths and never contain credentials.
+ */
 export interface StorageProvider {
   id(): string;
-  canHandle(source: MediaSource): boolean;
-  stat(source: MediaSource): Promise<StorageEntry | null>;
-  list(source: MediaSource): Promise<StorageEntry[]>;
-  open(source: MediaSource): Promise<RandomAccessSource>;
+  stat(locator: string): Promise<StorageEntry | null>;
+  list(locator: string, options?: StorageListOptions): Promise<StorageEntry[]>;
+  open(locator: string): Promise<RandomAccessSource>;
 }
