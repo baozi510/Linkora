@@ -2,6 +2,8 @@ import { media } from '@kit.MediaKit';
 import { image } from '@kit.ImageKit';
 import { url } from '@kit.ArkTS';
 import { BusinessError, systemDateTime } from '@kit.BasicServicesKit';
+import { SystemMediaMetadataResult, SystemMediaProbe } from './SystemMediaProbe';
+import { SystemThumbnailExtractor, SystemThumbnailResult } from './SystemThumbnailExtractor';
 
 export enum ProbeStatus {
   COMPLETE = 'complete', METADATA_ONLY = 'metadata_only', UNAVAILABLE = 'unavailable',
@@ -53,15 +55,27 @@ class ProbeJob {
   thumbnailMs: number | null = null;
 }
 
-/** One explicit inspection. close() also waits for cancelled native work to actually exit. */
+/**
+ * Compatibility facade for one explicit inspection.
+ *
+ * Metadata and frame extraction are delegated to separate system stages while
+ * this facade keeps shared extractor ownership so a BOTH request still opens
+ * the remote source only once.
+ */
 export class NetworkMediaProbe {
   private current: ProbeJob | null = null;
   private closed: boolean = false;
   private closing: Promise<void> | null = null;
   private readonly createExtractor: () => Promise<media.AVMetadataExtractor>;
+  private readonly metadataProbe: SystemMediaProbe;
+  private readonly thumbnailExtractor: SystemThumbnailExtractor;
 
-  constructor(createExtractor: () => Promise<media.AVMetadataExtractor> = () => media.createAVMetadataExtractor()) {
+  constructor(createExtractor: () => Promise<media.AVMetadataExtractor> = () => media.createAVMetadataExtractor(),
+    metadataProbe: SystemMediaProbe = new SystemMediaProbe(),
+    thumbnailExtractor: SystemThumbnailExtractor = new SystemThumbnailExtractor()) {
     this.createExtractor = createExtractor;
+    this.metadataProbe = metadataProbe;
+    this.thumbnailExtractor = thumbnailExtractor;
   }
 
   async inspect(sourceUrl: string, headers: Record<string, string> = {},
@@ -103,14 +117,15 @@ export class NetworkMediaProbe {
       job.extractor.setUrlSource(sourceUrl, headers);
       this.endPhase(job);
       if (options.mode !== ProbeMode.THUMBNAIL) {
-        job.phase = 'metadata'; job.phaseStarted = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP);
-        const metadata: media.AVMetadata = await job.extractor.fetchMetadata();
+        job.phase = 'metadata';
+        job.phaseStarted = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP);
+        const metadata: SystemMediaMetadataResult = await this.metadataProbe.probe(job.extractor);
         this.endPhase(job);
         if (!job.active) return;
-        job.durationMs = this.positive(metadata.duration);
-        job.width = this.positive(metadata.videoWidth);
-        job.height = this.positive(metadata.videoHeight);
-        job.metadataComplete = true;
+        job.durationMs = metadata.durationMs;
+        job.width = metadata.width;
+        job.height = metadata.height;
+        job.metadataComplete = metadata.complete;
         job.status = ProbeStatus.METADATA_ONLY;
         options.onMetadata?.(this.result(job, null));
         if (!job.active || options.mode === ProbeMode.METADATA) return;
@@ -118,10 +133,11 @@ export class NetworkMediaProbe {
         const duration: number = options.durationHintMs ?? 0;
         job.durationMs = Number.isFinite(duration) && duration > 0 ? duration : 0;
       }
-      const timeUs: number = job.durationMs > 0 ? Math.min(1000000, Math.max(0, (job.durationMs - 1) * 1000)) : 0;
-      job.phase = 'thumbnail'; job.phaseStarted = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP);
-      job.thumbnail = await job.extractor.fetchFrameByTime(timeUs,
-        media.AVImageQueryOptions.AV_IMAGE_QUERY_CLOSEST_SYNC, { width: 224, height: 126 });
+      job.phase = 'thumbnail';
+      job.phaseStarted = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP);
+      const frame: SystemThumbnailResult =
+        await this.thumbnailExtractor.extract(job.extractor, job.durationMs, 224, 126);
+      job.thumbnail = frame.thumbnail;
       this.endPhase(job);
       if (job.active) job.status = ProbeStatus.COMPLETE;
     } catch (error) {
@@ -189,11 +205,6 @@ export class NetworkMediaProbe {
     return job.frameReleasing ?? Promise.resolve();
   }
 
-  private positive(value: string | undefined): number {
-    const number: number = Number(value);
-    return Number.isFinite(number) && number > 0 ? number : 0;
-  }
-
   private validate(sourceUrl: string, headers: Record<string, string>): Record<string, string> {
     if (sourceUrl.length > 8192 || /[\r\n\0]/.test(sourceUrl)) throw new Error('Invalid source URL');
     try {
@@ -209,7 +220,6 @@ export class NetworkMediaProbe {
       const value: string = headers[key];
       if (!/^[!#$%&'*+.^_`|~0-9A-Za-z-]+$/.test(key) || typeof value !== 'string' ||
         value.length > 4096 || /[\r\n\0]/.test(value)) throw new Error('Invalid headers');
-      // HTTP boundary is bytes, not UTF-16 characters; malformed Unicode is rejected too.
       try { total += key.length + encodeURIComponent(value).replace(/%[0-9A-F]{2}|[^%]/g, 'x').length; }
       catch (_error) { throw new Error('Invalid headers'); }
       if (total > 16384) throw new Error('Invalid headers');
