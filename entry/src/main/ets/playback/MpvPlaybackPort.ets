@@ -57,18 +57,8 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
   }
 
   capabilities(): PlayerBackendCapabilities {
-    return new PlayerBackendCapabilities(
-      true,
-      true,
-      true,
-      true,
-      true,
-      true,
-      true,
-      true,
-      false,
-      false
-    );
+    // Advanced output/subtitle capabilities await target-device validation.
+    return new PlayerBackendCapabilities();
   }
 
   configure(source: MediaSource, surfaceId: string): void {

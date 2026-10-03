@@ -122,3 +122,11 @@ test('post-prepare error log neither emits fatal error nor tears down playback',
   await port.play(); assert.equal(f.player.playCalls, 2);
   await port.release();
 });
+
+test('unverified advanced capabilities are reported conservatively', async () => {
+  const f = fixture(), port = await f.create();
+  const caps = port.capabilities();
+  for (const name of ['assSubtitle', 'pgsSubtitle', 'hdr10', 'hlg', 'dolbyVisionAware',
+    'nativeDolbyVisionOutput', 'audioPassthrough']) assert.equal(caps[name], false, name);
+  await port.release();
+});
