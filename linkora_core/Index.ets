@@ -6,6 +6,14 @@ export { LocalFilePickerGateway, LocalMediaPermissionResult, LocalMediaPickResul
   SettingsRepository } from './src/main/ets/contracts/FeaturePorts';
 export { NetworkAccessPolicyPort, NetworkProbePort, NetworkProbeResult,
   ProtocolTestAdapter, ProtocolTestRequest, ProtocolTestResult } from './src/main/ets/contracts/NetworkPorts';
+export { RandomAccessSource, RemoteReadSessionAdapter, SourceCapabilities, StorageEntry, StorageEntryKind,
+  StorageProvider } from './src/main/ets/contracts/StoragePorts';
+export { RequestPolicy, ResolvedMediaInput, ResolvedMediaInputKind } from './src/main/ets/contracts/MediaInput';
+export { IMediaProbe, MediaProbeDiagnostics, ProbeCompleteness, ProbeFieldOrigin, ProbeRequirement,
+  ProbeResult } from './src/main/ets/contracts/MediaAnalysisPorts';
+export { EncodedThumbnail, IThumbnailEncoder, IThumbnailExtractor, IThumbnailProcessor, RawThumbnail,
+  ThumbnailEncodeRequest, ThumbnailExtractRequest, ThumbnailPixelFormat, ThumbnailProcessRequest,
+  ThumbnailResizeMode } from './src/main/ets/contracts/ThumbnailPorts';
 export { LibraryFeatureController, LibraryFeatureObserver,
   LibraryFeatureState } from './src/main/ets/features/LibraryFeatureController';
 export { NetworkLinkController, NetworkLinkObserver,
@@ -18,6 +26,8 @@ export { SettingsFeatureController, SettingsFeatureObserver,
   SettingsFeatureState } from './src/main/ets/features/SettingsFeatureController';
 export { AppAccentColor, AppSettings, AppThemeMode } from './src/main/ets/models/AppSettings';
 export { LinkIssue, LinkParseResult, MediaFormat, MediaLink, MediaProtocol } from './src/main/ets/models/MediaLink';
+export { AudioTrackInfo, ChapterInfo, HdrType, MediaInfo, SubtitleKind, SubtitleTrackInfo,
+  VideoTrackInfo } from './src/main/ets/models/MediaInfo';
 export { LocalMediaAsset, LocalMediaAvailability,
   LocalMediaOrigin } from './src/main/ets/models/LocalMediaAsset';
 export { FileSizeFormatter } from './src/main/ets/models/FileSizeFormatter';
@@ -35,6 +45,8 @@ export { RecentMediaItem } from './src/main/ets/models/RecentMediaItem';
 export { AdapterRuntime, DiscoveryMethod, NETWORK_PROTOCOL_CAPABILITIES, ProtocolCapability,
   RemoteProtocol, SourceFamily } from './src/main/ets/models/RemoteSource';
 export { PlaybackEngine } from './src/main/ets/playback/PlaybackEngine';
+export { PlayerBackendCapabilities, PlayerBackendKind, PlayerBackendPreference,
+  PlaybackBackend } from './src/main/ets/playback/PlaybackBackend';
 export { PlaybackObserver, PlaybackSnapshot, PlaybackStatus } from './src/main/ets/playback/PlaybackModels';
 export { PlaybackPort, PlaybackPortError, PlaybackPortFactory, PlaybackPortObserver,
   PortBufferingEvent, PortPlaybackState } from './src/main/ets/playback/PlaybackPort';
@@ -45,4 +57,4 @@ export { DiscoveredService, DiscoveryObserver, DiscoveryPlugin, DiscoveryRequest
 export { RemoteConnectionOptions, RemoteEntry, RemoteEntryKind, RemoteReadSession,
   SourceConnection, SourcePlugin, SourcePluginRegistry } from './src/main/ets/sources/SourcePlugin';
 
-export const LINKORA_CORE_VERSION: string = '1.0.0';
+export const LINKORA_CORE_VERSION: string = '1.1.0';
