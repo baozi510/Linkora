@@ -16,6 +16,9 @@ class FakePlaybackPort implements PlaybackPort {
   playbackRate: number = 1;
   volume: number = 1;
   released: boolean = false;
+  surfaceWidth: number = 0;
+  surfaceHeight: number = 0;
+  sizeCalls: number = 0;
 
   constructor(observer: PlaybackPortObserver) {
     this.observer = observer;
@@ -26,7 +29,11 @@ class FakePlaybackPort implements PlaybackPort {
     this.observer.onStateChange(PortPlaybackState.INITIALIZED);
   }
 
-  setSurfaceSize(_width: number, _height: number): void {}
+  setSurfaceSize(width: number, height: number): void {
+    this.surfaceWidth = width;
+    this.surfaceHeight = height;
+    ++this.sizeCalls;
+  }
 
   getDuration(): number {
     return 120000;
@@ -85,6 +92,54 @@ function latest(snapshots: PlaybackSnapshot[]): PlaybackSnapshot {
 
 export default function playbackEngineTest(): void {
   describe('PlaybackEngine', () => {
+    it('deliversSizeStoredBeforeOpenToNewBackend', 0, async () => {
+      const ports: FakePlaybackPort[] = [];
+      const engine = new PlaybackEngine(() => {}, async (observer: PlaybackPortObserver) => {
+        const port = new FakePlaybackPort(observer);
+        ports.push(port);
+        return port;
+      });
+      engine.setSurfaceSize(640, 360);
+      await engine.open(MediaSource.fromLocalDocument('file://video.mp4'), 'surface');
+      expect(ports[0].surfaceWidth).assertEqual(640);
+      expect(ports[0].surfaceHeight).assertEqual(360);
+      expect(ports[0].sizeCalls).assertEqual(1);
+      await engine.release();
+    });
+
+    it('forwardsSizeChangesToActiveBackend', 0, async () => {
+      const ports: FakePlaybackPort[] = [];
+      const engine = new PlaybackEngine(() => {}, async (observer: PlaybackPortObserver) => {
+        const port = new FakePlaybackPort(observer);
+        ports.push(port);
+        return port;
+      });
+      await engine.open(MediaSource.fromLocalDocument('file://video.mp4'), 'surface');
+      engine.setSurfaceSize(1280, 720);
+      expect(ports[0].surfaceWidth).assertEqual(1280);
+      expect(ports[0].surfaceHeight).assertEqual(720);
+      expect(ports[0].sizeCalls).assertEqual(1);
+      await engine.release();
+    });
+
+    it('roundsSizeAndDoesNotForwardNonPositiveDimensions', 0, async () => {
+      const ports: FakePlaybackPort[] = [];
+      const engine = new PlaybackEngine(() => {}, async (observer: PlaybackPortObserver) => {
+        const port = new FakePlaybackPort(observer);
+        ports.push(port);
+        return port;
+      });
+      engine.setSurfaceSize(-10, 360);
+      await engine.open(MediaSource.fromLocalDocument('file://video.mp4'), 'surface');
+      expect(ports[0].sizeCalls).assertEqual(0);
+      engine.setSurfaceSize(640, 0);
+      expect(ports[0].sizeCalls).assertEqual(0);
+      engine.setSurfaceSize(640.6, 359.4);
+      expect(ports[0].surfaceWidth).assertEqual(641);
+      expect(ports[0].surfaceHeight).assertEqual(359);
+      await engine.release();
+    });
+
     it('opensAndAutoplaysThroughPort', 0, async () => {
       const snapshots: PlaybackSnapshot[] = [];
       const ports: FakePlaybackPort[] = [];

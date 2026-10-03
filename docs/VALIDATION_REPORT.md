@@ -8,7 +8,10 @@
 已完整阅读 `CODEX_POST_VALIDATION_ACTIONS.md`，同步至 `145c6ed` 后按 A→B→C→D 执行。下文原验证记录保留为历史证据，本轮结果以本节后续更新为准。
 
 - A：四个实际 MPV Adapter 的桌面 VM 回归修复前全部 FAIL（prepare 被日志提前拒绝、timeout 被取消、post-prepare onError）；现在 error stream 仅保存最近诊断，FILE_LOADED/12 秒 timeout 保持成功/失败依据。测试使用 wrapper double/受控时钟，无新增生产注入接口；不等于 native MPV 实测。新增检查加入 verify，原检查全部保留。
-- B/C/D、完整 verify、模拟器安装结果：PENDING。
+- A 回归：4/4 PASS；commit `ffe02c6`。修复前原始输出 `artifacts/validation/post-A-before.log`，修复后 `post-A-after.log`。
+- B：新增 4 个 Hypium 测试（open 前尺寸、open 后更新、round/clamp、controller detach/reopen 旧事件隔离）。修复前 Hvigor test exit 1：`10505001 Property 'setSurfaceSize' does not exist on type 'PlayerFeatureController'`。UI 在 attach 前和 area-change 时转发，controller 委托现有 engine，不改变尺寸保存设计。
+- B 修复后：Hvigor test exit 0，141/141 PASS，0 Failure/Error/Ignore；日志 `artifacts/validation/post-B-after.log`。
+- C/D、完整 verify、模拟器安装结果：PENDING。
 
 ## Git 与执行范围
 

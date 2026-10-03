@@ -148,6 +148,7 @@ export struct PlayerPage {
     if (surfaceId.length === 0) {
       return;
     }
+    this.controller?.setSurfaceSize(this.surfaceWidth, this.surfaceHeight);
     this.controller?.attachSurface(surfaceId);
   }
 
@@ -373,6 +374,7 @@ export struct PlayerPage {
     .onAreaChange((_oldArea: Area, newArea: Area) => {
       this.surfaceWidth = Number(newArea.width);
       this.surfaceHeight = Number(newArea.height);
+      this.controller?.setSurfaceSize(this.surfaceWidth, this.surfaceHeight);
     })
     .gesture(
       GestureGroup(GestureMode.Exclusive,
