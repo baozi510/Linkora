@@ -1,4 +1,5 @@
 import networkMediaProbeTest from './NetworkMediaProbe.test';
+import systemMediaStagesTest from './SystemMediaStages.test';
 import networkLinkParserTest from './NetworkLinkParser.test';
 import mediaSourceTest from './MediaSource.test';
 import architectureContractsTest from './ArchitectureContracts.test';
@@ -31,5 +32,6 @@ export default function testsuite(): void {
   appNavigationTest();
   networkDirectoryStateTest();
   networkFileProxyTest();
+  systemMediaStagesTest();
   networkMediaProbeTest();
 }
