@@ -7,6 +7,7 @@ $ErrorActionPreference = 'Stop'
 $sdkRoot = Join-Path $StudioRoot 'sdk'
 $hvigor = Join-Path $StudioRoot 'tools\hvigor\bin\hvigorw.bat'
 $javaRoot = Join-Path $StudioRoot 'jbr'
+$node = Join-Path $StudioRoot 'tools\node\node.exe'
 $testResult = Join-Path $PSScriptRoot '..\entry\.test\default\intermediates\test\coverage_data\test_result.txt'
 
 if (-not (Test-Path -LiteralPath $hvigor)) {
@@ -19,6 +20,11 @@ $env:Path = "$(Join-Path $javaRoot 'bin');$env:Path"
 
 Push-Location (Join-Path $PSScriptRoot '..')
 try {
+  & $node (Join-Path $PSScriptRoot 'check-architecture-boundaries.cjs')
+  if ($LASTEXITCODE -ne 0) {
+    throw 'Architecture boundary checks failed.'
+  }
+
   $uiSource = Get-ChildItem -LiteralPath 'entry\src\main\ets' -Recurse -Filter '*.ets'
   $legacyPatterns = @(
     '^\s*@Component\s*$',
@@ -38,15 +44,15 @@ try {
     throw 'ArkUI state management V1 usage remains.'
   }
 
-  & (Join-Path $StudioRoot 'tools\node\node.exe') (Join-Path $PSScriptRoot 'check-local-persistence.cjs') $StudioRoot
+  & $node (Join-Path $PSScriptRoot 'check-local-persistence.cjs') $StudioRoot
   if ($LASTEXITCODE -ne 0) {
     throw 'Local persistence regression checks failed.'
   }
 
-  & (Join-Path $StudioRoot 'tools\node\node.exe') (Join-Path $PSScriptRoot 'check-network-media-probe.cjs') --unit
+  & $node (Join-Path $PSScriptRoot 'check-network-media-probe.cjs') --unit
   if ($LASTEXITCODE -ne 0) { throw 'HTTP range adapter regression checks failed.' }
 
-  & (Join-Path $StudioRoot 'tools\node\node.exe') (Join-Path $PSScriptRoot 'check-network-media-list.cjs')
+  & $node (Join-Path $PSScriptRoot 'check-network-media-list.cjs')
   if ($LASTEXITCODE -ne 0) { throw 'Network media list/cache regression checks failed.' }
 
   & $hvigor test --mode module -p module=entry@default -p product=default --no-daemon
@@ -75,7 +81,7 @@ try {
     }
   }
 
-  Write-Host 'Verification completed: local persistence checks, unit tests, Debug/Release core/proxy/media-probe HAR and Debug/Release HAP passed.'
+  Write-Host 'Verification completed: architecture boundaries, persistence checks, unit tests, HAR and HAP builds passed.'
 } finally {
   Pop-Location
 }
