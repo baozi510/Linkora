@@ -57,5 +57,7 @@ export { DiscoveredService, DiscoveryObserver, DiscoveryPlugin, DiscoveryRequest
   DiscoverySession } from './src/main/ets/sources/DiscoveryPlugin';
 export { RemoteConnectionOptions, RemoteEntry, RemoteEntryKind, RemoteReadSession,
   SourceConnection, SourcePlugin, SourcePluginRegistry } from './src/main/ets/sources/SourcePlugin';
+export { DefaultThumbnailTimePolicy, ThumbnailPlan,
+  ThumbnailTimePolicy } from './src/main/ets/thumbnail/ThumbnailPolicy';
 
-export const LINKORA_CORE_VERSION: string = '1.2.0';
+export const LINKORA_CORE_VERSION: string = '1.3.0';
