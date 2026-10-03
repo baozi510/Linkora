@@ -67,15 +67,11 @@ export class PortVideoInfo {
 
   hdrLabel(): string {
     const transfer: string = this.transfer.toLowerCase();
-    const primaries: string = this.colorPrimaries.toLowerCase();
     if (transfer.includes('pq') || transfer.includes('2084')) {
       return 'HDR10';
     }
     if (transfer.includes('hlg')) {
       return 'HLG';
-    }
-    if (primaries.includes('bt.2020') || primaries.includes('bt2020')) {
-      return 'HDR';
     }
     return '';
   }

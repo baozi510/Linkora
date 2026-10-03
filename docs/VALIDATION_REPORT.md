@@ -11,7 +11,10 @@
 - A 回归：4/4 PASS；commit `ffe02c6`。修复前原始输出 `artifacts/validation/post-A-before.log`，修复后 `post-A-after.log`。
 - B：新增 4 个 Hypium 测试（open 前尺寸、open 后更新、round/clamp、controller detach/reopen 旧事件隔离）。修复前 Hvigor test exit 1：`10505001 Property 'setSurfaceSize' does not exist on type 'PlayerFeatureController'`。UI 在 attach 前和 area-change 时转发，controller 委托现有 engine，不改变尺寸保存设计。
 - B 修复后：Hvigor test exit 0，141/141 PASS，0 Failure/Error/Ignore；日志 `artifacts/validation/post-B-after.log`。
-- C/D、完整 verify、模拟器安装结果：PENDING。
+- B commit：`0d78d17`。
+- C：新增 4 个 Hypium metadata-label 测试。修复前 Hvigor test 返回 exit 0，但 Hypium 为 145 total / 144 PASS / 1 Failure（`doesNotLabelBt2020SdrAsHdr: expect HDR equals [empty]`），因此不认定为通过。移除 primaries-only HDR 分支，保留 colorPrimaries 数据；PQ/2084→HDR10，HLG→HLG，其余空值，不声明 native HDR 输出。
+- C 修复后：Hvigor test exit 0，145/145 PASS，0 Failure/Error/Ignore；原始日志 `artifacts/validation/post-C-before.log` / `post-C-after.log`。
+- D、完整 verify、模拟器安装结果：PENDING。
 
 ## Git 与执行范围
 
