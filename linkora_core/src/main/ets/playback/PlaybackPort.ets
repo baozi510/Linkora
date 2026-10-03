@@ -19,6 +19,68 @@ export enum PortBufferingEvent {
   CACHED_DURATION = 'cached_duration'
 }
 
+export enum PortTrackKind {
+  VIDEO = 'video',
+  AUDIO = 'audio',
+  SUBTITLE = 'subtitle'
+}
+
+export class PortTrack {
+  readonly id: string;
+  readonly kind: PortTrackKind;
+  readonly codec: string;
+  readonly language: string;
+  readonly title: string;
+  readonly selected: boolean;
+
+  constructor(id: string, kind: PortTrackKind, codec: string = '',
+    language: string = '', title: string = '', selected: boolean = false) {
+    this.id = id;
+    this.kind = kind;
+    this.codec = codec;
+    this.language = language;
+    this.title = title;
+    this.selected = selected;
+  }
+}
+
+export class PortVideoInfo {
+  readonly pixelFormat: string;
+  readonly hardwarePixelFormat: string;
+  readonly colorMatrix: string;
+  readonly colorLevels: string;
+  readonly colorPrimaries: string;
+  readonly transfer: string;
+  readonly light: string;
+
+  constructor(pixelFormat: string = '', hardwarePixelFormat: string = '',
+    colorMatrix: string = '', colorLevels: string = '', colorPrimaries: string = '',
+    transfer: string = '', light: string = '') {
+    this.pixelFormat = pixelFormat;
+    this.hardwarePixelFormat = hardwarePixelFormat;
+    this.colorMatrix = colorMatrix;
+    this.colorLevels = colorLevels;
+    this.colorPrimaries = colorPrimaries;
+    this.transfer = transfer;
+    this.light = light;
+  }
+
+  hdrLabel(): string {
+    const transfer: string = this.transfer.toLowerCase();
+    const primaries: string = this.colorPrimaries.toLowerCase();
+    if (transfer.includes('pq') || transfer.includes('2084')) {
+      return 'HDR10';
+    }
+    if (transfer.includes('hlg')) {
+      return 'HLG';
+    }
+    if (primaries.includes('bt.2020') || primaries.includes('bt2020')) {
+      return 'HDR';
+    }
+    return '';
+  }
+}
+
 export class PlaybackPortError extends Error {
   readonly code: number;
   readonly detail: string;
@@ -33,8 +95,11 @@ export class PlaybackPortError extends Error {
 export type PortStateObserver = (state: PortPlaybackState) => void;
 export type PortErrorObserver = (error: PlaybackPortError) => void;
 export type PortNumberObserver = (value: number) => void;
+export type PortStringObserver = (value: string) => void;
 export type PortBufferingObserver = (event: PortBufferingEvent, value: number) => void;
 export type PortVideoSizeObserver = (width: number, height: number) => void;
+export type PortTrackObserver = (tracks: PortTrack[]) => void;
+export type PortVideoInfoObserver = (info: PortVideoInfo) => void;
 export type PortVoidObserver = () => void;
 
 export class PlaybackPortObserver {
@@ -46,11 +111,19 @@ export class PlaybackPortObserver {
   readonly onFirstFrame: PortVoidObserver;
   readonly onVideoSizeChange: PortVideoSizeObserver;
   readonly onInterruptionPause: PortVoidObserver;
+  readonly onSeekComplete: PortNumberObserver;
+  readonly onTracksChange: PortTrackObserver;
+  readonly onVideoInfoChange: PortVideoInfoObserver;
+  readonly onBackendChange: PortStringObserver;
 
   constructor(onStateChange: PortStateObserver, onError: PortErrorObserver,
     onDurationChange: PortNumberObserver, onPositionChange: PortNumberObserver,
     onBufferingChange: PortBufferingObserver, onFirstFrame: PortVoidObserver,
-    onVideoSizeChange: PortVideoSizeObserver, onInterruptionPause: PortVoidObserver) {
+    onVideoSizeChange: PortVideoSizeObserver, onInterruptionPause: PortVoidObserver,
+    onSeekComplete: PortNumberObserver = () => {},
+    onTracksChange: PortTrackObserver = () => {},
+    onVideoInfoChange: PortVideoInfoObserver = () => {},
+    onBackendChange: PortStringObserver = () => {}) {
     this.onStateChange = onStateChange;
     this.onError = onError;
     this.onDurationChange = onDurationChange;
@@ -59,11 +132,16 @@ export class PlaybackPortObserver {
     this.onFirstFrame = onFirstFrame;
     this.onVideoSizeChange = onVideoSizeChange;
     this.onInterruptionPause = onInterruptionPause;
+    this.onSeekComplete = onSeekComplete;
+    this.onTracksChange = onTracksChange;
+    this.onVideoInfoChange = onVideoInfoChange;
+    this.onBackendChange = onBackendChange;
   }
 }
 
 export interface PlaybackPort {
   configure(source: MediaSource, surfaceId: string): void;
+  setSurfaceSize(width: number, height: number): void;
   getDuration(): number;
   prepare(): Promise<void>;
   play(): Promise<void>;
