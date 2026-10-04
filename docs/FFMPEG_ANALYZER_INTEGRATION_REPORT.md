@@ -64,18 +64,18 @@
 
 ## Comparison Matrix
 
-| Fixture | System result | FFmpeg result | Key differences | System median | FFmpeg median | Bytes / ranges |
-| --- | --- | --- | --- | ---: | ---: | --- |
-| H264/AAC MP4 | NOT RUN | NOT RUN | | | | |
-| HEVC/AAC MKV | NOT RUN | NOT RUN | | | | |
-| HEVC Main10 | NOT RUN | NOT RUN | | | | |
-| HDR10 | NOT RUN | NOT RUN | | | | |
-| HLG | NOT RUN | NOT RUN | | | | |
-| Multi-audio | NOT RUN | NOT RUN | | | | |
-| Text subtitle | NOT RUN | NOT RUN | | | | |
-| Bitmap subtitle | NOT RUN | NOT RUN | | | | |
-| Long GOP | NOT RUN | NOT RUN | | | | |
-| WebDAV remote | NOT RUN | NOT RUN | | | | |
+| Fixture | System result | FFmpeg result | Key functional differences | Remote access semantics |
+| --- | --- | --- | --- | --- |
+| H264/AAC MP4 | NOT RUN | NOT RUN | | |
+| HEVC/AAC MKV | NOT RUN | NOT RUN | | |
+| HEVC Main10 | NOT RUN | NOT RUN | | |
+| HDR10 | NOT RUN | NOT RUN | | |
+| HLG | NOT RUN | NOT RUN | | |
+| Multi-audio | NOT RUN | NOT RUN | | |
+| Text subtitle | NOT RUN | NOT RUN | | |
+| Bitmap subtitle | NOT RUN | NOT RUN | | |
+| Long GOP | NOT RUN | NOT RUN | | |
+| WebDAV remote | NOT RUN | NOT RUN | | |
 
 ## FFmpeg Correctness vs Fixture Truth
 
@@ -147,13 +147,23 @@
 
 -
 
-## Recommended Next Policy
+## Functional Recommendation for Next Policy Review
 
-- System role:
-- FFmpeg role:
+- System functional role:
+- FFmpeg functional role:
 - merger needed:
-- thumbnail policy:
+- thumbnail functional role:
+- unresolved semantic conflicts:
+- performance decision: DEFERRED TO ARM64 REAL DEVICE
 - device evidence still required:
+
+## Performance Scope
+
+- simulator timing comparison performed: NO
+- median/p95 collected: NO
+- System-vs-FFmpeg speed ranking: NOT CLAIMED
+- CPU/GPU/power/thermal comparison: NOT RUN
+- performance benchmark target: ARM64 REAL DEVICE
 
 ## Decision
 
