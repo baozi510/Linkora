@@ -2,7 +2,7 @@
 
 > Branch: `feat/ffmpeg-analyzer-integration-phase2`  
 > Base: `fix/simulator-default-dependency-restore`  
-> Goal: integrate FFmpeg as a real media-analysis plugin and collect System-vs-FFmpeg evidence without changing the current user-facing production probe/thumbnail policy.  
+> Goal: integrate FFmpeg as a real media-analysis plugin and validate System/FFmpeg functional correctness and completeness without changing the current user-facing production probe/thumbnail policy.  
 > Do not merge during this phase.
 
 ## 1. Accepted baseline
@@ -202,15 +202,14 @@ Do not make `COMPLETE` synonymous with “every field non-empty”.
 
 ### diagnostics
 
-Populate:
+Populate functional diagnostics only:
 
 - engine = `ffmpeg`;
-- resolve/prepare time;
-- native probe time;
-- total time;
-- MediaProxy byte delta;
-- MediaProxy read-request delta;
+- completion/error state;
+- MediaProxy read-request / Range semantics when useful to prove random-access behavior;
 - bounded notes.
+
+Existing timing fields may remain populated if the contract already carries them, but Phase 2 must not use simulator timing as an acceptance criterion, ranking signal or policy input.
 
 No source URL/token/credential in notes.
 
@@ -282,16 +281,16 @@ At minimum capture per engine:
 
 - success/error;
 - completeness;
-- duration;
+- media duration;
 - primary width/height;
 - container;
 - video/audio/subtitle counts;
 - primary video codec/profile/bit depth;
 - HDR type;
 - audio codec/channel count;
-- totalMs;
-- bytesRead;
-- rangeRequests.
+- remote access semantics where applicable: Range/random-access observed, sequential-only, or unavailable.
+
+Do not include engine execution time, median, p95, throughput or memory/CPU ranking in Phase 2 decisions.
 
 Capture differences without declaring one engine correct merely because it is richer.
 
@@ -313,19 +312,15 @@ Do not expose a production settings toggle yet.
 
 For each case, run engines independently with fresh analysis leases.
 
-For timing samples use alternating order:
+The purpose is functional comparison only:
 
-```text
-System -> FFmpeg
-FFmpeg -> System
-...
-```
+- whether the engine succeeds;
+- whether returned fields match fixture truth;
+- which fields are missing;
+- whether cancellation and cleanup work;
+- whether remote access preserves Range/random-access semantics.
 
-so one engine is not always favored by first-run cache state.
-
-Record first run separately from repeated runs.
-
-Do not run both concurrently for timing comparisons.
+Repeat a case only when needed to prove determinism, lifecycle or cleanup. Do not collect simulator timing samples for performance comparison, and do not rank System vs FFmpeg by speed.
 
 ## 12. Fixture matrix
 
@@ -385,9 +380,11 @@ Record:
 
 - requested time;
 - actual dimensions;
-- extraction duration;
 - success/failure;
-- encoded WebP size only if passed through the existing shared encoder for a diagnostic comparison.
+- pixel format / byte-count validity;
+- whether the existing shared WebP encoder can consume the extracted frame in a diagnostic path.
+
+Do not compare extraction speed or encoded size as performance evidence in Phase 2.
 
 Do not persist comparison thumbnails into the normal production cache unless they are produced by the unchanged production path.
 
@@ -448,27 +445,32 @@ Confirm Debug and Release default HAPs contain exactly the expected 9 AArch64 na
 
 Do not require arm64 runtime if no device exists.
 
-## 20. Benchmark evidence
+## 20. Functional evidence only
 
-For each achievable fixture and engine:
+Performance benchmarking is explicitly deferred to a real arm64 device.
 
-- one first-run sample;
-- at least 5 repeated samples;
-- median;
-- p95 only if sample count is sufficient and clearly labeled;
-- bytesRead;
-- rangeRequests.
+Phase 2 must not produce or use:
 
-Do not use simulator data to tune playback Auto.
+- System-vs-FFmpeg speed rankings;
+- median/p95 latency;
+- CPU/GPU utilization comparisons;
+- memory-efficiency rankings;
+- throughput comparisons;
+- power/thermal conclusions.
 
-Do not yet select a final analyzer policy solely from simulator timing.
+For each achievable fixture, collect only functional evidence:
 
-The most important Phase-2 outputs are:
-
-- correctness;
+- success/failure;
+- correctness against fixture truth;
 - completeness;
-- failure coverage;
-- relative resource behavior.
+- stable error mapping;
+- cancellation/cleanup;
+- Range/random-access behavior for remote sources;
+- thumbnail output validity.
+
+MediaProxy byte/read counters may be used only to prove functional random-access behavior, such as avoiding an unintended full sequential download. They must not be treated as performance benchmark results.
+
+All analyzer and playback performance decisions are deferred to arm64 real-device testing.
 
 ## 21. Report
 
@@ -484,9 +486,9 @@ Include:
 - test totals;
 - simulator artifact/install;
 - fixture truth;
-- System vs FFmpeg results;
-- thumbnail results;
-- proxy diagnostics;
+- System vs FFmpeg functional results;
+- thumbnail functional results;
+- proxy access-semantics diagnostics;
 - cancellation/cleanup;
 - arm64 build;
 - remaining device-only gaps;
@@ -510,4 +512,4 @@ Also stop early if:
 - comparison reveals a storage/MediaProxy architecture defect;
 - System/FFmpeg results conflict in a way that requires product semantics decisions.
 
-Do not implement final merger/policy routing without review.
+Do not implement final merger/policy routing without review. Do not make performance-based policy decisions until real arm64 device benchmarks exist.
