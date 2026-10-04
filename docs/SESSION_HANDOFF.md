@@ -393,7 +393,7 @@ This means Auto fallback and native-protocol configuration/error paths can be te
 
 Simulator bundle:
 
-`com.linkora.player.simulator`
+`com.linkora.player`
 
 Read:
 
