@@ -1,0 +1,32 @@
+[
+  {
+    "step": "toggle 记住播放位置",
+    "before": "true"
+  },
+  {
+    "step": "toggle 播放时保持亮屏",
+    "before": "true"
+  },
+  {
+    "step": "player toggles after restart",
+    "text": [
+      "根据媒体类型选择内核；打开失败时最多回退一次"
+    ],
+    "sliders": []
+  },
+  {
+    "step": "toggle 记住播放位置",
+    "before": "false"
+  },
+  {
+    "step": "toggle 播放时保持亮屏",
+    "before": "false"
+  },
+  {
+    "step": "screen auto-preference-persisted",
+    "text": [
+      "根据媒体类型选择内核；打开失败时最多回退一次"
+    ],
+    "sliders": []
+  }
+]

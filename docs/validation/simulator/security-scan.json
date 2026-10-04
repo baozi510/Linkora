@@ -1,0 +1,30 @@
+{
+  "hilog-runtime.txt": {
+    "knownLabPassword": 0,
+    "authorizationValue": 0,
+    "cookieValue": 0,
+    "urlEmbeddedCredential": 0,
+    "signedQuery": 0
+  },
+  "hilog-seek.txt": {
+    "knownLabPassword": 0,
+    "authorizationValue": 0,
+    "cookieValue": 0,
+    "urlEmbeddedCredential": 0,
+    "signedQuery": 0
+  },
+  "hilog-fixed-runtime.txt": {
+    "knownLabPassword": 0,
+    "authorizationValue": 0,
+    "cookieValue": 0,
+    "urlEmbeddedCredential": 0,
+    "signedQuery": 0
+  },
+  "hilog-final-runtime.txt": {
+    "knownLabPassword": 0,
+    "authorizationValue": 0,
+    "cookieValue": 0,
+    "urlEmbeddedCredential": 0,
+    "signedQuery": 0
+  }
+}

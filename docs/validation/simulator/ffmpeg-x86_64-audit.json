@@ -1,0 +1,34 @@
+[
+  {
+    "library": "avformat",
+    "bytes": 32175880,
+    "sha256": "697cd7d4861418a1091421337b48d6e1de255f8ee9341005a44da7ad7ea1aed1",
+    "machines": [
+      "Machine:                           Advanced Micro Devices X86-64"
+    ]
+  },
+  {
+    "library": "avcodec",
+    "bytes": 90054552,
+    "sha256": "9ddd5ce0292e4e372263029de6aacb00bf8be5bced86af1d989b52d927dd4170",
+    "machines": [
+      "Machine:                           Advanced Micro Devices X86-64"
+    ]
+  },
+  {
+    "library": "avutil",
+    "bytes": 3236192,
+    "sha256": "074ae78e9d6c1bfd9fdae7a161409f48eaba39d1d979b973c3ca233ba24dbb2a",
+    "machines": [
+      "Machine:                           Advanced Micro Devices X86-64"
+    ]
+  },
+  {
+    "library": "swscale",
+    "bytes": 5251604,
+    "sha256": "452f0bb617eec5c8a9ce0872ae28b478ae74828a04725971823eb283328d74c9",
+    "machines": [
+      "Machine:                           Advanced Micro Devices X86-64"
+    ]
+  }
+]

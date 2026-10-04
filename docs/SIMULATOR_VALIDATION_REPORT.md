@@ -1,344 +1,210 @@
 # Simulator Validation Report
 
-> Status: NOT RUN（default/parity/simulator build/安装/冷启动已 PASS；功能矩阵执行中）
+> Status: BLOCKED — EMULATOR PLATFORM
 > Branch: `test/simulator-validation`  
-> This report validates the near-production x86_64 simulator product. It does not replace ARM64 device validation.
+> x86_64 模拟器结果不替代 ARM64 真机验证；没有执行/没有采集的项目保持 NOT RUN。
 
-## 1. Git
+## 1. Git / scope
 
-- Base branch: `test/player-architecture-validation`
-- Simulator branch: `test/simulator-validation`
-- Starting SHA: `c26ed66d86ee0e2c72ae34fd23a4c4bf665b7ebc`；干净检出 `D:\Linkora-validation`，原 D:\Linkora 用户工作区不动。
-- Final tested SHA: `1fab9e09bbdcec766029eb383d2a833d821dad4a`（当前源码；最终 full default 仍会在交接前重跑）
-- Final documentation SHA:
+- Starting SHA: `c26ed66d86ee0e2c72ae34fd23a4c4bf665b7ebc`。
+- Final tested source SHA: `04814840403b54d8dd0e0e61798be1fb3f8f8da8`。
+- Final documentation SHA: 见交接消息和 `git log -1`；文档不嵌入自身 commit hash。
+- Checkout: `D:\Linkora-validation`；原 `D:\Linkora` dirty main 未 checkout、提交或修改生产源码。
+- 完整依次阅读 SIMULATOR_TEST_MANUAL、FFMPEG_BOOTSTRAP、原 SIMULATOR_VALIDATION_REPORT，按 gate→build→runtime→bootstrap 执行。
+- 未 merge、未修改 Auto policy / 公共 Architecture Contract / 生产 native transport 边界，未实现或集成 FFmpegMediaProbe/ThumbnailExtractor。
 
 ## 2. Environment
 
-- Host OS: Windows 11 Pro 10.0.26200 x64 / PowerShell
-- DevEco Studio: 26.0.0.821
-- HarmonyOS SDK: 26.0.0.105 / API 26
-- Hvigor: 6.26.4
-- ohpm: 26.0.0.630
-- Node: default 回归实际使用 PATH 24.13.1；Studio bundled 24.14.1 可用。simulator 第三次重试改用 bundled Node 满足 plugin README 要求。
-- Emulator model: emulator；HDC 127.0.0.1:5555
-- Emulator OS/build: OpenHarmony-7.0.0.105
-- Emulator API: 26
-- Emulator ABI: x86_64
-- Emulator resolution: 1256x2760，RenderService hidumper 实测
-- HarmonyOS Native SDK root used for FFmpeg:
+| Item | Actual environment |
+| --- | --- |
+| Host | Windows11 Pro10.0.26200 x64 / PowerShell |
+| DevEco / SDK | 26.0.0.821 / 26.0.0.105 API26 |
+| Hvigor / ohpm | 6.26.4 / 26.0.0.630 |
+| Node | 最终 Studio bundled24.14.1；早期 default02 为 PATH24.13.1 |
+| Emulator | HDC127.0.0.1:5555；OpenHarmony7.0.0.105；API26；x86_64 |
+| Resolution | 1256x2760；全屏横向2760x1256 |
+| UI automation | SDK hdc/uitest，按实时 dumpLayout bounds 操作 |
+| Native SDK | `C:\Program Files\Huawei\DevEco Studio\sdk\default\openharmony\native` |
+| Target compiler | SDK clang15.0.4 OHOS；明确 OHOS triple / SDK sysroot |
+| POSIX build | Git Bash；ignored local MSYS2 GNU make4.4.1 |
+| Physical ARM64 device | NOT RUN：当前只有 x86_64 emulator |
 
 ## 3. Dependency / Sync
 
-- `ohpm install`: PASS / exit 0；正常生成/解析 lock，未手工修改。
-- DevEco Project Sync: PASS（CLI Sync 重试 exit 0，四模块 init 完成）；首次 00303038 配置失败已记录，未声称执行 GUI Sync。
-- multi-target plugin resolved: PASS；Hvigor install 下载 7.0.0，pnpm 安装成功。
-- default real mpv dependency resolved: PASS；OHPM 使用真实 1.0.0 依赖，未替换 default。
-- simulator MPV target replacement resolved: PASS；Seq 实际运行 OHPM，将本地 stub 注册为 local，包中没有 .so。插件生成当前 target lock，后续 default 回归须正常重新解析真实依赖，不手工改 lock。
+`git fetch --all`、指定分支 checkout/status、正常 `ohpm install` 已执行。真实 `@mpv-ohos/mpv-arkts@1.0.0` 正常解析，没有手工伪造 lock。
 
-## 4. Production Regression Gate
+CLI Project Sync：首次 FAIL00303038，修复 schema 后 PASS/exit0；没有声称 GUI Sync。multi-target plugin 正常解析7.0.0，Seq 实际注册在 project root。simulator plugin 正常 OHPM 将 stub 注册 local。最终 `ohpm install` PASS（715ms），恢复真实 mpv dependency；最终 lock 与 Git baseline 无 diff。
 
-Command:
+## 4. Production Regression Gate / build matrix
 
-```powershell
-./scripts/verify.ps1
-```
+`./scripts/verify.ps1` 完整 attempt02、03、06、最终07 PASS/exit0，失败未跳过。最终07 在正常 ohpm install 后执行，源码 SHA 如上。
 
-- Result: PASS / exit 0（完整 attempt 02、03、06）；失败尝试均保留，未跳项。
-- Hypium: 初始 145/145；补充 seek 顺序测试后 149/149 PASS、18 suites、0 Failure/Error/Ignore。
-- MPV adapter regression: PASS，5/5
-- architecture/parity guards: PASS；guard fixtures 5/5，parity/isolation PASS
-- default Debug HAP: PASS，unsigned / arm64-v8a；同时三个 Debug HAR PASS。
-- default Release HAP: PASS，unsigned / arm64-v8a；同时三个 Release HAR PASS。
-- notes: 全量入口首个真实错误为 Hvigor test 的 00303038 schema validation，尚未进入 Hypium/build。本地原始日志 artifacts/simulator-validation/default-verify-01.log。已按 SDK schema 将 default native buildOption 移至 targets[0].config.buildOption，仍保持 arm64-v8a；同步 parity guard 的读取/隔离检测路径。
+| Tests | Result |
+| --- | --- |
+| Hypium | PASS：149 tests /18 suites /0 Failure /0 Error /0 Ignore |
+| Seek regression red run | FAIL：149 tests /4 Failure /145 Pass，证明新增测试重现缺陷 |
+| MPV adapter regression | PASS：5/5 |
+| Architecture guard fixtures | PASS：5/5 |
+| Architecture / simulator parity guards | PASS |
+| Persistence / HTTP Range / network media list checks | PASS：完整入口真实执行 |
 
-## 5. Simulator Parity Gate
-
-Command:
-
-```powershell
-node scripts/check-simulator-product.cjs
-```
-
-- Result: PASS，输出 `Simulator product parity/isolation checks passed.`；UI/runtime 已执行。
-
-Confirm:
-
-| Parity requirement | Result | Notes |
+| Build artifact | Debug | Release |
 | --- | --- | --- |
-| Auto/System/MPV UI same as production | PASS | 同一 UI 源码，实际三选项可见 |
-| SMB/SFTP/FTP/NFS/WebDAV UI same as production | PASS | 五种 picker/配置/路由实测 |
-| AdaptivePlaybackPort retained | PASS | parity/architecture guard + simulator 编译 |
-| BackendSelector retained | PASS | 同上，无策略修改 |
-| WebDAV provider shared with default | PASS | 同源 Provider + 实际认证/列表/播放 |
-| MediaProxy shared | PASS | static composition/guards；内部 runtime source 计数另列 NOT RUN |
-| Native transport replacement only at provider boundary | PASS | 配置/保存成功、directory 明确 unavailable |
-| MPV replacement only at target dependency boundary | PASS | plugin OHPM 实际 target 替换，default real 1.0.0 |
+| linkora_core HAR | PASS | PASS |
+| linkora_proxy HAR | PASS | PASS |
+| linkora_media_probe HAR | PASS | PASS |
+| entry@default arm64-v8a HAP | PASS | PASS |
 
-## 6. Simulator Build
+现存 ArkTS warnings 与 unsigned default signing warning 保留，不表示验证失败，也不声称已为 default 真机安装签名。
 
-Command:
+## 5. Simulator parity
 
-```powershell
-./scripts/verify-simulator.ps1
-```
+`node scripts/check-simulator-product.cjs` PASS。同源 UI、AdaptivePlaybackPort、BackendSelector、PlaybackEngine、Controller、Provider、shared MediaProxy、DB、probe 保留。Auto/System/MPV 实际可见；五种协议 picker/配置/路由实测。Native transport 与 MPV 替换均只在最终 native 边界。没有为 x86 修改生产架构。
 
-- Result: PASS / exit 0（attempt 03、04、05）；先前失败保留日志。
-- Discovered Seq task: assembleHapSeq，在项目根 node 注册（tasks 原始输出已保存）。
-- HAP path: entry/build/simulator/outputs/simulator/linkora-simulator-unsigned.hap；本地开发签名后 linkora-simulator.hap
-- HAP SHA256: unsigned `bd223c72214aa6f53eafb0d8c06ddeca93c6356c6255c69418d6f8aa15db47f7`；signed `5f11c2b17db94149cea699210cdb06cef91d31965f08af2615a112c77e84b143`
-- Bundle: `com.linkora.player`
-- libmpv packaged: PASS（未打包）
-- SMB/SFTP/FTP/NFS production native SO packaged: PASS（未打包）
-- FFmpeg analyzer SO packaged: PASS（未集成，无 .so）
-- unknown SO packaged: PASS（无 .so）
-- notes:
+## 6. Simulator build / install / launch
 
-## 7. Install / Launch
+`./scripts/verify-simulator.ps1` attempt03/04/05 PASS/exit0；project-root assembleHapSeq，传 module=entry@simulator。
 
-- target: 127.0.0.1:5555
-- ABI: x86_64
-- install: PASS（signed install 02）；unsigned install 01 FAIL / 9568332 install sign info inconsistent，HDC process exit 0 不代表成功。
-- cold launch: PASS；aa force-stop 后 aa start 成功，实际截图显示本地页。
-- navigation: PASS（本地→设置→播放器→串流→网络，以及播放页返回）；其余功能矩阵继续执行。
-- crash/native loader error: 冷启动未观察到；尚无完整稳定性结果。
-- evidence: artifacts/simulator-validation/install-{01,02}.txt、launch.txt、launch.png、launch-layout.json。
+- Latest unsigned HAP SHA256：`9a48bf15b17a2efe87e977990cfec2f380dec368d340f47d83507c53c9beae1c`。
+- Latest signed HAP SHA256：`3119dfb05f1fa22a31b30dc2414ae4d09c4c4d599eb3b07bac5c452f4765ad07`。
+- Path：`entry/build/simulator/outputs/simulator/linkora-simulator.hap`；final副本在 ignored artifacts。
+- Bundle：com.linkora.player；archive native检查 PASS：无libmpv、生产协议.so、未知.so；FFmpeg未集成。
+- Unsigned install01 FAIL9568332/sign info inconsistent（HDC exit0不是成功）；latest signed install03 PASS。
+- 兼容开发签名仅本地临时添加，finally原字节恢复 build-profile；无 uninstall/数据清空/签名材料提交。
+- Force-stop/aa start 冷启动、本地/设置/串流/网络/播放页导航 PASS。
 
-已有同 bundle 签名应用；使用本机现有开发签名材料兼容更新，未 uninstall/清空应用数据。临时 signingConfigs 仅在本地构建期间加入，finally 原字节恢复 build-profile；签名材料/密码不打印、不提交，原 D:\Linkora 文件未修改。签名 log 已遮蔽 material 值，二进制仅本地保存。
+## 7. Playback preferences / Forced MPV / Auto
 
-## 8. Playback Preference UI
+三 backend选择和重启持久化 PASS。原始 Auto，最终 cleanup 恢复并检查。
 
-| Check | Result | Notes |
-| --- | --- | --- |
-| Auto visible | PASS | 实际播放器设置页 layout/screenshot |
-| System visible | PASS | 同页，已选择 System |
-| MPV visible | PASS | 同页，已选择 MPV |
-| preference persists restart | PASS | MPV、System、Auto 重启检查；已恢复原始 Auto（截图确认） |
+Forced MPV：本地 System可播H264-only文件受控 LNK-PLAY-007、Retry、Back PASS，没有转到System播放、native loader crash；不代表真实MPV支持。精确configure/open stack及resource count NOT RUN。
 
-## 9. Forced MPV Replacement Path
+Auto+真实H264/AAC MKV（60s/640x360）10轮彩色首帧及播放中 PASS，stub不能实例化，因此成功最终backend为System。精确MPV-first selector/candidate次数、one-shot/no-second-fallback、瞬时stale状态、cleanup telemetry均 NOT RUN，不用能播放替代事件证据；deterministic Adaptive Hypium分别覆盖事件顺序。Auto策略没有调整。
 
-Expected simulator behavior: same production PlaybackEngine/AdaptivePlaybackPort path, then fail only when target-specific MPV package attempts to instantiate native backend.
+## 8. System playback
 
-- configure/open reaches adaptive stack: NOT RUN
-- controlled backend unavailable error: PASS（forced MPV 打开本地视频出现 LNK-PLAY-007 + 重试；不是 real MPV 播放 PASS）
-- no crash/native SO load: PASS（此 smoke 未 crash；包本身不含 .so）
-- forced MPV does not fallback: PASS（同一个 System 可播放的本地 H264 文件在 forced MPV 明确失败；没有转入 System 播放）
-- resource cleanup: NOT RUN
+| Case | Prepare / first frame | Pause/resume | Seek | EOF / replay | Release |
+| --- | --- | --- | --- | --- | --- |
+| Required Local H264/AAC MP4 | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| Required HTTPS H264/AAC MP4 | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| HEVC/AAC MP4,10s | FAIL5400106/LNK-PLAY-001 | NOT RUN | NOT RUN | NOT RUN | PASS：Back；资源计数NOT RUN |
+| Local legacy H264-only MP4,2s | PASS | NOT RUN | NOT RUN | PASS | PASS：Back |
+| HTTP H264/AAC MKV,60s | PASS | PASS | 50%/高位PASS | NOT RUN | PASS：Back |
+| WebDAV H264/AAC MP4,60s | PASS | PASS | 10%/50%/90%PASS | NOT RUN | PASS：20轮Back/reopen |
+| WebDAV H264/AAC MP4,600s | PASS | PASS | 50%/约93%PASS | NOT RUN | PASS：Back |
+| HTTPS H264-only MP4,10s | PASS | PASS | 10%/50%/90%PASS | PASS | PASS：Back |
 
-## 10. Auto Fallback
+HEVC标为 SYSTEM_SIMULATOR_UNSUPPORTED，不外推ARM64codec。有效HTTPS为 [test-videos H264](https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/720/Big_Buck_Bunny_720_10s_1MB.mp4)，HEAD200，ffprobe H264-only1280x720/10s/969201bytes，无AAC，不能伪记规定AAC样本PASS。此前公共URL404/403也保留。Local AAC未成功导入：sandbox/shared-media读取拒绝、hdc smode明确undebuggable；未绕过权限。
 
-Use at least one MPV-first sample such as MKV.
+## 9. Network configuration / WebDAV
 
-- selector chose MPV first: NOT RUN
-- simulator MPV replacement failed at final boundary: NOT RUN
-- one-shot fallback attempted: NOT RUN
-- failed candidate did not leak stale state: NOT RUN
-- System fallback final result: PASS（Auto + 真实 H264/AAC MKV，60s/640x360、移动色条首帧、播放中；实际 stub 不可实例化，成功 backend 因此为 System）。精确 candidate 次数/瞬时事件未采集，下面 NOT RUN 不能以源码推断改为 PASS。
-- no second fallback: NOT RUN
-
-## 11. System Playback
-
-| Case | Prepare | First frame | Pause/resume | Seek 50% | Seek 90% | Completion | Release |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| HTTPS H264/AAC MP4 | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| Local H264/AAC MP4 | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-| HEVC/AAC MP4 | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
-
-附加已测：本地 album_b_video_03.mp4（原始 fixture ffprobe 为 H264-only，2s，没有 AAC）System 首帧、播放完成、replay、返回 PASS；不能记为上表 H264/AAC。HTTP H264/AAC MKV（生成 fixture）System 能播放，50%/90% UI position 跳至约 30s/56s；暂停/seekDone 后 buffering 状态恢复仍需继续确认，未提前记 PASS。
-
-## 12. Network Configuration Parity
-
-| Protocol | UI fields | Save/edit/delete | Connection test | Directory/open |
+| Protocol | Fields/save/edit/restart | Delete/restart | Connection test | Directory/open |
 | --- | --- | --- | --- | --- |
-| WebDAV | PASS | PASS（删除待执行） | PASS / HTTP 207、错误密码拒绝 | PASS |
-| SMB | PASS | PASS（删除待执行） | PASS / controlled unavailable | PASS / SIMULATOR_NATIVE_TRANSPORT_UNAVAILABLE |
-| SFTP | PASS | PASS（删除待执行） | PASS / controlled unavailable | PASS / SIMULATOR_NATIVE_TRANSPORT_UNAVAILABLE |
-| FTP | PASS | PASS（删除待执行） | PASS / real ArkTS TCP 19221 | PASS / controlled unavailable |
-| NFS | PASS | PASS（删除待执行） | PASS / real ArkTS TCP 19249 | PASS / controlled unavailable |
+| WebDAV | PASS | PASS | PASS207；错误密码拒绝 | PASS真实Provider |
+| SMB | PASS | PASS | PASS受控unavailable | PASS受控unavailable；native I/O NOT RUN |
+| SFTP | PASS | PASS | PASS受控unavailable | PASS受控unavailable；native I/O NOT RUN |
+| FTP | PASS | PASS | PASS真实ArkTS TCP | PASS受控unavailable；native I/O NOT RUN |
+| NFS | PASS | PASS | PASS真实ArkTS TCP | PASS受控unavailable；native I/O NOT RUN |
 
-## 13. WebDAV
+使用现有 test-lab/protocols。WSL IP 对host/emulator路由超时，仅测试端宿主172.23.0.1 TCP→WSL stdio转发19280→19080、19221→12121、19249→12049，没有修改App网络实现。原用户profiles不删。
 
-| Check | Result | Notes |
+WebDAV正确/错误认证、root/Movies/Action多级目录、中文空格/City Chase空格文件、保存编辑重启、播放 PASS；20轮directory进出 PASS。Refresh 原动态插入重复旧sample行，修复RepeatItem Builder后即时正确显示，PASS。
+
+Paused seek 原buffering卡住；修复后10轮50%/90%保持PAUSED，约30s/54s；10% resume PASS。
+
+## 10. MediaProxy diagnostics
+
+| Diagnostic | Actual evidence |
+| --- | --- |
+| activeSources before/during/after | NOT RUN：没有内部计数 |
+| activeClients/releasedSources | NOT RUN |
+| readRequests/bytesRead | 一次metadata probe delta为5/991017，非全程/active值 |
+| localhost only | static/unit PASS；观察127.0.0.1:41127未关联PID，完整runtime断言NOT RUN |
+| token无credential/upstream path | static/unit PASS；runtime token inspection NOT RUN |
+| HEAD/GET/Range/suffixRange/416 | deterministic PASS；App localhost endpoint runtime矩阵NOT RUN |
+| random remote seek | PASS：真实WebDAV upstream ledger |
+| release source→0 | NOT RUN，不以Back成功代替资源计数 |
+
+隔离长视频136060722bytes：121GET+1HEAD，总wire31503326bytes（含HTTPheaders，不当作App bytesRead）。50%从end10493951跳start66283018；高位约93%从end76768777跳start125216723，此前仅21004966wirebytes，未顺序读byte0到目标。精确90%由60s样本另验。提交ledger只有method/range/own-fixture标记和计数，不含auth/header/url/path。
+
+## 11. Metadata / thumbnail
+
+| Check | Result/evidence |
+| --- | --- |
+| duration/width-height/visible thumbnail | PASS：实测10s/640x360，目录实际缩略图 |
+| Generation plan | PASS：hilog thumbnailPlan=2000:480:270:80:1，imageEncodingMs22/probe thumbnailMs83 |
+| quality80/time/max480x270 | runtime计划+deterministic PASS；实际文件参数检查NOT RUN |
+| aspect ratio | deterministic PASS；实际缓存尺寸NOT RUN |
+| new WebP/no new JPEG | static/unit PASS；落盘magic/目录扫描NOT RUN |
+| algorithmVersion/cache reuse | deterministic PASS；真实文件复用NOT RUN |
+
+App/private/shared目录读取被拒绝，未伪造cache PASS。没有新增JPEG fallback或让MediaProbe编码缓存。
+
+## 12. DB/settings/lifecycle
+
+Remember position/keep screen on/experimental storage/cellular：反转、重启确认、恢复原值 PASS。外观Dark/Blue重启PASS，已恢复Follow system/system accent。扩展名新增.linkoratest保存重启、恢复完整原列表 PASS；首次UITest包装引号造成输入错误，改逗号单token后重跑通过，无生产代码修改。未观察DB迁移错误；独立旧DBmigration fixture NOT RUN。
+
+| Cycle | Result |
+| --- | --- |
+| Player open/first frame/fullscreen/exit/back/reopen ×20 | PASS |
+| Landscape/portrait ×20 | PASS |
+| WebDAV directory enter/exit ×20 | PASS |
+| Paused50%/90%seek pairs ×10 | PASS |
+| Home/background→foreground ×10 | PASS：暂停约9s保留 |
+| Auto MKV opens ×10 | PASS：最终System播放；精确fallback事件NOT RUN |
+
+20张首图Pillow检查均有彩色testsrc，人工抽检1/10/20。早期测试误用两次Back退出全屏，按“退出”按钮改正、完整20轮重跑。重复远端screenshot filename留旧PNG尾部，后改唯一filename；只提交统计和新的独立截图。
+
+内存中途VmRSS251152KB/49threads，循环后256392KB/47threads；缺初始baseline，不能证明无泄漏。Residual audio、forced surface recreation、精确stale-session、proxy leak count NOT RUN。期间未观察crash/ANR/black surface，不声称全面稳定性保证。
+
+## 13. Error recovery / security
+
+HTTP404/500/bad payload/60s stall均受控PlaybackFailure、Retry/Back PASS，恢复normal后重开PASS。stall为LNK-PLAY-006/5400102，精确timeout mapping NOT RUN。HEVC unsupported受控错误PASS（播放能力FAIL）。WebDAV错密码Retry/Close、stop directory2300052/重新加载/Back/recover PASS；播放中断网/invalid path NOT RUN。五种native unavailable控制路径PASS，不代表I/O能力。
+
+WebDAV拒绝认证UI使用通用“服务器要求身份验证/当前直链没有携带认证信息”措辞；可证明拒绝和恢复正确凭据后207成功，不能证明精确区分缺凭据与错误密码。此文案/分类问题保留审查，未在收口阶段扩展error policy。
+
+四份runtime hilog按测试密码、Authorization Basic/Bearer、Cookie、embedded URL credential、signed query模式扫描全零，PASS（仅这些模式/窗口）；sanitized JSON提交，raw日志ignored。Signing原配置恢复，新提交不含签名材料。Runtime proxy token/locator准确泄漏检查NOT RUN，零匹配不是全面安全保证。
+
+## 14. FFmpeg bootstrap
+
+Pin8.1.3/n8.1.3；HEAD1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7；tag object23151b11c75aa44d9ab8db796a53c76acf00f6c0。Fetch02和existing-pin03 PASS。01失败refspec由`${Tag}`最小修复。
+
+Target --target=x86_64-linux-ohos/aarch64-linux-ohos，真实SDK sysroot，--target-os=linux假设实际验证。Local junction仅避开路径空格，没有伪造header/lib。LGPL-default/static，disable programs/encoders/muxers/hwaccels/avdevice/avfilter/swresample/autodetect；无enable-gpl/nonfree。
+
+| Step | x86_64 | arm64-v8a |
 | --- | --- | --- |
-| Correct authentication | PASS | 实际 HTTP 207 |
-| Wrong auth rejected | PASS | 明确认证错误 + Retry/Close |
-| Root list | PASS | test-lab root |
-| Nested list | PASS | Movies/Action；自己的测试子目录 |
-| Chinese filename | PASS | 中文 样本.mp4 列表/播放 |
-| Space filename | PASS | City Chase 1080P.mp4 列表/播放 |
-| Refresh | PASS | 修复后新增目录即时正确显示，无重复旧行 |
-| H264 MP4 playback | PASS | H264/AAC 60s 和 600s，20轮打开/关闭 |
-| Seek 50% | PASS | 10轮，约30s，保持暂停 |
-| Seek 90% | PASS | 10轮，约54s，保持暂停 |
+| Fetch/pin | PASS | PASS：同源 |
+| Configure | PASS | PASS |
+| Four .a + headers + manifest | PASS | PASS |
+| ELF machine / profile audit | PASS：四库全部X86-64 | PASS：四库全部AArch64 |
 
-## 14. MediaProxy
+Host01 FAIL gcc:command not found→汇总C11缺失；host02 MSVC cl FAIL不接受-std=c17/c11；host03 Windows clang/MSVC环境成功。Host headers仅用于host工具，目标始终强制OHOSsysroot。两ABI构建均exit0，没有patch FFmpeg。各ABI133个include文件、四.a库、manifest齐全；readelf逐库所有archive members的machine均正确。config.h实测LGPL2.1-or-later、GPL/NONFREE/SHARED/FFMPEG/FFPROBE/FFPLAY/ENCODERS/MUXERS/HWACCELS全部0、STATIC1；prefix中无.exe/.so。Hashes、配置和可重现环境见`docs/validation/simulator/FFMPEG_BUILD_EVIDENCE.md`及audit JSON；生成的headers/libs只留ignored prebuilt，不混入HAP。
 
-- activeSources before:
-- activeSources during:
-- activeSources after:
-- activeClients:
-- readRequests:
-- bytesRead:
-- releasedSources:
-- localhost only: NOT RUN
-- token privacy: NOT RUN
-- HEAD: NOT RUN
-- GET: NOT RUN
-- Range: NOT RUN
-- 50% random access: PASS（测试 upstream Range ledger；10min/136060722-byte 文件，从 10493951 跳至 66283018）
-- 90% avoids sequential byte-0 read: PASS（高位 seek 实际约93%；跳至125216723之前只传输21004966 wire bytes；60s样本精确90%已测）
-- release returns source count to zero: NOT RUN
+FFmpegMediaProbe/FFmpegThumbnailExtractor/System-vs-FFmpeg benchmark：NOT RUN，未接入App。
 
-## 15. Metadata / Thumbnail
+## 15. Fix commits / failure evidence
 
-| Check | Result | Evidence |
-| --- | --- | --- |
-| duration | NOT RUN | |
-| width/height | NOT RUN | |
-| thumbnail visible | NOT RUN | |
-| new cache = WebP | NOT RUN | |
-| no new JPEG | NOT RUN | |
-| quality 80 | NOT RUN | |
-| target-time policy | NOT RUN | |
-| max 480x270 | NOT RUN | |
-| aspect ratio | NOT RUN | |
-| cache reuse | NOT RUN | |
-
-## 16. Database / Settings
-
-- settings persistence: PASS（remember position / keep screen on / experimental storage / cellular；反转、重启恢复、还原）；theme/extensions 尚 NOT RUN
-- player preference persistence: PASS（原始 Auto 已恢复）
-- WebDAV server persistence: PASS
-- SMB config persistence: PASS
-- SFTP config persistence: PASS
-- FTP config persistence: PASS
-- NFS config persistence: PASS
-- delete persistence: NOT RUN
-- DB migration errors:
-
-## 17. Surface / Lifecycle
-
-- fullscreen enter/exit: PASS（20轮，全屏退出用真实“退出”按钮）
-- orientation: PASS（20轮横屏/竖屏）
-- background/foreground: PASS（10轮，暂停位置保留）
-- surface recreate: NOT RUN
-- stale-session isolation: NOT RUN
-- 20 player open/close: PASS（20轮 ledger、first-image screenshot；Pillow 分析20/20含真实彩色 testsrc；人工抽检1/10/20）
-- residual audio:
-- black surface:
-- crash/ANR:
-
-## 18. Error Recovery
-
-| Case | Result | Notes |
-| --- | --- | --- |
-| HTTP 404 | NOT RUN | |
-| HTTP 500 | NOT RUN | |
-| timeout | NOT RUN | |
-| unsupported media | NOT RUN | |
-| WebDAV bad password | NOT RUN | |
-| WebDAV server stop/recover | NOT RUN | |
-| forced MPV simulator unavailable | NOT RUN | |
-| SMB native transport unavailable | NOT RUN | |
-| SFTP native transport unavailable | NOT RUN | |
-| FTP native transport unavailable | NOT RUN | |
-| NFS native transport unavailable | NOT RUN | |
-
-## 19. Security
-
-- Authorization leak scan: NOT RUN
-- Cookie leak scan: NOT RUN
-- password/credential leak scan: NOT RUN
-- proxy upstream locator leak scan: NOT RUN
-- signing secret scan: NOT RUN
-
-## 20. FFmpeg Bootstrap
-
-Pinned source:
-
-- version: 8.1.3
-- tag: n8.1.3
-- commit: 1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7
-
-Fetch attempt 01 FAIL：`git fetch --no-tags origin "refs/tags/$Tag:refs/tags/$Tag"` 得到 `fatal: invalid refspec 'refs/tags//tags/n8.1.3'`。PowerShell 将 `$Tag:refs` 当作带 scope 的变量，丢失 refspec 前半段。仅将变量明确界定为 `${Tag}`，未改版本或 pin。失败生成的 checkout 移入 ignored artifacts 保存，正常脚本重试 02 PASS；HEAD 与 tag object 分别实测为上述 commit 和 `23151b11c75aa44d9ab8db796a53c76acf00f6c0`。已存在源码再次运行 attempt 03 PASS。修复独立提交，SHA 在最终修复表记录。
-
-x86 configure attempt 01 FAIL：`Host compiler lacks C11 support`；完整 config.log 的首个实际错误为 `gcc: command not found`，OHOS target clang 的编译/链接测试已成功。正在使用本机已有 MSVC host compiler 重试；不使用 host headers/libs 替代 OHOS target sysroot。
-
-| Step | x86_64 | arm64-v8a | Evidence |
+| Commit | Failure/original error | Root cause/changed files | Full retry |
 | --- | --- | --- | --- |
-| source fetch/pin | NOT RUN | same source | |
-| configure | NOT RUN | NOT RUN | |
-| libavformat.a | NOT RUN | NOT RUN | |
-| libavcodec.a | NOT RUN | NOT RUN | |
-| libavutil.a | NOT RUN | NOT RUN | |
-| libswscale.a | NOT RUN | NOT RUN | |
-| build manifest | NOT RUN | NOT RUN | |
+| 1a417bdc91eb516eba267476448a4652085629fd | Sync/default01 00303038 targets[0].buildOption | schema层级；entry/build-profile.json5、check-simulator-product.cjs | Sync02/parity/default02 PASS |
+| bae6cfd536d741592616e97d46a8db68eb52ac02 | simulator01 ParserError line72 unexpected Simulator | regex截断/重复finally；verify-simulator.ps1 | parser PASS；02到真实scope错误 |
+| b6ea52ceeaf9d375ef4ecf26db44a31bbd87b281 | simulator02 00306054 assembleHapSeq not found | project task用module mode；verify-simulator.ps1/bundledNode | simulator03 PASS |
+| b7a58e1b50d336ed0218a25a80b170c0d646ba34 | Pausedseek buffering；red4FAIL | 重叠seek/buffer END覆盖意图；PlaybackEngine.ets+4Hypiumcases | default03 149/149+8 builds；sim04/runtime10轮PASS |
+| 1fab9e09bbdcec766029eb383d2a833d821dad4a | Refresh重复旧行；default04/05静态guardFAIL | Builder只收.item无Repeat复用绑定；NetworkDirectoryBrowser.ets/media-list静态匹配 | 误改detailLabels已纠正；default06/sim05/refresh PASS |
+| 04814840403b54d8dd0e0e61798be1fb3f8f8da8 | fetch invalid refspec refs/tags//tags/n8.1.3 | PowerShell $Tag:refs scope歧义；fetch-source.ps1界定${Tag} | fetch02/03 pin PASS；最终default07 PASS |
 
-FFmpegMediaProbe: NOT RUN  
-FFmpegThumbnailExtractor: NOT RUN  
-System-vs-FFmpeg benchmark: NOT RUN
+各提交更新报告。完整失败/build/config日志本地ignored artifacts/simulator-validation保留；精简证据见docs/validation/simulator。Refresh依据[OpenHarmony官方Repeat说明](https://github.com/openharmony/docs/blob/master/en/application-dev/ui/rendering-control/arkts-new-rendering-control-repeat.md)，保留virtual list/cache/provider。
 
-## 21. Explicit Device-Only Items
+## 16. Cleanup / device-only / remaining gaps
 
-Remain NOT RUN regardless of simulator success:
+五种测试profiles和两个串流链接已删除，force-stop/start后均不返回；原用户profiles保留。原Auto/两个player toggles、theme/network/scanning extensions已恢复，Auto最终截图人工确认。只删除自己生成的两个lab fixture目录，停止自己的HTTP fixture/TCP转发Node进程；原WebDAV Docker服务实测running，其它服务未停止。Cleanup初次工具误把空text的Button当确认文字，未确认删除；改按真实“删除服务器”dialog与Text确认重跑，逐个删除完成。最后重启时一次HDC超时，随后重新连接、重启结果和两页删除持久化独立确认。
 
-- real MPV runtime
-- SMB/SFTP/FTP/NFS native I/O
-- native HDR/DV output
-- DTS-HD/TrueHD passthrough
-- Atmos/DTS:X
-- Audio Vivid
-- arm64 hardware decode
-- power/thermal
-- final Auto performance policy
+真实MPV、SMB/SFTP/FTP/NFS native I/O、HDR10/HLG/native DolbyVision、DTS-HD/TrueHD passthrough、Atmos/DTS:X/AudioVivid、arm64 hardware decode/power/thermal：全部NOT RUN/DEVICE REQUIRED。声音或播放文件不证明native输出。
 
-## 22. Fixes During Simulator Validation
+Benchmark NDJSON/report NOT RUN，不用emulator数据决定Auto。仍缺Local/HTTPS AAC规定样本、Auto精确telemetry、MediaProxy runtime完整矩阵/source回零、缩略图落盘证据。报告未将这些项目写成PASS。
 
-Runtime progress: WebDAV 实测错误密码拒绝、正确认证 HTTP 207、保存、root/Movies/Action 多级目录、空格文件播放、中文空格文件列表及 H264/AAC MP4 首帧 PASS。WSL IP 对模拟器超时，测试端使用宿主机 TCP→WSL stdio 转发（只转发 test-lab 服务，未修改生产代码）。原数据未删除。
+## 17. Handoff decision
 
-Paused seek 真实 FAIL：暂停于 14s 后 seek 50%/90%，UI 留在 buffering；系统日志已有 BUFFERING_END 和 OnSeekDone(30000/56000)。Engine 将 seek 前的暂停意图覆盖为 BUFFERING，且 END 在 SEEKING 状态被忽略；重复 Slider seek 又保存 SEEKING 为返回状态。新增四个事件顺序/暂停与播放/重复 seek 组合测试，修复前实跑 149 tests / 4 Failure / 145 Pass。最小 bookkeeping 修复不改变 public contract/Auto 策略；default 全量 attempt 03 PASS / exit 0，149/149 Hypium 和八项构建全部通过，之后须 simulator 重建和 runtime 复测。
+**BLOCKED — EMULATOR PLATFORM**
 
-Refresh 动态新增目录时，列表出现重复 sample 行且遗漏新目录；返回再进入恢复。root cause：virtual Repeat 的 Builder 只接收 repeatItem.item，无法跟踪节点复用后的新 item。按 [OpenHarmony 官方 Repeat 文档](https://github.com/openharmony/docs/blob/master/en/application-dev/ui/rendering-control/arkts-new-rendering-control-repeat.md)，将 list/grid/metadata Builder 改为接收完整 RepeatItem，保留虚拟列表/缓存/Provider/MediaProxy。default 04 因原静态检查仍匹配旧 entry 名失败；调整检查时误改了仍使用 entry 的 detailLabels 匹配，05 再次失败；已纠正，06 完整回归 PASS / exit 0，149/149 Hypium + 八项构建。原始失败日志均保留，无跳过检查。simulator 05 PASS，signed HAP `3119dfb05f1fa22a31b30dc2414ae4d09c4c4d599eb3b07bac5c452f4765ad07` install 03 PASS。
-
-Seek 修复后 runtime：WebDAV 60s H264/AAC MP4，暂停状态重复十轮 50%/90% seek，十轮均保持 PAUSED，position 约 30s/54s；NOT RUN 项不由此自动改为 PASS。逐轮 ledger/screenshot 本地保存。四种 Native 配置已完成编辑、保存、重启恢复（edited 名称）；待删除持久化检查。
-
-Home/foreground 十轮，均回到暂停的相同 position（约 9s），未自动继续，未观察到 crash。刷新修复后真实新增目录插入、refresh list 顺序及显示 PASS（无重复旧行、无需重进）；截图、layout 保存。二十轮 player/fullscreen 横屏/exit/back/reopen 正在执行。当前日志扫描测试密码、Authorization/Cookie 值、URL embedded credentials、signed query 均零匹配；扫描范围与缺少 raw-cache 权限明确保留，不作全面安全保证。
-
-SMB/SFTP 已填写、保存并进入目录，真实页面显示 `SIMULATOR_NATIVE_TRANSPORT_UNAVAILABLE`，connection-test UI 显示相同平台限制，未 crash；不能证明 native auth/I/O。
-
-FTP/NFS 的真实 ArkTS TCP test PASS（宿主机转发端口 19221/19249，对应 test-lab 12121/12049），directory/open 在 transport boundary 明确不可用。四种新增 native 协议配置 force-stop/start 后仍存在。模拟器拒绝读取应用/共享文件目录，`hdc smode` 返回 Cannot set root run mode in undebuggable version；未绕过安全边界，缓存落盘与完整 runtime diagnostics 暂 NOT RUN。
-
-| Commit | Failure | Root cause | Files | Verification |
-| --- | --- | --- | --- | --- |
-| `1a417bdc91eb516eba267476448a4652085629fd` | Sync / default verify 01：00303038 targets[0].buildOption schema error | Native target option 配置层级不合法，SDK 只接受 config.buildOption | entry/build-profile.json5；check-simulator-product.cjs；本报告 | CLI Sync 02 exit 0，parity PASS；default 全量 02 进行中 |
-| `bae6cfd` | verify-simulator 01：ParserError line 72 unexpected token Simulator | native .so 检查段被重复/截断，两个 regex 字符串未闭合，finally 和尾部重复 | scripts/verify-simulator.ps1；本报告 | PowerShell parser PASS；02 成功发现 Seq，随后作用域错误 |
-| 待本次独立提交 | verify-simulator 02：00306054 Task assembleHapSeq was not found | 插件将 Seq 注册在 project root，脚本却 --mode module；tasks 和真实插件源码一致证明作用域错误，尚未执行依赖替换 | scripts/verify-simulator.ps1；本报告 | 改为 project 调用，仍传入 entry@simulator；使用 bundled Node 24.14.1；第三次重试待执行 |
-
-## 23. Final Assessment
-
-- production regression:
-- parity/isolation:
-- simulator build:
-- install:
-- UI parity:
-- System:
-- Auto fallback:
-- forced MPV replacement:
-- WebDAV:
-- native-protocol pre-transport path:
-- MediaProxy:
-- thumbnail:
-- lifecycle:
-- security:
-- FFmpeg x86 build:
-- FFmpeg arm64 build:
-- blockers:
-
-## 24. Handoff Decision
-
-Choose exactly one:
-
-- READY FOR ARCHITECTURE REVIEW
-- BLOCKED — SIMULATOR PRODUCT BUILD
-- BLOCKED — EMULATOR PLATFORM
-- BLOCKED — FFMPEG TOOLCHAIN/PATCH REQUIRED
-- VALIDATION FAILED — FIXES REQUIRED
+Default完整回归、八项生产构建、simulator build/install、可执行的功能循环、FFmpeg双ABI bootstrap均通过；当前模拟器不能完成规定Local AAC导入/私有cache检查、HEVC播放，且缺App内部proxy/Auto telemetry，因此完整功能与资源验收不能宣称全部PASS。对应NOT RUN/FAIL已逐项列明，不扩展产品代码来绕过平台限制。交回架构审查，保留真机/额外可观测性和fixture准备事项；不merge，不实现Analyzer，不进入下一阶段。

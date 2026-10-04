@@ -1,0 +1,12 @@
+#define FFMPEG_CONFIGURATION "--prefix=/d/Linkora-validation/third_party/ffmpeg/prebuilt/arm64-v8a --enable-cross-compile --target-os=linux --arch=aarch64 --sysroot=/d/Linkora-validation/artifacts/simulator-validation/native-sdk/sysroot --cc=/d/Linkora-validation/third_party/ffmpeg/build/arm64-v8a/toolchain-wrapper/cc --cxx=/d/Linkora-validation/third_party/ffmpeg/build/arm64-v8a/toolchain-wrapper/cxx --ar=/d/Linkora-validation/artifacts/simulator-validation/native-sdk/llvm/bin/llvm-ar --ranlib=/d/Linkora-validation/artifacts/simulator-validation/native-sdk/llvm/bin/llvm-ranlib --nm=/d/Linkora-validation/artifacts/simulator-validation/native-sdk/llvm/bin/llvm-nm --strip=/d/Linkora-validation/artifacts/simulator-validation/native-sdk/llvm/bin/llvm-strip --enable-static --disable-shared --enable-pic --disable-programs --disable-doc --disable-avdevice --disable-avfilter --disable-swresample --disable-encoders --disable-muxers --disable-hwaccels --disable-x86asm --disable-indevs --disable-outdevs --disable-autodetect --disable-protocols --enable-protocol=file --enable-protocol=http --enable-protocol=tcp --enable-network --extra-cflags=-fPIC --extra-ldflags='-Wl,--gc-sections'"
+#define FFMPEG_LICENSE "LGPL version 2.1 or later"
+#define CONFIG_SHARED 0
+#define CONFIG_STATIC 1
+#define CONFIG_GPL 0
+#define CONFIG_NONFREE 0
+#define CONFIG_FFPLAY 0
+#define CONFIG_FFPROBE 0
+#define CONFIG_FFMPEG 0
+#define CONFIG_ENCODERS 0
+#define CONFIG_HWACCELS 0
+#define CONFIG_MUXERS 0

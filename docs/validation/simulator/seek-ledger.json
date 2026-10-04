@@ -1,0 +1,704 @@
+[
+  {
+    "step": "click 中文 样本.mp4",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:00",
+      "1:00",
+      "播放中",
+      "640 × 360"
+    ],
+    "sliders": [
+      "570.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "click ❚❚",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:02",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "2688.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "seek 0.5",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:30",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "30041.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "seek 0.9",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:54",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "54000.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "paused seek pair 1",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:54",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "54000.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "seek 0.5",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:30",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "30041.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "seek 0.9",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:54",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "54041.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "paused seek pair 2",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:54",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "54041.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "seek 0.5",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:30",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "30041.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "seek 0.9",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:54",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "54000.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "paused seek pair 3",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:54",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "54000.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "seek 0.5",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:30",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "30041.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "seek 0.9",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:54",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "54000.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "paused seek pair 4",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:54",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "54000.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "seek 0.5",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:30",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "30041.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "seek 0.9",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:54",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "54000.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "paused seek pair 5",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:54",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "54000.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "seek 0.5",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:30",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "30000.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "seek 0.9",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:54",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "54041.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "paused seek pair 6",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:54",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "54041.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "seek 0.5",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:30",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "30000.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "seek 0.9",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:54",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "54041.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "paused seek pair 7",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:54",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "54041.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "seek 0.5",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:30",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "30000.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "seek 0.9",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:54",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "54000.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "paused seek pair 8",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:54",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "54000.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "seek 0.5",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:30",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "30041.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "seek 0.9",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:54",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "54000.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "paused seek pair 9",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:54",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "54000.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "seek 0.5",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:30",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "30041.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "seek 0.9",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:54",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "54041.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "paused seek pair 10",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:54",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "54041.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "screen paused-seek-fixed",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:54",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "54041.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "seek 0.1",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:06",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "6041.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "click ▶",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:06",
+      "1:00",
+      "播放中",
+      "640 × 360"
+    ],
+    "sliders": [
+      "6842.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "resume after seek10",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:08",
+      "1:00",
+      "播放中",
+      "640 × 360"
+    ],
+    "sliders": [
+      "8663.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "key Home",
+    "text": [],
+    "sliders": []
+  },
+  {
+    "step": "foreground 1",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:09",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "9059.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "key Home",
+    "text": [],
+    "sliders": []
+  },
+  {
+    "step": "foreground 2",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:09",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "9059.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "key Home",
+    "text": [],
+    "sliders": []
+  },
+  {
+    "step": "foreground 3",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:09",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "9059.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "key Home",
+    "text": [],
+    "sliders": []
+  },
+  {
+    "step": "foreground 4",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:09",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "9059.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "key Home",
+    "text": [],
+    "sliders": []
+  },
+  {
+    "step": "foreground 5",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:09",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "9059.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "key Home",
+    "text": [],
+    "sliders": []
+  },
+  {
+    "step": "foreground 6",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:09",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "9059.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "key Home",
+    "text": [],
+    "sliders": []
+  },
+  {
+    "step": "foreground 7",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:09",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "9059.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "key Home",
+    "text": [],
+    "sliders": []
+  },
+  {
+    "step": "foreground 8",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:09",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "9059.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "key Home",
+    "text": [],
+    "sliders": []
+  },
+  {
+    "step": "foreground 9",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:09",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "9059.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "key Home",
+    "text": [],
+    "sliders": []
+  },
+  {
+    "step": "foreground 10",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:09",
+      "1:00",
+      "已暂停",
+      "640 × 360"
+    ],
+    "sliders": [
+      "9059.000000",
+      "1.000000"
+    ]
+  },
+  {
+    "step": "key Back",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "1:00"
+    ],
+    "sliders": []
+  }
+]

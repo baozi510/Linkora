@@ -1,0 +1,34 @@
+[
+  {
+    "library": "avformat",
+    "bytes": 32052280,
+    "sha256": "a22a9867605252219990d7883ab26eca976c5e65e48e4507ba5b279c9e43cbdb",
+    "machines": [
+      "Machine:                           AArch64"
+    ]
+  },
+  {
+    "library": "avcodec",
+    "bytes": 87837490,
+    "sha256": "74f8e78b1c6fcef48d21ab19e7278f89dfef9b501cf14a8f8ae78af9e56ccd80",
+    "machines": [
+      "Machine:                           AArch64"
+    ]
+  },
+  {
+    "library": "avutil",
+    "bytes": 3297022,
+    "sha256": "67e198e0d21efc54d769b1f6f1b1f5186e838ac17e3705593c89da54042fe860",
+    "machines": [
+      "Machine:                           AArch64"
+    ]
+  },
+  {
+    "library": "swscale",
+    "bytes": 4486068,
+    "sha256": "27fbaf1614c2d4d53db7ef996973d6ae0daf8a8ab55987a52509bb4a014b7718",
+    "machines": [
+      "Machine:                           AArch64"
+    ]
+  }
+]
