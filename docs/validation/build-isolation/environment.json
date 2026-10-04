@@ -1,0 +1,10 @@
+{
+  "host": "Windows / PowerShell 7",
+  "devEco": "26.0.0.821",
+  "sdk": "26.0.0.105",
+  "api": "26",
+  "hvigor": "6.26.4",
+  "ohpm": "26.0.0.630",
+  "emulator": "7.0.0.107(SP8DEVC00E999R4P11)",
+  "abi": "x86_64"
+}

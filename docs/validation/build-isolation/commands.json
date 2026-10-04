@@ -1,0 +1,92 @@
+[
+  {
+    "startedAt": "2026-10-04T12:39:41.1961423Z",
+    "endedAt": "2026-10-04T12:42:41.9662843Z",
+    "exitCode": 0,
+    "command": "scripts/verify.ps1",
+    "label": "baseline",
+    "debugCaptured": true,
+    "target": "default",
+    "acceptanceCounted": true
+  },
+  {
+    "command": "scripts/verify-simulator.ps1",
+    "startedAt": "2026-10-04T12:42:52.8096710Z",
+    "debugCaptured": false,
+    "label": "cycle1-simulator",
+    "endedAt": "2026-10-04T12:43:11.2221279Z",
+    "exitCode": 0,
+    "target": "simulator",
+    "acceptanceCounted": true
+  },
+  {
+    "command": "scripts/verify.ps1",
+    "startedAt": "2026-10-04T12:43:11.2452945Z",
+    "debugCaptured": true,
+    "label": "cycle1-default",
+    "endedAt": "2026-10-04T12:46:11.1253638Z",
+    "exitCode": 0,
+    "target": "default",
+    "acceptanceCounted": true
+  },
+  {
+    "label": "cycle2-simulator",
+    "exitCode": null,
+    "debugCaptured": false,
+    "command": "scripts/verify-simulator.ps1",
+    "endedAt": "2026-10-04T12:46:40.4722651Z",
+    "startedAt": "2026-10-04T12:46:22.1086509Z",
+    "target": "simulator",
+    "acceptanceCounted": false
+  },
+  {
+    "command": "scripts/verify.ps1",
+    "startedAt": "2026-10-04T12:46:40.5615275Z",
+    "label": "cycle2-default",
+    "debugCaptured": true,
+    "exitCode": 0,
+    "endedAt": "2026-10-04T12:49:38.8585262Z",
+    "target": "default",
+    "acceptanceCounted": false
+  },
+  {
+    "debugCaptured": false,
+    "command": "scripts/verify-simulator.ps1",
+    "target": "simulator",
+    "exitCode": 0,
+    "label": "cycle2-simulator-final",
+    "startedAt": "2026-10-04T12:49:55.4557824Z",
+    "endedAt": "2026-10-04T12:50:14.1428717Z",
+    "acceptanceCounted": true
+  },
+  {
+    "startedAt": "2026-10-04T12:50:14.2063930Z",
+    "command": "scripts/verify.ps1",
+    "target": "default",
+    "label": "cycle2-default-final",
+    "exitCode": 0,
+    "debugCaptured": true,
+    "endedAt": "2026-10-04T12:53:12.1828612Z",
+    "acceptanceCounted": true
+  },
+  {
+    "exitCode": 1,
+    "endedAt": "2026-10-04T12:53:33.8187854Z",
+    "target": "simulator",
+    "debugCaptured": false,
+    "label": "failure-simulator",
+    "startedAt": "2026-10-04T12:53:22.2999628Z",
+    "command": "scripts/verify-simulator.ps1",
+    "acceptanceCounted": true
+  },
+  {
+    "exitCode": 0,
+    "endedAt": "2026-10-04T12:56:31.9012572Z",
+    "target": "default",
+    "debugCaptured": true,
+    "label": "failure-default",
+    "startedAt": "2026-10-04T12:53:33.8444587Z",
+    "command": "scripts/verify.ps1",
+    "acceptanceCounted": true
+  }
+]

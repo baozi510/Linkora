@@ -1,0 +1,15 @@
+{
+  "label": "cycle2-simulator-final",
+  "mode": "simulator",
+  "capturedAt": "2026-10-04T12:50:14.107Z",
+  "hapSha256": "cac76b95e511e13547f83477c3e1e6120bfb3d35cff92a75cb8e6784e765ba1d",
+  "nativeCount": 1,
+  "native": [
+    {
+      "name": "libs/x86_64/liblinkora_ffmpeg.so",
+      "elfClass": 2,
+      "machine": 62,
+      "sha256": "f7a500c641e228753ea066ce7ecefb8b0e0694c6d5ab1bf476e3527b8de1e606"
+    }
+  ]
+}
