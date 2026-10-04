@@ -9,11 +9,13 @@ import { ProxyBuildProfile } from 'linkora_proxy';
 import { NetworkProxySmokeTest } from '../services/NetworkProxySmokeTest';
 import { MediaProbeBuildProfile } from 'linkora_media_probe';
 import { NetworkMediaProbeSmokeTest } from '../services/NetworkMediaProbeSmokeTest';
+import { RuntimeDiagnostics } from 'entry/RuntimeDiagnostics';
 
 export default class EntryAbility extends UIAbility {
   private mediaProbeSmokeConfig: string = '';
   private proxySmokeConfig: string = '';
   onCreate(want: Want): void {
+    RuntimeDiagnostics.configure(want);
     if (MediaProbeBuildProfile.DEBUG && typeof want.parameters?.linkoraMediaProbeSmokeConfig === 'string') {
       this.mediaProbeSmokeConfig = want.parameters.linkoraMediaProbeSmokeConfig as string;
     }
@@ -45,6 +47,7 @@ export default class EntryAbility extends UIAbility {
       return windowStage.loadContent('pages/Index');
     }).then(() => {
       this.registerIconFonts(windowStage);
+      RuntimeDiagnostics.run(context).catch(() => {});
       if (this.mediaProbeSmokeConfig.length > 0) {
         NetworkMediaProbeSmokeTest.run(context, this.mediaProbeSmokeConfig).catch(() => {});
       }
