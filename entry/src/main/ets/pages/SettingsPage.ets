@@ -108,6 +108,12 @@ export struct SettingsPage {
     return result;
   }
 
+  private networkStorageDescription(): string {
+    return RuntimeProfile.systemOnlyPlayback() ?
+      '模拟器验证构建仅开放 WebDAV；SMB/SFTP/FTP/NFS 需要 arm64 真机' :
+      '启用 WebDAV、SMB、SFTP、FTP 与 NFS；首发默认关闭';
+  }
+
   private themeLabel(): string {
     if (this.settings.themeMode === AppThemeMode.DARK) {
       return '深色';
@@ -607,7 +613,7 @@ export struct SettingsPage {
       .width('100%')
     } else if (this.detail === SettingsDetail.NETWORK) {
       Column() {
-        this.toggleRow('实验性网络存储', '启用 WebDAV、SMB、SFTP、FTP 与 NFS；首发默认关闭',
+        this.toggleRow('实验性网络存储', this.networkStorageDescription(),
           this.settings.experimentalNetworkStorage, (value: boolean) => {
             this.onExperimentalNetworkStorageChange(value);
           })
