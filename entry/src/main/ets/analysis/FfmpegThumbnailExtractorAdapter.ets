@@ -15,8 +15,12 @@ export class FfmpegThumbnailExtractorAdapter implements IThumbnailExtractor {
   async canExtract(source: MediaSource): Promise<boolean> { return !this.lifecycle.isClosed() && this.resolver.canResolve(source, 'ffmpeg'); }
   async extract(source: MediaSource, request: ThumbnailExtractRequest): Promise<RawThumbnail | null> {
     let operation: AnalysisOperation | null = null;
-    try { operation = this.lifecycle.begin(); return await this.perform(source, request, operation); }
-    catch (error) { throw AnalysisError.from(error as Object); }
+    try {
+      operation = this.lifecycle.begin(); const raw = await this.perform(source, request, operation);
+      try { operation.check(); } catch (error) { await raw.release(); throw AnalysisError.from(error as Object); }
+      return raw;
+    }
+    catch (error) { throw operation !== null ? operation.failure(error as Object) : AnalysisError.from(error as Object); }
     finally { if (operation !== null) this.lifecycle.end(operation); }
   }
   private async perform(source: MediaSource, request: ThumbnailExtractRequest, operation: AnalysisOperation): Promise<RawThumbnail> {

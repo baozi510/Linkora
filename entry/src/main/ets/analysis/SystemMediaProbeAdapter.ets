@@ -22,8 +22,8 @@ export class SystemMediaProbeAdapter implements IMediaProbe {
   async canProbe(source: MediaSource): Promise<boolean> { return !this.lifecycle.isClosed() && this.resolver.canResolve(source, 'system'); }
   async probe(source: MediaSource, requirement: ProbeRequirement): Promise<ProbeResult> {
     let operation: AnalysisOperation | null = null;
-    try { operation = this.lifecycle.begin(); return await this.perform(source, requirement, operation); }
-    catch (error) { const failed = AnalysisError.from(error as Object, AnalysisErrorCode.SYSTEM_FAILED); return new ProbeResult(null, ProbeCompleteness.UNAVAILABLE, [],
+    try { operation = this.lifecycle.begin(); const result = await this.perform(source, requirement, operation); operation.check(); return result; }
+    catch (error) { const failed = operation !== null ? operation.failure(error as Object, AnalysisErrorCode.SYSTEM_FAILED) : AnalysisError.from(error as Object, AnalysisErrorCode.SYSTEM_FAILED); return new ProbeResult(null, ProbeCompleteness.UNAVAILABLE, [],
       new MediaProbeDiagnostics('system', 0, 0, 0, 0, 0, ['error=' + failed.code]), failed.code); }
     finally { if (operation !== null) this.lifecycle.end(operation); }
   }

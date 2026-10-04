@@ -23,6 +23,7 @@ class TestInputs implements AnalysisInputPorts {
   fail: boolean = false; source: TestSource = new TestSource();
   observed: RandomAccessSource | null = null;
   registration: (() => Promise<void>) | null = null;
+  cleanup: (() => Promise<void>) | null = null;
   open: () => Promise<RandomAccessSource> = async () => this.source;
   async openRemote(_source: MediaSource, _operation: AnalysisOperation): Promise<RandomAccessSource> { this.opened++; return this.open(); }
   async openHttp(_source: MediaSource, _operation: AnalysisOperation): Promise<RandomAccessSource> { this.opened++; return this.open(); }
@@ -30,7 +31,9 @@ class TestInputs implements AnalysisInputPorts {
     this.registered++;
     this.observed = source; if (this.registration !== null) await this.registration();
     if (this.fail) { source.cancel(); await source.close(); throw new Error('http://secret:token@private/locator'); }
-    return new AnalysisProxyRegistration('http://127.0.0.1:99/private-token', async () => { this.released++; source.cancel(); await source.close(); });
+    return new AnalysisProxyRegistration('http://127.0.0.1:99/private-token', async () => {
+      this.released++; source.cancel(); await source.close(); if (this.cleanup !== null) await this.cleanup();
+    });
   }
 }
 class TestNative implements NativeFfmpegApi {
@@ -69,6 +72,70 @@ function resolver(inputs: TestInputs): MediaAnalysisInputResolver { return new M
 
 export default function mediaAnalysisAdaptersTest(): void {
   describe('MediaAnalysisAdapters', () => {
+    for (const stage of ['open', 'registration']) {
+      it('review cancellation retains identity when delayed ' + stage + ' rejects', 0, async () => {
+        const ports = new TestInputs(); let rejectWork: (error: Error) => void = () => {};
+        if (stage === 'open') ports.open = () => new Promise((_resolve, reject) => { rejectWork = reject; });
+        else ports.registration = () => new Promise((_resolve, reject) => { rejectWork = reject; });
+        const operation = new AnalysisOperation(); const pending = resolver(ports).resolve(file(), 'ffmpeg', operation);
+        while (stage === 'registration' && ports.registered === 0) await Promise.resolve();
+        operation.cancel(); rejectWork(new Error('late private locator failure'));
+        let code = 0; try { await pending; } catch (error) { code = (error as AnalysisError).code; }
+        expect(code).assertEqual(AnalysisErrorCode.CANCELLED);
+        expect(ports.source.closes).assertEqual(stage === 'open' ? 0 : 1);
+      });
+    }
+    for (const engine of ['ffmpeg', 'system']) {
+      it('review ' + engine + ' cancellation retains identity when backend rejects', 0, async () => {
+        const ports = new TestInputs(); const native = new TestNative(); const backend = new TestSystem();
+        let rejectWork: (error: Error) => void = () => {};
+        native.work = () => new Promise((_resolve, reject) => { rejectWork = reject; });
+        backend.work = () => new Promise((_resolve, reject) => { rejectWork = reject; });
+        const probe = engine === 'ffmpeg' ? new FfmpegMediaProbeAdapter(resolver(ports), new FfmpegAnalysis(native)) :
+          new SystemMediaProbeAdapter(resolver(ports), () => backend);
+        const pending = probe.probe(file(), ProbeRequirement.DETAIL);
+        while (engine === 'ffmpeg' ? native.calls === 0 : !backend.started) await Promise.resolve();
+        probe.cancel(); rejectWork(new FfmpegError(FfmpegErrorCode.OPEN_FAILED));
+        const result = await pending; await probe.close();
+        expect(result.errorCode).assertEqual(AnalysisErrorCode.CANCELLED); expect(ports.source.closes).assertEqual(1);
+      });
+      it('review ' + engine + ' close during release suppresses completed metadata until cleanup', 0, async () => {
+        const ports = new TestInputs(); let finish: () => void = () => {};
+        ports.cleanup = () => new Promise((resolve) => { finish = resolve; });
+        const probe = engine === 'ffmpeg' ? new FfmpegMediaProbeAdapter(resolver(ports), new FfmpegAnalysis(new TestNative())) :
+          new SystemMediaProbeAdapter(resolver(ports), () => new TestSystem());
+        const pending = probe.probe(file(), ProbeRequirement.DETAIL);
+        while (ports.released === 0) await Promise.resolve();
+        // Wait until the cleanup action's deferred promise has been installed.
+        while (ports.source.closes === 0) await Promise.resolve(); await Promise.resolve();
+        let closed = false; const closing = probe.close().then(() => { closed = true; });
+        await Promise.resolve(); expect(closed).assertEqual(false);
+        expect((await probe.probe(file(), ProbeRequirement.LIST)).errorCode).assertEqual(AnalysisErrorCode.CLOSED);
+        finish(); const result = await pending; await closing;
+        expect(result.errorCode).assertEqual(AnalysisErrorCode.CANCELLED); expect(ports.source.closes).assertEqual(1);
+      });
+    }
+    it('review thumbnail cancellation retains identity when native frame rejects', 0, async () => {
+      const ports = new TestInputs(); const native = new TestNative(); let rejectWork: (error: Error) => void = () => {};
+      native.frameWork = () => new Promise((_resolve, reject) => { rejectWork = reject; });
+      const extractor = new FfmpegThumbnailExtractorAdapter(resolver(ports), new FfmpegAnalysis(native));
+      const pending = extractor.extract(file(), new ThumbnailExtractRequest(1000));
+      while (native.calls === 0) await Promise.resolve(); extractor.cancel(); rejectWork(new FfmpegError(FfmpegErrorCode.OPEN_FAILED));
+      let code = 0; try { await pending; } catch (error) { code = (error as AnalysisError).code; }
+      await extractor.close(); expect(code).assertEqual(AnalysisErrorCode.CANCELLED); expect(ports.source.closes).assertEqual(1);
+    });
+    it('review thumbnail close during release suppresses completed pixels until cleanup', 0, async () => {
+      const ports = new TestInputs(); let finish: () => void = () => {};
+      ports.cleanup = () => new Promise((resolve) => { finish = resolve; });
+      const extractor = new FfmpegThumbnailExtractorAdapter(resolver(ports), new FfmpegAnalysis(new TestNative()));
+      const pending = extractor.extract(file(), new ThumbnailExtractRequest(1000));
+      while (ports.released === 0) await Promise.resolve();
+      while (ports.source.closes === 0) await Promise.resolve(); await Promise.resolve();
+      let closed = false; const closing = extractor.close().then(() => { closed = true; });
+      await Promise.resolve(); expect(closed).assertEqual(false); finish();
+      let code = 0; try { const raw = await pending; await raw?.release(); } catch (error) { code = (error as AnalysisError).code; }
+      await closing; expect(code).assertEqual(AnalysisErrorCode.CANCELLED); expect(ports.source.closes).assertEqual(1);
+    });
     it('canResolve is pure and rejects unsafe links unresolved local and FFmpeg playlists', 0, async () => {
       const ports = new TestInputs(); const input = resolver(ports);
       expect(input.canResolve(file(), 'ffmpeg')).assertTrue();

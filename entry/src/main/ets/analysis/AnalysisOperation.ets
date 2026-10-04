@@ -37,6 +37,9 @@ export class AnalysisOperation {
   private finish: () => void = () => {};
   constructor() { this.finished = new Promise((resolve) => { this.finish = resolve; }); }
   check(): void { if (this.cancelled) throw new AnalysisError(AnalysisErrorCode.CANCELLED); }
+  failure(error: Object, fallback: AnalysisErrorCode = AnalysisErrorCode.FAILED): AnalysisError {
+    return this.cancelled ? new AnalysisError(AnalysisErrorCode.CANCELLED) : AnalysisError.from(error, fallback);
+  }
   onCancel(action: () => void): void { if (this.cancelled) action(); else this.actions.push(action); }
   cancel(): void { if (this.cancelled) return; this.cancelled = true;
     for (const action of this.actions) { try { action(); } catch (_error) {} } this.actions = []; }

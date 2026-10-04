@@ -86,7 +86,7 @@ export class MediaAnalysisInputResolver {
     } catch (error) {
       if (lease !== null) await lease.release();
       else if (owned !== null) { owned.cancel(); await owned.close(); }
-      throw AnalysisError.from(error as Object, AnalysisErrorCode.RESOLVE_FAILED);
+      throw operation.failure(error as Object, AnalysisErrorCode.RESOLVE_FAILED);
     }
   }
   private identity(source: MediaSource): string {
