@@ -1,0 +1,5 @@
+
+Algorithm : SHA256
+Hash      : 65A4A2BD764D487684D5AAFC80ED94B8CE9CCB45F49624B5572755E12C67EC95
+Path      : D:\Linkora-validation\linkora_ffmpeg\build\default\intermediates\cmake\default\obj\arm64-v8a\liblinkora_ffmpeg.so
+

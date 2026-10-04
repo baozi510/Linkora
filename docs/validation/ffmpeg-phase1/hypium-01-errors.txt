@@ -1,0 +1,39 @@
+
+> artifacts\ffmpeg-phase1\hypium-01.log:57:> hvigor ERROR: Failed :entry:default@UnitTestArkTS... 
+  artifacts\ffmpeg-phase1\hypium-01.log:58:> hvigor WARN: 
+  artifacts\ffmpeg-phase1\hypium-01.log:59:1 WARN: ArkTS:WARN File: D:/Linkora-validation/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/MpvLib.d.ets:2:1
+  artifacts\ffmpeg-phase1\hypium-01.log:60: Switching off type checks with in-place comments is not allowed (arkts-strict-typing-required)
+> artifacts\ffmpeg-phase1\hypium-01.log:107:17 WARN: ArkTS:WARN: For details about ArkTS syntax errors, see FAQs
+  artifacts\ffmpeg-phase1\hypium-01.log:108:18 WARN: ArkTS:WARN File: D:/Linkora-validation/entry/src/main/ets/services/LinkoraDatabase.ets:319:11
+  artifacts\ffmpeg-phase1\hypium-01.log:109: Function may throw exceptions. Special handling is required.
+  artifacts\ffmpeg-phase1\hypium-01.log:110:
+> artifacts\ffmpeg-phase1\hypium-01.log:954:> hvigor ERROR: ArkTS Compiler Error
+> artifacts\ffmpeg-phase1\hypium-01.log:955:1 ERROR: 10605025 ArkTS Compiler Error
+> artifacts\ffmpeg-phase1\hypium-01.log:956:Error Message: Declaring fields in "constructor" is not supported (arkts-no-ctor-prop-decls) At File: D:/Linkora-validation/linkora_ffmpeg/src/main/ets/FfmpegMediaInfoMapper.ets:6:15
+  artifacts\ffmpeg-phase1\hypium-01.log:957:
+  artifacts\ffmpeg-phase1\hypium-01.log:958:
+> artifacts\ffmpeg-phase1\hypium-01.log:959:2 ERROR: 10605025 ArkTS Compiler Error
+> artifacts\ffmpeg-phase1\hypium-01.log:960:Error Message: Declaring fields in "constructor" is not supported (arkts-no-ctor-prop-decls) At File: D:/Linkora-validation/linkora_ffmpeg/src/main/ets/FfmpegMediaInfoMapper.ets:6:41
+  artifacts\ffmpeg-phase1\hypium-01.log:961:
+  artifacts\ffmpeg-phase1\hypium-01.log:962:
+> artifacts\ffmpeg-phase1\hypium-01.log:963:3 ERROR: 10605093 ArkTS Compiler Error
+> artifacts\ffmpeg-phase1\hypium-01.log:964:Error Message: Using "this" inside stand-alone functions is not supported (arkts-no-standalone-this) At File: D:/Linkora-validation/linkora_ffmpeg/src/main/ets/FfmpegMediaInfoMapper.ets:14:7
+  artifacts\ffmpeg-phase1\hypium-01.log:965:
+  artifacts\ffmpeg-phase1\hypium-01.log:966:
+> artifacts\ffmpeg-phase1\hypium-01.log:967:4 ERROR: 10605025 ArkTS Compiler Error
+> artifacts\ffmpeg-phase1\hypium-01.log:968:Error Message: Declaring fields in "constructor" is not supported (arkts-no-ctor-prop-decls) At File: D:/Linkora-validation/linkora_ffmpeg/src/main/ets/FfmpegAnalysis.ets:6:15
+  artifacts\ffmpeg-phase1\hypium-01.log:969:
+  artifacts\ffmpeg-phase1\hypium-01.log:970:
+> artifacts\ffmpeg-phase1\hypium-01.log:971:5 ERROR: 10605038 ArkTS Compiler Error
+> artifacts\ffmpeg-phase1\hypium-01.log:972:Error Message: Object literal must correspond to some explicitly declared class or interface (arkts-no-untyped-obj-literals) At File: D:/Linkora-validation/entry/src/test/FfmpegAnalysis.test.ets:28:69
+  artifacts\ffmpeg-phase1\hypium-01.log:973:
+  artifacts\ffmpeg-phase1\hypium-01.log:974:
+> artifacts\ffmpeg-phase1\hypium-01.log:975:COMPILE RESULT:FAIL {ERROR:6 WARN:299}
+  artifacts\ffmpeg-phase1\hypium-01.log:976:
+  artifacts\ffmpeg-phase1\hypium-01.log:977:* Try:
+  artifacts\ffmpeg-phase1\hypium-01.log:978:> Run with --stacktrace option to get the stack trace.
+> artifacts\ffmpeg-phase1\hypium-01.log:981:> hvigor ERROR: BUILD FAILED in 56 s 3 ms 
+  artifacts\ffmpeg-phase1\hypium-01.log:982:
+  artifacts\ffmpeg-phase1\hypium-01.log:983:43 tasks in total: 39 executed, 4 up-to-date
+
+

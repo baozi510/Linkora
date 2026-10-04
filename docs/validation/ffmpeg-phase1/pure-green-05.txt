@@ -1,0 +1,16 @@
+PASS maps format video audio chapters and field origins
+PASS maps PQ conservatively as metadata HDR10
+PASS maps HLG transfer
+PASS requires explicit Dolby Vision configuration
+PASS does not infer HDR from BT2020 or ten bits alone
+PASS maps text bitmap unknown and subtitle dispositions
+PASS caps arbitrary tag values and total tag bytes
+PASS caps stream and chapter counts
+PASS rejects invalid raw frame byte count
+PASS rejects unbounded frame allocation dimensions
+PASS releases frame idempotently and rejects later reads
+PASS does not cancel unrelated request ids
+PASS isolates identical external ids between wrappers
+PASS rejects duplicate active request ids without replacing state
+PASS close cancels owned work and rejects new requests
+FFmpeg Phase1 pure tests: 15/15 PASS

@@ -1,0 +1,4 @@
+linkora_ffmpeg/src/main/cpp/napi_init.cpp:3:10: fatal error: 'napi/native_node_api.h' file not found
+#include <napi/native_node_api.h>
+         ^~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.

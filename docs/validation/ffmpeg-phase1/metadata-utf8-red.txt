@@ -1,0 +1,2 @@
+native_core_test.cpp
+FAIL: bounded metadata removed an untruncated Chinese character

@@ -1,0 +1,23 @@
+
+> artifacts\ffmpeg-phase1\hypium-02.log:48:> hvigor ERROR: Failed :entry:default@UnitTestArkTS... 
+  artifacts\ffmpeg-phase1\hypium-02.log:49:> hvigor WARN: 
+  artifacts\ffmpeg-phase1\hypium-02.log:50:1 WARN: ArkTS:WARN File: D:/Linkora-validation/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/MpvLib.d.ets:2:1
+  artifacts\ffmpeg-phase1\hypium-02.log:51: Switching off type checks with in-place comments is not allowed (arkts-strict-typing-required)
+> artifacts\ffmpeg-phase1\hypium-02.log:98:17 WARN: ArkTS:WARN: For details about ArkTS syntax errors, see FAQs
+  artifacts\ffmpeg-phase1\hypium-02.log:99:18 WARN: ArkTS:WARN File: D:/Linkora-validation/entry/src/main/ets/services/LinkoraDatabase.ets:319:11
+  artifacts\ffmpeg-phase1\hypium-02.log:100: Function may throw exceptions. Special handling is required.
+  artifacts\ffmpeg-phase1\hypium-02.log:101:
+> artifacts\ffmpeg-phase1\hypium-02.log:945:> hvigor ERROR: ArkTS Compiler Error
+> artifacts\ffmpeg-phase1\hypium-02.log:946:1 ERROR: 10605038 ArkTS Compiler Error
+> artifacts\ffmpeg-phase1\hypium-02.log:947:Error Message: Object literal must correspond to some explicitly declared class or interface (arkts-no-untyped-obj-literals) At File: D:/Linkora-validation/entry/src/test/FfmpegAnalysis.test.ets:29:44
+  artifacts\ffmpeg-phase1\hypium-02.log:948:
+  artifacts\ffmpeg-phase1\hypium-02.log:949:
+> artifacts\ffmpeg-phase1\hypium-02.log:950:COMPILE RESULT:FAIL {ERROR:2 WARN:299}
+  artifacts\ffmpeg-phase1\hypium-02.log:951:
+  artifacts\ffmpeg-phase1\hypium-02.log:952:* Try:
+  artifacts\ffmpeg-phase1\hypium-02.log:953:> Run with --stacktrace option to get the stack trace.
+> artifacts\ffmpeg-phase1\hypium-02.log:956:> hvigor ERROR: BUILD FAILED in 13 s 86 ms 
+  artifacts\ffmpeg-phase1\hypium-02.log:957:
+  artifacts\ffmpeg-phase1\hypium-02.log:958:43 tasks in total: 17 executed, 26 up-to-date
+
+
