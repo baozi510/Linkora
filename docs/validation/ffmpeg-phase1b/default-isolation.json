@@ -1,0 +1,14 @@
+[
+  {
+    "mode": "debug",
+    "smokePresent": false,
+    "simulatorDiagnosticsPresent": false,
+    "defaultDiagnosticsPresent": true
+  },
+  {
+    "mode": "release",
+    "smokePresent": false,
+    "simulatorDiagnosticsPresent": false,
+    "defaultDiagnosticsPresent": true
+  }
+]

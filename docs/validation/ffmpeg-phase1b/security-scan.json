@@ -1,0 +1,13 @@
+{
+  "pid": 24363,
+  "scope": "app PID in round03 hilog window",
+  "appLogLines": 1041,
+  "matches": {
+    "authorization": 0,
+    "cookie": 0,
+    "proxyToken": 0,
+    "upstreamPath": 0,
+    "userinfo": 0,
+    "signedUrl": 0
+  }
+}

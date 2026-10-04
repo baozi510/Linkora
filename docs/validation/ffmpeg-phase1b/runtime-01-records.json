@@ -1,0 +1,837 @@
+[
+  {
+    "at": 1791109099928,
+    "record": {
+      "case": "native-initialize",
+      "status": "PASS"
+    }
+  },
+  {
+    "at": 1791109100285,
+    "record": {
+      "case": "local-mp4",
+      "status": "DATA",
+      "container": "mov,mp4,m4a,3gp,3g2,mj2",
+      "durationMs": 10000,
+      "sizeBytes": 2362050,
+      "video": "h264",
+      "audio": "aac",
+      "videoProfile": "Constrained Baseline",
+      "audioProfile": "LC",
+      "subtitles": 0,
+      "width": 640,
+      "height": 360,
+      "frameRate": 24,
+      "channels": 2,
+      "sampleRate": 48000
+    }
+  },
+  {
+    "at": 1791109100286,
+    "record": {
+      "case": "local-mp4-probe",
+      "status": "PASS",
+      "elapsedMs": 21
+    }
+  },
+  {
+    "at": 1791109100286,
+    "record": {
+      "case": "local-mkv",
+      "status": "DATA",
+      "container": "matroska,webm",
+      "durationMs": 4021,
+      "sizeBytes": 174146,
+      "video": "hevc",
+      "audio": "aac",
+      "videoProfile": "Main",
+      "audioProfile": "LC",
+      "subtitles": 0,
+      "width": 320,
+      "height": 180,
+      "frameRate": 24,
+      "channels": 2,
+      "sampleRate": 48000
+    }
+  },
+  {
+    "at": 1791109100287,
+    "record": {
+      "case": "local-mkv-probe",
+      "status": "PASS",
+      "elapsedMs": 3
+    }
+  },
+  {
+    "at": 1791109100531,
+    "record": {
+      "case": "local-frame-data",
+      "status": "DATA",
+      "width": 480,
+      "height": 270,
+      "timeMs": 3000,
+      "bytes": 518400,
+      "pixelFormat": "rgba_8888",
+      "pixelHash": "c115927c"
+    }
+  },
+  {
+    "at": 1791109100672,
+    "record": {
+      "case": "small-frame-data",
+      "status": "DATA",
+      "width": 320,
+      "height": 180,
+      "timeMs": 1000,
+      "bytes": 230400,
+      "pixelFormat": "rgba_8888",
+      "pixelHash": "92271e90"
+    }
+  },
+  {
+    "at": 1791109100673,
+    "record": {
+      "case": "local-frame",
+      "status": "PASS",
+      "elapsedMs": 392
+    }
+  },
+  {
+    "at": 1791109108715,
+    "record": {
+      "case": "mediaproxy-remote",
+      "status": "FAIL",
+      "code": "SMOKE_ASSERTION",
+      "elapsedMs": 8034
+    }
+  },
+  {
+    "at": 1791109109385,
+    "record": {
+      "case": "timeout-data",
+      "status": "DATA",
+      "cycle": 0,
+      "code": "FF_TIMEOUT",
+      "elapsedMs": 676,
+      "startedReads": 1,
+      "closes": 1,
+      "activeSources": 0,
+      "activeClients": 0
+    }
+  },
+  {
+    "at": 1791109109385,
+    "record": {
+      "case": "timeout",
+      "status": "PASS",
+      "elapsedMs": 682
+    }
+  },
+  {
+    "at": 1791109109510,
+    "record": {
+      "case": "cancel-data",
+      "status": "DATA",
+      "cycle": 1,
+      "code": "FF_CANCELLED",
+      "elapsedMs": 116,
+      "startedReads": 1,
+      "closes": 1,
+      "activeSources": 0,
+      "activeClients": 0
+    }
+  },
+  {
+    "at": 1791109109511,
+    "record": {
+      "case": "cancel-cycle-1",
+      "status": "PASS",
+      "elapsedMs": 117
+    }
+  },
+  {
+    "at": 1791109109620,
+    "record": {
+      "case": "cancel-data",
+      "status": "DATA",
+      "cycle": 2,
+      "code": "FF_CANCELLED",
+      "elapsedMs": 114,
+      "startedReads": 1,
+      "closes": 1,
+      "activeSources": 0,
+      "activeClients": 0
+    }
+  },
+  {
+    "at": 1791109109621,
+    "record": {
+      "case": "cancel-cycle-2",
+      "status": "PASS",
+      "elapsedMs": 114
+    }
+  },
+  {
+    "at": 1791109109746,
+    "record": {
+      "case": "cancel-data",
+      "status": "DATA",
+      "cycle": 3,
+      "code": "FF_CANCELLED",
+      "elapsedMs": 120,
+      "startedReads": 1,
+      "closes": 1,
+      "activeSources": 0,
+      "activeClients": 0
+    }
+  },
+  {
+    "at": 1791109109746,
+    "record": {
+      "case": "cancel-cycle-3",
+      "status": "PASS",
+      "elapsedMs": 121
+    }
+  },
+  {
+    "at": 1791109109853,
+    "record": {
+      "case": "cancel-data",
+      "status": "DATA",
+      "cycle": 4,
+      "code": "FF_CANCELLED",
+      "elapsedMs": 107,
+      "startedReads": 1,
+      "closes": 1,
+      "activeSources": 0,
+      "activeClients": 0
+    }
+  },
+  {
+    "at": 1791109109854,
+    "record": {
+      "case": "cancel-cycle-4",
+      "status": "PASS",
+      "elapsedMs": 108
+    }
+  },
+  {
+    "at": 1791109109962,
+    "record": {
+      "case": "cancel-data",
+      "status": "DATA",
+      "cycle": 5,
+      "code": "FF_CANCELLED",
+      "elapsedMs": 109,
+      "startedReads": 1,
+      "closes": 1,
+      "activeSources": 0,
+      "activeClients": 0
+    }
+  },
+  {
+    "at": 1791109109963,
+    "record": {
+      "case": "cancel-cycle-5",
+      "status": "PASS",
+      "elapsedMs": 109
+    }
+  },
+  {
+    "at": 1791109110072,
+    "record": {
+      "case": "cancel-data",
+      "status": "DATA",
+      "cycle": 6,
+      "code": "FF_CANCELLED",
+      "elapsedMs": 110,
+      "startedReads": 1,
+      "closes": 1,
+      "activeSources": 0,
+      "activeClients": 0
+    }
+  },
+  {
+    "at": 1791109110072,
+    "record": {
+      "case": "cancel-cycle-6",
+      "status": "PASS",
+      "elapsedMs": 110
+    }
+  },
+  {
+    "at": 1791109110180,
+    "record": {
+      "case": "cancel-data",
+      "status": "DATA",
+      "cycle": 7,
+      "code": "FF_CANCELLED",
+      "elapsedMs": 107,
+      "startedReads": 1,
+      "closes": 1,
+      "activeSources": 0,
+      "activeClients": 0
+    }
+  },
+  {
+    "at": 1791109110181,
+    "record": {
+      "case": "cancel-cycle-7",
+      "status": "PASS",
+      "elapsedMs": 107
+    }
+  },
+  {
+    "at": 1791109110287,
+    "record": {
+      "case": "cancel-data",
+      "status": "DATA",
+      "cycle": 8,
+      "code": "FF_CANCELLED",
+      "elapsedMs": 107,
+      "startedReads": 1,
+      "closes": 1,
+      "activeSources": 0,
+      "activeClients": 0
+    }
+  },
+  {
+    "at": 1791109110288,
+    "record": {
+      "case": "cancel-cycle-8",
+      "status": "PASS",
+      "elapsedMs": 107
+    }
+  },
+  {
+    "at": 1791109110398,
+    "record": {
+      "case": "cancel-data",
+      "status": "DATA",
+      "cycle": 9,
+      "code": "FF_CANCELLED",
+      "elapsedMs": 109,
+      "startedReads": 1,
+      "closes": 1,
+      "activeSources": 0,
+      "activeClients": 0
+    }
+  },
+  {
+    "at": 1791109110398,
+    "record": {
+      "case": "cancel-cycle-9",
+      "status": "PASS",
+      "elapsedMs": 109
+    }
+  },
+  {
+    "at": 1791109110507,
+    "record": {
+      "case": "cancel-data",
+      "status": "DATA",
+      "cycle": 10,
+      "code": "FF_CANCELLED",
+      "elapsedMs": 111,
+      "startedReads": 1,
+      "closes": 1,
+      "activeSources": 0,
+      "activeClients": 0
+    }
+  },
+  {
+    "at": 1791109110508,
+    "record": {
+      "case": "cancel-cycle-10",
+      "status": "PASS",
+      "elapsedMs": 111
+    }
+  },
+  {
+    "at": 1791109110616,
+    "record": {
+      "case": "close-active-data",
+      "status": "DATA",
+      "cycle": 11,
+      "code": "FF_CANCELLED",
+      "elapsedMs": 108,
+      "startedReads": 1,
+      "closes": 1,
+      "activeSources": 0,
+      "activeClients": 0
+    }
+  },
+  {
+    "at": 1791109110616,
+    "record": {
+      "case": "close-active",
+      "status": "PASS",
+      "elapsedMs": 108
+    }
+  },
+  {
+    "at": 1791109110617,
+    "record": {
+      "case": "invalid-scheme",
+      "status": "DATA",
+      "code": "FF_INVALID_INPUT"
+    }
+  },
+  {
+    "at": 1791109110617,
+    "record": {
+      "case": "invalid-scheme",
+      "status": "PASS",
+      "elapsedMs": 1
+    }
+  },
+  {
+    "at": 1791109110618,
+    "record": {
+      "case": "malformed-loopback",
+      "status": "DATA",
+      "code": "FF_INVALID_INPUT"
+    }
+  },
+  {
+    "at": 1791109110618,
+    "record": {
+      "case": "malformed-loopback",
+      "status": "PASS",
+      "elapsedMs": 0
+    }
+  },
+  {
+    "at": 1791109110619,
+    "record": {
+      "case": "userinfo",
+      "status": "DATA",
+      "code": "FF_INVALID_INPUT"
+    }
+  },
+  {
+    "at": 1791109110620,
+    "record": {
+      "case": "userinfo",
+      "status": "PASS",
+      "elapsedMs": 0
+    }
+  },
+  {
+    "at": 1791109110620,
+    "record": {
+      "case": "control-cr",
+      "status": "DATA",
+      "code": "FF_INVALID_INPUT"
+    }
+  },
+  {
+    "at": 1791109110621,
+    "record": {
+      "case": "control-cr",
+      "status": "PASS",
+      "elapsedMs": 0
+    }
+  },
+  {
+    "at": 1791109110621,
+    "record": {
+      "case": "control-lf",
+      "status": "DATA",
+      "code": "FF_INVALID_INPUT"
+    }
+  },
+  {
+    "at": 1791109110622,
+    "record": {
+      "case": "control-lf",
+      "status": "PASS",
+      "elapsedMs": 0
+    }
+  },
+  {
+    "at": 1791109110622,
+    "record": {
+      "case": "control-nul",
+      "status": "DATA",
+      "code": "FF_INVALID_INPUT"
+    }
+  },
+  {
+    "at": 1791109110623,
+    "record": {
+      "case": "control-nul",
+      "status": "PASS",
+      "elapsedMs": 1
+    }
+  },
+  {
+    "at": 1791109110624,
+    "record": {
+      "case": "missing-file",
+      "status": "DATA",
+      "code": "FF_OPEN_FAILED"
+    }
+  },
+  {
+    "at": 1791109110624,
+    "record": {
+      "case": "missing-file",
+      "status": "PASS",
+      "elapsedMs": 0
+    }
+  },
+  {
+    "at": 1791109110625,
+    "record": {
+      "case": "corrupt-file",
+      "status": "DATA",
+      "code": "FF_OPEN_FAILED"
+    }
+  },
+  {
+    "at": 1791109110625,
+    "record": {
+      "case": "corrupt-file",
+      "status": "PASS",
+      "elapsedMs": 1
+    }
+  },
+  {
+    "at": 1791109110626,
+    "record": {
+      "case": "concurrent-two-probes",
+      "status": "PASS",
+      "elapsedMs": 4
+    }
+  },
+  {
+    "at": 1791109110679,
+    "record": {
+      "case": "parallel-frame-data",
+      "status": "DATA",
+      "width": 480,
+      "height": 270,
+      "timeMs": 4000,
+      "bytes": 518400,
+      "pixelFormat": "rgba_8888",
+      "pixelHash": "dbde9a20"
+    }
+  },
+  {
+    "at": 1791109110679,
+    "record": {
+      "case": "concurrent-probe-frame",
+      "status": "PASS",
+      "elapsedMs": 58
+    }
+  },
+  {
+    "at": 1791109110680,
+    "record": {
+      "case": "lifecycle-start",
+      "status": "DATA"
+    }
+  },
+  {
+    "at": 1791109111690,
+    "record": {
+      "case": "lifecycle-1",
+      "status": "PASS",
+      "elapsedMs": 1012
+    }
+  },
+  {
+    "at": 1791109112750,
+    "record": {
+      "case": "lifecycle-frame",
+      "status": "DATA",
+      "width": 480,
+      "height": 270,
+      "timeMs": 2000,
+      "bytes": 518400,
+      "pixelFormat": "rgba_8888",
+      "pixelHash": "688fd2f4"
+    }
+  },
+  {
+    "at": 1791109112751,
+    "record": {
+      "case": "lifecycle-2",
+      "status": "PASS",
+      "elapsedMs": 1056
+    }
+  },
+  {
+    "at": 1791109113758,
+    "record": {
+      "case": "lifecycle-3",
+      "status": "PASS",
+      "elapsedMs": 1011
+    }
+  },
+  {
+    "at": 1791109114815,
+    "record": {
+      "case": "lifecycle-frame",
+      "status": "DATA",
+      "width": 480,
+      "height": 270,
+      "timeMs": 2000,
+      "bytes": 518400,
+      "pixelFormat": "rgba_8888",
+      "pixelHash": "688fd2f4"
+    }
+  },
+  {
+    "at": 1791109114816,
+    "record": {
+      "case": "lifecycle-4",
+      "status": "PASS",
+      "elapsedMs": 1064
+    }
+  },
+  {
+    "at": 1791109115842,
+    "record": {
+      "case": "lifecycle-5",
+      "status": "PASS",
+      "elapsedMs": 1019
+    }
+  },
+  {
+    "at": 1791109116960,
+    "record": {
+      "case": "lifecycle-frame",
+      "status": "DATA",
+      "width": 480,
+      "height": 270,
+      "timeMs": 2000,
+      "bytes": 518400,
+      "pixelFormat": "rgba_8888",
+      "pixelHash": "688fd2f4"
+    }
+  },
+  {
+    "at": 1791109116961,
+    "record": {
+      "case": "lifecycle-6",
+      "status": "PASS",
+      "elapsedMs": 1121
+    }
+  },
+  {
+    "at": 1791109117997,
+    "record": {
+      "case": "lifecycle-7",
+      "status": "PASS",
+      "elapsedMs": 1021
+    }
+  },
+  {
+    "at": 1791109119033,
+    "record": {
+      "case": "lifecycle-frame",
+      "status": "DATA",
+      "width": 480,
+      "height": 270,
+      "timeMs": 2000,
+      "bytes": 518400,
+      "pixelFormat": "rgba_8888",
+      "pixelHash": "688fd2f4"
+    }
+  },
+  {
+    "at": 1791109119034,
+    "record": {
+      "case": "lifecycle-8",
+      "status": "PASS",
+      "elapsedMs": 1060
+    }
+  },
+  {
+    "at": 1791109120036,
+    "record": {
+      "case": "lifecycle-9",
+      "status": "PASS",
+      "elapsedMs": 995
+    }
+  },
+  {
+    "at": 1791109121097,
+    "record": {
+      "case": "lifecycle-frame",
+      "status": "DATA",
+      "width": 480,
+      "height": 270,
+      "timeMs": 2000,
+      "bytes": 518400,
+      "pixelFormat": "rgba_8888",
+      "pixelHash": "688fd2f4"
+    }
+  },
+  {
+    "at": 1791109121098,
+    "record": {
+      "case": "lifecycle-10",
+      "status": "PASS",
+      "elapsedMs": 1061
+    }
+  },
+  {
+    "at": 1791109122111,
+    "record": {
+      "case": "lifecycle-11",
+      "status": "PASS",
+      "elapsedMs": 1011
+    }
+  },
+  {
+    "at": 1791109123172,
+    "record": {
+      "case": "lifecycle-frame",
+      "status": "DATA",
+      "width": 480,
+      "height": 270,
+      "timeMs": 2000,
+      "bytes": 518400,
+      "pixelFormat": "rgba_8888",
+      "pixelHash": "688fd2f4"
+    }
+  },
+  {
+    "at": 1791109123173,
+    "record": {
+      "case": "lifecycle-12",
+      "status": "PASS",
+      "elapsedMs": 1061
+    }
+  },
+  {
+    "at": 1791109124185,
+    "record": {
+      "case": "lifecycle-13",
+      "status": "PASS",
+      "elapsedMs": 1013
+    }
+  },
+  {
+    "at": 1791109125247,
+    "record": {
+      "case": "lifecycle-frame",
+      "status": "DATA",
+      "width": 480,
+      "height": 270,
+      "timeMs": 2000,
+      "bytes": 518400,
+      "pixelFormat": "rgba_8888",
+      "pixelHash": "688fd2f4"
+    }
+  },
+  {
+    "at": 1791109125248,
+    "record": {
+      "case": "lifecycle-14",
+      "status": "PASS",
+      "elapsedMs": 1063
+    }
+  },
+  {
+    "at": 1791109126268,
+    "record": {
+      "case": "lifecycle-15",
+      "status": "PASS",
+      "elapsedMs": 1020
+    }
+  },
+  {
+    "at": 1791109127342,
+    "record": {
+      "case": "lifecycle-frame",
+      "status": "DATA",
+      "width": 480,
+      "height": 270,
+      "timeMs": 2000,
+      "bytes": 518400,
+      "pixelFormat": "rgba_8888",
+      "pixelHash": "688fd2f4"
+    }
+  },
+  {
+    "at": 1791109127342,
+    "record": {
+      "case": "lifecycle-16",
+      "status": "PASS",
+      "elapsedMs": 1053
+    }
+  },
+  {
+    "at": 1791109128339,
+    "record": {
+      "case": "lifecycle-17",
+      "status": "PASS",
+      "elapsedMs": 1018
+    }
+  },
+  {
+    "at": 1791109129402,
+    "record": {
+      "case": "lifecycle-frame",
+      "status": "DATA",
+      "width": 480,
+      "height": 270,
+      "timeMs": 2000,
+      "bytes": 518400,
+      "pixelFormat": "rgba_8888",
+      "pixelHash": "688fd2f4"
+    }
+  },
+  {
+    "at": 1791109129402,
+    "record": {
+      "case": "lifecycle-18",
+      "status": "PASS",
+      "elapsedMs": 1060
+    }
+  },
+  {
+    "at": 1791109130411,
+    "record": {
+      "case": "lifecycle-19",
+      "status": "PASS",
+      "elapsedMs": 1010
+    }
+  },
+  {
+    "at": 1791109131476,
+    "record": {
+      "case": "lifecycle-frame",
+      "status": "DATA",
+      "width": 480,
+      "height": 270,
+      "timeMs": 2000,
+      "bytes": 518400,
+      "pixelFormat": "rgba_8888",
+      "pixelHash": "688fd2f4"
+    }
+  },
+  {
+    "at": 1791109131477,
+    "record": {
+      "case": "lifecycle-20",
+      "status": "PASS",
+      "elapsedMs": 1069
+    }
+  },
+  {
+    "at": 1791109131477,
+    "record": {
+      "case": "complete",
+      "status": "FAIL",
+      "passed": 45,
+      "failed": 1,
+      "activeSources": 0,
+      "activeClients": 0
+    }
+  }
+]

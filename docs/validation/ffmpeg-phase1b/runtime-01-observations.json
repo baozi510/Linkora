@@ -1,0 +1,57 @@
+{
+  "observations": [
+    {
+      "stage": "cold-launch",
+      "pid": 17808,
+      "at": 1791109099450,
+      "threads": 14,
+      "rssKb": 86908
+    },
+    {
+      "stage": "native-initialize",
+      "pid": 17808,
+      "at": 1791109100180,
+      "threads": 37,
+      "rssKb": 184120
+    },
+    {
+      "stage": "lifecycle-start",
+      "pid": 17808,
+      "at": 1791109111001,
+      "threads": 39,
+      "rssKb": 228552
+    },
+    {
+      "stage": "lifecycle-10",
+      "pid": 17808,
+      "at": 1791109121319,
+      "threads": 37,
+      "rssKb": 226992
+    },
+    {
+      "stage": "complete",
+      "pid": 17808,
+      "at": 1791109131733,
+      "threads": 37,
+      "rssKb": 232108
+    }
+  ],
+  "commands": [
+    {
+      "case": "cold-launch",
+      "at": 1791109099451,
+      "started": true
+    },
+    {
+      "case": "background",
+      "at": 1791109116237,
+      "backgroundObserved": true
+    },
+    {
+      "case": "foreground",
+      "at": 1791109117994,
+      "started": true,
+      "foregroundObserved": true
+    }
+  ]
+}

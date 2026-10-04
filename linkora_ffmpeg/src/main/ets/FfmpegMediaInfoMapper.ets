@@ -15,7 +15,8 @@ export class FfmpegMediaInfoMapper {
     const videos = result.video.slice(0, 64).map((v) => new VideoTrackInfo(`${v.index}:${v.id}`,
       v.codec, v.profile, v.level > 0 ? `${v.level}` : '', v.width, v.height, v.frameRate,
       v.bitrate, v.bitDepth, v.pixelFormat, v.colorPrimaries, v.transfer, v.colorSpace,
-      FfmpegMediaInfoMapper.hdr(v), v.dolbyVisionProfile > 0 ? `${v.dolbyVisionProfile}` : '',
+      FfmpegMediaInfoMapper.hdr(v),
+      v.hasDolbyVisionConfiguration ? `${v.dolbyVisionProfile}` : '',
       v.language.slice(0, 512), v.title.slice(0, 512), v.isDefault));
     const audio = result.audio.slice(0, 64).map((a) => new AudioTrackInfo(`${a.index}:${a.id}`,
       a.codec, a.profile, a.channels, a.channelLayout, a.sampleRate, a.bitrate,

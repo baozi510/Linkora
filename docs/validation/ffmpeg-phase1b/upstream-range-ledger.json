@@ -1,0 +1,86 @@
+[
+  {
+    "time": 1791109635631,
+    "method": "HEAD",
+    "ownFixture": true,
+    "range": null,
+    "wireBytes": 208
+  },
+  {
+    "time": 1791109635766,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=0-262143",
+    "wireBytes": 262403
+  },
+  {
+    "time": 1791109635797,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=262144-524287",
+    "wireBytes": 262408
+  },
+  {
+    "time": 1791109635814,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=0-262143",
+    "wireBytes": 262403
+  },
+  {
+    "time": 1791109635829,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=262144-524287",
+    "wireBytes": 262408
+  },
+  {
+    "time": 1791109635844,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=524288-786431",
+    "wireBytes": 262408
+  },
+  {
+    "time": 1791109635859,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=14243021-14243630",
+    "wireBytes": 875
+  },
+  {
+    "time": 1791109635875,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=786432-1048575",
+    "wireBytes": 262409
+  },
+  {
+    "time": 1791109635937,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=80675-342818",
+    "wireBytes": 262407
+  },
+  {
+    "time": 1791109635952,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=342819-604962",
+    "wireBytes": 262408
+  },
+  {
+    "time": 1791109635986,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=9953081-10215224",
+    "wireBytes": 262411
+  },
+  {
+    "time": 1791109636001,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=604963-867106",
+    "wireBytes": 262408
+  }
+]

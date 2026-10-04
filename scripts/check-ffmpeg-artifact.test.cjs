@@ -18,9 +18,15 @@ test('rejects production native libs even when ELF is x86', () => {
 });
 test('default confirms FFmpeg and existing libraries are AArch64', () => {
   assert.equal(checkNativeEntries([{ name: 'libs/arm64-v8a/liblinkora_ffmpeg.so', data: elf(183) },
-    { name: 'libs/arm64-v8a/libmpv.so', data: elf(183) }], 'arm64-v8a'), 2);
+    { name: 'libs/arm64-v8a/libmpv.so', data: elf(183) },
+    { name: 'libs/arm64-v8a/libmpv_wrapper.so', data: elf(183) },
+    { name: 'libs/arm64-v8a/libaki_jsbind.so', data: elf(183) }], 'arm64-v8a'), 4);
 });
 test('rejects missing analyzer and unrecognized ELF', () => {
   assert.throws(() => checkNativeEntries([], 'arm64-v8a'));
   assert.throws(() => checkNativeEntries([{ name: 'libs/arm64-v8a/liblinkora_ffmpeg.so', data: Buffer.alloc(64) }], 'arm64-v8a'));
+});
+test('rejects default HAP polluted by simulator MPV dependency override', () => {
+  assert.throws(() => checkNativeEntries([{ name: 'libs/arm64-v8a/liblinkora_ffmpeg.so', data: elf(183) }], 'arm64-v8a'),
+    /Missing production MPV library/);
 });

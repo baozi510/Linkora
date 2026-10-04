@@ -72,7 +72,9 @@ export default function ffmpegAnalysisTest(): void {
       expect(track.hdrType).assertEqual(HdrType.DOLBY_VISION);
       expect(track.dolbyVisionProfile).assertEqual('8');
       video.dolbyVisionProfile = 0;
-      expect(FfmpegMediaInfoMapper.map(result).info.videoTracks[0].hdrType).assertEqual(HdrType.DOLBY_VISION);
+      const profileZero = FfmpegMediaInfoMapper.map(result).info.videoTracks[0];
+      expect(profileZero.hdrType).assertEqual(HdrType.DOLBY_VISION);
+      expect(profileZero.dolbyVisionProfile).assertEqual('0');
     });
     it('does not infer HDR from BT2020 or ten bits alone', 0, () => {
       const result = new NativeProbeResult(); const video = new NativeVideoStream();

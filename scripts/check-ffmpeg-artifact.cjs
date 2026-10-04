@@ -13,6 +13,11 @@ function checkNativeEntries(entries, abi) {
     else if (abi === 'x86_64') throw Error('Unapproved simulator native library: ' + entry.name);
   }
   if (analyzer !== 1) throw Error('Expected exactly one liblinkora_ffmpeg.so; got ' + analyzer);
+  if (abi === 'arm64-v8a') {
+    for (const name of ['libmpv.so', 'libmpv_wrapper.so', 'libaki_jsbind.so']) {
+      if (!entries.some(entry => entry.name === `libs/arm64-v8a/${name}`)) throw Error('Missing production MPV library: ' + name);
+    }
+  }
   return entries.filter(entry => entry.name.endsWith('.so')).length;
 }
 function nativeEntries(file) {

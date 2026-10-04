@@ -5,6 +5,20 @@ const path = require('node:path');
 
 const root = path.resolve(__dirname, '..');
 const failures = [];
+for (const target of ['default', 'simulator']) {
+  const diagnostics = path.join(root, 'entry/src', target, 'RuntimeDiagnostics.ets');
+  if (!fs.existsSync(diagnostics)) failures.push(`${target} RuntimeDiagnostics target boundary missing`);
+}
+const noopPath = path.join(root, 'entry/src/default/RuntimeDiagnostics.ets');
+if (fs.existsSync(noopPath)) {
+  const noop = fs.readFileSync(noopPath, 'utf8');
+  if (/linkora_ffmpeg|FfmpegRuntimeSmoke|NetworkFileProxy|http\./.test(noop)) failures.push('default diagnostics must remain no-op');
+}
+const commonFiles = fs.readdirSync(path.join(root, 'entry/src/main/ets'), { recursive: true });
+for (const file of commonFiles.filter(name => name.endsWith('.ets'))) {
+  const source = fs.readFileSync(path.join(root, 'entry/src/main/ets', file), 'utf8');
+  if (/linkora_ffmpeg\/Native|FfmpegRuntimeSmoke/.test(source)) failures.push('common source must delegate diagnostics through target boundary: ' + file);
+}
 
 function read(relative) {
   return fs.readFileSync(path.join(root, relative), 'utf8').replace(/^\uFEFF/, '');
@@ -57,6 +71,8 @@ const defaultTarget = entry.targets.find(item => item.name === 'default');
 const simulatorTarget = entry.targets.find(item => item.name === 'simulator');
 check(defaultTarget && defaultTarget.source.sourceRoots.includes('./src/default'),
   'default target must use src/default');
+check(defaultTarget && !defaultTarget.source.sourceRoots.includes('./src/simulator'),
+  'default target must exclude simulator diagnostics source root');
 check(defaultTarget && defaultTarget.config && defaultTarget.config.buildOption &&
   defaultTarget.config.buildOption.externalNativeOptions.abiFilters.includes('arm64-v8a'),
   'default target must retain arm64-v8a native build');

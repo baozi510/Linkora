@@ -1,0 +1,11 @@
+{
+  "count": 1,
+  "unsignedHapSha256": "83e2462b19964435728ec1800bc9a878b15ccb6576292625c56d7c86228ab615",
+  "native": [
+    {
+      "name": "libs/x86_64/liblinkora_ffmpeg.so",
+      "machine": 62,
+      "sha256": "f7a500c641e228753ea066ce7ecefb8b0e0694c6d5ab1bf476e3527b8de1e606"
+    }
+  ]
+}
