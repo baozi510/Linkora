@@ -7,7 +7,6 @@ import { SettingsDetail } from '../models/AppNavigation';
 import { LocalViewSettings } from '../models/LocalMediaViewOptions';
 import { LocalViewSettingsStore } from '../services/LocalViewSettingsStore';
 import { AppColors, AppRadius, AppSpacing, AppTypography } from '../ui/AppTheme';
-import { RuntimeProfile } from 'entry/RuntimeProfile';
 
 @ComponentV2
 export struct SettingsPage {
@@ -106,12 +105,6 @@ export struct SettingsPage {
       }
     }
     return result;
-  }
-
-  private networkStorageDescription(): string {
-    return RuntimeProfile.systemOnlyPlayback() ?
-      '模拟器验证构建仅开放 WebDAV；SMB/SFTP/FTP/NFS 需要 arm64 真机' :
-      '启用 WebDAV、SMB、SFTP、FTP 与 NFS；首发默认关闭';
   }
 
   private themeLabel(): string {
@@ -262,8 +255,7 @@ export struct SettingsPage {
         }
         .alignItems(HorizontalAlign.Start)
         .layoutWeight(1)
-        if ((RuntimeProfile.systemOnlyPlayback() && preference === PlayerBackendPreference.SYSTEM) ||
-          (!RuntimeProfile.systemOnlyPlayback() && this.settings.playerBackendPreference === preference)) {
+        if (this.settings.playerBackendPreference === preference) {
           AppIcon({ name: AppIconName.CHECK_CIRCLE, iconSize: 20,
             color: AppColors.accent(this.accentColor) })
         }
@@ -573,28 +565,16 @@ export struct SettingsPage {
           .fontColor(AppColors.TEXT_SECONDARY)
           .width('100%')
         Column() {
-          if (RuntimeProfile.systemOnlyPlayback()) {
-            this.backendChoice(PlayerBackendPreference.SYSTEM, '系统播放器',
-              '模拟器验证构建仅启用 HarmonyOS AVPlayer')
-          } else {
-            this.backendChoice(PlayerBackendPreference.AUTO, '自动',
-              '根据媒体类型选择内核；打开失败时最多回退一次')
-            this.backendChoice(PlayerBackendPreference.SYSTEM, '系统播放器',
-              '优先使用 HarmonyOS AVPlayer')
-            this.backendChoice(PlayerBackendPreference.MPV, 'MPV',
-              '优先使用 libmpv，兼容复杂封装、字幕与音轨')
-          }
+          this.backendChoice(PlayerBackendPreference.AUTO, '自动',
+            '根据媒体类型选择内核；打开失败时最多回退一次')
+          this.backendChoice(PlayerBackendPreference.SYSTEM, '系统播放器',
+            '优先使用 HarmonyOS AVPlayer')
+          this.backendChoice(PlayerBackendPreference.MPV, 'MPV',
+            '优先使用 libmpv，兼容复杂封装、字幕与音轨')
         }
         .width('100%')
         .backgroundColor(AppColors.SURFACE_RAISED)
         .borderRadius(AppRadius.CONTROL)
-
-        if (RuntimeProfile.systemOnlyPlayback()) {
-          Text('当前为 x86_64 模拟器验证构建：MPV 与 Native 文件协议已从运行产物隔离。')
-            .fontSize(AppTypography.META)
-            .fontColor(AppColors.TEXT_MUTED)
-            .width('100%')
-        }
 
         Column() {
           this.toggleRow('记住播放位置', '再次打开时从上次位置继续',
@@ -613,7 +593,7 @@ export struct SettingsPage {
       .width('100%')
     } else if (this.detail === SettingsDetail.NETWORK) {
       Column() {
-        this.toggleRow('实验性网络存储', this.networkStorageDescription(),
+        this.toggleRow('实验性网络存储', '启用 WebDAV、SMB、SFTP、FTP 与 NFS；首发默认关闭',
           this.settings.experimentalNetworkStorage, (value: boolean) => {
             this.onExperimentalNetworkStorageChange(value);
           })
