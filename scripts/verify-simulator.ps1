@@ -10,9 +10,13 @@ $sdkRoot = Join-Path $StudioRoot 'sdk'
 $hvigor = Join-Path $StudioRoot 'tools\hvigor\bin\hvigorw.bat'
 $javaRoot = Join-Path $StudioRoot 'jbr'
 $node = Join-Path $StudioRoot 'tools\node\node.exe'
+$ohpm = Join-Path $StudioRoot 'tools\ohpm\bin\ohpm.bat'
 
 if (-not (Test-Path -LiteralPath $hvigor)) {
   throw "DevEco Studio build tool was not found under: $StudioRoot"
+}
+if (-not (Test-Path -LiteralPath $ohpm)) {
+  throw "DevEco Studio ohpm was not found under: $StudioRoot"
 }
 
 $env:DEVECO_SDK_HOME = $sdkRoot
@@ -94,5 +98,13 @@ try {
     Write-Host 'Simulator HAP native whitelist passed (FFmpeg analyzer only).'
   }
 } finally {
-  Pop-Location
+  try {
+    Write-Host 'Restoring the default dependency graph after simulator target resolution...'
+    & $ohpm install
+    if ($LASTEXITCODE -ne 0) {
+      throw 'Failed to restore the default ohpm dependency graph after simulator verification.'
+    }
+  } finally {
+    Pop-Location
+  }
 }

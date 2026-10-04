@@ -1,0 +1,79 @@
+[
+  {
+    "case": "wrong-commit",
+    "exitCode": 1,
+    "expectedGuardReached": true,
+    "commitSubstringPresent": false,
+    "command": [
+      "cmake",
+      "-S",
+      "D:\\Linkora-validation\\linkora_ffmpeg\\src\\main\\cpp",
+      "-B",
+      "D:\\Linkora-validation\\artifacts\\build-isolation\\manifest-fixtures\\wrong-commit\\build-final",
+      "-G",
+      "Ninja",
+      "-DCMAKE_MAKE_PROGRAM=C:/Program Files/Huawei/DevEco Studio/sdk/default/openharmony/native/build-tools/cmake/bin/ninja.exe",
+      "-DCMAKE_TOOLCHAIN_FILE=C:/Program Files/Huawei/DevEco Studio/sdk/default/hms/native/build/cmake/hmos.toolchain.cmake",
+      "-DOHOS_SDK_NATIVE=C:/Program Files/Huawei/DevEco Studio/sdk/default/openharmony/native",
+      "-DHMOS_SDK_NATIVE=C:/Program Files/Huawei/DevEco Studio/sdk/default/hms/native",
+      "-DOHOS_ARCH=x86_64",
+      "-DCMAKE_OHOS_ARCH_ABI=x86_64",
+      "-DOHOS_STL=c++_static",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DFFMPEG_PREBUILT_ROOT=D:\\Linkora-validation\\artifacts\\build-isolation\\manifest-fixtures\\wrong-commit\\prebuilt"
+    ]
+  },
+  {
+    "case": "wrong-abi",
+    "exitCode": 1,
+    "expectedGuardReached": true,
+    "commitSubstringPresent": true,
+    "command": [
+      "cmake",
+      "-S",
+      "D:\\Linkora-validation\\linkora_ffmpeg\\src\\main\\cpp",
+      "-B",
+      "D:\\Linkora-validation\\artifacts\\build-isolation\\manifest-fixtures\\wrong-abi\\build-final",
+      "-G",
+      "Ninja",
+      "-DCMAKE_MAKE_PROGRAM=C:/Program Files/Huawei/DevEco Studio/sdk/default/openharmony/native/build-tools/cmake/bin/ninja.exe",
+      "-DCMAKE_TOOLCHAIN_FILE=C:/Program Files/Huawei/DevEco Studio/sdk/default/hms/native/build/cmake/hmos.toolchain.cmake",
+      "-DOHOS_SDK_NATIVE=C:/Program Files/Huawei/DevEco Studio/sdk/default/openharmony/native",
+      "-DHMOS_SDK_NATIVE=C:/Program Files/Huawei/DevEco Studio/sdk/default/hms/native",
+      "-DOHOS_ARCH=x86_64",
+      "-DCMAKE_OHOS_ARCH_ABI=x86_64",
+      "-DOHOS_STL=c++_static",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DFFMPEG_PREBUILT_ROOT=D:\\Linkora-validation\\artifacts\\build-isolation\\manifest-fixtures\\wrong-abi\\prebuilt"
+    ]
+  },
+  {
+    "case": "substring-commit",
+    "exitCode": 1,
+    "expectedGuardReached": true,
+    "commitSubstringPresent": true,
+    "command": [
+      "cmake",
+      "-S",
+      "D:\\Linkora-validation\\linkora_ffmpeg\\src\\main\\cpp",
+      "-B",
+      "D:\\Linkora-validation\\artifacts\\build-isolation\\manifest-fixtures\\substring-commit\\build-final",
+      "-G",
+      "Ninja",
+      "-DCMAKE_MAKE_PROGRAM=C:/Program Files/Huawei/DevEco Studio/sdk/default/openharmony/native/build-tools/cmake/bin/ninja.exe",
+      "-DCMAKE_TOOLCHAIN_FILE=C:/Program Files/Huawei/DevEco Studio/sdk/default/hms/native/build/cmake/hmos.toolchain.cmake",
+      "-DOHOS_SDK_NATIVE=C:/Program Files/Huawei/DevEco Studio/sdk/default/openharmony/native",
+      "-DHMOS_SDK_NATIVE=C:/Program Files/Huawei/DevEco Studio/sdk/default/hms/native",
+      "-DOHOS_ARCH=x86_64",
+      "-DCMAKE_OHOS_ARCH_ABI=x86_64",
+      "-DOHOS_STL=c++_static",
+      "-DCMAKE_BUILD_TYPE=Debug",
+      "-DFFMPEG_PREBUILT_ROOT=D:\\Linkora-validation\\artifacts\\build-isolation\\manifest-fixtures\\substring-commit\\prebuilt"
+    ]
+  },
+  {
+    "case": "real-pinned-manifests",
+    "exactCommitAndAbi": true,
+    "realManifestUnchanged": true
+  }
+]

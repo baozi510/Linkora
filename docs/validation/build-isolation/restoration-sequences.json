@@ -1,0 +1,23 @@
+[
+  {
+    "simulator": "cycle1-simulator",
+    "automaticRestoreCompleted": true,
+    "manualInstallInserted": false,
+    "nextDefault": "cycle1-default",
+    "gapMs": 23
+  },
+  {
+    "simulator": "cycle2-simulator-final",
+    "automaticRestoreCompleted": true,
+    "manualInstallInserted": false,
+    "nextDefault": "cycle2-default-final",
+    "gapMs": 64
+  },
+  {
+    "simulator": "failure-simulator",
+    "automaticRestoreCompleted": true,
+    "manualInstallInserted": false,
+    "nextDefault": "failure-default",
+    "gapMs": 26
+  }
+]

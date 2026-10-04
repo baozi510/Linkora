@@ -1,0 +1,63 @@
+{
+  "label": "cycle2-default-final",
+  "mode": "debug",
+  "capturedAt": "2026-10-04T12:52:21.900Z",
+  "hapSha256": "f8b0ea218a51790cea3593c1c0b2c39d93dd8deeb09793bc2db639d3a0a59d54",
+  "nativeCount": 9,
+  "native": [
+    {
+      "name": "libs/arm64-v8a/libaki_jsbind.so",
+      "elfClass": 2,
+      "machine": 183,
+      "sha256": "10ef2c85cee19eee7fc1d123e7b4627ae3f8245d2590d1cc98817ce3b63d75a1"
+    },
+    {
+      "name": "libs/arm64-v8a/libc++_shared.so",
+      "elfClass": 2,
+      "machine": 183,
+      "sha256": "f69947af100b652e349ae51e4a4888bcc7a327db9085272d318176ef1782bf0f"
+    },
+    {
+      "name": "libs/arm64-v8a/liblinkora_ffmpeg.so",
+      "elfClass": 2,
+      "machine": 183,
+      "sha256": "07b747c09dd05120ae848964a0f70173466f4f7702a15e210c0f4c9b81487fd7"
+    },
+    {
+      "name": "libs/arm64-v8a/liblinkora_ftp.so",
+      "elfClass": 2,
+      "machine": 183,
+      "sha256": "379c772c23d0362e162391582dfbd64a7b45cddfda4e8c128f554be3b27269a4"
+    },
+    {
+      "name": "libs/arm64-v8a/liblinkora_nfs.so",
+      "elfClass": 2,
+      "machine": 183,
+      "sha256": "cdbde81b759a5cd31a7b24c164a26e990511acb6f2879e005a1e8f404e7592fd"
+    },
+    {
+      "name": "libs/arm64-v8a/liblinkora_sftp.so",
+      "elfClass": 2,
+      "machine": 183,
+      "sha256": "115ebf17fe26a4e0c7a0ed4d3cc0545c222d5aec55da037315b55dafd0c879cb"
+    },
+    {
+      "name": "libs/arm64-v8a/liblinkora_smb.so",
+      "elfClass": 2,
+      "machine": 183,
+      "sha256": "eb5b8f6a9a99a909e526bbbe633f716ca5d2b7399d1fb25cb4f4e39f2d210961"
+    },
+    {
+      "name": "libs/arm64-v8a/libmpv.so",
+      "elfClass": 2,
+      "machine": 183,
+      "sha256": "672e98d497199a89e20893979ecec686dee1113bbe1b609c9a9266aa1679bd32"
+    },
+    {
+      "name": "libs/arm64-v8a/libmpv_wrapper.so",
+      "elfClass": 2,
+      "machine": 183,
+      "sha256": "7ecd48d92861f2dad0310c3b716d00a396de376be7bbc54b24a9579a1f805928"
+    }
+  ]
+}

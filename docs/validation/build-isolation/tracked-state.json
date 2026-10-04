@@ -1,0 +1,20 @@
+{
+  "protectedPaths": [
+    "build-profile.json5",
+    "oh-package-lock.json5",
+    "entry/oh-package-lock.json5",
+    "linkora_ffmpeg/oh-package-lock.json5",
+    "entry/src",
+    "linkora_ffmpeg/src/main/cpp/analysis.cpp",
+    "linkora_ffmpeg/src/main/cpp/napi_init.cpp",
+    "linkora_ffmpeg/src/main/ets",
+    "linkora_proxy/src",
+    "linkora_core/src",
+    "linkora_media_probe/src"
+  ],
+  "protectedDiffFromStartingSha": [],
+  "generatedPrebuiltOrBuildBinariesTracked": [],
+  "sourceSha": "ce24be1daf12892bfaa028bcd138fca25116a320",
+  "statusBeforeReportCommit": "M docs/BUILD_ISOLATION_HARDENING_REPORT.md\n?? docs/validation/build-isolation/",
+  "signingProfileByteExactRestored": true
+}
