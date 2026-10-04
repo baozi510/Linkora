@@ -14,6 +14,7 @@ import { FtpPassiveMode, FtpSecurityMode, NetworkAdvancedOptions, NetworkServerD
 import { UpnpDiscoveryScanner } from '../services/UpnpDiscoveryScanner';
 import { NetworkAddressParser, ParsedServerAddress, ParsedWebUrl } from '../models/NetworkAddressParser';
 import { AppColors, AppRadius, AppSpacing, AppTypography, MediaLayout } from '../ui/AppTheme';
+import { RuntimeProfile } from 'entry/RuntimeProfile';
 
 enum NetworkAddStep {
   PROTOCOL = 'protocol',
