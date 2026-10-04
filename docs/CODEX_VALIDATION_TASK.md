@@ -305,6 +305,8 @@ Do not fix the failure.
 
 ## 12. Report and evidence
 
+Remote handoff requirement: the final report/evidence commit must be pushed to the task branch and verified visible remotely before the run is considered complete.
+
 Update:
 
 `docs/FFMPEG_ANALYZER_POLICY_PHASE3_REPORT.md`
@@ -347,4 +349,15 @@ Use one of these conclusions:
 
 Do not merge and do not begin the next implementation phase.
 
-After committing only the authorized report/evidence changes, stop and return the result to GPT.
+After the test commands finish, the round is not handed off until the evidence is remotely visible.
+
+You must:
+
+1. commit only the authorized report/evidence changes;
+2. push that commit to `feat/ffmpeg-analyzer-policy-phase3`;
+3. fetch the remote branch and verify the pushed commit is contained in the remote branch;
+4. report the pushed evidence commit SHA.
+
+If push fails or is unavailable, conclude `BLOCKED — EVIDENCE NOT PUSHED`, preserve the local evidence commit SHA, and do not claim that GPT can review the run.
+
+Only after the evidence commit is visible remotely should you stop and return the result to GPT.

@@ -134,7 +134,20 @@ The validation report records both:
 
 Codex may update only the report/evidence paths authorized by the task. It does not rewrite the task file unless a future workflow explicitly permits that.
 
-After Codex commits evidence, the user returns to GPT. GPT reviews the actual result, fixes source if needed, and updates durable project state.
+A validation round is **not complete merely because commands finished locally**.
+
+Before telling the user that testing is complete, Codex must:
+
+1. update the authorized validation report;
+2. add the sanitized evidence required by the task;
+3. commit only those authorized report/evidence changes;
+4. push that commit to the exact validation branch named by the task;
+5. fetch the remote branch again and verify the remote HEAD contains the pushed evidence commit;
+6. report the pushed evidence commit SHA to the user.
+
+If push is unavailable or rejected, Codex must say `BLOCKED — EVIDENCE NOT PUSHED` and provide the local evidence commit SHA. It must not say the validation is finished/handed off to GPT because GPT cannot review inaccessible local-only evidence.
+
+After the evidence commit is visible on the remote validation branch, the user returns to GPT. GPT reviews the actual result, fixes source if needed, and updates durable project state.
 
 A failed validation run remains historical evidence. A later rerun must not relabel unexecuted items from the older run as PASS.
 
