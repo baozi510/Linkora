@@ -225,6 +225,25 @@ Current work:
 - formal `IMediaProbe` adapters for System and FFmpeg;
 - formal FFmpeg `IThumbnailExtractor` adapter;
 - protocol-agnostic analysis input resolver;
-- simulator comparison matrix with field completeness/correctness/resource diagnostics.
+- simulator functional comparison matrix with field completeness/correctness/error/cleanup and remote access-semantics diagnostics. Performance comparison is deferred to real arm64 device testing.
 
 Production NetworkMediaLoader behavior remains unchanged until policy review.
+
+
+## Performance policy for this phase
+
+Simulator Phase 2 is functional-only.
+
+Do not use x86 simulator data for:
+
+- System-vs-FFmpeg speed ranking;
+- median/p95 latency;
+- throughput;
+- CPU/GPU utilization;
+- memory-efficiency ranking;
+- power/thermal conclusions;
+- final analyzer or playback policy.
+
+Remote byte/range counters may only be used to verify functional random-access behavior and cleanup.
+
+Performance benchmarking and performance-based policy decisions are deferred to real arm64 device testing.
