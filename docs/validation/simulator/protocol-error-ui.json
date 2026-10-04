@@ -1,0 +1,93 @@
+{
+  "smb": {
+    "test-result": {
+      "source": "smb-test-result-layout.json",
+      "text": [
+        "模拟器缺少 Native 传输层：SMB 的配置、数据库和页面流程与正式版一致；连接认证/目录读取需要 arm64 Native transport 真机验证。"
+      ]
+    },
+    "open-result": {
+      "source": "smb-open-result-layout.json",
+      "text": [
+        "SIMULATOR_NATIVE_TRANSPORT_UNAVAILABLE: SMB requires the arm64 native transport."
+      ]
+    }
+  },
+  "sftp": {
+    "test-result": {
+      "source": "sftp-test-result-layout.json",
+      "text": [
+        "模拟器缺少 Native 传输层：SFTP 的配置、数据库和页面流程与正式版一致；连接认证/目录读取需要 arm64 Native transport 真机验证。"
+      ]
+    },
+    "open-result": {
+      "source": "sftp-open-result-layout.json",
+      "text": [
+        "SIMULATOR_NATIVE_TRANSPORT_UNAVAILABLE: SFTP requires the arm64 native transport."
+      ]
+    }
+  },
+  "ftp": {
+    "test-result": {
+      "source": "ftp-test-result-layout.json",
+      "text": [
+        "FTP连接成功：端口连接成功（19221）"
+      ]
+    },
+    "open-result": {
+      "source": "ftp-open-result-layout.json",
+      "text": [
+        "SIMULATOR_NATIVE_TRANSPORT_UNAVAILABLE: FTP requires the arm64 native transport."
+      ]
+    }
+  },
+  "nfs": {
+    "test-result": {
+      "source": "nfs-test-result-layout.json",
+      "text": [
+        "NFS连接成功：端口连接成功（19249）"
+      ]
+    },
+    "open-result": {
+      "source": "nfs-open-result-layout.json",
+      "text": [
+        "SIMULATOR_NATIVE_TRANSPORT_UNAVAILABLE: NFS requires the arm64 native transport."
+      ]
+    }
+  },
+  "forced-mpv-open": {
+    "source": "forced-mpv-open-layout.json",
+    "text": [
+      "LNK-PLAY-007",
+      "失败"
+    ]
+  },
+  "forced-mpv-retry": {
+    "source": "forced-mpv-retry-layout.json",
+    "text": [
+      "LNK-PLAY-007",
+      "失败"
+    ]
+  },
+  "hevc-result": {
+    "source": "hevc-result-layout.json",
+    "text": [
+      "当前设备不支持该媒体",
+      "视频或音频编码超出当前设备的系统解码能力。",
+      "LNK-PLAY-001/5400106",
+      "失败"
+    ]
+  },
+  "wd-wrong-retry-final": {
+    "source": "wd-wrong-retry-final-layout.json",
+    "text": [
+      "服务器要求身份验证：该地址需要登录令牌、Cookie 或账号信息，当前直链没有携带认证信息。"
+    ]
+  },
+  "wd-correct-result": {
+    "source": "wd-correct-result-layout.json",
+    "text": [
+      "WebDAV 连接成功：服务器返回 HTTP 207"
+    ]
+  }
+}

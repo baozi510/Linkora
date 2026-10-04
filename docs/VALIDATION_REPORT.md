@@ -293,3 +293,7 @@ Auto one-shot fallback、失败 candidate duration/tracks/HDR/error 隔离、强
 **Handoff decision: BLOCKED — TOOLCHAIN/DEVICE REQUIRED（具体缺少 arm64 目标设备/部署验证，已安装 SDK 构建可用）。**
 
 已达到 verify PASS 和 Debug/Release arm64 HAP 构建成功的停止条件。提交验证分支及证据供架构审查；不 merge，不继续下一阶段。
+
+## 后续 simulator-validation 结果
+
+后续独立分支 `test/simulator-validation` 的完整报告见 [SIMULATOR_VALIDATION_REPORT.md](SIMULATOR_VALIDATION_REPORT.md)。最新源码 `04814840403b54d8dd0e0e61798be1fb3f8f8da8`：default verify全量PASS，149/149 Hypium及Debug/Release八项HAR/HAP均PASS；simulator build/install与可行runtime循环已执行。FFmpeg8.1.3真实SDK双ABI bootstrap四静态库/headers/manifest均PASS，无FFmpeg patch，尚未接入Analyzer，完整integration exit criteria仍未满足。资源计数、落盘cache、规定AAC本地/HTTPS样本与真机能力缺口明确NOT RUN；交接为 BLOCKED — EMULATOR PLATFORM，不merge、不调Auto、不开发下一阶段。旧段落的结果保持其当时语义，最新证据以该报告为准。

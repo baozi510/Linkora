@@ -1,0 +1,28 @@
+[
+  {
+    "step": "toggle 实验性网络存储",
+    "before": "false"
+  },
+  {
+    "step": "toggle 允许移动网络播放",
+    "before": "false"
+  },
+  {
+    "step": "network toggles after restart",
+    "text": [],
+    "sliders": []
+  },
+  {
+    "step": "toggle 实验性网络存储",
+    "before": "true"
+  },
+  {
+    "step": "toggle 允许移动网络播放",
+    "before": "true"
+  },
+  {
+    "step": "network preferences restored",
+    "text": [],
+    "sliders": []
+  }
+]

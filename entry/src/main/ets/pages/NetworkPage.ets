@@ -8,7 +8,7 @@ import { AppSheetHeader } from '../components/AppSheetHeader';
 import { AppSheetSurface } from '../components/AppSheetSurface';
 import { ConnectionTestPanel } from '../components/ConnectionTestPanel';
 import { AppToolbar } from '../components/AppToolbar';
-import { NetworkProtocolTestRegistry } from '../adapters/NetworkProtocolTestRegistry';
+import { NetworkProtocolTestRegistry } from 'entry/ets/adapters/NetworkProtocolTestRegistry';
 import { FtpPassiveMode, FtpSecurityMode, NetworkAdvancedOptions, NetworkServerDraft,
   NetworkServerEntry, NetworkServerStore, SftpAuthMode, SftpHostKeyPolicy } from '../services/NetworkServerStore';
 import { UpnpDiscoveryScanner } from '../services/UpnpDiscoveryScanner';

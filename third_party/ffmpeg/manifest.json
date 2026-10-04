@@ -1,0 +1,14 @@
+{
+  "name": "FFmpeg",
+  "upstream": "https://github.com/FFmpeg/FFmpeg.git",
+  "version": "8.1.3",
+  "tag": "n8.1.3",
+  "tagObject": "23151b11c75aa44d9ab8db796a53c76acf00f6c0",
+  "commit": "1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7",
+  "licenseProfile": "LGPL-default-no-gpl-no-nonfree",
+  "architectures": ["arm64-v8a", "x86_64"],
+  "libraries": ["libavformat", "libavcodec", "libavutil", "libswscale"],
+  "programs": false,
+  "sharedLibraries": false,
+  "purpose": "Linkora media metadata analysis and software thumbnail frame extraction"
+}

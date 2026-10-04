@@ -1,28 +1,34 @@
 {
   "apiType": "stageMode",
   "buildOption": {
-    "externalNativeOptions": {
-      "path": "./src/main/cpp/CMakeLists.txt",
-      "abiFilters": [
-        "arm64-v8a"
-      ],
-      "arguments": "",
-      "cppFlags": ""
-    },
     "arkOptions": {
       "obfuscation": {
         "ruleOptions": {
           "enable": true,
-          "files": [
-            "./obfuscation-rules.txt"
-          ]
+          "files": ["./obfuscation-rules.txt"]
         }
       }
     }
   },
   "targets": [
     {
-      "name": "default"
+      "name": "default",
+      "source": { "sourceRoots": ["./src/default"] },
+      "config": {
+        "buildOption": {
+          "externalNativeOptions": {
+            "path": "./src/main/cpp/CMakeLists.txt",
+            "abiFilters": ["arm64-v8a"],
+            "arguments": "",
+            "cppFlags": ""
+          }
+        }
+      }
+    },
+    {
+      "name": "simulator",
+      "source": { "sourceRoots": ["./src/simulator"] },
+      "output": { "artifactName": "linkora-simulator" }
     }
   ]
 }

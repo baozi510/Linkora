@@ -1,0 +1,1098 @@
+[
+  {
+    "time": 1791092038563,
+    "port": 19080,
+    "method": "HEAD",
+    "ownFixture": true,
+    "range": null,
+    "receivedBytes": 253
+  },
+  {
+    "time": 1791092038746,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=0-8191",
+    "receivedBytes": 8492
+  },
+  {
+    "time": 1791092038765,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=8192-270335",
+    "receivedBytes": 262451
+  },
+  {
+    "time": 1791092038780,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=270336-532479",
+    "receivedBytes": 262453
+  },
+  {
+    "time": 1791092038798,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=532480-794623",
+    "receivedBytes": 262453
+  },
+  {
+    "time": 1791092038819,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=794624-1056767",
+    "receivedBytes": 262454
+  },
+  {
+    "time": 1791092038832,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=1056768-1318911",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092038849,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=1318912-1581055",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092038867,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=1581056-1843199",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092038906,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=1843200-2105343",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092038947,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=2105344-2367487",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092038970,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=2367488-2629631",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092038984,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=2629632-2891775",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039004,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=2891776-3153919",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039020,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=3153920-3416063",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039035,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=3416064-3678207",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039071,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=3678208-3940351",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039103,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=3940352-4202495",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039174,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=4202496-4464639",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039198,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=4464640-4726783",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039222,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=4726784-4988927",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039241,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=4988928-5251071",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039256,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=5251072-5513215",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039284,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=5513216-5775359",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039300,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=5775360-6037503",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039317,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=6037504-6299647",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039343,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=6299648-6561791",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039360,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=6561792-6823935",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039371,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=6823936-7086079",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039383,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=7086080-7348223",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039393,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=7348224-7610367",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039404,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=7610368-7872511",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039414,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=7872512-8134655",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039424,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=8134656-8396799",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039439,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=8396800-8658943",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039452,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=8658944-8921087",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039466,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=8921088-9183231",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039479,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=9183232-9445375",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039490,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=9445376-9707519",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039505,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=9707520-9969663",
+    "receivedBytes": 262455
+  },
+  {
+    "time": 1791092039515,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=9969664-10231807",
+    "receivedBytes": 262456
+  },
+  {
+    "time": 1791092039526,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=10231808-10493951",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092043849,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=66283018-66545161",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092043865,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=66545162-66807305",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092043879,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=66807306-67069449",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092043893,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=67069450-67331593",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092043908,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=67331594-67593737",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092043919,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=67593738-67855881",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092043939,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=67855882-68118025",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092043953,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=68118026-68380169",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092043995,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=68380170-68642313",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044044,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=68642314-68904457",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044078,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=68904458-69166601",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044090,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=69166602-69428745",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044104,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=69428746-69690889",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044121,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=69690890-69953033",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044136,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=69953034-70215177",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044147,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=70215178-70477321",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044165,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=70477322-70739465",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044177,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=70739466-71001609",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044188,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=71001610-71263753",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044200,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=71263754-71525897",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044216,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=71525898-71788041",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044230,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=71788042-72050185",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044242,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=72050186-72312329",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044254,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=72312330-72574473",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044375,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=72574474-72836617",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044395,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=72836618-73098761",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044411,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=73098762-73360905",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044430,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=73360906-73623049",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044446,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=73623050-73885193",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044470,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=73885194-74147337",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044486,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=74147338-74409481",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044498,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=74409482-74671625",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044536,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=74671626-74933769",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044555,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=74933770-75195913",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044573,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=75195914-75458057",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044585,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=75458058-75720201",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044596,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=75720202-75982345",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044605,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=75982346-76244489",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044616,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=76244490-76506633",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092044626,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=76506634-76768777",
+    "receivedBytes": 262457
+  },
+  {
+    "time": 1791092046337,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=125216723-125478866",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046350,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=125478867-125741010",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046365,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=125741011-126003154",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046383,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=126003155-126265298",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046402,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=126265299-126527442",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046425,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=126527443-126789586",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046437,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=126789587-127051730",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046454,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=127051731-127313874",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046572,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=127313875-127576018",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046585,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=127576019-127838162",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046599,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=127838163-128100306",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046611,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=128100307-128362450",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046625,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=128362451-128624594",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046640,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=128624595-128886738",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046657,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=128886739-129148882",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046674,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=129148883-129411026",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046720,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=129411027-129673170",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046732,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=129673171-129935314",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046741,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=129935315-130197458",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046751,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=130197459-130459602",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046760,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=130459603-130721746",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046769,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=130721747-130983890",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046784,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=130983891-131246034",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046798,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=131246035-131508178",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092046979,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=131508179-131770322",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092047025,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=131770323-132032466",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092047036,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=132032467-132294610",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092047046,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=132294611-132556754",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092047059,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=132556755-132818898",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092047074,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=132818899-133081042",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092047086,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=133081043-133343186",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092047096,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=133343187-133605330",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092047115,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=133605331-133867474",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092047127,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=133867475-134129618",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092047138,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=134129619-134391762",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092047148,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=134391763-134653906",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092047159,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=134653907-134916050",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092047171,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=134916051-135178194",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092047181,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=135178195-135440338",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092047192,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=135440339-135702482",
+    "receivedBytes": 262459
+  },
+  {
+    "time": 1791092088960,
+    "port": 19080,
+    "method": "HEAD",
+    "ownFixture": true,
+    "range": null,
+    "receivedBytes": 248
+  },
+  {
+    "time": 1791092089011,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=0-8191",
+    "receivedBytes": 8487
+  },
+  {
+    "time": 1791092089032,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=8192-270335",
+    "receivedBytes": 262446
+  },
+  {
+    "time": 1791092089048,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=270336-532479",
+    "receivedBytes": 262448
+  },
+  {
+    "time": 1791092089068,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=532480-678830",
+    "receivedBytes": 146655
+  },
+  {
+    "time": 1791092091544,
+    "port": 19080,
+    "method": "HEAD",
+    "ownFixture": true,
+    "range": null,
+    "receivedBytes": 248
+  },
+  {
+    "time": 1791092091699,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=0-8191",
+    "receivedBytes": 8487
+  },
+  {
+    "time": 1791092091723,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=8192-270335",
+    "receivedBytes": 262446
+  },
+  {
+    "time": 1791092091741,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=270336-532479",
+    "receivedBytes": 262448
+  },
+  {
+    "time": 1791092091765,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=532480-678830",
+    "receivedBytes": 146655
+  },
+  {
+    "time": 1791092126942,
+    "port": 19080,
+    "method": "HEAD",
+    "ownFixture": true,
+    "range": null,
+    "receivedBytes": 248
+  },
+  {
+    "time": 1791092126983,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=0-8191",
+    "receivedBytes": 8487
+  },
+  {
+    "time": 1791092127002,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=8192-270335",
+    "receivedBytes": 262446
+  },
+  {
+    "time": 1791092127015,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=270336-532479",
+    "receivedBytes": 262448
+  },
+  {
+    "time": 1791092127029,
+    "port": 19080,
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=532480-678830",
+    "receivedBytes": 146655
+  }
+]

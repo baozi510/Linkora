@@ -1,0 +1,31 @@
+[
+  {
+    "step": "screen webdav-offline",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited"
+    ],
+    "sliders": []
+  },
+  {
+    "step": "WebDAV server stopped",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited"
+    ],
+    "sliders": []
+  },
+  {
+    "step": "WebDAV retry offline",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited"
+    ],
+    "sliders": []
+  },
+  {
+    "step": "WebDAV restored directory",
+    "text": [
+      "Linkora-Simulator-WebDAV-Edited",
+      "0:10"
+    ],
+    "sliders": []
+  }
+]

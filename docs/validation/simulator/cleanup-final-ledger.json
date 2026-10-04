@@ -1,0 +1,24 @@
+[
+  {
+    "step": "deleted Linkora-Simulator-Auto-MKV",
+    "testNames": [
+      "Linkora-Simulator-HTTPS"
+    ]
+  },
+  {
+    "step": "deleted Linkora-Simulator-HTTPS",
+    "testNames": []
+  },
+  {
+    "step": "network deletion after restart",
+    "testNames": []
+  },
+  {
+    "step": "stream deletion after restart",
+    "testNames": []
+  },
+  {
+    "step": "Auto restored",
+    "testNames": []
+  }
+]

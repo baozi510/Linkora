@@ -212,26 +212,27 @@ All of this still requires real DevEco/arm64 target validation.
 
 ## FFmpeg analyzer status
 
-BLOCKED.
+DEPENDENCY BOOTSTRAP IN PROGRESS.
 
-Do not implement against private libmpv-linked FFmpeg symbols.
+Pinned source:
 
-Required first:
+- FFmpeg 8.1.3
+- n8.1.3
+- commit 1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7
 
-- pinned FFmpeg version/revision;
-- reproducible HarmonyOS arm64 build;
-- headers;
-- libavformat;
-- libavcodec;
-- libavutil;
-- libswscale;
-- build manifest/checksums;
-- clean CMake link;
-- smoke tests.
+The repository now contains reproducible source-fetch and HarmonyOS dual-ABI bootstrap scripts for:
+
+- arm64-v8a
+- x86_64
+
+The analyzer itself is still NOT IMPLEMENTED until both ABI builds produce verified libavformat/libavcodec/libavutil/libswscale artifacts.
+
+Never use private libmpv-linked FFmpeg symbols.
 
 Read:
 
-`docs/FFMPEG_INTEGRATION_BLOCKER.md`
+- `docs/FFMPEG_BOOTSTRAP.md`
+- `docs/FFMPEG_INTEGRATION_BLOCKER.md`
 
 ## Claims that require device evidence
 
@@ -361,3 +362,58 @@ Read and follow:
 Do not continue simulator-specific production changes. The available x86_64 emulator cannot install the current arm64-v8a HAP.
 
 Do not merge PR #10 until arm64 runtime evidence has been reviewed.
+
+
+## x86_64 near-production simulator product
+
+Current active simulator branch:
+
+`test/simulator-validation`
+
+It is based on `test/player-architecture-validation` and must not be merged before validation.
+
+The simulator is no longer a System/WebDAV-only product. It intentionally mirrors production business behavior:
+
+- same SettingsPage with Auto/System/MPV
+- same NetworkPage with WebDAV/SMB/SFTP/FTP/NFS
+- same PlaybackEngine
+- same PlaybackBackendSelector
+- same AdaptivePlaybackPort
+- same NetworkDirectoryService
+- same database/config models
+- same MediaProxy
+- exact same shared HTTP/WebDAV providers
+
+Only the final platform boundaries are replaced:
+
+- real arm64 MPV package -> compile-only x86 simulator MPV replacement
+- real SMB/SFTP/FTP/NFS Native storage providers -> explicit simulator unavailable transport provider
+
+This means Auto fallback and native-protocol configuration/error paths can be tested without pretending the real Native implementation ran.
+
+Simulator bundle:
+
+`com.linkora.player`
+
+Read:
+
+- `docs/SIMULATOR_TEST_MANUAL.md`
+- `docs/SIMULATOR_VALIDATION_REPORT.md`
+- `docs/FFMPEG_BOOTSTRAP.md`
+
+Required order:
+
+1. `./scripts/verify.ps1`
+2. `node scripts/check-simulator-product.cjs`
+3. `./scripts/verify-simulator.ps1`
+4. install the x86_64 simulator HAP
+5. execute the near-production simulator manual
+6. build pinned FFmpeg for x86_64 and arm64-v8a if the Native SDK is available
+7. update reports
+8. stop for architecture review
+
+The simulator HAP must never contain real libmpv or production SMB/SFTP/FTP/NFS native libraries.
+
+A future `liblinkora_ffmpeg.so` is the only planned x86 native runtime addition after FFmpeg integration.
+
+Simulator evidence still does not replace ARM64 device validation.

@@ -28,6 +28,9 @@ try {
   & $node (Join-Path $PSScriptRoot 'check-architecture-boundaries.test.cjs')
   if ($LASTEXITCODE -ne 0) { throw 'Architecture guard fixture checks failed.' }
 
+  & $node (Join-Path $PSScriptRoot 'check-simulator-product.cjs')
+  if ($LASTEXITCODE -ne 0) { throw 'Simulator product isolation checks failed.' }
+
   $uiSource = Get-ChildItem -LiteralPath 'entry\src\main\ets' -Recurse -Filter '*.ets'
   $legacyPatterns = @(
     '^\s*@Component\s*$',
