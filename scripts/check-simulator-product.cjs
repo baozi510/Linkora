@@ -12,12 +12,12 @@ for (const target of ['default', 'simulator']) {
 const noopPath = path.join(root, 'entry/src/default/RuntimeDiagnostics.ets');
 if (fs.existsSync(noopPath)) {
   const noop = fs.readFileSync(noopPath, 'utf8');
-  if (/linkora_ffmpeg|FfmpegRuntimeSmoke|NetworkFileProxy|http\./.test(noop)) failures.push('default diagnostics must remain no-op');
+  if (/linkora_ffmpeg|FfmpegRuntimeSmoke|AnalyzerIntegrationSmoke|NetworkFileProxy|http\./.test(noop)) failures.push('default diagnostics must remain no-op');
 }
 const commonFiles = fs.readdirSync(path.join(root, 'entry/src/main/ets'), { recursive: true });
 for (const file of commonFiles.filter(name => name.endsWith('.ets'))) {
   const source = fs.readFileSync(path.join(root, 'entry/src/main/ets', file), 'utf8');
-  if (/linkora_ffmpeg\/Native|FfmpegRuntimeSmoke/.test(source)) failures.push('common source must delegate diagnostics through target boundary: ' + file);
+  if (/linkora_ffmpeg\/Native|FfmpegRuntimeSmoke|AnalyzerIntegrationSmoke/.test(source)) failures.push('common source must delegate diagnostics through target boundary: ' + file);
 }
 
 function read(relative) {

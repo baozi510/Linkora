@@ -1,5 +1,6 @@
 import networkMediaProbeTest from './NetworkMediaProbe.test';
 import ffmpegAnalysisTest from './FfmpegAnalysis.test';
+import mediaAnalysisAdaptersTest from './MediaAnalysisAdapters.test';
 import systemMediaStagesTest from './SystemMediaStages.test';
 import thumbnailPolicyTest from './ThumbnailPolicy.test';
 import networkLinkParserTest from './NetworkLinkParser.test';
@@ -20,6 +21,7 @@ import networkFileProxyTest from './NetworkFileProxy.test';
 
 export default function testsuite(): void {
   ffmpegAnalysisTest();
+  mediaAnalysisAdaptersTest();
   networkLinkParserTest();
   mediaSourceTest();
   architectureContractsTest();

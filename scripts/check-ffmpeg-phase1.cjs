@@ -29,7 +29,14 @@ function load(relative) {
 }
 (async () => {
   assert.ok(fs.existsSync(path.join(root, 'linkora_ffmpeg/Index.ets')), 'Phase1 module public API is missing');
-  load('entry/src/test/FfmpegAnalysis.test.ets').default();
-  for (const test of tests) { await test.body(); console.log('PASS ' + test.name); }
-  console.log(`FFmpeg Phase1 pure tests: ${tests.length}/${tests.length} PASS`);
+  const phase2 = process.argv.includes('--phase2');
+  if (phase2) assert.ok(fs.existsSync(path.join(root, 'entry/src/main/ets/analysis/MediaAnalysisInputResolver.ets')), 'Phase2 resolver implementation is missing');
+  load(phase2 ? 'entry/src/test/MediaAnalysisAdapters.test.ets' : 'entry/src/test/FfmpegAnalysis.test.ets').default();
+  let failures = 0;
+  for (const test of tests) {
+    try { await test.body(); console.log('PASS ' + test.name); }
+    catch (error) { failures++; console.error('FAIL ' + test.name); console.error(error); }
+  }
+  if (failures) throw Error(`${failures}/${tests.length} pure tests failed`);
+  console.log(`${phase2 ? 'Analysis Phase2' : 'FFmpeg Phase1'} pure tests: ${tests.length}/${tests.length} PASS`);
 })().catch(error => { console.error(error); process.exitCode = 1; });

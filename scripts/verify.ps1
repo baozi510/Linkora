@@ -33,6 +33,8 @@ try {
 
   & $node (Join-Path $PSScriptRoot 'check-ffmpeg-phase1.cjs') $StudioRoot
   if ($LASTEXITCODE -ne 0) { throw 'FFmpeg Phase1 pure tests failed.' }
+  & $node (Join-Path $PSScriptRoot 'check-ffmpeg-phase1.cjs') $StudioRoot --phase2
+  if ($LASTEXITCODE -ne 0) { throw 'Analysis Phase2 pure tests failed.' }
   & $node --test (Join-Path $PSScriptRoot 'check-ffmpeg-artifact.test.cjs')
   if ($LASTEXITCODE -ne 0) { throw 'FFmpeg artifact guard tests failed.' }
 

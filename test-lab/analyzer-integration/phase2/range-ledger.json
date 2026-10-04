@@ -1,0 +1,188 @@
+[
+  {
+    "case": "webdav-system",
+    "method": "HEAD",
+    "ownFixture": true,
+    "range": null
+  },
+  {
+    "case": "webdav-system",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=0-8191"
+  },
+  {
+    "case": "webdav-system",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=8192-270335"
+  },
+  {
+    "case": "webdav-system",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=270336-532479"
+  },
+  {
+    "case": "webdav-system",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=532480-794623"
+  },
+  {
+    "case": "webdav-ffmpeg",
+    "method": "HEAD",
+    "ownFixture": true,
+    "range": null
+  },
+  {
+    "case": "webdav-ffmpeg",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=0-262143"
+  },
+  {
+    "case": "webdav-ffmpeg",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=262144-524287"
+  },
+  {
+    "case": "webdav-ffmpeg-thumbnail",
+    "method": "HEAD",
+    "ownFixture": true,
+    "range": null
+  },
+  {
+    "case": "webdav-ffmpeg-thumbnail",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=0-262143"
+  },
+  {
+    "case": "webdav-ffmpeg-thumbnail",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=262144-524287"
+  },
+  {
+    "case": "webdav-ffmpeg-thumbnail",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=17855498-17855626"
+  },
+  {
+    "case": "webdav-ffmpeg-thumbnail",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=524288-786431"
+  },
+  {
+    "case": "webdav-ffmpeg-thumbnail",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=103334-365477"
+  },
+  {
+    "case": "webdav-ffmpeg-thumbnail",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=365478-627621"
+  },
+  {
+    "case": "webdav-ffmpeg-thumbnail",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=11881492-12143635"
+  },
+  {
+    "case": "webdav-ffmpeg-thumbnail",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=627622-889765"
+  },
+  {
+    "case": "webdav-ffmpeg-thumbnail",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=12143636-12405779"
+  },
+  {
+    "case": "webdav-ffmpeg-thumbnail",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=12405780-12667923"
+  },
+  {
+    "case": "webdav-ffmpeg-thumbnail",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=12667924-12930067"
+  },
+  {
+    "case": "webdav-system-thumbnail",
+    "method": "HEAD",
+    "ownFixture": true,
+    "range": null
+  },
+  {
+    "case": "webdav-system-thumbnail",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=0-8191"
+  },
+  {
+    "case": "webdav-system-thumbnail",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=8192-270335"
+  },
+  {
+    "case": "webdav-system-thumbnail",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=270336-532479"
+  },
+  {
+    "case": "webdav-system-thumbnail",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=532480-794623"
+  },
+  {
+    "case": "webdav-system-thumbnail",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=794624-1056767"
+  },
+  {
+    "case": "webdav-system-thumbnail",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=17855498-17855626"
+  },
+  {
+    "case": "webdav-system-thumbnail",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=11881492-12143635"
+  },
+  {
+    "case": "webdav-system-thumbnail",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=12143636-12405779"
+  },
+  {
+    "case": "webdav-system-thumbnail",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=12405780-12667923"
+  },
+  {
+    "case": "webdav-system-thumbnail",
+    "method": "GET",
+    "ownFixture": true,
+    "range": "bytes=12667924-12930067"
+  }
+]
