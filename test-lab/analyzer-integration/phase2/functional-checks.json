@@ -1,0 +1,2386 @@
+{
+  "checks": 352,
+  "passed": 352,
+  "failed": 0,
+  "rows": [
+    {
+      "fixture": "h264.mp4",
+      "engine": "system",
+      "status": "SUCCESS",
+      "completeness": "partial",
+      "errorCode": 0,
+      "access": "random_access_observed"
+    },
+    {
+      "fixture": "h264.mp4",
+      "engine": "ffmpeg",
+      "status": "SUCCESS",
+      "completeness": "complete",
+      "errorCode": 0,
+      "access": "random_access_observed"
+    },
+    {
+      "fixture": "hevc.mkv",
+      "engine": "system",
+      "status": "SUCCESS",
+      "completeness": "partial",
+      "errorCode": 0,
+      "access": "range_available"
+    },
+    {
+      "fixture": "hevc.mkv",
+      "engine": "ffmpeg",
+      "status": "SUCCESS",
+      "completeness": "complete",
+      "errorCode": 0,
+      "access": "range_available"
+    },
+    {
+      "fixture": "main10.mkv",
+      "engine": "system",
+      "status": "SUCCESS",
+      "completeness": "partial",
+      "errorCode": 0,
+      "access": "range_available"
+    },
+    {
+      "fixture": "main10.mkv",
+      "engine": "ffmpeg",
+      "status": "SUCCESS",
+      "completeness": "complete",
+      "errorCode": 0,
+      "access": "range_available"
+    },
+    {
+      "fixture": "hdr10.mkv",
+      "engine": "system",
+      "status": "SUCCESS",
+      "completeness": "partial",
+      "errorCode": 0,
+      "access": "range_available"
+    },
+    {
+      "fixture": "hdr10.mkv",
+      "engine": "ffmpeg",
+      "status": "SUCCESS",
+      "completeness": "complete",
+      "errorCode": 0,
+      "access": "range_available"
+    },
+    {
+      "fixture": "hlg.mkv",
+      "engine": "system",
+      "status": "SUCCESS",
+      "completeness": "partial",
+      "errorCode": 0,
+      "access": "range_available"
+    },
+    {
+      "fixture": "hlg.mkv",
+      "engine": "ffmpeg",
+      "status": "SUCCESS",
+      "completeness": "complete",
+      "errorCode": 0,
+      "access": "range_available"
+    },
+    {
+      "fixture": "multi.mkv",
+      "engine": "system",
+      "status": "SUCCESS",
+      "completeness": "partial",
+      "errorCode": 0,
+      "access": "range_available"
+    },
+    {
+      "fixture": "multi.mkv",
+      "engine": "ffmpeg",
+      "status": "SUCCESS",
+      "completeness": "complete",
+      "errorCode": 0,
+      "access": "range_available"
+    },
+    {
+      "fixture": "subtitle.mkv",
+      "engine": "system",
+      "status": "SUCCESS",
+      "completeness": "partial",
+      "errorCode": 0,
+      "access": "range_available"
+    },
+    {
+      "fixture": "subtitle.mkv",
+      "engine": "ffmpeg",
+      "status": "SUCCESS",
+      "completeness": "complete",
+      "errorCode": 0,
+      "access": "range_available"
+    },
+    {
+      "fixture": "long-gop.mkv",
+      "engine": "system",
+      "status": "SUCCESS",
+      "completeness": "partial",
+      "errorCode": 0,
+      "access": "range_available"
+    },
+    {
+      "fixture": "long-gop.mkv",
+      "engine": "ffmpeg",
+      "status": "SUCCESS",
+      "completeness": "complete",
+      "errorCode": 0,
+      "access": "range_available"
+    },
+    {
+      "fixture": "webdav",
+      "engine": "system",
+      "status": "SUCCESS",
+      "completeness": "partial",
+      "errorCode": 0,
+      "access": "range_available"
+    },
+    {
+      "fixture": "webdav",
+      "engine": "ffmpeg",
+      "status": "SUCCESS",
+      "completeness": "complete",
+      "errorCode": 0,
+      "access": "range_available"
+    }
+  ],
+  "thumbnails": [
+    {
+      "fixture": "h264.mp4-thumbnail",
+      "engine": "ffmpeg",
+      "width": 480,
+      "height": 270,
+      "requestedTimeMs": 2800,
+      "webp": true
+    },
+    {
+      "fixture": "h264.mp4-thumbnail",
+      "engine": "system",
+      "width": 480,
+      "height": 270,
+      "requestedTimeMs": 2800,
+      "webp": true
+    },
+    {
+      "fixture": "hevc.mkv-thumbnail",
+      "engine": "ffmpeg",
+      "width": 480,
+      "height": 270,
+      "requestedTimeMs": 2814,
+      "webp": true
+    },
+    {
+      "fixture": "main10.mkv-thumbnail",
+      "engine": "ffmpeg",
+      "width": 480,
+      "height": 270,
+      "requestedTimeMs": 2814,
+      "webp": true
+    },
+    {
+      "fixture": "hdr10.mkv-thumbnail",
+      "engine": "ffmpeg",
+      "width": 480,
+      "height": 270,
+      "requestedTimeMs": 2814,
+      "webp": true
+    },
+    {
+      "fixture": "hlg.mkv-thumbnail",
+      "engine": "ffmpeg",
+      "width": 480,
+      "height": 270,
+      "requestedTimeMs": 2814,
+      "webp": true
+    },
+    {
+      "fixture": "multi.mkv-thumbnail",
+      "engine": "ffmpeg",
+      "width": 480,
+      "height": 270,
+      "requestedTimeMs": 2814,
+      "webp": true
+    },
+    {
+      "fixture": "multi.mkv-thumbnail",
+      "engine": "system",
+      "width": 480,
+      "height": 270,
+      "requestedTimeMs": 2814,
+      "webp": true
+    },
+    {
+      "fixture": "subtitle.mkv-thumbnail",
+      "engine": "ffmpeg",
+      "width": 480,
+      "height": 270,
+      "requestedTimeMs": 2814,
+      "webp": true
+    },
+    {
+      "fixture": "subtitle.mkv-thumbnail",
+      "engine": "system",
+      "width": 480,
+      "height": 270,
+      "requestedTimeMs": 2814,
+      "webp": true
+    },
+    {
+      "fixture": "long-gop.mkv-thumbnail",
+      "engine": "ffmpeg",
+      "width": 480,
+      "height": 270,
+      "requestedTimeMs": 42014,
+      "webp": true
+    },
+    {
+      "fixture": "long-gop.mkv-thumbnail",
+      "engine": "system",
+      "width": 480,
+      "height": 270,
+      "requestedTimeMs": 42014,
+      "webp": true
+    },
+    {
+      "fixture": "webdav-thumbnail",
+      "engine": "ffmpeg",
+      "width": 480,
+      "height": 270,
+      "requestedTimeMs": 42000,
+      "webp": true
+    },
+    {
+      "fixture": "webdav-thumbnail",
+      "engine": "system",
+      "width": 480,
+      "height": 270,
+      "requestedTimeMs": 42000,
+      "webp": true
+    }
+  ],
+  "randomAccess": {
+    "remoteSize": 17855627,
+    "rangeReads": 11,
+    "rangeBytes": 2621569,
+    "maxOffset": 17855498,
+    "fullSequentialDownload": false
+  },
+  "details": [
+    {
+      "check": "h264.mp4/system/record",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/system/activeSources",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/system/duration",
+      "actual": 4000,
+      "expected": 4000,
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/system/width",
+      "actual": 640,
+      "expected": 640,
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/system/height",
+      "actual": 360,
+      "expected": 360,
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/system/unclaimedAudio",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/system/unclaimedCodec",
+      "actual": "",
+      "expected": "",
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/ffmpeg/record",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/ffmpeg/activeSources",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/ffmpeg/success",
+      "actual": "SUCCESS",
+      "expected": "SUCCESS",
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/ffmpeg/container",
+      "actual": "mov,mp4,m4a,3gp,3g2,mj2",
+      "expected": "mov,mp4,m4a,3gp,3g2,mj2",
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/ffmpeg/duration",
+      "actual": 4000,
+      "expected": 4000,
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/video/count",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/video0/codec",
+      "actual": "h264",
+      "expected": "h264",
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/video0/language",
+      "actual": "und",
+      "expected": "und",
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/video0/profile",
+      "actual": "Constrained Baseline",
+      "expected": "Constrained Baseline",
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/video0/width",
+      "actual": 640,
+      "expected": 640,
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/video0/height",
+      "actual": 360,
+      "expected": 360,
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/video0/frameRate",
+      "actual": 24,
+      "expected": 24,
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/video0/bitDepth",
+      "actual": 8,
+      "expected": 8,
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/video0/pixelFormat",
+      "actual": "yuv420p",
+      "expected": "yuv420p",
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/video0/transfer",
+      "actual": "bt709",
+      "expected": "bt709",
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/video0/colorPrimaries",
+      "actual": "bt709",
+      "expected": "bt709",
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/video0/colorSpace",
+      "actual": "bt709",
+      "expected": "bt709",
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/video0/hdrType",
+      "actual": "sdr",
+      "expected": "sdr",
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/audio/count",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/audio0/codec",
+      "actual": "aac",
+      "expected": "aac",
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/audio0/language",
+      "actual": "eng",
+      "expected": "eng",
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/audio0/channels",
+      "actual": 2,
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/audio0/sampleRate",
+      "actual": 48000,
+      "expected": 48000,
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/audio0/profile",
+      "actual": "LC",
+      "expected": "LC",
+      "passed": true
+    },
+    {
+      "check": "h264.mp4/subtitle/count",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/system/record",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/system/activeSources",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/system/duration",
+      "actual": 4021,
+      "expected": 4021,
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/system/width",
+      "actual": 640,
+      "expected": 640,
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/system/height",
+      "actual": 360,
+      "expected": 360,
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/system/unclaimedAudio",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/system/unclaimedCodec",
+      "actual": "",
+      "expected": "",
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/ffmpeg/record",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/ffmpeg/activeSources",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/ffmpeg/success",
+      "actual": "SUCCESS",
+      "expected": "SUCCESS",
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/ffmpeg/container",
+      "actual": "matroska,webm",
+      "expected": "matroska,webm",
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/ffmpeg/duration",
+      "actual": 4021,
+      "expected": 4021,
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/video/count",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/video0/codec",
+      "actual": "hevc",
+      "expected": "hevc",
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/video0/profile",
+      "actual": "Main",
+      "expected": "Main",
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/video0/width",
+      "actual": 640,
+      "expected": 640,
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/video0/height",
+      "actual": 360,
+      "expected": 360,
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/video0/frameRate",
+      "actual": 24,
+      "expected": 24,
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/video0/bitDepth",
+      "actual": 8,
+      "expected": 8,
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/video0/pixelFormat",
+      "actual": "yuv420p",
+      "expected": "yuv420p",
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/video0/transfer",
+      "actual": "bt709",
+      "expected": "bt709",
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/video0/colorPrimaries",
+      "actual": "bt709",
+      "expected": "bt709",
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/video0/colorSpace",
+      "actual": "bt709",
+      "expected": "bt709",
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/video0/hdrType",
+      "actual": "sdr",
+      "expected": "sdr",
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/audio/count",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/audio0/codec",
+      "actual": "aac",
+      "expected": "aac",
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/audio0/language",
+      "actual": "eng",
+      "expected": "eng",
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/audio0/title",
+      "actual": "Synthetic English",
+      "expected": "Synthetic English",
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/audio0/channels",
+      "actual": 2,
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/audio0/sampleRate",
+      "actual": 48000,
+      "expected": 48000,
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/audio0/profile",
+      "actual": "LC",
+      "expected": "LC",
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv/subtitle/count",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/system/record",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/system/activeSources",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/system/duration",
+      "actual": 4021,
+      "expected": 4021,
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/system/width",
+      "actual": 640,
+      "expected": 640,
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/system/height",
+      "actual": 360,
+      "expected": 360,
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/system/unclaimedAudio",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/system/unclaimedCodec",
+      "actual": "",
+      "expected": "",
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/ffmpeg/record",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/ffmpeg/activeSources",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/ffmpeg/success",
+      "actual": "SUCCESS",
+      "expected": "SUCCESS",
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/ffmpeg/container",
+      "actual": "matroska,webm",
+      "expected": "matroska,webm",
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/ffmpeg/duration",
+      "actual": 4021,
+      "expected": 4021,
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/video/count",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/video0/codec",
+      "actual": "hevc",
+      "expected": "hevc",
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/video0/profile",
+      "actual": "Main 10",
+      "expected": "Main 10",
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/video0/width",
+      "actual": 640,
+      "expected": 640,
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/video0/height",
+      "actual": 360,
+      "expected": 360,
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/video0/frameRate",
+      "actual": 24,
+      "expected": 24,
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/video0/bitDepth",
+      "actual": 10,
+      "expected": 10,
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/video0/pixelFormat",
+      "actual": "yuv420p10le",
+      "expected": "yuv420p10le",
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/video0/transfer",
+      "actual": "bt709",
+      "expected": "bt709",
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/video0/colorPrimaries",
+      "actual": "bt709",
+      "expected": "bt709",
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/video0/colorSpace",
+      "actual": "bt709",
+      "expected": "bt709",
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/video0/hdrType",
+      "actual": "sdr",
+      "expected": "sdr",
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/audio/count",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/audio0/codec",
+      "actual": "aac",
+      "expected": "aac",
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/audio0/language",
+      "actual": "eng",
+      "expected": "eng",
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/audio0/title",
+      "actual": "Synthetic English",
+      "expected": "Synthetic English",
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/audio0/channels",
+      "actual": 2,
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/audio0/sampleRate",
+      "actual": 48000,
+      "expected": 48000,
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/audio0/profile",
+      "actual": "LC",
+      "expected": "LC",
+      "passed": true
+    },
+    {
+      "check": "main10.mkv/subtitle/count",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/system/record",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/system/activeSources",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/system/duration",
+      "actual": 4021,
+      "expected": 4021,
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/system/width",
+      "actual": 640,
+      "expected": 640,
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/system/height",
+      "actual": 360,
+      "expected": 360,
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/system/unclaimedAudio",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/system/unclaimedCodec",
+      "actual": "",
+      "expected": "",
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/ffmpeg/record",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/ffmpeg/activeSources",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/ffmpeg/success",
+      "actual": "SUCCESS",
+      "expected": "SUCCESS",
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/ffmpeg/container",
+      "actual": "matroska,webm",
+      "expected": "matroska,webm",
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/ffmpeg/duration",
+      "actual": 4021,
+      "expected": 4021,
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/video/count",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/video0/codec",
+      "actual": "hevc",
+      "expected": "hevc",
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/video0/profile",
+      "actual": "Main 10",
+      "expected": "Main 10",
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/video0/width",
+      "actual": 640,
+      "expected": 640,
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/video0/height",
+      "actual": 360,
+      "expected": 360,
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/video0/frameRate",
+      "actual": 24,
+      "expected": 24,
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/video0/bitDepth",
+      "actual": 10,
+      "expected": 10,
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/video0/pixelFormat",
+      "actual": "yuv420p10le",
+      "expected": "yuv420p10le",
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/video0/transfer",
+      "actual": "smpte2084",
+      "expected": "smpte2084",
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/video0/colorPrimaries",
+      "actual": "bt2020",
+      "expected": "bt2020",
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/video0/colorSpace",
+      "actual": "bt2020nc",
+      "expected": "bt2020nc",
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/video0/hdrType",
+      "actual": "hdr10",
+      "expected": "hdr10",
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/audio/count",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/audio0/codec",
+      "actual": "aac",
+      "expected": "aac",
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/audio0/language",
+      "actual": "eng",
+      "expected": "eng",
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/audio0/title",
+      "actual": "Synthetic English",
+      "expected": "Synthetic English",
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/audio0/channels",
+      "actual": 2,
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/audio0/sampleRate",
+      "actual": 48000,
+      "expected": 48000,
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/audio0/profile",
+      "actual": "LC",
+      "expected": "LC",
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv/subtitle/count",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/system/record",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/system/activeSources",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/system/duration",
+      "actual": 4021,
+      "expected": 4021,
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/system/width",
+      "actual": 640,
+      "expected": 640,
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/system/height",
+      "actual": 360,
+      "expected": 360,
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/system/unclaimedAudio",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/system/unclaimedCodec",
+      "actual": "",
+      "expected": "",
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/ffmpeg/record",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/ffmpeg/activeSources",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/ffmpeg/success",
+      "actual": "SUCCESS",
+      "expected": "SUCCESS",
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/ffmpeg/container",
+      "actual": "matroska,webm",
+      "expected": "matroska,webm",
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/ffmpeg/duration",
+      "actual": 4021,
+      "expected": 4021,
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/video/count",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/video0/codec",
+      "actual": "hevc",
+      "expected": "hevc",
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/video0/profile",
+      "actual": "Main 10",
+      "expected": "Main 10",
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/video0/width",
+      "actual": 640,
+      "expected": 640,
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/video0/height",
+      "actual": 360,
+      "expected": 360,
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/video0/frameRate",
+      "actual": 24,
+      "expected": 24,
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/video0/bitDepth",
+      "actual": 10,
+      "expected": 10,
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/video0/pixelFormat",
+      "actual": "yuv420p10le",
+      "expected": "yuv420p10le",
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/video0/transfer",
+      "actual": "arib-std-b67",
+      "expected": "arib-std-b67",
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/video0/colorPrimaries",
+      "actual": "bt2020",
+      "expected": "bt2020",
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/video0/colorSpace",
+      "actual": "bt2020nc",
+      "expected": "bt2020nc",
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/video0/hdrType",
+      "actual": "hlg",
+      "expected": "hlg",
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/audio/count",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/audio0/codec",
+      "actual": "aac",
+      "expected": "aac",
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/audio0/language",
+      "actual": "eng",
+      "expected": "eng",
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/audio0/title",
+      "actual": "Synthetic English",
+      "expected": "Synthetic English",
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/audio0/channels",
+      "actual": 2,
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/audio0/sampleRate",
+      "actual": 48000,
+      "expected": 48000,
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/audio0/profile",
+      "actual": "LC",
+      "expected": "LC",
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv/subtitle/count",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/system/record",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/system/activeSources",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/system/duration",
+      "actual": 4021,
+      "expected": 4021,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/system/width",
+      "actual": 640,
+      "expected": 640,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/system/height",
+      "actual": 360,
+      "expected": 360,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/system/unclaimedAudio",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/system/unclaimedCodec",
+      "actual": "",
+      "expected": "",
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/ffmpeg/record",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/ffmpeg/activeSources",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/ffmpeg/success",
+      "actual": "SUCCESS",
+      "expected": "SUCCESS",
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/ffmpeg/container",
+      "actual": "matroska,webm",
+      "expected": "matroska,webm",
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/ffmpeg/duration",
+      "actual": 4021,
+      "expected": 4021,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/video/count",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/video0/codec",
+      "actual": "h264",
+      "expected": "h264",
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/video0/profile",
+      "actual": "Constrained Baseline",
+      "expected": "Constrained Baseline",
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/video0/width",
+      "actual": 640,
+      "expected": 640,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/video0/height",
+      "actual": 360,
+      "expected": 360,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/video0/frameRate",
+      "actual": 24,
+      "expected": 24,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/video0/bitDepth",
+      "actual": 8,
+      "expected": 8,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/video0/pixelFormat",
+      "actual": "yuv420p",
+      "expected": "yuv420p",
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/video0/transfer",
+      "actual": "bt709",
+      "expected": "bt709",
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/video0/colorPrimaries",
+      "actual": "bt709",
+      "expected": "bt709",
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/video0/colorSpace",
+      "actual": "bt709",
+      "expected": "bt709",
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/video0/hdrType",
+      "actual": "sdr",
+      "expected": "sdr",
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/audio/count",
+      "actual": 2,
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/audio0/codec",
+      "actual": "aac",
+      "expected": "aac",
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/audio0/language",
+      "actual": "eng",
+      "expected": "eng",
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/audio0/title",
+      "actual": "Synthetic English",
+      "expected": "Synthetic English",
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/audio0/channels",
+      "actual": 2,
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/audio0/sampleRate",
+      "actual": 48000,
+      "expected": 48000,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/audio0/profile",
+      "actual": "LC",
+      "expected": "LC",
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/audio1/codec",
+      "actual": "aac",
+      "expected": "aac",
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/audio1/language",
+      "actual": "fra",
+      "expected": "fra",
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/audio1/title",
+      "actual": "Synthetic French",
+      "expected": "Synthetic French",
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/audio1/channels",
+      "actual": 2,
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/audio1/sampleRate",
+      "actual": 48000,
+      "expected": 48000,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/audio1/profile",
+      "actual": "LC",
+      "expected": "LC",
+      "passed": true
+    },
+    {
+      "check": "multi.mkv/subtitle/count",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/system/record",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/system/activeSources",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/system/duration",
+      "actual": 4021,
+      "expected": 4021,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/system/width",
+      "actual": 640,
+      "expected": 640,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/system/height",
+      "actual": 360,
+      "expected": 360,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/system/unclaimedAudio",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/system/unclaimedCodec",
+      "actual": "",
+      "expected": "",
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/ffmpeg/record",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/ffmpeg/activeSources",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/ffmpeg/success",
+      "actual": "SUCCESS",
+      "expected": "SUCCESS",
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/ffmpeg/container",
+      "actual": "matroska,webm",
+      "expected": "matroska,webm",
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/ffmpeg/duration",
+      "actual": 4021,
+      "expected": 4021,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/video/count",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/video0/codec",
+      "actual": "h264",
+      "expected": "h264",
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/video0/profile",
+      "actual": "Constrained Baseline",
+      "expected": "Constrained Baseline",
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/video0/width",
+      "actual": 640,
+      "expected": 640,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/video0/height",
+      "actual": 360,
+      "expected": 360,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/video0/frameRate",
+      "actual": 24,
+      "expected": 24,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/video0/bitDepth",
+      "actual": 8,
+      "expected": 8,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/video0/pixelFormat",
+      "actual": "yuv420p",
+      "expected": "yuv420p",
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/video0/transfer",
+      "actual": "bt709",
+      "expected": "bt709",
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/video0/colorPrimaries",
+      "actual": "bt709",
+      "expected": "bt709",
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/video0/colorSpace",
+      "actual": "bt709",
+      "expected": "bt709",
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/video0/hdrType",
+      "actual": "sdr",
+      "expected": "sdr",
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/audio/count",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/audio0/codec",
+      "actual": "aac",
+      "expected": "aac",
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/audio0/language",
+      "actual": "eng",
+      "expected": "eng",
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/audio0/title",
+      "actual": "Synthetic English",
+      "expected": "Synthetic English",
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/audio0/channels",
+      "actual": 2,
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/audio0/sampleRate",
+      "actual": 48000,
+      "expected": 48000,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/audio0/profile",
+      "actual": "LC",
+      "expected": "LC",
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/subtitle/count",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/subtitle0/codec",
+      "actual": "ass",
+      "expected": "ass",
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/subtitle0/language",
+      "actual": "eng",
+      "expected": "eng",
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/subtitle0/title",
+      "actual": "Synthetic ASS",
+      "expected": "Synthetic ASS",
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv/subtitle0/kind",
+      "actual": "text",
+      "expected": "text",
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/system/record",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/system/activeSources",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/system/duration",
+      "actual": 60021,
+      "expected": 60021,
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/system/width",
+      "actual": 640,
+      "expected": 640,
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/system/height",
+      "actual": 360,
+      "expected": 360,
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/system/unclaimedAudio",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/system/unclaimedCodec",
+      "actual": "",
+      "expected": "",
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/ffmpeg/record",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/ffmpeg/activeSources",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/ffmpeg/success",
+      "actual": "SUCCESS",
+      "expected": "SUCCESS",
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/ffmpeg/container",
+      "actual": "matroska,webm",
+      "expected": "matroska,webm",
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/ffmpeg/duration",
+      "actual": 60021,
+      "expected": 60021,
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/video/count",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/video0/codec",
+      "actual": "h264",
+      "expected": "h264",
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/video0/profile",
+      "actual": "Constrained Baseline",
+      "expected": "Constrained Baseline",
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/video0/width",
+      "actual": 640,
+      "expected": 640,
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/video0/height",
+      "actual": 360,
+      "expected": 360,
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/video0/frameRate",
+      "actual": 24,
+      "expected": 24,
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/video0/bitDepth",
+      "actual": 8,
+      "expected": 8,
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/video0/pixelFormat",
+      "actual": "yuv420p",
+      "expected": "yuv420p",
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/video0/transfer",
+      "actual": "bt709",
+      "expected": "bt709",
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/video0/colorPrimaries",
+      "actual": "bt709",
+      "expected": "bt709",
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/video0/colorSpace",
+      "actual": "bt709",
+      "expected": "bt709",
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/video0/hdrType",
+      "actual": "sdr",
+      "expected": "sdr",
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/audio/count",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/audio0/codec",
+      "actual": "aac",
+      "expected": "aac",
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/audio0/language",
+      "actual": "eng",
+      "expected": "eng",
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/audio0/title",
+      "actual": "Synthetic English",
+      "expected": "Synthetic English",
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/audio0/channels",
+      "actual": 2,
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/audio0/sampleRate",
+      "actual": 48000,
+      "expected": 48000,
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/audio0/profile",
+      "actual": "LC",
+      "expected": "LC",
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv/subtitle/count",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "webdav/system/record",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "webdav/system/activeSources",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "webdav/system/duration",
+      "actual": 60021,
+      "expected": 60021,
+      "passed": true
+    },
+    {
+      "check": "webdav/system/width",
+      "actual": 640,
+      "expected": 640,
+      "passed": true
+    },
+    {
+      "check": "webdav/system/height",
+      "actual": 360,
+      "expected": 360,
+      "passed": true
+    },
+    {
+      "check": "webdav/system/unclaimedAudio",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "webdav/system/unclaimedCodec",
+      "actual": "",
+      "expected": "",
+      "passed": true
+    },
+    {
+      "check": "webdav/ffmpeg/record",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "webdav/ffmpeg/activeSources",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "webdav/ffmpeg/success",
+      "actual": "SUCCESS",
+      "expected": "SUCCESS",
+      "passed": true
+    },
+    {
+      "check": "webdav/ffmpeg/container",
+      "actual": "matroska,webm",
+      "expected": "matroska,webm",
+      "passed": true
+    },
+    {
+      "check": "webdav/ffmpeg/duration",
+      "actual": 60021,
+      "expected": 60021,
+      "passed": true
+    },
+    {
+      "check": "webdav/video/count",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "check": "webdav/video0/codec",
+      "actual": "h264",
+      "expected": "h264",
+      "passed": true
+    },
+    {
+      "check": "webdav/video0/profile",
+      "actual": "Constrained Baseline",
+      "expected": "Constrained Baseline",
+      "passed": true
+    },
+    {
+      "check": "webdav/video0/width",
+      "actual": 640,
+      "expected": 640,
+      "passed": true
+    },
+    {
+      "check": "webdav/video0/height",
+      "actual": 360,
+      "expected": 360,
+      "passed": true
+    },
+    {
+      "check": "webdav/video0/frameRate",
+      "actual": 24,
+      "expected": 24,
+      "passed": true
+    },
+    {
+      "check": "webdav/video0/bitDepth",
+      "actual": 8,
+      "expected": 8,
+      "passed": true
+    },
+    {
+      "check": "webdav/video0/pixelFormat",
+      "actual": "yuv420p",
+      "expected": "yuv420p",
+      "passed": true
+    },
+    {
+      "check": "webdav/video0/transfer",
+      "actual": "bt709",
+      "expected": "bt709",
+      "passed": true
+    },
+    {
+      "check": "webdav/video0/colorPrimaries",
+      "actual": "bt709",
+      "expected": "bt709",
+      "passed": true
+    },
+    {
+      "check": "webdav/video0/colorSpace",
+      "actual": "bt709",
+      "expected": "bt709",
+      "passed": true
+    },
+    {
+      "check": "webdav/video0/hdrType",
+      "actual": "sdr",
+      "expected": "sdr",
+      "passed": true
+    },
+    {
+      "check": "webdav/audio/count",
+      "actual": 1,
+      "expected": 1,
+      "passed": true
+    },
+    {
+      "check": "webdav/audio0/codec",
+      "actual": "aac",
+      "expected": "aac",
+      "passed": true
+    },
+    {
+      "check": "webdav/audio0/language",
+      "actual": "eng",
+      "expected": "eng",
+      "passed": true
+    },
+    {
+      "check": "webdav/audio0/title",
+      "actual": "Synthetic English",
+      "expected": "Synthetic English",
+      "passed": true
+    },
+    {
+      "check": "webdav/audio0/channels",
+      "actual": 2,
+      "expected": 2,
+      "passed": true
+    },
+    {
+      "check": "webdav/audio0/sampleRate",
+      "actual": 48000,
+      "expected": 48000,
+      "passed": true
+    },
+    {
+      "check": "webdav/audio0/profile",
+      "actual": "LC",
+      "expected": "LC",
+      "passed": true
+    },
+    {
+      "check": "webdav/subtitle/count",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "h264.mp4-thumbnail/ffmpeg/bounds",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "h264.mp4-thumbnail/ffmpeg/webp",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "h264.mp4-thumbnail/rgba",
+      "actual": "rgba_8888",
+      "expected": "rgba_8888",
+      "passed": true
+    },
+    {
+      "check": "h264.mp4-thumbnail/bytes",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "h264.mp4-thumbnail/system/bounds",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "h264.mp4-thumbnail/system/webp",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv-thumbnail/ffmpeg/bounds",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv-thumbnail/ffmpeg/webp",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv-thumbnail/rgba",
+      "actual": "rgba_8888",
+      "expected": "rgba_8888",
+      "passed": true
+    },
+    {
+      "check": "hevc.mkv-thumbnail/bytes",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "main10.mkv-thumbnail/ffmpeg/bounds",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "main10.mkv-thumbnail/ffmpeg/webp",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "main10.mkv-thumbnail/rgba",
+      "actual": "rgba_8888",
+      "expected": "rgba_8888",
+      "passed": true
+    },
+    {
+      "check": "main10.mkv-thumbnail/bytes",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv-thumbnail/ffmpeg/bounds",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv-thumbnail/ffmpeg/webp",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv-thumbnail/rgba",
+      "actual": "rgba_8888",
+      "expected": "rgba_8888",
+      "passed": true
+    },
+    {
+      "check": "hdr10.mkv-thumbnail/bytes",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv-thumbnail/ffmpeg/bounds",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv-thumbnail/ffmpeg/webp",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv-thumbnail/rgba",
+      "actual": "rgba_8888",
+      "expected": "rgba_8888",
+      "passed": true
+    },
+    {
+      "check": "hlg.mkv-thumbnail/bytes",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv-thumbnail/ffmpeg/bounds",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv-thumbnail/ffmpeg/webp",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv-thumbnail/rgba",
+      "actual": "rgba_8888",
+      "expected": "rgba_8888",
+      "passed": true
+    },
+    {
+      "check": "multi.mkv-thumbnail/bytes",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv-thumbnail/system/bounds",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "multi.mkv-thumbnail/system/webp",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv-thumbnail/ffmpeg/bounds",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv-thumbnail/ffmpeg/webp",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv-thumbnail/rgba",
+      "actual": "rgba_8888",
+      "expected": "rgba_8888",
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv-thumbnail/bytes",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv-thumbnail/system/bounds",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "subtitle.mkv-thumbnail/system/webp",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv-thumbnail/ffmpeg/bounds",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv-thumbnail/ffmpeg/webp",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv-thumbnail/rgba",
+      "actual": "rgba_8888",
+      "expected": "rgba_8888",
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv-thumbnail/bytes",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv-thumbnail/system/bounds",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "long-gop.mkv-thumbnail/system/webp",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "webdav-thumbnail/ffmpeg/bounds",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "webdav-thumbnail/ffmpeg/webp",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "webdav-thumbnail/rgba",
+      "actual": "rgba_8888",
+      "expected": "rgba_8888",
+      "passed": true
+    },
+    {
+      "check": "webdav-thumbnail/bytes",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "webdav-thumbnail/system/bounds",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "webdav-thumbnail/system/webp",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "ffmpegThumbnailCount",
+      "actual": 9,
+      "expected": 9,
+      "passed": true
+    },
+    {
+      "check": "runtimeSummary",
+      "actual": "PASS",
+      "expected": "PASS",
+      "passed": true
+    },
+    {
+      "check": "runtimeFailures",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "finalActiveSources",
+      "actual": 0,
+      "expected": 0,
+      "passed": true
+    },
+    {
+      "check": "ownedServerRemoved",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "webdavAllGETsUseRange",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "webdav70PercentFrameNonzeroOffset",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    },
+    {
+      "check": "webdav70PercentFrameAvoidsFullSequentialDownload",
+      "actual": true,
+      "expected": true,
+      "passed": true
+    }
+  ]
+}
