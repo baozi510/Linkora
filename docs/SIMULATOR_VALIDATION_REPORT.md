@@ -19,7 +19,7 @@
 - HarmonyOS SDK: 26.0.0.105 / API 26
 - Hvigor: 6.26.4
 - ohpm: 26.0.0.630
-- Node: DevEco bundled 24.14.1
+- Node: default 回归实际使用 PATH 24.13.1；Studio bundled 24.14.1 可用。simulator 第三次重试改用 bundled Node 满足 plugin README 要求。
 - Emulator model: emulator；HDC 127.0.0.1:5555
 - Emulator OS/build: OpenHarmony-7.0.0.105
 - Emulator API: 26
@@ -82,8 +82,8 @@ Command:
 ./scripts/verify-simulator.ps1
 ```
 
-- Result: FAIL（attempt 01，PowerShell ParserError；修复后重试待执行）
-- Discovered Seq task:
+- Result: FAIL（attempt 01 ParserError；02 Seq 作用域错误；第三次重试待执行）
+- Discovered Seq task: assembleHapSeq，在项目根 node 注册（tasks 原始输出已保存）。
 - HAP path:
 - HAP SHA256:
 - Bundle: `com.linkora.player`
@@ -288,7 +288,8 @@ Remain NOT RUN regardless of simulator success:
 | Commit | Failure | Root cause | Files | Verification |
 | --- | --- | --- | --- | --- |
 | `1a417bdc91eb516eba267476448a4652085629fd` | Sync / default verify 01：00303038 targets[0].buildOption schema error | Native target option 配置层级不合法，SDK 只接受 config.buildOption | entry/build-profile.json5；check-simulator-product.cjs；本报告 | CLI Sync 02 exit 0，parity PASS；default 全量 02 进行中 |
-| 待本次独立提交 | verify-simulator 01：ParserError line 72 unexpected token Simulator | native .so 检查段被重复/截断，两个 regex 字符串未闭合，finally 和尾部重复 | scripts/verify-simulator.ps1；本报告 | 修复为单个完整 ZIP 检查块，保留 production-native denylist 和 FFmpeg-only whitelist；重试待执行 |
+| `bae6cfd` | verify-simulator 01：ParserError line 72 unexpected token Simulator | native .so 检查段被重复/截断，两个 regex 字符串未闭合，finally 和尾部重复 | scripts/verify-simulator.ps1；本报告 | PowerShell parser PASS；02 成功发现 Seq，随后作用域错误 |
+| 待本次独立提交 | verify-simulator 02：00306054 Task assembleHapSeq was not found | 插件将 Seq 注册在 project root，脚本却 --mode module；tasks 和真实插件源码一致证明作用域错误，尚未执行依赖替换 | scripts/verify-simulator.ps1；本报告 | 改为 project 调用，仍传入 entry@simulator；使用 bundled Node 24.14.1；第三次重试待执行 |
 
 ## 23. Final Assessment
 

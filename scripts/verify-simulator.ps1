@@ -17,7 +17,7 @@ if (-not (Test-Path -LiteralPath $hvigor)) {
 
 $env:DEVECO_SDK_HOME = $sdkRoot
 $env:JAVA_HOME = $javaRoot
-$env:Path = "$(Join-Path $javaRoot 'bin');$env:Path"
+$env:Path = "$(Join-Path $StudioRoot 'tools\node');$(Join-Path $javaRoot 'bin');$env:Path"
 
 Push-Location (Join-Path $PSScriptRoot '..')
 try {
@@ -38,7 +38,7 @@ try {
   }
 
   Write-Host "Using multi-target task: $seqTask"
-  & $hvigor $seqTask --mode module -p module=entry@simulator -p product=simulator -p buildMode=$BuildMode --no-daemon
+  & $hvigor $seqTask --mode project -p module=entry@simulator -p product=simulator -p buildMode=$BuildMode --no-daemon
   if ($LASTEXITCODE -ne 0) {
     throw "Simulator HAP build failed via $seqTask."
   }
