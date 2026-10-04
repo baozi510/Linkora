@@ -1,0 +1,16 @@
+{
+  "sourceSha": "72e74d11a790bd0d258e219e3a8de18f3c59fd17",
+  "workingDirectory": "D:\\Linkora-validation",
+  "command": "& 'C:\\Program Files\\PowerShell\\7\\pwsh.exe' -NoProfile -File scripts/verify.ps1",
+  "invocationWrapper": "artifacts/build-isolation/run-stage.ps1 -Label phase3-initial-default -Target default",
+  "environment": "DevEco bundled Node on PATH; verifier sets existing SDK/JBR environment",
+  "exitCode": 1,
+  "failurePhase": "default verifier static ArkUI output-field check, before Hvigor compilation/test",
+  "sourceFile": "entry/src/main/ets/analysis/NetworkMediaAnalysisCoordinator.ets",
+  "sourceLine": 87,
+  "checkFile": "scripts/verify.ps1",
+  "checkRegexLine": 53,
+  "throwLine": 57,
+  "sourceChangesApplied": false,
+  "furtherBuildOrRuntimeTestsRun": false
+}

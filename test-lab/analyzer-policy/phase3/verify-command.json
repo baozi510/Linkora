@@ -1,0 +1,9 @@
+{
+  "target": "default",
+  "exitCode": 1,
+  "command": "scripts/verify.ps1",
+  "debugCaptured": false,
+  "label": "phase3-initial-default",
+  "endedAt": "2026-10-04T16:13:53.0908280Z",
+  "startedAt": "2026-10-04T16:13:50.0696815Z"
+}

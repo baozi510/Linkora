@@ -1,0 +1,103 @@
+Architecture boundary checks passed.
+✔ generated .test platform imports are outside production roots (63.3939ms)
+✔ core production platform imports fail (46.9126ms)
+✔ core production implementation imports fail (48.6856ms)
+✔ production build directory cannot hide a platform import (47.4763ms)
+✔ module production export entry is also guarded (46.691ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 260.1996
+Simulator product parity/isolation checks passed.
+PASS maps format video audio chapters and field origins
+PASS maps PQ conservatively as metadata HDR10
+PASS maps HLG transfer
+PASS requires explicit Dolby Vision configuration
+PASS does not infer HDR from BT2020 or ten bits alone
+PASS maps text bitmap unknown and subtitle dispositions
+PASS caps arbitrary tag values and total tag bytes
+PASS caps stream and chapter counts
+PASS rejects invalid raw frame byte count
+PASS rejects unbounded frame allocation dimensions
+PASS releases frame idempotently and rejects later reads
+PASS does not cancel unrelated request ids
+PASS isolates identical external ids between wrappers
+PASS rejects duplicate active request ids without replacing state
+PASS close cancels owned work and rejects new requests
+FFmpeg Phase1 pure tests: 15/15 PASS
+PASS review cancellation retains identity when delayed open rejects
+PASS review cancellation retains identity when delayed registration rejects
+PASS review ffmpeg cancellation retains identity when backend rejects
+PASS review ffmpeg close during release suppresses completed metadata until cleanup
+PASS review system cancellation retains identity when backend rejects
+PASS review system close during release suppresses completed metadata until cleanup
+PASS review thumbnail cancellation retains identity when native frame rejects
+PASS review thumbnail close during release suppresses completed pixels until cleanup
+PASS canResolve is pure and rejects unsafe links unresolved local and FFmpeg playlists
+PASS HTTP and remote resolution own proxy sources with idempotent release and stable identity
+PASS registration failure closes once even if registration already took ownership
+PASS late proxy registration after cancellation releases registered source once
+PASS access diagnostics distinguish observed nonsequential source reads
+PASS cancel during late source open releases source without registering
+PASS FFmpeg completeness satisfies list without optional chapters/tags
+PASS FFmpeg completeness satisfies detail without optional chapters/tags
+PASS FFmpeg completeness satisfies advanced without optional chapters/tags
+PASS FFmpeg partial and unavailable reflect requested structural completeness
+PASS maps stable numeric error and releases lease for FF_INVALID_INPUT
+PASS maps stable numeric error and releases lease for FF_OPEN_FAILED
+PASS maps stable numeric error and releases lease for FF_STREAM_INFO_FAILED
+PASS maps stable numeric error and releases lease for FF_NO_VIDEO
+PASS maps stable numeric error and releases lease for FF_DECODER_UNAVAILABLE
+PASS maps stable numeric error and releases lease for FF_DECODE_FAILED
+PASS maps stable numeric error and releases lease for FF_TIMEOUT
+PASS maps stable numeric error and releases lease for FF_CANCELLED
+PASS maps stable numeric error and releases lease for FF_SIZE_REJECTED
+PASS maps stable numeric error and releases lease for FF_CLOSED
+PASS cancel rejects late native success and close waits lease cleanup
+PASS System maps only claimed basic metadata and provenance with requirement completeness
+PASS System unavailable values are not fabricated into usable metadata
+PASS System errors and timeout retain numeric failure state and clean up
+PASS System close cancels active job rejects late result and awaits cleanup
+PASS thumbnail passes requested bounds/time and owns raw output separately from source
+PASS thumbnail error releases source and reports stable cancellation
+PASS thumbnail close cancels active native work discards late pixels and releases once
+PASS comparison distinguishes unclaimed System structure from a true empty stream count
+PASS comparison classifies both missing ffmpeg missing and value differences independently
+PASS production policy keeps LIST System-first and file-like detail FFmpeg-first
+PASS production policy keeps local playlists on System functional path
+PASS LIST accepts complete System result without invoking FFmpeg
+PASS LIST falls back from partial System to complete FFmpeg without merging
+PASS DETAIL falls back to System only when FFmpeg is unusable
+PASS policy cancellation never starts the fallback engine after an active probe settles
+PASS DETAIL keeps usable partial FFmpeg result and does not merge System fields
+Analysis Phase2 pure tests: 45/45 PASS
+✔ accepts only x86 FFmpeg in simulator (0.8432ms)
+✔ rejects mislabeled arm64 ELF in simulator (0.2128ms)
+✔ rejects production native libs even when ELF is x86 (0.1494ms)
+✔ default confirms the complete production native set is AArch64 (0.2653ms)
+✔ rejects missing analyzer and unrecognized ELF (0.1423ms)
+✔ rejects default HAP polluted by simulator dependency state (0.3027ms)
+✔ rejects default with only libaki_jsbind.so missing (0.1905ms)
+✔ rejects default with only libc++_shared.so missing (0.1148ms)
+✔ rejects default with only liblinkora_ffmpeg.so missing (0.1347ms)
+✔ rejects default with only liblinkora_smb.so missing (0.17ms)
+✔ rejects default with only liblinkora_sftp.so missing (0.116ms)
+✔ rejects default with only liblinkora_ftp.so missing (0.1233ms)
+✔ rejects default with only liblinkora_nfs.so missing (0.0943ms)
+✔ rejects default with only libmpv.so missing (0.0881ms)
+✔ rejects default with only libmpv_wrapper.so missing (0.5972ms)
+✔ rejects unknown x86 simulator native library (0.1614ms)
+✔ rejects unknown arm64 production native library (0.2225ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 69.9062
+D:\Linkora-validation\entry\src\main\ets\analysis\NetworkMediaAnalysisCoordinator.ets:87:    onMetadata: (durationMs: number, width: number, height: number, engine: string) => void = () => {}):
