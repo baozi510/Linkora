@@ -3,6 +3,7 @@ import { image } from '@kit.ImageKit';
 import {
   DefaultThumbnailTimePolicy,
   IMediaProbe,
+  IThumbnailExtractor,
   MediaInfo,
   MediaSource,
   ProbeRequirement,
@@ -50,7 +51,7 @@ export class NetworkMediaAnalysisResult {
 export class NetworkMediaAnalysisCoordinator {
   private readonly policy: ProductionMediaAnalysisPolicy = new ProductionMediaAnalysisPolicy();
   private readonly probe: PolicyMediaProbe;
-  private readonly ffmpegThumbnail;
+  private readonly ffmpegThumbnail: IThumbnailExtractor;
   private readonly systemThumbnail: SystemThumbnailFallback;
   private readonly encoder: SystemWebPEncoder = new SystemWebPEncoder();
   private readonly thumbnailPolicy: DefaultThumbnailTimePolicy = new DefaultThumbnailTimePolicy();
