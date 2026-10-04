@@ -1,6 +1,6 @@
 # Simulator Validation Report
 
-> Status: FAIL（首次 default regression 配置阻断，修复/重试进行中）
+> Status: NOT RUN（default/parity/simulator build/安装/冷启动已 PASS；功能矩阵执行中）
 > Branch: `test/simulator-validation`  
 > This report validates the near-production x86_64 simulator product. It does not replace ARM64 device validation.
 
@@ -33,7 +33,7 @@
 - DevEco Project Sync: PASS（CLI Sync 重试 exit 0，四模块 init 完成）；首次 00303038 配置失败已记录，未声称执行 GUI Sync。
 - multi-target plugin resolved: PASS；Hvigor install 下载 7.0.0，pnpm 安装成功。
 - default real mpv dependency resolved: PASS；OHPM 使用真实 1.0.0 依赖，未替换 default。
-- simulator MPV target replacement resolved: NOT RUN
+- simulator MPV target replacement resolved: PASS；Seq 实际运行 OHPM，将本地 stub 注册为 local，包中没有 .so。插件生成当前 target lock，后续 default 回归须正常重新解析真实依赖，不手工改 lock。
 
 ## 4. Production Regression Gate
 
@@ -82,44 +82,46 @@ Command:
 ./scripts/verify-simulator.ps1
 ```
 
-- Result: FAIL（attempt 01 ParserError；02 Seq 作用域错误；第三次重试待执行）
+- Result: PASS / exit 0（attempt 03）；先前两次失败保留日志。
 - Discovered Seq task: assembleHapSeq，在项目根 node 注册（tasks 原始输出已保存）。
-- HAP path:
-- HAP SHA256:
+- HAP path: entry/build/simulator/outputs/simulator/linkora-simulator-unsigned.hap；本地开发签名后 linkora-simulator.hap
+- HAP SHA256: unsigned `bd223c72214aa6f53eafb0d8c06ddeca93c6356c6255c69418d6f8aa15db47f7`；signed `5f11c2b17db94149cea699210cdb06cef91d31965f08af2615a112c77e84b143`
 - Bundle: `com.linkora.player`
-- libmpv packaged: NOT RUN
-- SMB/SFTP/FTP/NFS production native SO packaged: NOT RUN
-- FFmpeg analyzer SO packaged:
-- unknown SO packaged:
+- libmpv packaged: PASS（未打包）
+- SMB/SFTP/FTP/NFS production native SO packaged: PASS（未打包）
+- FFmpeg analyzer SO packaged: PASS（未集成，无 .so）
+- unknown SO packaged: PASS（无 .so）
 - notes:
 
 ## 7. Install / Launch
 
-- target:
-- ABI:
-- install: NOT RUN
-- cold launch: NOT RUN
-- navigation: NOT RUN
-- crash/native loader error:
-- evidence:
+- target: 127.0.0.1:5555
+- ABI: x86_64
+- install: PASS（signed install 02）；unsigned install 01 FAIL / 9568332 install sign info inconsistent，HDC process exit 0 不代表成功。
+- cold launch: PASS；aa force-stop 后 aa start 成功，实际截图显示本地页。
+- navigation: PASS（本地→设置→播放器→串流→网络，以及播放页返回）；其余功能矩阵继续执行。
+- crash/native loader error: 冷启动未观察到；尚无完整稳定性结果。
+- evidence: artifacts/simulator-validation/install-{01,02}.txt、launch.txt、launch.png、launch-layout.json。
+
+已有同 bundle 签名应用；使用本机现有开发签名材料兼容更新，未 uninstall/清空应用数据。临时 signingConfigs 仅在本地构建期间加入，finally 原字节恢复 build-profile；签名材料/密码不打印、不提交，原 D:\Linkora 文件未修改。签名 log 已遮蔽 material 值，二进制仅本地保存。
 
 ## 8. Playback Preference UI
 
 | Check | Result | Notes |
 | --- | --- | --- |
-| Auto visible | NOT RUN | |
-| System visible | NOT RUN | |
-| MPV visible | NOT RUN | |
-| preference persists restart | NOT RUN | |
+| Auto visible | PASS | 实际播放器设置页 layout/screenshot |
+| System visible | PASS | 同页，已选择 System |
+| MPV visible | PASS | 同页，已选择 MPV |
+| preference persists restart | PASS | forced MPV 保存后 aa force-stop/start，截图仍为 MPV 勾选；原始偏好 Auto，测试结束恢复 |
 
 ## 9. Forced MPV Replacement Path
 
 Expected simulator behavior: same production PlaybackEngine/AdaptivePlaybackPort path, then fail only when target-specific MPV package attempts to instantiate native backend.
 
 - configure/open reaches adaptive stack: NOT RUN
-- controlled backend unavailable error: NOT RUN
-- no crash/native SO load: NOT RUN
-- forced MPV does not fallback: NOT RUN
+- controlled backend unavailable error: PASS（forced MPV 打开本地视频出现 LNK-PLAY-007 + 重试；不是 real MPV 播放 PASS）
+- no crash/native SO load: PASS（此 smoke 未 crash；包本身不含 .so）
+- forced MPV does not fallback: PASS（同一个 System 可播放的本地 H264 文件在 forced MPV 明确失败；没有转入 System 播放）
 - resource cleanup: NOT RUN
 
 ## 10. Auto Fallback
@@ -130,7 +132,7 @@ Use at least one MPV-first sample such as MKV.
 - simulator MPV replacement failed at final boundary: NOT RUN
 - one-shot fallback attempted: NOT RUN
 - failed candidate did not leak stale state: NOT RUN
-- System fallback final result:
+- System fallback final result: PASS（Auto + 真实 H264/AAC MKV，60s/640x360、移动色条首帧、播放中；实际 stub 不可实例化，成功 backend 因此为 System）。精确 candidate 次数/瞬时事件未采集，下面 NOT RUN 不能以源码推断改为 PASS。
 - no second fallback: NOT RUN
 
 ## 11. System Playback
@@ -140,6 +142,8 @@ Use at least one MPV-first sample such as MKV.
 | HTTPS H264/AAC MP4 | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | Local H264/AAC MP4 | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 | HEVC/AAC MP4 | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+
+附加已测：本地 album_b_video_03.mp4（原始 fixture ffprobe 为 H264-only，2s，没有 AAC）System 首帧、播放完成、replay、返回 PASS；不能记为上表 H264/AAC。HTTP H264/AAC MKV（生成 fixture）System 能播放，50%/90% UI position 跳至约 30s/56s；暂停/seekDone 后 buffering 状态恢复仍需继续确认，未提前记 PASS。
 
 ## 12. Network Configuration Parity
 
@@ -284,6 +288,12 @@ Remain NOT RUN regardless of simulator success:
 - final Auto performance policy
 
 ## 22. Fixes During Simulator Validation
+
+Runtime progress: WebDAV 实测错误密码拒绝、正确认证 HTTP 207、保存、root/Movies/Action 多级目录、空格文件播放、中文空格文件列表及 H264/AAC MP4 首帧 PASS。WSL IP 对模拟器超时，测试端使用宿主机 TCP→WSL stdio 转发（只转发 test-lab 服务，未修改生产代码）。原数据未删除。
+
+Paused seek 真实 FAIL：暂停于 14s 后 seek 50%/90%，UI 留在 buffering；系统日志已有 BUFFERING_END 和 OnSeekDone(30000/56000)。Engine 将 seek 前的暂停意图覆盖为 BUFFERING，且 END 在 SEEKING 状态被忽略；重复 Slider seek 又保存 SEEKING 为返回状态。新增四个事件顺序/暂停与播放/重复 seek 组合测试，修复前实跑 149 tests / 4 Failure / 145 Pass。最小 bookkeeping 修复不改变 public contract/Auto 策略；default 全量 attempt 03 PASS / exit 0，149/149 Hypium 和八项构建全部通过，之后须 simulator 重建和 runtime 复测。
+
+Refresh 动态新增目录时，列表出现重复 sample 行且暂时遗漏新目录；返回再进入恢复。保留实际 layout，尚未确认 root cause，不先写 PASS。
 
 | Commit | Failure | Root cause | Files | Verification |
 | --- | --- | --- | --- | --- |

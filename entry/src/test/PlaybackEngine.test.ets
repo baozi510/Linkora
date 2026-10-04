@@ -92,6 +92,36 @@ function latest(snapshots: PlaybackSnapshot[]): PlaybackSnapshot {
 
 export default function playbackEngineTest(): void {
   describe('PlaybackEngine', () => {
+    for (const paused of [true, false]) {
+      for (const endBeforeSeekDone of [true, false]) {
+        it(`restoresSeekIntentPaused${paused}EndFirst${endBeforeSeekDone}`, 0, async () => {
+          const snapshots: PlaybackSnapshot[] = [];
+          const ports: FakePlaybackPort[] = [];
+          const engine = new PlaybackEngine((snapshot: PlaybackSnapshot) => snapshots.push(snapshot),
+            async (observer: PlaybackPortObserver) => {
+              const port = new FakePlaybackPort(observer);
+              ports.push(port);
+              return port;
+            });
+          await engine.open(MediaSource.fromLocalDocument('file://seek.mp4'), 'surface');
+          if (paused) await engine.togglePlayback();
+          engine.seek(60000);
+          ports[0].emitBuffering(PortBufferingEvent.START, 0);
+          // Slider input can issue another seek before the first one completes.
+          engine.seek(108000);
+          if (endBeforeSeekDone) ports[0].emitBuffering(PortBufferingEvent.END, 0);
+          ports[0].observer.onSeekComplete(108000);
+          if (!endBeforeSeekDone) {
+            expect(latest(snapshots).status).assertEqual(PlaybackStatus.BUFFERING);
+            ports[0].emitBuffering(PortBufferingEvent.END, 0);
+          }
+          expect(latest(snapshots).status).assertEqual(paused ? PlaybackStatus.PAUSED : PlaybackStatus.PLAYING);
+          expect(latest(snapshots).position).assertEqual(108000);
+          await engine.release();
+        });
+      }
+    }
+
     it('deliversSizeStoredBeforeOpenToNewBackend', 0, async () => {
       const ports: FakePlaybackPort[] = [];
       const engine = new PlaybackEngine(() => {}, async (observer: PlaybackPortObserver) => {

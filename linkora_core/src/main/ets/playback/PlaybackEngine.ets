@@ -117,8 +117,10 @@ export class PlaybackEngine {
     }
     const target: number = Math.max(0, Math.min(Math.round(position), this.duration));
     try {
-      this.statusBeforeSeeking = this.status === PlaybackStatus.BUFFERING ?
-        this.statusBeforeBuffering : this.status;
+      if (this.status !== PlaybackStatus.SEEKING) {
+        this.statusBeforeSeeking = this.status === PlaybackStatus.BUFFERING ?
+          this.statusBeforeBuffering : this.status;
+      }
       this.status = PlaybackStatus.SEEKING;
       port.seek(target);
       this.position = target;
@@ -258,13 +260,21 @@ export class PlaybackEngine {
       if (this.status !== PlaybackStatus.SEEKING) {
         this.status = PlaybackStatus.PLAYING;
       } else {
-        this.statusBeforeSeeking = PlaybackStatus.PLAYING;
+        if (this.statusBeforeSeeking === PlaybackStatus.BUFFERING) {
+          this.statusBeforeBuffering = PlaybackStatus.PLAYING;
+        } else {
+          this.statusBeforeSeeking = PlaybackStatus.PLAYING;
+        }
       }
     } else if (state === PortPlaybackState.PAUSED) {
       if (this.status !== PlaybackStatus.SEEKING) {
         this.status = PlaybackStatus.PAUSED;
       } else {
-        this.statusBeforeSeeking = PlaybackStatus.PAUSED;
+        if (this.statusBeforeSeeking === PlaybackStatus.BUFFERING) {
+          this.statusBeforeBuffering = PlaybackStatus.PAUSED;
+        } else {
+          this.statusBeforeSeeking = PlaybackStatus.PAUSED;
+        }
       }
     } else if (state === PortPlaybackState.COMPLETED) {
       this.status = PlaybackStatus.COMPLETED;
@@ -283,13 +293,20 @@ export class PlaybackEngine {
   private handleBufferingChange(event: PortBufferingEvent, value: number): void {
     if (event === PortBufferingEvent.START && this.status !== PlaybackStatus.BUFFERING) {
       if (this.status === PlaybackStatus.SEEKING) {
-        this.statusBeforeSeeking = PlaybackStatus.BUFFERING;
+        if (this.statusBeforeSeeking !== PlaybackStatus.BUFFERING) {
+          this.statusBeforeBuffering = this.statusBeforeSeeking;
+          this.statusBeforeSeeking = PlaybackStatus.BUFFERING;
+        }
       } else {
         this.statusBeforeBuffering = this.status;
         this.status = PlaybackStatus.BUFFERING;
       }
-    } else if (event === PortBufferingEvent.END && this.status === PlaybackStatus.BUFFERING) {
-      this.status = this.statusBeforeBuffering;
+    } else if (event === PortBufferingEvent.END) {
+      if (this.status === PlaybackStatus.BUFFERING) {
+        this.status = this.statusBeforeBuffering;
+      } else if (this.status === PlaybackStatus.SEEKING && this.statusBeforeSeeking === PlaybackStatus.BUFFERING) {
+        this.statusBeforeSeeking = this.statusBeforeBuffering;
+      }
     } else if (event === PortBufferingEvent.PERCENT) {
       this.bufferedPercent = Math.max(0, Math.min(value, 100));
     } else if (event === PortBufferingEvent.CACHED_DURATION) {
