@@ -30,7 +30,7 @@
 ## 3. Dependency / Sync
 
 - `ohpm install`: PASS / exit 0；正常生成/解析 lock，未手工修改。
-- DevEco Project Sync: FAIL；执行 Studio Hvigor `--sync --no-daemon`（实际 CLI Sync）；00303038 entry targets[0].buildOption 不在合法 schema；无 GUI Sync 结果。
+- DevEco Project Sync: PASS（CLI Sync 重试 exit 0，四模块 init 完成）；首次 00303038 配置失败已记录，未声称执行 GUI Sync。
 - multi-target plugin resolved: PASS；Hvigor install 下载 7.0.0，pnpm 安装成功。
 - default real mpv dependency resolved: PASS；OHPM 使用真实 1.0.0 依赖，未替换 default。
 - simulator MPV target replacement resolved: NOT RUN
@@ -43,12 +43,12 @@ Command:
 ./scripts/verify.ps1
 ```
 
-- Result: FAIL（attempt 01；重试待执行）
-- Hypium:
-- MPV adapter regression:
-- architecture/parity guards:
-- default Debug HAP:
-- default Release HAP:
+- Result: PASS / exit 0（完整 attempt 02）；首次 schema 失败记录保留。
+- Hypium: attempt 02 完整执行 145/145 PASS、0 Failure/Error/Ignore。
+- MPV adapter regression: PASS，5/5
+- architecture/parity guards: PASS；guard fixtures 5/5，parity/isolation PASS
+- default Debug HAP: PASS，unsigned / arm64-v8a；同时三个 Debug HAR PASS。
+- default Release HAP: PASS，unsigned / arm64-v8a；同时三个 Release HAR PASS。
 - notes: 全量入口首个真实错误为 Hvigor test 的 00303038 schema validation，尚未进入 Hypium/build。本地原始日志 artifacts/simulator-validation/default-verify-01.log。已按 SDK schema 将 default native buildOption 移至 targets[0].config.buildOption，仍保持 arm64-v8a；同步 parity guard 的读取/隔离检测路径。
 
 ## 5. Simulator Parity Gate
@@ -59,7 +59,7 @@ Command:
 node scripts/check-simulator-product.cjs
 ```
 
-- Result: NOT RUN
+- Result: PASS（静态检查），输出 `Simulator product parity/isolation checks passed.`；应用 UI/runtime 尚未执行。
 
 Confirm:
 
@@ -82,7 +82,7 @@ Command:
 ./scripts/verify-simulator.ps1
 ```
 
-- Result: NOT RUN
+- Result: FAIL（attempt 01，PowerShell ParserError；修复后重试待执行）
 - Discovered Seq task:
 - HAP path:
 - HAP SHA256:
@@ -287,6 +287,8 @@ Remain NOT RUN regardless of simulator success:
 
 | Commit | Failure | Root cause | Files | Verification |
 | --- | --- | --- | --- | --- |
+| `1a417bdc91eb516eba267476448a4652085629fd` | Sync / default verify 01：00303038 targets[0].buildOption schema error | Native target option 配置层级不合法，SDK 只接受 config.buildOption | entry/build-profile.json5；check-simulator-product.cjs；本报告 | CLI Sync 02 exit 0，parity PASS；default 全量 02 进行中 |
+| 待本次独立提交 | verify-simulator 01：ParserError line 72 unexpected token Simulator | native .so 检查段被重复/截断，两个 regex 字符串未闭合，finally 和尾部重复 | scripts/verify-simulator.ps1；本报告 | 修复为单个完整 ZIP 检查块，保留 production-native denylist 和 FFmpeg-only whitelist；重试待执行 |
 
 ## 23. Final Assessment
 

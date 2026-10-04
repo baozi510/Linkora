@@ -62,21 +62,7 @@ try {
   $zip = [System.IO.Compression.ZipFile]::OpenRead($hap.FullName)
   try {
     $nativeEntries = @($zip.Entries | Where-Object {
-      $_.FullName -match '\.so
-  } finally {
-    $zip.Dispose()
-  }
-
-  Write-Host "Simulator HAP verified: $($hap.FullName)"
-  if ($nativeEntries.Count -eq 0) {
-    Write-Host 'Simulator HAP currently contains no native .so files.'
-  } else {
-    Write-Host 'Simulator HAP native whitelist passed (FFmpeg analyzer only).'
-  }
-} finally {
-  Pop-Location
-}
-
+      $_.FullName -match '\.so$'
     } | ForEach-Object { $_.FullName })
 
     $forbiddenNative = @($nativeEntries | Where-Object {
@@ -88,17 +74,7 @@ try {
     }
 
     $unknownNative = @($nativeEntries | Where-Object {
-      $_ -notmatch 'liblinkora_ffmpeg\.so
-  } finally {
-    $zip.Dispose()
-  }
-
-  Write-Host "Simulator HAP verified: $($hap.FullName)"
-  Write-Host 'No native .so entries were found in the simulator HAP.'
-} finally {
-  Pop-Location
-}
-
+      $_ -notmatch '(^|/)liblinkora_ffmpeg\.so$'
     })
     if ($unknownNative.Count -gt 0) {
       $unknownNative | ForEach-Object { Write-Host "Unexpected native entry: $_" }
@@ -109,7 +85,11 @@ try {
   }
 
   Write-Host "Simulator HAP verified: $($hap.FullName)"
-  Write-Host 'No native .so entries were found in the simulator HAP.'
+  if ($nativeEntries.Count -eq 0) {
+    Write-Host 'Simulator HAP currently contains no native .so files.'
+  } else {
+    Write-Host 'Simulator HAP native whitelist passed (FFmpeg analyzer only).'
+  }
 } finally {
   Pop-Location
 }
