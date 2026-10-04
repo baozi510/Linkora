@@ -47,15 +47,33 @@ Pin/version should remain tied to the repository submodule/vendor state.
 
 ## FFmpeg / libav
 
-Status: NOT YET VENDORED OR REPRODUCIBLY BUILT FOR LINKORA.
+Status: DEPENDENCY BOOTSTRAP IN PROGRESS.
 
-Required libraries for the planned analyzer:
+Pinned source:
+
+- FFmpeg 8.1.3
+- tag: n8.1.3
+- commit: 1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7
+- manifest: third_party/ffmpeg/manifest.json
+
+Planned ABIs:
+
+- arm64-v8a
+- x86_64
+
+Planned analyzer libraries:
 
 - libavformat
 - libavcodec
 - libavutil
 - libswscale
 
-Do not add ffmpeg or ffprobe CLI binaries to the app.
+Initial profile is static, LGPL-oriented, with programs/encoders/muxers/hwaccels disabled.
 
-See FFMPEG_INTEGRATION_BLOCKER.md.
+Do not add ffmpeg or ffprobe CLI binaries to the app.
+Do not use private libmpv-linked FFmpeg symbols.
+
+See:
+
+- docs/FFMPEG_BOOTSTRAP.md
+- docs/FFMPEG_INTEGRATION_BLOCKER.md
