@@ -181,6 +181,7 @@ export default function mediaAnalysisAdaptersTest(): void {
       const ports = new TestInputs(); const probe = new SystemMediaProbeAdapter(resolver(ports), () => backend);
       const result = await probe.probe(file(), ProbeRequirement.LIST);
       expect(result.info).assertEqual(null); expect(result.completeness).assertEqual(ProbeCompleteness.UNAVAILABLE);
+      expect(result.errorCode).assertEqual(AnalysisErrorCode.SYSTEM_FAILED);
       expect(result.fieldOrigins.length).assertEqual(0); expect(backend.closed).assertEqual(1); expect(ports.released).assertEqual(1); await probe.close();
     });
     it('System errors and timeout retain numeric failure state and clean up', 0, async () => {

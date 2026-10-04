@@ -38,6 +38,7 @@ export class SystemMediaProbeAdapter implements IMediaProbe {
       const width = Number.isFinite(data.width) && data.width > 0 ? data.width : 0;
       const height = Number.isFinite(data.height) && data.height > 0 ? data.height : 0;
       const useful = duration > 0 || width > 0 || height > 0;
+      if (!useful) throw new AnalysisError(AnalysisErrorCode.SYSTEM_FAILED);
       const origins: ProbeFieldOrigin[] = [];
       if (duration > 0) origins.push(new ProbeFieldOrigin('durationMs', 'system'));
       if (width > 0) origins.push(new ProbeFieldOrigin('videoTracks.width', 'system'));

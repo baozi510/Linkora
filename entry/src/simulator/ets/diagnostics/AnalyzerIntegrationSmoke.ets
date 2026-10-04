@@ -132,7 +132,8 @@ export class AnalyzerIntegrationSmoke {
           Math.abs(data.size.width / data.size.height - fixture.width / fixture.height) < 0.02 && webp);
         await AnalyzerIntegrationSmoke.emit({ case: fixture.name + '-thumbnail', engine: 'system', status: 'SUCCESS',
           width: data.size.width, height: data.size.height, requestedTimeMs: time, pixelFormat: '' + data.pixelFormat, webp });
-      } finally { await frame?.release(); await probe.close(); await lease.release(); operation.complete(); }
+      } finally { await frame?.release(); await probe.close(); await lease.release(); operation.complete();
+        AnalyzerIntegrationSmoke.check(proxy.diagnostics().activeSources === 0); }
       AnalyzerIntegrationSmoke.check(proxy.diagnostics().activeSources === 0);
     });
   }
