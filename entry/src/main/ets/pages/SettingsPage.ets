@@ -580,14 +580,15 @@ export struct SettingsPage {
           }
         }
         .width('100%')
+        .backgroundColor(AppColors.SURFACE_RAISED)
+        .borderRadius(AppRadius.CONTROL)
+
         if (RuntimeProfile.systemOnlyPlayback()) {
           Text('当前为 x86_64 模拟器验证构建：MPV 与 Native 文件协议已从运行产物隔离。')
             .fontSize(AppTypography.META)
             .fontColor(AppColors.TEXT_MUTED)
             .width('100%')
         }
-        .backgroundColor(AppColors.SURFACE_RAISED)
-        .borderRadius(AppRadius.CONTROL)
 
         Column() {
           this.toggleRow('记住播放位置', '再次打开时从上次位置继续',
