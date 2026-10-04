@@ -89,6 +89,8 @@ check(simulatorPlayback.includes('SystemPlaybackPort'),
   'simulator playback composition must use SystemPlaybackPort');
 check(!simulatorPlayback.includes('AdaptivePlaybackPort') && !simulatorPlayback.includes('MpvPlaybackPort'),
   'simulator playback composition must not reference MPV/adaptive playback');
+check(simulatorPlayback.includes('NetworkPlaybackSourceResolver'),
+  'simulator System playback must preserve REMOTE_FILE -> MediaProxy resolution');
 
 const defaultPlayback = read('entry/src/default/PlaybackComposition.ets');
 check(defaultPlayback.includes('AdaptivePlaybackPort'),
