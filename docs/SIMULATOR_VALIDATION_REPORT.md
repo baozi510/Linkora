@@ -86,7 +86,7 @@ Command:
 - Discovered Seq task:
 - HAP path:
 - HAP SHA256:
-- Bundle: `com.linkora.player.simulator`
+- Bundle: `com.linkora.player`
 - libmpv packaged: NOT RUN
 - SMB/SFTP/FTP/NFS production native SO packaged: NOT RUN
 - FFmpeg analyzer SO packaged:
