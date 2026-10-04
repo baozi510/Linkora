@@ -1,7 +1,7 @@
 # Codex Validation Task
 
 > State: READY
-> Task ID: phase3-rerun-3b-isolated-checkout
+> Task ID: phase3-rerun-3c-eol-self-heal
 > Repository: `baozi510/Linkora`
 > Branch: `feat/ffmpeg-analyzer-policy-phase3`
 > Implementation source SHA: `15db3f8a3e87f75edc209c1919f944f39c0b9fcb`
@@ -9,57 +9,46 @@
 
 ## 1. Start rule
 
-This file is the only current validation dispatch.
+This is the only current validation dispatch. Do not rely on any previous Codex conversation.
 
-Do not rely on any previous Codex conversation.
+The user's existing local workspace is not the validation workspace. If it is dirty or on another branch, leave it completely untouched: do not stash, reset, clean, restore, checkout over, or write files there.
 
-The user's existing local workspace is **not required** to already be on the validation branch or be clean.
-
-If the current workspace is on another branch (for example `main`) or contains uncommitted work:
-
-- do **not** stash it;
-- do **not** reset it;
-- do **not** clean it;
-- do **not** checkout another branch over it;
-- leave it completely untouched.
-
-Instead, create or reuse a **separate isolated validation clone/worktree** and perform all validation there.
-
-If an existing validation checkout is itself dirty, do not destroy its work. Create another clean isolated validation checkout.
+Create or reuse a separate isolated validation clone/worktree.
 
 In the isolated validation checkout:
 
-1. fetch the repository;
-2. check out the remote branch `feat/ffmpeg-analyzer-policy-phase3`;
-3. confirm the isolated checkout's `git status` is clean;
+1. fetch `feat/ffmpeg-analyzer-policy-phase3`;
+2. check out the current remote branch HEAD;
+3. confirm the validation checkout is clean before dependency installation;
 4. record the actual validation checkout HEAD;
-5. confirm `15db3f8a3e87f75edc209c1919f944f39c0b9fcb` is an ancestor of that HEAD;
-6. run:
+5. confirm `15db3f8a3e87f75edc209c1919f944f39c0b9fcb` is an ancestor of HEAD;
+6. inspect:
 
 ```powershell
 git diff --name-only 15db3f8a3e87f75edc209c1919f944f39c0b9fcb..HEAD
 ```
 
-The only permitted changed paths after the implementation source SHA are:
+Every path after the implementation source SHA must be inside this allowlist:
 
 ```text
 docs/AI_WORKFLOW.md
 docs/CODEX_VALIDATION_TASK.md
+docs/SESSION_HANDOFF.md
+docs/IMPLEMENTATION_STATUS.md
+docs/FFMPEG_ANALYZER_POLICY_PHASE3_REPORT.md
+test-lab/analyzer-policy/phase3/**
 ```
 
-No other path is allowed.
+No ArkTS/C/C++, test script, build profile, package manifest, lockfile, CMake/native source, or other unrelated path may differ after the implementation source SHA.
 
-If any production source, test script, build profile, lockfile, report, evidence or unrelated document changed after the implementation source SHA, **STOP** and report the mismatch. Do not guess which revision to test.
+If any non-allowlisted path appears, STOP and report the mismatch.
 
-The validation checkout HEAD may therefore contain docs-only workflow/dispatch commits ahead of the implementation source SHA. Record both the implementation source SHA and actual validation checkout SHA in the final report.
+Record both:
+
+- implementation source SHA;
+- actual validation checkout SHA.
 
 Do not modify this task file.
-
-Important distinction:
-
-- dirty/unrelated **user workspace** -> preserve it and use an isolated validation checkout;
-- dirty **validation checkout** -> do not test there; create another clean validation checkout or stop if that is impossible;
-- source/HEAD mismatch beyond the explicitly allowed docs-only paths -> STOP.
 
 ## 2. Required reading
 
@@ -75,63 +64,141 @@ Read completely, in this order:
 8. `docs/CODEX_PHASE3_FUNCTIONAL_VALIDATION.md`
 9. `docs/FFMPEG_ANALYZER_POLICY_PHASE3_REPORT.md`
 
-Historical validation results are history only. Do not reuse an older PASS for an item not executed in this round.
+Historical failed/blocked runs are evidence only. Never splice their partial PASS items into this run.
 
-## 3. What changed since the previous failed rerun
+## 3. What this rerun is validating
 
-The previous Codex rerun stopped because the desktop `check-network-media-list.cjs` VM tried to resolve the Harmony target alias `entry/AnalysisComposition` as a root file.
+Implementation source remains unchanged at:
 
-ChatGPT review made three relevant corrections:
+`15db3f8a3e87f75edc209c1919f944f39c0b9fcb`
 
-1. The desktop Loader/cache harness now mocks `NetworkMediaAnalysisCoordinator` at the Loader boundary instead of loading target-specific analyzer composition/NAPI code.
-2. `HarmonyAnalysisInputs.openRemote()` again captures the remote native setup-settlement promise and awaits late setup cleanup on failure, preserving the pre-Phase-3 queue/lifecycle guarantee.
-3. Timeout/cancellation regression semantics now require that a cancelled analysis cannot publish a late partial result.
+The previous run stopped before `scripts/verify.ps1` because Windows `ohpm install` rewrote exactly four lockfiles from LF to CRLF.
 
-SFTP trust semantics remain:
+Uploaded evidence proves all four had identical normalized Git blobs/content. GPT reviewed that as non-semantic validation-environment drift.
 
-- `MediaSource.fingerprint` is media/cache identity only;
-- the per-open SFTP fingerprint override is empty;
-- persisted SFTP host-key trust remains owned by `NetworkServerEntry.advancedOptions.sftpFingerprint`.
+This rerun must validate the actual Phase 3 source after safely self-healing that exact EOL-only case when it recurs.
 
-No System/FFmpeg performance policy, playback routing, field merger or Direct I/O change was made.
+Phase 3 production policy remains:
 
-## 4. Codex permissions
+- LIST: System first, FFmpeg controlled fallback for resolvable file-like media;
+- DETAIL / ADVANCED: FFmpeg first, System fallback only when FFmpeg is unusable;
+- no System+FFmpeg field merger;
+- file-like remote thumbnail: FFmpeg first, existing System fallback;
+- HLS / DASH / LOCAL_DOCUMENT: System-only;
+- no performance-derived routing;
+- playback routing unchanged.
+
+## 4. Permissions
 
 Allowed:
 
-- create/reuse a separate isolated validation clone/worktree without modifying the user's unrelated dirty workspace;
+- create/reuse an isolated validation clone/worktree;
 - run builds/tests;
-- install/run the supported simulator or device when required by the Phase 3 runbook;
+- install/run the supported simulator/device when required by the runbook;
 - collect sanitized evidence;
 - update `docs/FFMPEG_ANALYZER_POLICY_PHASE3_REPORT.md`;
-- add/update evidence only under `test-lab/analyzer-policy/phase3/`.
+- add a new evidence subdirectory under `test-lab/analyzer-policy/phase3/`;
+- perform the narrowly defined EOL-only validation-workspace cleanup in section 5.
 
 Forbidden:
 
-- ArkTS/C/C++ production edits;
-- test-script or test-expectation edits;
-- build-profile/lockfile edits;
-- architecture changes;
+- production ArkTS/C/C++ edits;
+- test-script/test-expectation edits;
+- package manifest/build profile/CMake edits;
+- semantic lockfile edits;
+- architecture/policy changes;
 - bypassing a failed gate;
-- changing playback/analyzer policy;
 - modifying `docs/CODEX_VALIDATION_TASK.md`;
-- merging branches.
+- force-pushing or merging.
 
-If a source/test-infrastructure change is required, stop and return evidence to GPT.
+If a source/test-infrastructure change is required, STOP and return evidence to GPT.
 
-## 5. Fresh default gate
+## 5. Dependency installation and EOL-only self-heal
 
-Use a clean validation checkout.
-
-Run normal dependency resolution:
+From a clean isolated validation checkout, record pre-install state and run:
 
 ```powershell
 ohpm install
 ```
 
-Confirm tracked lockfiles remain unchanged.
+The command itself must succeed.
 
-Then run the full default verifier exactly as the project requires:
+Then inspect the tracked worktree.
+
+### 5.1 If the checkout remains clean
+
+Proceed directly to section 6.
+
+### 5.2 If the checkout becomes dirty
+
+The only self-healable changed tracked paths are exactly these lockfiles:
+
+```text
+entry/oh-package-lock.json5
+linkora_ffmpeg/oh-package-lock.json5
+linkora_proxy/oh-package-lock.json5
+oh-package-lock.json5
+```
+
+No additional tracked path may be changed.
+
+For each changed allowlisted lockfile, prove all of the following before restoring anything:
+
+1. the HEAD blob exists;
+2. the worktree file's Git-normalized blob equals `HEAD:<path>`;
+3. CRLF→LF normalized bytes are identical to the HEAD content;
+4. line content is equal;
+5. there is no dependency/version/checksum/graph/comment/content change;
+6. `git diff` has no semantic content delta;
+7. EOL inspection is consistent with the known case (repository index LF, worktree CRLF, attribute `text eol=lf`) when the drift manifests.
+
+A valid blob check may use the equivalent of:
+
+```powershell
+$headBlob = (git rev-parse "HEAD:<path>").Trim()
+$workBlob = (git hash-object --path="<path>" "<path>").Trim()
+```
+
+and must establish `$headBlob -eq $workBlob`.
+
+Also preserve evidence equivalent to:
+
+```powershell
+git ls-files --eol -- <lockfiles>
+git diff --exit-code -- <lockfiles>
+```
+
+If **any** normalized blob differs, any semantic content differs, any extra tracked path changed, or the situation cannot be proven to be EOL-only:
+
+**STOP. Do not restore the files.**
+
+If and only if every check passes, Codex is explicitly authorized to restore only the affected allowlisted lockfiles in the isolated validation checkout:
+
+```powershell
+git restore --source=HEAD --worktree -- <affected lockfiles>
+```
+
+Then verify:
+
+```powershell
+git status --porcelain=v1
+```
+
+is clean.
+
+Record the EOL drift, proof and restore in this run's evidence.
+
+Do not commit the restored files.
+
+Do not rerun `ohpm install` merely because those EOL-only files were restored; dependency installation already succeeded.
+
+If restore does not return the validation checkout to clean state, STOP.
+
+This permission applies only to the isolated validation checkout, never to the user's unrelated workspace.
+
+## 6. Fresh default gate
+
+After section 5 ends with a clean validation checkout, run the complete default gate:
 
 ```powershell
 ./scripts/verify.ps1
@@ -141,223 +208,240 @@ Do not substitute individual commands for this gate.
 
 Record fresh results for:
 
-- architecture boundary checks;
+- architecture boundaries;
 - architecture guard fixtures;
 - simulator product static isolation;
-- FFmpeg pure suite;
-- analyzer adapter/policy pure suite;
+- FFmpeg pure suite and exact count;
+- analyzer adapter/policy pure suite and exact count;
 - native artifact guard fixtures;
 - ArkUI migration/static guard;
 - persistence regression;
 - HTTP range/System probe regression;
 - network media list/cache/lifecycle regression;
-- MPV adapter event-mapping regression;
-- actual Hvigor Hypium execution and exact test count;
+- MPV event-mapping regression;
+- actual Hvigor Hypium execution and exact count;
 - Debug/Release HAR builds;
 - Debug/Release default HAP builds;
-- exact production AArch64 native-library/ABI audit;
+- exact AArch64 production native-library/ABI audit;
 - final verifier completion marker.
 
-Specific regression requirements introduced by this review:
+Specific regressions that must be exercised by the default gate:
 
-- `check-network-media-list.cjs` must reach its normal completion marker instead of failing module resolution;
-- the queued Loader job must not advance while a failed native setup is still completing late cleanup;
-- a cancelled analysis must not publish a late partial metadata result;
-- all opened test sources/readers must still close;
-- the media/cache fingerprint must not be used as an SFTP host-key override.
+- desktop Loader/cache harness reaches its normal completion marker;
+- target-specific `entry/AnalysisComposition` no longer breaks that desktop harness;
+- queued Loader job waits for failed native setup's late cleanup;
+- cancelled analysis cannot publish late partial metadata;
+- opened test readers/sources close;
+- media/cache fingerprint is not used as SFTP host-key override.
 
-If the full default verifier fails, apply the stop condition in section 11.
+If `scripts/verify.ps1` fails, STOP and report exact evidence. Do not fix it.
 
-## 6. Simulator -> immediate default isolation gate
+## 7. Simulator -> immediate default isolation gate
 
-Only after the fresh default verifier fully passes:
+Only after section 6 fully passes:
 
 ```powershell
 ./scripts/verify-simulator.ps1
 ```
 
-Verify the simulator artifact rules from the existing runbook.
+Verify the simulator artifact/ABI/native whitelist requirements from the runbook.
 
-Immediately after simulator verification, **without a manual `ohpm install`**, run:
+Immediately afterward, without a manual `ohpm install`, run:
 
 ```powershell
 ./scripts/verify.ps1
 ```
 
-The immediate default verification must pass and restore/retain the production dependency/native set correctly.
+The immediate post-simulator default gate must pass.
 
-If either gate fails, stop.
+If simulator verification or the immediate default rerun fails, STOP.
 
-## 7. Phase 3 functional policy
+If a dependency-management step inside the official scripts again causes the exact proven LF→CRLF-only lockfile drift, the same section 5 self-heal rule may be applied only after the script finishes and only if the task/runbook does not require inspecting that dirty state as a failure itself. Record it explicitly. Any semantic drift still requires STOP.
 
-After the build gates pass, execute every achievable case in:
+## 8. Phase 3 policy validation
 
-`docs/CODEX_PHASE3_FUNCTIONAL_VALIDATION.md`
+After build gates pass, execute every achievable case in `docs/CODEX_PHASE3_FUNCTIONAL_VALIDATION.md`.
 
-At minimum preserve fresh evidence for:
+Fresh evidence must distinguish pure/static/build/runtime scopes.
 
 ### Probe policy
 
-- LIST System COMPLETE -> no FFmpeg invocation;
+Verify:
+
+- LIST System COMPLETE -> no FFmpeg call;
 - LIST System incomplete/unusable -> FFmpeg controlled fallback;
 - DETAIL FFmpeg COMPLETE -> FFmpeg result;
 - DETAIL usable FFmpeg PARTIAL -> keep FFmpeg partial, no System merge;
 - DETAIL FFmpeg unusable -> System fallback;
-- ADVANCED follows the same functional contract;
-- cancellation must not start a later fallback engine;
+- ADVANCED contract with actual ADVANCED execution where available;
+- cancellation does not start a later fallback;
 - no field merger.
 
-Do not relabel DETAIL coverage as ADVANCED coverage when ADVANCED execution was not actually run.
+Do not relabel DETAIL evidence as ADVANCED execution.
 
 ### Thumbnail policy
 
-For resolvable file-like remote media:
+For resolvable file-like remote media verify, where environment permits:
 
 - FFmpeg thumbnail first;
 - FFmpeg raw frame -> common WebP encoder/cache;
-- natural FFmpeg failure -> existing System thumbnail fallback;
+- natural FFmpeg failure -> existing System fallback;
 - both engines unavailable/fail -> no invalid image persisted;
-- metadata must remain useful when thumbnail generation fails where the production contract allows it.
+- metadata remains useful when thumbnail generation fails according to contract.
 
 HLS / DASH / LOCAL_DOCUMENT remain System-only.
 
-### SFTP regression
+### SFTP ownership
 
-Confirm:
+Verify:
 
-- no `MediaSource.fingerprint` -> SFTP host-key use;
-- persisted SFTP trust is still read from `NetworkServerEntry.advancedOptions.sftpFingerprint`;
-- WebDAV/SMB/FTP/NFS behavior is not changed by this fix.
+- `MediaSource.fingerprint` is never used as SFTP host-key fingerprint;
+- the analysis open path leaves the per-open SFTP trust override empty;
+- persisted trust remains `NetworkServerEntry.advancedOptions.sftpFingerprint`;
+- WebDAV/SMB/FTP/NFS are not semantically changed by this correction.
 
-## 8. Production flow/runtime
+## 9. Production flow/runtime
 
-Use the real production Network page/list -> `NetworkMediaLoader` -> `NetworkMediaAnalysisCoordinator` path where the runbook/environment makes it available.
+Use the real production Network page/list -> `NetworkMediaLoader` -> `NetworkMediaAnalysisCoordinator` path where the environment permits.
 
-Required production cases remain those in the Phase 3 runbook, including:
+Required cases remain the Phase 3 runbook cases, including:
 
 - WebDAV H.264/AAC MP4;
 - WebDAV HEVC/MKV;
-- metadata engine result;
-- thumbnail engine result;
-- new WebP persistence;
+- duration/width/height;
+- `metadataEngine`;
+- `thumbnailEngine`;
+- WebP persistence;
 - cache reopen;
-- cancellation/refresh/stale-result rejection;
-- proxy/source cleanup;
 - natural thumbnail fallback;
 - both-thumbnail-engines-unavailable behavior;
-- 20-cycle lifecycle.
+- navigate-away/refresh/stale-generation rejection;
+- proxy/source cleanup;
+- 20-cycle lifecycle;
+- HLS/DASH System-only;
+- LOCAL_DOCUMENT System-only.
 
-If no suitable simulator/device is available, report affected runtime items as BLOCKED or NOT RUN according to the runbook. Do not promote static/pure tests into runtime PASS.
+If a required simulator/device is genuinely unavailable, classify affected runtime items as BLOCKED or NOT RUN exactly as the runbook defines. Do not promote pure/static evidence into runtime PASS.
 
-Do not start/modify unrelated user environments or services merely to manufacture a PASS.
+Do not alter unrelated local services/workspaces just to manufacture runtime evidence.
 
-## 9. Security
+## 10. Security
 
-Inspect fresh logs/evidence for accidental exposure of:
+Inspect fresh committed evidence/logs for leakage of:
 
 - Authorization;
 - Cookie;
-- password/private credential;
+- passwords/private credentials;
 - proxy token;
-- sensitive full upstream URL/path.
+- sensitive full upstream URL/path;
+- signing material.
 
-The new production analysis log should expose only safe analysis diagnostics such as:
+Production analysis logs should expose only safe analysis fields such as:
 
-- metadataEngine;
-- thumbnailEngine;
-- thumbnailPlan.
+- `metadataEngine`;
+- `thumbnailEngine`;
+- `thumbnailPlan`.
 
-Do not commit signing material, credentials, private URLs or raw secrets.
+Sanitize evidence before commit.
 
-## 10. Performance exclusion
+## 11. Performance exclusion
 
-This round is functional validation only.
+This is functional validation only.
 
 Do not collect or interpret System-vs-FFmpeg:
 
-- latency ranking;
-- median/p95;
+- median/p95 or latency ranking;
 - throughput ranking;
 - CPU/GPU ranking;
 - memory-efficiency ranking;
-- power;
-- thermal.
+- power/thermal conclusions.
 
-Performance policy remains deferred to a real arm64 device.
+x86 simulator evidence must not be used for performance policy.
 
-Incidental command durations are not benchmark evidence.
+Performance remains deferred to real arm64 hardware.
 
-## 11. Stop conditions
+## 12. Stop conditions
 
-Stop immediately and write evidence if any of these occurs:
+STOP immediately when:
 
+- source/HEAD safety check fails;
+- dependency installation fails;
+- post-install drift is not strictly proven EOL-only under section 5;
+- EOL restore fails to return the isolated validation checkout to clean state;
 - `scripts/verify.ps1` fails;
 - simulator verification fails;
 - immediate post-simulator default verification fails;
-- a policy/fallback order violates the Phase 3 contract;
-- cancellation starts/publishes work from a later/stale generation;
-- common WebP encoding/fallback behavior regresses;
-- production NetworkMediaLoader/cache behavior regresses;
-- a source/test-infrastructure modification would be required;
-- branch/source safety checks in section 1 do not match.
+- policy/fallback behavior violates the contract;
+- cancellation/stale-generation behavior violates the contract;
+- WebP/cache behavior regresses;
+- production Loader/cache/lifecycle behavior regresses;
+- any source/test-infrastructure edit would be required.
 
-Do not fix the failure.
+Do not fix a stopped failure.
 
-## 12. Report and evidence
-
-Remote handoff requirement: the final report/evidence commit must be pushed to the task branch and verified visible remotely before the run is considered complete.
+## 13. Report and evidence
 
 Update:
 
 `docs/FFMPEG_ANALYZER_POLICY_PHASE3_REPORT.md`
 
-Store fresh sanitized evidence under a new subdirectory of:
+Add fresh sanitized evidence under a new subdirectory:
 
 `test-lab/analyzer-policy/phase3/`
 
 The report must record:
 
 - task ID;
-- implementation source SHA `15db3f8a3e87f75edc209c1919f944f39c0b9fcb`;
+- implementation source SHA;
 - actual validation checkout SHA;
-- isolated validation checkout path/worktree identity;
-- confirmation that any unrelated dirty user workspace was left untouched;
-- exact commands;
-- exit codes;
-- actual Hypium count if executed;
-- build/artifact results;
+- isolated checkout path/worktree identity;
+- proof the unrelated user workspace was left untouched;
+- exact commands and exit codes;
+- any EOL-only normalization proof/restore;
+- actual pure/Hypium counts;
+- build/artifact/ABI results;
 - functional/runtime results;
 - environment/device availability;
 - failures and root-cause assessment when supported;
-- items NOT RUN / NOT APPLICABLE / BLOCKED;
-- confirmation that protected production/test/build files were not modified.
+- every NOT RUN / NOT APPLICABLE / BLOCKED item;
+- confirmation no protected production/test/build/semantic-lockfile content was committed.
 
 Only actually executed items may be PASS.
 
-## 13. Final decision
+## 14. Remote handoff is mandatory
 
-Use one of these conclusions:
+The run is not complete merely because local commands finished.
 
-- `READY FOR PHASE 3 ARCHITECTURE ACCEPTANCE` — only if all required and achievable Phase 3 gates/cases pass and no required acceptance evidence is missing;
+After testing:
+
+1. update only the authorized report/evidence;
+2. commit only those report/evidence paths;
+3. fetch the remote validation branch;
+4. if the remote advanced unexpectedly outside the task's allowed operational paths, STOP before rewriting history;
+5. push the evidence commit to `feat/ffmpeg-analyzer-policy-phase3` without force;
+6. fetch again and verify the evidence commit is contained in the remote branch;
+7. report the remotely visible evidence commit SHA.
+
+If push is unavailable/rejected, conclude:
+
+`BLOCKED — EVIDENCE NOT PUSHED`
+
+and provide the local evidence commit SHA. Do not claim GPT can review a local-only run.
+
+## 15. Final decision
+
+Use one precise conclusion supported by evidence:
+
+- `READY FOR PHASE 3 ARCHITECTURE ACCEPTANCE`;
 - `FAIL — BUILD`;
 - `FAIL — POLICY`;
 - `FAIL — NETWORK MEDIA LOADER`;
 - `FAIL — THUMBNAIL PIPELINE`;
 - `FAIL — CANCELLATION/CLEANUP`;
 - `BLOCKED — TEST ENVIRONMENT`;
+- `BLOCKED — EVIDENCE NOT PUSHED`;
 - another precise FAIL/BLOCKED category justified by evidence.
 
-Do not merge and do not begin the next implementation phase.
+Do not merge and do not start the next implementation phase.
 
-After the test commands finish, the round is not handed off until the evidence is remotely visible.
-
-You must:
-
-1. commit only the authorized report/evidence changes;
-2. push that commit to `feat/ffmpeg-analyzer-policy-phase3`;
-3. fetch the remote branch and verify the pushed commit is contained in the remote branch;
-4. report the pushed evidence commit SHA.
-
-If push fails or is unavailable, conclude `BLOCKED — EVIDENCE NOT PUSHED`, preserve the local evidence commit SHA, and do not claim that GPT can review the run.
-
-Only after the evidence commit is visible remotely should you stop and return the result to GPT.
+After remote evidence is verified visible, stop and return the evidence commit SHA to GPT.
