@@ -53,3 +53,11 @@ test('rejects unknown x86 simulator native library', () => {
     { name: 'libs/x86_64/libunexpected.so', data: elf(62) }
   ], 'x86_64'), /Unapproved simulator native library/);
 });
+
+test('rejects unknown arm64 production native library', () => {
+  const names = ['libaki_jsbind.so', 'libc++_shared.so', 'liblinkora_ffmpeg.so',
+    'liblinkora_smb.so', 'liblinkora_sftp.so', 'liblinkora_ftp.so', 'liblinkora_nfs.so',
+    'libmpv.so', 'libmpv_wrapper.so', 'libunexpected.so'];
+  const entries = names.map(name => ({ name: 'libs/arm64-v8a/' + name, data: elf(183) }));
+  assert.throws(() => checkNativeEntries(entries, 'arm64-v8a'), /Unexpected production native library set/);
+});
