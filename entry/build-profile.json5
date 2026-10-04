@@ -14,12 +14,14 @@
     {
       "name": "default",
       "source": { "sourceRoots": ["./src/default"] },
-      "buildOption": {
-        "externalNativeOptions": {
-          "path": "./src/main/cpp/CMakeLists.txt",
-          "abiFilters": ["arm64-v8a"],
-          "arguments": "",
-          "cppFlags": ""
+      "config": {
+        "buildOption": {
+          "externalNativeOptions": {
+            "path": "./src/main/cpp/CMakeLists.txt",
+            "abiFilters": ["arm64-v8a"],
+            "arguments": "",
+            "cppFlags": ""
+          }
         }
       }
     },

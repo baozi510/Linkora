@@ -45,11 +45,14 @@ const defaultTarget = entry.targets.find(item => item.name === 'default');
 const simulatorTarget = entry.targets.find(item => item.name === 'simulator');
 check(defaultTarget && defaultTarget.source.sourceRoots.includes('./src/default'),
   'default target must use src/default');
-check(defaultTarget && defaultTarget.buildOption.externalNativeOptions.abiFilters.includes('arm64-v8a'),
+check(defaultTarget && defaultTarget.config && defaultTarget.config.buildOption &&
+  defaultTarget.config.buildOption.externalNativeOptions.abiFilters.includes('arm64-v8a'),
   'default target must retain arm64-v8a native build');
 check(simulatorTarget && simulatorTarget.source.sourceRoots.includes('./src/simulator'),
   'simulator target must use src/simulator');
-check(simulatorTarget && !(simulatorTarget.buildOption && simulatorTarget.buildOption.externalNativeOptions),
+check(simulatorTarget && !(simulatorTarget.buildOption && simulatorTarget.buildOption.externalNativeOptions) &&
+  !(simulatorTarget.config && simulatorTarget.config.buildOption &&
+    simulatorTarget.config.buildOption.externalNativeOptions),
   'entry@simulator must not build production native libraries');
 
 check(hvigor.dependencies['@ohos/hvigor-multi-target-package-plugin'] === '7.0.0',

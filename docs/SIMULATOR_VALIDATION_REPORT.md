@@ -1,6 +1,6 @@
 # Simulator Validation Report
 
-> Status: NOT RUN  
+> Status: FAIL（首次 default regression 配置阻断，修复/重试进行中）
 > Branch: `test/simulator-validation`  
 > This report validates the near-production x86_64 simulator product. It does not replace ARM64 device validation.
 
@@ -8,31 +8,31 @@
 
 - Base branch: `test/player-architecture-validation`
 - Simulator branch: `test/simulator-validation`
-- Starting SHA:
+- Starting SHA: `c26ed66d86ee0e2c72ae34fd23a4c4bf665b7ebc`；干净检出 `D:\Linkora-validation`，原 D:\Linkora 用户工作区不动。
 - Final tested SHA:
 - Final documentation SHA:
 
 ## 2. Environment
 
-- Host OS:
-- DevEco Studio:
-- HarmonyOS SDK:
-- Hvigor:
-- ohpm:
-- Node:
-- Emulator model:
-- Emulator OS/build:
-- Emulator API:
-- Emulator ABI:
-- Emulator resolution:
+- Host OS: Windows 11 Pro 10.0.26200 x64 / PowerShell
+- DevEco Studio: 26.0.0.821
+- HarmonyOS SDK: 26.0.0.105 / API 26
+- Hvigor: 6.26.4
+- ohpm: 26.0.0.630
+- Node: DevEco bundled 24.14.1
+- Emulator model: emulator；HDC 127.0.0.1:5555
+- Emulator OS/build: OpenHarmony-7.0.0.105
+- Emulator API: 26
+- Emulator ABI: x86_64
+- Emulator resolution: 1256x2760，RenderService hidumper 实测
 - HarmonyOS Native SDK root used for FFmpeg:
 
 ## 3. Dependency / Sync
 
-- `ohpm install`: NOT RUN
-- DevEco Project Sync: NOT RUN
-- multi-target plugin resolved: NOT RUN
-- default real mpv dependency resolved: NOT RUN
+- `ohpm install`: PASS / exit 0；正常生成/解析 lock，未手工修改。
+- DevEco Project Sync: FAIL；执行 Studio Hvigor `--sync --no-daemon`（实际 CLI Sync）；00303038 entry targets[0].buildOption 不在合法 schema；无 GUI Sync 结果。
+- multi-target plugin resolved: PASS；Hvigor install 下载 7.0.0，pnpm 安装成功。
+- default real mpv dependency resolved: PASS；OHPM 使用真实 1.0.0 依赖，未替换 default。
 - simulator MPV target replacement resolved: NOT RUN
 
 ## 4. Production Regression Gate
@@ -43,13 +43,13 @@ Command:
 ./scripts/verify.ps1
 ```
 
-- Result: NOT RUN
+- Result: FAIL（attempt 01；重试待执行）
 - Hypium:
 - MPV adapter regression:
 - architecture/parity guards:
 - default Debug HAP:
 - default Release HAP:
-- notes:
+- notes: 全量入口首个真实错误为 Hvigor test 的 00303038 schema validation，尚未进入 Hypium/build。本地原始日志 artifacts/simulator-validation/default-verify-01.log。已按 SDK schema 将 default native buildOption 移至 targets[0].config.buildOption，仍保持 arm64-v8a；同步 parity guard 的读取/隔离检测路径。
 
 ## 5. Simulator Parity Gate
 
