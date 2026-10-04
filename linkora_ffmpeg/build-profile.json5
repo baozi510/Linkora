@@ -1,0 +1,13 @@
+{
+  "apiType": "stageMode",
+  "targets": [
+    { "name": "default", "config": { "buildOption": { "externalNativeOptions": {
+      "path": "./src/main/cpp/CMakeLists.txt", "abiFilters": ["arm64-v8a"],
+      "arguments": "-DOHOS_STL=c++_static", "cppFlags": ""
+    } } } },
+    { "name": "simulator", "config": { "buildOption": { "externalNativeOptions": {
+      "path": "./src/main/cpp/CMakeLists.txt", "abiFilters": ["x86_64"],
+      "arguments": "-DOHOS_STL=c++_static", "cppFlags": ""
+    } } } }
+  ]
+}
