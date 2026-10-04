@@ -10,13 +10,17 @@ Current branch: `feat/ffmpeg-analyzer-policy-phase3`.
 
 Phase 3 production analyzer policy is implemented in source but is **not yet accepted**.
 
+Current implementation source remains:
+
+`15db3f8a3e87f75edc209c1919f944f39c0b9fcb`
+
 Validation history:
 
 - source `72e74d11a790bd0d258e219e3a8de18f3c59fd17`: stopped at an over-scoped ArkUI static checker; reviewed/fixed.
-- source `81ed0684b273e25afbed056a055ee23aded0b661`: ArkUI gate passed, then desktop `check-network-media-list.cjs` stopped on unresolved `entry/AnalysisComposition`; no later build/runtime gates executed.
-- current review corrects that harness boundary and restores late native setup cleanup serialization in `HarmonyAnalysisInputs`.
+- source `81ed0684b273e25afbed056a055ee23aded0b661`: ArkUI gate passed, then desktop Loader harness stopped on unresolved target alias; reviewed/fixed.
+- source `15db3f8a3e87f75edc209c1919f944f39c0b9fcb`: isolated validation setup succeeded; `ohpm install` then rewrote four lockfiles LF→CRLF only. Evidence commit `59d626bc647dfe257a60c34feb9f9e02ad9e9165` proves normalized blobs/content unchanged. No default verifier/runtime gate ran.
 
-The second stop is classified as test-harness/module-resolution compatibility plus a migration-time lifecycle guarantee review, not evidence of a production FFmpeg runtime failure.
+The LF→CRLF stop is classified as **non-semantic validation-environment drift**. The durable workflow now permits Codex to self-recover from this exact class only after strict normalized-blob/content verification and only inside an isolated validation checkout.
 
 Current Phase 3 invariants remain unchanged:
 
@@ -29,7 +33,7 @@ Current Phase 3 invariants remain unchanged:
 - PlaybackBackendSelector and Auto/System/MPV policy unchanged;
 - performance ranking remains deferred to real arm64 hardware.
 
-A fresh Codex validation round must use `docs/CODEX_VALIDATION_TASK.md`. Old partial results cannot be spliced into a new PASS.
+A fresh Codex validation round must use the current `docs/CODEX_VALIDATION_TASK.md`. Old partial results cannot be spliced into a new PASS.
 
 
 This file is the current execution status for the architecture migration.

@@ -6,27 +6,41 @@ Repository: `baozi510/Linkora`
 
 Current branch: `feat/ffmpeg-analyzer-policy-phase3`
 
-Current phase: **FFmpeg Analyzer Production Policy Phase 3 — implementation reviewed; validation rerun required after second test-infrastructure/lifecycle correction.**
+Current phase: **FFmpeg Analyzer Production Policy Phase 3 — implementation source unchanged; fresh validation rerun required after reviewed Windows lockfile-EOL normalization.**
 
-Latest Codex evidence commit before this review:
+Latest remotely published Codex evidence commit:
 
-`5917c84df3790a4e832d46ac9ca3f57f176b41d9`
+`59d626bc647dfe257a60c34feb9f9e02ad9e9165`
 
-That rerun tested `81ed0684b273e25afbed056a055ee23aded0b661`. The earlier ArkUI false-positive fix passed. The run then stopped in `scripts/check-network-media-list.cjs` because the desktop VM tried to resolve the target alias `entry/AnalysisComposition` as a root file. No Hypium/HAR/HAP/simulator/runtime Phase 3 claims were made after that stop.
+That run tested implementation source:
 
-### Architecture review of the second stop
+`15db3f8a3e87f75edc209c1919f944f39c0b9fcb`
 
-The production target alias is valid. The desktop list/cache harness was overreaching by loading the real target-specific analyzer composition for a Loader/cache unit-regression test.
+in an isolated validation clone and correctly preserved the unrelated dirty `main` workspace.
 
-The reviewed correction:
+### Review of the latest validation stop
 
-- mocks `NetworkMediaAnalysisCoordinator` at the Loader boundary in the desktop harness;
-- keeps analyzer adapter/policy behavior covered by the separate 45-case pure suite;
-- restores the pre-Phase-3 late-native-setup cleanup guarantee in `HarmonyAnalysisInputs.openRemote()`;
-- keeps the per-open SFTP fingerprint override empty so persisted `NetworkServerEntry.advancedOptions.sftpFingerprint` remains owned by the storage layer;
-- updates the timeout regression expectation so a cancelled analysis cannot publish a late partial result.
+`ohpm install` succeeded, then rewrote exactly four tracked lockfiles from LF to CRLF:
 
-This is not a Phase 3 acceptance claim. A fresh validation round is required.
+- `entry/oh-package-lock.json5`
+- `linkora_ffmpeg/oh-package-lock.json5`
+- `linkora_proxy/oh-package-lock.json5`
+- `oh-package-lock.json5`
+
+The committed evidence proves for all four files:
+
+- line content is equal;
+- Git-normalized worktree blob equals the HEAD blob;
+- repository attributes already require `*.json5 text eol=lf`;
+- no dependency graph/content change was observed.
+
+Therefore this is a **validation-environment EOL drift**, not a production code failure and not a dependency-content change.
+
+The blocked run remains historical evidence and is not relabeled PASS.
+
+For the next run, Codex may self-recover only if it proves the same strict EOL-only condition. It may then restore those four files from HEAD inside the isolated validation checkout, confirm clean state, record the cleanup, and continue. Any real normalized lockfile change still requires STOP.
+
+Phase 3 remains unaccepted because the latest run stopped before `scripts/verify.ps1`.
 
 ### Durable conversation workflow
 

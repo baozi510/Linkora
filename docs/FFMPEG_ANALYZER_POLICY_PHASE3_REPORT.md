@@ -1,11 +1,27 @@
 # FFmpeg Analyzer Production Policy Phase 3 Report
 
-> Status: BLOCKED — TEST ENVIRONMENT. Current task stopped after normal dependency installation rewrote four protected lockfiles from LF to CRLF; no verifier or runtime tests executed.
+> Status: REVIEWED — latest run blocked on proven LF→CRLF-only lockfile drift; validation-workspace normalization approved; fresh rerun required.
 > Branch: `feat/ffmpeg-analyzer-policy-phase3`
 > Codex role: test/report only; no source fixes.
 > Date: 2026-10-05 (Asia/Shanghai).
 
-## Current validation — phase3-rerun-3b-isolated-checkout
+## GPT review after phase3-rerun-3b environment block
+
+Review date: 2026-10-05.
+
+Ruling:
+
+- The Codex stop was correct under the task wording active during that run.
+- The uploaded evidence proves the four lockfiles changed only by LF→CRLF worktree encoding: each `normalizedWorktreeBlob` exactly equals its corresponding HEAD blob and line content is equal.
+- `.gitattributes` already declares `*.json5 text eol=lf`; no repository line-ending policy change is required.
+- This is not evidence of a dependency graph/content change, production analyzer defect, build failure, or runtime failure.
+- Future validation tasks may explicitly allow Codex to restore only these four lockfiles from HEAD inside an isolated validation checkout after re-proving the same normalized equality and confirming no other tracked path changed.
+- That cleanup must be recorded as evidence and must not be committed. Any normalized-content mismatch remains an immediate STOP.
+- No Phase 3 production source, analyzer routing, playback routing, benchmark policy, or Direct I/O implementation changes are justified by this run.
+
+The blocked result below remains historical evidence. It is not converted into PASS. A fresh run must begin from the current READY validation task.
+
+## Validation evidence — phase3-rerun-3b-isolated-checkout
 
 This section is the fresh result for the current READY dispatch. Everything below the historical separator is preserved history and supplies no PASS evidence for this run.
 

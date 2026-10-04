@@ -70,6 +70,28 @@ Unless a task explicitly changes this rule, Codex must not modify production sou
 
 If a source change is needed, Codex stops at the task's stop condition and returns evidence to GPT.
 
+### Validation-environment normalization
+
+Codex may repair **non-semantic validation-environment drift inside an isolated validation checkout** only when the current task explicitly permits it.
+
+The canonical case is a Windows package manager rewriting tracked lockfiles from LF to CRLF while their Git-normalized content remains byte-for-byte equivalent to HEAD.
+
+Codex may self-recover from that case only when all of the following are proven:
+
+1. every affected path is explicitly allowlisted by the current validation task;
+2. each worktree file hashes to the same Git-normalized blob as `HEAD:<path>`;
+3. CRLF-to-LF normalized bytes are identical to the HEAD blob;
+4. no dependency entry, version, checksum, graph, comment or other semantic content changed;
+5. no other tracked file changed.
+
+When all checks pass, Codex may restore only those allowlisted files from HEAD **inside the isolated validation checkout**, confirm the checkout is clean again, record the normalization evidence, and continue testing.
+
+That restore is validation-workspace cleanup. It is not a production-source/test change and must never be committed.
+
+If any normalized blob differs, any semantic content differs, any extra tracked path changed, or the restore does not return the validation checkout to clean state, Codex must STOP and return evidence to GPT.
+
+This rule never authorizes modifying the user's unrelated dirty workspace.
+
 ## Fixed Codex task file
 
 There is only one current dispatch file:
