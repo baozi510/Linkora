@@ -28,7 +28,7 @@ export class HarmonyAnalysisInputs implements AnalysisInputPorts {
     return new RemoteReadSessionAdapter(source.sourceId, await HttpRemoteReadSession.open(source.locator, {}));
   }
   async register(source: RandomAccessSource): Promise<AnalysisProxyRegistration> {
-    const lease = await this.proxy.buildSourceUrl(source);
+    const lease = await this.proxy.buildSourceUrl(source, 'application/octet-stream');
     return new AnalysisProxyRegistration(lease.url, () => lease.release());
   }
 }

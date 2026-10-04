@@ -21,11 +21,14 @@ class TestSource implements RandomAccessSource {
 class TestInputs implements AnalysisInputPorts {
   opened: number = 0; released: number = 0; registered: number = 0;
   fail: boolean = false; source: TestSource = new TestSource();
+  observed: RandomAccessSource | null = null;
+  registration: (() => Promise<void>) | null = null;
   open: () => Promise<RandomAccessSource> = async () => this.source;
   async openRemote(_source: MediaSource, _operation: AnalysisOperation): Promise<RandomAccessSource> { this.opened++; return this.open(); }
   async openHttp(_source: MediaSource, _operation: AnalysisOperation): Promise<RandomAccessSource> { this.opened++; return this.open(); }
   async register(source: RandomAccessSource): Promise<AnalysisProxyRegistration> {
     this.registered++;
+    this.observed = source; if (this.registration !== null) await this.registration();
     if (this.fail) { source.cancel(); await source.close(); throw new Error('http://secret:token@private/locator'); }
     return new AnalysisProxyRegistration('http://127.0.0.1:99/private-token', async () => { this.released++; source.cancel(); await source.close(); });
   }
@@ -35,6 +38,7 @@ class TestNative implements NativeFfmpegApi {
   code: FfmpegErrorCode | null = null; calls: number = 0; cancelled: string[] = [];
   time: number = 0; width: number = 0; height: number = 0;
   work: (() => Promise<NativeProbeResult>) | null = null;
+  frameWork: (() => Promise<NativeFrameResult>) | null = null;
   constructor() { this.result.container = 'mov,mp4'; this.result.durationMs = 1000;
     const video = new NativeVideoStream(); video.codec = 'h264'; video.profile = 'High';
     video.width = 640; video.height = 360; video.frameRate = 24; video.bitDepth = 8; this.result.video = [video]; }
@@ -44,6 +48,7 @@ class TestNative implements NativeFfmpegApi {
   }
   async extractFrame(_id: string, _input: string, time: number, width: number, height: number, _timeout: number): Promise<NativeFrameResult> {
     this.time = time; this.width = width; this.height = height;
+    this.calls++; if (this.frameWork !== null) return this.frameWork();
     if (this.code !== null) throw new FfmpegError(this.code);
     const frame = new NativeFrameResult(); frame.width = 2; frame.height = 1; frame.timeMs = time;
     frame.pixels = new ArrayBuffer(8); return frame;
@@ -52,7 +57,9 @@ class TestNative implements NativeFfmpegApi {
 }
 class TestSystem implements SystemAnalysisBackend {
   cancelled: number = 0; closed: number = 0;
-  async inspect(_input: string): Promise<SystemAnalysisSnapshot> { return new SystemAnalysisSnapshot(1000, 640, 360); }
+  work: () => Promise<SystemAnalysisSnapshot> = async () => new SystemAnalysisSnapshot(1000, 640, 360);
+  started: boolean = false;
+  async inspect(_input: string): Promise<SystemAnalysisSnapshot> { this.started = true; return this.work(); }
   cancel(): void { this.cancelled++; } async close(): Promise<void> { this.closed++; }
 }
 function file(format: MediaFormat = MediaFormat.MP4): MediaSource {
@@ -89,6 +96,20 @@ export default function mediaAnalysisAdaptersTest(): void {
       let code = 0; try { await resolver(ports).resolve(file(), 'ffmpeg', new AnalysisOperation()); }
       catch (error) { code = (error as AnalysisError).code; }
       expect(code).assertEqual(AnalysisErrorCode.RESOLVE_FAILED); expect(ports.source.closes).assertEqual(1);
+    });
+    it('late proxy registration after cancellation releases registered source once', 0, async () => {
+      const ports = new TestInputs(); let finish: () => void = () => {};
+      ports.registration = () => new Promise((resolve) => { finish = resolve; });
+      const operation = new AnalysisOperation(); const pending = resolver(ports).resolve(file(), 'ffmpeg', operation);
+      while (ports.registered === 0) await Promise.resolve(); operation.cancel(); finish();
+      let code = 0; try { await pending; } catch (error) { code = (error as AnalysisError).code; }
+      expect(code).assertEqual(AnalysisErrorCode.CANCELLED); expect(ports.released).assertEqual(1); expect(ports.source.closes).assertEqual(1);
+    });
+    it('access diagnostics distinguish observed nonsequential source reads', 0, async () => {
+      const ports = new TestInputs(); const lease = await resolver(ports).resolve(file(), 'ffmpeg', new AnalysisOperation());
+      await ports.observed!.readAt(0, 10); expect(lease.access.semantics()).assertEqual('range_available');
+      await ports.observed!.readAt(700, 20); expect(lease.access.semantics()).assertEqual('random_access_observed');
+      expect(lease.access.bytesRead).assertEqual(30); expect(lease.access.readRequests).assertEqual(2); await lease.release();
     });
     it('cancel during late source open releases source without registering', 0, async () => {
       const ports = new TestInputs(); let finish: (source: RandomAccessSource) => void = () => {};
@@ -155,10 +176,37 @@ export default function mediaAnalysisAdaptersTest(): void {
       expect((await probe.probe(file(), ProbeRequirement.ADVANCED)).completeness).assertEqual(ProbeCompleteness.PARTIAL);
       expect(backends.every((backend) => backend.closed === 1)).assertTrue(); await probe.close();
     });
+    it('System unavailable values are not fabricated into usable metadata', 0, async () => {
+      const backend = new TestSystem(); backend.work = async () => new SystemAnalysisSnapshot(NaN, -1, Infinity);
+      const ports = new TestInputs(); const probe = new SystemMediaProbeAdapter(resolver(ports), () => backend);
+      const result = await probe.probe(file(), ProbeRequirement.LIST);
+      expect(result.info).assertEqual(null); expect(result.completeness).assertEqual(ProbeCompleteness.UNAVAILABLE);
+      expect(result.fieldOrigins.length).assertEqual(0); expect(backend.closed).assertEqual(1); expect(ports.released).assertEqual(1); await probe.close();
+    });
+    it('System errors and timeout retain numeric failure state and clean up', 0, async () => {
+      for (const code of [AnalysisErrorCode.TIMEOUT, AnalysisErrorCode.SYSTEM_FAILED]) {
+        const backend = new TestSystem(); backend.work = async () => { throw new AnalysisError(code); };
+        const ports = new TestInputs(); const probe = new SystemMediaProbeAdapter(resolver(ports), () => backend);
+        const result = await probe.probe(file(), ProbeRequirement.DETAIL);
+        expect(result.errorCode).assertEqual(code); expect(result.isUsable()).assertEqual(false);
+        expect(backend.closed).assertEqual(1); expect(ports.released).assertEqual(1); await probe.close();
+      }
+    });
+    it('System close cancels active job rejects late result and awaits cleanup', 0, async () => {
+      const backend = new TestSystem(); let finish: (result: SystemAnalysisSnapshot) => void = () => {};
+      backend.work = () => new Promise((resolve) => { finish = resolve; });
+      const ports = new TestInputs(); const probe = new SystemMediaProbeAdapter(resolver(ports), () => backend);
+      const pending = probe.probe(file(), ProbeRequirement.LIST);
+      while (!backend.started) await Promise.resolve(); const closing = probe.close();
+      finish(new SystemAnalysisSnapshot(1000, 640, 360)); const result = await pending; await closing; await probe.close();
+      expect(result.errorCode).assertEqual(AnalysisErrorCode.CANCELLED); expect(backend.cancelled).assertEqual(1);
+      expect(backend.closed).assertEqual(1); expect(ports.source.closes).assertEqual(1);
+    });
     it('thumbnail passes requested bounds/time and owns raw output separately from source', 0, async () => {
       const native = new TestNative(); const ports = new TestInputs();
       const extractor = new FfmpegThumbnailExtractorAdapter(resolver(ports), new FfmpegAnalysis(native));
       const raw = await extractor.extract(file(), new ThumbnailExtractRequest(3000, 480, 270));
+      expect(raw!.width()).assertEqual(2); expect(raw!.height()).assertEqual(1); expect(raw!.pixelFormat()).assertEqual('rgba_8888');
       expect(native.time).assertEqual(3000); expect(native.width).assertEqual(480); expect(native.height).assertEqual(270);
       expect(ports.released).assertEqual(1); expect((await raw!.readPixels()).byteLength).assertEqual(8);
       await raw!.release(); await raw!.release(); await extractor.close(); await extractor.close();
@@ -170,6 +218,17 @@ export default function mediaAnalysisAdaptersTest(): void {
       let code = 0; try { await extractor.extract(file(), new ThumbnailExtractRequest(1000)); } catch (error) { code = (error as AnalysisError).code; }
       expect(code).assertEqual(AnalysisErrorCode.CANCELLED); expect(ports.released).assertEqual(1); await extractor.close();
     });
+    it('thumbnail close cancels active native work discards late pixels and releases once', 0, async () => {
+      const native = new TestNative(); let finish: (result: NativeFrameResult) => void = () => {};
+      native.frameWork = () => new Promise((resolve) => { finish = resolve; });
+      const ports = new TestInputs(); const extractor = new FfmpegThumbnailExtractorAdapter(resolver(ports), new FfmpegAnalysis(native));
+      const pending = extractor.extract(file(), new ThumbnailExtractRequest(1000));
+      while (native.calls === 0) await Promise.resolve(); const closing = extractor.close();
+      const frame = new NativeFrameResult(); frame.width = 2; frame.height = 1; frame.pixels = new ArrayBuffer(8); finish(frame);
+      let code = 0; try { await pending; } catch (error) { code = (error as AnalysisError).code; }
+      await closing; expect(code).assertEqual(AnalysisErrorCode.CANCELLED); expect(native.cancelled.length > 0).assertTrue();
+      expect(ports.released).assertEqual(1); expect(ports.source.closes).assertEqual(1);
+    });
     it('comparison distinguishes unclaimed System structure from a true empty stream count', 0, () => {
       const system = new ProbeResult(new MediaInfo('', 1000, 0, 0, [new VideoTrackInfo('primary', '', '', '', 640, 360)]), ProbeCompleteness.PARTIAL, [], new MediaProbeDiagnostics('system'));
       const ff = new ProbeResult(new MediaInfo('mp4', 1000, 0, 0, [new VideoTrackInfo('v', 'h264', 'High', '', 640, 360)]), ProbeCompleteness.COMPLETE, [], new MediaProbeDiagnostics('ffmpeg'));
@@ -179,6 +238,14 @@ export default function mediaAnalysisAdaptersTest(): void {
       expect(JSON.stringify(comparison).includes('probeMs')).assertEqual(false);
       const unavailable = new ProbeResult(null, ProbeCompleteness.UNAVAILABLE, [], new MediaProbeDiagnostics('system'), 1);
       expect(MediaAnalysisComparison.compare(unavailable, ff).differences.some((d) => d.kind === AnalysisDifferenceKind.ENGINE_UNAVAILABLE)).assertTrue();
+    });
+    it('comparison classifies both missing ffmpeg missing and value differences independently', 0, () => {
+      const system = new ProbeResult(new MediaInfo('system-format', 1000), ProbeCompleteness.PARTIAL, [], new MediaProbeDiagnostics('system'));
+      const ff = new ProbeResult(new MediaInfo('', 1100), ProbeCompleteness.PARTIAL, [], new MediaProbeDiagnostics('ffmpeg'));
+      const result = MediaAnalysisComparison.compare(system, ff);
+      expect(result.differences.some((d) => d.field === 'container' && d.kind === AnalysisDifferenceKind.FFMPEG_MISSING)).assertTrue();
+      expect(result.differences.some((d) => d.field === 'durationMs' && d.kind === AnalysisDifferenceKind.VALUE_DIFFERENCE)).assertTrue();
+      expect(result.differences.some((d) => d.field === 'videoCodec' && d.kind === AnalysisDifferenceKind.MATCH)).assertTrue();
     });
   });
 }
