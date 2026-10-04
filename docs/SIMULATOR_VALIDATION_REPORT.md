@@ -1,18 +1,18 @@
 # Simulator Validation Report
 
 > Status: NOT RUN  
-> Branch: test/simulator-validation  
-> This report is for the x86_64 simulator-only product. It must not be used as evidence for MPV/native/HDR/passthrough support.
+> Branch: `test/simulator-validation`  
+> This report validates the near-production x86_64 simulator product. It does not replace ARM64 device validation.
 
-## Git
+## 1. Git
 
-- Base branch: test/player-architecture-validation
-- Simulator branch: test/simulator-validation
+- Base branch: `test/player-architecture-validation`
+- Simulator branch: `test/simulator-validation`
 - Starting SHA:
 - Final tested SHA:
 - Final documentation SHA:
 
-## Environment
+## 2. Environment
 
 - Host OS:
 - DevEco Studio:
@@ -25,167 +25,148 @@
 - Emulator API:
 - Emulator ABI:
 - Emulator resolution:
+- HarmonyOS Native SDK root used for FFmpeg:
 
-## Dependency / Sync
+## 3. Dependency / Sync
 
-- ohpm install: NOT RUN
+- `ohpm install`: NOT RUN
 - DevEco Project Sync: NOT RUN
-- multi-target package plugin resolved: NOT RUN
-- simulatorTargetDependencies applied: NOT RUN
-- notes:
+- multi-target plugin resolved: NOT RUN
+- default real mpv dependency resolved: NOT RUN
+- simulator MPV target replacement resolved: NOT RUN
 
-## Production regression gate
+## 4. Production Regression Gate
 
 Command:
 
-~~~powershell
+```powershell
 ./scripts/verify.ps1
-~~~
+```
 
 - Result: NOT RUN
 - Hypium:
-- default Debug HAR/HAP:
-- default Release HAR/HAP:
-- architecture checks:
+- MPV adapter regression:
+- architecture/parity guards:
+- default Debug HAP:
+- default Release HAP:
 - notes:
 
-## Simulator static gate
+## 5. Simulator Parity Gate
 
 Command:
 
-~~~powershell
+```powershell
 node scripts/check-simulator-product.cjs
-~~~
+```
 
 - Result: NOT RUN
-- Notes:
 
-## Simulator build gate
+Confirm:
+
+| Parity requirement | Result | Notes |
+| --- | --- | --- |
+| Auto/System/MPV UI same as production | NOT RUN | |
+| SMB/SFTP/FTP/NFS/WebDAV UI same as production | NOT RUN | |
+| AdaptivePlaybackPort retained | NOT RUN | |
+| BackendSelector retained | NOT RUN | |
+| WebDAV provider shared with default | NOT RUN | |
+| MediaProxy shared | NOT RUN | |
+| Native transport replacement only at provider boundary | NOT RUN | |
+| MPV replacement only at target dependency boundary | NOT RUN | |
+
+## 6. Simulator Build
 
 Command:
 
-~~~powershell
+```powershell
 ./scripts/verify-simulator.ps1
-~~~
+```
 
 - Result: NOT RUN
 - Discovered Seq task:
 - HAP path:
 - HAP SHA256:
-- BundleName:
-- Native .so count:
-- MPV real HAR packaged:
-- Notes:
+- Bundle: `com.linkora.player.simulator`
+- libmpv packaged: NOT RUN
+- SMB/SFTP/FTP/NFS production native SO packaged: NOT RUN
+- FFmpeg analyzer SO packaged:
+- unknown SO packaged:
+- notes:
 
-Expected:
+## 7. Install / Launch
 
-- BundleName = com.linkora.player.simulator
-- Native .so count = 0
-- real libmpv.so absent
-- liblinkora native adapters absent
-
-## Install / launch
-
-- hdc target:
+- target:
 - ABI:
 - install: NOT RUN
-- launch: NOT RUN
-- cold launch:
-- navigation:
-- crash:
-- native load error:
+- cold launch: NOT RUN
+- navigation: NOT RUN
+- crash/native loader error:
 - evidence:
 
-## Simulator capability UI
+## 8. Playback Preference UI
 
 | Check | Result | Notes |
 | --- | --- | --- |
-| Player settings shows System only | NOT RUN | |
-| Auto hidden | NOT RUN | |
-| MPV hidden | NOT RUN | |
-| Simulator notice visible | NOT RUN | |
-| WebDAV available | NOT RUN | |
-| SMB hidden | NOT RUN | |
-| SFTP hidden | NOT RUN | |
-| FTP hidden | NOT RUN | |
-| NFS hidden | NOT RUN | |
+| Auto visible | NOT RUN | |
+| System visible | NOT RUN | |
+| MPV visible | NOT RUN | |
+| preference persists restart | NOT RUN | |
 
-## Settings / database
+## 9. Forced MPV Replacement Path
 
-| Check | Result | Notes |
-| --- | --- | --- |
-| Settings persist after restart | NOT RUN | |
-| Theme persists | NOT RUN | |
-| WebDAV server add | NOT RUN | |
-| WebDAV server edit | NOT RUN | |
-| WebDAV server persists restart | NOT RUN | |
-| WebDAV server delete | NOT RUN | |
-| DB initialization/migrations | NOT RUN | |
+Expected simulator behavior: same production PlaybackEngine/AdaptivePlaybackPort path, then fail only when target-specific MPV package attempts to instantiate native backend.
 
-## HTTPS System playback
+- configure/open reaches adaptive stack: NOT RUN
+- controlled backend unavailable error: NOT RUN
+- no crash/native SO load: NOT RUN
+- forced MPV does not fallback: NOT RUN
+- resource cleanup: NOT RUN
 
-Media case:
+## 10. Auto Fallback
 
-- URL redacted:
-- Codec/container:
-- Duration:
+Use at least one MPV-first sample such as MKV.
 
-| Check | Result | Timing / notes |
-| --- | --- | --- |
-| Open | NOT RUN | |
-| Prepare | NOT RUN | |
-| First frame | NOT RUN | |
-| Play | NOT RUN | |
-| Pause | NOT RUN | |
-| Resume | NOT RUN | |
-| Seek 10% | NOT RUN | |
-| Seek 50% | NOT RUN | |
-| Seek 90% | NOT RUN | |
-| Completion | NOT RUN | |
-| Replay | NOT RUN | |
-| Release | NOT RUN | |
+- selector chose MPV first: NOT RUN
+- simulator MPV replacement failed at final boundary: NOT RUN
+- one-shot fallback attempted: NOT RUN
+- failed candidate did not leak stale state: NOT RUN
+- System fallback final result:
+- no second fallback: NOT RUN
 
-## Local System playback
+## 11. System Playback
 
-| Check | Result | Notes |
-| --- | --- | --- |
-| File picker/import available | NOT RUN | |
-| H264/AAC MP4 open | NOT RUN | |
-| First frame | NOT RUN | |
-| Pause/resume | NOT RUN | |
-| Seek 50% | NOT RUN | |
-| Seek 90% | NOT RUN | |
-| Completion/reopen | NOT RUN | |
+| Case | Prepare | First frame | Pause/resume | Seek 50% | Seek 90% | Completion | Release |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| HTTPS H264/AAC MP4 | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| Local H264/AAC MP4 | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| HEVC/AAC MP4 | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
 
-## WebDAV connection
+## 12. Network Configuration Parity
+
+| Protocol | UI fields | Save/edit/delete | Connection test | Directory/open |
+| --- | --- | --- | --- | --- |
+| WebDAV | NOT RUN | NOT RUN | NOT RUN | NOT RUN |
+| SMB | NOT RUN | NOT RUN | expected native-boundary unavailable | expected native-boundary unavailable |
+| SFTP | NOT RUN | NOT RUN | expected native-boundary unavailable | expected native-boundary unavailable |
+| FTP | NOT RUN | NOT RUN | real ArkTS TCP test | expected native-boundary unavailable |
+| NFS | NOT RUN | NOT RUN | real ArkTS TCP test | expected native-boundary unavailable |
+
+## 13. WebDAV
 
 | Check | Result | Notes |
 | --- | --- | --- |
-| Correct credentials test | NOT RUN | |
-| Wrong credentials rejected | NOT RUN | |
-| Save server | NOT RUN | |
+| Correct authentication | NOT RUN | |
+| Wrong auth rejected | NOT RUN | |
 | Root list | NOT RUN | |
 | Nested list | NOT RUN | |
 | Chinese filename | NOT RUN | |
 | Space filename | NOT RUN | |
 | Refresh | NOT RUN | |
-| Back navigation | NOT RUN | |
-
-## WebDAV System playback
-
-| Check | Result | Timing / notes |
-| --- | --- | --- |
-| Open H264/AAC MP4 | NOT RUN | |
-| First frame | NOT RUN | |
-| Play 30 seconds | NOT RUN | |
-| Pause/resume | NOT RUN | |
+| H264 MP4 playback | NOT RUN | |
 | Seek 50% | NOT RUN | |
 | Seek 90% | NOT RUN | |
-| Completion | NOT RUN | |
-| Replay | NOT RUN | |
-| Release | NOT RUN | |
 
-## MediaProxy runtime
+## 14. MediaProxy
 
 - activeSources before:
 - activeSources during:
@@ -199,112 +180,140 @@ Media case:
 - HEAD: NOT RUN
 - GET: NOT RUN
 - Range: NOT RUN
-- 50% seek random access: NOT RUN
-- 90% seek avoids sequential byte-0 read: NOT RUN
-- lease release: NOT RUN
+- 50% random access: NOT RUN
+- 90% avoids sequential byte-0 read: NOT RUN
+- release returns source count to zero: NOT RUN
 
-## Metadata / thumbnail runtime
+## 15. Metadata / Thumbnail
 
 | Check | Result | Evidence |
 | --- | --- | --- |
-| Duration | NOT RUN | |
-| Width/height | NOT RUN | |
-| Thumbnail visible | NOT RUN | |
-| New cache extension .webp | NOT RUN | |
-| No new JPEG | NOT RUN | |
-| Landscape aspect ratio | NOT RUN | |
-| Ultrawide aspect ratio | NOT RUN | |
-| Portrait aspect ratio | NOT RUN | |
-| Max 480x270 | NOT RUN | |
-| Cache reuse | NOT RUN | |
+| duration | NOT RUN | |
+| width/height | NOT RUN | |
+| thumbnail visible | NOT RUN | |
+| new cache = WebP | NOT RUN | |
+| no new JPEG | NOT RUN | |
+| quality 80 | NOT RUN | |
+| target-time policy | NOT RUN | |
+| max 480x270 | NOT RUN | |
+| aspect ratio | NOT RUN | |
+| cache reuse | NOT RUN | |
 
-## Surface / lifecycle
+## 16. Database / Settings
 
-| Check | Result | Notes |
-| --- | --- | --- |
-| Fullscreen enter | NOT RUN | |
-| Fullscreen exit | NOT RUN | |
-| Orientation change | NOT RUN | |
-| Background | NOT RUN | |
-| Foreground | NOT RUN | |
-| Surface recreate | NOT RUN | |
-| Old-session event isolation | NOT RUN | |
-| 20 open/close cycles | NOT RUN | |
+- settings persistence: NOT RUN
+- player preference persistence: NOT RUN
+- WebDAV server persistence: NOT RUN
+- SMB config persistence: NOT RUN
+- SFTP config persistence: NOT RUN
+- FTP config persistence: NOT RUN
+- NFS config persistence: NOT RUN
+- delete persistence: NOT RUN
+- DB migration errors:
 
-## Error recovery
+## 17. Surface / Lifecycle
+
+- fullscreen enter/exit: NOT RUN
+- orientation: NOT RUN
+- background/foreground: NOT RUN
+- surface recreate: NOT RUN
+- stale-session isolation: NOT RUN
+- 20 player open/close: NOT RUN
+- residual audio:
+- black surface:
+- crash/ANR:
+
+## 18. Error Recovery
 
 | Case | Result | Notes |
 | --- | --- | --- |
-| Empty URL | NOT RUN | |
-| Invalid protocol | NOT RUN | |
 | HTTP 404 | NOT RUN | |
 | HTTP 500 | NOT RUN | |
-| Timeout | NOT RUN | |
-| Unsupported media | NOT RUN | |
+| timeout | NOT RUN | |
+| unsupported media | NOT RUN | |
 | WebDAV bad password | NOT RUN | |
-| WebDAV server stop | NOT RUN | |
-| Reopen after server restore | NOT RUN | |
+| WebDAV server stop/recover | NOT RUN | |
+| forced MPV simulator unavailable | NOT RUN | |
+| SMB native transport unavailable | NOT RUN | |
+| SFTP native transport unavailable | NOT RUN | |
+| FTP native transport unavailable | NOT RUN | |
+| NFS native transport unavailable | NOT RUN | |
 
-## Security
+## 19. Security
 
-- Log credential scan: NOT RUN
-- Authorization leak: NOT RUN
-- Cookie leak: NOT RUN
-- Password leak: NOT RUN
-- Proxy upstream locator leak: NOT RUN
-- Signing/private key leak: NOT RUN
+- Authorization leak scan: NOT RUN
+- Cookie leak scan: NOT RUN
+- password/credential leak scan: NOT RUN
+- proxy upstream locator leak scan: NOT RUN
+- signing secret scan: NOT RUN
 
-## Stability
+## 20. FFmpeg Bootstrap
 
-- 20 player open/close: NOT RUN
-- 20 WebDAV directory enter/exit: NOT RUN
-- 10 seek cycles: NOT RUN
-- 10 background/foreground cycles: NOT RUN
-- crash/ANR:
-- black surface:
-- residual audio:
-- proxy leak:
+Pinned source:
 
-## Explicitly NOT VALIDATED by simulator
+- version: 8.1.3
+- tag: n8.1.3
+- commit: 1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7
 
-These must remain NOT RUN regardless of simulator success:
+| Step | x86_64 | arm64-v8a | Evidence |
+| --- | --- | --- | --- |
+| source fetch/pin | NOT RUN | same source | |
+| configure | NOT RUN | NOT RUN | |
+| libavformat.a | NOT RUN | NOT RUN | |
+| libavcodec.a | NOT RUN | NOT RUN | |
+| libavutil.a | NOT RUN | NOT RUN | |
+| libswscale.a | NOT RUN | NOT RUN | |
+| build manifest | NOT RUN | NOT RUN | |
 
-- MPV runtime
-- SMB/SFTP/FTP/NFS native runtime
-- FFmpeg analyzer
-- HDR/Dolby Vision physical output
+FFmpegMediaProbe: NOT RUN  
+FFmpegThumbnailExtractor: NOT RUN  
+System-vs-FFmpeg benchmark: NOT RUN
+
+## 21. Explicit Device-Only Items
+
+Remain NOT RUN regardless of simulator success:
+
+- real MPV runtime
+- SMB/SFTP/FTP/NFS native I/O
+- native HDR/DV output
 - DTS-HD/TrueHD passthrough
 - Atmos/DTS:X
 - Audio Vivid
-- arm64 hardware decode coverage
-- power/thermal performance
-- Auto backend benchmark/tuning
+- arm64 hardware decode
+- power/thermal
+- final Auto performance policy
 
-## Fixes during simulator validation
+## 22. Fixes During Simulator Validation
 
 | Commit | Failure | Root cause | Files | Verification |
 | --- | --- | --- | --- | --- |
 
-## Final assessment
+## 23. Final Assessment
 
-- Production default regression:
-- Simulator isolation:
-- Simulator build:
-- Install:
-- Launch:
-- System playback:
+- production regression:
+- parity/isolation:
+- simulator build:
+- install:
+- UI parity:
+- System:
+- Auto fallback:
+- forced MPV replacement:
 - WebDAV:
+- native-protocol pre-transport path:
 - MediaProxy:
-- Thumbnail:
-- Lifecycle:
-- Security:
-- Remaining blockers:
+- thumbnail:
+- lifecycle:
+- security:
+- FFmpeg x86 build:
+- FFmpeg arm64 build:
+- blockers:
 
-## Handoff decision
+## 24. Handoff Decision
 
 Choose exactly one:
 
 - READY FOR ARCHITECTURE REVIEW
 - BLOCKED — SIMULATOR PRODUCT BUILD
 - BLOCKED — EMULATOR PLATFORM
+- BLOCKED — FFMPEG TOOLCHAIN/PATCH REQUIRED
 - VALIDATION FAILED — FIXES REQUIRED
