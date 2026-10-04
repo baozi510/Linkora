@@ -56,6 +56,7 @@ export class NetworkMediaAnalysisCoordinator {
   private readonly encoder: SystemWebPEncoder = new SystemWebPEncoder();
   private readonly thumbnailPolicy: DefaultThumbnailTimePolicy = new DefaultThumbnailTimePolicy();
   private closed: boolean = false;
+  private cancellationGeneration: number = 0;
 
   constructor(context: common.UIAbilityContext, proxy: NetworkFileProxy) {
     const resolver = new MediaAnalysisInputResolver(new HarmonyAnalysisInputs(context, proxy));
@@ -74,6 +75,7 @@ export class NetworkMediaAnalysisCoordinator {
     Promise<NetworkMediaAnalysisResult> {
     if (this.closed) return new NetworkMediaAnalysisResult(
       durationHintMs, widthHint, heightHint, null);
+    const generation: number = this.cancellationGeneration;
 
     let durationMs: number = Math.max(0, durationHintMs);
     let width: number = Math.max(0, widthHint);
@@ -82,6 +84,9 @@ export class NetworkMediaAnalysisCoordinator {
 
     if (durationMs <= 0 || width <= 0 || height <= 0) {
       const result: ProbeResult = await this.probe.probe(source, ProbeRequirement.LIST);
+      if (generation !== this.cancellationGeneration || this.closed) {
+        return new NetworkMediaAnalysisResult(durationMs, width, height, null);
+      }
       if (result.info !== null && result.isUsable()) {
         const values = this.basic(result.info);
         durationMs = values.durationMs || durationMs;
@@ -98,11 +103,13 @@ export class NetworkMediaAnalysisCoordinator {
     let thumbnailEngine: string = '';
 
     for (const engine of this.policy.thumbnailOrder(source)) {
+      if (generation !== this.cancellationGeneration || this.closed) break;
       if (engine === ProductionAnalysisEngine.FFMPEG) {
         if (!await this.ffmpegThumbnail.canExtract(source)) continue;
         let raw: RawThumbnail | null = null;
         try {
           raw = await this.ffmpegThumbnail.extract(source, request);
+          if (generation !== this.cancellationGeneration || this.closed) break;
           if (raw !== null) {
             encoded = await this.encoder.encodeRaw(raw, plan.quality);
             thumbnailEngine = 'ffmpeg';
@@ -116,6 +123,10 @@ export class NetworkMediaAnalysisCoordinator {
         if (!await this.systemThumbnail.canExtract(source)) continue;
         const frame: image.PixelMap | null =
           await this.systemThumbnail.extract(source, request, durationMs, width, height);
+        if (generation !== this.cancellationGeneration || this.closed) {
+          await frame?.release().catch(() => {});
+          break;
+        }
         if (frame !== null) {
           try {
             encoded = await this.encoder.encode(frame, plan.quality);
@@ -135,6 +146,7 @@ export class NetworkMediaAnalysisCoordinator {
   }
 
   cancel(): void {
+    this.cancellationGeneration++;
     this.probe.cancel();
     this.ffmpegThumbnail.cancel();
     this.systemThumbnail.cancel();
