@@ -105,15 +105,23 @@ The user only needs to send:
 
 Codex must fetch the repository, read the task completely, and validate the task state and source revision before doing any test work.
 
-If the task is not READY, or repository/source checks do not match the task, Codex stops and reports the mismatch.
+The developer's existing local workspace is **not** the validation workspace requirement. If the current local checkout is on another branch or has uncommitted work, Codex must preserve it untouched and create or reuse a separate isolated validation clone/worktree. The isolated validation checkout must be clean before tests begin.
+
+Codex must not stash, reset, clean, checkout over, or otherwise mutate an unrelated dirty user workspace merely to satisfy validation setup.
+
+If the task is not READY, the isolated validation checkout cannot be made clean, or repository/source checks do not match the task, Codex stops and reports the mismatch.
 
 ## Source-revision safety
 
-Because the validation-task file is committed after the implementation commit, the branch HEAD may be one docs-only dispatch commit ahead of the implementation source SHA.
+Because the validation-task file is committed after the implementation commit, the branch HEAD may contain docs-only workflow/dispatch commits ahead of the implementation source SHA.
 
-The task must define the allowed drift. Normally the only allowed path between the implementation source SHA and dispatch HEAD is:
+The task must define the allowed drift explicitly. Normally the permitted drift is limited to operational validation documentation such as:
+
+`docs/AI_WORKFLOW.md`
 
 `docs/CODEX_VALIDATION_TASK.md`
+
+The exact allowed path set for a round is always whatever the current task file declares.
 
 If any production source, test script, build profile, lockfile, or unrelated document changed after the implementation source SHA, Codex must stop rather than silently test a different source.
 
