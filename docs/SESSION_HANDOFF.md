@@ -4,80 +4,80 @@
 
 Repository: `baozi510/Linkora`
 
-Current implementation branch:
+Current branch: `feat/ffmpeg-analyzer-policy-phase3`
 
-`feat/ffmpeg-analyzer-policy-phase3`
+Current phase: **FFmpeg Analyzer Production Policy Phase 3 — implementation reviewed; validation rerun required after second test-infrastructure/lifecycle correction.**
 
-Current phase:
+Latest Codex evidence commit before this review:
 
-**FFmpeg Analyzer Production Policy Phase 3 — implementation complete; post-review validation rerun required.**
+`5917c84df3790a4e832d46ac9ca3f57f176b41d9`
 
-The first Codex test-only run tested source `72e74d11a790bd0d258e219e3a8de18f3c59fd17` and stopped at the first default verification gate. Evidence/report commit `50fc19fbc91337e21180fc8c8a856750a4a20b95` proves the failure was a static-check false positive: a service method parameter named `onMetadata` matched the ArkUI plain-output regex. Codex did not modify production source.
+That rerun tested `81ed0684b273e25afbed056a055ee23aded0b661`. The earlier ArkUI false-positive fix passed. The run then stopped in `scripts/check-network-media-list.cjs` because the desktop VM tried to resolve the target alias `entry/AnalysisComposition` as a root file. No Hypium/HAR/HAP/simulator/runtime Phase 3 claims were made after that stop.
 
-This architecture-review commit narrows that plain-output check to actual ArkUI component/page sources. It does **not** convert the incomplete validation run into PASS. The full Phase 3 validation manual must be rerun from the new branch HEAD.
+### Architecture review of the second stop
 
-### Source-of-truth order for a new session
+The production target alias is valid. The desktop list/cache harness was overreaching by loading the real target-specific analyzer composition for a Loader/cache unit-regression test.
 
-Read these in order before changing code:
+The reviewed correction:
 
-1. `docs/MASTER_IMPLEMENTATION_PLAN.md` — project-wide technical implementation baseline.
-2. `docs/ARCHITECTURE_TARGET.md` — current engineering target architecture.
-3. `docs/ARCHITECTURE_MIGRATION.md` — current strangler-migration path.
-4. `docs/IMPLEMENTATION_STATUS.md` — current completed/pending implementation state.
-5. this `docs/SESSION_HANDOFF.md` CURRENT STATE section.
-6. the latest phase implementation report and validation report/evidence.
-7. inspect the actual Git branch/HEAD and affected source before making changes.
+- mocks `NetworkMediaAnalysisCoordinator` at the Loader boundary in the desktop harness;
+- keeps analyzer adapter/policy behavior covered by the separate 45-case pure suite;
+- restores the pre-Phase-3 late-native-setup cleanup guarantee in `HarmonyAnalysisInputs.openRemote()`;
+- keeps the per-open SFTP fingerprint override empty so persisted `NetworkServerEntry.advancedOptions.sftpFingerprint` remains owned by the storage layer;
+- updates the timeout regression expectation so a cancelled analysis cannot publish a late partial result.
 
-Do not rely on prior chat memory. Repository state and the documents above are the durable project memory.
+This is not a Phase 3 acceptance claim. A fresh validation round is required.
 
-### Approved Phase 3 interpretation of the Master Plan
+### Durable conversation workflow
 
-The Master Plan originally places final analysis policy after System-vs-FFmpeg benchmark. The project later established that x86 simulator performance must not be used for System-vs-FFmpeg ranking. Therefore Phase 3 intentionally introduces only a **functional production policy** before the real arm64 benchmark:
+Read `docs/AI_WORKFLOW.md`.
 
-- LIST: System primary, FFmpeg controlled fallback for resolvable file-like sources.
+New GPT sessions and Codex sessions are intentionally disposable. GitHub is the durable project memory.
+
+For a new GPT session, the user can send only:
+
+`打开 GitHub 仓库 baozi510/Linkora，按照 docs/AI_WORKFLOW.md 的 New GPT Session 流程恢复项目上下文；先审查当前状态，不要直接改代码。`
+
+For a new Codex validation session, the user can send only:
+
+`读取仓库 docs/CODEX_VALIDATION_TASK.md 并严格按其中要求执行本轮测试和取证；不要修改生产源码。`
+
+Every validation round uses the single fixed file `docs/CODEX_VALIDATION_TASK.md`; Git history preserves old tasks.
+
+### Source-of-truth order
+
+1. `docs/MASTER_IMPLEMENTATION_PLAN.md`
+2. later explicitly approved architecture decisions
+3. `docs/ARCHITECTURE_TARGET.md`
+4. `docs/ARCHITECTURE_MIGRATION.md`
+5. `docs/IMPLEMENTATION_STATUS.md`
+6. this CURRENT STATE
+7. current phase report / validation evidence
+8. actual branch/HEAD and affected source
+
+Do not rely on prior chat memory.
+
+### Phase 3 invariants
+
+- LIST: System primary, controlled FFmpeg fallback for resolvable file-like sources.
 - DETAIL / ADVANCED: FFmpeg primary, System fallback only when FFmpeg is unusable.
-- thumbnail: FFmpeg primary for resolvable file-like remote sources, existing System fallback.
-- HLS / DASH / LOCAL_DOCUMENT remain System-only.
-- no System+FFmpeg field merger in this phase.
-- no performance-derived routing in this phase.
-- no playback backend policy change.
-
-This is a staged migration decision, not a claim that the long-term analysis architecture is finished.
-
-### Phase 3 review findings
-
-- SFTP semantic bug fix is correct at the storage boundary: analysis no longer passes `MediaSource.fingerprint` as a host-key fingerprint; SFTP provider/browser resolve trust from `NetworkServerEntry.advancedOptions.sftpFingerprint`.
-- Storage remains protocol-aware; FFmpeg remains protocol-agnostic and continues through RandomAccessSource -> shared MediaProxy -> localhost.
-- default and simulator `AnalysisComposition` remain symmetric at the analyzer boundary.
-- PlaybackBackendSelector / Auto/System/MPV playback policy is unchanged.
-- `NetworkMediaAnalysisCoordinator` is accepted as a Phase 3 production orchestration facade, but the long-term Master Plan still targets explicit `MediaProbeService` / `ThumbnailService` application services. Do not proliferate direct adapter construction into business/UI call sites.
-- the only issue proven by the completed Codex run is the verifier false positive described above. Runtime/load/cache/fallback lifecycle cases were not reached and are not PASS.
+- no System+FFmpeg field merger in Phase 3.
+- remote thumbnail: FFmpeg primary + existing System fallback.
+- HLS / DASH / LOCAL_DOCUMENT: System-only.
+- remote analysis remains RandomAccessSource -> shared MediaProxy -> localhost.
+- FFmpeg remains protocol-agnostic.
+- WebP/cache/time policy remains unchanged.
+- PlaybackBackendSelector and Auto/System/MPV routing remain unchanged.
+- performance ranking remains deferred to real arm64 hardware.
 
 ### Next action
 
-Codex remains test/report-only for Phase 3.
+Use the READY task in `docs/CODEX_VALIDATION_TASK.md` after the validation-dispatch commit is present.
 
-From a clean checkout of the new HEAD:
+Codex remains test/report-only. Any source/test-infrastructure failure that requires modification returns to GPT.
 
-1. run normal `ohpm install`;
-2. run full `scripts/verify.ps1`;
-3. only if the default gate passes, continue the Phase 3 simulator/runtime cases in `docs/CODEX_PHASE3_FUNCTIONAL_VALIDATION.md`;
-4. update `docs/FFMPEG_ANALYZER_POLICY_PHASE3_REPORT.md` with only actually executed evidence;
-5. do not patch production source from Codex;
-6. return failures to ChatGPT for implementation review.
+Performance remains deferred to real arm64 hardware.
 
-Performance remains deferred to a real arm64 device.
-
-### End-of-phase documentation rule
-
-Every implementation/validation phase must close by updating all applicable durable state in the same branch:
-
-- `docs/IMPLEMENTATION_STATUS.md`;
-- the phase implementation/report document;
-- the phase validation report/evidence document;
-- `docs/SESSION_HANDOFF.md` CURRENT STATE / NEXT ACTION.
-
-If a validation rerun follows a source fix, old failed evidence remains historical evidence; do not rewrite it as if it had passed.
 
 # Historical milestones
 

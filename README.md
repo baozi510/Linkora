@@ -46,7 +46,7 @@ Linkora 是一个面向 HarmonyOS 的原生网络媒体播放器。产品分为 
 
 ## 项目状态
 
-项目完整技术实施基线见 [docs/MASTER_IMPLEMENTATION_PLAN.md](docs/MASTER_IMPLEMENTATION_PLAN.md)。当前工程目标与迁移策略分别见 [docs/ARCHITECTURE_TARGET.md](docs/ARCHITECTURE_TARGET.md) 和 [docs/ARCHITECTURE_MIGRATION.md](docs/ARCHITECTURE_MIGRATION.md)；当前执行位置以 [docs/SESSION_HANDOFF.md](docs/SESSION_HANDOFF.md) 与 [docs/IMPLEMENTATION_STATUS.md](docs/IMPLEMENTATION_STATUS.md) 为准。产品里程碑见 [docs/PRODUCT_PLAN.md](docs/PRODUCT_PLAN.md)，网络协议计划见 [docs/NETWORK_SOURCE_PLAN.md](docs/NETWORK_SOURCE_PLAN.md)，数据库规则见 [docs/LOCAL_DATABASE.md](docs/LOCAL_DATABASE.md)，模块边界见 [docs/MODULE_BOUNDARIES.md](docs/MODULE_BOUNDARIES.md)，开发与设备运行方式见 [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)。
+项目完整技术实施基线见 [docs/MASTER_IMPLEMENTATION_PLAN.md](docs/MASTER_IMPLEMENTATION_PLAN.md)。当前工程目标与迁移策略分别见 [docs/ARCHITECTURE_TARGET.md](docs/ARCHITECTURE_TARGET.md) 和 [docs/ARCHITECTURE_MIGRATION.md](docs/ARCHITECTURE_MIGRATION.md)；当前执行位置以 [docs/SESSION_HANDOFF.md](docs/SESSION_HANDOFF.md) 与 [docs/IMPLEMENTATION_STATUS.md](docs/IMPLEMENTATION_STATUS.md) 为准。 GPT/Codex 可替换对话与固定验证任务流程见 [docs/AI_WORKFLOW.md](docs/AI_WORKFLOW.md)。产品里程碑见 [docs/PRODUCT_PLAN.md](docs/PRODUCT_PLAN.md)，网络协议计划见 [docs/NETWORK_SOURCE_PLAN.md](docs/NETWORK_SOURCE_PLAN.md)，数据库规则见 [docs/LOCAL_DATABASE.md](docs/LOCAL_DATABASE.md)，模块边界见 [docs/MODULE_BOUNDARIES.md](docs/MODULE_BOUNDARIES.md)，开发与设备运行方式见 [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)。
 
 ## 发布前必须替换
 

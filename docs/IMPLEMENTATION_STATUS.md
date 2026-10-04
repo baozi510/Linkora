@@ -4,15 +4,21 @@
 
 Project-wide technical baseline: `docs/MASTER_IMPLEMENTATION_PLAN.md`.
 
+Operational GPT/Codex workflow: `docs/AI_WORKFLOW.md`.
+
 Current branch: `feat/ffmpeg-analyzer-policy-phase3`.
 
-Phase 3 production analyzer policy is implemented in source. The first Codex validation run completed its allowed execution and stopped at the first default gate on source `72e74d11a790bd0d258e219e3a8de18f3c59fd17`; report/evidence commit `50fc19fbc91337e21180fc8c8a856750a4a20b95` records a static ArkUI guard false positive before Hypium/HAR/HAP/simulator runtime.
+Phase 3 production analyzer policy is implemented in source but is **not yet accepted**.
 
-Architecture review accepted the Phase 3 implementation direction and SFTP fingerprint ownership. The checker is corrected in the current review commit by scoping the plain `onX/loadX` output-field regex to ArkUI components/pages instead of every service file.
+Validation history:
 
-**Validation status is still incomplete until the full Phase 3 manual is rerun from the new HEAD.** Do not reuse old Phase 2 runtime results as Phase 3 PASS evidence.
+- source `72e74d11a790bd0d258e219e3a8de18f3c59fd17`: stopped at an over-scoped ArkUI static checker; reviewed/fixed.
+- source `81ed0684b273e25afbed056a055ee23aded0b661`: ArkUI gate passed, then desktop `check-network-media-list.cjs` stopped on unresolved `entry/AnalysisComposition`; no later build/runtime gates executed.
+- current review corrects that harness boundary and restores late native setup cleanup serialization in `HarmonyAnalysisInputs`.
 
-Current Phase 3 invariants:
+The second stop is classified as test-harness/module-resolution compatibility plus a migration-time lifecycle guarantee review, not evidence of a production FFmpeg runtime failure.
+
+Current Phase 3 invariants remain unchanged:
 
 - LIST = System primary with controlled FFmpeg fallback for resolvable file-like inputs;
 - DETAIL / ADVANCED = FFmpeg primary, System fallback only when FFmpeg is unusable;
@@ -23,7 +29,7 @@ Current Phase 3 invariants:
 - PlaybackBackendSelector and Auto/System/MPV policy unchanged;
 - performance ranking remains deferred to real arm64 hardware.
 
-For the exact next action, read `docs/SESSION_HANDOFF.md` CURRENT STATE first.
+A fresh Codex validation round must use `docs/CODEX_VALIDATION_TASK.md`. Old partial results cannot be spliced into a new PASS.
 
 
 This file is the current execution status for the architecture migration.

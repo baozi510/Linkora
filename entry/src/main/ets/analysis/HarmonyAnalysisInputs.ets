@@ -22,8 +22,17 @@ export class HarmonyAnalysisInputs implements AnalysisInputPorts {
     const directory = new NetworkDirectoryService(server);
     operation.onCancel(() => directory.cancel());
     // MediaSource.fingerprint is a media/cache identity, not an SFTP host-key fingerprint.
-    // The provider resolves protocol security options from the persisted server entry.
-    return directory.openSource(source.locator);
+    // Pass an empty per-open override so the SFTP provider keeps ownership of persisted trust.
+    let setupSettled: Promise<void> = Promise.resolve();
+    try {
+      return await directory.openSource(source.locator, '',
+        (settled: Promise<void>) => { setupSettled = settled; });
+    } catch (error) {
+      // Native setup may time out before a late handle finishes opening/closing. Preserve the
+      // pre-Phase-3 serialization guarantee so the next loader job does not overlap that cleanup.
+      await setupSettled.catch(() => {});
+      throw error;
+    }
   }
   async openHttp(source: MediaSource, _operation: AnalysisOperation): Promise<RandomAccessSource> {
     // The resolver closes a late HEAD result if cancellation happened while opening.

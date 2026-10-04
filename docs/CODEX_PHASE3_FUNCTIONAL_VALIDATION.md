@@ -5,19 +5,19 @@
 > Do not modify source code. Do not fix failures. Do not merge.
 
 
-## Post-review rerun requirement
+## Validation dispatch rule
 
-The first execution against source `72e74d11a790bd0d258e219e3a8de18f3c59fd17` stopped at the default verifier because a service method callback parameter matched an ArkUI plain-output regex. Evidence is committed at `50fc19fbc91337e21180fc8c8a856750a4a20b95`.
+This file is the stable Phase 3 functional-validation runbook.
 
-ChatGPT architecture review corrected the checker scope; it did not waive the gate and did not mark any unexecuted runtime case PASS.
+The exact branch/source revision for any new execution is **not** inferred from this file or from chat. It is dispatched through:
 
-For the next run:
+`docs/CODEX_VALIDATION_TASK.md`
 
-- start from a clean checkout of the current `feat/ffmpeg-analyzer-policy-phase3` HEAD;
-- rerun the manual from the beginning, including `ohpm install` and full default `scripts/verify.ps1`;
-- do not splice the previous partial pure-test results into the new run;
-- if the default gate passes, continue every achievable functional/runtime section below;
-- keep Codex test/report-only; any new source failure returns to ChatGPT.
+Codex must read that fixed task file first. The task provides the exact implementation source SHA, allowed branch drift, required reading, stop conditions and authorized report/evidence paths.
+
+Historical failed runs remain recorded in `docs/FFMPEG_ANALYZER_POLICY_PHASE3_REPORT.md`; their partial PASS items must never be spliced into a later run.
+
+If `docs/CODEX_VALIDATION_TASK.md` is absent, not READY, or its source checks do not match the repository, do not start Phase 3 validation.
 
 ## 1. What changed
 

@@ -1,9 +1,27 @@
 # FFmpeg Analyzer Production Policy Phase 3 Report
 
-> Status: FAIL — post-review rerun stopped at desktop network-media-list module resolution; ChatGPT source review required.
+> Status: REVIEWED — second rerun stopped at desktop harness alias resolution; harness/lifecycle corrections committed; fresh validation required.
 > Branch: `feat/ffmpeg-analyzer-policy-phase3`
 > Codex role: test/report only; no source fixes.
 > Date: 2026-10-05 (Asia/Shanghai).
+
+
+## Architecture review after second validation stop
+
+Review date: 2026-10-05.
+
+Ruling:
+
+- The rerun correctly proved the previous ArkUI guard fix: that gate passed.
+- The new failure occurs before Loader/cache assertions because the desktop VM loader does not implement Harmony target alias resolution for `entry/AnalysisComposition`.
+- Production `NetworkMediaAnalysisCoordinator` is target-composed by design; changing production imports to satisfy this desktop VM would be the wrong layer.
+- `check-network-media-list.cjs` is a Loader/cache/lifecycle regression harness, so it now mocks `NetworkMediaAnalysisCoordinator` at that boundary. Analyzer policy/adapters remain independently exercised by the 45-case pure suite.
+- While reviewing the old Loader regression coverage, Phase 3 was found to have dropped the prior `setupSettled` wait when remote opening moved into `HarmonyAnalysisInputs`. The production input adapter now captures `NetworkDirectoryService.openSource(..., setupObserver)` and awaits late native setup cleanup on failure before the loader queue can advance.
+- The call passes an explicit empty per-open fingerprint override. It still never passes `MediaSource.fingerprint`; persisted SFTP trust remains in `NetworkServerEntry.advancedOptions.sftpFingerprint`.
+- A cancelled coordinator generation must not publish a late partial result. The desktop regression expectation is updated to assert that behavior instead of the old pre-Phase-3 partial-after-timeout behavior.
+- No performance policy, playback routing, field merger, Direct I/O, or protocol-specific FFmpeg path was introduced.
+
+All gates after the recorded second stop remain NOT RUN. A fresh validation task is required.
 
 
 ## Post-review rerun — 2026-10-05

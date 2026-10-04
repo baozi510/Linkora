@@ -76,7 +76,13 @@ class Probe {
 const kits = {
   '@kit.AbilityKit': {}, '@kit.BasicServicesKit': { systemDateTime: { TimeType: { STARTUP: 0 }, getUptime: () => performance.now() } }, '@kit.CoreFileKit': { fileIo }, '@kit.ImageKit': { image },
   '@kit.ArkData': { relationalStore: { SecurityLevel: { S2: 2 }, getRdbStore: async () => rdb } }, '@kit.NetworkKit': { connection: {} },
-  linkora_core: { LocalFileCategory: { VIDEO: 'video' }, LocalFileFilter: class { categoryOf(name) { return name.endsWith('.mp4') ? 'video' : 'other'; } } },
+  linkora_core: {
+    LocalFileCategory: { VIDEO: 'video' },
+    LocalFileFilter: class { categoryOf(name) { return name.endsWith('.mp4') ? 'video' : 'other'; } },
+    MediaSource: { fromRemoteFile(locator, displayName, originLabel, sizeBytes, sourceId, credentialRef, fingerprint) {
+      return { kind: 'remote_file', locator, displayName, originLabel, sizeBytes, sourceId, credentialRef, fingerprint };
+    } }
+  },
   linkora_media_probe: { NetworkMediaProbe: Probe, ProbeMode: { BOTH: 'both', METADATA: 'metadata', THUMBNAIL: 'thumbnail' } },
   linkora_proxy: { NetworkFileProxy: class {
     diagnostics() { return { bytesRead: 0, readRequests: 0 }; }
@@ -113,6 +119,90 @@ kits[path.join(serviceDir, 'NetworkDirectoryService.ets')] = { NetworkDirectoryS
     return { close: async () => { closed++; }, cancel() {} };
   }
 } };
+const analysisDir = path.join(root, 'entry/src/main/ets/analysis');
+class TestNetworkMediaAnalysisCoordinator {
+  constructor(_context, _proxy) {
+    this.probe = new Probe();
+    this.source = null;
+    this.setupSettled = Promise.resolve();
+    this.cancelled = false;
+  }
+  async inspect(source, durationHintMs = 0, widthHint = 0, heightHint = 0, onMetadata = () => {}) {
+    const Directory = kits[path.join(serviceDir, 'NetworkDirectoryService.ets')].NetworkDirectoryService;
+    const directory = new Directory(server);
+    this.source = await directory.openSource(source.locator, '', settled => { this.setupSettled = settled; });
+    if (this.cancelled) return { durationMs: durationHintMs, width: widthHint, height: heightHint,
+      encodedThumbnail: null, metadataEngine: '', thumbnailEngine: '' };
+
+    const metadataComplete = durationHintMs > 0 && widthHint > 0 && heightHint > 0;
+    const mode = metadataComplete ? 'thumbnail' : 'both';
+    let published = false;
+    const result = await this.probe.inspect('http://127.0.0.1/test', {}, {
+      mode,
+      durationHintMs,
+      widthHint,
+      heightHint,
+      onMetadata: info => {
+        if (this.cancelled) return;
+        published = true;
+        onMetadata(info.durationMs || durationHintMs,
+          info.width > 0 && info.height > 0 ? info.width : widthHint,
+          info.width > 0 && info.height > 0 ? info.height : heightHint,
+          'system');
+      }
+    });
+
+    if (this.cancelled) return { durationMs: durationHintMs, width: widthHint, height: heightHint,
+      encodedThumbnail: null, metadataEngine: '', thumbnailEngine: '' };
+
+    const durationMs = metadataComplete ? durationHintMs : (result.durationMs || durationHintMs);
+    const hasResolution = result.width > 0 && result.height > 0;
+    const width = metadataComplete ? widthHint : (hasResolution ? result.width : widthHint);
+    const height = metadataComplete ? heightHint : (hasResolution ? result.height : heightHint);
+    if (!metadataComplete && !published && !fail && (durationMs > 0 || (width > 0 && height > 0))) {
+      onMetadata(durationMs, width, height, 'system');
+    }
+
+    let encodedThumbnail = null;
+    if (result.thumbnail !== null && result.thumbnail !== undefined) {
+      const packer = image.createImagePacker();
+      try {
+        if (!packer.supportedFormats.includes('image/webp')) throw Error('WebP encoder unavailable');
+        encodedThumbnail = await packer.packing(result.thumbnail, { format: 'image/webp', quality: 80 });
+      } catch (_error) {
+        encodedThumbnail = null;
+      } finally {
+        await packer.release();
+        await result.thumbnail.release();
+      }
+    }
+    return {
+      durationMs,
+      width,
+      height,
+      encodedThumbnail,
+      metadataEngine: durationMs > 0 || (width > 0 && height > 0) ? 'system' : '',
+      thumbnailEngine: encodedThumbnail === null ? '' : 'system'
+    };
+  }
+  cancel() {
+    if (this.cancelled) return;
+    this.cancelled = true;
+    this.probe.cancel();
+    this.source?.cancel?.();
+  }
+  async close() {
+    this.cancel();
+    await Promise.allSettled([
+      this.probe.close(),
+      this.source?.close?.() ?? Promise.resolve(),
+      this.setupSettled
+    ]);
+  }
+}
+kits[path.join(analysisDir, 'NetworkMediaAnalysisCoordinator.ets')] = {
+  NetworkMediaAnalysisCoordinator: TestNetworkMediaAnalysisCoordinator
+};
 kits[path.join(serviceDir, 'NetworkCredentialStore.ets')] = { NetworkCredentialStore: class { async remove() {} } };
 const sqlite = new DatabaseSync(':memory:');
 const rdb = {
@@ -275,9 +365,12 @@ async function check() {
   Probe.prototype.inspect = function() { this.partial = true; return originalInspect.call(this); };
   captureDeadline = true; hold = true;
   const timed = partialLoader.load(partialEntry); await tick(); await tick(); deadline();
-  assert.equal(await timed, null); assert.ok(updates.some(([p, d]) => p === partialEntry.path && d === 1234));
+  assert.equal(await timed, null);
+  assert.equal(updates.some(([p, d]) => p === partialEntry.path && d === 1234), false,
+    'cancelled analysis cannot publish a late partial result');
   const beforeTimeoutRetry = calls;
-  assert.equal(await partialLoader.load(partialEntry), null); assert.equal(calls, beforeTimeoutRetry, 'timeout backoff retains partial metadata');
+  assert.equal(await partialLoader.load(partialEntry), null);
+  assert.equal(calls, beforeTimeoutRetry, 'timeout backoff suppresses an immediate retry');
   captureDeadline = false; hold = false; unblock(); partialLoader.close(); await tick();
   Probe.prototype.inspect = originalInspect;
   const setupLoader = new NetworkMediaLoader(context, server, () => {});
@@ -307,6 +400,13 @@ async function check() {
   assert.equal((await adapter.test(trustRequest)).succeeded, false); assert.equal(trustArgs, undefined, 'strict missing trust sends no credentials');
   assert.equal((await adapter.test({ ...trustRequest, sftpFingerprint: 'SHA256:trusted' })).succeeded, true);
   assert.equal(trustArgs[7], 'SHA256:trusted'); assert.equal(trustArgs[8], 1);
+  const analysisInputsSource = fs.readFileSync(path.join(analysisDir, 'HarmonyAnalysisInputs.ets'), 'utf8');
+  assert.doesNotMatch(analysisInputsSource, /openSource\(source\.locator,\s*source\.fingerprint/,
+    'media/cache fingerprint must never become an SFTP host-key override');
+  assert.match(analysisInputsSource, /openSource\(source\.locator,\s*''/,
+    'analysis remote open must leave the per-open SFTP trust override empty');
+  assert.match(analysisInputsSource, /await setupSettled\.catch/,
+    'analysis remote open must await late native setup cleanup on failure');
   const pageSource = fs.readFileSync(path.join(root, 'entry/src/main/ets/pages/NetworkPage.ets'), 'utf8');
   assert.match(pageSource, /this\.sftpFingerprint\.trim\(\), this\.sftpHostKeyPolicy === SftpHostKeyPolicy\.STRICT/);
   assert.match(pageSource, /server\.advancedOptions\.sftpFingerprint, server\.advancedOptions\.sftpHostKeyPolicy === SftpHostKeyPolicy\.STRICT/);
