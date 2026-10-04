@@ -10,6 +10,11 @@ import { FfmpegMediaProbeAdapter } from '../main/ets/analysis/FfmpegMediaProbeAd
 import { FfmpegThumbnailExtractorAdapter } from '../main/ets/analysis/FfmpegThumbnailExtractorAdapter';
 import { SystemMediaProbeAdapter, SystemAnalysisBackend, SystemAnalysisSnapshot } from '../main/ets/analysis/SystemMediaProbeAdapter';
 import { MediaAnalysisComparison, AnalysisDifferenceKind } from '../main/ets/analysis/MediaAnalysisComparison';
+import { PolicyMediaProbe } from '../main/ets/analysis/PolicyMediaProbe';
+import {
+  ProductionAnalysisEngine,
+  ProductionMediaAnalysisPolicy
+} from '../main/ets/analysis/ProductionMediaAnalysisPolicy';
 
 class TestSource implements RandomAccessSource {
   closes: number = 0; cancels: number = 0;
@@ -69,6 +74,32 @@ function file(format: MediaFormat = MediaFormat.MP4): MediaSource {
   return new MediaSource(MediaSourceKind.NETWORK_LINK, 'https://example.test/file.mp4?token=secret', 'file', '', format);
 }
 function resolver(inputs: TestInputs): MediaAnalysisInputResolver { return new MediaAnalysisInputResolver(inputs); }
+
+class TestPolicyProbe implements IMediaProbe {
+  readonly engine: string;
+  result: ProbeResult;
+  calls: number = 0;
+  can: boolean = true;
+  cancelled: number = 0;
+  closed: number = 0;
+  constructor(engine: string, result: ProbeResult) { this.engine = engine; this.result = result; }
+  name(): string { return this.engine; }
+  async canProbe(_source: MediaSource): Promise<boolean> { return this.can && this.closed === 0; }
+  async probe(_source: MediaSource, _requirement: ProbeRequirement): Promise<ProbeResult> {
+    this.calls++;
+    return this.result;
+  }
+  cancel(): void { this.cancelled++; }
+  async close(): Promise<void> { this.closed++; }
+}
+function probeResult(engine: string, completeness: ProbeCompleteness,
+  info: MediaInfo | null): ProbeResult {
+  return new ProbeResult(info, completeness, [], new MediaProbeDiagnostics(engine));
+}
+function remoteFile(format: MediaFormat = MediaFormat.MATROSKA): MediaSource {
+  return new MediaSource(MediaSourceKind.REMOTE_FILE, '/movie.mkv', 'movie.mkv', '',
+    format, undefined, 1024, '', 'network-server:1');
+}
 
 export default function mediaAnalysisAdaptersTest(): void {
   describe('MediaAnalysisAdapters', () => {
@@ -314,6 +345,92 @@ export default function mediaAnalysisAdaptersTest(): void {
       expect(result.differences.some((d) => d.field === 'container' && d.kind === AnalysisDifferenceKind.FFMPEG_MISSING)).assertTrue();
       expect(result.differences.some((d) => d.field === 'durationMs' && d.kind === AnalysisDifferenceKind.VALUE_DIFFERENCE)).assertTrue();
       expect(result.differences.some((d) => d.field === 'videoCodec' && d.kind === AnalysisDifferenceKind.MATCH)).assertTrue();
+    });
+
+    it('production policy keeps LIST System-first and file-like detail FFmpeg-first', 0, () => {
+      const policy = new ProductionMediaAnalysisPolicy();
+      expect(policy.probeOrder(remoteFile(), ProbeRequirement.LIST)[0])
+        .assertEqual(ProductionAnalysisEngine.SYSTEM);
+      expect(policy.probeOrder(remoteFile(), ProbeRequirement.DETAIL)[0])
+        .assertEqual(ProductionAnalysisEngine.FFMPEG);
+      expect(policy.probeOrder(remoteFile(), ProbeRequirement.ADVANCED)[0])
+        .assertEqual(ProductionAnalysisEngine.FFMPEG);
+      expect(policy.thumbnailOrder(remoteFile())[0]).assertEqual(ProductionAnalysisEngine.FFMPEG);
+    });
+
+    it('production policy keeps local playlists on System functional path', 0, () => {
+      const policy = new ProductionMediaAnalysisPolicy();
+      const local = MediaSource.fromLocalDocument('content://document/movie.mp4', 'movie.mp4');
+      const hls = file(MediaFormat.HLS);
+      const dash = file(MediaFormat.DASH);
+      expect(policy.probeOrder(local, ProbeRequirement.ADVANCED).length).assertEqual(1);
+      expect(policy.probeOrder(local, ProbeRequirement.ADVANCED)[0]).assertEqual(ProductionAnalysisEngine.SYSTEM);
+      expect(policy.thumbnailOrder(hls)[0]).assertEqual(ProductionAnalysisEngine.SYSTEM);
+      expect(policy.thumbnailOrder(dash)[0]).assertEqual(ProductionAnalysisEngine.SYSTEM);
+    });
+
+    it('LIST accepts complete System result without invoking FFmpeg', 0, async () => {
+      const info = new MediaInfo('', 1000, 0, 0,
+        [new VideoTrackInfo('primary', '', '', '', 640, 360)]);
+      const system = new TestPolicyProbe('system',
+        probeResult('system', ProbeCompleteness.COMPLETE, info));
+      const ffmpeg = new TestPolicyProbe('ffmpeg',
+        probeResult('ffmpeg', ProbeCompleteness.COMPLETE, info));
+      const policyProbe = new PolicyMediaProbe(system, ffmpeg);
+      const result = await policyProbe.probe(remoteFile(), ProbeRequirement.LIST);
+      expect(result.diagnostics.engine).assertEqual('system');
+      expect(system.calls).assertEqual(1);
+      expect(ffmpeg.calls).assertEqual(0);
+      await policyProbe.close();
+    });
+
+    it('LIST falls back from partial System to complete FFmpeg without merging', 0, async () => {
+      const systemInfo = new MediaInfo('', 1000);
+      const ffmpegInfo = new MediaInfo('matroska', 1000, 0, 0,
+        [new VideoTrackInfo('v', 'hevc', 'Main 10', '', 640, 360, 24, 0, 10)]);
+      const system = new TestPolicyProbe('system',
+        probeResult('system', ProbeCompleteness.PARTIAL, systemInfo));
+      const ffmpeg = new TestPolicyProbe('ffmpeg',
+        probeResult('ffmpeg', ProbeCompleteness.COMPLETE, ffmpegInfo));
+      const policyProbe = new PolicyMediaProbe(system, ffmpeg);
+      const result = await policyProbe.probe(remoteFile(), ProbeRequirement.LIST);
+      expect(result.info!.container).assertEqual('matroska');
+      expect(result.diagnostics.engine).assertEqual('ffmpeg');
+      expect(system.calls).assertEqual(1);
+      expect(ffmpeg.calls).assertEqual(1);
+      await policyProbe.close();
+    });
+
+    it('DETAIL falls back to System only when FFmpeg is unusable', 0, async () => {
+      const systemInfo = new MediaInfo('', 1000, 0, 0,
+        [new VideoTrackInfo('primary', '', '', '', 640, 360)]);
+      const system = new TestPolicyProbe('system',
+        probeResult('system', ProbeCompleteness.PARTIAL, systemInfo));
+      const ffmpeg = new TestPolicyProbe('ffmpeg',
+        probeResult('ffmpeg', ProbeCompleteness.UNAVAILABLE, null));
+      const policyProbe = new PolicyMediaProbe(system, ffmpeg);
+      const result = await policyProbe.probe(remoteFile(), ProbeRequirement.DETAIL);
+      expect(result.diagnostics.engine).assertEqual('system');
+      expect(ffmpeg.calls).assertEqual(1);
+      expect(system.calls).assertEqual(1);
+      await policyProbe.close();
+    });
+
+    it('DETAIL keeps usable partial FFmpeg result and does not merge System fields', 0, async () => {
+      const ffmpegInfo = new MediaInfo('matroska', 1000, 0, 0,
+        [new VideoTrackInfo('v', 'hevc', 'Main', '', 640, 360)]);
+      const systemInfo = new MediaInfo('', 1000, 0, 0,
+        [new VideoTrackInfo('primary', '', '', '', 1920, 1080)]);
+      const ffmpeg = new TestPolicyProbe('ffmpeg',
+        probeResult('ffmpeg', ProbeCompleteness.PARTIAL, ffmpegInfo));
+      const system = new TestPolicyProbe('system',
+        probeResult('system', ProbeCompleteness.PARTIAL, systemInfo));
+      const policyProbe = new PolicyMediaProbe(system, ffmpeg);
+      const result = await policyProbe.probe(remoteFile(), ProbeRequirement.DETAIL);
+      expect(result.info!.videoTracks[0].width).assertEqual(640);
+      expect(result.diagnostics.engine).assertEqual('ffmpeg');
+      expect(system.calls).assertEqual(0);
+      await policyProbe.close();
     });
   });
 }
