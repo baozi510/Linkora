@@ -46,7 +46,8 @@ export class PolicyMediaProbe implements IMediaProbe {
 
   async probe(source: MediaSource, requirement: ProbeRequirement): Promise<ProbeResult> {
     if (this.closed) {
-      return new ProbeResult(null, ProbeCompleteness.UNAVAILABLE);
+      return new ProbeResult(null, ProbeCompleteness.UNAVAILABLE, [],
+        new MediaProbeDiagnostics('policy'), AnalysisErrorCode.CLOSED);
     }
 
     const generation: number = this.cancellationGeneration;
@@ -79,7 +80,8 @@ export class PolicyMediaProbe implements IMediaProbe {
       }
     }
 
-    return best ?? new ProbeResult(null, ProbeCompleteness.UNAVAILABLE);
+    return best ?? new ProbeResult(null, ProbeCompleteness.UNAVAILABLE, [],
+      new MediaProbeDiagnostics('policy'), AnalysisErrorCode.UNSUPPORTED);
   }
 
   cancel(): void {
