@@ -88,7 +88,7 @@ export default function mediaAnalysisAdaptersTest(): void {
     for (const engine of ['ffmpeg', 'system']) {
       it('review ' + engine + ' cancellation retains identity when backend rejects', 0, async () => {
         const ports = new TestInputs(); const native = new TestNative(); const backend = new TestSystem();
-        let rejectWork: (error: Error) => void = () => {};
+        let rejectWork: (error: FfmpegError) => void = () => {};
         native.work = () => new Promise((_resolve, reject) => { rejectWork = reject; });
         backend.work = () => new Promise((_resolve, reject) => { rejectWork = reject; });
         const probe: IMediaProbe = engine === 'ffmpeg' ? new FfmpegMediaProbeAdapter(resolver(ports), new FfmpegAnalysis(native)) :
@@ -116,7 +116,7 @@ export default function mediaAnalysisAdaptersTest(): void {
       });
     }
     it('review thumbnail cancellation retains identity when native frame rejects', 0, async () => {
-      const ports = new TestInputs(); const native = new TestNative(); let rejectWork: (error: Error) => void = () => {};
+      const ports = new TestInputs(); const native = new TestNative(); let rejectWork: (error: FfmpegError) => void = () => {};
       native.frameWork = () => new Promise((_resolve, reject) => { rejectWork = reject; });
       const extractor = new FfmpegThumbnailExtractorAdapter(resolver(ports), new FfmpegAnalysis(native));
       const pending = extractor.extract(file(), new ThumbnailExtractRequest(1000));
