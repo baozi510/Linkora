@@ -534,3 +534,48 @@ Still forbidden:
 - System/FFmpeg merger;
 - AVIO direct storage callbacks;
 - MPV/Auto changes.
+
+
+## FFmpeg Phase 1B runtime accepted / build isolation hardening required
+
+Phase 1B runtime validation is accepted.
+
+Validated source:
+
+`d8dad1d757c5b7e6a13b9603d540903aba99567a`
+
+Confirmed:
+
+- real x86 `liblinkora_ffmpeg.so` packaged and loaded;
+- real NAPI import/factory/probe/frame/cancel;
+- local MP4 and MKV probe;
+- software RGBA frame extraction;
+- WebDAV -> RandomAccessSource -> MediaProxy -> FFmpeg;
+- high-offset Range seek evidence;
+- real FF_TIMEOUT through stalling MediaProxy source;
+- 10 active FF_CANCELLED cycles;
+- concurrency isolation;
+- 20 lifecycle cycles;
+- final default arm64 Debug/Release builds;
+- Hypium 164/164.
+
+One important build-system issue remains before production analyzer routing:
+
+A simulator target dependency resolution previously left the workspace in a state where a subsequent default HAP omitted real MPV until normal `ohpm install` restored the default dependency graph.
+
+Current hardening branch:
+
+`fix/simulator-default-dependency-restore`
+
+Read:
+
+- `docs/CODEX_BUILD_ISOLATION_HARDENING.md`
+- `docs/BUILD_ISOLATION_HARDENING_REPORT.md`
+
+This branch:
+
+- makes simulator verification restore the default ohpm dependency graph automatically;
+- requires all 9 expected production native libraries in default artifact audits;
+- tightens FFmpeg bootstrap manifest checks to exact lines.
+
+Do not start production FFmpeg analyzer routing until this hardening report passes.
