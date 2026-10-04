@@ -5,6 +5,7 @@ import {
   ProbeRequirement,
   ProbeResult
 } from 'linkora_core';
+import { AnalysisErrorCode } from './AnalysisOperation';
 import {
   ProductionAnalysisEngine,
   ProductionMediaAnalysisPolicy
@@ -19,6 +20,7 @@ export class PolicyMediaProbe implements IMediaProbe {
   private readonly ffmpeg: IMediaProbe;
   private readonly policy: ProductionMediaAnalysisPolicy;
   private closed: boolean = false;
+  private cancellationGeneration: number = 0;
 
   constructor(system: IMediaProbe, ffmpeg: IMediaProbe,
     policy: ProductionMediaAnalysisPolicy = new ProductionMediaAnalysisPolicy()) {
@@ -46,14 +48,23 @@ export class PolicyMediaProbe implements IMediaProbe {
       return new ProbeResult(null, ProbeCompleteness.UNAVAILABLE);
     }
 
+    const generation: number = this.cancellationGeneration;
     const order: ProductionAnalysisEngine[] = this.policy.probeOrder(source, requirement);
     let best: ProbeResult | null = null;
 
     for (let index: number = 0; index < order.length; index++) {
+      if (generation !== this.cancellationGeneration || this.closed) {
+        return new ProbeResult(null, ProbeCompleteness.UNAVAILABLE, [], undefined,
+          AnalysisErrorCode.CANCELLED);
+      }
       const adapter: IMediaProbe = this.adapter(order[index]);
       if (!await adapter.canProbe(source)) continue;
 
       const result: ProbeResult = await adapter.probe(source, requirement);
+      if (generation !== this.cancellationGeneration || this.closed) {
+        return new ProbeResult(null, ProbeCompleteness.UNAVAILABLE, [], undefined,
+          AnalysisErrorCode.CANCELLED);
+      }
       if (result.completeness === ProbeCompleteness.COMPLETE) return result;
 
       if (result.isUsable()) {
@@ -71,6 +82,7 @@ export class PolicyMediaProbe implements IMediaProbe {
   }
 
   cancel(): void {
+    this.cancellationGeneration++;
     this.system.cancel();
     this.ffmpeg.cancel();
   }
@@ -78,6 +90,7 @@ export class PolicyMediaProbe implements IMediaProbe {
   async close(): Promise<void> {
     if (this.closed) return;
     this.closed = true;
+    this.cancel();
     await Promise.allSettled([this.system.close(), this.ffmpeg.close()]);
   }
 
