@@ -1,5 +1,7 @@
 # Codex FFmpeg Media Analysis Phase 1 Runbook
 
+> **Architecture review update:** Phase 1A build/unit work completed successfully. The old §22 stop condition was intentionally conservative and stopped before x86 runtime smoke. Runtime continuation is now authorized only under `docs/CODEX_FFMPEG_PHASE1B_RUNTIME_RUNBOOK.md`.
+
 > Branch: `feat/ffmpeg-media-analysis-phase1`  
 > Base: `test/simulator-validation`  
 > Status: IMPLEMENTATION AUTHORIZED  
