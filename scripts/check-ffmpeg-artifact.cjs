@@ -14,8 +14,21 @@ function checkNativeEntries(entries, abi) {
   }
   if (analyzer !== 1) throw Error('Expected exactly one liblinkora_ffmpeg.so; got ' + analyzer);
   if (abi === 'arm64-v8a') {
-    for (const name of ['libmpv.so', 'libmpv_wrapper.so', 'libaki_jsbind.so']) {
-      if (!entries.some(entry => entry.name === `libs/arm64-v8a/${name}`)) throw Error('Missing production MPV library: ' + name);
+    const required = [
+      'libaki_jsbind.so',
+      'libc++_shared.so',
+      'liblinkora_ffmpeg.so',
+      'liblinkora_smb.so',
+      'liblinkora_sftp.so',
+      'liblinkora_ftp.so',
+      'liblinkora_nfs.so',
+      'libmpv.so',
+      'libmpv_wrapper.so'
+    ];
+    for (const name of required) {
+      if (!entries.some(entry => entry.name === `libs/arm64-v8a/${name}`)) {
+        throw Error('Missing production native library: ' + name);
+      }
     }
   }
   return entries.filter(entry => entry.name.endsWith('.so')).length;
