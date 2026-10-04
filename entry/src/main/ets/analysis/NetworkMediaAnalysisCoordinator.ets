@@ -10,7 +10,8 @@ import {
   ProbeResult,
   RawThumbnail,
   ThumbnailExtractRequest,
-  ThumbnailPlan
+  ThumbnailPlan,
+  VideoTrackInfo
 } from 'linkora_core';
 import { NetworkFileProxy } from 'linkora_proxy';
 import { AnalysisComposition } from 'entry/AnalysisComposition';
@@ -23,6 +24,18 @@ import {
 } from './ProductionMediaAnalysisPolicy';
 import { SystemThumbnailFallback } from './SystemThumbnailFallback';
 import { SystemWebPEncoder } from '../services/SystemWebPEncoder';
+
+class BasicMediaMetadata {
+  readonly durationMs: number;
+  readonly width: number;
+  readonly height: number;
+
+  constructor(durationMs: number, width: number, height: number) {
+    this.durationMs = Math.max(0, durationMs);
+    this.width = Math.max(0, width);
+    this.height = Math.max(0, height);
+  }
+}
 
 export class NetworkMediaAnalysisResult {
   readonly durationMs: number;
@@ -163,14 +176,16 @@ export class NetworkMediaAnalysisCoordinator {
     ]);
   }
 
-  private basic(info: MediaInfo): { durationMs: number; width: number; height: number } {
+  private basic(info: MediaInfo): BasicMediaMetadata {
     let width: number = 0;
     let height: number = 0;
-    const primary = info.videoTracks.find((track) => track.isDefault) ?? info.videoTracks[0];
+    const primary: VideoTrackInfo | undefined =
+      info.videoTracks.find((track: VideoTrackInfo): boolean => track.isDefault) ??
+      info.videoTracks[0];
     if (primary !== undefined) {
       width = primary.width;
       height = primary.height;
     }
-    return { durationMs: info.durationMs, width, height };
+    return new BasicMediaMetadata(info.durationMs, width, height);
   }
 }
