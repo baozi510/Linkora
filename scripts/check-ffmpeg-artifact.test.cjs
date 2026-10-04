@@ -35,3 +35,21 @@ test('rejects default HAP polluted by simulator dependency state', () => {
   assert.throws(() => checkNativeEntries(incomplete, 'arm64-v8a'),
     /Missing production native library/);
 });
+for (const missing of ['libaki_jsbind.so', 'libc++_shared.so', 'liblinkora_ffmpeg.so',
+  'liblinkora_smb.so', 'liblinkora_sftp.so', 'liblinkora_ftp.so', 'liblinkora_nfs.so',
+  'libmpv.so', 'libmpv_wrapper.so']) {
+  test('rejects default with only ' + missing + ' missing', () => {
+    const entries = ['libaki_jsbind.so', 'libc++_shared.so', 'liblinkora_ffmpeg.so',
+      'liblinkora_smb.so', 'liblinkora_sftp.so', 'liblinkora_ftp.so', 'liblinkora_nfs.so',
+      'libmpv.so', 'libmpv_wrapper.so'].filter(name => name !== missing)
+      .map(name => ({ name: 'libs/arm64-v8a/' + name, data: elf(183) }));
+    assert.throws(() => checkNativeEntries(entries, 'arm64-v8a'), missing === 'liblinkora_ffmpeg.so'
+      ? /Expected exactly one liblinkora_ffmpeg/ : error => error.message === 'Missing production native library: ' + missing);
+  });
+}
+test('rejects unknown x86 simulator native library', () => {
+  assert.throws(() => checkNativeEntries([
+    { name: 'libs/x86_64/liblinkora_ffmpeg.so', data: elf(62) },
+    { name: 'libs/x86_64/libunexpected.so', data: elf(62) }
+  ], 'x86_64'), /Unapproved simulator native library/);
+});
