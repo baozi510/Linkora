@@ -1,7 +1,7 @@
 # Codex Validation Task
 
 > State: READY
-> Task ID: phase3-rerun-3-harness-lifecycle
+> Task ID: phase3-rerun-3b-isolated-checkout
 > Repository: `baozi510/Linkora`
 > Branch: `feat/ffmpeg-analyzer-policy-phase3`
 > Implementation source SHA: `15db3f8a3e87f75edc209c1919f944f39c0b9fcb`
@@ -13,32 +13,53 @@ This file is the only current validation dispatch.
 
 Do not rely on any previous Codex conversation.
 
-Fetch the repository and check out:
+The user's existing local workspace is **not required** to already be on the validation branch or be clean.
 
-`feat/ffmpeg-analyzer-policy-phase3`
+If the current workspace is on another branch (for example `main`) or contains uncommitted work:
 
-Before running tests:
+- do **not** stash it;
+- do **not** reset it;
+- do **not** clean it;
+- do **not** checkout another branch over it;
+- leave it completely untouched.
 
-1. confirm `git status` is clean;
-2. record the actual branch HEAD;
-3. confirm `15db3f8a3e87f75edc209c1919f944f39c0b9fcb` is an ancestor of that HEAD;
-4. run:
+Instead, create or reuse a **separate isolated validation clone/worktree** and perform all validation there.
+
+If an existing validation checkout is itself dirty, do not destroy its work. Create another clean isolated validation checkout.
+
+In the isolated validation checkout:
+
+1. fetch the repository;
+2. check out the remote branch `feat/ffmpeg-analyzer-policy-phase3`;
+3. confirm the isolated checkout's `git status` is clean;
+4. record the actual validation checkout HEAD;
+5. confirm `15db3f8a3e87f75edc209c1919f944f39c0b9fcb` is an ancestor of that HEAD;
+6. run:
 
 ```powershell
 git diff --name-only 15db3f8a3e87f75edc209c1919f944f39c0b9fcb..HEAD
 ```
 
-The only permitted path after the implementation source SHA is:
+The only permitted changed paths after the implementation source SHA are:
 
 ```text
+docs/AI_WORKFLOW.md
 docs/CODEX_VALIDATION_TASK.md
 ```
 
-If any production source, test script, build profile, lockfile, report, evidence or unrelated file also changed after the implementation source SHA, **STOP** and report the mismatch. Do not guess which revision to test.
+No other path is allowed.
 
-The validation checkout HEAD may therefore be one docs-only dispatch commit ahead of the implementation source SHA. Record both SHAs in the final report.
+If any production source, test script, build profile, lockfile, report, evidence or unrelated document changed after the implementation source SHA, **STOP** and report the mismatch. Do not guess which revision to test.
+
+The validation checkout HEAD may therefore contain docs-only workflow/dispatch commits ahead of the implementation source SHA. Record both the implementation source SHA and actual validation checkout SHA in the final report.
 
 Do not modify this task file.
+
+Important distinction:
+
+- dirty/unrelated **user workspace** -> preserve it and use an isolated validation checkout;
+- dirty **validation checkout** -> do not test there; create another clean validation checkout or stop if that is impossible;
+- source/HEAD mismatch beyond the explicitly allowed docs-only paths -> STOP.
 
 ## 2. Required reading
 
@@ -78,6 +99,7 @@ No System/FFmpeg performance policy, playback routing, field merger or Direct I/
 
 Allowed:
 
+- create/reuse a separate isolated validation clone/worktree without modifying the user's unrelated dirty workspace;
 - run builds/tests;
 - install/run the supported simulator or device when required by the Phase 3 runbook;
 - collect sanitized evidence;
@@ -296,6 +318,8 @@ The report must record:
 - task ID;
 - implementation source SHA `15db3f8a3e87f75edc209c1919f944f39c0b9fcb`;
 - actual validation checkout SHA;
+- isolated validation checkout path/worktree identity;
+- confirmation that any unrelated dirty user workspace was left untouched;
 - exact commands;
 - exit codes;
 - actual Hypium count if executed;
