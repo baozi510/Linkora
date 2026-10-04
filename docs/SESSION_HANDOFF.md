@@ -480,3 +480,57 @@ Still forbidden before the next architecture review:
 - System/FFmpeg policy tuning;
 - AVIOContext direct callbacks;
 - FFmpeg playback backend.
+
+
+## FFmpeg Phase 1A accepted / Phase 1B runtime required
+
+Phase 1A branch:
+
+`feat/ffmpeg-media-analysis-phase1`
+
+Phase 1A validated source:
+
+`772889a48aabec8d8c427a1222126c1709159ca4`
+
+Accepted Phase 1A results:
+
+- dedicated `linkora_ffmpeg` module exists;
+- pinned static FFmpeg linkage is isolated from MPV;
+- arm64-v8a native Debug/Release link passes;
+- default arm64 HAP Debug/Release passes;
+- NAPI work/request/cancel design passed source/unit review;
+- Hypium 164/164 passed at the validated source;
+- no production analyzer/playback policy was changed.
+
+Phase 1A did **not** execute the x86 simulator native runtime because the previous runbook stop condition fired after arm64 link success. This is not sufficient for analyzer integration.
+
+Current runtime-validation branch:
+
+`test/ffmpeg-media-analysis-phase1b-runtime`
+
+Read:
+
+1. `docs/CODEX_FFMPEG_PHASE1B_RUNTIME_RUNBOOK.md`
+2. `docs/FFMPEG_PHASE1B_RUNTIME_REPORT.md`
+3. `docs/FFMPEG_PHASE1_REPORT.md`
+
+Phase 1B must attempt real x86:
+
+- HAP packaging/install;
+- `liblinkora_ffmpeg.so` load;
+- NAPI factory;
+- local probe;
+- local frame extraction;
+- WebDAV -> MediaProxy -> FFmpeg probe/frame;
+- real timeout;
+- real cancellation;
+- concurrency;
+- lifecycle cycles.
+
+Still forbidden:
+
+- production FFmpeg routing;
+- probe-policy tuning;
+- System/FFmpeg merger;
+- AVIO direct storage callbacks;
+- MPV/Auto changes.
