@@ -46,3 +46,8 @@ linkora_media_probe/BuildProfile.ets
 .env
 .env.*
 !.env.example
+
+# Reproducible FFmpeg bootstrap outputs (source and binaries are generated, not vendored)
+third_party/ffmpeg/source/
+third_party/ffmpeg/build/
+third_party/ffmpeg/prebuilt/
