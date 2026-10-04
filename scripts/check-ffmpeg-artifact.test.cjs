@@ -16,17 +16,22 @@ test('rejects production native libs even when ELF is x86', () => {
   assert.throws(() => checkNativeEntries([{ name: 'libs/x86_64/liblinkora_smb.so', data: elf(62) },
     { name: 'libs/x86_64/liblinkora_ffmpeg.so', data: elf(62) }], 'x86_64'));
 });
-test('default confirms FFmpeg and existing libraries are AArch64', () => {
-  assert.equal(checkNativeEntries([{ name: 'libs/arm64-v8a/liblinkora_ffmpeg.so', data: elf(183) },
-    { name: 'libs/arm64-v8a/libmpv.so', data: elf(183) },
-    { name: 'libs/arm64-v8a/libmpv_wrapper.so', data: elf(183) },
-    { name: 'libs/arm64-v8a/libaki_jsbind.so', data: elf(183) }], 'arm64-v8a'), 4);
+test('default confirms the complete production native set is AArch64', () => {
+  const names = ['libaki_jsbind.so', 'libc++_shared.so', 'liblinkora_ffmpeg.so',
+    'liblinkora_smb.so', 'liblinkora_sftp.so', 'liblinkora_ftp.so', 'liblinkora_nfs.so',
+    'libmpv.so', 'libmpv_wrapper.so'];
+  const entries = names.map(name => ({ name: 'libs/arm64-v8a/' + name, data: elf(183) }));
+  assert.equal(checkNativeEntries(entries, 'arm64-v8a'), 9);
 });
 test('rejects missing analyzer and unrecognized ELF', () => {
   assert.throws(() => checkNativeEntries([], 'arm64-v8a'));
   assert.throws(() => checkNativeEntries([{ name: 'libs/arm64-v8a/liblinkora_ffmpeg.so', data: Buffer.alloc(64) }], 'arm64-v8a'));
 });
-test('rejects default HAP polluted by simulator MPV dependency override', () => {
-  assert.throws(() => checkNativeEntries([{ name: 'libs/arm64-v8a/liblinkora_ffmpeg.so', data: elf(183) }], 'arm64-v8a'),
-    /Missing production MPV library/);
+test('rejects default HAP polluted by simulator dependency state', () => {
+  const incomplete = [
+    'libaki_jsbind.so', 'libc++_shared.so', 'liblinkora_ffmpeg.so',
+    'liblinkora_smb.so', 'liblinkora_sftp.so', 'liblinkora_ftp.so'
+  ].map(name => ({ name: 'libs/arm64-v8a/' + name, data: elf(183) }));
+  assert.throws(() => checkNativeEntries(incomplete, 'arm64-v8a'),
+    /Missing production native library/);
 });
