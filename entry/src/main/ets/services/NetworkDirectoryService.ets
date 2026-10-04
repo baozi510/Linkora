@@ -7,7 +7,7 @@ import {
   StorageListOptions
 } from 'linkora_core';
 import { NetworkDirectoryEntry, NetworkDirectoryEntryKind } from '../models/NetworkDirectoryState';
-import { createDefaultNetworkStorageProviderRegistry } from './DefaultNetworkStorageProviders';
+import { createDefaultNetworkStorageProviderRegistry } from 'entry/ets/services/DefaultNetworkStorageProviders';
 import {
   NetworkStorageOpenOptions,
   NetworkStorageProvider,

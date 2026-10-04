@@ -8,7 +8,7 @@ import { AppSheetHeader } from '../components/AppSheetHeader';
 import { AppSheetSurface } from '../components/AppSheetSurface';
 import { ConnectionTestPanel } from '../components/ConnectionTestPanel';
 import { AppToolbar } from '../components/AppToolbar';
-import { NetworkProtocolTestRegistry } from '../adapters/NetworkProtocolTestRegistry';
+import { NetworkProtocolTestRegistry } from 'entry/ets/adapters/NetworkProtocolTestRegistry';
 import { FtpPassiveMode, FtpSecurityMode, NetworkAdvancedOptions, NetworkServerDraft,
   NetworkServerEntry, NetworkServerStore, SftpAuthMode, SftpHostKeyPolicy } from '../services/NetworkServerStore';
 import { UpnpDiscoveryScanner } from '../services/UpnpDiscoveryScanner';
@@ -139,7 +139,7 @@ export struct NetworkPage {
     this.loadFailure = '';
     try {
       this.servers = (await this.serverStore.load())
-        .filter((server: NetworkServerEntry) => server.protocol !== RemoteProtocol.HTTP);
+        .filter((server: NetworkServerEntry) => server.protocol !== RemoteProtocol.HTTP && RuntimeProfile.supportsNetworkProtocol(server.protocol));
     } catch (_error) {
       this.loadFailure = '服务器列表加载失败';
     } finally {
@@ -743,7 +743,7 @@ export struct NetworkPage {
         this.advancedOptions());
       const entries: NetworkServerEntry[] = this.editingServerId > 0 ?
         await this.serverStore.update(this.editingServerId, draft) : await this.serverStore.add(draft);
-      this.servers = entries.filter((server: NetworkServerEntry) => server.protocol !== RemoteProtocol.HTTP);
+      this.servers = entries.filter((server: NetworkServerEntry) => server.protocol !== RemoteProtocol.HTTP && RuntimeProfile.supportsNetworkProtocol(server.protocol));
       this.addSheetVisible = false;
       this.editingServerId = -1;
     } catch (_error) {
@@ -895,7 +895,7 @@ export struct NetworkPage {
     }
     try {
       this.servers = (await this.serverStore.remove(id))
-        .filter((server: NetworkServerEntry) => server.protocol !== RemoteProtocol.HTTP);
+        .filter((server: NetworkServerEntry) => server.protocol !== RemoteProtocol.HTTP && RuntimeProfile.supportsNetworkProtocol(server.protocol));
     } catch (_error) {
       this.showOperationError('删除失败', '服务器仍保留在列表中，请稍后重试。');
     }
@@ -1179,7 +1179,8 @@ export struct NetworkPage {
       AppSheetHeader({ title: '选择网络类型' })
         .padding({ bottom: 12 })
       ForEach(NETWORK_PROTOCOL_CAPABILITIES.filter((capability: ProtocolCapability) =>
-        capability.protocol !== RemoteProtocol.HTTP), (capability: ProtocolCapability) => {
+        capability.protocol !== RemoteProtocol.HTTP &&
+        RuntimeProfile.supportsNetworkProtocol(capability.protocol)), (capability: ProtocolCapability) => {
         this.protocolOption(capability)
       }, (capability: ProtocolCapability) => capability.protocol)
       Row()

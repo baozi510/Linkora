@@ -7,7 +7,7 @@ import { HarmonyLocalFilePickerGateway } from '../adapters/HarmonyLocalFilePicke
 import { HarmonyMediaLibraryGateway } from '../adapters/HarmonyMediaLibraryGateway';
 import { HarmonyNetworkProbe } from '../adapters/HarmonyNetworkProbe';
 import { HarmonyNetworkAccessPolicy } from '../adapters/HarmonyNetworkAccessPolicy';
-import { AdaptivePlaybackPort } from '../playback/AdaptivePlaybackPort';
+import { createPlaybackPort } from 'entry/PlaybackComposition';
 import { PlaybackBookmarkStore } from '../services/PlaybackBookmarkStore';
 import { RecentMediaStore } from '../services/RecentMediaStore';
 import { AppSettingsStore } from '../services/AppSettingsStore';
@@ -76,7 +76,7 @@ export class LinkoraFeatures {
     settings: AppSettings, observer: PlayerFeatureObserver): PlayerFeatureController {
     const engineFactory: PlaybackEngineFactory = (playbackObserver: PlaybackObserver) =>
       new PlaybackEngine(playbackObserver, async (portObserver) =>
-        new AdaptivePlaybackPort(context, LinkoraFeatures.sharedMediaProxy(), portObserver,
+        createPlaybackPort(context, LinkoraFeatures.sharedMediaProxy(), portObserver,
           settings.playerBackendPreference));
     return new PlayerFeatureController(
       source,

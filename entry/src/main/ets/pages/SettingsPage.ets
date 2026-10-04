@@ -7,6 +7,7 @@ import { SettingsDetail } from '../models/AppNavigation';
 import { LocalViewSettings } from '../models/LocalMediaViewOptions';
 import { LocalViewSettingsStore } from '../services/LocalViewSettingsStore';
 import { AppColors, AppRadius, AppSpacing, AppTypography } from '../ui/AppTheme';
+import { RuntimeProfile } from 'entry/RuntimeProfile';
 
 @ComponentV2
 export struct SettingsPage {
@@ -255,7 +256,8 @@ export struct SettingsPage {
         }
         .alignItems(HorizontalAlign.Start)
         .layoutWeight(1)
-        if (this.settings.playerBackendPreference === preference) {
+        if ((RuntimeProfile.systemOnlyPlayback() && preference === PlayerBackendPreference.SYSTEM) ||
+          (!RuntimeProfile.systemOnlyPlayback() && this.settings.playerBackendPreference === preference)) {
           AppIcon({ name: AppIconName.CHECK_CIRCLE, iconSize: 20,
             color: AppColors.accent(this.accentColor) })
         }
@@ -565,14 +567,25 @@ export struct SettingsPage {
           .fontColor(AppColors.TEXT_SECONDARY)
           .width('100%')
         Column() {
-          this.backendChoice(PlayerBackendPreference.AUTO, '自动',
-            '根据媒体类型选择内核；打开失败时最多回退一次')
-          this.backendChoice(PlayerBackendPreference.SYSTEM, '系统播放器',
-            '优先使用 HarmonyOS AVPlayer')
-          this.backendChoice(PlayerBackendPreference.MPV, 'MPV',
-            '优先使用 libmpv，兼容复杂封装、字幕与音轨')
+          if (RuntimeProfile.systemOnlyPlayback()) {
+            this.backendChoice(PlayerBackendPreference.SYSTEM, '系统播放器',
+              '模拟器验证构建仅启用 HarmonyOS AVPlayer')
+          } else {
+            this.backendChoice(PlayerBackendPreference.AUTO, '自动',
+              '根据媒体类型选择内核；打开失败时最多回退一次')
+            this.backendChoice(PlayerBackendPreference.SYSTEM, '系统播放器',
+              '优先使用 HarmonyOS AVPlayer')
+            this.backendChoice(PlayerBackendPreference.MPV, 'MPV',
+              '优先使用 libmpv，兼容复杂封装、字幕与音轨')
+          }
         }
         .width('100%')
+        if (RuntimeProfile.systemOnlyPlayback()) {
+          Text('当前为 x86_64 模拟器验证构建：MPV 与 Native 文件协议已从运行产物隔离。')
+            .fontSize(AppTypography.META)
+            .fontColor(AppColors.TEXT_MUTED)
+            .width('100%')
+        }
         .backgroundColor(AppColors.SURFACE_RAISED)
         .borderRadius(AppRadius.CONTROL)
 
