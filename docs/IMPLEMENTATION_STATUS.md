@@ -247,3 +247,38 @@ Do not use x86 simulator data for:
 Remote byte/range counters may only be used to verify functional random-access behavior and cleanup.
 
 Performance benchmarking and performance-based policy decisions are deferred to real arm64 device testing.
+
+
+### Phase 3 — FFmpeg analyzer production functional policy
+
+IMPLEMENTED; TEST-ONLY VALIDATION PENDING.
+
+Current branch:
+
+`feat/ffmpeg-analyzer-policy-phase3`
+
+Implemented:
+
+- `ProductionMediaAnalysisPolicy`;
+- `PolicyMediaProbe` with non-merging one-step fallback;
+- production `NetworkMediaAnalysisCoordinator`;
+- FFmpeg-first remote thumbnail extraction with existing System fallback;
+- raw RGBA -> existing WebP encoder bridge;
+- `NetworkMediaLoader` production routing through the coordinator;
+- cancellation generation guards;
+- SFTP media-fingerprint/host-key semantic correction;
+- policy unit tests.
+
+Functional routing:
+
+- LIST: System first, FFmpeg fallback for file-like sources;
+- DETAIL/ADVANCED: FFmpeg first, System fallback only if FFmpeg is unusable;
+- HLS/DASH/LOCAL_DOCUMENT: System-only policy;
+- thumbnail: FFmpeg first for file-like remote sources, System fallback.
+
+No field merger is implemented.
+No performance-based policy is implemented.
+Playback routing is unchanged.
+
+Validation owner: Codex, report-only.
+Source fixes remain owned by ChatGPT.
