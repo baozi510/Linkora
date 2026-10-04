@@ -579,3 +579,55 @@ This branch:
 - tightens FFmpeg bootstrap manifest checks to exact lines.
 
 Do not start production FFmpeg analyzer routing until this hardening report passes.
+
+
+## Build isolation hardening accepted / FFmpeg Analyzer Phase 2 active
+
+Build isolation hardening is accepted.
+
+Validated hardening source:
+
+`ce24be1daf12892bfaa028bcd138fca25116a320`
+
+Confirmed:
+
+- two simulator -> immediate default cycles passed with no manual restore;
+- one intentional simulator build failure still restored default dependencies automatically;
+- default Debug and Release HAPs each contained the required 9 AArch64 native libraries;
+- simulator HAP contained only x86_64 `liblinkora_ffmpeg.so`;
+- artifact guard fixtures passed;
+- exact FFmpeg manifest negative checks passed;
+- Hypium 164/164 passed;
+- tracked dependency/signing state remained clean.
+
+Current branch:
+
+`feat/ffmpeg-analyzer-integration-phase2`
+
+Read:
+
+1. `docs/CODEX_FFMPEG_ANALYZER_INTEGRATION_PHASE2.md`
+2. `docs/FFMPEG_ANALYZER_INTEGRATION_REPORT.md`
+3. `docs/FFMPEG_PHASE1B_RUNTIME_REPORT.md`
+4. `docs/BUILD_ISOLATION_HARDENING_REPORT.md`
+
+Current authorization:
+
+- implement analysis input resolver;
+- implement FFmpeg `IMediaProbe` adapter;
+- implement System `IMediaProbe` adapter;
+- implement FFmpeg `IThumbnailExtractor` adapter;
+- run simulator System-vs-FFmpeg comparison/diagnostic matrix;
+- collect completeness, correctness, bytes/range and timing evidence.
+
+Still forbidden before the next review:
+
+- switching `NetworkMediaLoader` production results to FFmpeg;
+- merging System/FFmpeg fields into cache;
+- final analyzer policy;
+- default FFmpeg thumbnail routing;
+- playback Auto changes;
+- AVIOContext direct callbacks;
+- FFmpeg playback.
+
+This branch also tightens the default artifact audit to reject unexpected extra arm64 native libraries.
