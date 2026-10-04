@@ -346,3 +346,18 @@ Current next action is:
 8. update VALIDATION_REPORT.md and stop for architecture review.
 
 Do not start FFmpeg or Auto-policy tuning before this review loop is complete.
+
+
+## ARM64 device validation handoff
+
+The post-validation correction pass has now been architecture-reviewed and accepted at the source/build level.
+
+Current next step requires a real arm64 HarmonyOS device.
+
+Read and follow:
+
+`docs/ARM64_DEVICE_VALIDATION_RUNBOOK.md`
+
+Do not continue simulator-specific production changes. The available x86_64 emulator cannot install the current arm64-v8a HAP.
+
+Do not merge PR #10 until arm64 runtime evidence has been reviewed.
