@@ -25,8 +25,11 @@ const hvigor = json5('hvigor/hvigor-config.json5');
 
 const simulatorProduct = project.app.products.find(item => item.name === 'simulator');
 check(!!simulatorProduct, 'simulator product is missing');
-check(simulatorProduct && simulatorProduct.bundleName === 'com.linkora.player.simulator',
-  'simulator product must use isolated bundleName');
+check(simulatorProduct && simulatorProduct.bundleName === undefined,
+  'simulator product must not override the production bundleName');
+const appScope = json5('AppScope/app.json5');
+check(appScope.app.bundleName === 'com.linkora.player',
+  'simulator and default must share the production app identity');
 
 const entryModule = project.modules.find(item => item.name === 'entry');
 const projectDefaultTarget = entryModule && entryModule.targets.find(item => item.name === 'default');
