@@ -293,7 +293,11 @@ Runtime progress: WebDAV 实测错误密码拒绝、正确认证 HTTP 207、保�
 
 Paused seek 真实 FAIL：暂停于 14s 后 seek 50%/90%，UI 留在 buffering；系统日志已有 BUFFERING_END 和 OnSeekDone(30000/56000)。Engine 将 seek 前的暂停意图覆盖为 BUFFERING，且 END 在 SEEKING 状态被忽略；重复 Slider seek 又保存 SEEKING 为返回状态。新增四个事件顺序/暂停与播放/重复 seek 组合测试，修复前实跑 149 tests / 4 Failure / 145 Pass。最小 bookkeeping 修复不改变 public contract/Auto 策略；default 全量 attempt 03 PASS / exit 0，149/149 Hypium 和八项构建全部通过，之后须 simulator 重建和 runtime 复测。
 
-Refresh 动态新增目录时，列表出现重复 sample 行且暂时遗漏新目录；返回再进入恢复。保留实际 layout，尚未确认 root cause，不先写 PASS。
+Refresh 动态新增目录时，列表出现重复 sample 行且遗漏新目录；返回再进入恢复。root cause：virtual Repeat 的 Builder 只接收 repeatItem.item，无法跟踪节点复用后的新 item。按 [OpenHarmony 官方 Repeat 文档](https://github.com/openharmony/docs/blob/master/en/application-dev/ui/rendering-control/arkts-new-rendering-control-repeat.md)，将 list/grid/metadata Builder 改为接收完整 RepeatItem，保留虚拟列表/缓存/Provider/MediaProxy。default 04 因原静态检查仍匹配旧 entry 名失败；调整检查时误改了仍使用 entry 的 detailLabels 匹配，05 再次失败；已纠正，06 完整回归 PASS / exit 0，149/149 Hypium + 八项构建。原始失败日志均保留，无跳过检查。simulator build/runtime 重试待执行。
+
+SMB/SFTP 已填写、保存并进入目录，真实页面显示 `SIMULATOR_NATIVE_TRANSPORT_UNAVAILABLE`，connection-test UI 显示相同平台限制，未 crash；不能证明 native auth/I/O。
+
+FTP/NFS 的真实 ArkTS TCP test PASS（宿主机转发端口 19221/19249，对应 test-lab 12121/12049），directory/open 在 transport boundary 明确不可用。四种新增 native 协议配置 force-stop/start 后仍存在。模拟器拒绝读取应用/共享文件目录，`hdc smode` 返回 Cannot set root run mode in undebuggable version；未绕过安全边界，缓存落盘与完整 runtime diagnostics 暂 NOT RUN。
 
 | Commit | Failure | Root cause | Files | Verification |
 | --- | --- | --- | --- | --- |

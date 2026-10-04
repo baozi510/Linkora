@@ -194,12 +194,12 @@ struct NetworkDirectoryList {
   }
 
   @Builder
-  private metadataChips(entry: NetworkDirectoryEntry) {
+  private metadataChips(repeatItem: RepeatItem<NetworkDirectoryEntry>) {
     Flex({ direction: FlexDirection.Row, wrap: FlexWrap.Wrap,
       justifyContent: FlexAlign.Start }) {
-      ForEach(this.preparingPath === entry.path ? ['正在准备播放…'] : this.detailLabels(entry),
+      ForEach(this.preparingPath === repeatItem.item.path ? ['正在准备播放…'] : this.detailLabels(repeatItem.item),
         (label: string, index: number) => {
-          MetadataChip({ label: label, highlighted: this.preparingPath === entry.path })
+          MetadataChip({ label: label, highlighted: this.preparingPath === repeatItem.item.path })
             .margin({ left: index > 0 ? 5 : 0, bottom: 2 })
         }, (label: string): string => label)
     }
@@ -207,44 +207,44 @@ struct NetworkDirectoryList {
   }
 
   @Builder
-  private listEntry(entry: NetworkDirectoryEntry) {
+  private listEntry(repeatItem: RepeatItem<NetworkDirectoryEntry>) {
     AppActionListItem({
       itemHeight: MediaLayout.LIST_MEDIA_ITEM_HEIGHT,
-      selected: this.isHighlighted(entry),
+      selected: this.isHighlighted(repeatItem.item),
       accentColor: this.accentColor,
       showTrailingAction: false,
-      accessibilityLabel: `打开 ${entry.displayName}`,
-      menuAccessibilityLabel: `${entry.displayName} 菜单`,
+      accessibilityLabel: `打开 ${repeatItem.item.displayName}`,
+      menuAccessibilityLabel: `${repeatItem.item.displayName} 菜单`,
       onOpen: () => {
-        this.onOpen(entry);
+        this.onOpen(repeatItem.item);
       },
       onOpenMenu: () => {
-        this.openMenu(entry);
+        this.openMenu(repeatItem.item);
       }
     }) {
       Row({ space: 10 }) {
-        if (this.isDirectory(entry)) {
+        if (this.isDirectory(repeatItem.item)) {
           FolderPreview({ accentColor: this.accentColor })
         } else {
-          FileMediaPreview({ fileName: entry.displayName, accentColor: this.accentColor,
-            uri: this.previewKey(entry), thumbnailEnabled: this.mediaEnabled, visibleOnly: true,
-            durationLabel: entry.mediaPreviewReady && entry.durationMs > 0 ? this.mediaAsset(entry).durationLabel() : '',
+          FileMediaPreview({ fileName: repeatItem.item.displayName, accentColor: this.accentColor,
+            uri: this.previewKey(repeatItem.item), thumbnailEnabled: this.mediaEnabled, visibleOnly: true,
+            durationLabel: repeatItem.item.mediaPreviewReady && repeatItem.item.durationMs > 0 ? this.mediaAsset(repeatItem.item).durationLabel() : '',
             onReadyChanged: (ready: boolean) => {
-              entry.mediaPreviewReady = ready;
+              repeatItem.item.mediaPreviewReady = ready;
             },
-            load: (_uri: string, consumerId: string) => this.loadThumbnail(entry, consumerId),
-            cancelLoad: (_uri: string, consumerId: string) => this.cancelThumbnail(entry.path, consumerId) })
+            load: (_uri: string, consumerId: string) => this.loadThumbnail(repeatItem.item, consumerId),
+            cancelLoad: (_uri: string, consumerId: string) => this.cancelThumbnail(repeatItem.item.path, consumerId) })
         }
 
         Column({ space: 5 }) {
-          Text(entry.displayName)
+          Text(repeatItem.item.displayName)
             .width('100%')
             .fontSize(AppTypography.BODY)
             .fontWeight(FontWeight.Regular)
             .fontColor(AppColors.TEXT_PRIMARY)
             .maxLines(2)
             .textOverflow({ overflow: TextOverflow.Ellipsis })
-          this.metadataChips(entry)
+          this.metadataChips(repeatItem)
         }
         .alignItems(HorizontalAlign.Start)
         .layoutWeight(1)
@@ -254,18 +254,18 @@ struct NetworkDirectoryList {
   }
 
   @Builder
-  private gridEntry(entry: NetworkDirectoryEntry) {
+  private gridEntry(repeatItem: RepeatItem<NetworkDirectoryEntry>) {
     Column({ space: 6 }) {
-      if (this.isDirectory(entry)) {
+      if (this.isDirectory(repeatItem.item)) {
         FolderPreview({ gridView: true, accentColor: this.accentColor })
       } else {
         Stack() {
-          FileMediaPreview({ fileName: entry.displayName, gridView: true,
-            accentColor: this.accentColor, uri: this.previewKey(entry),
+          FileMediaPreview({ fileName: repeatItem.item.displayName, gridView: true,
+            accentColor: this.accentColor, uri: this.previewKey(repeatItem.item),
             thumbnailEnabled: this.mediaEnabled, visibleOnly: true,
-            load: (_uri: string, consumerId: string) => this.loadThumbnail(entry, consumerId),
-            cancelLoad: (_uri: string, consumerId: string) => this.cancelThumbnail(entry.path, consumerId) })
-          if (this.preparingPath === entry.path) {
+            load: (_uri: string, consumerId: string) => this.loadThumbnail(repeatItem.item, consumerId),
+            cancelLoad: (_uri: string, consumerId: string) => this.cancelThumbnail(repeatItem.item.path, consumerId) })
+          if (this.preparingPath === repeatItem.item.path) {
             LoadingProgress()
               .width(24)
               .height(24)
@@ -275,7 +275,7 @@ struct NetworkDirectoryList {
         .width('100%')
       }
 
-      Text(entry.displayName)
+      Text(repeatItem.item.displayName)
         .width('100%')
         .fontSize(AppTypography.BODY)
         .fontColor(AppColors.TEXT_PRIMARY)
@@ -286,20 +286,20 @@ struct NetworkDirectoryList {
     .alignItems(HorizontalAlign.Center)
     .width('100%')
     .padding(4)
-    .backgroundColor(this.isHighlighted(entry) ? AppColors.SELECTED_BACKGROUND : Color.Transparent)
+    .backgroundColor(this.isHighlighted(repeatItem.item) ? AppColors.SELECTED_BACKGROUND : Color.Transparent)
     .borderRadius(AppRadius.CARD)
     .onClick(() => {
-      if (!this.suppressClickAfterLongPress(entry)) {
-        this.onOpen(entry);
+      if (!this.suppressClickAfterLongPress(repeatItem.item)) {
+        this.onOpen(repeatItem.item);
       }
     })
     .priorityGesture(
       LongPressGesture({ fingers: 1, repeat: false, duration: 500 })
         .onAction(() => {
-          this.recordLongPress(entry);
+          this.recordLongPress(repeatItem.item);
         })
     )
-    .accessibilityText(`打开 ${entry.displayName}，长按打开菜单`)
+    .accessibilityText(`打开 ${repeatItem.item.displayName}，长按打开菜单`)
   }
 
   build() {
@@ -309,9 +309,9 @@ struct NetworkDirectoryList {
         .each((repeatItem: RepeatItem<NetworkDirectoryEntry>) => {
           GridItem() {
             if (this.gridView) {
-              this.gridEntry(repeatItem.item)
+              this.gridEntry(repeatItem)
             } else {
-              this.listEntry(repeatItem.item)
+              this.listEntry(repeatItem)
             }
           }
         })

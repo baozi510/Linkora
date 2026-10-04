@@ -414,7 +414,7 @@ async function check() {
   finishPreview(readyFrame); await tick(); assert.deepEqual(previewReady, [false, true]);
   readyPreview.aboutToDisappear(); assert.deepEqual(previewReady, [false, true, false]);
   assert.match(browser, /entry\.mediaPreviewReady && entry\.width/);
-  assert.match(browser, /onReadyChanged:\s*\(ready: boolean\) => \{\s*entry\.mediaPreviewReady = ready/);
+  assert.match(browser, /onReadyChanged:\s*\(ready: boolean\) => \{\s*repeatItem\.item\.mediaPreviewReady = ready/);
   assert.match(preview, /visibleOnly/); assert.match(preview, /onVisibleAreaChange/); assert.match(preview, /cancelLoad/);
   assert.match(browser, /createNetworkMediaLoader/); assert.match(browser, /mediaLoader\?\.cancel/);
   assert.match(browser, /entry\.modifiedAt, this\.previewGeneration/); assert.match(browser, /\+\+this\.previewGeneration/);
