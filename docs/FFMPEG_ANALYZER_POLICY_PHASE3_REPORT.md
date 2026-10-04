@@ -1,9 +1,27 @@
 # FFmpeg Analyzer Production Policy Phase 3 Report
 
-> Status: FAIL — first default verification gate.
+> Status: REVIEWED — first run stopped at static-gate false positive; checker fix committed; full validation rerun required.
 > Branch: `feat/ffmpeg-analyzer-policy-phase3`
 > Codex role: test/report only; no source fixes.
 > Date: 2026-10-05 (Asia/Shanghai).
+
+
+## Architecture review after validation stop
+
+Review date: 2026-10-05.
+
+Ruling:
+
+- The Codex run correctly stopped and reported rather than patching source.
+- The triggering `onMetadata` text is a service method parameter, not an ArkUI V1 output field.
+- The verifier rule itself was over-scoped because it applied the plain `onX/loadX` output-field regex to every `entry/src/main/ets/**/*.ets` file.
+- The reviewed fix keeps legacy ArkUI-state scanning across main ArkTS, but scopes the plain output-field regex to `entry/src/main/ets/components` and `entry/src/main/ets/pages`.
+- No production analyzer behavior was changed to satisfy the gate.
+- SFTP fingerprint ownership was re-reviewed: `HarmonyAnalysisInputs` does not forward media/cache fingerprint; `SftpStorageProvider` / `SftpBrowserService` use persisted `NetworkServerEntry.advancedOptions.sftpFingerprint` when no explicit trusted fingerprint is provided.
+- Phase 3 policy remains a functional routing stage. It does not claim benchmark-derived optimality and does not implement a System+FFmpeg field merger.
+- Because source/checker changed after the recorded run, all later build/runtime items remain NOT RUN until a fresh validation from the new HEAD completes.
+
+Next acceptance action: rerun this Phase 3 validation manual from a clean checkout of the new branch HEAD. Do not combine old partial results with the new run to manufacture a full PASS.
 
 ## Git / Environment
 

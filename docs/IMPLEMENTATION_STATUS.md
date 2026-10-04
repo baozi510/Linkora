@@ -1,5 +1,31 @@
 # Linkora Player Architecture — Implementation Status
 
+## CURRENT EXECUTION SUMMARY — 2026-10-05
+
+Project-wide technical baseline: `docs/MASTER_IMPLEMENTATION_PLAN.md`.
+
+Current branch: `feat/ffmpeg-analyzer-policy-phase3`.
+
+Phase 3 production analyzer policy is implemented in source. The first Codex validation run completed its allowed execution and stopped at the first default gate on source `72e74d11a790bd0d258e219e3a8de18f3c59fd17`; report/evidence commit `50fc19fbc91337e21180fc8c8a856750a4a20b95` records a static ArkUI guard false positive before Hypium/HAR/HAP/simulator runtime.
+
+Architecture review accepted the Phase 3 implementation direction and SFTP fingerprint ownership. The checker is corrected in the current review commit by scoping the plain `onX/loadX` output-field regex to ArkUI components/pages instead of every service file.
+
+**Validation status is still incomplete until the full Phase 3 manual is rerun from the new HEAD.** Do not reuse old Phase 2 runtime results as Phase 3 PASS evidence.
+
+Current Phase 3 invariants:
+
+- LIST = System primary with controlled FFmpeg fallback for resolvable file-like inputs;
+- DETAIL / ADVANCED = FFmpeg primary, System fallback only when FFmpeg is unusable;
+- no field merger in Phase 3;
+- remote thumbnail = FFmpeg primary + existing System fallback;
+- HLS / DASH / LOCAL_DOCUMENT = System-only;
+- WebP/cache/time policy unchanged;
+- PlaybackBackendSelector and Auto/System/MPV policy unchanged;
+- performance ranking remains deferred to real arm64 hardware.
+
+For the exact next action, read `docs/SESSION_HANDOFF.md` CURRENT STATE first.
+
+
 This file is the current execution status for the architecture migration.
 
 ## Completed in code
@@ -251,7 +277,7 @@ Performance benchmarking and performance-based policy decisions are deferred to 
 
 ### Phase 3 — FFmpeg analyzer production functional policy
 
-IMPLEMENTED; TEST-ONLY VALIDATION PENDING.
+IMPLEMENTED; FIRST TEST-ONLY RUN STOPPED AT A REVIEWED STATIC-CHECK FALSE POSITIVE. CHECKER FIXED IN CURRENT REVIEW COMMIT; FULL VALIDATION RERUN REQUIRED.
 
 Current branch:
 

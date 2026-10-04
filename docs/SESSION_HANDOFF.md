@@ -1,5 +1,88 @@
 # Linkora Session Handoff
 
+## CURRENT STATE — read this before historical sections
+
+Repository: `baozi510/Linkora`
+
+Current implementation branch:
+
+`feat/ffmpeg-analyzer-policy-phase3`
+
+Current phase:
+
+**FFmpeg Analyzer Production Policy Phase 3 — implementation complete; post-review validation rerun required.**
+
+The first Codex test-only run tested source `72e74d11a790bd0d258e219e3a8de18f3c59fd17` and stopped at the first default verification gate. Evidence/report commit `50fc19fbc91337e21180fc8c8a856750a4a20b95` proves the failure was a static-check false positive: a service method parameter named `onMetadata` matched the ArkUI plain-output regex. Codex did not modify production source.
+
+This architecture-review commit narrows that plain-output check to actual ArkUI component/page sources. It does **not** convert the incomplete validation run into PASS. The full Phase 3 validation manual must be rerun from the new branch HEAD.
+
+### Source-of-truth order for a new session
+
+Read these in order before changing code:
+
+1. `docs/MASTER_IMPLEMENTATION_PLAN.md` — project-wide technical implementation baseline.
+2. `docs/ARCHITECTURE_TARGET.md` — current engineering target architecture.
+3. `docs/ARCHITECTURE_MIGRATION.md` — current strangler-migration path.
+4. `docs/IMPLEMENTATION_STATUS.md` — current completed/pending implementation state.
+5. this `docs/SESSION_HANDOFF.md` CURRENT STATE section.
+6. the latest phase implementation report and validation report/evidence.
+7. inspect the actual Git branch/HEAD and affected source before making changes.
+
+Do not rely on prior chat memory. Repository state and the documents above are the durable project memory.
+
+### Approved Phase 3 interpretation of the Master Plan
+
+The Master Plan originally places final analysis policy after System-vs-FFmpeg benchmark. The project later established that x86 simulator performance must not be used for System-vs-FFmpeg ranking. Therefore Phase 3 intentionally introduces only a **functional production policy** before the real arm64 benchmark:
+
+- LIST: System primary, FFmpeg controlled fallback for resolvable file-like sources.
+- DETAIL / ADVANCED: FFmpeg primary, System fallback only when FFmpeg is unusable.
+- thumbnail: FFmpeg primary for resolvable file-like remote sources, existing System fallback.
+- HLS / DASH / LOCAL_DOCUMENT remain System-only.
+- no System+FFmpeg field merger in this phase.
+- no performance-derived routing in this phase.
+- no playback backend policy change.
+
+This is a staged migration decision, not a claim that the long-term analysis architecture is finished.
+
+### Phase 3 review findings
+
+- SFTP semantic bug fix is correct at the storage boundary: analysis no longer passes `MediaSource.fingerprint` as a host-key fingerprint; SFTP provider/browser resolve trust from `NetworkServerEntry.advancedOptions.sftpFingerprint`.
+- Storage remains protocol-aware; FFmpeg remains protocol-agnostic and continues through RandomAccessSource -> shared MediaProxy -> localhost.
+- default and simulator `AnalysisComposition` remain symmetric at the analyzer boundary.
+- PlaybackBackendSelector / Auto/System/MPV playback policy is unchanged.
+- `NetworkMediaAnalysisCoordinator` is accepted as a Phase 3 production orchestration facade, but the long-term Master Plan still targets explicit `MediaProbeService` / `ThumbnailService` application services. Do not proliferate direct adapter construction into business/UI call sites.
+- the only issue proven by the completed Codex run is the verifier false positive described above. Runtime/load/cache/fallback lifecycle cases were not reached and are not PASS.
+
+### Next action
+
+Codex remains test/report-only for Phase 3.
+
+From a clean checkout of the new HEAD:
+
+1. run normal `ohpm install`;
+2. run full `scripts/verify.ps1`;
+3. only if the default gate passes, continue the Phase 3 simulator/runtime cases in `docs/CODEX_PHASE3_FUNCTIONAL_VALIDATION.md`;
+4. update `docs/FFMPEG_ANALYZER_POLICY_PHASE3_REPORT.md` with only actually executed evidence;
+5. do not patch production source from Codex;
+6. return failures to ChatGPT for implementation review.
+
+Performance remains deferred to a real arm64 device.
+
+### End-of-phase documentation rule
+
+Every implementation/validation phase must close by updating all applicable durable state in the same branch:
+
+- `docs/IMPLEMENTATION_STATUS.md`;
+- the phase implementation/report document;
+- the phase validation report/evidence document;
+- `docs/SESSION_HANDOFF.md` CURRENT STATE / NEXT ACTION.
+
+If a validation rerun follows a source fix, old failed evidence remains historical evidence; do not rewrite it as if it had passed.
+
+# Historical milestones
+
+> The material below is preserved for provenance. It contains earlier "current" statements that may now be stale. For present work, the CURRENT STATE and source-of-truth order above take precedence.
+
 ## Purpose
 
 This file is the durable context handoff for a new ChatGPT/Codex session.

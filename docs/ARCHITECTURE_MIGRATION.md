@@ -1,5 +1,7 @@
 # Linkora 架构迁移计划
 
+> 本文服从 `docs/MASTER_IMPLEMENTATION_PLAN.md` 的总体技术基线，并描述当前代码如何渐进迁移到 `docs/ARCHITECTURE_TARGET.md`。阶段性验证若推翻某个假设，应先记录证据和审核决策，再更新迁移路径；不得静默偏离 Master Plan。
+
 ## 1. 迁移原则
 
 采用 Strangler Migration，不重建平行系统。
