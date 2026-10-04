@@ -618,7 +618,7 @@ Current authorization:
 - implement System `IMediaProbe` adapter;
 - implement FFmpeg `IThumbnailExtractor` adapter;
 - run simulator System-vs-FFmpeg comparison/diagnostic matrix;
-- collect completeness, correctness, bytes/range and timing evidence.
+- collect completeness, correctness, error/cleanup and remote Range/random-access functional evidence. Performance evidence is deferred to real arm64 device testing.
 
 Still forbidden before the next review:
 
@@ -631,3 +631,22 @@ Still forbidden before the next review:
 - FFmpeg playback.
 
 This branch also tightens the default artifact audit to reject unexpected extra arm64 native libraries.
+
+
+## Performance policy for this phase
+
+Simulator Phase 2 is functional-only.
+
+Do not use x86 simulator data for:
+
+- System-vs-FFmpeg speed ranking;
+- median/p95 latency;
+- throughput;
+- CPU/GPU utilization;
+- memory-efficiency ranking;
+- power/thermal conclusions;
+- final analyzer or playback policy.
+
+Remote byte/range counters may only be used to verify functional random-access behavior and cleanup.
+
+Performance benchmarking and performance-based policy decisions are deferred to real arm64 device testing.
