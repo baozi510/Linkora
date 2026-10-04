@@ -83,12 +83,13 @@ class TestPolicyProbe implements IMediaProbe {
   can: boolean = true;
   cancelled: number = 0;
   closed: number = 0;
+  work: (() => Promise<ProbeResult>) | null = null;
   constructor(engine: string, result: ProbeResult) { this.engine = engine; this.result = result; }
   name(): string { return this.engine; }
   async canProbe(_source: MediaSource): Promise<boolean> { return this.can && this.closed === 0; }
   async probe(_source: MediaSource, _requirement: ProbeRequirement): Promise<ProbeResult> {
     this.calls++;
-    return this.result;
+    return this.work !== null ? this.work() : this.result;
   }
   cancel(): void { this.cancelled++; }
   async close(): Promise<void> { this.closed++; }
@@ -417,6 +418,25 @@ export default function mediaAnalysisAdaptersTest(): void {
       await policyProbe.close();
     });
 
+
+    it('policy cancellation never starts the fallback engine after an active probe settles', 0, async () => {
+      const partial = probeResult('system', ProbeCompleteness.PARTIAL, new MediaInfo('', 1000));
+      const system = new TestPolicyProbe('system', partial);
+      const ffmpeg = new TestPolicyProbe('ffmpeg',
+        probeResult('ffmpeg', ProbeCompleteness.COMPLETE, new MediaInfo('matroska', 1000)));
+      let finish: (result: ProbeResult) => void = () => {};
+      system.work = () => new Promise((resolve) => { finish = resolve; });
+      const policyProbe = new PolicyMediaProbe(system, ffmpeg);
+      const pending = policyProbe.probe(remoteFile(), ProbeRequirement.LIST);
+      while (system.calls === 0) await Promise.resolve();
+      policyProbe.cancel();
+      finish(partial);
+      const result = await pending;
+      expect(result.errorCode).assertEqual(AnalysisErrorCode.CANCELLED);
+      expect(ffmpeg.calls).assertEqual(0);
+      expect(system.cancelled).assertEqual(1);
+      await policyProbe.close();
+    });
     it('DETAIL keeps usable partial FFmpeg result and does not merge System fields', 0, async () => {
       const ffmpegInfo = new MediaInfo('matroska', 1000, 0, 0,
         [new VideoTrackInfo('v', 'hevc', 'Main', '', 640, 360)]);
