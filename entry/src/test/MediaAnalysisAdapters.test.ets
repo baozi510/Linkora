@@ -1,7 +1,7 @@
 import { describe, it, expect } from '@ohos/hypium';
 import { MediaSource, MediaSourceKind, MediaFormat, RandomAccessSource, SourceCapabilities,
   ProbeRequirement, ProbeCompleteness, ResolvedMediaInputKind, ThumbnailExtractRequest,
-  MediaInfo, VideoTrackInfo, ProbeResult, MediaProbeDiagnostics } from 'linkora_core';
+  MediaInfo, VideoTrackInfo, ProbeResult, MediaProbeDiagnostics, IMediaProbe } from 'linkora_core';
 import { FfmpegAnalysis, NativeFfmpegApi, NativeProbeResult, NativeVideoStream, NativeAudioStream,
   NativeFrameResult, FfmpegError, FfmpegErrorCode } from 'linkora_ffmpeg';
 import { AnalysisOperation, AnalysisError, AnalysisErrorCode } from '../main/ets/analysis/AnalysisOperation';
@@ -91,7 +91,7 @@ export default function mediaAnalysisAdaptersTest(): void {
         let rejectWork: (error: Error) => void = () => {};
         native.work = () => new Promise((_resolve, reject) => { rejectWork = reject; });
         backend.work = () => new Promise((_resolve, reject) => { rejectWork = reject; });
-        const probe = engine === 'ffmpeg' ? new FfmpegMediaProbeAdapter(resolver(ports), new FfmpegAnalysis(native)) :
+        const probe: IMediaProbe = engine === 'ffmpeg' ? new FfmpegMediaProbeAdapter(resolver(ports), new FfmpegAnalysis(native)) :
           new SystemMediaProbeAdapter(resolver(ports), () => backend);
         const pending = probe.probe(file(), ProbeRequirement.DETAIL);
         while (engine === 'ffmpeg' ? native.calls === 0 : !backend.started) await Promise.resolve();
@@ -102,7 +102,7 @@ export default function mediaAnalysisAdaptersTest(): void {
       it('review ' + engine + ' close during release suppresses completed metadata until cleanup', 0, async () => {
         const ports = new TestInputs(); let finish: () => void = () => {};
         ports.cleanup = () => new Promise((resolve) => { finish = resolve; });
-        const probe = engine === 'ffmpeg' ? new FfmpegMediaProbeAdapter(resolver(ports), new FfmpegAnalysis(new TestNative())) :
+        const probe: IMediaProbe = engine === 'ffmpeg' ? new FfmpegMediaProbeAdapter(resolver(ports), new FfmpegAnalysis(new TestNative())) :
           new SystemMediaProbeAdapter(resolver(ports), () => new TestSystem());
         const pending = probe.probe(file(), ProbeRequirement.DETAIL);
         while (ports.released === 0) await Promise.resolve();
