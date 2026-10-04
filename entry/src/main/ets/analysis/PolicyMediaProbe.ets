@@ -1,6 +1,7 @@
 import {
   IMediaProbe,
   MediaSource,
+  MediaProbeDiagnostics,
   ProbeCompleteness,
   ProbeRequirement,
   ProbeResult
@@ -54,8 +55,8 @@ export class PolicyMediaProbe implements IMediaProbe {
 
     for (let index: number = 0; index < order.length; index++) {
       if (generation !== this.cancellationGeneration || this.closed) {
-        return new ProbeResult(null, ProbeCompleteness.UNAVAILABLE, [], undefined,
-          AnalysisErrorCode.CANCELLED);
+        return new ProbeResult(null, ProbeCompleteness.UNAVAILABLE, [],
+          new MediaProbeDiagnostics('policy'), AnalysisErrorCode.CANCELLED);
       }
       const adapter: IMediaProbe = this.adapter(order[index]);
       if (!await adapter.canProbe(source)) continue;
