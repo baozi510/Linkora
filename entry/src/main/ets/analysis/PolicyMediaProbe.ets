@@ -63,8 +63,8 @@ export class PolicyMediaProbe implements IMediaProbe {
 
       const result: ProbeResult = await adapter.probe(source, requirement);
       if (generation !== this.cancellationGeneration || this.closed) {
-        return new ProbeResult(null, ProbeCompleteness.UNAVAILABLE, [], undefined,
-          AnalysisErrorCode.CANCELLED);
+        return new ProbeResult(null, ProbeCompleteness.UNAVAILABLE, [],
+          new MediaProbeDiagnostics('policy'), AnalysisErrorCode.CANCELLED);
       }
       if (result.completeness === ProbeCompleteness.COMPLETE) return result;
 
