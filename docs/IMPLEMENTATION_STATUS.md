@@ -84,7 +84,7 @@ Includes:
 
 ### Phase 6 — dual playback foundation
 
-Completed in code, not build/device verified.
+Completed in code and build-verified on the validation branch. Device runtime is still not verified.
 
 Includes:
 
@@ -99,7 +99,7 @@ Includes:
 
 ### Phase 7 — playback contract enrichment
 
-Completed in code, not build/device verified.
+Completed in code and build/unit-regression verified. Device runtime is still not verified.
 
 Includes:
 
@@ -115,25 +115,30 @@ Includes:
 
 ### FFmpeg media analysis
 
-BLOCKED.
+DEPENDENCY BOOTSTRAP IN PROGRESS; ANALYZER NOT YET IMPLEMENTED.
 
-Reason:
+Current repository state:
 
-The repository has no pinned, reproducible HarmonyOS FFmpeg/libav development artifact.
+- FFmpeg 8.1.3 pinned to commit `1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7`
+- reproducible source fetch script
+- HarmonyOS arm64-v8a bootstrap build script
+- HarmonyOS x86_64 bootstrap build script
+- generated source/build/prebuilt directories excluded from Git
+- intended libraries: libavformat/libavcodec/libavutil/libswscale
+- no CLI programs, encoders, muxers or hwaccels in the initial analyzer profile
 
-Required before implementation:
+Still required before implementing `FFmpegMediaProbe`:
 
-- pinned FFmpeg revision
-- HarmonyOS arm64 build script
-- headers
-- libavformat
-- libavcodec
-- libavutil
-- libswscale
-- checksums/version manifest
-- clean CMake integration
+- both ABI builds must succeed on the real HarmonyOS Native SDK
+- exact build manifests must be captured
+- any HarmonyOS-specific FFmpeg patch must be documented
+- native Linkora module must link cleanly
+- local and MediaProxy smoke probes must pass
 
-See FFMPEG_INTEGRATION_BLOCKER.md.
+See:
+
+- `docs/FFMPEG_BOOTSTRAP.md`
+- `docs/FFMPEG_INTEGRATION_BLOCKER.md`
 
 ### Analysis benchmark: System vs FFmpeg
 
@@ -181,16 +186,15 @@ Do not implement OH_AVDataSource / AVIOContext / libmpv stream callbacks until b
 
 ## Mandatory next steps outside this environment
 
-1. Run ohpm install.
-2. Commit the regenerated package lock only after dependency resolution succeeds.
-3. Run scripts/verify.ps1.
-4. Build Debug and Release arm64 HAP.
-5. Run unit tests.
-6. Run protocol lab.
-7. Run media compatibility lab.
-8. Run the full TEST_MANUAL.md on a target device.
-9. Collect benchmark NDJSON.
-10. Tune PlaybackBackendSelector only from measured results.
-11. Add reproducible FFmpeg artifacts.
-12. Implement FFmpegMediaProbe / FFmpegThumbnailExtractor.
-13. Repeat analysis benchmark and tune ProbePolicy / ThumbnailPolicy.
+1. On `test/simulator-validation`, run `ohpm install` and Project Sync.
+2. Run `scripts/verify.ps1` to prove default arm64 behavior still passes.
+3. Run `scripts/check-simulator-product.cjs`.
+4. Run `scripts/verify-simulator.ps1`.
+5. Install `com.linkora.player.simulator` on the x86_64 emulator.
+6. Execute `docs/SIMULATOR_TEST_MANUAL.md` and fill `docs/SIMULATOR_VALIDATION_REPORT.md`.
+7. Run `scripts/ffmpeg/fetch-source.ps1`.
+8. Build FFmpeg for x86_64 and arm64-v8a using `docs/FFMPEG_BOOTSTRAP.md`.
+9. If both FFmpeg builds succeed, return for architecture review before wiring `FFmpegMediaProbe`.
+10. After simulator evidence is reviewed, continue the arm64 device manual for real MPV/native/HDR/audio validation.
+11. Collect benchmark data before tuning `PlaybackBackendSelector`.
+12. Do not implement direct I/O until MediaProxy benchmark evidence justifies it.
