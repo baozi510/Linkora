@@ -361,3 +361,43 @@ Read and follow:
 Do not continue simulator-specific production changes. The available x86_64 emulator cannot install the current arm64-v8a HAP.
 
 Do not merge PR #10 until arm64 runtime evidence has been reviewed.
+
+
+## x86_64 simulator validation product
+
+A dedicated simulator-validation branch now exists:
+
+test/simulator-validation
+
+It is based on test/player-architecture-validation and must not be merged before validation.
+
+The simulator product is intentionally isolated from production:
+
+- product: simulator
+- entry target: simulator
+- bundleName: com.linkora.player.simulator
+- System AVPlayer only
+- WebDAV / HTTP only
+- no entry CMake/native build
+- target-specific compile-only MPV stub
+- no production MPV/native protocol capability is removed
+
+Before doing simulator work, read:
+
+docs/SIMULATOR_TEST_MANUAL.md
+
+Write all simulator evidence into:
+
+docs/SIMULATOR_VALIDATION_REPORT.md
+
+Required ordering:
+
+1. run the full default ./scripts/verify.ps1;
+2. run node scripts/check-simulator-product.cjs;
+3. run ./scripts/verify-simulator.ps1;
+4. verify the simulator HAP contains zero native .so files;
+5. only then install to the x86_64 emulator;
+6. run the manual;
+7. stop for architecture review.
+
+Simulator results do not replace ARM64 device validation.
