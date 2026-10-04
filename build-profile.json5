@@ -12,7 +12,6 @@
       },
       {
         "name": "simulator",
-        "bundleName": "com.linkora.player.simulator",
         "buildOption": { "strictMode": { "useNormalizedOHMUrl": true } },
         "compileSdkVersion": "26.0.0",
         "compatibleSdkVersion": "6.0.0(20)",
