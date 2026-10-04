@@ -30,6 +30,13 @@ function checkNativeEntries(entries, abi) {
         throw Error('Missing production native library: ' + name);
       }
     }
+    const arm64Native = entries.filter(entry => entry.name.endsWith('.so'));
+    if (arm64Native.length !== required.length) {
+      const unknown = arm64Native.filter(entry =>
+        !required.includes(entry.name.substring('libs/arm64-v8a/'.length)));
+      throw Error('Unexpected production native library set: ' +
+        (unknown.length > 0 ? unknown.map(entry => entry.name).join(',') : arm64Native.length.toString()));
+    }
   }
   return entries.filter(entry => entry.name.endsWith('.so')).length;
 }
