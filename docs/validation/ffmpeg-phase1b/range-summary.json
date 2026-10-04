@@ -1,0 +1,7 @@
+{
+  "getRequests": 11,
+  "headRequests": 1,
+  "wireBytesIncludingHeaders": 2625156,
+  "fixtureSizeBytes": 14243631,
+  "originalRounds01And02LedgerComplete": false
+}

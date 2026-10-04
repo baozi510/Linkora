@@ -1,0 +1,83 @@
+{
+  "generator": "/usr/bin/ffmpeg in existing WSL Ubuntu, lavfi testsrc2 + sine; libx264/libx265 + AAC; MP4 faststart; 24 fps; H264 GOP 48",
+  "fixtures": [
+    {
+      "name": "local.mp4",
+      "sha256": "056967d7916b34334b613f522ade7678c8f61f83580ef8c52b36ade717ea2491",
+      "sizeBytes": 2362050,
+      "durationSeconds": 10,
+      "container": "mov,mp4,m4a,3gp,3g2,mj2",
+      "streams": [
+        {
+          "type": "video",
+          "codec": "h264",
+          "profile": "Constrained Baseline",
+          "width": 640,
+          "height": 360,
+          "frameRate": "24/1"
+        },
+        {
+          "type": "audio",
+          "codec": "aac",
+          "profile": "LC",
+          "frameRate": "0/0",
+          "sampleRate": "48000",
+          "channels": 2,
+          "layout": "stereo"
+        }
+      ]
+    },
+    {
+      "name": "local.mkv",
+      "sha256": "cc4f5969fd2c2e77d5b3a330e1495f6ac93b0c8807f5fb8a92c8f4e0c2d586f8",
+      "sizeBytes": 174146,
+      "durationSeconds": 4.021,
+      "container": "matroska,webm",
+      "streams": [
+        {
+          "type": "video",
+          "codec": "hevc",
+          "profile": "Main",
+          "width": 320,
+          "height": 180,
+          "frameRate": "24/1"
+        },
+        {
+          "type": "audio",
+          "codec": "aac",
+          "profile": "LC",
+          "frameRate": "0/0",
+          "sampleRate": "48000",
+          "channels": 2,
+          "layout": "stereo"
+        }
+      ]
+    },
+    {
+      "name": "remote.mkv",
+      "sha256": "d7e4693b9b019785c2d838880c243b8fa688c881a9c73e07391ed934ca51ba75",
+      "sizeBytes": 14243631,
+      "durationSeconds": 60.021,
+      "container": "matroska,webm",
+      "streams": [
+        {
+          "type": "video",
+          "codec": "h264",
+          "profile": "Constrained Baseline",
+          "width": 640,
+          "height": 360,
+          "frameRate": "24/1"
+        },
+        {
+          "type": "audio",
+          "codec": "aac",
+          "profile": "LC",
+          "frameRate": "0/0",
+          "sampleRate": "48000",
+          "channels": 2,
+          "layout": "stereo"
+        }
+      ]
+    }
+  ]
+}
