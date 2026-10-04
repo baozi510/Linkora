@@ -1,14 +1,24 @@
 import {
-  RandomAccessSource, RemoteProtocol, RemoteReadSession, RemoteReadSessionAdapter,
-  SourceCapabilities, StorageEntry, StorageEntryKind, StorageListOptions
+  RandomAccessSource,
+  RemoteProtocol,
+  RemoteReadSession,
+  RemoteReadSessionAdapter,
+  SourceCapabilities,
+  StorageEntry,
+  StorageEntryKind,
+  StorageListOptions
 } from 'linkora_core';
 import { HttpRemoteReadSession } from 'entry/ets/services/HttpRemoteReadSession';
 import {
-  NetworkStorageOpenOptions, NetworkStorageProvider, NetworkStorageProviderRegistry
+  NetworkStorageOpenOptions,
+  NetworkStorageProvider,
+  NetworkStorageProviderRegistry
 } from 'entry/ets/services/NetworkStorageProvider';
 import { NetworkServerEntry } from 'entry/ets/services/NetworkServerStore';
 import {
-  WebDavBrowserEntry, WebDavBrowserService, WebDavEntryKind
+  WebDavBrowserEntry,
+  WebDavBrowserService,
+  WebDavEntryKind
 } from 'entry/ets/services/WebDavBrowserService';
 
 function sourceId(server: NetworkServerEntry, path: string): string {
@@ -68,9 +78,13 @@ class SimulatorWebDavStorageProvider implements NetworkStorageProvider {
   async list(path: string, options: StorageListOptions = new StorageListOptions()): Promise<StorageEntry[]> {
     const entries: WebDavBrowserEntry[] = await this.browser.list(directory(path), options.forceRefresh);
     return entries.map((entry: WebDavBrowserEntry): StorageEntry =>
-      new StorageEntry(entry.path, entry.displayName,
+      new StorageEntry(
+        entry.path,
+        entry.displayName,
         entry.kind === WebDavEntryKind.DIRECTORY ? StorageEntryKind.DIRECTORY : StorageEntryKind.FILE,
-        entry.size, entry.modifiedAt));
+        entry.size,
+        entry.modifiedAt
+      ));
   }
 
   async open(path: string): Promise<RandomAccessSource> {
@@ -84,7 +98,7 @@ class SimulatorWebDavStorageProvider implements NetworkStorageProvider {
   }
 
   async download(_path: string, _localPath: string): Promise<number> {
-    throw new Error('模拟器 WebDAV 路径使用随机读取，不需要下载缓存。');
+    throw new Error('WebDAV simulator path uses random access instead of compatibility download.');
   }
 
   directFileUrl(path: string): string {
@@ -111,19 +125,19 @@ class SimulatorDirectHttpProvider implements NetworkStorageProvider {
   async stat(_path: string): Promise<StorageEntry | null> { return null; }
 
   async list(_path: string, _options: StorageListOptions = new StorageListOptions()): Promise<StorageEntry[]> {
-    throw new Error('HTTP 直链不支持目录浏览。');
+    throw new Error('HTTP direct links do not support directory browsing.');
   }
 
   async open(_path: string): Promise<RandomAccessSource> {
-    throw new Error('HTTP 直链由播放器直接打开。');
+    throw new Error('HTTP direct links are opened directly by the player.');
   }
 
   async openWithOptions(_path: string, _options: NetworkStorageOpenOptions): Promise<RandomAccessSource> {
-    throw new Error('HTTP 直链由播放器直接打开。');
+    throw new Error('HTTP direct links are opened directly by the player.');
   }
 
   async download(_path: string, _localPath: string): Promise<number> {
-    throw new Error('HTTP 直链不需要下载缓存。');
+    throw new Error('HTTP direct links do not require compatibility download.');
   }
 
   directFileUrl(_path: string): string {
@@ -138,11 +152,80 @@ class SimulatorDirectHttpProvider implements NetworkStorageProvider {
   cancel(): void {}
 }
 
+class SimulatorUnavailableNativeStorageProvider implements NetworkStorageProvider {
+  private readonly server: NetworkServerEntry;
+
+  constructor(server: NetworkServerEntry) {
+    this.server = server;
+  }
+
+  id(): string { return this.server.protocol; }
+  protocol(): RemoteProtocol { return this.server.protocol; }
+
+  initialPath(): string {
+    const path: string = this.server.rootPath.trim();
+    return path.length > 0 ? path : '/';
+  }
+
+  displayPath(path: string): string {
+    return path.length > 0 ? path : '/';
+  }
+
+  directoryPath(path: string): string {
+    return path.length > 0 ? path : '/';
+  }
+
+  async stat(_path: string): Promise<StorageEntry | null> {
+    throw this.unavailable();
+  }
+
+  async list(_path: string, _options: StorageListOptions = new StorageListOptions()): Promise<StorageEntry[]> {
+    throw this.unavailable();
+  }
+
+  async open(_path: string): Promise<RandomAccessSource> {
+    throw this.unavailable();
+  }
+
+  async openWithOptions(_path: string, _options: NetworkStorageOpenOptions): Promise<RandomAccessSource> {
+    throw this.unavailable();
+  }
+
+  async download(_path: string, _localPath: string): Promise<number> {
+    throw this.unavailable();
+  }
+
+  directFileUrl(_path: string): string {
+    return '';
+  }
+
+  cancel(): void {}
+
+  private unavailable(): Error {
+    return new Error(
+      `SIMULATOR_NATIVE_TRANSPORT_UNAVAILABLE: ${this.server.protocol.toUpperCase()} requires the arm64 native transport.`
+    );
+  }
+}
+
 export function createDefaultNetworkStorageProviderRegistry(): NetworkStorageProviderRegistry {
   const registry = new NetworkStorageProviderRegistry();
+
   registry.register(RemoteProtocol.WEBDAV,
     (server: NetworkServerEntry): NetworkStorageProvider => new SimulatorWebDavStorageProvider(server));
   registry.register(RemoteProtocol.HTTP,
     (server: NetworkServerEntry): NetworkStorageProvider => new SimulatorDirectHttpProvider(server));
+
+  for (const protocol of [
+    RemoteProtocol.SMB,
+    RemoteProtocol.SFTP,
+    RemoteProtocol.FTP,
+    RemoteProtocol.NFS
+  ]) {
+    registry.register(protocol,
+      (server: NetworkServerEntry): NetworkStorageProvider =>
+        new SimulatorUnavailableNativeStorageProvider(server));
+  }
+
   return registry;
 }
