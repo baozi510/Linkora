@@ -24,8 +24,8 @@ class StageExtractorStub {
   async fetchFrameByTime(time: number, _option: media.AVImageQueryOptions,
     params: media.PixelMapParams): Promise<image.PixelMap> {
     this.timeUs = time;
-    this.width = params.width;
-    this.height = params.height;
+    this.width = params.width ?? 0;
+    this.height = params.height ?? 0;
     return this.frame;
   }
 }

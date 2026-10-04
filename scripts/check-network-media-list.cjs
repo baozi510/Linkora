@@ -45,7 +45,8 @@ const fileIo = {
 const image = {
   createImagePacker: () => ({ supportedFormats: webpSupported ? ['image/webp', 'image/jpeg'] : ['image/jpeg'],
     packing: async (frame, opts) => {
-      assert.ok(opts.format === 'image/jpeg' || (webpSupported && opts.format === 'image/webp'));
+      assert.equal(opts.format, 'image/webp', 'new thumbnails never use JPEG');
+      assert.equal(opts.quality, 80);
       if (packFail || (webpFailure && opts.format === 'image/webp')) throw Error('image encoding');
       return png;
     }, release: async () => {} }),
@@ -78,7 +79,8 @@ const kits = {
   linkora_core: { LocalFileCategory: { VIDEO: 'video' }, LocalFileFilter: class { categoryOf(name) { return name.endsWith('.mp4') ? 'video' : 'other'; } } },
   linkora_media_probe: { NetworkMediaProbe: Probe, ProbeMode: { BOTH: 'both', METADATA: 'metadata', THUMBNAIL: 'thumbnail' } },
   linkora_proxy: { NetworkFileProxy: class {
-    async buildProxyUrl(reader) { let closing; return { url: 'http://127.0.0.1/test', release: () => closing ??= reader.close() }; }
+    diagnostics() { return { bytesRead: 0, readRequests: 0 }; }
+    async buildSourceUrl(source) { let closing; return { url: 'http://127.0.0.1/test', release: () => closing ??= source.close() }; }
     async close() {}
   } }
 };
@@ -96,12 +98,13 @@ function load(file) {
   return module.exports;
 }
 const serviceDir = path.join(root, 'entry/src/main/ets/services');
+Object.assign(kits.linkora_core, load(path.join(root, 'linkora_core/src/main/ets/thumbnail/ThumbnailPolicy.ets')));
 kits[path.join(serviceDir, 'SourceIdentity.ets')] = { SourceIdentity: { value: async value => {
   if (holdKey) await new Promise(resolve => { releaseKey = resolve; });
   return createHash('sha256').update(value).digest('hex');
 } } };
 kits[path.join(serviceDir, 'NetworkDirectoryService.ets')] = { NetworkDirectoryService: class {
-  async openReader(p, fingerprint, onSetup) {
+  async openSource(p, fingerprint, onSetup) {
     opened++;
     if (setupHold) {
       const settled = new Promise(resolve => { releaseSetup = resolve; }).then(() => { closed++; });
@@ -129,6 +132,9 @@ const tick = () => new Promise(resolve => setImmediate(resolve));
 async function check() {
   const { NetworkMediaCache, CachedNetworkMedia } = load(path.join(serviceDir, 'NetworkMediaCache.ets'));
   const { NetworkMediaLoader } = load(path.join(serviceDir, 'NetworkMediaLoader.ets'));
+  const { NetworkThumbnailCache } = load(path.join(serviceDir, 'NetworkThumbnailCache.ets'));
+  const thumbnails = new NetworkThumbnailCache(context, server.id);
+  const policy = new kits.linkora_core.DefaultThumbnailTimePolicy();
   const { LinkoraDatabase } = load(path.join(serviceDir, 'LinkoraDatabase.ets'));
   await LinkoraDatabase.shared(context).store();
   await rdb.execute("INSERT INTO network_server(id,display_name,protocol,host,port,created_at,updated_at) VALUES (1,'test','smb','host',445,1,2)");
@@ -224,7 +230,8 @@ async function check() {
   loader.reset([entry('/a.mp4'), entry('/b.mp4'), entry('/cancel.mp4'), entry('/bad.mp4'), entry('/pack.mp4')], false);
   const count = calls; assert.ok(await loader.load(entry('/a.mp4'))); assert.equal(calls, count);
   const refreshKey = await cache.key(server, entry('/a.mp4'));
-  const refreshPath = path.join(context.filesDir, 'network-media', refreshKey + '.webp');
+  const refreshThumbnailKey = await thumbnails.key(server, entry('/a.mp4'), policy.plan(10000, 640, 360));
+  const refreshPath = path.join(context.cacheDir, 'network-thumbnails', String(server.id), refreshThumbnailKey + '.webp');
   const refreshImage = fs.readFileSync(refreshPath);
   const refreshMetadata = sqlite.prepare('SELECT * FROM network_media_metadata WHERE cache_key=?').get(refreshKey);
   const refreshTime = fs.statSync(refreshPath).mtimeMs;
@@ -303,18 +310,22 @@ async function check() {
   const pageSource = fs.readFileSync(path.join(root, 'entry/src/main/ets/pages/NetworkPage.ets'), 'utf8');
   assert.match(pageSource, /this\.sftpFingerprint\.trim\(\), this\.sftpHostKeyPolicy === SftpHostKeyPolicy\.STRICT/);
   assert.match(pageSource, /server\.advancedOptions\.sftpFingerprint, server\.advancedOptions\.sftpHostKeyPolicy === SftpHostKeyPolicy\.STRICT/);
-  const fallbackEntry = entry('/jpeg-fallback.mp4'); webpSupported = false;
+  const fallbackEntry = entry('/webp-unavailable.mp4'); webpSupported = false;
   const fallbackLoader = new NetworkMediaLoader(context, server, () => {}); fallbackLoader.reset([fallbackEntry], false);
-  assert.ok(await fallbackLoader.load(fallbackEntry));
+  assert.equal(await fallbackLoader.load(fallbackEntry), null, 'missing WebP encoder fails thumbnail without JPEG fallback');
   const fallbackKey = await cache.key(server, fallbackEntry);
-  assert.equal((await new NetworkMediaCache(context, 1).get(fallbackKey)).imageFormat, 'jpg');
+  assert.equal((await new NetworkMediaCache(context, 1).get(fallbackKey)).imageData, null);
+  assert.ok(!fs.existsSync(path.join(context.filesDir, 'network-media', fallbackKey + '.jpg')));
+  assert.equal(thumbnails.get(await thumbnails.key(server, fallbackEntry, policy.plan(10000, 640, 360))), null);
   webpSupported = true; fallbackLoader.close(); await tick();
   webpFailure = true;
   const rejectedEntry = entry('/webp-rejected.mp4');
   const rejectedLoader = new NetworkMediaLoader(context, server, () => {}); rejectedLoader.reset([rejectedEntry], false);
-  assert.ok(await rejectedLoader.load(rejectedEntry), 'JPEG fallback when advertised WebP encoding fails');
+  assert.equal(await rejectedLoader.load(rejectedEntry), null, 'WebP encode failure never falls back to JPEG');
   const rejectedKey = await cache.key(server, rejectedEntry);
-  assert.equal((await new NetworkMediaCache(context, 1).get(rejectedKey)).imageFormat, 'jpg');
+  assert.equal((await new NetworkMediaCache(context, 1).get(rejectedKey)).imageData, null);
+  assert.ok(!fs.existsSync(path.join(context.filesDir, 'network-media', rejectedKey + '.jpg')));
+  assert.equal(thumbnails.get(await thumbnails.key(server, rejectedEntry, policy.plan(10000, 640, 360))), null);
   webpFailure = false; rejectedLoader.close(); await tick();
   assert.equal(opened, closed, 'including delayed setup, all readers closed');
   const { NetworkServerStore } = load(path.join(serviceDir, 'NetworkServerStore.ets'));

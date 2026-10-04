@@ -42,16 +42,21 @@ async function unitChecks() {
   await assert.rejects(reader.read(10, 5));
   console.log('PASS bounded authenticated HTTP ranges, wrong positions, ignored Range, reuse and close');
   const probeFile = path.resolve(__dirname, '../linkora_media_probe/src/main/ets/NetworkMediaProbe.ets');
-  const probeCode = ts.transpileModule(fs.readFileSync(probeFile, 'utf8'), {
-    compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 }
-  }).outputText;
-  const probeModule = { exports: {} };
   let clock = 1000;
   const probeImports = { '@kit.ArkTS': { url: { URL: { parseURL: value => new URL(value) } } },
     '@kit.BasicServicesKit': { systemDateTime: { TimeType: { STARTUP: 0 }, getUptime: () => clock } },
     '@kit.MediaKit': { media: { AVImageQueryOptions: { AV_IMAGE_QUERY_CLOSEST_SYNC: 0 } } } };
-  vm.runInThisContext(`(function(require,module,exports){${probeCode}\n})`, { filename: probeFile })(
-    name => probeImports[name] || {}, probeModule, probeModule.exports);
+  function loadProbe(file) {
+    const code = ts.transpileModule(fs.readFileSync(file, 'utf8'), {
+      compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 }
+    }).outputText;
+    const module = { exports: {} };
+    vm.runInThisContext(`(function(require,module,exports){${code}\n})`, { filename: file })(
+      name => name.startsWith('.') ? loadProbe(path.resolve(path.dirname(file), name + '.ets')) :
+        probeImports[name] || {}, module, module.exports);
+    return module.exports;
+  }
+  const probeModule = { exports: loadProbe(probeFile) };
   const frame = { release: async () => {} };
   const extractor = { setUrlSource() { clock += 3; },
     async fetchMetadata() { clock += 17; return { duration: '1234', videoWidth: '640', videoHeight: '360' }; },

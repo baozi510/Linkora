@@ -1,0 +1,239 @@
+Evidence: post-A-before.log
+✖ error log before FILE_LOADED leaves prepare pending (152.4034ms)
+✖ FILE_LOADED after error log succeeds and clears prepare timer (57.4226ms)
+✖ prepare timeout reports the latest error log (48.5242ms)
+✖ post-prepare error log neither emits fatal error nor tears down playback (45.1113ms)
+ℹ Error: Test "prepare timeout reports the latest error log" at scripts\check-mpv-playback-port.cjs:101:1 generated asynchronous activity after the test ended. This activity created the error "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'older diagnostic'
+- 'MPV prepare timed out: latest diagnostic'
+" and would have caused the test to fail, but instead triggered an unhandledRejection event.
+ℹ tests 4
+ℹ suites 0
+ℹ pass 0
+ℹ fail 4
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 308.1032
+
+✖ failing tests:
+
+test at scripts\check-mpv-playback-port.cjs:78:1
+✖ error log before FILE_LOADED leaves prepare pending (152.4034ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  true !== false
+
+      at TestContext.<anonymous> (D:\Linkora-validation\scripts\check-mpv-playback-port.cjs:84:10)
+      at async Test.run (node:internal/test_runner/test:1110:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:358:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts\check-mpv-playback-port.cjs:90:1
+✖ FILE_LOADED after error log succeeds and clears prepare timer (57.4226ms)
+  PlaybackPortError: Playback platform operation failed
+      at D:\Linkora-validation\entry\src\main\ets\playback\MpvPlaybackPort.ets:205:27
+      at Object.add (D:\Linkora-validation\scripts\check-mpv-playback-port.cjs:26:81)
+      at TestContext.<anonymous> (D:\Linkora-validation\scripts\check-mpv-playback-port.cjs:93:25)
+      at async Test.run (node:internal/test_runner/test:1110:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:785:7) {
+    code: 0,
+    detail: 'recoverable decoder warning'
+  }
+
+test at scripts\check-mpv-playback-port.cjs:101:1
+✖ prepare timeout reports the latest error log (48.5242ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  0 !== 1
+
+      at Object.timeout (D:\Linkora-validation\scripts\check-mpv-playback-port.cjs:74:24)
+      at TestContext.<anonymous> (D:\Linkora-validation\scripts\check-mpv-playback-port.cjs:109:5)
+      at async Test.run (node:internal/test_runner/test:1110:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:785:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at scripts\check-mpv-playback-port.cjs:115:1
+✖ post-prepare error log neither emits fatal error nor tears down playback (45.1113ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  1 !== 0
+
+      at TestContext.<anonymous> (D:\Linkora-validation\scripts\check-mpv-playback-port.cjs:119:10)
+      at async Test.run (node:internal/test_runner/test:1110:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:785:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+
+Evidence: post-A-after.log
+✔ error log before FILE_LOADED leaves prepare pending (144.9252ms)
+✔ FILE_LOADED after error log succeeds and clears prepare timer (52.6731ms)
+✔ prepare timeout reports the latest error log (47.1635ms)
+✔ post-prepare error log neither emits fatal error nor tears down playback (42.9434ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 292.2267
+
+
+Evidence: post-B-before.log
+> hvigor ERROR: Failed :entry:default@UnitTestArkTS...
+> hvigor ERROR: ArkTS Compiler Error
+1 ERROR: 10505001 ArkTS Compiler Error
+Error Message: Property 'setSurfaceSize' does not exist on type 'PlayerFeatureController'. At File: D:/Linkora-validation/entry/src/test/FeatureModules.test.ets:434:18
+
+2 ERROR: 10505001 ArkTS Compiler Error
+Error Message: Property 'setSurfaceSize' does not exist on type 'PlayerFeatureController'. At File: D:/Linkora-validation/entry/src/test/FeatureModules.test.ets:439:18
+
+3 ERROR: 10505001 ArkTS Compiler Error
+Error Message: Property 'setSurfaceSize' does not exist on type 'PlayerFeatureController'. At File: D:/Linkora-validation/entry/src/test/FeatureModules.test.ets:443:18
+
+COMPILE RESULT:FAIL {ERROR:4 WARN:299}
+> hvigor ERROR: BUILD FAILED in 8 s 611 ms
+
+Evidence: post-B-after.log
+> hvigor [32mBUILD SUCCESSFUL in 13 s 219 ms [39m
+
+Evidence: post-C-before.log
+> hvigor ERROR: Error in doesNotLabelBt2020SdrAsHdr, expect HDR equals
+> hvigor ERROR:     at AssertException (oh_modules/.ohpm/@ohos+hypium@1.0.18/oh_modules/@ohos/hypium/src/main/service.js:23:9)
+> hvigor ERROR:     at anonymous (oh_modules/.ohpm/@ohos+hypium@1.0.18/oh_modules/@ohos/hypium/src/main/service.js:1084:45)
+> hvigor ERROR:     at anonymous (entry/src/test/ArchitectureContracts.test.ets:61:31)
+> hvigor ERROR:     at anonymous (oh_modules/.ohpm/@ohos+hypium@1.0.18/oh_modules/@ohos/hypium/src/main/service.js:38:19)
+> hvigor ERROR:     at getFuncWithArgsZero (oh_modules/.ohpm/@ohos+hypium@1.0.18/oh_modules/@ohos/hypium/src/main/service.js:30:12)
+> hvigor ERROR:     at processedFunc (oh_modules/.ohpm/@ohos+hypium@1.0.18/oh_modules/@ohos/hypium/src/main/service.js:109:24)
+> hvigor ERROR:     at asyncRun (oh_modules/.ohpm/@ohos+hypium@1.0.18/oh_modules/@ohos/hypium/src/main/service.js:919:24)
+> hvigor ERROR:     at asyncRunSpecs (oh_modules/.ohpm/@ohos+hypium@1.0.18/oh_modules/@ohos/hypium/src/main/service.js:621:32)
+> hvigor [32mBUILD SUCCESSFUL in 10 s 667 ms [39m
+
+Evidence: post-C-after.log
+> hvigor [32mBUILD SUCCESSFUL in 13 s 696 ms [39m
+
+Evidence: post-D-before.log
+✔ generated .test platform imports are outside production roots (58.2855ms)
+✔ core production platform imports fail (51.0952ms)
+✔ core production implementation imports fail (48.3522ms)
+✖ production build directory cannot hide a platform import (47.8402ms)
+✔ module production export entry is also guarded (45.7051ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 4
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 256.5892
+
+✖ failing tests:
+
+test at scripts\check-architecture-boundaries.test.cjs:47:1
+✖ production build directory cannot hide a platform import (47.8402ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  0 !== 1
+
+      at TestContext.<anonymous> (D:\Linkora-validation\scripts\check-architecture-boundaries.test.cjs:49:10)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1103:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:785:18)
+      at Test.postRun (node:internal/test_runner/test:1232:19)
+      at Test.run (node:internal/test_runner/test:1160:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:785:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 0,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+
+Evidence: post-D-after.log
+✔ generated .test platform imports are outside production roots (61.2723ms)
+✔ core production platform imports fail (48.8264ms)
+✔ core production implementation imports fail (48.3999ms)
+✔ production build directory cannot hide a platform import (51.2963ms)
+✔ module production export entry is also guarded (51.0315ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 266.6569
+
+
+Evidence: post-capabilities-before.log
+✔ error log before FILE_LOADED leaves prepare pending (158.0633ms)
+✔ FILE_LOADED after error log succeeds and clears prepare timer (54.307ms)
+✔ prepare timeout reports the latest error log (46.9723ms)
+✔ post-prepare error log neither emits fatal error nor tears down playback (45.2349ms)
+✖ unverified advanced capabilities are reported conservatively (44.7919ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 4
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 354.0823
+
+✖ failing tests:
+
+test at scripts\check-mpv-playback-port.cjs:126:1
+✖ unverified advanced capabilities are reported conservatively (44.7919ms)
+  AssertionError [ERR_ASSERTION]: assSubtitle
+
+  true !== false
+
+      at TestContext.<anonymous> (D:\Linkora-validation\scripts\check-mpv-playback-port.cjs:130:60)
+      at async Test.run (node:internal/test_runner/test:1110:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:785:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+
+Evidence: post-capabilities-after.log
+✔ error log before FILE_LOADED leaves prepare pending (150.2744ms)
+✔ FILE_LOADED after error log succeeds and clears prepare timer (53.3311ms)
+✔ prepare timeout reports the latest error log (46.5877ms)
+✔ post-prepare error log neither emits fatal error nor tears down playback (42.8394ms)
+✔ unverified advanced capabilities are reported conservatively (37.2087ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 334.8094

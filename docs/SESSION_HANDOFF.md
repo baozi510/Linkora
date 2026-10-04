@@ -324,3 +324,40 @@ Use the latest repository documents as the source of truth.
 Continue from the documented current branch/status.
 Do not redesign or merge branches until you have reviewed the validation evidence.
 ```
+
+
+## Post-validation review update
+
+Architecture review after the first validation pass is complete.
+
+Before any further runtime testing or feature work, read:
+
+`docs/CODEX_POST_VALIDATION_ACTIONS.md`
+
+Current next action is:
+
+1. keep the accepted validation fixes;
+2. correct MPV error-log handling;
+3. wire surface size from PlayerPage -> PlayerFeatureController -> PlaybackEngine;
+4. correct HDR labeling so BT.2020 alone is not treated as HDR;
+5. tighten the architecture-boundary scanner;
+6. rerun the full verify.ps1;
+7. attempt the current HAP on the available x86_64 emulator without production ABI hacks;
+8. update VALIDATION_REPORT.md and stop for architecture review.
+
+Do not start FFmpeg or Auto-policy tuning before this review loop is complete.
+
+
+## ARM64 device validation handoff
+
+The post-validation correction pass has now been architecture-reviewed and accepted at the source/build level.
+
+Current next step requires a real arm64 HarmonyOS device.
+
+Read and follow:
+
+`docs/ARM64_DEVICE_VALIDATION_RUNBOOK.md`
+
+Do not continue simulator-specific production changes. The available x86_64 emulator cannot install the current arm64-v8a HAP.
+
+Do not merge PR #10 until arm64 runtime evidence has been reviewed.

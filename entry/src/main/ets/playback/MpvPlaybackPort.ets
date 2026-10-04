@@ -35,6 +35,7 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
   private prepareReject: ((error: PlaybackPortError) => void) | null = null;
   private prepareTimer: number = -1;
   private seekPending: boolean = false;
+  private latestErrorLog: string = '';
 
   private constructor(observer: PlaybackPortObserver) {
     this.observer = observer;
@@ -56,18 +57,8 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
   }
 
   capabilities(): PlayerBackendCapabilities {
-    return new PlayerBackendCapabilities(
-      true,
-      true,
-      true,
-      true,
-      true,
-      true,
-      true,
-      true,
-      false,
-      false
-    );
+    // Advanced output/subtitle capabilities await target-device validation.
+    return new PlayerBackendCapabilities();
   }
 
   configure(source: MediaSource, surfaceId: string): void {
@@ -112,7 +103,8 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
       this.prepareReject = reject;
     });
     this.prepareTimer = setTimeout(() => {
-      this.failPrepare(new PlaybackPortError(0, 'MPV prepare timed out'));
+      const diagnostic: string = this.latestErrorLog.length > 0 ? `: ${this.latestErrorLog}` : '';
+      this.failPrepare(new PlaybackPortError(0, `MPV prepare timed out${diagnostic}`));
     }, MPV_PREPARE_TIMEOUT_MS);
     try {
       this.player.open(new Media(source.locator), false);
@@ -259,11 +251,9 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
       this.observer.onTracksChange(this.mapTracks(this.player.state.tracks, track));
     });
     this.player.stream.error.listen((detail: string) => {
-      const error = new PlaybackPortError(0, detail || 'MPV playback error');
-      if (!this.prepared) {
-        this.failPrepare(error);
-      } else if (!this.released) {
-        this.observer.onError(error);
+      // The wrapper emits error-level log lines, not structured fatal errors.
+      if (!this.released) {
+        this.latestErrorLog = detail;
       }
     });
   }

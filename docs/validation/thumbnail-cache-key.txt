@@ -1,0 +1,1 @@
+PASS production thumbnail cache key: frame time, width, height, quality, algorithmVersion each change identity; identical plan reuses identity (desktop crypto bindings).

@@ -61,6 +61,12 @@ export class PlayerFeatureController {
     });
   }
 
+  setSurfaceSize(width: number, height: number): void {
+    if (this.active) {
+      this.engine.setSurfaceSize(width, height);
+    }
+  }
+
   attachSurface(surfaceId: string): void {
     if (!this.active || surfaceId.length === 0) {
       return;

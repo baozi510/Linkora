@@ -25,6 +25,9 @@ try {
     throw 'Architecture boundary checks failed.'
   }
 
+  & $node (Join-Path $PSScriptRoot 'check-architecture-boundaries.test.cjs')
+  if ($LASTEXITCODE -ne 0) { throw 'Architecture guard fixture checks failed.' }
+
   $uiSource = Get-ChildItem -LiteralPath 'entry\src\main\ets' -Recurse -Filter '*.ets'
   $legacyPatterns = @(
     '^\s*@Component\s*$',
@@ -54,6 +57,9 @@ try {
 
   & $node (Join-Path $PSScriptRoot 'check-network-media-list.cjs')
   if ($LASTEXITCODE -ne 0) { throw 'Network media list/cache regression checks failed.' }
+
+  & $node (Join-Path $PSScriptRoot 'check-mpv-playback-port.cjs') $StudioRoot
+  if ($LASTEXITCODE -ne 0) { throw 'MPV adapter event-mapping regression checks failed.' }
 
   & $hvigor test --mode module -p module=entry@default -p product=default --no-daemon
   if ($LASTEXITCODE -ne 0) {

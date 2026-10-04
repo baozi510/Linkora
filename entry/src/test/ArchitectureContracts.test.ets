@@ -10,6 +10,7 @@ import {
   PlayerBackendCapabilities,
   PlayerBackendKind,
   PlayerBackendPreference,
+  PortVideoInfo,
   ProbeCompleteness,
   ProbeFieldOrigin,
   ProbeResult,
@@ -46,6 +47,26 @@ class FakeRemoteReadSession implements RemoteReadSession {
 
 export default function architectureContractsTest(): void {
   describe('ArchitectureContracts', () => {
+    it('labelsPqBt2020MetadataAsHdr10', 0, () => {
+      expect(new PortVideoInfo('', '', '', '', 'bt2020', 'pq').hdrLabel()).assertEqual('HDR10');
+      expect(new PortVideoInfo('', '', '', '', 'bt2020', 'smpte2084').hdrLabel()).assertEqual('HDR10');
+    });
+
+    it('labelsHlgBt2020MetadataAsHlg', 0, () => {
+      expect(new PortVideoInfo('', '', '', '', 'bt2020', 'hlg').hdrLabel()).assertEqual('HLG');
+    });
+
+    it('doesNotLabelBt2020SdrAsHdr', 0, () => {
+      const info = new PortVideoInfo('', '', '', '', 'bt2020', 'bt.1886');
+      expect(info.hdrLabel()).assertEqual('');
+      expect(info.colorPrimaries).assertEqual('bt2020');
+      expect(new PortVideoInfo('', '', '', '', 'bt.2020', 'sdr').hdrLabel()).assertEqual('');
+    });
+
+    it('doesNotLabelBt709SdrAsHdr', 0, () => {
+      expect(new PortVideoInfo('', '', '', '', 'bt709', 'bt.1886').hdrLabel()).assertEqual('');
+    });
+
     it('adaptsExistingRemoteReadSessionsToRandomAccess', 0, async () => {
       const legacy = new FakeRemoteReadSession();
       const source = new RemoteReadSessionAdapter(

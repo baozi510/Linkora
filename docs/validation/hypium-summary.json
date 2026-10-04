@@ -1,0 +1,95 @@
+{
+  "total": 137,
+  "suites": {
+    "NetworkLinkParser": {
+      "total": 9,
+      "pass": 9,
+      "fail": 0
+    },
+    "MediaSource": {
+      "total": 5,
+      "pass": 5,
+      "fail": 0
+    },
+    "ArchitectureContracts": {
+      "total": 6,
+      "pass": 6,
+      "fail": 0
+    },
+    "NetworkStorageProvider": {
+      "total": 2,
+      "pass": 2,
+      "fail": 0
+    },
+    "PlaybackEngine": {
+      "total": 9,
+      "pass": 9,
+      "fail": 0
+    },
+    "PlaybackBookmark": {
+      "total": 3,
+      "pass": 3,
+      "fail": 0
+    },
+    "FailureCatalog": {
+      "total": 7,
+      "pass": 7,
+      "fail": 0
+    },
+    "LocalMediaAsset": {
+      "total": 17,
+      "pass": 17,
+      "fail": 0
+    },
+    "FeatureModules": {
+      "total": 36,
+      "pass": 36,
+      "fail": 0
+    },
+    "PlayerGestureController": {
+      "total": 4,
+      "pass": 4,
+      "fail": 0
+    },
+    "NetworkAddressParser": {
+      "total": 5,
+      "pass": 5,
+      "fail": 0
+    },
+    "LocalMediaOrdering": {
+      "total": 7,
+      "pass": 7,
+      "fail": 0
+    },
+    "AppNavigationParams": {
+      "total": 6,
+      "pass": 6,
+      "fail": 0
+    },
+    "NetworkDirectoryState": {
+      "total": 3,
+      "pass": 3,
+      "fail": 0
+    },
+    "NetworkFileProxy": {
+      "total": 8,
+      "pass": 8,
+      "fail": 0
+    },
+    "SystemMediaStages": {
+      "total": 2,
+      "pass": 2,
+      "fail": 0
+    },
+    "ThumbnailPolicy": {
+      "total": 3,
+      "pass": 3,
+      "fail": 0
+    },
+    "NetworkMediaProbe": {
+      "total": 5,
+      "pass": 5,
+      "fail": 0
+    }
+  }
+}

@@ -75,7 +75,7 @@ export class NetworkPlaybackSourceResolver {
     } catch (error) {
       randomAccess.cancel();
       await randomAccess.close().catch(() => {});
-      throw error;
+      throw error as Error;
     }
   }
 

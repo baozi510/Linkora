@@ -300,6 +300,8 @@ class FakeNetworkProbe implements NetworkProbePort {
 class FakePlaybackPort implements PlaybackPort {
   readonly observer: PlaybackPortObserver;
   seekPosition: number = -1;
+  surfaceWidth: number = 0;
+  surfaceHeight: number = 0;
 
   constructor(observer: PlaybackPortObserver) {
     this.observer = observer;
@@ -307,6 +309,11 @@ class FakePlaybackPort implements PlaybackPort {
 
   configure(_source: MediaSource, _surfaceId: string): void {
     this.observer.onStateChange(PortPlaybackState.INITIALIZED);
+  }
+
+  setSurfaceSize(width: number, height: number): void {
+    this.surfaceWidth = width;
+    this.surfaceHeight = height;
   }
 
   getDuration(): number {
@@ -412,6 +419,41 @@ async function waitFor(milliseconds: number): Promise<void> {
 
 export default function featureModulesTest(): void {
   describe('FeatureModules', () => {
+    it('forwardsControllerSizeAndIgnoresDetachedBackendEventsAfterReopen', 0, async () => {
+      const ports: FakePlaybackPort[] = [];
+      const controller = new PlayerFeatureController(
+        MediaSource.fromLocalDocument('file://video.mp4'),
+        (observer: PlaybackObserver) => new PlaybackEngine(observer,
+          async (portObserver: PlaybackPortObserver): Promise<PlaybackPort> => {
+            const port = new FakePlaybackPort(portObserver);
+            ports.push(port);
+            return port;
+          }),
+        new FakeBookmarkRepository(), new AppSettings(false, false, false), () => {}
+      );
+      controller.setSurfaceSize(640, 360);
+      controller.attachSurface('surface-1');
+      await settle();
+      expect(ports[0].surfaceWidth).assertEqual(640);
+      expect(ports[0].surfaceHeight).assertEqual(360);
+      controller.setSurfaceSize(1280, 720);
+      expect(ports[0].surfaceWidth).assertEqual(1280);
+      controller.detachSurface();
+      await settle();
+      controller.setSurfaceSize(1920, 1080);
+      controller.attachSurface('surface-2');
+      await settle();
+      expect(ports.length).assertEqual(2);
+      expect(ports[1].surfaceWidth).assertEqual(1920);
+      expect(ports[1].surfaceHeight).assertEqual(1080);
+      ports[0].observer.onPositionChange(99999);
+      ports[0].observer.onStateChange(PortPlaybackState.ERROR);
+      expect(controller.currentState().playback.status).assertEqual(PlaybackStatus.PLAYING);
+      expect(controller.currentState().playback.position).assertEqual(0);
+      controller.stop();
+      await settle();
+    });
+
     it('keepsImportedFilesAtRootAndScannedAlbumsInsideLocalMedia', 0, async () => {
       const gateway = new FakeLocalMediaGateway();
       const album = new LocalMediaFolder('album://camera', 'Camera', 1, 1, 0);

@@ -1,0 +1,62 @@
+Command: ./scripts/verify.ps1
+Validated SHA: 7621608b4acce6daa5d7d399bb1feb8ddc384524
+Process exit: 0
+
+Architecture boundary checks passed.
+✔ generated .test platform imports are outside production roots (48.8505ms)
+✔ core production platform imports fail (47.1246ms)
+✔ core production implementation imports fail (46.5668ms)
+✔ production build directory cannot hide a platform import (47.702ms)
+✔ module production export entry is also guarded (44.6674ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 239.8267
+PASS: migration failure rolls back schema and version; retry succeeds
+PASS: legacy half-migrated v3/v5/v6/v7 recover without losing rows
+PASS: v8 reference migration rolls back completely before retry
+PASS: v9 network metadata migration rolls back and retries without losing v8 media
+PASS: same-folder deduplication and cross-folder references survive removal
+PASS: reauthorization preserves alias and folder; cancellation preserves data
+PASS: batch hide/restore rolls back partial writes and remains usable
+PASS bounded authenticated HTTP ranges, wrong positions, ignored Range, reuse and close
+PASS metadata-only, thumbnail-only, early metadata and interrupted timing snapshot
+PASS separate native preparation, metadata, thumbnail and total timings
+PASS stalled cleanup watchdog returns failure evidence
+PASS media cache and loader checks
+PASS permanent database metadata, WebP storage, legacy migration, refresh cache reuse, serial/coalesced load, cancellation/late results, partial metadata, independent images, UI boundary and nullable factory
+✔ error log before FILE_LOADED leaves prepare pending (152.513ms)
+✔ FILE_LOADED after error log succeeds and clears prepare timer (57.9585ms)
+✔ prepare timeout reports the latest error log (45.0198ms)
+✔ post-prepare error log neither emits fatal error nor tears down playback (39.9317ms)
+✔ unverified advanced capabilities are reported conservatively (37.5877ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 339.793
+> hvigor [32mBUILD SUCCESSFUL in 11 s 225 ms [39m
+> hvigor [32mFinished :linkora_core:assembleHar... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 7 s 130 ms [39m
+> hvigor [32mFinished :linkora_proxy:assembleHar... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 6 s 908 ms [39m
+> hvigor [32mFinished :linkora_media_probe:assembleHar... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 6 s 310 ms [39m
+> hvigor [32mFinished :entry:assembleHap... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 45 s 905 ms [39m
+> hvigor [32mFinished :linkora_core:assembleHar... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 7 s 918 ms [39m
+> hvigor [32mFinished :linkora_proxy:assembleHar... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 6 s 936 ms [39m
+> hvigor [32mFinished :linkora_media_probe:assembleHar... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 6 s 782 ms [39m
+> hvigor [32mFinished :entry:assembleHap... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 19 s 872 ms [39m
+Verification completed: architecture boundaries, persistence checks, unit tests, HAR and HAP builds passed.

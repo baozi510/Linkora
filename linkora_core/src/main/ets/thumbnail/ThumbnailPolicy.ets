@@ -23,6 +23,11 @@ export interface ThumbnailTimePolicy {
   plan(durationMs: number, sourceWidth: number, sourceHeight: number): ThumbnailPlan;
 }
 
+interface ThumbnailSize {
+  width: number;
+  height: number;
+}
+
 export class DefaultThumbnailTimePolicy implements ThumbnailTimePolicy {
   private readonly maxWidth: number;
   private readonly maxHeight: number;
@@ -50,7 +55,7 @@ export class DefaultThumbnailTimePolicy implements ThumbnailTimePolicy {
     return new ThumbnailPlan(timeMs, size.width, size.height, this.quality, this.algorithmVersion);
   }
 
-  private fit(sourceWidth: number, sourceHeight: number): { width: number; height: number } {
+  private fit(sourceWidth: number, sourceHeight: number): ThumbnailSize {
     const width: number = Number.isFinite(sourceWidth) && sourceWidth > 0 ? sourceWidth : 0;
     const height: number = Number.isFinite(sourceHeight) && sourceHeight > 0 ? sourceHeight : 0;
     if (width <= 0 || height <= 0) {
