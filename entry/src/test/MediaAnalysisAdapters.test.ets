@@ -1,7 +1,8 @@
 import { describe, it, expect } from '@ohos/hypium';
 import { MediaSource, MediaSourceKind, MediaFormat, RandomAccessSource, SourceCapabilities,
   ProbeRequirement, ProbeCompleteness, ResolvedMediaInputKind, ThumbnailExtractRequest,
-  MediaInfo, VideoTrackInfo, ProbeResult, MediaProbeDiagnostics, IMediaProbe } from 'linkora_core';
+  MediaInfo, VideoTrackInfo, ProbeResult, MediaProbeDiagnostics, IMediaProbe,
+  LocalFileCategory } from 'linkora_core';
 import { FfmpegAnalysis, NativeFfmpegApi, NativeProbeResult, NativeVideoStream, NativeAudioStream,
   NativeFrameResult, FfmpegError, FfmpegErrorCode } from 'linkora_ffmpeg';
 import { AnalysisOperation, AnalysisError, AnalysisErrorCode } from '../main/ets/analysis/AnalysisOperation';
@@ -98,7 +99,7 @@ function probeResult(engine: string, completeness: ProbeCompleteness,
 }
 function remoteFile(format: MediaFormat = MediaFormat.MATROSKA): MediaSource {
   return new MediaSource(MediaSourceKind.REMOTE_FILE, '/movie.mkv', 'movie.mkv', '',
-    format, undefined, 1024, '', 'network-server:1');
+    format, LocalFileCategory.VIDEO, 1024, '', 'network-server:1');
 }
 
 export default function mediaAnalysisAdaptersTest(): void {
