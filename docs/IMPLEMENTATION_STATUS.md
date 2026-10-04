@@ -115,7 +115,7 @@ Includes:
 
 ### FFmpeg media analysis
 
-DEPENDENCY BOOTSTRAP IN PROGRESS; ANALYZER NOT YET IMPLEMENTED.
+DEPENDENCY BOOTSTRAP VERIFIED; PHASE-1 NATIVE ANALYZER IMPLEMENTATION AUTHORIZED.
 
 Current repository state:
 
@@ -127,13 +127,20 @@ Current repository state:
 - intended libraries: libavformat/libavcodec/libavutil/libswscale
 - no CLI programs, encoders, muxers or hwaccels in the initial analyzer profile
 
-Still required before implementing `FFmpegMediaProbe`:
+Verified by simulator validation:
 
-- both ABI builds must succeed on the real HarmonyOS Native SDK
-- exact build manifests must be captured
-- any HarmonyOS-specific FFmpeg patch must be documented
-- native Linkora module must link cleanly
-- local and MediaProxy smoke probes must pass
+- x86_64 FFmpeg bootstrap build succeeded
+- arm64-v8a FFmpeg bootstrap build succeeded
+- exact build manifests/audits were captured
+- no HarmonyOS FFmpeg source patch was required for bootstrap
+
+Current required work:
+
+- create and link dedicated `linkora_ffmpeg` native module
+- run x86 simulator local/MediaProxy probe + frame smoke
+- build the module for arm64-v8a
+- prove cancellation/timeout/error handling
+- return for review before production policy wiring
 
 See:
 
