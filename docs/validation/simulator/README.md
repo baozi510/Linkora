@@ -9,3 +9,5 @@ Screenshots are selected fresh captures using unique remote filenames. Older fix
 Full original failures, successful builds/configure logs, source pin proof, lab setup helpers, input/retry harness logs and generated fixtures/artifacts remain local at D:\Linkora-validation\artifacts\simulator-validation. Generated FFmpeg static libraries/headers remain in ignored third_party/ffmpeg/prebuilt; do not confuse them with App integration.
 
 NOT RUN gaps are intentional, visible in the main report: private cache files and App proxy counters inaccessible, required AAC local/HTTPS cases unexecuted, precise Auto runtime events uncollected, and real ARM64-only capabilities unavailable. These are not PASS.
+
+Committed command-log copies normalize line endings and trailing whitespace only; original unmodified logs remain in ignored artifacts.
