@@ -62,7 +62,7 @@ real native storage transports
 ```text
 product=simulator
 entry@simulator
-bundle=com.linkora.player.simulator
+bundle=com.linkora.player
 x86_64 emulator
 AdaptivePlaybackPort
 MPV package replacement at final native boundary
@@ -230,7 +230,7 @@ hdc shell param get const.product.cpu.abilist
 
 确认 bundle：
 
-`com.linkora.player.simulator`
+`com.linkora.player`
 
 如果仍出现 ABI mismatch：
 
