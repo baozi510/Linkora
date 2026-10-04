@@ -25,7 +25,7 @@ if ($parent) {
 git clone --filter=blob:none --no-checkout $Remote $Destination
 if ($LASTEXITCODE -ne 0) { throw 'FFmpeg clone failed.' }
 
-git -C $Destination fetch --depth 1 origin "refs/tags/$Tag:refs/tags/$Tag"
+git -C $Destination fetch --depth 1 origin "refs/tags/${Tag}:refs/tags/${Tag}"
 if ($LASTEXITCODE -ne 0) { throw "Unable to fetch $Tag." }
 
 git -C $Destination checkout --detach $Tag
