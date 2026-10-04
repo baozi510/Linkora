@@ -21,7 +21,9 @@ export class HarmonyAnalysisInputs implements AnalysisInputPorts {
     if (server === undefined) throw new AnalysisError(AnalysisErrorCode.RESOLVE_FAILED);
     const directory = new NetworkDirectoryService(server);
     operation.onCancel(() => directory.cancel());
-    return directory.openSource(source.locator, source.fingerprint);
+    // MediaSource.fingerprint is a media/cache identity, not an SFTP host-key fingerprint.
+    // The provider resolves protocol security options from the persisted server entry.
+    return directory.openSource(source.locator);
   }
   async openHttp(source: MediaSource, _operation: AnalysisOperation): Promise<RandomAccessSource> {
     // The resolver closes a late HEAD result if cancellation happened while opening.
