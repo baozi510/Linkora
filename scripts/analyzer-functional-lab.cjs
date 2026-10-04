@@ -41,6 +41,9 @@ const config = { fixtures: truth.fixtures.map(item => { const v = item.truth.str
   return { name: item.name, url: endpoint + '/' + item.name, durationMs: Math.round(Number(item.truth.format.duration) * 1000), width: v.width, height: v.height }; }),
   host: '10.0.2.2', port: 19334, remotePath: '/' + path.basename(owned) + '/remote.mkv', remoteSize: fs.statSync(remote).size, corrupt: endpoint + '/corrupt.mp4' };
 const server = http.createServer((request, response) => {
+  if (request.url === '/' + token + '/stop' && request.method === 'POST') {
+    response.end('stopping owned helper'); response.on('finish', () => { close(); process.exit(0); }); return;
+  }
   if (request.url === '/' + token && request.method === 'GET') { response.setHeader('Content-Type', 'application/json'); return response.end(JSON.stringify(config)); }
   if (request.url === '/' + token + '/evidence' && request.method === 'POST') {
     let body = ''; request.on('data', data => { body += data; if (body.length > 131072) request.destroy(); });
