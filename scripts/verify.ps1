@@ -31,6 +31,11 @@ try {
   & $node (Join-Path $PSScriptRoot 'check-simulator-product.cjs')
   if ($LASTEXITCODE -ne 0) { throw 'Simulator product isolation checks failed.' }
 
+  & $node (Join-Path $PSScriptRoot 'check-ffmpeg-phase1.cjs') $StudioRoot
+  if ($LASTEXITCODE -ne 0) { throw 'FFmpeg Phase1 pure tests failed.' }
+  & $node --test (Join-Path $PSScriptRoot 'check-ffmpeg-artifact.test.cjs')
+  if ($LASTEXITCODE -ne 0) { throw 'FFmpeg artifact guard tests failed.' }
+
   $uiSource = Get-ChildItem -LiteralPath 'entry\src\main\ets' -Recurse -Filter '*.ets'
   $legacyPatterns = @(
     '^\s*@Component\s*$',
@@ -75,7 +80,7 @@ try {
   }
 
   foreach ($buildMode in @('debug', 'release')) {
-    foreach ($harModule in @('linkora_core', 'linkora_proxy', 'linkora_media_probe')) {
+    foreach ($harModule in @('linkora_core', 'linkora_proxy', 'linkora_media_probe', 'linkora_ffmpeg')) {
       & $hvigor assembleHar --mode module -p module=$harModule@default -p product=default `
         -p buildMode=$buildMode --no-daemon
       if ($LASTEXITCODE -ne 0) {
@@ -88,6 +93,11 @@ try {
     if ($LASTEXITCODE -ne 0) {
       throw "$buildMode HAP build failed."
     }
+    $hap = Get-ChildItem -LiteralPath 'entry\build\default\outputs' -Recurse -Filter '*unsigned.hap' |
+      Sort-Object LastWriteTimeUtc | Select-Object -Last 1
+    if ($null -eq $hap) { throw 'Default unsigned HAP missing for native ABI audit.' }
+    & $node (Join-Path $PSScriptRoot 'check-ffmpeg-artifact.cjs') $hap.FullName arm64-v8a
+    if ($LASTEXITCODE -ne 0) { throw "$buildMode default native ABI audit failed." }
   }
 
   Write-Host 'Verification completed: architecture boundaries, persistence checks, unit tests, HAR and HAP builds passed.'

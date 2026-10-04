@@ -6,6 +6,7 @@
   "author": "",
   "license": "Proprietary",
   "dependencies": {
+    "linkora_ffmpeg": "file:../linkora_ffmpeg",
     "@mpv-ohos/mpv-arkts": "1.0.0",
     "linkora_media_probe": "file:../linkora_media_probe",
     "linkora_core": "file:../linkora_core",

@@ -2,11 +2,20 @@
 
 ## Status
 
-Dependency bootstrap is now **IN PROGRESS** on the simulator-validation branch.
+Dependency bootstrap is **COMPLETE FOR PHASE-1 ENTRY**.
 
-Linkora has pinned FFmpeg 8.1.3 and added reproducible source-fetch / dual-ABI build scripts, but the analyzer implementation is still blocked until those scripts produce verified HarmonyOS artifacts on the real DevEco Native SDK.
+Validation produced real FFmpeg 8.1.3 static libraries for both x86_64 and arm64-v8a using the HarmonyOS SDK toolchain, and archive members were audited as X86-64 / AArch64.
 
-Read `docs/FFMPEG_BOOTSTRAP.md` first.
+The dedicated analyzer module implementation is now authorized on:
+
+`feat/ffmpeg-media-analysis-phase1`
+
+Policy integration remains blocked until the native module itself passes x86 simulator smoke and arm64 build verification.
+
+Read:
+
+- `docs/FFMPEG_BOOTSTRAP.md`
+- `docs/CODEX_FFMPEG_INTEGRATION_RUNBOOK.md`
 
 ## What is present
 

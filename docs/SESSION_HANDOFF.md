@@ -417,3 +417,66 @@ The simulator HAP must never contain real libmpv or production SMB/SFTP/FTP/NFS 
 A future `liblinkora_ffmpeg.so` is the only planned x86 native runtime addition after FFmpeg integration.
 
 Simulator evidence still does not replace ARM64 device validation.
+
+
+## Simulator validation accepted / FFmpeg Phase 1 authorized
+
+The near-production simulator validation round is architecture-reviewed and accepted.
+
+Accepted tested source SHA from that round:
+
+`04814840403b54d8dd0e0e61798be1fb3f8f8da8`
+
+The simulator branch later added evidence/documentation only.
+
+Confirmed validation highlights:
+
+- default `verify.ps1` PASS;
+- Hypium 149/149 PASS;
+- default arm64 Debug/Release HAP PASS;
+- simulator HAP build/install/launch PASS;
+- Auto/System/MPV UI parity preserved;
+- WebDAV real shared provider path exercised;
+- real MediaProxy random seek evidence collected;
+- overlapping seek/buffering bug fixed and regression-tested;
+- RepeatItem refresh bug fixed and runtime-tested;
+- FFmpeg 8.1.3 bootstrap built for both x86_64 and arm64-v8a;
+- static archives audited as X86-64 / AArch64.
+
+Still device-only / not proven:
+
+- real MPV runtime;
+- real SMB/SFTP/FTP/NFS native I/O;
+- native HDR/Dolby Vision output;
+- DTS-HD/TrueHD/Atmos/DTS:X passthrough;
+- arm64 hardware decode/power/thermal.
+
+Current implementation branch:
+
+`feat/ffmpeg-media-analysis-phase1`
+
+Read first:
+
+1. `docs/CODEX_FFMPEG_INTEGRATION_RUNBOOK.md`
+2. `docs/FFMPEG_PHASE1_REPORT.md`
+3. `docs/FFMPEG_BOOTSTRAP.md`
+4. `docs/SIMULATOR_VALIDATION_REPORT.md`
+
+Current authorization:
+
+- create dedicated `linkora_ffmpeg` module;
+- link the pinned FFmpeg static libraries;
+- support x86_64 simulator and arm64-v8a build;
+- implement async native metadata probe;
+- implement async one-frame RGBA extractor;
+- implement cancellation/timeout via AVIOInterruptCB;
+- run local + MediaProxy simulator smoke.
+
+Still forbidden before the next architecture review:
+
+- making FFmpeg the production default probe;
+- changing IMediaProbe public signature;
+- changing Auto/PlaybackBackendSelector;
+- System/FFmpeg policy tuning;
+- AVIOContext direct callbacks;
+- FFmpeg playback backend.

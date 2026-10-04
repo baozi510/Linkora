@@ -1,0 +1,50 @@
+Architecture boundary checks passed.
+Simulator product parity/isolation checks passed.
+PASS maps format video audio chapters and field origins
+PASS maps PQ conservatively as metadata HDR10
+PASS maps HLG transfer
+PASS requires explicit Dolby Vision configuration
+PASS does not infer HDR from BT2020 or ten bits alone
+PASS maps text bitmap unknown and subtitle dispositions
+PASS caps arbitrary tag values and total tag bytes
+PASS caps stream and chapter counts
+PASS rejects invalid raw frame byte count
+PASS rejects unbounded frame allocation dimensions
+PASS releases frame idempotently and rejects later reads
+PASS does not cancel unrelated request ids
+PASS isolates identical external ids between wrappers
+PASS rejects duplicate active request ids without replacing state
+PASS close cancels owned work and rejects new requests
+FFmpeg Phase1 pure tests: 15/15 PASS
+Local persistence checks passed (desktop SQLite; Harmony bindings and authorization require device verification).
+PASS bounded authenticated HTTP ranges, wrong positions, ignored Range, reuse and close
+PASS metadata-only, thumbnail-only, early metadata and interrupted timing snapshot
+PASS separate native preparation, metadata, thumbnail and total timings
+PASS stalled cleanup watchdog returns failure evidence
+PASS media cache and loader checks
+PASS permanent database metadata, WebP storage, legacy migration, refresh cache reuse, serial/coalesced load, cancellation/late results, partial metadata, independent images, UI boundary and nullable factory
+> hvigor [32mBUILD SUCCESSFUL in 11 s 541 ms [39m
+> hvigor [32mFinished :linkora_core:assembleHar... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 7 s 958 ms [39m
+> hvigor [32mFinished :linkora_proxy:assembleHar... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 7 s 418 ms [39m
+> hvigor [32mFinished :linkora_media_probe:assembleHar... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 7 s 59 ms [39m
+> hvigor [32mFinished :linkora_ffmpeg:assembleHar... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 10 s 783 ms [39m
+> hvigor [32mFinished :entry:assembleHap... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 41 s 90 ms [39m
+FFmpeg/native artifact ABI audit PASS: 9 libraries (arm64-v8a)
+> hvigor [32mFinished :linkora_core:assembleHar... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 8 s 437 ms [39m
+> hvigor [32mFinished :linkora_proxy:assembleHar... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 7 s 315 ms [39m
+> hvigor [32mFinished :linkora_media_probe:assembleHar... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 7 s 139 ms [39m
+> hvigor [32mFinished :linkora_ffmpeg:assembleHar... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 11 s 760 ms [39m
+> hvigor [32mFinished :entry:assembleHap... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 23 s 882 ms [39m
+FFmpeg/native artifact ABI audit PASS: 9 libraries (arm64-v8a)
+Verification completed: architecture boundaries, persistence checks, unit tests, HAR and HAP builds passed.
+verify.ps1 exit code: 0; complete log SHA256: FB9B312B103A02FEB1C03B68B982F3E1B2326E3030028FAD362C4F33A4F05F2A

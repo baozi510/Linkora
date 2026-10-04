@@ -26,6 +26,13 @@
   },
   "modules": [
     {
+      "name": "linkora_ffmpeg", "srcPath": "./linkora_ffmpeg",
+      "targets": [
+        { "name": "default", "applyToProducts": ["default"] },
+        { "name": "simulator", "applyToProducts": ["simulator"] }
+      ]
+    },
+    {
       "name": "linkora_media_probe",
       "srcPath": "./linkora_media_probe",
       "targets": [

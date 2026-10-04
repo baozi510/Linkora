@@ -21,6 +21,18 @@ function check(condition, message) {
 const project = json5('build-profile.json5');
 const entry = json5('entry/build-profile.json5');
 const entryPackage = json5('entry/oh-package.json5');
+const ffmpeg = json5('linkora_ffmpeg/build-profile.json5');
+const ffmpegModule = project.modules.find(item => item.name === 'linkora_ffmpeg');
+check(!!ffmpegModule, 'linkora_ffmpeg module is required');
+for (const [target, abi, product] of [['default', 'arm64-v8a', 'default'], ['simulator', 'x86_64', 'simulator']]) {
+  const config = ffmpeg.targets.find(item => item.name === target);
+  check(config && JSON.stringify(config.config.buildOption.externalNativeOptions.abiFilters) === JSON.stringify([abi]),
+    `linkora_ffmpeg@${target} must build only ${abi}`);
+  const moduleTarget = ffmpegModule && ffmpegModule.targets.find(item => item.name === target);
+  check(moduleTarget && JSON.stringify(moduleTarget.applyToProducts) === JSON.stringify([product]),
+    `linkora_ffmpeg@${target} must apply only to ${product}`);
+}
+check(entryPackage.dependencies.linkora_ffmpeg === 'file:../linkora_ffmpeg', 'entry must package linkora_ffmpeg');
 const hvigor = json5('hvigor/hvigor-config.json5');
 
 const simulatorProduct = project.app.products.find(item => item.name === 'simulator');

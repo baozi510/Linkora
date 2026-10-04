@@ -51,3 +51,6 @@ linkora_media_probe/BuildProfile.ets
 third_party/ffmpeg/source/
 third_party/ffmpeg/build/
 third_party/ffmpeg/prebuilt/
+linkora_ffmpeg/build/
+linkora_ffmpeg/.cxx/
+linkora_ffmpeg/oh_modules/

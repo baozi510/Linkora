@@ -1,0 +1,13 @@
+✔ accepts only x86 FFmpeg in simulator (1.0821ms)
+✔ rejects mislabeled arm64 ELF in simulator (0.4625ms)
+✔ rejects production native libs even when ELF is x86 (0.1733ms)
+✔ default confirms FFmpeg and existing libraries are AArch64 (0.1572ms)
+✔ rejects missing analyzer and unrecognized ELF (0.4711ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 79.4515

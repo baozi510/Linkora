@@ -1,0 +1,9 @@
+{
+  "name": "linkora_ffmpeg", "version": "0.1.0", "main": "Index.ets",
+  "description": "Phase 1 async software media analysis; no routing policy.",
+  "license": "Proprietary",
+  "dependencies": {
+    "linkora_core": "file:../linkora_core",
+    "liblinkora_ffmpeg.so": "file:./src/main/cpp/types/liblinkora_ffmpeg"
+  }
+}

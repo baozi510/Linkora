@@ -1,0 +1,19 @@
+PASS maps format video audio chapters and field origins
+PASS maps PQ conservatively as metadata HDR10
+PASS maps HLG transfer
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'hdr10'
+- 'dolby_vision'
+
+    at Object.assertEqual (D:\Linkora-validation\scripts\check-ffmpeg-phase1.cjs:21:40)
+    at Object.body (D:\Linkora-validation\entry\src\test\FfmpegAnalysis.test.ets:79:114)
+    at D:\Linkora-validation\scripts\check-ffmpeg-phase1.cjs:33:42 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 'hdr10',
+  expected: 'dolby_vision',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
