@@ -1,12 +1,138 @@
 # FFmpeg Analyzer Production Policy Phase 3 Report
 
-> Status: REVIEWED — first run stopped at static-gate false positive; checker fix committed; full validation rerun required.
+> Status: FAIL — post-review rerun stopped at desktop network-media-list module resolution; ChatGPT source review required.
 > Branch: `feat/ffmpeg-analyzer-policy-phase3`
 > Codex role: test/report only; no source fixes.
 > Date: 2026-10-05 (Asia/Shanghai).
 
 
-## Architecture review after validation stop
+## Post-review rerun — 2026-10-05
+
+Tested source: `81ed0684b273e25afbed056a055ee23aded0b661` on `feat/ffmpeg-analyzer-policy-phase3`, fetched and fast-forwarded to the user-specified reviewed commit. Clean checkout confirmed before dependency install. Original `D:/Linkora` has unrelated uncommitted main changes and is preserved; execution uses `D:/Linkora-validation`.
+
+All seven requested baseline/runbook/report documents were read completely, including SESSION_HANDOFF CURRENT STATE and its approved non-merging Phase 3 interpretation. Historical results below remain historical only.
+
+- Normal `ohpm install`: PASS, exit 0; tracked lockfiles unchanged.
+- Fresh full default `scripts/verify.ps1`: FAIL, exit 1 at `scripts/verify.ps1:77`; network-media-list desktop harness fails before Hvigor.
+- Simulator/default consecutive verification and all production runtime cases: NOT RUN, runbook section 20 stop condition.
+- Initial HDC inventory: `[Empty]`; no emulator/device was started, installed, launched, hidden or closed during this rerun. This did not cause the default gate failure.
+- No production, test expectation, profile, lockfile or business-policy edits permitted or applied.
+- Fresh evidence: `test-lab/analyzer-policy/phase3/rerun-81ed068/`. Historical first-run evidence is preserved separately and is not reused as rerun PASS.
+
+### Fresh gate results
+
+| Gate | Result | Evidence from this rerun |
+| --- | --- | --- |
+| Clean checkout / requested source SHA | PASS | Git status empty; HEAD exactly `81ed0684b273e25afbed056a055ee23aded0b661` |
+| Normal dependency resolution / tracked locks | PASS | `ohpm install` exit 0; protected audit and Git show no lock changes |
+| Architecture boundary checks | PASS | Fresh completion marker |
+| Architecture guard fixtures | PASS | 5/5, failure 0 |
+| Simulator product static isolation | PASS | Fresh parity/isolation completion marker; no simulator build implied |
+| FFmpeg pure tests | PASS | 15/15 |
+| Analyzer adapter/policy pure tests | PASS | 45/45; fresh execution, not old results |
+| Native artifact guard fixtures | PASS | 17/17; these are fixture tests, not actual HAP audits |
+| ArkUI migration/static guard | PASS | Full verifier proceeded into subsequent persistence checks; old callback false positive did not recur |
+| Persistence regression | PASS | Desktop SQLite completion marker; injected rollback errors are expected test cases |
+| HTTP range / System probe regression harness | PASS | Four existing PASS markers, including stalled cleanup watchdog |
+| Network media list/cache regression | FAIL | ENOENT during module load, before `check()` cache/loader assertions |
+| MPV event mapping regression | NOT RUN | Next verifier command after failed list/cache gate |
+| Actual Hvigor Hypium compilation/execution | NOT RUN | `hvigor test` was not reached; executed Hypium count 0 |
+| Full default verifier | FAIL | Exit 1; no overall completion marker |
+| Simulator verify / automatic dependency restoration | NOT RUN | Default stop condition |
+| Immediate default verify after simulator | NOT RUN | No simulator gate attempted; no intervening manual install |
+
+### Fresh build matrix
+
+| Artifact | Debug | Release |
+| --- | --- | --- |
+| linkora_core default HAR | NOT RUN | NOT RUN |
+| linkora_proxy default HAR | NOT RUN | NOT RUN |
+| linkora_media_probe default HAR | NOT RUN | NOT RUN |
+| linkora_ffmpeg default HAR | NOT RUN | NOT RUN |
+| entry default arm64 HAP | NOT RUN | NOT RUN |
+| default exact-nine AArch64 native set / ABI audit | NOT RUN | NOT RUN |
+| entry simulator x86_64 HAP / native whitelist audit | NOT RUN | NOT RUN |
+
+No existing generated binary or old Hypium result was accepted as this source's build/runtime evidence.
+
+### Exact new failure / minimal reproduction
+
+Tested source: `81ed0684b273e25afbed056a055ee23aded0b661`.
+
+Actual full command executed in `D:/Linkora-validation`, with DevEco bundled Node on PATH:
+
+```powershell
+& 'C:\Program Files\PowerShell\7\pwsh.exe' -NoProfile -File scripts/verify.ps1
+```
+
+Actual invocation was captured by the existing ignored `artifacts/build-isolation/run-stage.ps1` wrapper; it launches that unmodified full script with redirected original stdout/stderr. Exit code 1. No Debug checkpoint was reached. UTC timestamps and wrapper details are in the evidence JSON.
+
+The first failing nested command is:
+
+```powershell
+& 'C:\Program Files\Huawei\DevEco Studio\tools\node\node.exe' scripts/check-network-media-list.cjs
+```
+
+This is the minimal standalone reproduction command extracted from the actual failing invocation; it was not rerun after the stop condition. The full verifier already executed it once.
+
+Original key error:
+
+```text
+Error: ENOENT: no such file or directory, open 'D:\Linkora-validation\entry\AnalysisComposition.ets'
+    at Object.readFileSync (node:fs:440:20)
+    at load (D:\Linkora-validation\scripts\check-network-media-list.cjs:93:38)
+    at D:\Linkora-validation\scripts\check-network-media-list.cjs:97:13
+    at D:\Linkora-validation\entry\src\main\ets\analysis\NetworkMediaAnalysisCoordinator.ets:5:31
+    at load (D:\Linkora-validation\scripts\check-network-media-list.cjs:96:96)
+    at D:\Linkora-validation\scripts\check-network-media-list.cjs:97:13
+    at D:\Linkora-validation\entry\src\main\ets\services\NetworkMediaLoader.ets:9:43
+    at load (D:\Linkora-validation\scripts\check-network-media-list.cjs:96:96)
+    at check (D:\Linkora-validation\scripts\check-network-media-list.cjs:134:34)
+Exception: D:\Linkora-validation\scripts\verify.ps1:77
+Network media list/cache regression checks failed.
+```
+
+Root cause confirmed by read-only source tracing: coordinator source line 17 imports the target-specific alias `entry/AnalysisComposition`. The desktop loader at lines 87–97 checks its `kits` map, appends `.ets`, then reads unmatched non-relative imports directly as filenames. The unchanged harness has no `entry/AnalysisComposition` alias/mock mapping, so it reads the absent root file instead of resolving the target implementation. Both actual files exist at `entry/src/default/AnalysisComposition.ets` and `entry/src/simulator/AnalysisComposition.ets`; their current bytes are identical. VM stack line 5 is a transpiled location, not original ArkTS source line 17.
+
+Classification: FAIL — desktop regression-harness/module-resolution compatibility. This is not an ArkTS compiler failure, native load failure, production runtime failure, or missing SDK/device diagnosis. A reviewed test-harness/source change is required to pass this gate; Codex applied none. No alias shim, new file, mock substitution, test-expectation change, gate bypass or retry was used. Potential later assertions are unknown and must be tested after ChatGPT's reviewed correction.
+
+### Fresh policy coverage / runtime exclusions
+
+The 45-case pure runner freshly passed the seven production-policy cases, including LIST System COMPLETE/no FFmpeg; LIST PARTIAL fallback without merge; DETAIL unusable fallback; DETAIL usable PARTIAL/no merge; cancellation with zero later fallback calls; System-only local/playlist order; and FFmpeg-first file-like DETAIL/ADVANCED order. These are desktop pure tests, not Hvigor Hypium or production UI tests. ADVANCED COMPLETE/PARTIAL/UNAVAILABLE generic execution remains NOT RUN; DETAIL execution is not relabeled ADVANCED evidence.
+
+| Functional area | Result / scope |
+| --- | --- |
+| WebDAV MP4 production Network page → loader → coordinator flow | NOT RUN |
+| WebDAV HEVC/MKV production flow | NOT RUN |
+| Production duration/dimensions/metadataEngine/thumbnailEngine | NOT RUN |
+| FFmpeg frame → common WebP encoder → persistent cache / reopen | NOT RUN |
+| Natural FFmpeg thumbnail failure → real System success | NOT RUN |
+| Both thumbnail engines failed / retained metadata / bounded backoff | NOT RUN |
+| Legacy JPEG, metadata-only and WebP cache runtime compatibility | NOT RUN; list/cache harness failed before assertions |
+| Navigate-away, refresh, generation/stale-result rejection | NOT RUN |
+| Production fallback-after-cancel and final activeSources | NOT RUN |
+| 20-cycle directory lifecycle | NOT RUN, cycles 0 |
+| HTTP production consumer applicability and real resolver/native boundary | NOT RUN |
+| HLS/DASH System-only native-attempt runtime audit | NOT RUN; pure policy case PASS only |
+| LOCAL_DOCUMENT UI/System thumbnail runtime | NOT RUN; pure order case PASS only |
+| SFTP / SMB / FTP / NFS connection/open/read runtime | NOT RUN |
+| Production security-log scan | NOT RUN; no fresh HAP installed/launched |
+| System / MPV / Auto playback runtime | NOT RUN; outside reached gates |
+| Benchmark / performance ranking | NOT RUN, prohibited this round; no NDJSON/report |
+
+MediaProxy diagnostics: real runtime NOT RUN; no activeSources/Range/bytes counters from this rerun. Pure resolver/cleanup assertions passed inside the existing 45-case suite, but do not prove production proxy cleanup.
+
+### Evidence integrity / stop decision
+
+Protected pre/post audit covers 863 tracked source, header, type, package/lock, build-profile, Hvigor, CMake and script files. Changed files: 0. No production edits, test edits, strategy changes, merge or new-stage work.
+
+Raw stdout/stderr, command/exit record, install result, exact numbered failure context and fresh protected hashes are retained in the rerun evidence directory. Evidence is inspected for credential, Authorization/Cookie value, proxy token and sensitive upstream locator leakage before commit. Incidental existing runner durations are original command output only; no System-versus-FFmpeg metrics were collected or compared.
+
+Final rerun decision: FAIL, with later work NOT RUN under runbook section 20. Acceptance is BLOCKED pending ChatGPT review of the new harness failure. **Not READY FOR PHASE 3 ARCHITECTURE ACCEPTANCE.** Only report and sanitized evidence are committed. Stop and await review.
+
+### Historical first execution / architecture ruling
+
+Everything below is preserved history for source `72e74d1` and its architecture review; the current rerun results and stop decision are above. Historical PASS statements are not included in the current rerun's evidence.
 
 Review date: 2026-10-05.
 

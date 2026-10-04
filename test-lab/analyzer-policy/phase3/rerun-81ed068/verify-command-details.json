@@ -1,0 +1,12 @@
+{
+  "command": "pwsh -NoProfile -File scripts/verify.ps1",
+  "nestedFailedCommand": "C:/Program Files/Huawei/DevEco Studio/tools/node/node.exe scripts/check-network-media-list.cjs",
+  "powershell": "C:/Program Files/PowerShell/7/pwsh.exe",
+  "exitCode": 1,
+  "hdcInventory": "[Empty]",
+  "wrapper": "artifacts/build-isolation/run-stage.ps1 -Label phase3-rerun-default -Target default",
+  "workingDirectory": "D:/Linkora-validation",
+  "sourceSha": "81ed0684b273e25afbed056a055ee23aded0b661",
+  "hypiumExecuted": 0,
+  "stopCondition": "runbook section 20: failed default gate / source change required"
+}

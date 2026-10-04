@@ -1,0 +1,76 @@
+FILE scripts/check-network-media-list.cjs
+76: const kits = {
+77:   '@kit.AbilityKit': {}, '@kit.BasicServicesKit': { systemDateTime: { TimeType: { STARTUP: 0 }, getUptime: () => performance.now() } }, '@kit.CoreFileKit': { fileIo }, '@kit.ImageKit': { image },
+78:   '@kit.ArkData': { relationalStore: { SecurityLevel: { S2: 2 }, getRdbStore: async () => rdb } }, '@kit.NetworkKit': { connection: {} },
+79:   linkora_core: { LocalFileCategory: { VIDEO: 'video' }, LocalFileFilter: class { categoryOf(name) { return name.endsWith('.mp4') ? 'video' : 'other'; } } },
+80:   linkora_media_probe: { NetworkMediaProbe: Probe, ProbeMode: { BOTH: 'both', METADATA: 'metadata', THUMBNAIL: 'thumbnail' } },
+81:   linkora_proxy: { NetworkFileProxy: class {
+82:     diagnostics() { return { bytesRead: 0, readRequests: 0 }; }
+83:     async buildSourceUrl(source) { let closing; return { url: 'http://127.0.0.1/test', release: () => closing ??= source.close() }; }
+84:     async close() {}
+85:   } }
+86: };
+87: function load(file) {
+88:   if (kits[file]) return kits[file];
+89:   if (!file.endsWith('.ets')) file += '.ets';
+90:   if (kits[file]) return kits[file];
+91:   if (modules.has(file)) return modules.get(file).exports;
+92:   const module = { exports: {} }; modules.set(file, module);
+93:   const code = ts.transpileModule(fs.readFileSync(file, 'utf8'), {
+94:     compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 }
+95:   }).outputText;
+96:   vm.runInThisContext('(function(require,module,exports){' + code + '\n})', { filename: file })(
+97:     name => load(name.startsWith('.') ? path.resolve(path.dirname(file), name) : name), module, module.exports);
+98:   return module.exports;
+99: }
+100: const serviceDir = path.join(root, 'entry/src/main/ets/services');
+101: Object.assign(kits.linkora_core, load(path.join(root, 'linkora_core/src/main/ets/thumbnail/ThumbnailPolicy.ets')));
+102: kits[path.join(serviceDir, 'SourceIdentity.ets')] = { SourceIdentity: { value: async value => {
+103:   if (holdKey) await new Promise(resolve => { releaseKey = resolve; });
+104:   return createHash('sha256').update(value).digest('hex');
+105: } } };
+106: kits[path.join(serviceDir, 'NetworkDirectoryService.ets')] = { NetworkDirectoryService: class {
+107:   async openSource(p, fingerprint, onSetup) {
+108:     opened++;
+109:     if (setupHold) {
+110:       const settled = new Promise(resolve => { releaseSetup = resolve; }).then(() => { closed++; });
+111:       onSetup(settled); throw Error('setup deadline');
+112:     }
+113:     return { close: async () => { closed++; }, cancel() {} };
+114:   }
+115: } };
+FILE entry/src/main/ets/analysis/NetworkMediaAnalysisCoordinator.ets
+15: } from 'linkora_core';
+16: import { NetworkFileProxy } from 'linkora_proxy';
+17: import { AnalysisComposition } from 'entry/AnalysisComposition';
+18: import { HarmonyAnalysisInputs } from './HarmonyAnalysisInputs';
+19: import { MediaAnalysisInputResolver } from './MediaAnalysisInputResolver';
+20: import { PolicyMediaProbe } from './PolicyMediaProbe';
+21: import {
+22:   ProductionAnalysisEngine,
+23:   ProductionMediaAnalysisPolicy
+24: } from './ProductionMediaAnalysisPolicy';
+25: import { SystemThumbnailFallback } from './SystemThumbnailFallback';
+26: import { SystemWebPEncoder } from '../services/SystemWebPEncoder';
+FILE scripts/verify.ps1
+68:   & $node (Join-Path $PSScriptRoot 'check-local-persistence.cjs') $StudioRoot
+69:   if ($LASTEXITCODE -ne 0) {
+70:     throw 'Local persistence regression checks failed.'
+71:   }
+72:
+73:   & $node (Join-Path $PSScriptRoot 'check-network-media-probe.cjs') --unit
+74:   if ($LASTEXITCODE -ne 0) { throw 'HTTP range adapter regression checks failed.' }
+75:
+76:   & $node (Join-Path $PSScriptRoot 'check-network-media-list.cjs')
+77:   if ($LASTEXITCODE -ne 0) { throw 'Network media list/cache regression checks failed.' }
+78:
+79:   & $node (Join-Path $PSScriptRoot 'check-mpv-playback-port.cjs') $StudioRoot
+80:   if ($LASTEXITCODE -ne 0) { throw 'MPV adapter event-mapping regression checks failed.' }
+81:
+82:   & $hvigor test --mode module -p module=entry@default -p product=default --no-daemon
+83:   if ($LASTEXITCODE -ne 0) {
+84:     throw 'Unit-test compilation failed.'
+85:   }
+entry/AnalysisComposition.ets exists: False
+entry/src/default/AnalysisComposition.ets sha256: 9a4233c6a00f05ef928505530b8312d5078b1d38e91395d9d0d3b492deaff04f
+entry/src/simulator/AnalysisComposition.ets sha256: 9a4233c6a00f05ef928505530b8312d5078b1d38e91395d9d0d3b492deaff04f

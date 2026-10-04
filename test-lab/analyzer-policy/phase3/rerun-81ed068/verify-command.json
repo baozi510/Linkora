@@ -1,0 +1,9 @@
+{
+  "endedAt": "2026-10-04T16:48:53.7792683Z",
+  "label": "phase3-rerun-default",
+  "command": "scripts/verify.ps1",
+  "exitCode": 1,
+  "target": "default",
+  "debugCaptured": false,
+  "startedAt": "2026-10-04T16:48:49.0846609Z"
+}
