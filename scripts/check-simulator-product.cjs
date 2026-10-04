@@ -114,9 +114,12 @@ check(simulatorProfile.includes('return false;') &&
   'simulator RuntimeProfile must describe full product surface, not hide capabilities');
 
 const simulatorProviders = read('entry/src/simulator/ets/services/DefaultNetworkStorageProviders.ets');
-check(simulatorProviders.includes('RemoteProtocol.WEBDAV') &&
-  simulatorProviders.includes('RemoteProtocol.HTTP'),
-  'simulator must retain real HTTP/WebDAV transport');
+check(simulatorProviders.includes('registerSharedNetworkStorageProviders'),
+  'simulator must reuse the exact shared HTTP/WebDAV provider implementation');
+const sharedProviders = read('entry/src/main/ets/services/SharedNetworkStorageProviders.ets');
+check(sharedProviders.includes('WebDavStorageProvider') &&
+  sharedProviders.includes('DirectHttpCompatibilityProvider'),
+  'shared provider module must own real WebDAV/HTTP implementations');
 for (const protocol of ['SMB', 'SFTP', 'FTP', 'NFS']) {
   check(simulatorProviders.includes('RemoteProtocol.' + protocol),
     'simulator storage registry must register last-layer replacement for ' + protocol);
@@ -125,6 +128,8 @@ check(simulatorProviders.includes('SimulatorUnavailableNativeStorageProvider'),
   'simulator native storage replacement must fail at the transport boundary');
 check(!/(SmbBrowserService|SftpBrowserService|FtpBrowserService|NfsBrowserService|liblinkora_)/.test(simulatorProviders),
   'simulator transport replacement must not import arm64 native protocol implementations');
+check(!simulatorProviders.includes('WebDavBrowserService'),
+  'simulator must not duplicate the shared WebDAV provider implementation');
 
 const simulatorTests = read('entry/src/simulator/ets/adapters/NetworkProtocolTestRegistry.ets');
 for (const protocol of ['SMB', 'SFTP', 'FTP', 'NFS']) {
