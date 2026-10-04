@@ -41,20 +41,27 @@ case "$ABI" in
     ;;
 esac
 
-clang="$NATIVE_ROOT/llvm/bin/clang"
-clangxx="$NATIVE_ROOT/llvm/bin/clang++"
-ar="$NATIVE_ROOT/llvm/bin/llvm-ar"
-ranlib="$NATIVE_ROOT/llvm/bin/llvm-ranlib"
-nm="$NATIVE_ROOT/llvm/bin/llvm-nm"
-strip="$NATIVE_ROOT/llvm/bin/llvm-strip"
-sysroot="$NATIVE_ROOT/sysroot"
-
-for tool in "$clang" "$clangxx" "$ar" "$ranlib" "$nm" "$strip"; do
-  if [[ ! -x "$tool" && ! -f "${tool}.exe" ]]; then
-    echo "HarmonyOS tool not found: $tool" >&2
-    exit 1
+resolve_tool() {
+  local base="$1"
+  if [[ -x "$base" || -f "$base" ]]; then
+    printf '%s' "$base"
+    return
   fi
-done
+  if [[ -x "${base}.exe" || -f "${base}.exe" ]]; then
+    printf '%s' "${base}.exe"
+    return
+  fi
+  echo "HarmonyOS tool not found: $base" >&2
+  exit 1
+}
+
+clang="$(resolve_tool "$NATIVE_ROOT/llvm/bin/clang")"
+clangxx="$(resolve_tool "$NATIVE_ROOT/llvm/bin/clang++")"
+ar="$(resolve_tool "$NATIVE_ROOT/llvm/bin/llvm-ar")"
+ranlib="$(resolve_tool "$NATIVE_ROOT/llvm/bin/llvm-ranlib")"
+nm="$(resolve_tool "$NATIVE_ROOT/llvm/bin/llvm-nm")"
+strip="$(resolve_tool "$NATIVE_ROOT/llvm/bin/llvm-strip")"
+sysroot="$NATIVE_ROOT/sysroot"
 
 if [[ ! -d "$sysroot" ]]; then
   echo "HarmonyOS sysroot not found: $sysroot" >&2
@@ -116,6 +123,7 @@ pushd "$BUILD_DIR" >/dev/null
   --disable-encoders \
   --disable-muxers \
   --disable-hwaccels \
+  --disable-x86asm \
   --disable-indevs \
   --disable-outdevs \
   --disable-autodetect \
