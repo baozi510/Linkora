@@ -84,6 +84,9 @@ try {
     $zip.Dispose()
   }
 
+  & $node (Join-Path $PSScriptRoot 'check-ffmpeg-artifact.cjs') $hap.FullName x86_64
+  if ($LASTEXITCODE -ne 0) { throw 'Simulator FFmpeg native ELF/ABI audit failed.' }
+
   Write-Host "Simulator HAP verified: $($hap.FullName)"
   if ($nativeEntries.Count -eq 0) {
     Write-Host 'Simulator HAP currently contains no native .so files.'
