@@ -5,7 +5,7 @@ import { FfmpegThumbnailExtractorAdapter } from '../main/ets/analysis/FfmpegThum
 import { SystemMediaProbeAdapter } from '../main/ets/analysis/SystemMediaProbeAdapter';
 import { HarmonySystemAnalysisBackend } from '../main/ets/analysis/HarmonySystemAnalysisBackend';
 
-/** Available integration plugin. Production loaders do not select these factories. */
+/** Target-specific analysis factories used by the production functional policy. */
 export class AnalysisComposition {
   static ffmpeg(resolver: MediaAnalysisInputResolver, timeoutMs: number = 10000): FfmpegMediaProbeAdapter {
     return new FfmpegMediaProbeAdapter(resolver, createFfmpegAnalysis(), timeoutMs);
