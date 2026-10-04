@@ -1,0 +1,1 @@
+Empty output from git status --porcelain=v1 before evidence directory creation and dependency installation; confirmed in fresh fetch/source-safety command.

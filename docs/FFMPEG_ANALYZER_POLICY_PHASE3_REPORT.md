@@ -1,9 +1,102 @@
 # FFmpeg Analyzer Production Policy Phase 3 Report
 
-> Status: REVIEWED — second rerun stopped at desktop harness alias resolution; harness/lifecycle corrections committed; fresh validation required.
+> Status: BLOCKED — TEST ENVIRONMENT. Current task stopped after normal dependency installation rewrote four protected lockfiles from LF to CRLF; no verifier or runtime tests executed.
 > Branch: `feat/ffmpeg-analyzer-policy-phase3`
 > Codex role: test/report only; no source fixes.
 > Date: 2026-10-05 (Asia/Shanghai).
+
+## Current validation — phase3-rerun-3b-isolated-checkout
+
+This section is the fresh result for the current READY dispatch. Everything below the historical separator is preserved history and supplies no PASS evidence for this run.
+
+- Repository: `baozi510/Linkora`.
+- Branch: `feat/ffmpeg-analyzer-policy-phase3`.
+- Implementation source SHA: `15db3f8a3e87f75edc209c1919f944f39c0b9fcb`.
+- Actual validation checkout SHA: `b5c53c01ee158d1374b71130f6ce910da1fddcaa`.
+- Isolated independent clone: `D:/Linkora-validation-phase3-20261005`; origin is `https://github.com/baozi510/Linkora.git`.
+- Evidence: `test-lab/analyzer-policy/phase3/rerun-3b-isolated-20261005/`.
+- Original dirty workspace `D:/Linkora` remains on `main`, HEAD `ef6ee820a6d010f4ee63a1c0a14c646a717eaa17`. Its status and binary-diff SHA256 digests match before/after. No stash/reset/clean/checkout or file write was performed there.
+- All nine required documents were read completely in the dispatched order, with SESSION_HANDOFF CURRENT STATE first.
+
+### Fresh commands and results
+
+| Command / check | Exit code | Fresh result |
+| --- | --- | --- |
+| `git fetch --no-tags https://github.com/baozi510/Linkora.git feat/ffmpeg-analyzer-policy-phase3` in original repository | 0 | Retrieved current dispatch only; no checkout performed |
+| `git clone --single-branch --branch feat/ffmpeg-analyzer-policy-phase3 https://github.com/baozi510/Linkora.git D:\Linkora-validation-phase3-20261005` | 0 | Created independent validation clone |
+| `git fetch origin feat/ffmpeg-analyzer-policy-phase3` in clone | 0 | HEAD and remote branch both equal the validation SHA above |
+| `git status --porcelain=v1` before evidence/dependency installation | 0 | PASS; empty output |
+| `git merge-base --is-ancestor 15db3f8a3e87f75edc209c1919f944f39c0b9fcb HEAD` | 0 | PASS; implementation source is an ancestor |
+| `git diff --name-only 15db3f8a3e87f75edc209c1919f944f39c0b9fcb..HEAD` | 0 | PASS; exactly `docs/AI_WORKFLOW.md` and `docs/CODEX_VALIDATION_TASK.md` |
+| `ohpm --version`; `node --version` with DevEco tool directories prepended to process PATH | 0 | ohpm `26.0.0.630`, Node `v24.14.1` |
+| `hdc list targets` using installed SDK executable | 0 | `[Empty]`; no simulator/device started |
+| `ohpm install` in validation clone | 0 | Install succeeded; four tracked lockfiles subsequently reported modified |
+| `git diff --exit-code -- '*oh-package-lock.json5'` | 0 | No normalized Git-content change; this does not establish byte preservation or clean status |
+| `git ls-files --eol '*oh-package-lock.json5'` | 0 | All four index blobs LF, worktree files CRLF, attribute `text eol=lf` |
+
+Installation used process PATH prefixes `C:\Program Files\Huawei\DevEco Studio\tools\node` and `C:\Program Files\Huawei\DevEco Studio\tools\ohpm\bin`. No package-resolution flags, test substitutions, source patches or gate bypasses were used. PowerShell version freshly observed: `7.6.6`. HDC executable: `C:\Program Files\Huawei\DevEco Studio\sdk\default\openharmony\toolchains\hdc.exe`.
+
+### Stop evidence and assessment
+
+Normal `ohpm install` changed the bytes of these four protected files:
+
+- `entry/oh-package-lock.json5`;
+- `linkora_ffmpeg/oh-package-lock.json5`;
+- `linkora_proxy/oh-package-lock.json5`;
+- `oh-package-lock.json5`.
+
+For every file, line-content comparison is equal and Git-normalized worktree blob equals the HEAD blob. The fresh evidence therefore confirms LF-to-CRLF rewriting only, with no dependency graph/content change. SHA256 before/after values are different, and `git status --porcelain=v1` reports all four files as modified. Exact hashes/blob IDs and EOL attributes are in `lockfile-eol-drift.json` and `lockfile-eol.txt`.
+
+The task requires a clean validation checkout, unchanged tracked lockfiles after dependency resolution, and forbids lockfile edits. On that conservative reading, the prerequisite cannot be reported PASS despite the empty normalized Git diff. Execution stopped before `scripts/verify.ps1`. No manual EOL normalization, restore, index refresh to conceal status, new checkout workaround, verifier retry or package-manager patch was performed. The decision is an environment/prerequisite block, not a failed default verifier, production analyzer defect or dependency-content mismatch. Resolution of this package-manager/EOL prerequisite needs a reviewed workflow clarification or environment correction before a new run.
+
+Protected audit: 1,997 tracked regular files were hashed before and after installation, excluding the authorized report and phase3 evidence. 1,993 files are byte-identical; only the four installer-rewritten lockfiles differ. Three Gitlink entries were recorded separately rather than hashed as files. An initial attempt to hash those directories produced access errors; the baseline was corrected before installation to cover regular files and record Gitlinks separately. No production/test/build file was manually edited. No source/test/profile/lockfile content is staged or committed by this report.
+
+### Unexecuted gates and cases
+
+| Required item | Current-run result |
+| --- | --- |
+| Fresh full default `./scripts/verify.ps1` | NOT RUN; dependency/clean-checkout prerequisite blocked |
+| Architecture boundaries and guard fixtures | NOT RUN |
+| Simulator product static isolation | NOT RUN |
+| FFmpeg pure tests; analyzer adapter/policy pure tests | NOT RUN |
+| Native artifact guard fixtures | NOT RUN |
+| ArkUI migration/static guard; persistence regressions | NOT RUN |
+| HTTP range/System probe regressions | NOT RUN |
+| Network media list/cache/lifecycle normal completion, late native cleanup serialization, cancelled-result rejection and reader closure | NOT RUN |
+| MPV event-mapping regressions | NOT RUN |
+| Actual Hvigor Hypium execution and test count | NOT RUN; executed count 0 |
+| Debug/Release HAR for core/proxy/media_probe/ffmpeg | NOT RUN for every module/mode |
+| Debug/Release default HAP and exact-nine AArch64 native/ABI audit | NOT RUN for both modes |
+| Default verifier final completion marker | NOT RUN |
+| Simulator verification, x86 whitelist/ABI audit and dependency restoration | NOT RUN |
+| Immediate post-simulator default verification | NOT RUN; no simulator gate executed |
+| LIST COMPLETE/incomplete fallback; DETAIL and ADVANCED COMPLETE/PARTIAL/unusable; non-merging and cancel policy | NOT RUN; no DETAIL evidence relabeled ADVANCED |
+| FFmpeg-first thumbnail, common WebP persistence, natural System fallback and both-engines-unavailable behavior | NOT RUN |
+| WebDAV H.264/AAC MP4 and HEVC/AAC MKV production Network-page/loader/coordinator flow | NOT RUN |
+| Production metadata/thumbnail engine logs, cache reopen and legacy cache compatibility | NOT RUN |
+| Navigate-away/refresh/stale-generation rejection, proxy/source cleanup and 20-cycle lifecycle | NOT RUN; runtime cycles 0 |
+| HTTP production-consumer applicability, HLS/DASH System-only and LOCAL_DOCUMENT functional flow | NOT RUN; applicability not established |
+| SFTP host-key ownership regression and WebDAV/SMB/FTP/NFS behavior | NOT RUN; no fresh source/runtime result claimed |
+| Production log security audit | NOT RUN; no new HAP built/installed/launched |
+| Performance comparison/benchmark/ranking | NOT RUN; prohibited this round |
+
+No runtime fixture/service was started and no target installed or launched. Device-dependent acceptance is unavailable in the observed empty HDC inventory, but that did not cause the lockfile prerequisite block. Uninitialized native Gitlinks and generated FFmpeg prebuilts were not provisioned or assessed for build readiness after the stop.
+
+Evidence is checked for Authorization/Cookie values, passwords/private credentials, proxy tokens and sensitive upstream URLs/paths before commit. It contains only command results, repository paths, public Git repository identifiers, hashes and environment metadata. No signing material, credential or raw private URL is included. No performance data was collected or interpreted; the install duration in original output is incidental command output.
+
+**Final decision: BLOCKED — TEST ENVIRONMENT.** No Phase 3 architecture acceptance claim. Publish only the authorized report/evidence under the updated remote-handoff requirement; do not merge or begin another phase.
+
+### Remote handoff of the preserved run — 2026-10-05
+
+The latest task was freshly fetched and read completely at remote SHA `5aa9ddc39901be8ebaf72c7607fb3e1ad974f1ce`, including sections 12 and 13. It retains the same task ID/source and adds mandatory push/fetch verification. The only changes from the actual tested checkout SHA are the two allowed operational documents. This handoff is not a new test run: `ohpm install`, default verifier, simulator verifier and runtime cases were not rerun, and the actual validation SHA above remains unchanged.
+
+Original local evidence commit: `34e203a537c842e76cb90f2c018c8b003c463e77`. Its report/evidence worktree diff is empty; all 14 evidence Git blobs are preserved unchanged during import. The original validation checkout, including the four installer-rewritten lockfiles, was not reset, normalized, rebased or otherwise overwritten.
+
+Publication uses a new clean independent clone at `D:/Linkora-phase3-handoff-20261005`, initially at the remote SHA above. Only the authorized report/evidence delta from the original local commit is imported with `git cherry-pick --no-commit`; no branch merge or protected-file delta is included. Original run evidence remains in its fresh per-run subdirectory. Additional handoff provenance and blob-identity evidence are under `test-lab/analyzer-policy/phase3/remote-handoff-20261005/`.
+
+The handoff commit is sent using `git push origin HEAD:refs/heads/feat/ffmpeg-analyzer-policy-phase3` without force. After push, `git fetch origin feat/ffmpeg-analyzer-policy-phase3` and `git merge-base --is-ancestor HEAD origin/feat/ffmpeg-analyzer-policy-phase3` must establish remote containment before completion is reported. The resulting commit SHA and observed remote verification are returned in the final handoff message; the evidence commit cannot contain its own SHA. If publication fails, the handoff status is `BLOCKED — EVIDENCE NOT PUSHED` while the preserved test result remains `BLOCKED — TEST ENVIRONMENT`.
+
+## Historical validation and review — not current-run evidence
 
 
 ## Architecture review after second validation stop

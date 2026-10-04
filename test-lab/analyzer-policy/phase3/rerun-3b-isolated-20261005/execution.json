@@ -1,0 +1,41 @@
+{
+  "taskId": "phase3-rerun-3b-isolated-checkout",
+  "date": "2026-10-05",
+  "timezone": "Asia/Shanghai",
+  "repository": "baozi510/Linkora",
+  "branch": "feat/ffmpeg-analyzer-policy-phase3",
+  "implementationSourceSha": "15db3f8a3e87f75edc209c1919f944f39c0b9fcb",
+  "validationCheckoutSha": "b5c53c01ee158d1374b71130f6ce910da1fddcaa",
+  "checkout": "D:/Linkora-validation-phase3-20261005",
+  "initialCleanStatus": true,
+  "sourceAncestorExit": 0,
+  "allowedDrift": ["docs/AI_WORKFLOW.md", "docs/CODEX_VALIDATION_TASK.md"],
+  "actualDrift": ["docs/AI_WORKFLOW.md", "docs/CODEX_VALIDATION_TASK.md"],
+  "cloneExit": 0,
+  "fetchExit": 0,
+  "ohpmInstallExit": 0,
+  "normalizedLockDiffExit": 0,
+  "postInstallLockStatus": "Four tracked locks M; LF index, CRLF worktree; line content and normalized Git blobs unchanged",
+  "verifier": "NOT RUN",
+  "simulatorVerifier": "NOT RUN",
+  "immediateDefaultVerifier": "NOT RUN",
+  "hypium": "NOT RUN",
+  "hypiumExecutedCount": 0,
+  "runtimeLifecycleCycles": 0,
+  "decision": "BLOCKED — TEST ENVIRONMENT",
+  "scope": "Dependency resolution/EOL prerequisite; no build or production runtime failure established",
+  "manualProtectedEdits": 0,
+  "installerByteChangedLocks": 4,
+  "originalWorkspaceBefore": {
+    "branch": "main",
+    "head": "ef6ee820a6d010f4ee63a1c0a14c646a717eaa17",
+    "statusSha256": "648A0D596918685CDA16A5E9CA8102F289C5C21D4838C4646C54240652512DE4",
+    "binaryDiffSha256": "2F10CDD611132E2170F8466E5CBB3E136A44BFB06F0312A01E48DB73FEEBC9E2"
+  },
+  "originalWorkspaceAfter": {
+    "branch": "main",
+    "head": "ef6ee820a6d010f4ee63a1c0a14c646a717eaa17",
+    "statusSha256": "648A0D596918685CDA16A5E9CA8102F289C5C21D4838C4646C54240652512DE4",
+    "binaryDiffSha256": "2F10CDD611132E2170F8466E5CBB3E136A44BFB06F0312A01E48DB73FEEBC9E2"
+  }
+}

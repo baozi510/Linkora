@@ -1,0 +1,7 @@
+{
+  "command": "ohpm install",
+  "exitCode": 0,
+  "workingDirectory": "D:\\Linkora-validation-phase3-20261005",
+  "node": "v24.14.1",
+  "ohpm": "26.0.0.630"
+}

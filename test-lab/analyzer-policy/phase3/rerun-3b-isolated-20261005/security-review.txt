@@ -1,0 +1,5 @@
+Fresh evidence review before commit:
+rg -n -i '(authorization\s*[:=]|cookie\s*[:=]|password\s*[:=]|proxy.?token\s*[:=]|https?://|BEGIN .*PRIVATE KEY)' test-lab/analyzer-policy/phase3/rerun-3b-isolated-20261005
+Exit 1, no matches in the evidence files scanned before this review note was added.
+Manual review: evidence consists of repository file paths, hashes, public Gitlink revisions, command result metadata and package-install output. No credential, proxy token, signing material or upstream private media URL/path recorded.
+This is an evidence security review only. Production runtime log security: NOT RUN.

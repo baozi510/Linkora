@@ -1,0 +1,24 @@
+{
+  "taskId": "phase3-rerun-3b-isolated-checkout",
+  "handoffDate": "2026-10-05",
+  "timezone": "Asia/Shanghai",
+  "latestDispatchSha": "5aa9ddc39901be8ebaf72c7607fb3e1ad974f1ce",
+  "actualValidationCheckoutSha": "b5c53c01ee158d1374b71130f6ce910da1fddcaa",
+  "implementationSourceSha": "15db3f8a3e87f75edc209c1919f944f39c0b9fcb",
+  "originalLocalEvidenceCommit": "34e203a537c842e76cb90f2c018c8b003c463e77",
+  "originalValidationCheckout": "D:/Linkora-validation-phase3-20261005",
+  "cleanPublicationClone": "D:/Linkora-phase3-handoff-20261005",
+  "branch": "feat/ffmpeg-analyzer-policy-phase3",
+  "evidenceLoss": false,
+  "testsRerun": false,
+  "preservedRunDecision": "BLOCKED — TEST ENVIRONMENT",
+  "scope": "Remote publication of existing report and sanitized evidence only",
+  "pushCommand": "git push origin HEAD:refs/heads/feat/ffmpeg-analyzer-policy-phase3",
+  "verificationCommands": [
+    "git fetch origin feat/ffmpeg-analyzer-policy-phase3",
+    "git rev-parse HEAD",
+    "git rev-parse origin/feat/ffmpeg-analyzer-policy-phase3",
+    "git merge-base --is-ancestor HEAD origin/feat/ffmpeg-analyzer-policy-phase3"
+  ],
+  "remoteVerificationRecordedIn": "Final handoff response after actual push and fetch; no pre-push success claim"
+}
