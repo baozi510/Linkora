@@ -650,3 +650,57 @@ Do not use x86 simulator data for:
 Remote byte/range counters may only be used to verify functional random-access behavior and cleanup.
 
 Performance benchmarking and performance-based policy decisions are deferred to real arm64 device testing.
+
+
+## FFmpeg Analyzer Production Policy Phase 3 — implemented, awaiting test-only validation
+
+Current branch:
+
+`feat/ffmpeg-analyzer-policy-phase3`
+
+Implementation ownership for this phase:
+
+- ChatGPT implements/fixes source;
+- Codex tests and reports only;
+- Codex must not patch source on validation failures.
+
+Implemented functional policy:
+
+```text
+LOCAL_DOCUMENT / HLS / DASH
+  -> System-only policy
+
+file-like REMOTE_FILE / HTTP
+  LIST
+    -> System first
+    -> FFmpeg only if System is incomplete/unusable
+
+  DETAIL / ADVANCED
+    -> FFmpeg first
+    -> System only if FFmpeg is unusable
+    -> no field merger
+
+thumbnail
+  -> FFmpeg first
+  -> existing System thumbnail fallback
+  -> common WebP encoder/cache
+```
+
+Production `NetworkMediaLoader` now uses `NetworkMediaAnalysisCoordinator`.
+
+Additional lifecycle/security fixes in this phase:
+
+- policy cancellation cannot start a later fallback engine;
+- coordinator cancellation cannot continue into thumbnail fallback;
+- `MediaSource.fingerprint` is no longer misused as an SFTP host-key fingerprint;
+- FFmpeg raw RGBA frames use the existing System WebP encoder;
+- no performance-based routing was introduced.
+
+Read for validation:
+
+1. `docs/CODEX_PHASE3_FUNCTIONAL_VALIDATION.md`
+2. `docs/FFMPEG_ANALYZER_POLICY_PHASE3_REPORT.md`
+
+Performance remains deferred to arm64 real-device testing.
+
+If Codex reports a source failure, return to ChatGPT for the fix. Do not let Codex patch the implementation branch.
