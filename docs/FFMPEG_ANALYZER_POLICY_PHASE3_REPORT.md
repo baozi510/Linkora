@@ -1,9 +1,28 @@
 # FFmpeg Analyzer Production Policy Phase 3 Report
 
-> Status: FAIL — BUILD (phase3-rerun-3f-probe-wrapper-forwarding).
+> Status: REVIEWED — phase3-rerun-3f reached Hvigor and exposed ArkTS arbitrary-value rethrow; typed analysis error propagation applied; fresh rerun required.
 > Branch: `feat/ffmpeg-analyzer-policy-phase3`
 > Codex role: test/report only; no source fixes.
 > Date: 2026-10-05 (Asia/Shanghai).
+
+## GPT review after phase3-rerun-3f ArkTS compile stop
+
+Review date: 2026-10-05.
+
+Ruling:
+
+- The run freshly proves the previously blocked desktop Loader/cache/lifecycle harness and MPV mapping now pass.
+- The new stop is a real production ArkTS compilation failure, not a desktop fixture failure or missing target.
+- `HarmonyAnalysisInputs.openRemote()` must retain the late native setup-settlement wait before propagating an open failure.
+- Raw `throw error` is invalid because ArkTS limits thrown values to supported Error types.
+- The repository already has the appropriate typed boundary: `AnalysisOperation.failure(error as Object, fallback)`.
+- The source is corrected to await `setupSettled` and then throw `operation.failure(error as Object, AnalysisErrorCode.RESOLVE_FAILED)`.
+- This preserves cancellation as `CANCELLED`, preserves an existing `AnalysisError`, and maps other provider/open failures to `RESOLVE_FAILED`.
+- The desktop harness now statically guards against raw arbitrary rethrow and requires the typed mapping after the cleanup wait.
+- No analyzer routing, storage trust, playback routing, WebP/cache policy, benchmark policy or Direct I/O behavior is changed.
+- Hypium execution, HAR/HAP packaging, ABI audits, simulator and production runtime remain NOT RUN until a fresh validation proceeds past compilation.
+
+The failed 3f run below remains historical evidence and is not relabeled PASS.
 
 ## Current validation — phase3-rerun-3f-probe-wrapper-forwarding
 

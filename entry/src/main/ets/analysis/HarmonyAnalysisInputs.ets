@@ -31,7 +31,9 @@ export class HarmonyAnalysisInputs implements AnalysisInputPorts {
       // Native setup may time out before a late handle finishes opening/closing. Preserve the
       // pre-Phase-3 serialization guarantee so the next loader job does not overlap that cleanup.
       await setupSettled.catch(() => {});
-      throw error;
+      // ArkTS only permits throwing Error values. Keep the analysis-domain/cancellation mapping
+      // used by the resolver instead of rethrowing the arbitrary catch value.
+      throw operation.failure(error as Object, AnalysisErrorCode.RESOLVE_FAILED);
     }
   }
   async openHttp(source: MediaSource, _operation: AnalysisOperation): Promise<RandomAccessSource> {

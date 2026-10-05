@@ -6,35 +6,42 @@ Repository: `baozi510/Linkora`
 
 Current branch: `feat/ffmpeg-analyzer-policy-phase3`
 
-Current phase: **FFmpeg Analyzer Production Policy Phase 3 — latest validation stopped on a desktop Probe-wrapper argument forwarding defect; test infrastructure corrected; fresh rerun required.**
+Current phase: **FFmpeg Analyzer Production Policy Phase 3 — desktop Loader/cache/lifecycle harness now passes; latest validation stopped at a real ArkTS compile error in the late-setup cleanup path; source correction applied; fresh rerun required.**
 
 Latest remotely visible Codex evidence commit:
 
-`2a9a955a4cdc3da461d44f3eac0147862e06771a`
+`c50368e6e0da792191819608e43e5cf90ca91fee`
 
-That run validated source `198854ed2e6c14378e692f86852a78656d0aebe8`.
+That run validated source `0d87488dc92f3cd8bc77319ec61197520695597e`.
 
-### Review of phase3-rerun-3e stop
+### Review of phase3-rerun-3f build stop
 
-The new complete-cache retry assertion expected the coordinator mock to call `Probe.inspect(..., { mode: 'thumbnail', ... })`. The temporary test wrapper called `normalInspect.call(this)` without forwarding `source`, `headers` or `options`.
+Freshly proven before the stop:
 
-Because `Probe.inspect` defaults `options = {}`, the harness recorded `both` and discarded the callback/options contract even though the coordinator mock supplied `thumbnail`.
+- whole network-media Loader/cache/lifecycle desktop harness reached both normal PASS markers;
+- all three temporary Probe wrappers exercised with argument forwarding;
+- metadata/thumbnail retry separation cases passed;
+- MPV event mapping 5/5 passed;
+- architecture fixtures 5/5, FFmpeg pure 15/15, analyzer/policy 45/45 and native-artifact fixtures 17/17 passed.
 
-This is a test-infrastructure forwarding defect, not evidence of a production coordinator routing failure.
+The verifier then reached real Hvigor ArkTS compilation and failed at:
 
-Independent review also found the same dropped-argument pattern in:
+`HarmonyAnalysisInputs.ets:34`
 
-- the deadline/cancel partial wrapper;
-- the timed thumbnail retry wrapper.
+because `catch (error)` was followed by raw `throw error`. ArkTS `arkts-limited-throw` rejects throwing an arbitrary caught value.
 
-Reviewed correction:
+Reviewed production correction:
 
-- all three temporary Probe wrappers now accept and forward `source, headers, options`;
-- each wrapper still injects only its intended result mutation/partial behavior;
-- strict mode/metadata/cancellation assertions remain unchanged;
-- no production ArkTS/C/C++ source is modified.
+- retain `await setupSettled.catch(() => {})` before propagating the failure;
+- replace raw rethrow with `throw operation.failure(error as Object, AnalysisErrorCode.RESOLVE_FAILED)`;
+- this reuses the existing analysis-domain error boundary;
+- if the operation was cancelled, `operation.failure` still maps to `CANCELLED`;
+- otherwise existing `AnalysisError` values are preserved and other errors map to `RESOLVE_FAILED`;
+- desktop regression source checks now forbid raw `throw error` and require the typed mapping after cleanup.
 
-The earlier 3e partial PASS results remain historical only. A fresh run must execute the entire task again.
+No playback, thumbnail routing, storage trust, WebP, performance or Direct I/O policy is changed.
+
+The phase remains unaccepted until fresh validation passes compilation and later gates.
 
 ### Durable conversation workflow
 

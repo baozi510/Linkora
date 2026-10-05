@@ -409,6 +409,11 @@ async function check() {
     'analysis remote open must leave the per-open SFTP trust override empty');
   assert.match(analysisInputsSource, /await setupSettled\.catch/,
     'analysis remote open must await late native setup cleanup on failure');
+  assert.doesNotMatch(analysisInputsSource, /throw\s+error\s*;/,
+    'analysis remote open must not rethrow an arbitrary ArkTS catch value');
+  assert.match(analysisInputsSource,
+    /throw\s+operation\.failure\(error\s+as\s+Object,\s*AnalysisErrorCode\.RESOLVE_FAILED\)/,
+    'analysis remote open must preserve typed analysis/cancellation error mapping after cleanup');
   const pageSource = fs.readFileSync(path.join(root, 'entry/src/main/ets/pages/NetworkPage.ets'), 'utf8');
   assert.match(pageSource, /this\.sftpFingerprint\.trim\(\), this\.sftpHostKeyPolicy === SftpHostKeyPolicy\.STRICT/);
   assert.match(pageSource, /server\.advancedOptions\.sftpFingerprint, server\.advancedOptions\.sftpHostKeyPolicy === SftpHostKeyPolicy\.STRICT/);

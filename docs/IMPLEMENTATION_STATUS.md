@@ -12,25 +12,31 @@ Phase 3 production analyzer policy is implemented but **not yet accepted**.
 
 Latest evidence commit:
 
-`2a9a955a4cdc3da461d44f3eac0147862e06771a`
+`c50368e6e0da792191819608e43e5cf90ca91fee`
 
-Latest run (`phase3-rerun-3e-thumbnail-metadata-separation`) reached the new complete-cache retry contract and stopped because a temporary desktop Probe wrapper swallowed `source/headers/options`. That made the underlying Probe default to `options = {}` and record `both` instead of the coordinator mock's supplied `thumbnail`.
+Latest run (`phase3-rerun-3f-probe-wrapper-forwarding`) freshly passes the complete desktop network-media Loader/cache/lifecycle harness and MPV mapping, then reaches real Hvigor ArkTS compilation.
 
-Independent review found three wrappers with the same transparent-forwarding defect. All are corrected together so their injected partial/result mutations preserve the caller contract.
+Compilation fails at `HarmonyAnalysisInputs.ets` because ArkTS rejects raw `throw error` from an untyped catch value.
 
-No production source changed. A fresh validation run is required; historical PASS items cannot be reused.
+Reviewed correction keeps the late native setup cleanup wait, then propagates through the existing typed analysis boundary:
+
+`throw operation.failure(error as Object, AnalysisErrorCode.RESOLVE_FAILED)`
+
+This preserves cancellation mapping and existing `AnalysisError` values while satisfying the ArkTS throw restriction. Regression source checks now protect both the cleanup wait and typed rethrow.
+
+A fresh validation run is required. No historical PASS result substitutes for rerun evidence.
 
 Current Phase 3 invariants remain unchanged:
 
 - LIST = System primary with controlled FFmpeg fallback for resolvable file-like inputs;
 - DETAIL / ADVANCED = FFmpeg primary, System fallback only when FFmpeg is unusable;
-- metadata and thumbnail responsibilities remain separate;
+- metadata and thumbnail responsibilities are separate;
 - complete cached metadata remains authoritative during thumbnail-only repair;
-- no System+FFmpeg field merger in Phase 3;
-- remote thumbnail = FFmpeg primary + existing System fallback;
+- no System+FFmpeg field merger;
+- remote thumbnail = FFmpeg primary + System fallback;
 - HLS / DASH / LOCAL_DOCUMENT = System-only;
-- WebP/cache/time policy unchanged;
-- playback routing unchanged;
+- SFTP trust remains storage-owned;
+- WebP/cache/time and playback routing unchanged;
 - performance ranking deferred to real arm64 hardware.
 
 
