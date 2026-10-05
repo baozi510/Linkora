@@ -1,0 +1,4 @@
+warning: in the working copy of 'entry/oh-package-lock.json5', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'linkora_ffmpeg/oh-package-lock.json5', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'linkora_proxy/oh-package-lock.json5', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'oh-package-lock.json5', CRLF will be replaced by LF the next time Git touches it
