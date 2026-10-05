@@ -1,9 +1,26 @@
 # FFmpeg Analyzer Production Policy Phase 3 Report
 
-> Status: FAIL — NETWORK MEDIA LOADER; phase3-rerun-3d reaches corrupt-thumbnail retry assertion, then stops; later gates NOT RUN.
+> Status: REVIEWED — phase3-rerun-3d stopped on stale pre-split thumbnail/metadata expectation; regression coverage corrected; fresh rerun required.
 > Branch: `feat/ffmpeg-analyzer-policy-phase3`
 > Codex role: test/report only; no source fixes.
 > Date: 2026-10-05 (Asia/Shanghai).
+
+## GPT review after phase3-rerun-3d thumbnail-retry stop
+
+Review date: 2026-10-05.
+
+Ruling:
+
+- The run correctly proved the prior server-fixture fix and advanced the network-media harness.
+- The failing corrupt-thumbnail row seeds complete cached metadata `[12000, 1920, 1080]` but expected a thumbnail retry to replace duration with `9000`.
+- That expectation reflects the older coupled `NetworkMediaProbe` implementation, whose THUMBNAIL result was still fed through Loader `updateInfo()`.
+- Phase 3 intentionally separates metadata analysis from thumbnail extraction. Current production `NetworkMediaAnalysisCoordinator` runs LIST metadata probing only when duration/width/height hints are incomplete. With complete hints, thumbnail extraction does not update metadata.
+- Therefore the observed `[12000, 1920, 1080]` is consistent with the intended Phase 3 contract, not evidence of a production metadata regression.
+- Simply changing one expected number would lose useful coverage. The desktop regression is restructured so complete-cache thumbnail retries assert thumbnail-only mode and unchanged metadata, while separate incomplete-cache cases assert metadata refresh and persistence.
+- No production Loader/coordinator/analyzer behavior, playback routing, WebP policy, benchmark policy or Direct I/O design is changed.
+- All gates after the stopped network-media harness remain NOT RUN and require a fresh run.
+
+The failed run below remains historical evidence and is not relabeled PASS.
 
 ## Current validation — phase3-rerun-3d-server-fixture
 

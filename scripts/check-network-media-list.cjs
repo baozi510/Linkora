@@ -430,25 +430,59 @@ async function check() {
   assert.equal(opened, closed, 'including delayed setup, all readers closed');
   const { NetworkServerStore } = load(path.join(serviceDir, 'NetworkServerStore.ets'));
   const normalInspect = Probe.prototype.inspect;
-  for (const [name, imageData, numbers, expected] of [
-    ['missing', null, [0, 0, 0], [12000, 1920, 1080]],
-    ['corrupt', new Uint8Array([0, 0]).buffer, [9000, 0, 0], [9000, 1920, 1080]],
-    ['dimensions', null, [0, 1280, 720], [12000, 1280, 720]],
-    ['incomplete-dimensions', null, [0, 640, 0], [12000, 1920, 1080]]
+  const completeCachedMetadata = [12000, 1920, 1080];
+  for (const [name, imageData, thumbnailOnlyNumbers] of [
+    ['missing', null, [0, 0, 0]],
+    ['corrupt', new Uint8Array([0, 0]).buffer, [9000, 0, 0]],
+    ['unexpected-dimensions', null, [0, 1280, 720]],
+    ['incomplete-dimensions', null, [0, 640, 0]]
   ]) {
     const retryEntry = entry('/retry-' + name + '.mp4'), retryKey = await cache.key(server, retryEntry);
-    await cache.put(retryKey, new CachedNetworkMedia(12000, 1920, 1080, imageData));
+    await cache.put(retryKey, new CachedNetworkMedia(...completeCachedMetadata, imageData));
     Probe.prototype.inspect = async function() { const result = await normalInspect.call(this);
-      return { ...result, durationMs: numbers[0], width: numbers[1], height: numbers[2] }; };
+      return { ...result, durationMs: thumbnailOnlyNumbers[0],
+        width: thumbnailOnlyNumbers[1], height: thumbnailOnlyNumbers[2] }; };
     const retryUpdates = [];
     const retryLoader = new NetworkMediaLoader(context, server,
       (e, info) => retryUpdates.push([info.durationMs, info.width, info.height]));
     retryLoader.reset([retryEntry], false); assert.ok(await retryLoader.load(retryEntry));
-    assert.deepEqual(retryUpdates.at(-1), expected, 'thumbnail retry preserves previously known fields: ' + name);
+    assert.equal(probeModes.at(-1), 'thumbnail', 'complete cached metadata uses thumbnail-only retry: ' + name);
+    assert.deepEqual(retryUpdates.at(-1), completeCachedMetadata,
+      'thumbnail-only retry never rewrites complete cached metadata: ' + name);
     const retained = await new NetworkMediaCache(context, 1).get(retryKey);
-    assert.deepEqual([retained.durationMs, retained.width, retained.height], expected, 'retry retains persistent metadata');
+    assert.deepEqual([retained.durationMs, retained.width, retained.height], completeCachedMetadata,
+      'thumbnail-only retry retains persistent metadata: ' + name);
     retryLoader.close(); await tick();
   }
+
+  for (const [name, probeNumbers, expected] of [
+    ['refresh-complete', [9000, 1280, 720], [9000, 1280, 720]],
+    ['refresh-partial', [9000, 0, 0], [9000, 1920, 1080]]
+  ]) {
+    const retryEntry = entry('/retry-metadata-' + name + '.mp4'), retryKey = await cache.key(server, retryEntry);
+    await cache.put(retryKey, new CachedNetworkMedia(0, 1920, 1080, null));
+    Probe.prototype.inspect = async function(_source, _headers, options = {}) {
+      calls++; active++; maximum = Math.max(maximum, active);
+      probeModes.push(options.mode || 'both');
+      const info = { durationMs: probeNumbers[0], width: probeNumbers[1], height: probeNumbers[2] };
+      try {
+        options.onMetadata?.(info);
+        return { status: 'complete', ...info,
+          thumbnail: { release: async () => { framesReleased++; } } };
+      } finally { active--; }
+    };
+    const retryUpdates = [];
+    const retryLoader = new NetworkMediaLoader(context, server,
+      (_entry, info) => retryUpdates.push([info.durationMs, info.width, info.height]));
+    retryLoader.reset([retryEntry], false); assert.ok(await retryLoader.load(retryEntry));
+    assert.equal(probeModes.at(-1), 'both', 'incomplete cached metadata triggers metadata refresh: ' + name);
+    assert.deepEqual(retryUpdates.at(-1), expected, 'metadata refresh fills fields independently: ' + name);
+    const retained = await new NetworkMediaCache(context, 1).get(retryKey);
+    assert.deepEqual([retained.durationMs, retained.width, retained.height], expected,
+      'metadata refresh persists refreshed fields: ' + name);
+    retryLoader.close(); await tick();
+  }
+  Probe.prototype.inspect = normalInspect;
   const timedRetryEntry = entry('/retry-timeout.mp4'), timedRetryKey = await cache.key(server, timedRetryEntry);
   await cache.put(timedRetryKey, new CachedNetworkMedia(12000, 1920, 1080, null));
   Probe.prototype.inspect = async function() { this.partial = true; const result = await normalInspect.call(this);

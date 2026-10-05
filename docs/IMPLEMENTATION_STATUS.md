@@ -12,26 +12,25 @@ Phase 3 production analyzer policy is implemented but **not yet accepted**.
 
 Latest evidence commit:
 
-`9f27f20459b4bc2060eff4e20e336a38da6e1aad`
+`a21c658eca78cefa5e9a330ca17ad3722e55ac84`
 
-Latest run (`phase3-rerun-3c-eol-self-heal`) successfully handled the known LF→CRLF-only lockfile drift, then reached the full default verifier. Fresh pure/fixture gates passed before the network-media-list regression stopped.
+Latest run (`phase3-rerun-3d-server-fixture`) proves the server fixture fix and advances the Loader regression harness to the thumbnail retry contract.
 
-Independent review confirms the failure is a desktop fixture/API mismatch:
+Independent review finds the new failure is a stale test expectation from the pre-Phase-3 coupled probe model. Complete cached metadata is authoritative during thumbnail-only repair; Phase 3 does not rerun metadata probing merely because a thumbnail is missing/corrupt.
 
-- production `NetworkMediaSourceFactory.fromEntry()` calls `server.titleLabel()`;
-- real `NetworkServerEntry` defines that method;
-- the desktop harness's minimal `server` object omitted it;
-- Loader catches that malformed-fixture exception before analysis, explaining probe count 0.
+Reviewed correction strengthens the test split:
 
-The reviewed fix updates only the test fixture to provide `titleLabel()`. Production source and Phase 3 routing remain unchanged.
+- complete metadata -> thumbnail-only retry, metadata unchanged;
+- incomplete metadata -> metadata refresh path, refreshed/preserved fields asserted separately.
 
-A fresh validation run is required; no historical PASS may substitute for rerun evidence.
+No production ArkTS/C/C++ source changed for this review. A fresh validation run is required; no historical PASS may substitute for rerun evidence.
 
 Current Phase 3 invariants remain:
 
 - LIST = System primary with controlled FFmpeg fallback for resolvable file-like inputs;
 - DETAIL / ADVANCED = FFmpeg primary, System fallback only when FFmpeg is unusable;
-- no field merger in Phase 3;
+- metadata and thumbnail responsibilities are separate;
+- no System+FFmpeg field merger in Phase 3;
 - remote thumbnail = FFmpeg primary + existing System fallback;
 - HLS / DASH / LOCAL_DOCUMENT = System-only;
 - WebP/cache/time policy unchanged;

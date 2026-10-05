@@ -6,45 +6,35 @@ Repository: `baozi510/Linkora`
 
 Current branch: `feat/ffmpeg-analyzer-policy-phase3`
 
-Current phase: **FFmpeg Analyzer Production Policy Phase 3 — latest validation stopped on a reviewed desktop fixture/API mismatch; test-infrastructure correction applied; fresh rerun required.**
+Current phase: **FFmpeg Analyzer Production Policy Phase 3 — latest validation reached the thumbnail-retry contract; stale pre-split expectation reviewed and test coverage corrected; fresh rerun required.**
 
 Latest remotely visible Codex evidence commit:
 
-`9f27f20459b4bc2060eff4e20e336a38da6e1aad`
+`a21c658eca78cefa5e9a330ca17ad3722e55ac84`
 
-That run validated source:
+That run validated source `cd12a3869db8a8dbe84730c6f8a118faf73f33e0`. It freshly proved the server-fixture correction, earlier Loader/cache/cancellation/setup-cleanup assertions and the Phase 3 pure suites before stopping at the corrupt-thumbnail retry expectation.
 
-`15db3f8a3e87f75edc209c1919f944f39c0b9fcb`
+### Review of phase3-rerun-3d stop
 
-and correctly self-healed the proven Windows LF→CRLF-only lockfile drift before executing the full default verifier.
+The failing row seeded complete cached metadata `[12000, 1920, 1080]`, then expected a thumbnail-only retry to replace duration with `9000`.
 
-### Review of phase3-rerun-3c stop
+That expectation belongs to the older coupled `NetworkMediaProbe` behavior, where a THUMBNAIL probe result could also flow through `updateInfo()`.
 
-Fresh gate evidence before the stop:
+Phase 3 intentionally separates metadata probing from thumbnail extraction:
 
-- architecture fixtures 5/5 PASS;
-- FFmpeg pure 15/15 PASS;
-- analyzer adapter/policy pure 45/45 PASS;
-- native-artifact fixtures 17/17 PASS;
-- ArkUI/persistence/HTTP-range gates reached and passed;
-- old `entry/AnalysisComposition` desktop alias failure did not recur.
+- `NetworkMediaAnalysisCoordinator` starts from metadata hints;
+- it runs LIST metadata probing only when duration or dimensions are incomplete;
+- when all metadata hints are complete, thumbnail extraction does not replace them;
+- therefore repairing a missing/corrupt thumbnail with complete cached metadata must retain `[12000, 1920, 1080]`.
 
-The default verifier then stopped in `scripts/check-network-media-list.cjs` because the test fixture declared:
+Reviewed test-infrastructure correction:
 
-`{ id, updatedAt, protocol }`
+- complete-metadata thumbnail retries explicitly assert `thumbnail` mode and immutable cached metadata even if the mock returns stray metadata-like numbers;
+- separate incomplete-metadata retry cases explicitly assert metadata refresh behavior and persistence;
+- no production Loader/coordinator/analyzer source is changed;
+- historical phase3-rerun-3d remains FAIL and is not relabeled PASS.
 
-while production `NetworkMediaSourceFactory.fromEntry()` now requires `NetworkServerEntry.titleLabel()`.
-
-The real `NetworkServerEntry` implements `titleLabel()`. The Loader calls the real factory before the mocked analysis coordinator, and its production catch turns the malformed fixture TypeError into a null result; therefore the probe counter remained 0.
-
-Reviewed correction:
-
-- keep the real `NetworkMediaSourceFactory` in this regression harness;
-- update only the minimal desktop server fixture to expose `titleLabel: () => 'test'`;
-- do not alter production Loader/factory/analyzer behavior;
-- do not weaken the `calls === 1` expectation.
-
-The phase remains unaccepted until a fresh validation reaches the later gates.
+The phase remains unaccepted until a fresh validation completes later gates.
 
 ### Durable conversation workflow
 
