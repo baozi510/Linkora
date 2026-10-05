@@ -1,0 +1,16 @@
+{
+  "proofPassed": true,
+  "diffExit": 0,
+  "restoreCommand": "git restore --source=HEAD --worktree -- entry/oh-package-lock.json5 linkora_ffmpeg/oh-package-lock.json5 linkora_proxy/oh-package-lock.json5 oh-package-lock.json5",
+  "restoreExit": 0,
+  "statusCommand": "git status --porcelain=v1",
+  "postRestoreStatus": [],
+  "clean": true,
+  "affectedPaths": [
+    "entry/oh-package-lock.json5",
+    "linkora_ffmpeg/oh-package-lock.json5",
+    "linkora_proxy/oh-package-lock.json5",
+    "oh-package-lock.json5"
+  ],
+  "additionalByteChanges": 0
+}

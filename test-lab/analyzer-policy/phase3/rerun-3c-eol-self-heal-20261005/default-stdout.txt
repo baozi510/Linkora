@@ -1,0 +1,212 @@
+Architecture boundary checks passed.
+✔ generated .test platform imports are outside production roots (50.7198ms)
+✔ core production platform imports fail (54.5338ms)
+✔ core production implementation imports fail (50.9366ms)
+✔ production build directory cannot hide a platform import (47.8529ms)
+✔ module production export entry is also guarded (45.0602ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 256.4909
+Simulator product parity/isolation checks passed.
+PASS maps format video audio chapters and field origins
+PASS maps PQ conservatively as metadata HDR10
+PASS maps HLG transfer
+PASS requires explicit Dolby Vision configuration
+PASS does not infer HDR from BT2020 or ten bits alone
+PASS maps text bitmap unknown and subtitle dispositions
+PASS caps arbitrary tag values and total tag bytes
+PASS caps stream and chapter counts
+PASS rejects invalid raw frame byte count
+PASS rejects unbounded frame allocation dimensions
+PASS releases frame idempotently and rejects later reads
+PASS does not cancel unrelated request ids
+PASS isolates identical external ids between wrappers
+PASS rejects duplicate active request ids without replacing state
+PASS close cancels owned work and rejects new requests
+FFmpeg Phase1 pure tests: 15/15 PASS
+PASS review cancellation retains identity when delayed open rejects
+PASS review cancellation retains identity when delayed registration rejects
+PASS review ffmpeg cancellation retains identity when backend rejects
+PASS review ffmpeg close during release suppresses completed metadata until cleanup
+PASS review system cancellation retains identity when backend rejects
+PASS review system close during release suppresses completed metadata until cleanup
+PASS review thumbnail cancellation retains identity when native frame rejects
+PASS review thumbnail close during release suppresses completed pixels until cleanup
+PASS canResolve is pure and rejects unsafe links unresolved local and FFmpeg playlists
+PASS HTTP and remote resolution own proxy sources with idempotent release and stable identity
+PASS registration failure closes once even if registration already took ownership
+PASS late proxy registration after cancellation releases registered source once
+PASS access diagnostics distinguish observed nonsequential source reads
+PASS cancel during late source open releases source without registering
+PASS FFmpeg completeness satisfies list without optional chapters/tags
+PASS FFmpeg completeness satisfies detail without optional chapters/tags
+PASS FFmpeg completeness satisfies advanced without optional chapters/tags
+PASS FFmpeg partial and unavailable reflect requested structural completeness
+PASS maps stable numeric error and releases lease for FF_INVALID_INPUT
+PASS maps stable numeric error and releases lease for FF_OPEN_FAILED
+PASS maps stable numeric error and releases lease for FF_STREAM_INFO_FAILED
+PASS maps stable numeric error and releases lease for FF_NO_VIDEO
+PASS maps stable numeric error and releases lease for FF_DECODER_UNAVAILABLE
+PASS maps stable numeric error and releases lease for FF_DECODE_FAILED
+PASS maps stable numeric error and releases lease for FF_TIMEOUT
+PASS maps stable numeric error and releases lease for FF_CANCELLED
+PASS maps stable numeric error and releases lease for FF_SIZE_REJECTED
+PASS maps stable numeric error and releases lease for FF_CLOSED
+PASS cancel rejects late native success and close waits lease cleanup
+PASS System maps only claimed basic metadata and provenance with requirement completeness
+PASS System unavailable values are not fabricated into usable metadata
+PASS System errors and timeout retain numeric failure state and clean up
+PASS System close cancels active job rejects late result and awaits cleanup
+PASS thumbnail passes requested bounds/time and owns raw output separately from source
+PASS thumbnail error releases source and reports stable cancellation
+PASS thumbnail close cancels active native work discards late pixels and releases once
+PASS comparison distinguishes unclaimed System structure from a true empty stream count
+PASS comparison classifies both missing ffmpeg missing and value differences independently
+PASS production policy keeps LIST System-first and file-like detail FFmpeg-first
+PASS production policy keeps local playlists on System functional path
+PASS LIST accepts complete System result without invoking FFmpeg
+PASS LIST falls back from partial System to complete FFmpeg without merging
+PASS DETAIL falls back to System only when FFmpeg is unusable
+PASS policy cancellation never starts the fallback engine after an active probe settles
+PASS DETAIL keeps usable partial FFmpeg result and does not merge System fields
+Analysis Phase2 pure tests: 45/45 PASS
+✔ accepts only x86 FFmpeg in simulator (0.8806ms)
+✔ rejects mislabeled arm64 ELF in simulator (0.2261ms)
+✔ rejects production native libs even when ELF is x86 (0.1535ms)
+✔ default confirms the complete production native set is AArch64 (0.2774ms)
+✔ rejects missing analyzer and unrecognized ELF (0.175ms)
+✔ rejects default HAP polluted by simulator dependency state (0.3104ms)
+✔ rejects default with only libaki_jsbind.so missing (0.1935ms)
+✔ rejects default with only libc++_shared.so missing (0.12ms)
+✔ rejects default with only liblinkora_ffmpeg.so missing (0.1498ms)
+✔ rejects default with only liblinkora_smb.so missing (0.1769ms)
+✔ rejects default with only liblinkora_sftp.so missing (0.1177ms)
+✔ rejects default with only liblinkora_ftp.so missing (0.1113ms)
+✔ rejects default with only liblinkora_nfs.so missing (0.1004ms)
+✔ rejects default with only libmpv.so missing (0.0958ms)
+✔ rejects default with only libmpv_wrapper.so missing (0.559ms)
+✔ rejects unknown x86 simulator native library (0.2246ms)
+✔ rejects unknown arm64 production native library (0.2285ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 70.3095
+Database schema v5 migration started.
+Database schema v5 migration started.
+Database schema v5 migration started.
+Database schema version advanced to 5.
+Database schema v6 migration started.
+Database schema version advanced to 6.
+Database schema v7 migration started.
+Database schema version advanced to 7.
+Database schema v8 migration started.
+Database schema version advanced to 8.
+Database schema v9 migration started.
+Database schema version advanced to 9.
+PASS: migration failure rolls back schema and version; retry succeeds
+Database schema v3 migration started.
+Database schema version advanced to 3.
+Database schema v4 migration started.
+Database schema version advanced to 4.
+Database schema v5 migration started.
+Database schema version advanced to 5.
+Database schema v6 migration started.
+Database schema version advanced to 6.
+Database schema v7 migration started.
+Database schema version advanced to 7.
+Database schema v8 migration started.
+Database schema version advanced to 8.
+Database schema v9 migration started.
+Database schema version advanced to 9.
+Database schema v5 migration started.
+Database schema version advanced to 5.
+Database schema v6 migration started.
+Database schema version advanced to 6.
+Database schema v7 migration started.
+Database schema version advanced to 7.
+Database schema v8 migration started.
+Database schema version advanced to 8.
+Database schema v9 migration started.
+Database schema version advanced to 9.
+Database schema v6 migration started.
+Database schema version advanced to 6.
+Database schema v7 migration started.
+Database schema version advanced to 7.
+Database schema v8 migration started.
+Database schema version advanced to 8.
+Database schema v9 migration started.
+Database schema version advanced to 9.
+Database schema v7 migration started.
+Database schema version advanced to 7.
+Database schema v8 migration started.
+Database schema version advanced to 8.
+Database schema v9 migration started.
+Database schema version advanced to 9.
+PASS: legacy half-migrated v3/v5/v6/v7 recover without losing rows
+Database schema v8 migration started.
+Database schema v8 migration started.
+Database schema version advanced to 8.
+Database schema v9 migration started.
+Database schema version advanced to 9.
+PASS: v8 reference migration rolls back completely before retry
+Database schema v9 migration started.
+Database schema v9 migration started.
+Database schema version advanced to 9.
+PASS: v9 network metadata migration rolls back and retries without losing v8 media
+Database schema v1 creation started.
+Database schema version advanced to 1.
+Database schema v2 creation started.
+Database schema version advanced to 2.
+Database schema v3 migration started.
+Database schema version advanced to 3.
+Database schema v4 migration started.
+Database schema version advanced to 4.
+Database schema v5 migration started.
+Database schema version advanced to 5.
+Database schema v6 migration started.
+Database schema version advanced to 6.
+Database schema v7 migration started.
+Database schema version advanced to 7.
+Database schema v8 migration started.
+Database schema version advanced to 8.
+Database schema v9 migration started.
+Database schema version advanced to 9.
+PASS: same-folder deduplication and cross-folder references survive removal
+PASS: reauthorization preserves alias and folder; cancellation preserves data
+PASS: batch hide/restore rolls back partial writes and remains usable
+Local persistence checks passed (desktop SQLite; Harmony bindings and authorization require device verification).
+PASS bounded authenticated HTTP ranges, wrong positions, ignored Range, reuse and close
+PASS metadata-only, thumbnail-only, early metadata and interrupted timing snapshot
+PASS separate native preparation, metadata, thumbnail and total timings
+PASS stalled cleanup watchdog returns failure evidence
+Database initialization started.
+Database opened. schemaVersion=0
+Database foreign-key enforcement enabled.
+Database schema v1 creation started.
+Database schema version advanced to 1.
+Database schema v2 creation started.
+Database schema version advanced to 2.
+Database schema v3 migration started.
+Database schema version advanced to 3.
+Database schema v4 migration started.
+Database schema version advanced to 4.
+Database schema v5 migration started.
+Database schema version advanced to 5.
+Database schema v6 migration started.
+Database schema version advanced to 6.
+Database schema v7 migration started.
+Database schema version advanced to 7.
+Database schema v8 migration started.
+Database schema version advanced to 8.
+Database schema v9 migration started.
+Database schema version advanced to 9.
+Database initialization completed. schemaVersion=9

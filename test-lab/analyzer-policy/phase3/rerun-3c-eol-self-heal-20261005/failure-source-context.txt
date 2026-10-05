@@ -1,0 +1,271 @@
+Read-only numbered source context at validation HEAD 70f26f8f20086c8fee849170f2e2858dee324028. No modified-run reproduction or tests after stop.
+
+scripts/verify.ps1
+40: 
+41:   $mainArkTsSource = Get-ChildItem -LiteralPath 'entry\src\main\ets' -Recurse -Filter '*.ets'
+42:   $legacyPatterns = @(
+43:     '^\s*@Component\s*$',
+44:     '@State\b',
+45:     '@Prop\b',
+46:     '@Watch\b',
+47:     '@StorageProp\b',
+48:     '\$\$this\.',
+49:     '\bAppStorage\.'
+50:   )
+51:   $legacyUsage = $mainArkTsSource | Select-String -Pattern $legacyPatterns
+52:   # Plain onX/loadX callback fields are an ArkUI component migration concern.
+53:   # Keep this guard scoped to actual UI surfaces so service method parameters
+54:   # such as NetworkMediaAnalysisCoordinator.inspect(..., onMetadata = ...)
+55:   # cannot be misclassified as ArkUI state-management V1 output fields.
+56:   $arkUiSource = @(
+57:     Get-ChildItem -LiteralPath 'entry\src\main\ets\components' -Recurse -Filter '*.ets'
+58:     Get-ChildItem -LiteralPath 'entry\src\main\ets\pages' -Recurse -Filter '*.ets'
+59:   )
+60:   $plainOutputs = $arkUiSource | Select-String -Pattern `
+61:     '^\s+(on[A-Z][A-Za-z0-9]*|load[A-Z][A-Za-z0-9]*):\s*\([^)]*\)\s*=>.*=\s*'
+62: 
+63:   if ($legacyUsage -or $plainOutputs) {
+64:     @($legacyUsage) + @($plainOutputs) | ForEach-Object { Write-Host $_ }
+65:     throw 'ArkUI state management V1 usage remains.'
+66:   }
+67: 
+68:   & $node (Join-Path $PSScriptRoot 'check-local-persistence.cjs') $StudioRoot
+69:   if ($LASTEXITCODE -ne 0) {
+70:     throw 'Local persistence regression checks failed.'
+71:   }
+72: 
+73:   & $node (Join-Path $PSScriptRoot 'check-network-media-probe.cjs') --unit
+74:   if ($LASTEXITCODE -ne 0) { throw 'HTTP range adapter regression checks failed.' }
+75: 
+76:   & $node (Join-Path $PSScriptRoot 'check-network-media-list.cjs')
+77:   if ($LASTEXITCODE -ne 0) { throw 'Network media list/cache regression checks failed.' }
+78: 
+79:   & $node (Join-Path $PSScriptRoot 'check-mpv-playback-port.cjs') $StudioRoot
+80:   if ($LASTEXITCODE -ne 0) { throw 'MPV adapter event-mapping regression checks failed.' }
+81: 
+82:   & $hvigor test --mode module -p module=entry@default -p product=default --no-daemon
+83:   if ($LASTEXITCODE -ne 0) {
+
+scripts/check-network-media-list.cjs
+55: };
+56: class Probe {
+57:   cancelled = false;
+58:   abort = () => {};
+59:   partial = false;
+60:   async inspect(_source, _headers, options = {}) {
+61:     calls++; active++; maximum = Math.max(maximum, active);
+62:     probeModes.push(options.mode || 'both');
+63:     try {
+64:       if (!this.partial && !fail && options.mode !== 'thumbnail') options.onMetadata?.({ durationMs: 10000, width: 640, height: 360 });
+65:       if (hold) await Promise.race([new Promise(resolve => { unblock = resolve; }),
+66:         new Promise(resolve => { this.abort = resolve; })]);
+67:       if (this.cancelled && this.partial) return { durationMs: 1234, width: 640, height: 360, thumbnail: null };
+68:       if (this.cancelled || fail) return { status: this.cancelled ? 'cancelled' : 'unavailable', durationMs: 0, width: 0, height: 0, thumbnail: null };
+69:       return { status: 'complete', durationMs: 10000, width: 640, height: 360,
+70:         thumbnail: { release: async () => { framesReleased++; } } };
+71:     } finally { active--; }
+72:   }
+73:   cancel() { this.cancelled = true; cancels++; if (this.partial) this.abort(); }
+
+scripts/check-network-media-list.cjs
+123: class TestNetworkMediaAnalysisCoordinator {
+124:   constructor(_context, _proxy) {
+125:     this.probe = new Probe();
+126:     this.source = null;
+127:     this.setupSettled = Promise.resolve();
+128:     this.cancelled = false;
+129:   }
+130:   async inspect(source, durationHintMs = 0, widthHint = 0, heightHint = 0, onMetadata = () => {}) {
+131:     const Directory = kits[path.join(serviceDir, 'NetworkDirectoryService.ets')].NetworkDirectoryService;
+132:     const directory = new Directory(server);
+133:     this.source = await directory.openSource(source.locator, '', settled => { this.setupSettled = settled; });
+134:     if (this.cancelled) return { durationMs: durationHintMs, width: widthHint, height: heightHint,
+135:       encodedThumbnail: null, metadataEngine: '', thumbnailEngine: '' };
+136: 
+137:     const metadataComplete = durationHintMs > 0 && widthHint > 0 && heightHint > 0;
+138:     const mode = metadataComplete ? 'thumbnail' : 'both';
+139:     let published = false;
+140:     const result = await this.probe.inspect('http://127.0.0.1/test', {}, {
+141:       mode,
+142:       durationHintMs,
+143:       widthHint,
+144:       heightHint,
+145:       onMetadata: info => {
+146:         if (this.cancelled) return;
+
+scripts/check-network-media-list.cjs
+200:     ]);
+201:   }
+202: }
+203: kits[path.join(analysisDir, 'NetworkMediaAnalysisCoordinator.ets')] = {
+204:   NetworkMediaAnalysisCoordinator: TestNetworkMediaAnalysisCoordinator
+205: };
+
+scripts/check-network-media-list.cjs
+219: const server = { id: 1, updatedAt: 2, protocol: 'smb' };
+220: const entry = (p = '/video.mp4', size = 99) => ({ path: p, displayName: path.basename(p), kind: 'file', size, modifiedAt: 5 });
+
+scripts/check-network-media-list.cjs
+275:   const updates = [];
+276:   const loader = new NetworkMediaLoader(context, server, (e, info) => updates.push([e.path, info.durationMs]));
+277:   loader.reset([entry('/a.mp4'), entry('/b.mp4'), entry('/cancel.mp4'), entry('/bad.mp4'), entry('/pack.mp4')], false);
+278:   hold = true;
+279:   const a = loader.load(entry('/a.mp4')); const secondA = loader.load(entry('/a.mp4'));
+280:   const b = loader.load(entry('/b.mp4'));
+281:   await tick(); await tick(); assert.equal(calls, 1);
+282:   assert.equal(updates.length, 0, 'metadata stays hidden while frame is pending');
+283:   const earlyKey = await cache.key(server, entry('/a.mp4'));
+284:   assert.equal(sqlite.prepare('SELECT duration_ms FROM network_media_metadata WHERE cache_key=?').get(earlyKey)?.duration_ms,
+285:     10000, 'metadata persisted while frame is still pending');
+286:   hold = false; unblock();
+287:   const [one, two, three] = await Promise.all([a, secondA, b]);
+288:   assert.ok(one && two && three); assert.notEqual(one, two);
+289:   assert.equal(calls, 2); assert.equal(maximum, 1);
+
+entry/src/main/ets/services/NetworkMediaSourceFactory.ets
+1: import { MediaSource } from 'linkora_core';
+2: import { NetworkDirectoryEntry } from '../models/NetworkDirectoryState';
+3: import { NetworkServerEntry } from './NetworkServerStore';
+4: 
+5: const NETWORK_SERVER_PREFIX: string = 'network-server:';
+6: 
+7: export class NetworkMediaSourceFactory {
+8:   static fromEntry(server: NetworkServerEntry, entry: NetworkDirectoryEntry): MediaSource {
+9:     const identity: string = NetworkMediaSourceFactory.sourceId(server.id);
+10:     const fingerprint: string =
+11:       [server.updatedAt, entry.size, entry.modifiedAt].join(':');
+12:     return MediaSource.fromRemoteFile(
+13:       entry.path,
+14:       entry.displayName,
+15:       server.titleLabel(),
+16:       entry.size,
+17:       identity,
+18:       identity,
+19:       fingerprint
+20:     );
+21:   }
+22: 
+23:   static sourceId(serverId: number): string {
+
+entry/src/main/ets/services/NetworkServerStore.ets
+135:   titleLabel(): string {
+136:     const name: string = this.displayName.trim();
+137:     // Keep list titles compact and protocol-independent: use the custom name
+138:     // when present, otherwise show only the server address (host). Connection
+139:     // details such as scheme, port and path belong to the locator, not the UI title.
+140:     return name.length > 0 ? name : this.host;
+141:   }
+
+entry/src/main/ets/services/NetworkMediaLoader.ets
+209:   private async run(job: MediaLoadJob): Promise<void> {
+210:     const analysis = new NetworkMediaAnalysisCoordinator(this.context, this.proxy);
+211:     job.analysis = analysis;
+212:     const timer: number = setTimeout(() => this.expire(job), 8000);
+213: 
+214:     try {
+215:       const source: MediaSource = NetworkMediaSourceFactory.fromEntry(this.server, job.entry);
+216:       job.inspecting = true;
+217:       const result: NetworkMediaAnalysisResult = await analysis.inspect(
+218:         source,
+219:         job.info?.durationMs ?? 0,
+220:         job.info?.width ?? 0,
+221:         job.info?.height ?? 0,
+222:         (durationMs: number, width: number, height: number): void => {
+223:           if (job.cancelled || job.expired || job.generation !== this.generation || this.stopped) return;
+224:           job.info = new CachedNetworkMedia(durationMs, width, height, null);
+225:           this.cache.put(job.key, job.info).catch(() => {});
+226:         }
+227:       );
+228:       job.inspecting = false;
+229: 
+230:       if (job.cancelled || job.expired || job.generation !== this.generation || this.stopped) return;
+231: 
+232:       const info = new CachedNetworkMedia(
+233:         result.durationMs || job.info?.durationMs || 0,
+234:         result.width || job.info?.width || 0,
+235:         result.height || job.info?.height || 0,
+236:         null
+237:       );
+238:       job.info = info;
+239: 
+
+entry/src/main/ets/services/NetworkMediaLoader.ets
+264: 
+265:       console.info(`Network media analysis: ${JSON.stringify({
+266:         metadataEngine: result.metadataEngine,
+267:         thumbnailEngine: result.thumbnailEngine,
+268:         thumbnailPlan: plan.cacheIdentity()
+269:       })}`);
+270: 
+271:       if (!job.cancelled && !this.stopped && job.generation === this.generation) {
+272:         job.resolve(value);
+273:       }
+274:     } catch (_error) {
+275:       if (!job.cancelled) this.rememberFailure(job.key);
+276:     } finally {
+277:       clearTimeout(timer);
+278:       job.inspecting = false;
+279:       job.resolve(null);
+280:       await analysis.close().catch(() => {});
+
+entry/src/main/ets/analysis/HarmonyAnalysisInputs.ets
+19:     const servers = await this.store.load(); operation.check();
+20:     const server = servers.find((entry) => entry.id === NetworkMediaSourceFactory.serverId(source));
+21:     if (server === undefined) throw new AnalysisError(AnalysisErrorCode.RESOLVE_FAILED);
+22:     const directory = new NetworkDirectoryService(server);
+23:     operation.onCancel(() => directory.cancel());
+24:     // MediaSource.fingerprint is a media/cache identity, not an SFTP host-key fingerprint.
+25:     // Pass an empty per-open override so the SFTP provider keeps ownership of persisted trust.
+26:     let setupSettled: Promise<void> = Promise.resolve();
+27:     try {
+28:       return await directory.openSource(source.locator, '',
+29:         (settled: Promise<void>) => { setupSettled = settled; });
+30:     } catch (error) {
+31:       // Native setup may time out before a late handle finishes opening/closing. Preserve the
+32:       // pre-Phase-3 serialization guarantee so the next loader job does not overlap that cleanup.
+33:       await setupSettled.catch(() => {});
+34:       throw error;
+35:     }
+36:   }
+37:   async openHttp(source: MediaSource, _operation: AnalysisOperation): Promise<RandomAccessSource> {
+38:     // The resolver closes a late HEAD result if cancellation happened while opening.
+39:     return new RemoteReadSessionAdapter(source.sourceId, await HttpRemoteReadSession.open(source.locator, {}));
+40:   }
+41:   async register(source: RandomAccessSource): Promise<AnalysisProxyRegistration> {
+42:     const lease = await this.proxy.buildSourceUrl(source, 'application/octet-stream');
+43:     return new AnalysisProxyRegistration(lease.url, () => lease.release());
+44:   }
+45: }
+
+entry/src/main/ets/services/SftpBrowserService.ets
+81:       throw new Error(this.friendlyError(error));
+82:     }
+83:   }
+84: 
+85:   async openReader(path: string, expectedFingerprint: string = '', setupObserver: (settled: Promise<void>) => void = () => {}): Promise<RemoteReadSession> {
+86:     return openNativeRemoteReader(this.server.host, async (host: string): Promise<NativeRemoteFile> => {
+87:       const file = await linkoraSftp.openReader(host, this.server.port, this.initialPath,
+88:         this.server.username, this.server.password, '', '', this.trustedFingerprint(expectedFingerprint),
+89:         this.server.advancedOptions.sftpHostKeyPolicy === SftpHostKeyPolicy.STRICT ? 1 : 0,
+90:         this.server.advancedOptions.sftpAuthMode === SftpAuthMode.PRIVATE_KEY ? 1 : 0,
+91:         SftpBrowserService.normalizeAbsolute(path));
+92:       return new NativeRemoteFile(file.handle, file.size);
+93:     }, (handle: number, offset: number, length: number) => linkoraSftp.read(handle, offset, length),
+94:       (handle: number) => linkoraSftp.cancel(handle), (handle: number) => linkoraSftp.closeReader(handle), setupObserver);
+95:   }
+96: 
+97:   parent(path: string): string {
+98:     const normalized: string = SftpBrowserService.normalizeAbsolute(path);
+99:     if (normalized === '/') {
+100:       return '/';
+101:     }
+102:     const slash: number = normalized.lastIndexOf('/');
+103:     return slash <= 0 ? '/' : normalized.substring(0, slash);
+104:   }
+105: 
+106:   private trustedFingerprint(expected: string = ''): string {
+107:     const fingerprint: string = expected || this.server.advancedOptions.sftpFingerprint;
+108:     if (this.server.advancedOptions.sftpHostKeyPolicy === SftpHostKeyPolicy.STRICT && !fingerprint) {
+109:       throw new Error('严格匹配需要填写已信任的服务器指纹。');
+110:     }
+111:     return fingerprint;
