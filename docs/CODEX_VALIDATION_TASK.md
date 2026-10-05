@@ -1,10 +1,10 @@
 # Codex Validation Task
 
 > State: READY
-> Task ID: phase3-rerun-3f-probe-wrapper-forwarding
+> Task ID: phase3-rerun-3g-typed-analysis-error
 > Repository: `baozi510/Linkora`
 > Branch: `feat/ffmpeg-analyzer-policy-phase3`
-> Validation source SHA: `0d87488dc92f3cd8bc77319ec61197520695597e`
+> Validation source SHA: `44d0f62816b73ebd3bab8069be5b74f51e2c6999`
 > Role: TEST / EVIDENCE / REPORT ONLY
 
 ## 1. Authority and source safety
@@ -21,11 +21,11 @@ Before testing:
 
 1. confirm the isolated checkout is clean;
 2. record actual checkout HEAD;
-3. confirm `0d87488dc92f3cd8bc77319ec61197520695597e` is an ancestor of HEAD;
+3. confirm `44d0f62816b73ebd3bab8069be5b74f51e2c6999` is an ancestor of HEAD;
 4. run:
 
 ```powershell
-git diff --name-only 0d87488dc92f3cd8bc77319ec61197520695597e..HEAD
+git diff --name-only 44d0f62816b73ebd3bab8069be5b74f51e2c6999..HEAD
 ```
 
 The only permitted pre-test drift after the validation source SHA is:
@@ -58,31 +58,40 @@ All earlier PASS/FAIL/BLOCKED results are historical only. Execute fresh.
 
 Previous evidence commit:
 
-`2a9a955a4cdc3da461d44f3eac0147862e06771a`
+`c50368e6e0da792191819608e43e5cf90ca91fee`
 
 Previous conclusion:
 
-`FAIL — NETWORK MEDIA LOADER`
+`FAIL — BUILD`
 
-The phase3-rerun-3e failure occurred because a temporary desktop `Probe.prototype.inspect` wrapper did not forward `source`, `headers` or `options`.
+The previous run freshly passed the complete desktop network-media Loader/cache/lifecycle harness and MPV event mapping, then reached the actual Hvigor ArkTS unit-test compilation.
 
-The coordinator mock supplied `mode: 'thumbnail'`, but the wrapper invoked `normalInspect.call(this)`; original `Probe.inspect` therefore received its default `options = {}` and recorded `both`.
+Compiler stop:
 
-GPT independently reviewed the whole harness and found the same forwarding defect in three temporary wrappers:
+```text
+10605087 arkts-limited-throw
+HarmonyAnalysisInputs.ets:34
+"throw" statements cannot accept values of arbitrary types
+```
 
-- deadline/cancel partial wrapper;
-- complete-cache thumbnail retry wrapper;
-- timed thumbnail retry wrapper.
+The failing production path waited for late native setup cleanup and then used raw:
 
-Validation source `0d87488dc92f3cd8bc77319ec61197520695597e` corrects all three wrappers so they transparently forward:
+```text
+throw error
+```
 
-`source, headers, options`
+GPT independently reviewed the repository error boundary.
 
-while retaining only their intended injected partial/result behavior.
+Validation source `44d0f62816b73ebd3bab8069be5b74f51e2c6999` now:
 
-No production ArkTS/C/C++ source changed.
+- still awaits `setupSettled.catch(() => {})` before propagation;
+- throws `operation.failure(error as Object, AnalysisErrorCode.RESOLVE_FAILED)`;
+- preserves an existing `AnalysisError`;
+- maps cancelled operations to `CANCELLED`;
+- maps other remote-open/provider failures to `RESOLVE_FAILED`;
+- adds desktop source assertions forbidding raw `throw error` and requiring the typed mapping after cleanup.
 
-Strict assertions remain in place.
+This is a production ArkTS compile/error-boundary correction. No analysis routing, thumbnail policy, storage trust ownership, playback policy or performance policy changed.
 
 ## 4. Permissions
 
@@ -177,7 +186,8 @@ Record every fresh reached gate, including counts/results for:
 - HTTP range/System probe;
 - network media list/cache/lifecycle;
 - MPV mapping;
-- actual Hvigor Hypium;
+- actual Hvigor Hypium, including successful ArkTS compilation and exact executed test count;
+- absence of `arkts-limited-throw` for `HarmonyAnalysisInputs`;
 - Debug/Release HARs;
 - Debug/Release default HAP;
 - exact AArch64 native set/ABI audit;
@@ -195,6 +205,8 @@ The full harness must reach normal completion and freshly verify:
 - late native setup cleanup serialization;
 - reader/source closure;
 - SFTP trust ownership checks;
+- `HarmonyAnalysisInputs` still waits for late setup cleanup before typed error propagation;
+- raw arbitrary `throw error` is absent and the typed `operation.failure(...RESOLVE_FAILED)` boundary is present;
 - no JPEG fallback after WebP failure;
 - complete cached metadata + missing/corrupt thumbnail -> `thumbnail` mode;
 - complete cached metadata is not overwritten by stray thumbnail-only result fields;
@@ -279,7 +291,8 @@ STOP immediately if:
 - dependency preparation fails;
 - lock drift is not strictly EOL-only;
 - approved restore does not return clean;
-- default verifier fails;
+- default verifier fails, including ArkTS compilation/Hypium execution;
+- the typed remote-open error propagation changes cancellation or late-setup cleanup semantics;
 - simulator verifier fails;
 - immediate default verifier fails;
 - wrapper-forwarding regression or metadata/thumbnail separation fails;
