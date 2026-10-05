@@ -1,0 +1,677 @@
+FILE entry/src/main/ets/analysis/NetworkMediaAnalysisCoordinator.ets
+1: import { common } from '@kit.AbilityKit';
+2: import { image } from '@kit.ImageKit';
+3: import {
+4:   DefaultThumbnailTimePolicy,
+5:   IMediaProbe,
+6:   IThumbnailExtractor,
+7:   MediaInfo,
+8:   MediaSource,
+9:   ProbeRequirement,
+10:   ProbeResult,
+11:   RawThumbnail,
+12:   ThumbnailExtractRequest,
+13:   ThumbnailPlan,
+14:   VideoTrackInfo
+15: } from 'linkora_core';
+16: import { NetworkFileProxy } from 'linkora_proxy';
+17: import { AnalysisComposition } from 'entry/AnalysisComposition';
+18: import { HarmonyAnalysisInputs } from './HarmonyAnalysisInputs';
+19: import { MediaAnalysisInputResolver } from './MediaAnalysisInputResolver';
+20: import { PolicyMediaProbe } from './PolicyMediaProbe';
+21: import {
+22:   ProductionAnalysisEngine,
+23:   ProductionMediaAnalysisPolicy
+24: } from './ProductionMediaAnalysisPolicy';
+25: import { SystemThumbnailFallback } from './SystemThumbnailFallback';
+26: import { SystemWebPEncoder } from '../services/SystemWebPEncoder';
+27: 
+28: class BasicMediaMetadata {
+29:   readonly durationMs: number;
+30:   readonly width: number;
+31:   readonly height: number;
+32: 
+33:   constructor(durationMs: number, width: number, height: number) {
+34:     this.durationMs = Math.max(0, durationMs);
+35:     this.width = Math.max(0, width);
+36:     this.height = Math.max(0, height);
+37:   }
+38: }
+39: 
+40: export class NetworkMediaAnalysisResult {
+41:   readonly durationMs: number;
+42:   readonly width: number;
+43:   readonly height: number;
+44:   readonly encodedThumbnail: ArrayBuffer | null;
+45:   readonly metadataEngine: string;
+46:   readonly thumbnailEngine: string;
+47: 
+48:   constructor(durationMs: number, width: number, height: number,
+49:     encodedThumbnail: ArrayBuffer | null, metadataEngine: string = '',
+50:     thumbnailEngine: string = '') {
+51:     this.durationMs = Math.max(0, durationMs);
+52:     this.width = Math.max(0, width);
+53:     this.height = Math.max(0, height);
+54:     this.encodedThumbnail = encodedThumbnail;
+55:     this.metadataEngine = metadataEngine;
+56:     this.thumbnailEngine = thumbnailEngine;
+57:   }
+58: }
+59: 
+60: /**
+61:  * Production functional policy for network file analysis.
+62:  * No field merger and no performance-based routing.
+63:  */
+64: export class NetworkMediaAnalysisCoordinator {
+65:   private readonly policy: ProductionMediaAnalysisPolicy = new ProductionMediaAnalysisPolicy();
+66:   private readonly probe: PolicyMediaProbe;
+67:   private readonly ffmpegThumbnail: IThumbnailExtractor;
+68:   private readonly systemThumbnail: SystemThumbnailFallback;
+69:   private readonly encoder: SystemWebPEncoder = new SystemWebPEncoder();
+70:   private readonly thumbnailPolicy: DefaultThumbnailTimePolicy = new DefaultThumbnailTimePolicy();
+71:   private closed: boolean = false;
+72:   private cancellationGeneration: number = 0;
+73: 
+74:   constructor(context: common.UIAbilityContext, proxy: NetworkFileProxy) {
+75:     const resolver = new MediaAnalysisInputResolver(new HarmonyAnalysisInputs(context, proxy));
+76:     this.probe = new PolicyMediaProbe(
+77:       AnalysisComposition.system(resolver),
+78:       AnalysisComposition.ffmpeg(resolver),
+79:       this.policy
+80:     );
+81:     this.ffmpegThumbnail = AnalysisComposition.thumbnail(resolver);
+82:     this.systemThumbnail = new SystemThumbnailFallback(resolver);
+83:   }
+84: 
+85:   async inspect(source: MediaSource, durationHintMs: number = 0,
+86:     widthHint: number = 0, heightHint: number = 0,
+87:     onMetadata: (durationMs: number, width: number, height: number, engine: string) => void = () => {}):
+88:     Promise<NetworkMediaAnalysisResult> {
+89:     if (this.closed) return new NetworkMediaAnalysisResult(
+90:       durationHintMs, widthHint, heightHint, null);
+91:     const generation: number = this.cancellationGeneration;
+92: 
+93:     let durationMs: number = Math.max(0, durationHintMs);
+94:     let width: number = Math.max(0, widthHint);
+95:     let height: number = Math.max(0, heightHint);
+96:     let metadataEngine: string = '';
+97: 
+98:     if (durationMs <= 0 || width <= 0 || height <= 0) {
+99:       const result: ProbeResult = await this.probe.probe(source, ProbeRequirement.LIST);
+100:       if (generation !== this.cancellationGeneration || this.closed) {
+101:         return new NetworkMediaAnalysisResult(durationMs, width, height, null);
+102:       }
+103:       if (result.info !== null && result.isUsable()) {
+104:         const values = this.basic(result.info);
+105:         durationMs = values.durationMs || durationMs;
+106:         width = values.width || width;
+107:         height = values.height || height;
+108:         metadataEngine = result.diagnostics.engine;
+109:         onMetadata(durationMs, width, height, metadataEngine);
+110:       }
+111:     }
+112: 
+113:     const plan: ThumbnailPlan = this.thumbnailPolicy.plan(durationMs, width, height);
+114:     const request = new ThumbnailExtractRequest(plan.timeMs, plan.width, plan.height);
+115:     let encoded: ArrayBuffer | null = null;
+116:     let thumbnailEngine: string = '';
+117: 
+118:     for (const engine of this.policy.thumbnailOrder(source)) {
+119:       if (generation !== this.cancellationGeneration || this.closed) break;
+120:       if (engine === ProductionAnalysisEngine.FFMPEG) {
+121:         if (!await this.ffmpegThumbnail.canExtract(source)) continue;
+122:         let raw: RawThumbnail | null = null;
+123:         try {
+124:           raw = await this.ffmpegThumbnail.extract(source, request);
+125:           if (generation !== this.cancellationGeneration || this.closed) break;
+126:           if (raw !== null) {
+127:             encoded = await this.encoder.encodeRaw(raw, plan.quality);
+128:             thumbnailEngine = 'ffmpeg';
+129:           }
+130:         } catch (_error) {
+131:           encoded = null;
+132:         } finally {
+133:           await raw?.release().catch(() => {});
+134:         }
+135:       } else {
+136:         if (!await this.systemThumbnail.canExtract(source)) continue;
+137:         const frame: image.PixelMap | null =
+138:           await this.systemThumbnail.extract(source, request, durationMs, width, height);
+139:         if (generation !== this.cancellationGeneration || this.closed) {
+140:           await frame?.release().catch(() => {});
+141:           break;
+142:         }
+143:         if (frame !== null) {
+144:           try {
+145:             encoded = await this.encoder.encode(frame, plan.quality);
+146:             thumbnailEngine = 'system';
+147:           } catch (_error) {
+148:             encoded = null;
+149:           } finally {
+150:             await frame.release().catch(() => {});
+151:           }
+152:         }
+153:       }
+154:       if (encoded !== null) break;
+155:     }
+156: 
+157:     return new NetworkMediaAnalysisResult(
+158:       durationMs, width, height, encoded, metadataEngine, thumbnailEngine);
+159:   }
+160: 
+161:   cancel(): void {
+162:     this.cancellationGeneration++;
+163:     this.probe.cancel();
+164:     this.ffmpegThumbnail.cancel();
+165:     this.systemThumbnail.cancel();
+166:   }
+167: 
+168:   async close(): Promise<void> {
+169:     if (this.closed) return;
+170:     this.closed = true;
+171:     this.cancel();
+172:     await Promise.allSettled([
+173:       this.probe.close(),
+174:       this.ffmpegThumbnail.close(),
+175:       this.systemThumbnail.close()
+176:     ]);
+177:   }
+178: 
+179:   private basic(info: MediaInfo): BasicMediaMetadata {
+180:     let width: number = 0;
+181:     let height: number = 0;
+182:     const primary: VideoTrackInfo | undefined =
+183:       info.videoTracks.find((track: VideoTrackInfo): boolean => track.isDefault) ??
+184:       info.videoTracks[0];
+185:     if (primary !== undefined) {
+186:       width = primary.width;
+187:       height = primary.height;
+188:     }
+189:     return new BasicMediaMetadata(info.durationMs, width, height);
+190:   }
+191: }
+FILE entry/src/main/ets/analysis/PolicyMediaProbe.ets
+1: import {
+2:   IMediaProbe,
+3:   MediaSource,
+4:   MediaProbeDiagnostics,
+5:   ProbeCompleteness,
+6:   ProbeRequirement,
+7:   ProbeResult
+8: } from 'linkora_core';
+9: import { AnalysisErrorCode } from './AnalysisOperation';
+10: import {
+11:   ProductionAnalysisEngine,
+12:   ProductionMediaAnalysisPolicy
+13: } from './ProductionMediaAnalysisPolicy';
+14: 
+15: /**
+16:  * Selects a complete result when possible and performs at most one engine fallback.
+17:  * It never merges fields from different engines.
+18:  */
+19: export class PolicyMediaProbe implements IMediaProbe {
+20:   private readonly system: IMediaProbe;
+21:   private readonly ffmpeg: IMediaProbe;
+22:   private readonly policy: ProductionMediaAnalysisPolicy;
+23:   private closed: boolean = false;
+24:   private cancellationGeneration: number = 0;
+25: 
+26:   constructor(system: IMediaProbe, ffmpeg: IMediaProbe,
+27:     policy: ProductionMediaAnalysisPolicy = new ProductionMediaAnalysisPolicy()) {
+28:     this.system = system;
+29:     this.ffmpeg = ffmpeg;
+30:     this.policy = policy;
+31:   }
+32: 
+33:   name(): string {
+34:     return 'policy';
+35:   }
+36: 
+37:   async canProbe(source: MediaSource): Promise<boolean> {
+38:     if (this.closed) return false;
+39:     const order: ProductionAnalysisEngine[] =
+40:       this.policy.probeOrder(source, ProbeRequirement.LIST);
+41:     for (const engine of order) {
+42:       if (await this.adapter(engine).canProbe(source)) return true;
+43:     }
+44:     return false;
+45:   }
+46: 
+47:   async probe(source: MediaSource, requirement: ProbeRequirement): Promise<ProbeResult> {
+48:     if (this.closed) {
+49:       return new ProbeResult(null, ProbeCompleteness.UNAVAILABLE, [],
+50:         new MediaProbeDiagnostics('policy'), AnalysisErrorCode.CLOSED);
+51:     }
+52: 
+53:     const generation: number = this.cancellationGeneration;
+54:     const order: ProductionAnalysisEngine[] = this.policy.probeOrder(source, requirement);
+55:     let best: ProbeResult | null = null;
+56: 
+57:     for (let index: number = 0; index < order.length; index++) {
+58:       if (generation !== this.cancellationGeneration || this.closed) {
+59:         return new ProbeResult(null, ProbeCompleteness.UNAVAILABLE, [],
+60:           new MediaProbeDiagnostics('policy'), AnalysisErrorCode.CANCELLED);
+61:       }
+62:       const adapter: IMediaProbe = this.adapter(order[index]);
+63:       if (!await adapter.canProbe(source)) continue;
+64: 
+65:       const result: ProbeResult = await adapter.probe(source, requirement);
+66:       if (generation !== this.cancellationGeneration || this.closed) {
+67:         return new ProbeResult(null, ProbeCompleteness.UNAVAILABLE, [],
+68:           new MediaProbeDiagnostics('policy'), AnalysisErrorCode.CANCELLED);
+69:       }
+70:       if (result.completeness === ProbeCompleteness.COMPLETE) return result;
+71: 
+72:       if (result.isUsable()) {
+73:         if (best === null) best = result;
+74:         // FFmpeg is already the richer primary for DETAIL/ADVANCED. A System
+75:         // fallback cannot enrich a usable partial FFmpeg result without merging.
+76:         if (order[index] === ProductionAnalysisEngine.FFMPEG &&
+77:           requirement !== ProbeRequirement.LIST) {
+78:           return result;
+79:         }
+80:       }
+81:     }
+82: 
+83:     return best ?? new ProbeResult(null, ProbeCompleteness.UNAVAILABLE, [],
+84:       new MediaProbeDiagnostics('policy'), AnalysisErrorCode.UNSUPPORTED);
+85:   }
+86: 
+87:   cancel(): void {
+88:     this.cancellationGeneration++;
+89:     this.system.cancel();
+90:     this.ffmpeg.cancel();
+91:   }
+92: 
+93:   async close(): Promise<void> {
+94:     if (this.closed) return;
+95:     this.closed = true;
+96:     this.cancel();
+97:     await Promise.allSettled([this.system.close(), this.ffmpeg.close()]);
+98:   }
+99: 
+100:   private adapter(engine: ProductionAnalysisEngine): IMediaProbe {
+101:     return engine === ProductionAnalysisEngine.FFMPEG ? this.ffmpeg : this.system;
+102:   }
+103: }
+FILE entry/src/main/ets/analysis/ProductionMediaAnalysisPolicy.ets
+1: import {
+2:   MediaFormat,
+3:   MediaSource,
+4:   MediaSourceKind,
+5:   ProbeRequirement
+6: } from 'linkora_core';
+7: 
+8: export enum ProductionAnalysisEngine {
+9:   SYSTEM = 'system',
+10:   FFMPEG = 'ffmpeg'
+11: }
+12: 
+13: /**
+14:  * Functional routing only. Performance-based selection is intentionally deferred
+15:  * to arm64 device validation.
+16:  */
+17: export class ProductionMediaAnalysisPolicy {
+18:   probeOrder(source: MediaSource, requirement: ProbeRequirement): ProductionAnalysisEngine[] {
+19:     if (this.systemOnly(source)) {
+20:       return [ProductionAnalysisEngine.SYSTEM];
+21:     }
+22:     if (requirement === ProbeRequirement.LIST) {
+23:       return [ProductionAnalysisEngine.SYSTEM, ProductionAnalysisEngine.FFMPEG];
+24:     }
+25:     return [ProductionAnalysisEngine.FFMPEG, ProductionAnalysisEngine.SYSTEM];
+26:   }
+27: 
+28:   thumbnailOrder(source: MediaSource): ProductionAnalysisEngine[] {
+29:     return this.systemOnly(source) ?
+30:       [ProductionAnalysisEngine.SYSTEM] :
+31:       [ProductionAnalysisEngine.FFMPEG, ProductionAnalysisEngine.SYSTEM];
+32:   }
+33: 
+34:   private systemOnly(source: MediaSource): boolean {
+35:     return source.kind === MediaSourceKind.LOCAL_DOCUMENT ||
+36:       source.format === MediaFormat.HLS ||
+37:       source.format === MediaFormat.DASH;
+38:   }
+39: }
+FILE entry/src/main/ets/services/DefaultNetworkStorageProviders.ets
+1: import {
+2:   RandomAccessSource,
+3:   RemoteProtocol,
+4:   RemoteReadSession,
+5:   StorageEntry,
+6:   StorageEntryKind,
+7:   StorageListOptions
+8: } from 'linkora_core';
+9: import {
+10:   FileProtocolBrowserService,
+11:   FtpBrowserService,
+12:   NfsBrowserService,
+13:   RemoteBrowserEntry,
+14:   RemoteEntryKind
+15: } from './FileProtocolBrowserService';
+16: import {
+17:   NetworkStorageOpenOptions,
+18:   NetworkStorageProvider,
+19:   NetworkStorageProviderRegistry
+20: } from './NetworkStorageProvider';
+21: import { NetworkServerEntry } from './NetworkServerStore';
+22: import {
+23:   BaseNetworkStorageProvider,
+24:   registerSharedNetworkStorageProviders,
+25:   statFromEntries
+26: } from './SharedNetworkStorageProviders';
+27: import { SftpBrowserEntry, SftpBrowserService, SftpEntryKind } from './SftpBrowserService';
+28: import { SmbBrowserEntry, SmbBrowserService, SmbEntryKind } from './SmbBrowserService';
+29: 
+30: class SmbStorageProvider extends BaseNetworkStorageProvider {
+31:   private readonly browser: SmbBrowserService;
+32: 
+33:   constructor(server: NetworkServerEntry) {
+34:     super(server);
+35:     this.browser = new SmbBrowserService(server);
+36:   }
+37: 
+38:   id(): string { return RemoteProtocol.SMB; }
+39:   protocol(): RemoteProtocol { return RemoteProtocol.SMB; }
+40:   initialPath(): string { return this.browser.location.initialPath; }
+41:   displayPath(path: string): string { return this.browser.displayPath(path); }
+42:   directoryPath(path: string): string { return path; }
+43: 
+44:   async stat(path: string): Promise<StorageEntry | null> {
+45:     return statFromEntries(await this.list(this.browser.parent(path)), path);
+46:   }
+47: 
+48:   async list(path: string, options: StorageListOptions = new StorageListOptions()): Promise<StorageEntry[]> {
+49:     const entries: SmbBrowserEntry[] = await this.browser.list(path, options.forceRefresh);
+50:     return entries.map((entry: SmbBrowserEntry): StorageEntry =>
+51:       new StorageEntry(entry.path, entry.displayName,
+52:         entry.kind === SmbEntryKind.DIRECTORY ? StorageEntryKind.DIRECTORY : StorageEntryKind.FILE,
+53:         entry.size, entry.modifiedAt));
+54:   }
+55: 
+56:   async openWithOptions(path: string, options: NetworkStorageOpenOptions): Promise<RandomAccessSource> {
+57:     const session: RemoteReadSession = await this.browser.openReader(path, options.setupObserver);
+58:     return this.wrap(path, session);
+59:   }
+60: 
+61:   download(path: string, localPath: string): Promise<number> {
+62:     return this.browser.download(path, localPath);
+63:   }
+64: 
+65:   directFileUrl(_path: string): string { return ''; }
+66:   cancel(): void {}
+67: }
+68: 
+69: class SftpStorageProvider extends BaseNetworkStorageProvider {
+70:   private readonly browser: SftpBrowserService;
+71: 
+72:   constructor(server: NetworkServerEntry) {
+73:     super(server);
+74:     this.browser = new SftpBrowserService(server);
+75:   }
+76: 
+77:   id(): string { return RemoteProtocol.SFTP; }
+78:   protocol(): RemoteProtocol { return RemoteProtocol.SFTP; }
+79:   initialPath(): string { return this.browser.initialPath; }
+80:   displayPath(path: string): string { return this.browser.displayPath(path); }
+81:   directoryPath(path: string): string { return path; }
+82: 
+83:   async stat(path: string): Promise<StorageEntry | null> {
+84:     return statFromEntries(await this.list(this.browser.parent(path)), path);
+85:   }
+86: 
+87:   async list(path: string, options: StorageListOptions = new StorageListOptions()): Promise<StorageEntry[]> {
+88:     const entries: SftpBrowserEntry[] = await this.browser.list(path, options.forceRefresh);
+89:     return entries.map((entry: SftpBrowserEntry): StorageEntry =>
+90:       new StorageEntry(entry.path, entry.displayName,
+91:         entry.kind === SftpEntryKind.DIRECTORY ? StorageEntryKind.DIRECTORY : StorageEntryKind.FILE,
+92:         entry.size, entry.modifiedAt));
+93:   }
+94: 
+95:   async openWithOptions(path: string, options: NetworkStorageOpenOptions): Promise<RandomAccessSource> {
+96:     const fingerprint: string =
+97:       options.expectedFingerprint || this.server.advancedOptions.sftpFingerprint;
+98:     const session: RemoteReadSession =
+99:       await this.browser.openReader(path, fingerprint, options.setupObserver);
+100:     return this.wrap(path, session);
+101:   }
+102: 
+103:   download(path: string, localPath: string): Promise<number> {
+104:     return this.browser.download(path, localPath);
+105:   }
+106: 
+107:   directFileUrl(_path: string): string { return ''; }
+108:   cancel(): void {}
+109: }
+110: 
+111: abstract class FileStorageProvider extends BaseNetworkStorageProvider {
+112:   protected readonly browser: FileProtocolBrowserService;
+113: 
+114:   constructor(server: NetworkServerEntry, browser: FileProtocolBrowserService) {
+115:     super(server);
+116:     this.browser = browser;
+117:   }
+118: 
+119:   initialPath(): string { return this.browser.initialPath(); }
+120:   displayPath(path: string): string { return this.browser.displayPath(path); }
+121:   directoryPath(path: string): string { return path; }
+122: 
+123:   async stat(path: string): Promise<StorageEntry | null> {
+124:     return statFromEntries(await this.list(this.browser.parent(path)), path);
+125:   }
+126: 
+127:   async list(path: string, options: StorageListOptions = new StorageListOptions()): Promise<StorageEntry[]> {
+128:     const entries: RemoteBrowserEntry[] = await this.browser.list(path, options.forceRefresh);
+129:     return entries.map((entry: RemoteBrowserEntry): StorageEntry =>
+130:       new StorageEntry(entry.path, entry.displayName,
+131:         entry.kind === RemoteEntryKind.DIRECTORY ? StorageEntryKind.DIRECTORY : StorageEntryKind.FILE,
+132:         entry.size, entry.modifiedAt));
+133:   }
+134: 
+135:   async openWithOptions(path: string, options: NetworkStorageOpenOptions): Promise<RandomAccessSource> {
+136:     const session: RemoteReadSession = await this.browser.openReader(path, options.setupObserver);
+137:     return this.wrap(path, session);
+138:   }
+139: 
+140:   download(path: string, localPath: string): Promise<number> {
+141:     return this.browser.download(path, localPath);
+142:   }
+143: 
+144:   directFileUrl(_path: string): string { return ''; }
+145:   cancel(): void {}
+146: }
+147: 
+148: class FtpStorageProvider extends FileStorageProvider {
+149:   constructor(server: NetworkServerEntry) {
+150:     super(server, new FtpBrowserService(server));
+151:   }
+152: 
+153:   id(): string { return RemoteProtocol.FTP; }
+154:   protocol(): RemoteProtocol { return RemoteProtocol.FTP; }
+155: }
+156: 
+157: class NfsStorageProvider extends FileStorageProvider {
+158:   constructor(server: NetworkServerEntry) {
+159:     super(server, new NfsBrowserService(server));
+160:   }
+161: 
+162:   id(): string { return RemoteProtocol.NFS; }
+163:   protocol(): RemoteProtocol { return RemoteProtocol.NFS; }
+164: }
+165: 
+166: export function createDefaultNetworkStorageProviderRegistry(): NetworkStorageProviderRegistry {
+167:   const registry = new NetworkStorageProviderRegistry();
+168: 
+169:   registerSharedNetworkStorageProviders(registry);
+170: 
+171:   registry.register(RemoteProtocol.SMB,
+172:     (server: NetworkServerEntry): NetworkStorageProvider => new SmbStorageProvider(server));
+173:   registry.register(RemoteProtocol.SFTP,
+174:     (server: NetworkServerEntry): NetworkStorageProvider => new SftpStorageProvider(server));
+175:   registry.register(RemoteProtocol.FTP,
+176:     (server: NetworkServerEntry): NetworkStorageProvider => new FtpStorageProvider(server));
+177:   registry.register(RemoteProtocol.NFS,
+178:     (server: NetworkServerEntry): NetworkStorageProvider => new NfsStorageProvider(server));
+179: 
+180:   return registry;
+181: }
+FILE entry/src/main/ets/services/SftpBrowserService.ets
+1: import linkoraSftp, { SftpNativeEntry } from 'liblinkora_sftp.so';
+2: import { NetworkServerEntry, SftpAuthMode, SftpHostKeyPolicy } from './NetworkServerStore';
+3: import { NetworkDirectorySummaryCache } from './NetworkDirectorySummaryCache';
+4: import { RemoteReadSession } from 'linkora_core';
+5: import { NativeRemoteFile, openNativeRemoteReader } from './NativeRemoteReadSession';
+6: 
+7: export enum SftpEntryKind {
+8:   DIRECTORY = 'directory',
+9:   FILE = 'file'
+10: }
+11: 
+12: export class SftpBrowserEntry {
+13:   readonly displayName: string;
+14:   readonly path: string;
+15:   readonly kind: SftpEntryKind;
+16:   readonly size: number;
+17:   readonly modifiedAt: number;
+18: 
+19:   constructor(displayName: string, path: string, kind: SftpEntryKind, size: number, modifiedAt: number) {
+20:     this.displayName = displayName;
+21:     this.path = path;
+22:     this.kind = kind;
+23:     this.size = size;
+24:     this.modifiedAt = modifiedAt;
+25:   }
+26: }
+27: 
+28: export class SftpBrowserService {
+29:   private static directoryCache: Map<string, SftpBrowserEntry[]> =
+30:     new Map<string, SftpBrowserEntry[]>();
+31:   private server: NetworkServerEntry;
+32:   readonly initialPath: string;
+33: 
+34:   constructor(server: NetworkServerEntry) {
+35:     this.server = server;
+36:     this.initialPath = SftpBrowserService.normalizeAbsolute(server.rootPath);
+37:   }
+38: 
+39:   async list(path: string, forceRefresh: boolean = false): Promise<SftpBrowserEntry[]> {
+40:     const cacheKey: string = NetworkDirectorySummaryCache.keyForServer(this.server, path);
+41:     const cached: SftpBrowserEntry[] | undefined = SftpBrowserService.directoryCache.get(cacheKey);
+42:     if (!forceRefresh && cached !== undefined) {
+43:       return cached.slice();
+44:     }
+45:     try {
+46:       const nativeEntries: SftpNativeEntry[] = await linkoraSftp.list(
+47:         this.server.host, this.server.port, SftpBrowserService.normalizeAbsolute(path),
+48:         this.server.username, this.server.password, '', '', this.trustedFingerprint(),
+49:         this.server.advancedOptions.sftpHostKeyPolicy === SftpHostKeyPolicy.STRICT ? 1 : 0,
+50:         this.server.advancedOptions.sftpAuthMode === SftpAuthMode.PRIVATE_KEY ? 1 : 0);
+51:       const entries: SftpBrowserEntry[] = nativeEntries.map((entry: SftpNativeEntry): SftpBrowserEntry =>
+52:         new SftpBrowserEntry(entry.name, this.join(path, entry.name),
+53:           entry.isDirectory ? SftpEntryKind.DIRECTORY : SftpEntryKind.FILE,
+54:           entry.size, entry.modifiedAt));
+55:       entries.sort((left: SftpBrowserEntry, right: SftpBrowserEntry): number => {
+56:         if (left.kind !== right.kind) {
+57:           return left.kind === SftpEntryKind.DIRECTORY ? -1 : 1;
+58:         }
+59:         return left.displayName.localeCompare(right.displayName);
+60:       });
+61:       if (!SftpBrowserService.directoryCache.has(cacheKey) &&
+62:         SftpBrowserService.directoryCache.size >= 256) {
+63:         SftpBrowserService.directoryCache.clear();
+64:       }
+65:       SftpBrowserService.directoryCache.set(cacheKey, entries.slice());
+66:       return entries;
+67:     } catch (error) {
+68:       throw new Error(this.friendlyError(error));
+69:     }
+70:   }
+71: 
+72:   async download(remotePath: string, localPath: string): Promise<number> {
+73:     try {
+74:       return await linkoraSftp.download(
+75:         this.server.host, this.server.port, this.initialPath,
+76:         this.server.username, this.server.password, '', '', this.trustedFingerprint(),
+77:         this.server.advancedOptions.sftpHostKeyPolicy === SftpHostKeyPolicy.STRICT ? 1 : 0,
+78:         this.server.advancedOptions.sftpAuthMode === SftpAuthMode.PRIVATE_KEY ? 1 : 0,
+79:         SftpBrowserService.normalizeAbsolute(remotePath), localPath);
+80:     } catch (error) {
+81:       throw new Error(this.friendlyError(error));
+82:     }
+83:   }
+84: 
+85:   async openReader(path: string, expectedFingerprint: string = '', setupObserver: (settled: Promise<void>) => void = () => {}): Promise<RemoteReadSession> {
+86:     return openNativeRemoteReader(this.server.host, async (host: string): Promise<NativeRemoteFile> => {
+87:       const file = await linkoraSftp.openReader(host, this.server.port, this.initialPath,
+88:         this.server.username, this.server.password, '', '', this.trustedFingerprint(expectedFingerprint),
+89:         this.server.advancedOptions.sftpHostKeyPolicy === SftpHostKeyPolicy.STRICT ? 1 : 0,
+90:         this.server.advancedOptions.sftpAuthMode === SftpAuthMode.PRIVATE_KEY ? 1 : 0,
+91:         SftpBrowserService.normalizeAbsolute(path));
+92:       return new NativeRemoteFile(file.handle, file.size);
+93:     }, (handle: number, offset: number, length: number) => linkoraSftp.read(handle, offset, length),
+94:       (handle: number) => linkoraSftp.cancel(handle), (handle: number) => linkoraSftp.closeReader(handle), setupObserver);
+95:   }
+96: 
+97:   parent(path: string): string {
+98:     const normalized: string = SftpBrowserService.normalizeAbsolute(path);
+99:     if (normalized === '/') {
+100:       return '/';
+101:     }
+102:     const slash: number = normalized.lastIndexOf('/');
+103:     return slash <= 0 ? '/' : normalized.substring(0, slash);
+104:   }
+105: 
+106:   private trustedFingerprint(expected: string = ''): string {
+107:     const fingerprint: string = expected || this.server.advancedOptions.sftpFingerprint;
+108:     if (this.server.advancedOptions.sftpHostKeyPolicy === SftpHostKeyPolicy.STRICT && !fingerprint) {
+109:       throw new Error('严格匹配需要填写已信任的服务器指纹。');
+110:     }
+111:     return fingerprint;
+112:   }
+113: 
+114:   displayPath(path: string): string {
+115:     return SftpBrowserService.normalizeAbsolute(path);
+116:   }
+117: 
+118:   private join(parent: string, name: string): string {
+119:     const normalized: string = SftpBrowserService.normalizeAbsolute(parent);
+120:     return normalized === '/' ? `/${name}` : `${normalized}/${name}`;
+121:   }
+122: 
+123:   private friendlyError(error: Object): string {
+124:     const raw: string = error instanceof Error ? error.message : `${error}`;
+125:     const normalized: string = raw.toLowerCase();
+126:     if (normalized.includes('hostkey') || normalized.includes('指纹')) {
+127:       return raw.replace(/^SFTP_HOSTKEY:\s*/, '');
+128:     }
+129:     if (normalized.includes('auth') || normalized.includes('permission') ||
+130:       normalized.includes('账号') || normalized.includes('密码')) {
+131:       return '账号或密码不正确，或者当前账号没有访问权限。';
+132:     }
+133:     if (normalized.includes('resolve')) {
+134:       return '无法解析服务器地址，请检查主机名。';
+135:     }
+136:     if (normalized.includes('timeout') || normalized.includes('超时')) {
+137:       return '连接超时，请检查服务器地址、端口和网络。';
+138:     }
+139:     if (normalized.includes('refused') || normalized.includes('connect')) {
+140:       return '无法连接 SFTP 服务器，请检查地址和端口。';
+141:     }
+142:     if (normalized.includes('local_write')) {
+143:       return '无法创建播放缓存，请检查设备存储空间。';
+144:     }
+145:     if (normalized.includes('no such') || normalized.includes('目录')) {
+146:       return '远程目录不存在，请检查路径。';
+147:     }
+148:     return `SFTP 访问失败：${raw.replace(/^Error:\s*/, '')}`;
+149:   }
+150: 
+151:   private static normalizeAbsolute(path: string): string {
+152:     const value: string = path.trim();
+153:     if (value.length === 0 || value === '/') {
+154:       return '/';
+155:     }
+156:     return `/${value.replace(/^\/+|\/+$/g, '')}`;
+157:   }
+158: }

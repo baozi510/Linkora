@@ -1,11 +1,106 @@
 # FFmpeg Analyzer Production Policy Phase 3 Report
 
-> Status: REVIEWED — phase3-rerun-3f reached Hvigor and exposed ArkTS arbitrary-value rethrow; typed analysis error propagation applied; fresh rerun required.
+> Status: BLOCKED — TEST ENVIRONMENT. Fresh 3g default/simulator/immediate-default gates PASS; production runtime has no connected target.
 > Branch: `feat/ffmpeg-analyzer-policy-phase3`
 > Codex role: test/report only; no source fixes.
 > Date: 2026-10-05 (Asia/Shanghai).
 
-## GPT review after phase3-rerun-3f ArkTS compile stop
+## Current validation — phase3-rerun-3g-typed-analysis-error
+
+Only this section is current-run evidence. All following review/validation sections are historical and provide no PASS for 3g.
+
+- Repository/branch: `baozi510/Linkora`, `feat/ffmpeg-analyzer-policy-phase3`.
+- Validation source SHA: `44d0f62816b73ebd3bab8069be5b74f51e2c6999`.
+- Actual checkout SHA: `d27845a7dfe26f074756fd8ce76c561b0ecdc952`.
+- Fresh independent clone: `D:/Linkora-validation-phase3-3g-20261005`, origin `https://github.com/baozi510/Linkora.git`.
+- Fresh evidence: [rerun-3g-typed-analysis-error-20261005](../test-lab/analyzer-policy/phase3/rerun-3g-typed-analysis-error-20261005/).
+- Fresh fetch, branch/clean-state check and source ancestor check pass; source-to-HEAD drift is exactly the permitted `docs/CODEX_VALIDATION_TASK.md`. All nine required documents completely read in dispatch order, SESSION_HANDOFF CURRENT STATE first (`required-reading.json`).
+- Original dirty `D:/Linkora` stays on main at `ef6ee820a6d010f4ee63a1c0a14c646a717eaa17`. Before/after status SHA256 `648A0D596918685CDA16A5E9CA8102F289C5C21D4838C4646C54240652512DE4` and tracked binary-diff SHA256 `2F10CDD611132E2170F8466E5CBB3E136A44BFB06F0312A01E48DB73FEEBC9E2` match. No write/stash/reset/clean/restore/checkout there (`user-workspace-proof.json`).
+
+### Commands, dependency inputs and strict EOL recovery
+
+Preparation and execution used only the new clone; captures initially lived in ignored `artifacts/phase3-rerun-3g`.
+
+| Command/check | Exit | Fresh result |
+| --- | --- | --- |
+| Exact-branch independent `git clone --single-branch --branch feat/ffmpeg-analyzer-policy-phase3 https://github.com/baozi510/Linkora.git D:\Linkora-validation-phase3-3g-20261005` | 0 | New clean checkout |
+| `git fetch origin feat/ffmpeg-analyzer-policy-phase3` | 0 | Dispatch SHA above |
+| `git merge-base --is-ancestor 44d0f62816b73ebd3bab8069be5b74f51e2c6999 HEAD` | 0 | Source ancestor |
+| `git diff --name-only 44d0f62816b73ebd3bab8069be5b74f51e2c6999..HEAD` | 0 | Task file only |
+| `git submodule update --init --recursive` | 0 | Pinned native Gitlinks initialized |
+| `node --version`; `ohpm --version` | 0 | `v24.14.1`; `26.0.0.630` |
+| Normal `ohpm install` | 0 | Exactly once; four EOL-only lock changes |
+| Initial strict proof, `git diff --exit-code -- <allowed locks>`, exact affected-lock restore | 0 | All proofs pass; clean, no reinstall |
+| `pwsh -NoProfile -File scripts/verify.ps1` | 0 | First complete unmodified default invocation |
+| `pwsh -NoProfile -File scripts/verify-simulator.ps1` | 0 | Exactly once; automatic default dependency restore completes |
+| Post-simulator strict proof and exact affected-lock restore | 0 | Same proven EOL-only case; clean; no manual install |
+| Immediate `pwsh -NoProfile -File scripts/verify.ps1` | 0 | Exactly once after simulator; no manual ohpm between |
+| Bundled Node `artifacts/phase3-rerun-3g/functional-check.cjs` | 0 | Supplemental read-only desktop checks 10/10 |
+| SDK `hdc list targets`, initial/final | 0 | Both `[Empty]` |
+| Protected/submodule audit | 0 | 1,997 regular files unchanged; three Gitlinks clean/pinned |
+
+PowerShell `7.6.6`; DevEco bundled Node/ohpm directories prepended to process PATH. Official scripts manage SDK/Java. No dependency flags, gate substitution, source/test edits or retries. The two default invocations are the exact prescribed sequence, not retries of a failed gate.
+
+Only generated FFmpeg dependency inputs were reused from `D:/Linkora-validation/third_party/ffmpeg/prebuilt`. Both ABI manifests freshly match pin `1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7`, ABI, four libraries and disabled programs/encoders/muxers/hwaccels. Eight archive hashes and all-member ELF machine checks pass (AArch64/X86-64). Provenance/manifests are captured. This is dependency reuse, not fresh bootstrap builds; no old HAP/HAR or old test results were reused.
+
+Both the initial install and the official simulator script's automatic `ohpm install` rewrite only `entry/oh-package-lock.json5`, `linkora_ffmpeg/oh-package-lock.json5`, `linkora_proxy/oh-package-lock.json5`, `oh-package-lock.json5`. In each occurrence every normalized Git blob equals HEAD, CRLF→LF worktree bytes equal raw HEAD bytes, line contents match, EOL is `i/lf w/crlf attr/text eol=lf`, no additional protected byte changes, and semantic diff exit is 0. Thus dependency/version/checksum/graph/comment/content are unchanged. Restore occurs only after all proofs; exact affected paths return clean. No semantic lock edit/commit or manual reinstall. Post-simulator recovery takes place after the official script completed its own checks and automatic restoration, so no official check is bypassed. Initial proof is in `eol-proof.json`/`eol-restore.json`; second proof under `post-simulator-eol/`. Its installCount=1 describes the official automatic restore invocation, distinct from the single initial normal install.
+
+### Fresh complete build gates
+
+| Gate | First default | Immediate default | Scope |
+| --- | --- | --- | --- |
+| Architecture boundaries/fixtures | PASS, 5/5 | PASS, 5/5 | Fresh markers and zero failures |
+| Simulator static isolation | PASS | PASS | Shared product parity guard |
+| FFmpeg pure suite | PASS, 15/15 | PASS, 15/15 | Desktop pure |
+| Analyzer adapter/policy pure suite | PASS, 45/45 | PASS, 45/45 | Desktop pure |
+| Native artifact fixtures | PASS, 17/17 | PASS, 17/17 | Synthetic fixtures |
+| ArkUI guard/persistence | PASS | PASS | Desktop SQLite; injected rollback failures expected |
+| HTTP range/System probe harness | PASS | PASS | Four normal completion markers |
+| Whole Loader/cache/lifecycle harness | PASS | PASS | Both normal completion markers; mocked coordinator/image/native boundaries |
+| MPV event mapping | PASS, 5/5 | PASS, 5/5 | Desktop mocks |
+| Actual Hvigor ArkTS unit compilation | PASS | PASS | `UnitTestArkTS` completed |
+| Actual Hypium execution | PASS, 209/209 | PASS, 209/209 | Failure 0, Error 0, Ignore 0; separate raw results |
+| `arkts-limited-throw` regression | PASS | PASS | Zero matches in fresh stderr; compilation succeeds |
+| Full final completion marker | PASS | PASS | Verifier exit 0, original marker present |
+
+| Artifact/check | First Debug | First Release | Immediate Debug | Immediate Release |
+| --- | --- | --- | --- | --- |
+| linkora_core default HAR | PASS | PASS | PASS | PASS |
+| linkora_proxy default HAR | PASS | PASS | PASS | PASS |
+| linkora_media_probe default HAR | PASS | PASS | PASS | PASS |
+| linkora_ffmpeg default HAR | PASS | PASS | PASS | PASS |
+| entry default arm64 HAP | PASS | PASS | PASS | PASS |
+| Actual exact-nine AArch64 native ABI audit | PASS | PASS | PASS | PASS |
+
+Simulator Debug HAP: PASS. Multi-target `assembleHapSeq`, actual whitelist/ABI audit and automatic default dependency restoration pass. Exactly one x86_64 `liblinkora_ffmpeg.so`; no MPV/native-storage/unknown SOs. Simulator Release was not requested/executed. Four default HAP audit markers each confirm nine AArch64 libraries: `libaki_jsbind.so`, `libc++_shared.so`, `liblinkora_ffmpeg.so`, `liblinkora_smb.so`, `liblinkora_sftp.so`, `liblinkora_ftp.so`, `liblinkora_nfs.so`, `libmpv.so`, `libmpv_wrapper.so`. Final default/simulator native entry hashes and ELF machine values (183/62) are captured in `final-artifact-native-inventory.json`; initial Debug/Release HAP hashes are captured separately. Warnings remain in original logs; successful builds are unsigned and do not prove install/runtime.
+
+### Cleanup, wrapper and policy functional evidence
+
+The full sequential Loader harness passes freshly twice through real source factory/server titleLabel, serial/coalesced loading, cache/legacy JPEG migration/WebP/refresh, cancellation and stale decode, deadline/cancel partial rejection, late native setup cleanup serialization and reader closure, SFTP trust checks, missing/rejected WebP encoder without JPEG fallback, four complete-cache thumbnail-only retry rows retaining `[12000,1920,1080]` and persistent metadata, both complete/partial incomplete-cache refresh rows, timed retry, image-only completion, server deletion cleanup and UI/preview tail. All three temporary probe wrappers forward source/headers/options and preserve their injected behavior. These are completed desktop assertions; mocked System engine logs/synthetic pixels do not prove actual FFmpeg/WebP runtime.
+
+Fresh source assertions require cleanup settlement before typed `operation.failure(...RESOLVE_FAILED)` and forbid raw `throw error`. Compilation now succeeds. Supplemental read-only execution of unchanged `AnalysisOperation.failure` freshly verifies existing AnalysisError object identity, generic provider failure→RESOLVE_FAILED, and cancellation precedence→CANCELLED. Combined with the existing cleanup wait/late-setup harness assertions, no tested error/cleanup contract regression is observed. Actual HarmonyAnalysisInputs native open-failure/cancellation remains target runtime NOT RUN.
+
+The 45 adapter/policy cases freshly cover LIST System COMPLETE/no FFmpeg, partial fallback/no merge, DETAIL unusable fallback, DETAIL usable PARTIAL retained, cancellation without later fallback, adapter completeness/error/lease closure and local/playlist order. Supplemental `functional-check.cjs` executes the unchanged production PolicyMediaProbe for actual ADVANCED COMPLETE/PARTIAL/UNAVAILABLE with synthetic adapters, asserts exact result identity/call counts/no merge, and verifies ADVANCED cancellation starts no fallback. It also verifies single-System metadata/thumbnail orders for LOCAL_DOCUMENT/HLS/DASH. Supplemental result: 10/10 PASS (three ADVANCED outcomes, cancellation, three error-boundary cases, three System-only cases). It reuses the unchanged repository pure loader; it changes no existing script, expectation or production file. It is reproducible evidence and is not counted as additional Hypium or native tests.
+
+FFmpeg-first remote thumbnail order and raw RGBA adapter/common WebP wiring are covered by fresh policy/adapter tests and read-only source review. The real coordinator's FFmpeg frame→ImagePacker→persistent WebP, natural FFmpeg failure→System success, and both actual engines unavailable are NOT RUN. Desktop mocked encoder/failure cases are not substituted for those runtime checks.
+
+Fresh static/mocked SFTP ownership checks pass: analysis supplies an empty per-open override rather than media fingerprint; persisted trust is `NetworkServerEntry.advancedOptions.sftpFingerprint` via provider/browser. No native SFTP connection/open/read claim. HTTP resolver safe-input/owned proxy-lease assertions pass; production UI consumer applicability is not established, so no NOT APPLICABLE shortcut.
+
+### Runtime limitation, integrity, security and final decision
+
+Initial and final SDK HDC inventory are `[Empty]`; no running Emulator.exe process is observed. The checked common local environment paths supply no connected HarmonyOS target; an unrelated Android AVD is not a HarmonyOS runtime. Committed product signingConfigs are empty; no signing/build configuration was changed. No target/service/HAP was installed or launched. These facts limit runtime evidence; they do not undo the fresh build PASS results or prove a production defect.
+
+All required target production cases are BLOCKED/NOT RUN: Network page/list→real Loader/coordinator; WebDAV H.264/AAC MP4 and HEVC/MKV metadata/dimensions and engine logs; real FFmpeg-first raw frame/common WebP persistence/cache reopen; natural thumbnail fallback; both engines unavailable/no invalid image/useful metadata/bounded retry; runtime legacy/WebP/metadata-only cache compatibility; navigate-away/refresh/stale generation; actual proxy/source cleanup; 20-cycle lifecycle (runtime cycles 0); HTTP production consumer/native boundary; HLS/DASH/LOCAL_DOCUMENT user flows; actual ADVANCED native probe; optional arm64 SFTP and real SMB/FTP/NFS. No old HAP/process/test evidence substitutes for these items.
+
+Protected audit confirms all 1,997 tracked regular files excluding report/phase3 evidence byte-identical, three Gitlinks pinned/clean, and original dirty main snapshots unchanged. Production/tests/expectations/task/build profiles/manifests/CMake/semantic locks remain untouched.
+
+Fresh evidence was scanned/reviewed for Authorization/Cookie values, credentials/passwords, proxy tokens, sensitive upstream URLs/paths and private-key/signing material. Matches are public dependency URLs, case/source identifiers and committed synthetic mocks (including literal `password: 'secret'` in the source context), not live secrets. No private signing/key file content is collected. Loader desktop log contains only metadataEngine/thumbnailEngine/thumbnailPlan; actual production log security is NOT RUN. No x86 engine rankings, p50/p95, throughput, CPU/GPU/memory/power/thermal measurements or conclusions. Original build/test durations are incidental runner output only.
+
+**Final decision: BLOCKED — TEST ENVIRONMENT.** Fresh build chain and desktop functional checks PASS; Phase 3 production runtime/architecture acceptance is not established. No failed gate, patch, bypass, merge or next-phase work. Return to GPT to review the complete fresh evidence and determine target runtime provisioning/next task.
+
+Only this report and the new evidence directory are committed. Fetch before push and reject unexpected protected remote drift, normal push to the exact task branch, fetch again and verify evidence commit remote containment. Return the remotely visible SHA afterward; no self-referential SHA is embedded. Publication failure is `BLOCKED — EVIDENCE NOT PUSHED`.
+
+## Historical GPT review after phase3-rerun-3f ArkTS compile stop
 
 Review date: 2026-10-05.
 
@@ -24,9 +119,9 @@ Ruling:
 
 The failed 3f run below remains historical evidence and is not relabeled PASS.
 
-## Current validation — phase3-rerun-3f-probe-wrapper-forwarding
+## Historical validation — phase3-rerun-3f-probe-wrapper-forwarding
 
-This section alone records this fresh run. Every later section is historical and supplies no PASS evidence for this task.
+This section preserves the 3f run and supplies no PASS evidence for current 3g.
 
 - Repository/branch: `baozi510/Linkora`, `feat/ffmpeg-analyzer-policy-phase3`.
 - Validation source SHA: `0d87488dc92f3cd8bc77319ec61197520695597e`.

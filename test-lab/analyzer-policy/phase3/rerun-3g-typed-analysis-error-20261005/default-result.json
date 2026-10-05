@@ -1,0 +1,8 @@
+{
+  "command": "pwsh -NoProfile -File scripts/verify.ps1",
+  "cwd": "D:\\Linkora-validation-phase3-3g-20261005",
+  "startedAt": "2026-10-05T14:09:27.6732262Z",
+  "completedAt": "2026-10-05T14:13:24.1608094Z",
+  "exitCode": 0,
+  "invocationCount": 1
+}

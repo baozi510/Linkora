@@ -1,0 +1,8 @@
+{
+  "command": "pwsh -NoProfile -File scripts/verify-simulator.ps1",
+  "cwd": "D:\\Linkora-validation-phase3-3g-20261005",
+  "startedAt": "2026-10-05T14:14:03.7171556Z",
+  "completedAt": "2026-10-05T14:14:31.9757478Z",
+  "exitCode": 0,
+  "invocationCount": 1
+}

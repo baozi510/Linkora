@@ -1,0 +1,26 @@
+[
+  {
+    "stage": "default",
+    "exitCode": 0,
+    "architecture": true,
+    "ffmpegPure": true,
+    "adapterPure": true,
+    "loader": true,
+    "hypium": 209,
+    "arktsLimitedThrowMatches": 0,
+    "nativeAudit9Count": 2,
+    "finalMarker": true
+  },
+  {
+    "stage": "immediate-default",
+    "exitCode": 0,
+    "architecture": true,
+    "ffmpegPure": true,
+    "adapterPure": true,
+    "loader": true,
+    "hypium": 209,
+    "arktsLimitedThrowMatches": 0,
+    "nativeAudit9Count": 2,
+    "finalMarker": true
+  }
+]

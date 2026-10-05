@@ -1,0 +1,10 @@
+{
+  "scanned": "Fresh stdout/stderr, Hypium outputs, context excerpts, JSON, CSV and supplemental evidence",
+  "method": "rg case-insensitive Authorization/Cookie/password/token/private-key/URLs/signing scan plus match review",
+  "liveSecretsFound": 0,
+  "retainedMatches": "Public GitHub/ohpm URLs; source/test identifiers; synthetic committed mock username/password (secret); synthetic loopback URL; local paths/hashes",
+  "privateKeyOrSigningContentCollected": false,
+  "performanceRankingCollected": false,
+  "productionRuntimeSecurity": "NOT RUN",
+  "utc": "2026-10-05T14:25:25.7865705Z"
+}
