@@ -140,14 +140,51 @@ If HDC remains `[Empty]`, runtime acceptance is BLOCKED and this manual must not
 
 A supported development signing/install path must exist.
 
-Requirements:
+Phase 3 runtime acceptance explicitly permits one **ephemeral local signing overlay** in the isolated runtime checkout when DevEco automatic/development signing requires it.
 
-- no private signing material is committed;
-- no tracked build profile is changed only to make installation possible;
-- exact build/sign/install commands used by the environment are recorded;
-- the installed artifact must correspond to the source SHA dispatched by the READY task.
+The overlay rules are strict:
 
-The repository's build verifier produces unsigned HAP artifacts. Do not assume an unsigned HAP is directly installable on every target.
+- the checkout must be clean before signing preparation;
+- the only tracked path that may change for signing is the repository-root `build-profile.json5`;
+- the only permitted semantic changes inside that file are:
+  - development/debug signing material references under `app.signingConfigs`;
+  - a product/target/build reference that selects that signing config;
+- SDK versions, products, modules, native ABI filters, build options, dependencies and all production/test source must remain unchanged;
+- any other tracked path change or any other semantic build-profile change => STOP;
+- signing key/certificate/profile contents and private filesystem paths must not be committed or copied into evidence;
+- the raw signing diff may be reviewed locally but must not be committed when it contains sensitive paths;
+- record a sanitized signing-overlay summary and a cryptographic hash of the local overlaid `build-profile.json5`, not its secret-bearing contents;
+- after the signed HAP is built and its SHA-256 recorded, restore `build-profile.json5` to HEAD and prove the checkout is clean again before report/evidence commit.
+
+This temporary overlay is validation-environment configuration, not an implementation/source change.
+
+The exact-source provenance chain for an accepted runtime artifact must be:
+
+```text
+dispatched implementation SHA
+  -> reviewed docs-only validation baseline
+  -> clean isolated runtime checkout
+  -> signing-only local build-profile overlay
+  -> signed HAP SHA-256
+  -> explicit install of that HAP
+  -> installed com.linkora.player bundle/process on the target
+```
+
+The pre-existing `com.linkora.player` installation on the device is **not** acceptable runtime evidence because its source/artifact provenance is unknown.
+
+Before runtime cases:
+
+1. record the pre-existing package only as environment context;
+2. build a fresh signed debug/default arm64 HAP from the authorized checkout + signing-only overlay;
+3. record the signed HAP SHA-256 and sanitized package identity;
+4. explicitly install that exact HAP;
+5. verify `com.linkora.player` launches and its process Hilog is readable;
+6. if replacement is rejected because the pre-existing app has a different signature, it is permitted to uninstall **only `com.linkora.player`** from the dedicated validation target and then install the fresh signed HAP;
+7. if uninstall is used, record that app data was cleared and re-enter only the test WebDAV configuration.
+
+Do not reuse the old installed app for acceptance.
+
+The repository's normal verifier produces unsigned HAP artifacts. Do not assume an unsigned HAP is directly installable on every target.
 
 ### 4.3 Reachable WebDAV service
 
@@ -171,18 +208,36 @@ Do not commit:
 
 If HTTP rather than HTTPS is intentionally used in an isolated test environment, record that fact; do not turn it into a production security recommendation.
 
+For the current prepared Mate60 environment, HDC reverse port forwarding is an allowed transport bridge:
+
+```text
+device http://127.0.0.1:19082/
+  -> hdc reverse tcp:19082
+  -> host isolated read-only WebDAV fixture service
+```
+
+Before formal cases, freshly prove the reverse mapping is present and that the target can authenticate and obtain a DAV multistatus containing the declared fixture IDs. Do not expose the WebDAV credential in evidence.
+
 ### 4.4 Evidence observability
 
 Before starting media cases, confirm the environment can capture enough information to determine:
 
 - app launch/crash state;
-- sanitized application logs;
+- sanitized application/process Hilog;
 - generated persistent thumbnail files or an equivalent verifiable cache observation;
 - whether cache reopen avoids unnecessary regeneration;
-- source/proxy cleanup, if current diagnostics are observable;
 - lifecycle results across repeated opens/leaves.
 
-If a required observation is unavailable without modifying production code, mark that sub-check BLOCKED/NOT RUN and return to GPT if it prevents acceptance. Do not add ad-hoc production logging during a Codex test-only run.
+`NetworkFileProxy.diagnostics()` exists in code, but the current production app exposes no external/runtime diagnostic endpoint for the shared proxy. Therefore **direct `activeSources/activeClients` counters are not a READY prerequisite and are not a mandatory acceptance result in the current build**.
+
+Rules:
+
+- if a pre-existing authorized runtime path exposes the real shared production proxy diagnostics, capture it;
+- otherwise record the direct counter check as `NOT RUN — NO PRODUCTION DIAGNOSTIC ENDPOINT`;
+- do not add debug UI, instrumentation, reflection hooks or production logging solely to obtain the counters during a test-only run;
+- cleanup acceptance must instead use the strongest existing production observations: no late/stale UI delivery, successful leave/re-enter, no crash/ANR, cache remains usable, repeated lifecycle does not accumulate visible duplicate/stale work, and process/log behavior remains stable through 20 cycles.
+
+Absence of direct counters alone does not block Phase 3 runtime acceptance. A concrete cleanup/lifecycle regression still fails acceptance.
 
 ## 5. Test corpus
 
@@ -591,30 +646,33 @@ bytesRead
 releasedSources
 ```
 
-For runtime acceptance, the important correctness values are:
+but the current shared production proxy has no external diagnostic endpoint exposed by the app.
 
-- `activeSources`;
-- `activeClients`;
-- monotonic release behavior where observable.
+Therefore:
 
-Do not interpret bytes/read-request counts as a performance ranking in this phase.
+- direct production counter capture is **optional when an already-supported path exists**;
+- if no such path exists, record `NOT RUN — NO PRODUCTION DIAGNOSTIC ENDPOINT`;
+- do not modify production code merely to surface these counters;
+- the lack of a direct counter is not by itself a BLOCKED result.
 
-If diagnostics are available through the authorized runtime environment, capture sanitized before/after snapshots for:
-
-- cold load;
-- page leave;
-- cancellation;
-- both-engine failure;
-- selected lifecycle cycles.
-
-Expected settled state:
+When direct diagnostics are available, the expected settled state is:
 
 ```text
 activeSources = 0
 activeClients = 0
 ```
 
-If the production build exposes no authorized way to observe diagnostics, do not modify source during validation. Mark the direct counter check unavailable and rely only on other cleanup evidence until GPT decides whether dedicated observability is required.
+Regardless of counter availability, mandatory cleanup/lifecycle evidence includes:
+
+- leaving the network directory does not later inject old metadata/thumbnail into the UI;
+- refresh/re-enter does not create stale or duplicate rows;
+- cancellation does not produce a later fallback-visible result;
+- corrupt/both-fail media does not wedge the list;
+- repeated open/leave cycles do not show accumulating stale work;
+- the app remains responsive with no crash/ANR through the 20-cycle run;
+- cached media remains decodable after repeated lifecycle transitions.
+
+Do not interpret read/byte counters or elapsed time as a performance ranking in this phase.
 
 ## 23. Safe log capture
 

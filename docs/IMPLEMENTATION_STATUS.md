@@ -1,6 +1,6 @@
 # Linkora Player Architecture — Implementation Status
 
-## CURRENT EXECUTION SUMMARY — 2026-10-05
+## CURRENT EXECUTION SUMMARY — 2026-10-06
 
 Project-wide technical baseline: `docs/MASTER_IMPLEMENTATION_PLAN.md`.
 
@@ -12,7 +12,7 @@ Phase 3 implementation source:
 
 `44d0f62816b73ebd3bab8069be5b74f51e2c6999`
 
-Latest evidence commit:
+Latest completed build/static evidence:
 
 `e95feef35fa2541322216f9ce9336da3cad9060f`
 
@@ -20,38 +20,29 @@ Latest evidence commit:
 
 **Build/static/pure acceptance: PASS.**
 
-Fresh phase3-rerun-3g evidence establishes:
+**Production runtime acceptance: ENVIRONMENT PREPARED FOR A TARGETED READY RUN.**
 
-- default -> simulator -> immediate-default sequence all exit 0;
-- ArkTS compilation PASS;
-- Hypium 209/209 PASS twice;
-- all required Debug/Release HAR/HAP builds PASS twice;
-- exact-nine AArch64 production native audit PASS twice;
-- simulator native whitelist/ABI PASS;
-- complete desktop Loader/cache/lifecycle and MPV harnesses PASS twice;
-- Phase 3 policy pure suite and supplemental ADVANCED/error-boundary checks PASS;
-- typed remote-open failure boundary compiles and preserves tested cleanup/cancellation semantics.
+Reviewed runtime prerequisites now available:
 
-**Production runtime acceptance: BLOCKED — TEST ENVIRONMENT.**
+- Mate60 ARM64 HarmonyOS target connected through HDC;
+- target architecture/API information available;
+- process Hilog for `com.linkora.player` readable;
+- clean isolated runtime checkout prepared with pinned submodules;
+- DevEco account signed in and development-signing capability available;
+- H.264/AAC MP4, HEVC/AAC MKV and corrupt synthetic fixtures prepared and hashed;
+- isolated read-only authenticated WebDAV fixture service reachable from the target through HDC reverse port 19082;
+- target browser authentication/DAV multistatus confirmed;
+- fixture credentials remain local and uncommitted.
 
-No HarmonyOS target is connected (`hdc list targets = [Empty]`), so production UI/native runtime cases remain NOT RUN.
+The pre-existing installed Linkora app is not accepted as a test artifact because its provenance is unknown.
 
-No implementation defect is currently known from fresh validation. No source change is justified by phase3-rerun-3g.
+Runtime validation must first produce and explicitly install a fresh signed debug/default arm64 HAP from the dispatched checkout using the manual's temporary signing-only overlay rules.
 
-Phase 3 must not be marked fully accepted until the production runtime gate is executed on a suitable target. Historical build/static PASS may be referenced as prior evidence, but any future runtime task must report its own exact environment and runtime observations.
+Direct shared-proxy counters are not externally exposed by the current production app. Their absence is no longer a runtime prerequisite; direct counters are NOT RUN when unavailable, while cleanup is judged through existing production lifecycle/stale-delivery/crash/cache observations.
 
-Current Phase 3 invariants remain unchanged:
+No production source change is justified for environment preparation.
 
-- LIST System-first with controlled FFmpeg fallback for file-like sources;
-- DETAIL/ADVANCED FFmpeg-first, System fallback only when FFmpeg unusable;
-- no field merger;
-- complete cached metadata authoritative during thumbnail-only repair;
-- remote thumbnails FFmpeg-first + System fallback;
-- HLS/DASH/LOCAL_DOCUMENT System-only;
-- SFTP trust storage-owned;
-- common WebP/cache/time policy unchanged;
-- playback routing unchanged;
-- performance ranking deferred to real arm64 hardware.
+Current Phase 3 functional invariants remain unchanged.
 
 
 This file is the current execution status for the architecture migration.

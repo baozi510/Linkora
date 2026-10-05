@@ -6,53 +6,34 @@ Repository: `baozi510/Linkora`
 
 Current branch: `feat/ffmpeg-analyzer-policy-phase3`
 
-Current phase: **FFmpeg Analyzer Production Policy Phase 3 — build/static/pure acceptance achieved; production runtime acceptance is blocked only by missing HarmonyOS runtime environment.**
+Current phase: **FFmpeg Analyzer Production Policy Phase 3 — build/static/pure acceptance passed; Mate60 runtime environment is prepared; next action is a targeted production runtime READY validation.**
 
-Latest remotely visible Codex evidence commit:
-
-`e95feef35fa2541322216f9ce9336da3cad9060f`
-
-Implementation source validated:
+Implementation source:
 
 `44d0f62816b73ebd3bab8069be5b74f51e2c6999`
 
-### GPT review of phase3-rerun-3g
+Latest completed build/static evidence:
 
-Fresh evidence independently reviewed:
+`e95feef35fa2541322216f9ce9336da3cad9060f`
 
-- default verifier PASS;
-- simulator verifier PASS;
-- immediate post-simulator default verifier PASS;
-- ArkTS unit compilation PASS twice;
-- Hypium 209/209 PASS twice, Failure/Error/Ignore = 0;
-- Debug/Release four HARs and default HAPs PASS twice;
-- exact-nine AArch64 native ABI audit PASS for Debug and Release twice;
-- simulator HAP whitelist/ABI PASS with only x86_64 `liblinkora_ffmpeg.so`;
-- architecture fixtures 5/5, FFmpeg pure 15/15, analyzer/policy 45/45, native artifact fixtures 17/17, Loader/cache/lifecycle normal markers and MPV 5/5 PASS in both default runs;
-- supplemental desktop functional checks 10/10 PASS for ADVANCED policy/error-boundary/System-only contracts;
-- no `arkts-limited-throw` recurrence;
-- all protected files/submodules remain unchanged outside authorized report/evidence.
+### Runtime preparation review
 
-No failed gate remains in the build/static/pure validation chain.
+Environment preparation has established:
 
-### Remaining acceptance boundary
+- real Mate60 ARM64 target connected and launch/log access available;
+- isolated clean runtime checkout and pinned submodules;
+- synthetic MP4/MKV/corrupt fixtures;
+- isolated read-only authenticated WebDAV fixture service;
+- HDC reverse `tcp:19082 -> tcp:19082`;
+- device browser authentication and DAV multistatus containing all three fixtures.
 
-Phase 3 is **not yet fully accepted for production runtime** because both initial and final `hdc list targets` returned `[Empty]`.
+The pre-existing installed `com.linkora.player` is not source-provenance evidence.
 
-The following production cases remain unexecuted and cannot be promoted from desktop/synthetic evidence:
+The runtime task must build and install a fresh signed HAP from the dispatched checkout. A temporary local signing overlay is allowed only in root `build-profile.json5`, only for signing-related semantics, never committed, and restored to HEAD before evidence publication.
 
-- real Network page/list -> NetworkMediaLoader -> NetworkMediaAnalysisCoordinator;
-- WebDAV H.264/AAC MP4;
-- WebDAV HEVC/MKV;
-- real FFmpeg frame -> common WebP -> persistent cache/reopen;
-- natural FFmpeg thumbnail failure -> System fallback;
-- both thumbnail engines unavailable;
-- real navigation/refresh/cancel/stale-generation behavior;
-- actual proxy/source cleanup and 20-cycle lifecycle;
-- HLS/DASH/LOCAL_DOCUMENT production user flows;
-- target-native ADVANCED probe where applicable.
+The shared production `NetworkFileProxy.diagnostics()` has no external app endpoint. Direct counters are optional/NOT RUN when unavailable and do not block acceptance. Cleanup is still mandatory and is evaluated with the production UI/lifecycle/stale-delivery/crash/cache evidence defined in `docs/PHASE3_RUNTIME_ACCEPTANCE_MANUAL.md`.
 
-Therefore the next validation task must not rerun the already-green build chain merely because the current machine has no target. The repository is waiting for a suitable HarmonyOS runtime target and deployable test environment.
+No production source/test change is required for this preparation.
 
 ### Durable conversation workflow
 

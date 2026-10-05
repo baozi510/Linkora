@@ -29,6 +29,36 @@ The next action is an environment gate, not another build rerun: obtain a connec
 
 The current 3g evidence below remains authoritative for build/static/pure acceptance.
 
+## GPT runtime-readiness review — 2026-10-06
+
+The environment is now sufficient to dispatch a targeted Phase 3 production runtime validation.
+
+Reviewed facts:
+
+- a real Mate60 ARM64 target is connected and HDC/Hilog access works;
+- the clean runtime checkout is isolated from the dirty developer workspace;
+- required MP4/MKV/corrupt fixtures are prepared with local hashes;
+- an isolated authenticated read-only WebDAV fixture service is reachable from the target through HDC reverse port forwarding;
+- device-side authentication/DAV listing has been confirmed;
+- DevEco development signing is available, but the already-installed Linkora package has unknown source provenance.
+
+Artifact-provenance ruling:
+
+- the existing installed app must not be used for acceptance;
+- the runtime task must build a fresh signed default/debug arm64 HAP from the dispatched checkout;
+- a local uncommitted `build-profile.json5` signing-only overlay is permitted under the strict manual rules;
+- the signed HAP hash and explicit install action establish the artifact link;
+- the signing overlay must be restored and the checkout clean before evidence publication.
+
+Cleanup-observability ruling:
+
+- `NetworkFileProxy.diagnostics()` exists but the current production app exposes no external path to the shared proxy instance;
+- Phase 3 runtime validation must not add instrumentation only for counters;
+- direct `activeSources/activeClients` is therefore optional/NOT RUN when no existing endpoint is available;
+- cleanup remains a mandatory behavioral requirement through cancellation/stale UI, leave/re-enter, corrupt-media recovery, 20-cycle stability, cache usability and crash/ANR evidence.
+
+This readiness review does not itself execute any runtime acceptance case and does not alter the prior 3g PASS/BLOCKED evidence.
+
 ## Current validation — phase3-rerun-3g-typed-analysis-error
 
 Only this section is current-run evidence. All following review/validation sections are historical and provide no PASS for 3g.
