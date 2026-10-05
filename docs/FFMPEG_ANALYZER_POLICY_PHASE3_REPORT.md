@@ -1,9 +1,27 @@
 # FFmpeg Analyzer Production Policy Phase 3 Report
 
-> Status: FAIL — NETWORK MEDIA LOADER (phase3-rerun-3e-thumbnail-metadata-separation).
+> Status: REVIEWED — phase3-rerun-3e stopped on Probe-wrapper argument forwarding defect; all same-pattern wrappers corrected; fresh rerun required.
 > Branch: `feat/ffmpeg-analyzer-policy-phase3`
 > Codex role: test/report only; no source fixes.
 > Date: 2026-10-05 (Asia/Shanghai).
+
+## GPT review after phase3-rerun-3e wrapper-forwarding stop
+
+Review date: 2026-10-05.
+
+Ruling:
+
+- The run correctly stopped at the first failing assertion and did not patch or retry it.
+- The coordinator mock computes `metadataComplete` from complete hints and supplies `mode: 'thumbnail'` to `Probe.inspect`.
+- The complete-cache retry wrapper accepted no arguments and invoked `normalInspect.call(this)`; the original Probe therefore received its default empty options object and recorded `both`.
+- This fully explains the observed `actual 'both', expected 'thumbnail'` without requiring any production routing change.
+- The same dropped-argument pattern existed in the deadline/cancel partial wrapper and timed retry wrapper. Those older assertions could pass while not exercising the complete caller options/callback contract.
+- All three wrappers are corrected to transparently forward `source, headers, options` while retaining only their intended injected behavior.
+- The strict `thumbnail` mode assertion, metadata immutability assertions, timeout/cancellation assertions and later lifecycle assertions are not weakened.
+- No production Loader/coordinator/analyzer source, policy, playback behavior, WebP behavior or performance policy changes are justified by this evidence.
+- All later gates from the stopped run remain NOT RUN and require a fresh run.
+
+The failed 3e run below remains historical evidence and is not relabeled PASS.
 
 ## Current validation — phase3-rerun-3e-thumbnail-metadata-separation
 

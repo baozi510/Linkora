@@ -6,35 +6,35 @@ Repository: `baozi510/Linkora`
 
 Current branch: `feat/ffmpeg-analyzer-policy-phase3`
 
-Current phase: **FFmpeg Analyzer Production Policy Phase 3 — latest validation reached the thumbnail-retry contract; stale pre-split expectation reviewed and test coverage corrected; fresh rerun required.**
+Current phase: **FFmpeg Analyzer Production Policy Phase 3 — latest validation stopped on a desktop Probe-wrapper argument forwarding defect; test infrastructure corrected; fresh rerun required.**
 
 Latest remotely visible Codex evidence commit:
 
-`a21c658eca78cefa5e9a330ca17ad3722e55ac84`
+`2a9a955a4cdc3da461d44f3eac0147862e06771a`
 
-That run validated source `cd12a3869db8a8dbe84730c6f8a118faf73f33e0`. It freshly proved the server-fixture correction, earlier Loader/cache/cancellation/setup-cleanup assertions and the Phase 3 pure suites before stopping at the corrupt-thumbnail retry expectation.
+That run validated source `198854ed2e6c14378e692f86852a78656d0aebe8`.
 
-### Review of phase3-rerun-3d stop
+### Review of phase3-rerun-3e stop
 
-The failing row seeded complete cached metadata `[12000, 1920, 1080]`, then expected a thumbnail-only retry to replace duration with `9000`.
+The new complete-cache retry assertion expected the coordinator mock to call `Probe.inspect(..., { mode: 'thumbnail', ... })`. The temporary test wrapper called `normalInspect.call(this)` without forwarding `source`, `headers` or `options`.
 
-That expectation belongs to the older coupled `NetworkMediaProbe` behavior, where a THUMBNAIL probe result could also flow through `updateInfo()`.
+Because `Probe.inspect` defaults `options = {}`, the harness recorded `both` and discarded the callback/options contract even though the coordinator mock supplied `thumbnail`.
 
-Phase 3 intentionally separates metadata probing from thumbnail extraction:
+This is a test-infrastructure forwarding defect, not evidence of a production coordinator routing failure.
 
-- `NetworkMediaAnalysisCoordinator` starts from metadata hints;
-- it runs LIST metadata probing only when duration or dimensions are incomplete;
-- when all metadata hints are complete, thumbnail extraction does not replace them;
-- therefore repairing a missing/corrupt thumbnail with complete cached metadata must retain `[12000, 1920, 1080]`.
+Independent review also found the same dropped-argument pattern in:
 
-Reviewed test-infrastructure correction:
+- the deadline/cancel partial wrapper;
+- the timed thumbnail retry wrapper.
 
-- complete-metadata thumbnail retries explicitly assert `thumbnail` mode and immutable cached metadata even if the mock returns stray metadata-like numbers;
-- separate incomplete-metadata retry cases explicitly assert metadata refresh behavior and persistence;
-- no production Loader/coordinator/analyzer source is changed;
-- historical phase3-rerun-3d remains FAIL and is not relabeled PASS.
+Reviewed correction:
 
-The phase remains unaccepted until a fresh validation completes later gates.
+- all three temporary Probe wrappers now accept and forward `source, headers, options`;
+- each wrapper still injects only its intended result mutation/partial behavior;
+- strict mode/metadata/cancellation assertions remain unchanged;
+- no production ArkTS/C/C++ source is modified.
+
+The earlier 3e partial PASS results remain historical only. A fresh run must execute the entire task again.
 
 ### Durable conversation workflow
 

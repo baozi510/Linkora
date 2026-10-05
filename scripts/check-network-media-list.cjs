@@ -362,7 +362,9 @@ async function check() {
   const partialLoader = new NetworkMediaLoader(context, server, (e, info) => updates.push([e.path, info.durationMs]));
   const partialEntry = entry('/deadline.mp4'); partialLoader.reset([partialEntry], false);
   const originalInspect = Probe.prototype.inspect;
-  Probe.prototype.inspect = function() { this.partial = true; return originalInspect.call(this); };
+  Probe.prototype.inspect = function(source, headers, options = {}) {
+    this.partial = true; return originalInspect.call(this, source, headers, options);
+  };
   captureDeadline = true; hold = true;
   const timed = partialLoader.load(partialEntry); await tick(); await tick(); deadline();
   assert.equal(await timed, null);
@@ -439,9 +441,11 @@ async function check() {
   ]) {
     const retryEntry = entry('/retry-' + name + '.mp4'), retryKey = await cache.key(server, retryEntry);
     await cache.put(retryKey, new CachedNetworkMedia(...completeCachedMetadata, imageData));
-    Probe.prototype.inspect = async function() { const result = await normalInspect.call(this);
+    Probe.prototype.inspect = async function(source, headers, options = {}) {
+      const result = await normalInspect.call(this, source, headers, options);
       return { ...result, durationMs: thumbnailOnlyNumbers[0],
-        width: thumbnailOnlyNumbers[1], height: thumbnailOnlyNumbers[2] }; };
+        width: thumbnailOnlyNumbers[1], height: thumbnailOnlyNumbers[2] };
+    };
     const retryUpdates = [];
     const retryLoader = new NetworkMediaLoader(context, server,
       (e, info) => retryUpdates.push([info.durationMs, info.width, info.height]));
@@ -485,8 +489,10 @@ async function check() {
   Probe.prototype.inspect = normalInspect;
   const timedRetryEntry = entry('/retry-timeout.mp4'), timedRetryKey = await cache.key(server, timedRetryEntry);
   await cache.put(timedRetryKey, new CachedNetworkMedia(12000, 1920, 1080, null));
-  Probe.prototype.inspect = async function() { this.partial = true; const result = await normalInspect.call(this);
-    return { ...result, durationMs: 0, width: 0, height: 0 }; };
+  Probe.prototype.inspect = async function(source, headers, options = {}) {
+    this.partial = true; const result = await normalInspect.call(this, source, headers, options);
+    return { ...result, durationMs: 0, width: 0, height: 0 };
+  };
   const timedRetryUpdates = [];
   const timedRetryLoader = new NetworkMediaLoader(context, server,
     (e, info) => timedRetryUpdates.push([info.durationMs, info.width, info.height]));

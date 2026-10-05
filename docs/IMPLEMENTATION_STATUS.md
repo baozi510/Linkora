@@ -12,24 +12,20 @@ Phase 3 production analyzer policy is implemented but **not yet accepted**.
 
 Latest evidence commit:
 
-`a21c658eca78cefa5e9a330ca17ad3722e55ac84`
+`2a9a955a4cdc3da461d44f3eac0147862e06771a`
 
-Latest run (`phase3-rerun-3d-server-fixture`) proves the server fixture fix and advances the Loader regression harness to the thumbnail retry contract.
+Latest run (`phase3-rerun-3e-thumbnail-metadata-separation`) reached the new complete-cache retry contract and stopped because a temporary desktop Probe wrapper swallowed `source/headers/options`. That made the underlying Probe default to `options = {}` and record `both` instead of the coordinator mock's supplied `thumbnail`.
 
-Independent review finds the new failure is a stale test expectation from the pre-Phase-3 coupled probe model. Complete cached metadata is authoritative during thumbnail-only repair; Phase 3 does not rerun metadata probing merely because a thumbnail is missing/corrupt.
+Independent review found three wrappers with the same transparent-forwarding defect. All are corrected together so their injected partial/result mutations preserve the caller contract.
 
-Reviewed correction strengthens the test split:
+No production source changed. A fresh validation run is required; historical PASS items cannot be reused.
 
-- complete metadata -> thumbnail-only retry, metadata unchanged;
-- incomplete metadata -> metadata refresh path, refreshed/preserved fields asserted separately.
-
-No production ArkTS/C/C++ source changed for this review. A fresh validation run is required; no historical PASS may substitute for rerun evidence.
-
-Current Phase 3 invariants remain:
+Current Phase 3 invariants remain unchanged:
 
 - LIST = System primary with controlled FFmpeg fallback for resolvable file-like inputs;
 - DETAIL / ADVANCED = FFmpeg primary, System fallback only when FFmpeg is unusable;
-- metadata and thumbnail responsibilities are separate;
+- metadata and thumbnail responsibilities remain separate;
+- complete cached metadata remains authoritative during thumbnail-only repair;
 - no System+FFmpeg field merger in Phase 3;
 - remote thumbnail = FFmpeg primary + existing System fallback;
 - HLS / DASH / LOCAL_DOCUMENT = System-only;
