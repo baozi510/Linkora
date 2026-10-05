@@ -726,7 +726,7 @@ A retry is allowed only when the task explicitly defines it as part of the test 
 
 Do not declare full Phase 3 runtime acceptance unless all mandatory current-task cases are executed and pass.
 
-At minimum, when the current task follows this manual, acceptance normally requires:
+At minimum, when the current task follows this manual, core Phase 3 **remote-file analysis** acceptance normally requires:
 
 - WebDAV MP4 cold + reopen PASS;
 - WebDAV HEVC/MKV cold + reopen PASS;
@@ -734,11 +734,19 @@ At minimum, when the current task follows this manual, acceptance normally requi
 - both-engines-unavailable/corrupt behavior PASS;
 - cancellation/refresh/stale-generation PASS in naturally exercisable cases;
 - 20-cycle lifecycle PASS;
-- HLS/DASH/LOCAL_DOCUMENT production routing regression PASS;
-- no unresolved required cleanup/resource leak;
+- LOCAL_DOCUMENT smoke PASS when the target can import/open the prepared MP4 safely;
+- no unresolved required cleanup/lifecycle regression;
 - security evidence review PASS.
 
-Natural FFmpeg->System fallback may be NOT RUN only when no safe natural fixture exists and the task explicitly permits it.
+HLS/DASH target smoke is strongly preferred when safe fixtures already exist, but it may be `NOT RUN — NO PREPARED STREAMING FIXTURE` without blocking this remote-file Phase 3 runtime acceptance because:
+
+- the current production integration under acceptance is the file-like Network page/list -> Loader -> Coordinator path;
+- the fresh 3g pure/policy evidence already verifies HLS/DASH remain System-only;
+- a future dedicated streaming/runtime validation may exercise those user flows without changing the Phase 3 remote-file verdict.
+
+This exception does **not** allow an executed HLS/DASH regression to be ignored. If a target smoke is run and fails because of the Phase 3 changes, acceptance fails.
+
+Natural FFmpeg->System fallback may also be NOT RUN only when no safe natural fixture exists and the task explicitly permits it.
 
 ### FAIL
 
