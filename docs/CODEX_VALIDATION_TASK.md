@@ -78,7 +78,13 @@ If these prerequisites are not available, remain WAITING. Do not repeatedly reru
 
 ## 4. Runtime validation scope when activated
 
-When GPT later publishes a READY version of this task, the primary scope will be production runtime rather than another exploratory build cycle.
+Stable execution manual:
+
+`docs/PHASE3_RUNTIME_ACCEPTANCE_MANUAL.md`
+
+When GPT later publishes a READY version of this task, Codex must read that manual completely and follow it together with the new READY task. The task remains the dispatch authority for exact source SHA, permissions, required cases, stop conditions and evidence paths.
+
+The primary scope will be production runtime rather than another exploratory build cycle.
 
 Required production path:
 

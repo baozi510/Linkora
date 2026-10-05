@@ -17,6 +17,12 @@ Codex must read that fixed task file first. The task provides the exact implemen
 
 Historical failed runs remain recorded in `docs/FFMPEG_ANALYZER_POLICY_PHASE3_REPORT.md`; their partial PASS items must never be spliced into a later run.
 
+Production runtime execution mechanics are defined in:
+
+`docs/PHASE3_RUNTIME_ACCEPTANCE_MANUAL.md`
+
+When a future READY task activates runtime acceptance, read the manual completely. The current task file remains authoritative for the exact revision, permissions, required/optional cases and evidence paths.
+
 If `docs/CODEX_VALIDATION_TASK.md` is absent, not READY, or its source checks do not match the repository, do not start Phase 3 validation.
 
 ## 1. What changed
