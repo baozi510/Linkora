@@ -1,0 +1,9 @@
+Submodule 'entry/src/main/cpp/third_party/libnfs' (https://github.com/sahlberg/libnfs.git) registered for path 'entry/src/main/cpp/third_party/libnfs'
+Submodule 'entry/src/main/cpp/third_party/libsmb2' (https://github.com/sahlberg/libsmb2.git) registered for path 'entry/src/main/cpp/third_party/libsmb2'
+Submodule 'entry/src/main/cpp/third_party/mbedtls/framework' (https://github.com/Mbed-TLS/mbedtls-framework.git) registered for path 'entry/src/main/cpp/third_party/mbedtls/framework'
+Cloning into 'D:/Linkora-validation-phase3-3d-20261005/entry/src/main/cpp/third_party/libnfs'...
+Cloning into 'D:/Linkora-validation-phase3-3d-20261005/entry/src/main/cpp/third_party/libsmb2'...
+Cloning into 'D:/Linkora-validation-phase3-3d-20261005/entry/src/main/cpp/third_party/mbedtls/framework'...
+Submodule path 'entry/src/main/cpp/third_party/libnfs': checked out 'cee4ca723e081e6a18f51b838690a4c21e14bb2c'
+Submodule path 'entry/src/main/cpp/third_party/libsmb2': checked out 'b3d560c02fb1268320d2fd1c17fe841b0d93b85f'
+Submodule path 'entry/src/main/cpp/third_party/mbedtls/framework': checked out '7d726d145d678aa7f5a7df3b9e7ee3dbce6ea1bf'

@@ -1,0 +1,34 @@
+(node:50772) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Database schema v5 migration failed. code=undefined, message=Injected write failure
+Database schema v5 migration failed. code=undefined, message=Interrupted after SQL
+Database schema v8 migration failed. code=undefined, message=Injected write failure
+Database schema v9 migration failed. code=undefined, message=Injected write failure
+(node:53460) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Network media persistence failed. code=0
+Network media persistence failed. code=0
+Network media persistence failed. code=0
+AssertionError [ERR_ASSERTION]: thumbnail retry preserves previously known fields: corrupt
++ actual - expected
+
+  [
++   12000,
+-   9000,
+    1920,
+    1080
+  ]
+
+    at check (D:\Linkora-validation-phase3-3d-20261005\scripts\check-network-media-list.cjs:447:12) {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: [Array],
+  expected: [Array],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+Exception: D:\Linkora-validation-phase3-3d-20261005\scripts\verify.ps1:77
+Line |
+  77 |  бн DE -ne 0) { throw 'Network media list/cache regression checks failed. бн
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Network media list/cache regression checks failed.

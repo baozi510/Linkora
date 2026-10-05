@@ -1,0 +1,334 @@
+Fresh read-only source context, validation HEAD a517f01d9ea84c7505d61052a320ac18fb1c059c. No post-stop reproduction/test or edits.
+
+scripts/verify.ps1
+68:   & $node (Join-Path $PSScriptRoot 'check-local-persistence.cjs') $StudioRoot
+69:   if ($LASTEXITCODE -ne 0) {
+70:     throw 'Local persistence regression checks failed.'
+71:   }
+72: 
+73:   & $node (Join-Path $PSScriptRoot 'check-network-media-probe.cjs') --unit
+74:   if ($LASTEXITCODE -ne 0) { throw 'HTTP range adapter regression checks failed.' }
+75: 
+76:   & $node (Join-Path $PSScriptRoot 'check-network-media-list.cjs')
+77:   if ($LASTEXITCODE -ne 0) { throw 'Network media list/cache regression checks failed.' }
+78: 
+79:   & $node (Join-Path $PSScriptRoot 'check-mpv-playback-port.cjs') $StudioRoot
+80:   if ($LASTEXITCODE -ne 0) { throw 'MPV adapter event-mapping regression checks failed.' }
+81: 
+82:   & $hvigor test --mode module -p module=entry@default -p product=default --no-daemon
+83:   if ($LASTEXITCODE -ne 0) {
+
+scripts/check-network-media-list.cjs
+123: class TestNetworkMediaAnalysisCoordinator {
+124:   constructor(_context, _proxy) {
+125:     this.probe = new Probe();
+126:     this.source = null;
+127:     this.setupSettled = Promise.resolve();
+128:     this.cancelled = false;
+129:   }
+130:   async inspect(source, durationHintMs = 0, widthHint = 0, heightHint = 0, onMetadata = () => {}) {
+131:     const Directory = kits[path.join(serviceDir, 'NetworkDirectoryService.ets')].NetworkDirectoryService;
+132:     const directory = new Directory(server);
+133:     this.source = await directory.openSource(source.locator, '', settled => { this.setupSettled = settled; });
+134:     if (this.cancelled) return { durationMs: durationHintMs, width: widthHint, height: heightHint,
+135:       encodedThumbnail: null, metadataEngine: '', thumbnailEngine: '' };
+136: 
+137:     const metadataComplete = durationHintMs > 0 && widthHint > 0 && heightHint > 0;
+138:     const mode = metadataComplete ? 'thumbnail' : 'both';
+139:     let published = false;
+140:     const result = await this.probe.inspect('http://127.0.0.1/test', {}, {
+141:       mode,
+142:       durationHintMs,
+143:       widthHint,
+144:       heightHint,
+145:       onMetadata: info => {
+146:         if (this.cancelled) return;
+147:         published = true;
+148:         onMetadata(info.durationMs || durationHintMs,
+149:           info.width > 0 && info.height > 0 ? info.width : widthHint,
+150:           info.width > 0 && info.height > 0 ? info.height : heightHint,
+151:           'system');
+152:       }
+153:     });
+154: 
+155:     if (this.cancelled) return { durationMs: durationHintMs, width: widthHint, height: heightHint,
+156:       encodedThumbnail: null, metadataEngine: '', thumbnailEngine: '' };
+157: 
+158:     const durationMs = metadataComplete ? durationHintMs : (result.durationMs || durationHintMs);
+159:     const hasResolution = result.width > 0 && result.height > 0;
+160:     const width = metadataComplete ? widthHint : (hasResolution ? result.width : widthHint);
+161:     const height = metadataComplete ? heightHint : (hasResolution ? result.height : heightHint);
+162:     if (!metadataComplete && !published && !fail && (durationMs > 0 || (width > 0 && height > 0))) {
+163:       onMetadata(durationMs, width, height, 'system');
+164:     }
+165: 
+166:     let encodedThumbnail = null;
+167:     if (result.thumbnail !== null && result.thumbnail !== undefined) {
+
+scripts/check-network-media-list.cjs
+219: const server = { id: 1, updatedAt: 2, protocol: 'smb', titleLabel: () => 'test' };
+220: const entry = (p = '/video.mp4', size = 99) => ({ path: p, displayName: path.basename(p), kind: 'file', size, modifiedAt: 5 });
+
+scripts/check-network-media-list.cjs
+275:   const updates = [];
+276:   const loader = new NetworkMediaLoader(context, server, (e, info) => updates.push([e.path, info.durationMs]));
+277:   loader.reset([entry('/a.mp4'), entry('/b.mp4'), entry('/cancel.mp4'), entry('/bad.mp4'), entry('/pack.mp4')], false);
+278:   hold = true;
+279:   const a = loader.load(entry('/a.mp4')); const secondA = loader.load(entry('/a.mp4'));
+280:   const b = loader.load(entry('/b.mp4'));
+281:   await tick(); await tick(); assert.equal(calls, 1);
+282:   assert.equal(updates.length, 0, 'metadata stays hidden while frame is pending');
+283:   const earlyKey = await cache.key(server, entry('/a.mp4'));
+284:   assert.equal(sqlite.prepare('SELECT duration_ms FROM network_media_metadata WHERE cache_key=?').get(earlyKey)?.duration_ms,
+285:     10000, 'metadata persisted while frame is still pending');
+286:   hold = false; unblock();
+287:   const [one, two, three] = await Promise.all([a, secondA, b]);
+288:   assert.ok(one && two && three); assert.notEqual(one, two);
+289:   assert.equal(calls, 2); assert.equal(maximum, 1);
+290:   assert.equal(updates.length, 3); assert.equal(framesReleased, 2);
+
+scripts/check-network-media-list.cjs
+350:   packFail = false;
+351:   assert.equal(await loader.load({ ...entry('/subtitle.srt'), displayName: 'subtitle.srt' }), null);
+352:   assert.equal(await loader.load({ ...entry('/folder.mp4'), kind: 'directory' }), null);
+353:   loader.close(); await tick();
+354:   assert.equal(opened, closed, 'all readers closed'); assert.ok(cancels > 0);
+355:   assert.equal(await loader.load(entry('/a.mp4')), null, 'closed loader inert');
+356:   const raceLoader = new NetworkMediaLoader(context, server, () => { throw Error('late delivery'); });
+357:   const raceEntry = entry('/late-key.mp4'); raceLoader.reset([raceEntry], false);
+358:   holdKey = true; const race = raceLoader.load(raceEntry); await tick();
+359:   const beforeRace = calls; raceLoader.cancel(raceEntry.path); holdKey = false; releaseKey();
+360:   assert.equal(await race, null); assert.equal(calls, beforeRace, 'cancel before async key prevents native open');
+361:   raceLoader.close();
+362:   const partialLoader = new NetworkMediaLoader(context, server, (e, info) => updates.push([e.path, info.durationMs]));
+363:   const partialEntry = entry('/deadline.mp4'); partialLoader.reset([partialEntry], false);
+364:   const originalInspect = Probe.prototype.inspect;
+365:   Probe.prototype.inspect = function() { this.partial = true; return originalInspect.call(this); };
+366:   captureDeadline = true; hold = true;
+367:   const timed = partialLoader.load(partialEntry); await tick(); await tick(); deadline();
+368:   assert.equal(await timed, null);
+369:   assert.equal(updates.some(([p, d]) => p === partialEntry.path && d === 1234), false,
+370:     'cancelled analysis cannot publish a late partial result');
+371:   const beforeTimeoutRetry = calls;
+372:   assert.equal(await partialLoader.load(partialEntry), null);
+373:   assert.equal(calls, beforeTimeoutRetry, 'timeout backoff suppresses an immediate retry');
+374:   captureDeadline = false; hold = false; unblock(); partialLoader.close(); await tick();
+375:   Probe.prototype.inspect = originalInspect;
+376:   const setupLoader = new NetworkMediaLoader(context, server, () => {});
+377:   setupLoader.reset([entry('/setup.mp4'), entry('/queued.mp4')], false);
+378:   setupHold = true;
+379:   const firstSetup = setupLoader.load(entry('/setup.mp4')); await tick(); await tick();
+380:   const beforeQueued = opened;
+381:   setupHold = false; const queued = setupLoader.load(entry('/queued.mp4')); await tick(); await tick();
+382:   assert.equal(opened, beforeQueued, 'worker waits for actual native setup cleanup');
+383:   releaseSetup(); assert.equal(await firstSetup, null); assert.ok(await queued); setupLoader.close(); await tick();
+384:   const { openNativeRemoteReader, NativeRemoteFile } = load(path.join(serviceDir, 'NativeRemoteReadSession.ets'));
+385:   let actualSetupDone = false, nativeClosed = false, releaseNative;
+386:   captureDeadline = true;
+387:   const nativeSetup = openNativeRemoteReader('127.0.0.1', () => new Promise(resolve => { releaseNative = resolve; }),
+388:     async () => png, () => {}, async () => { nativeClosed = true; }, settled => settled.then(() => { actualSetupDone = true; }));
+389:   deadline(); await assert.rejects(nativeSetup, /timed out/);
+390:   assert.equal(actualSetupDone, false);
+391:   releaseNative(new NativeRemoteFile(1, 99)); await tick();
+392:   assert.ok(actualSetupDone && nativeClosed, 'completion includes closing a late native handle'); captureDeadline = false;
+
+scripts/check-network-media-list.cjs
+403:   const analysisInputsSource = fs.readFileSync(path.join(analysisDir, 'HarmonyAnalysisInputs.ets'), 'utf8');
+404:   assert.doesNotMatch(analysisInputsSource, /openSource\(source\.locator,\s*source\.fingerprint/,
+405:     'media/cache fingerprint must never become an SFTP host-key override');
+406:   assert.match(analysisInputsSource, /openSource\(source\.locator,\s*''/,
+407:     'analysis remote open must leave the per-open SFTP trust override empty');
+408:   assert.match(analysisInputsSource, /await setupSettled\.catch/,
+409:     'analysis remote open must await late native setup cleanup on failure');
+
+scripts/check-network-media-list.cjs
+410:   const pageSource = fs.readFileSync(path.join(root, 'entry/src/main/ets/pages/NetworkPage.ets'), 'utf8');
+411:   assert.match(pageSource, /this\.sftpFingerprint\.trim\(\), this\.sftpHostKeyPolicy === SftpHostKeyPolicy\.STRICT/);
+412:   assert.match(pageSource, /server\.advancedOptions\.sftpFingerprint, server\.advancedOptions\.sftpHostKeyPolicy === SftpHostKeyPolicy\.STRICT/);
+413:   const fallbackEntry = entry('/webp-unavailable.mp4'); webpSupported = false;
+414:   const fallbackLoader = new NetworkMediaLoader(context, server, () => {}); fallbackLoader.reset([fallbackEntry], false);
+415:   assert.equal(await fallbackLoader.load(fallbackEntry), null, 'missing WebP encoder fails thumbnail without JPEG fallback');
+416:   const fallbackKey = await cache.key(server, fallbackEntry);
+417:   assert.equal((await new NetworkMediaCache(context, 1).get(fallbackKey)).imageData, null);
+418:   assert.ok(!fs.existsSync(path.join(context.filesDir, 'network-media', fallbackKey + '.jpg')));
+419:   assert.equal(thumbnails.get(await thumbnails.key(server, fallbackEntry, policy.plan(10000, 640, 360))), null);
+420:   webpSupported = true; fallbackLoader.close(); await tick();
+421:   webpFailure = true;
+422:   const rejectedEntry = entry('/webp-rejected.mp4');
+423:   const rejectedLoader = new NetworkMediaLoader(context, server, () => {}); rejectedLoader.reset([rejectedEntry], false);
+424:   assert.equal(await rejectedLoader.load(rejectedEntry), null, 'WebP encode failure never falls back to JPEG');
+425:   const rejectedKey = await cache.key(server, rejectedEntry);
+426:   assert.equal((await new NetworkMediaCache(context, 1).get(rejectedKey)).imageData, null);
+427:   assert.ok(!fs.existsSync(path.join(context.filesDir, 'network-media', rejectedKey + '.jpg')));
+428:   assert.equal(thumbnails.get(await thumbnails.key(server, rejectedEntry, policy.plan(10000, 640, 360))), null);
+429:   webpFailure = false; rejectedLoader.close(); await tick();
+430:   assert.equal(opened, closed, 'including delayed setup, all readers closed');
+
+scripts/check-network-media-list.cjs
+431:   const { NetworkServerStore } = load(path.join(serviceDir, 'NetworkServerStore.ets'));
+432:   const normalInspect = Probe.prototype.inspect;
+433:   for (const [name, imageData, numbers, expected] of [
+434:     ['missing', null, [0, 0, 0], [12000, 1920, 1080]],
+435:     ['corrupt', new Uint8Array([0, 0]).buffer, [9000, 0, 0], [9000, 1920, 1080]],
+436:     ['dimensions', null, [0, 1280, 720], [12000, 1280, 720]],
+437:     ['incomplete-dimensions', null, [0, 640, 0], [12000, 1920, 1080]]
+438:   ]) {
+439:     const retryEntry = entry('/retry-' + name + '.mp4'), retryKey = await cache.key(server, retryEntry);
+440:     await cache.put(retryKey, new CachedNetworkMedia(12000, 1920, 1080, imageData));
+441:     Probe.prototype.inspect = async function() { const result = await normalInspect.call(this);
+442:       return { ...result, durationMs: numbers[0], width: numbers[1], height: numbers[2] }; };
+443:     const retryUpdates = [];
+444:     const retryLoader = new NetworkMediaLoader(context, server,
+445:       (e, info) => retryUpdates.push([info.durationMs, info.width, info.height]));
+446:     retryLoader.reset([retryEntry], false); assert.ok(await retryLoader.load(retryEntry));
+447:     assert.deepEqual(retryUpdates.at(-1), expected, 'thumbnail retry preserves previously known fields: ' + name);
+448:     const retained = await new NetworkMediaCache(context, 1).get(retryKey);
+449:     assert.deepEqual([retained.durationMs, retained.width, retained.height], expected, 'retry retains persistent metadata');
+450:     retryLoader.close(); await tick();
+451:   }
+452:   const timedRetryEntry = entry('/retry-timeout.mp4'), timedRetryKey = await cache.key(server, timedRetryEntry);
+453:   await cache.put(timedRetryKey, new CachedNetworkMedia(12000, 1920, 1080, null));
+454:   Probe.prototype.inspect = async function() { this.partial = true; const result = await normalInspect.call(this);
+455:     return { ...result, durationMs: 0, width: 0, height: 0 }; };
+456:   const timedRetryUpdates = [];
+457:   const timedRetryLoader = new NetworkMediaLoader(context, server,
+458:     (e, info) => timedRetryUpdates.push([info.durationMs, info.width, info.height]));
+459:   timedRetryLoader.reset([timedRetryEntry], false); captureDeadline = true; hold = true;
+460:   const timedRetry = timedRetryLoader.load(timedRetryEntry); await tick(); await tick(); deadline();
+461:   assert.equal(await timedRetry, null); await tick(); await tick();
+462:   assert.ok(timedRetryUpdates.every(values => values.join(',') === '12000,1920,1080'), 'timeout retry preserves known metadata');
+463:   const timedRetained = await new NetworkMediaCache(context, 1).get(timedRetryKey);
+464:   assert.deepEqual([timedRetained.durationMs, timedRetained.width, timedRetained.height], [12000, 1920, 1080]);
+465:   captureDeadline = false; hold = false; unblock(); timedRetryLoader.close(); await tick();
+466:   Probe.prototype.inspect = normalInspect;
+467:   const imageOnlyEntry = entry('/image-only.mp4'), imageOnlyKey = await cache.key(server, imageOnlyEntry);
+468:   await cache.put(imageOnlyKey, new CachedNetworkMedia(12000, 1920, 1080, null));
+469:   const imageOnlyUpdates = [];
+470:   const imageOnlyLoader = new NetworkMediaLoader(context, server, (_entry, info) => imageOnlyUpdates.push(info));
+471:   imageOnlyLoader.reset([imageOnlyEntry], false); hold = true;
+472:   const imageOnlyLoad = imageOnlyLoader.load(imageOnlyEntry); await tick(); await tick();
+473:   assert.equal(imageOnlyUpdates.length, 0, 'metadata-only cache stays hidden while missing image is loading');
+474:   hold = false; unblock(); assert.ok(await imageOnlyLoad);
+475:   assert.equal(imageOnlyUpdates.length, 1, 'metadata-only cache published after missing image completes');
+476:   assert.equal(probeModes.at(-1), 'thumbnail', 'valid metadata cache only extracts the missing thumbnail');
+477:   imageOnlyLoader.close(); await tick();
+478:   unlinkFailure = true;
+479:   await assert.rejects(new NetworkServerStore(context).remove(1), /unlink denied/, 'failed cleanup keeps server deletion retryable');
+480:   assert.equal(sqlite.prepare('SELECT count(*) AS n FROM network_server WHERE id=1').get().n, 1);
+481:   assert.ok(sqlite.prepare('SELECT count(*) AS n FROM network_media_metadata').get().n > 0, 'retain cleanup inventory');
+482:   unlinkFailure = false;
+483:   await new NetworkServerStore(context).remove(1);
+
+entry/src/main/ets/services/NetworkMediaLoader.ets
+107:   private async loadForConsumer(entry: NetworkDirectoryEntry, consumer: MediaConsumer): Promise<image.PixelMap | null> {
+108:     let key: string;
+109:     try { key = await this.cache.key(this.server, entry); } catch (_error) { return null; }
+110:     if (!this.isCurrent(consumer)) return null;
+111:     const cached = await this.cache.get(key);
+112:     if (!this.isCurrent(consumer)) return null;
+113:     if (cached !== null) {
+114:       const plan: ThumbnailPlan = this.thumbnailPolicy.plan(cached.durationMs, cached.width, cached.height);
+115:       try {
+116:         const thumbnailKey: string = await this.thumbnails.key(this.server, entry, plan);
+117:         const encoded: ArrayBuffer | null = this.thumbnails.get(thumbnailKey);
+118:         if (encoded !== null) {
+119:           const currentValue = new CachedNetworkMedia(cached.durationMs, cached.width, cached.height,
+120:             encoded, cached.savedAt, 'webp');
+121:           const thumbnail = await this.decode(currentValue, consumer);
+122:           if (!this.isCurrent(consumer)) return null;
+123:           if (thumbnail !== null) { this.onMetadata(entry, cached); return thumbnail; }
+124:         }
+125:       } catch (_error) {}
+126: 
+127:       if (cached.imageData !== null) {
+128:         const thumbnail = await this.decode(cached, consumer);
+129:         if (!this.isCurrent(consumer)) return null;
+130:         if (thumbnail !== null) { this.onMetadata(entry, cached); return thumbnail; }
+131:         await this.cache.put(key,
+132:           new CachedNetworkMedia(cached.durationMs, cached.width, cached.height, null, cached.savedAt));
+133:       }
+134:     }
+135: 
+136:     if (!this.isCurrent(consumer)) return null;
+137:     if (Date.now() - (this.failures.get(key) ?? 0) < 30000) return null;
+138:     let job: MediaLoadJob | undefined = this.jobs.get(entry.path);
+139:     if (job === undefined) {
+140:       if (this.jobs.size >= 32) return null;
+141:       job = new MediaLoadJob(entry, key, consumer.generation);
+142:       if (cached !== null) job.info = new CachedNetworkMedia(
+143:         cached.durationMs, cached.width, cached.height, null, cached.savedAt);
+144:       this.jobs.set(entry.path, job);
+145:       this.pump();
+146:     }
+147:     const value = await job.result;
+148:     if (value === null || job.cancelled || !this.isCurrent(consumer)) return null;
+149:     const thumbnail = await this.decode(value, consumer);
+150:     if (!this.isCurrent(consumer)) return null;
+151:     this.onMetadata(entry, new CachedNetworkMedia(
+152:       value.durationMs, value.width, value.height, null, value.savedAt));
+153:     return thumbnail;
+154:   }
+155: 
+
+entry/src/main/ets/services/NetworkMediaLoader.ets
+209:   private async run(job: MediaLoadJob): Promise<void> {
+210:     const analysis = new NetworkMediaAnalysisCoordinator(this.context, this.proxy);
+211:     job.analysis = analysis;
+212:     const timer: number = setTimeout(() => this.expire(job), 8000);
+213: 
+214:     try {
+215:       const source: MediaSource = NetworkMediaSourceFactory.fromEntry(this.server, job.entry);
+216:       job.inspecting = true;
+217:       const result: NetworkMediaAnalysisResult = await analysis.inspect(
+218:         source,
+219:         job.info?.durationMs ?? 0,
+220:         job.info?.width ?? 0,
+221:         job.info?.height ?? 0,
+222:         (durationMs: number, width: number, height: number): void => {
+223:           if (job.cancelled || job.expired || job.generation !== this.generation || this.stopped) return;
+224:           job.info = new CachedNetworkMedia(durationMs, width, height, null);
+225:           this.cache.put(job.key, job.info).catch(() => {});
+226:         }
+227:       );
+228:       job.inspecting = false;
+229: 
+230:       if (job.cancelled || job.expired || job.generation !== this.generation || this.stopped) return;
+231: 
+232:       const info = new CachedNetworkMedia(
+233:         result.durationMs || job.info?.durationMs || 0,
+234:         result.width || job.info?.width || 0,
+235:         result.height || job.info?.height || 0,
+236:         null
+237:       );
+
+entry/src/main/ets/analysis/NetworkMediaAnalysisCoordinator.ets
+85:   async inspect(source: MediaSource, durationHintMs: number = 0,
+86:     widthHint: number = 0, heightHint: number = 0,
+87:     onMetadata: (durationMs: number, width: number, height: number, engine: string) => void = () => {}):
+88:     Promise<NetworkMediaAnalysisResult> {
+89:     if (this.closed) return new NetworkMediaAnalysisResult(
+90:       durationHintMs, widthHint, heightHint, null);
+91:     const generation: number = this.cancellationGeneration;
+92: 
+93:     let durationMs: number = Math.max(0, durationHintMs);
+94:     let width: number = Math.max(0, widthHint);
+95:     let height: number = Math.max(0, heightHint);
+96:     let metadataEngine: string = '';
+97: 
+98:     if (durationMs <= 0 || width <= 0 || height <= 0) {
+99:       const result: ProbeResult = await this.probe.probe(source, ProbeRequirement.LIST);
+100:       if (generation !== this.cancellationGeneration || this.closed) {
+101:         return new NetworkMediaAnalysisResult(durationMs, width, height, null);
+102:       }
+103:       if (result.info !== null && result.isUsable()) {
+104:         const values = this.basic(result.info);
+105:         durationMs = values.durationMs || durationMs;
+106:         width = values.width || width;
+107:         height = values.height || height;
+108:         metadataEngine = result.diagnostics.engine;
+109:         onMetadata(durationMs, width, height, metadataEngine);
+110:       }
+111:     }
+112: 
+113:     const plan: ThumbnailPlan = this.thumbnailPolicy.plan(durationMs, width, height);
+114:     const request = new ThumbnailExtractRequest(plan.timeMs, plan.width, plan.height);
