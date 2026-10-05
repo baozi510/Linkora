@@ -6,41 +6,45 @@ Repository: `baozi510/Linkora`
 
 Current branch: `feat/ffmpeg-analyzer-policy-phase3`
 
-Current phase: **FFmpeg Analyzer Production Policy Phase 3 — implementation source unchanged; fresh validation rerun required after reviewed Windows lockfile-EOL normalization.**
+Current phase: **FFmpeg Analyzer Production Policy Phase 3 — latest validation stopped on a reviewed desktop fixture/API mismatch; test-infrastructure correction applied; fresh rerun required.**
 
-Latest remotely published Codex evidence commit:
+Latest remotely visible Codex evidence commit:
 
-`59d626bc647dfe257a60c34feb9f9e02ad9e9165`
+`9f27f20459b4bc2060eff4e20e336a38da6e1aad`
 
-That run tested implementation source:
+That run validated source:
 
 `15db3f8a3e87f75edc209c1919f944f39c0b9fcb`
 
-in an isolated validation clone and correctly preserved the unrelated dirty `main` workspace.
+and correctly self-healed the proven Windows LF→CRLF-only lockfile drift before executing the full default verifier.
 
-### Review of the latest validation stop
+### Review of phase3-rerun-3c stop
 
-`ohpm install` succeeded, then rewrote exactly four tracked lockfiles from LF to CRLF:
+Fresh gate evidence before the stop:
 
-- `entry/oh-package-lock.json5`
-- `linkora_ffmpeg/oh-package-lock.json5`
-- `linkora_proxy/oh-package-lock.json5`
-- `oh-package-lock.json5`
+- architecture fixtures 5/5 PASS;
+- FFmpeg pure 15/15 PASS;
+- analyzer adapter/policy pure 45/45 PASS;
+- native-artifact fixtures 17/17 PASS;
+- ArkUI/persistence/HTTP-range gates reached and passed;
+- old `entry/AnalysisComposition` desktop alias failure did not recur.
 
-The committed evidence proves for all four files:
+The default verifier then stopped in `scripts/check-network-media-list.cjs` because the test fixture declared:
 
-- line content is equal;
-- Git-normalized worktree blob equals the HEAD blob;
-- repository attributes already require `*.json5 text eol=lf`;
-- no dependency graph/content change was observed.
+`{ id, updatedAt, protocol }`
 
-Therefore this is a **validation-environment EOL drift**, not a production code failure and not a dependency-content change.
+while production `NetworkMediaSourceFactory.fromEntry()` now requires `NetworkServerEntry.titleLabel()`.
 
-The blocked run remains historical evidence and is not relabeled PASS.
+The real `NetworkServerEntry` implements `titleLabel()`. The Loader calls the real factory before the mocked analysis coordinator, and its production catch turns the malformed fixture TypeError into a null result; therefore the probe counter remained 0.
 
-For the next run, Codex may self-recover only if it proves the same strict EOL-only condition. It may then restore those four files from HEAD inside the isolated validation checkout, confirm clean state, record the cleanup, and continue. Any real normalized lockfile change still requires STOP.
+Reviewed correction:
 
-Phase 3 remains unaccepted because the latest run stopped before `scripts/verify.ps1`.
+- keep the real `NetworkMediaSourceFactory` in this regression harness;
+- update only the minimal desktop server fixture to expose `titleLabel: () => 'test'`;
+- do not alter production Loader/factory/analyzer behavior;
+- do not weaken the `calls === 1` expectation.
+
+The phase remains unaccepted until a fresh validation reaches the later gates.
 
 ### Durable conversation workflow
 

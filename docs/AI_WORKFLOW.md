@@ -171,6 +171,20 @@ If push is unavailable or rejected, Codex must say `BLOCKED — EVIDENCE NOT PUS
 
 After the evidence commit is visible on the remote validation branch, the user returns to GPT. GPT reviews the actual result, fixes source if needed, and updates durable project state.
 
+### Continuous GPT ↔ Codex review loop
+
+The preferred active-session workflow is:
+
+1. Codex executes the current `docs/CODEX_VALIDATION_TASK.md`, commits/pushes evidence, and reports the remotely visible evidence SHA.
+2. GPT independently fetches the branch and evidence; it does not rely only on Codex's prose diagnosis.
+3. GPT decides whether the stop is a production defect, test-infrastructure defect, environment issue, or acceptance result.
+4. GPT makes only the appropriate reviewed implementation/test-infrastructure/documentation changes.
+5. If another validation round is warranted, GPT creates a new implementation/review commit first, then a docs-only validation-dispatch commit whose task file names the exact source SHA.
+6. GPT replies in the conversation with the new commit SHA(s), task ID and a short READY instruction.
+7. The same Codex conversation may read that reply, fetch the branch again, and treat the latest `docs/CODEX_VALIDATION_TASK.md` as the **only** execution authority for the next round.
+
+Codex must never patch a stopped gate unless the latest task explicitly changes its role. GPT must never convert historical partial results into a new PASS.
+
 A failed validation run remains historical evidence. A later rerun must not relabel unexecuted items from the older run as PASS.
 
 ## End-of-phase durable state

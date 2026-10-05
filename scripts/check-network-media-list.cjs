@@ -216,7 +216,7 @@ const rdb = {
       getLong: c => rows[i][names[c]] || 0, getString: c => rows[i][names[c]] || '', close() {} };
   }
 };
-const server = { id: 1, updatedAt: 2, protocol: 'smb' };
+const server = { id: 1, updatedAt: 2, protocol: 'smb', titleLabel: () => 'test' };
 const entry = (p = '/video.mp4', size = 99) => ({ path: p, displayName: path.basename(p), kind: 'file', size, modifiedAt: 5 });
 const tick = () => new Promise(resolve => setImmediate(resolve));
 async function check() {

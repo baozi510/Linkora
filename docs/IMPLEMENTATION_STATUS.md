@@ -8,21 +8,26 @@ Operational GPT/Codex workflow: `docs/AI_WORKFLOW.md`.
 
 Current branch: `feat/ffmpeg-analyzer-policy-phase3`.
 
-Phase 3 production analyzer policy is implemented in source but is **not yet accepted**.
+Phase 3 production analyzer policy is implemented but **not yet accepted**.
 
-Current implementation source remains:
+Latest evidence commit:
 
-`15db3f8a3e87f75edc209c1919f944f39c0b9fcb`
+`9f27f20459b4bc2060eff4e20e336a38da6e1aad`
 
-Validation history:
+Latest run (`phase3-rerun-3c-eol-self-heal`) successfully handled the known LF→CRLF-only lockfile drift, then reached the full default verifier. Fresh pure/fixture gates passed before the network-media-list regression stopped.
 
-- source `72e74d11a790bd0d258e219e3a8de18f3c59fd17`: stopped at an over-scoped ArkUI static checker; reviewed/fixed.
-- source `81ed0684b273e25afbed056a055ee23aded0b661`: ArkUI gate passed, then desktop Loader harness stopped on unresolved target alias; reviewed/fixed.
-- source `15db3f8a3e87f75edc209c1919f944f39c0b9fcb`: isolated validation setup succeeded; `ohpm install` then rewrote four lockfiles LF→CRLF only. Evidence commit `59d626bc647dfe257a60c34feb9f9e02ad9e9165` proves normalized blobs/content unchanged. No default verifier/runtime gate ran.
+Independent review confirms the failure is a desktop fixture/API mismatch:
 
-The LF→CRLF stop is classified as **non-semantic validation-environment drift**. The durable workflow now permits Codex to self-recover from this exact class only after strict normalized-blob/content verification and only inside an isolated validation checkout.
+- production `NetworkMediaSourceFactory.fromEntry()` calls `server.titleLabel()`;
+- real `NetworkServerEntry` defines that method;
+- the desktop harness's minimal `server` object omitted it;
+- Loader catches that malformed-fixture exception before analysis, explaining probe count 0.
 
-Current Phase 3 invariants remain unchanged:
+The reviewed fix updates only the test fixture to provide `titleLabel()`. Production source and Phase 3 routing remain unchanged.
+
+A fresh validation run is required; no historical PASS may substitute for rerun evidence.
+
+Current Phase 3 invariants remain:
 
 - LIST = System primary with controlled FFmpeg fallback for resolvable file-like inputs;
 - DETAIL / ADVANCED = FFmpeg primary, System fallback only when FFmpeg is unusable;
@@ -30,10 +35,8 @@ Current Phase 3 invariants remain unchanged:
 - remote thumbnail = FFmpeg primary + existing System fallback;
 - HLS / DASH / LOCAL_DOCUMENT = System-only;
 - WebP/cache/time policy unchanged;
-- PlaybackBackendSelector and Auto/System/MPV policy unchanged;
-- performance ranking remains deferred to real arm64 hardware.
-
-A fresh Codex validation round must use the current `docs/CODEX_VALIDATION_TASK.md`. Old partial results cannot be spliced into a new PASS.
+- playback routing unchanged;
+- performance ranking deferred to real arm64 hardware.
 
 
 This file is the current execution status for the architecture migration.

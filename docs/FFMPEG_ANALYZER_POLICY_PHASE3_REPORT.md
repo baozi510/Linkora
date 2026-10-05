@@ -1,9 +1,27 @@
 # FFmpeg Analyzer Production Policy Phase 3 Report
 
-> Status: FAIL — NETWORK MEDIA LOADER; fresh default verifier stops at desktop fixture assertion; later build/runtime gates NOT RUN.
+> Status: REVIEWED — phase3-rerun-3c failure traced to stale desktop server fixture; fixture corrected; fresh rerun required.
 > Branch: `feat/ffmpeg-analyzer-policy-phase3`
 > Codex role: test/report only; no source fixes.
 > Date: 2026-10-05 (Asia/Shanghai).
+
+## GPT review after phase3-rerun-3c network-media-loader stop
+
+Review date: 2026-10-05.
+
+Ruling:
+
+- The run correctly applied the approved EOL-only self-heal and returned the isolated validation checkout to clean state before the verifier.
+- The old target-alias failure is resolved: the desktop harness reached Loader assertions.
+- The failing `calls === 1` assertion is explained by a stale test fixture, not by proven production analyzer behavior.
+- Production `NetworkMediaSourceFactory.fromEntry()` calls `server.titleLabel()`.
+- Real `NetworkServerEntry` implements `titleLabel()`.
+- The desktop harness fixture only provided `id`, `updatedAt` and `protocol`, so Loader failed before `analysis.inspect()`; Loader's catch converted the malformed fixture exception into the observed null path and probe count 0.
+- The appropriate correction is to add `titleLabel: () => 'test'` to that minimal fixture while retaining the real `NetworkMediaSourceFactory` call and the existing probe-count expectation.
+- No production ArkTS/C/C++ source, analyzer routing, playback routing, WebP policy, performance policy or Direct I/O design is changed by this review.
+- All later build/simulator/runtime gates from the stopped run remain NOT RUN and must be executed fresh.
+
+The failed run below remains historical evidence and is not relabeled PASS.
 
 ## Current validation — phase3-rerun-3c-eol-self-heal
 
