@@ -81,25 +81,22 @@ signingConfigs: []
 
 Therefore a runtime environment must provide a supported development signing/install path externally. Do not commit private keys or weaken tracked signing/build configuration merely to install the application.
 
-Persistent network-media images are stored by production code under:
+Current production cache responsibilities are split:
 
 ```text
-<context.filesDir>/network-media/
+NetworkThumbnailCache
+  -> <context.cacheDir>/network-thumbnails/<serverId>/<thumbnailKey>.webp
+  -> current generated thumbnail cache
+
+NetworkMediaCache
+  -> RDB network_media_metadata
+  -> <context.filesDir>/network-media/        # compatibility image store
+  -> <context.cacheDir>/network-media/        # legacy metadata/JPEG migration path
 ```
 
-New persistent thumbnails are expected to use:
+For the current `NetworkMediaLoader`, newly generated analysis thumbnails are written through `NetworkThumbnailCache` as WebP. Metadata is persisted separately through `NetworkMediaCache`.
 
-```text
-<cacheKey>.webp
-```
-
-Legacy JPEG read compatibility may still read:
-
-```text
-<cacheKey>.jpg
-```
-
-but Phase 3 must not introduce a new JPEG-generation fallback.
+Legacy JPEG compatibility may still read/migrate existing `.jpg` files, but Phase 3 must not introduce a new JPEG-generation fallback.
 
 Production analysis logging currently emits the safe diagnostic shape:
 
@@ -603,30 +600,33 @@ Do not create unrelated SFTP infrastructure solely for this optional case.
 
 ## 21. WebP/cache verification
 
-The production cache implementation uses:
+Current generated thumbnails are expected under:
+
+```text
+<context.cacheDir>/network-thumbnails/<serverId>/<thumbnailKey>.webp
+```
+
+Metadata persistence is separate. `NetworkMediaCache` stores metadata in the app RDB and keeps compatibility image/legacy migration paths under:
 
 ```text
 <context.filesDir>/network-media/
-```
-
-Expected new thumbnail extension:
-
-```text
-.webp
+<context.cacheDir>/network-media/
 ```
 
 Runtime evidence should prove as much of the following as the environment permits:
 
-- a new WebP file exists after successful thumbnail generation;
-- file is non-empty and decodable;
-- no sibling new `.jpg` fallback was generated;
+- a new `network-thumbnails/<serverId>/<thumbnailKey>.webp` file exists after successful thumbnail generation;
+- the WebP is non-empty and decodable;
+- no new JPEG fallback appears in the current or compatibility image paths;
 - reopen uses the persisted thumbnail;
-- metadata-only records survive thumbnail failure where contract permits;
-- unsupported/both-fail case leaves no invalid image.
+- metadata remains available independently of the thumbnail file;
+- metadata-only state survives thumbnail failure where the contract permits;
+- unsupported/both-fail case leaves no invalid generated thumbnail.
 
 Do not commit the user's private cache contents wholesale. Prefer a sanitized inventory containing:
 
-- sanitized cache-key prefix or hash;
+- sanitized key prefix or one-way hash;
+- logical cache area (`network-thumbnails`, compatibility `network-media`, legacy `network-media`);
 - extension;
 - byte size;
 - decode success/failure;
