@@ -8,35 +8,49 @@ Operational GPT/Codex workflow: `docs/AI_WORKFLOW.md`.
 
 Current branch: `feat/ffmpeg-analyzer-policy-phase3`.
 
-Phase 3 production analyzer policy is implemented but **not yet accepted**.
+Phase 3 implementation source:
+
+`44d0f62816b73ebd3bab8069be5b74f51e2c6999`
 
 Latest evidence commit:
 
-`c50368e6e0da792191819608e43e5cf90ca91fee`
+`e95feef35fa2541322216f9ce9336da3cad9060f`
 
-Latest run (`phase3-rerun-3f-probe-wrapper-forwarding`) freshly passes the complete desktop network-media Loader/cache/lifecycle harness and MPV mapping, then reaches real Hvigor ArkTS compilation.
+### Acceptance status
 
-Compilation fails at `HarmonyAnalysisInputs.ets` because ArkTS rejects raw `throw error` from an untyped catch value.
+**Build/static/pure acceptance: PASS.**
 
-Reviewed correction keeps the late native setup cleanup wait, then propagates through the existing typed analysis boundary:
+Fresh phase3-rerun-3g evidence establishes:
 
-`throw operation.failure(error as Object, AnalysisErrorCode.RESOLVE_FAILED)`
+- default -> simulator -> immediate-default sequence all exit 0;
+- ArkTS compilation PASS;
+- Hypium 209/209 PASS twice;
+- all required Debug/Release HAR/HAP builds PASS twice;
+- exact-nine AArch64 production native audit PASS twice;
+- simulator native whitelist/ABI PASS;
+- complete desktop Loader/cache/lifecycle and MPV harnesses PASS twice;
+- Phase 3 policy pure suite and supplemental ADVANCED/error-boundary checks PASS;
+- typed remote-open failure boundary compiles and preserves tested cleanup/cancellation semantics.
 
-This preserves cancellation mapping and existing `AnalysisError` values while satisfying the ArkTS throw restriction. Regression source checks now protect both the cleanup wait and typed rethrow.
+**Production runtime acceptance: BLOCKED — TEST ENVIRONMENT.**
 
-A fresh validation run is required. No historical PASS result substitutes for rerun evidence.
+No HarmonyOS target is connected (`hdc list targets = [Empty]`), so production UI/native runtime cases remain NOT RUN.
+
+No implementation defect is currently known from fresh validation. No source change is justified by phase3-rerun-3g.
+
+Phase 3 must not be marked fully accepted until the production runtime gate is executed on a suitable target. Historical build/static PASS may be referenced as prior evidence, but any future runtime task must report its own exact environment and runtime observations.
 
 Current Phase 3 invariants remain unchanged:
 
-- LIST = System primary with controlled FFmpeg fallback for resolvable file-like inputs;
-- DETAIL / ADVANCED = FFmpeg primary, System fallback only when FFmpeg is unusable;
-- metadata and thumbnail responsibilities are separate;
-- complete cached metadata remains authoritative during thumbnail-only repair;
-- no System+FFmpeg field merger;
-- remote thumbnail = FFmpeg primary + System fallback;
-- HLS / DASH / LOCAL_DOCUMENT = System-only;
-- SFTP trust remains storage-owned;
-- WebP/cache/time and playback routing unchanged;
+- LIST System-first with controlled FFmpeg fallback for file-like sources;
+- DETAIL/ADVANCED FFmpeg-first, System fallback only when FFmpeg unusable;
+- no field merger;
+- complete cached metadata authoritative during thumbnail-only repair;
+- remote thumbnails FFmpeg-first + System fallback;
+- HLS/DASH/LOCAL_DOCUMENT System-only;
+- SFTP trust storage-owned;
+- common WebP/cache/time policy unchanged;
+- playback routing unchanged;
 - performance ranking deferred to real arm64 hardware.
 
 

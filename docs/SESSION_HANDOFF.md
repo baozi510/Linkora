@@ -6,42 +6,53 @@ Repository: `baozi510/Linkora`
 
 Current branch: `feat/ffmpeg-analyzer-policy-phase3`
 
-Current phase: **FFmpeg Analyzer Production Policy Phase 3 — desktop Loader/cache/lifecycle harness now passes; latest validation stopped at a real ArkTS compile error in the late-setup cleanup path; source correction applied; fresh rerun required.**
+Current phase: **FFmpeg Analyzer Production Policy Phase 3 — build/static/pure acceptance achieved; production runtime acceptance is blocked only by missing HarmonyOS runtime environment.**
 
 Latest remotely visible Codex evidence commit:
 
-`c50368e6e0da792191819608e43e5cf90ca91fee`
+`e95feef35fa2541322216f9ce9336da3cad9060f`
 
-That run validated source `0d87488dc92f3cd8bc77319ec61197520695597e`.
+Implementation source validated:
 
-### Review of phase3-rerun-3f build stop
+`44d0f62816b73ebd3bab8069be5b74f51e2c6999`
 
-Freshly proven before the stop:
+### GPT review of phase3-rerun-3g
 
-- whole network-media Loader/cache/lifecycle desktop harness reached both normal PASS markers;
-- all three temporary Probe wrappers exercised with argument forwarding;
-- metadata/thumbnail retry separation cases passed;
-- MPV event mapping 5/5 passed;
-- architecture fixtures 5/5, FFmpeg pure 15/15, analyzer/policy 45/45 and native-artifact fixtures 17/17 passed.
+Fresh evidence independently reviewed:
 
-The verifier then reached real Hvigor ArkTS compilation and failed at:
+- default verifier PASS;
+- simulator verifier PASS;
+- immediate post-simulator default verifier PASS;
+- ArkTS unit compilation PASS twice;
+- Hypium 209/209 PASS twice, Failure/Error/Ignore = 0;
+- Debug/Release four HARs and default HAPs PASS twice;
+- exact-nine AArch64 native ABI audit PASS for Debug and Release twice;
+- simulator HAP whitelist/ABI PASS with only x86_64 `liblinkora_ffmpeg.so`;
+- architecture fixtures 5/5, FFmpeg pure 15/15, analyzer/policy 45/45, native artifact fixtures 17/17, Loader/cache/lifecycle normal markers and MPV 5/5 PASS in both default runs;
+- supplemental desktop functional checks 10/10 PASS for ADVANCED policy/error-boundary/System-only contracts;
+- no `arkts-limited-throw` recurrence;
+- all protected files/submodules remain unchanged outside authorized report/evidence.
 
-`HarmonyAnalysisInputs.ets:34`
+No failed gate remains in the build/static/pure validation chain.
 
-because `catch (error)` was followed by raw `throw error`. ArkTS `arkts-limited-throw` rejects throwing an arbitrary caught value.
+### Remaining acceptance boundary
 
-Reviewed production correction:
+Phase 3 is **not yet fully accepted for production runtime** because both initial and final `hdc list targets` returned `[Empty]`.
 
-- retain `await setupSettled.catch(() => {})` before propagating the failure;
-- replace raw rethrow with `throw operation.failure(error as Object, AnalysisErrorCode.RESOLVE_FAILED)`;
-- this reuses the existing analysis-domain error boundary;
-- if the operation was cancelled, `operation.failure` still maps to `CANCELLED`;
-- otherwise existing `AnalysisError` values are preserved and other errors map to `RESOLVE_FAILED`;
-- desktop regression source checks now forbid raw `throw error` and require the typed mapping after cleanup.
+The following production cases remain unexecuted and cannot be promoted from desktop/synthetic evidence:
 
-No playback, thumbnail routing, storage trust, WebP, performance or Direct I/O policy is changed.
+- real Network page/list -> NetworkMediaLoader -> NetworkMediaAnalysisCoordinator;
+- WebDAV H.264/AAC MP4;
+- WebDAV HEVC/MKV;
+- real FFmpeg frame -> common WebP -> persistent cache/reopen;
+- natural FFmpeg thumbnail failure -> System fallback;
+- both thumbnail engines unavailable;
+- real navigation/refresh/cancel/stale-generation behavior;
+- actual proxy/source cleanup and 20-cycle lifecycle;
+- HLS/DASH/LOCAL_DOCUMENT production user flows;
+- target-native ADVANCED probe where applicable.
 
-The phase remains unaccepted until fresh validation passes compilation and later gates.
+Therefore the next validation task must not rerun the already-green build chain merely because the current machine has no target. The repository is waiting for a suitable HarmonyOS runtime target and deployable test environment.
 
 ### Durable conversation workflow
 
