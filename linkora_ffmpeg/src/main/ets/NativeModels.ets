@@ -27,6 +27,8 @@ export class NativeProbeResult {
 export class NativeFrameResult {
   width: number = 0; height: number = 0; pixelFormat: string = 'rgba_8888';
   timeMs: number = 0; pixels: ArrayBuffer = new ArrayBuffer(0);
+  openInputMs: number = 0; findStreamInfoMs: number = 0; decoderInitMs: number = 0;
+  seekMs: number = 0; decodeMs: number = 0; scaleMs: number = 0;
 }
 export interface NativeFfmpegApi {
   probe(requestId: string, input: string, timeoutMs: number): Promise<NativeProbeResult>;

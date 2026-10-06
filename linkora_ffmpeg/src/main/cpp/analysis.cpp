@@ -1,6 +1,7 @@
 #include "analysis.h"
 #include <memory>
 #include <cstring>
+#include <chrono>
 #include <sys/stat.h>
 extern "C" {
 #include <libavformat/avformat.h>
@@ -32,6 +33,8 @@ std::string Text(const char *value, size_t max = 128) { return value ? std::stri
 class Input {
 public:
     AVFormatContext *context = nullptr;
+    int64_t openMs = 0;
+    int64_t streamInfoMs = 0;
     Input(const std::string &input, RequestState &state, int timeout) {
         Check(state);
         // FIFO/device opens cannot reliably be interrupted by the file protocol.
@@ -54,10 +57,15 @@ public:
             av_dict_set_int(&options, "analyzeduration", 5 * AV_TIME_BASE, 0) < 0) {
             av_dict_free(&options); avformat_close_input(&context); Fail("FF_SIZE_REJECTED");
         }
+        const auto t0 = std::chrono::steady_clock::now();
         int result = avformat_open_input(&context, input.c_str(), nullptr, &options);
         av_dict_free(&options);
+        const auto t1 = std::chrono::steady_clock::now();
+        openMs = std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0).count();
         if (result < 0) { avformat_close_input(&context); Check(state); Fail("FF_OPEN_FAILED", result); }
         result = avformat_find_stream_info(context, nullptr);
+        const auto t2 = std::chrono::steady_clock::now();
+        streamInfoMs = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
         if (result < 0) { avformat_close_input(&context); Check(state); Fail("FF_STREAM_INFO_FAILED", result); }
         try { Check(state); } catch (...) { avformat_close_input(&context); throw; }
     }
@@ -139,6 +147,7 @@ Probe ProbeInput(const std::string &input, RequestState &state, int timeoutMs) {
 
 Frame ExtractFrame(const std::string &input, RequestState &state, int timeoutMs, int64_t timeMs, int maxWidth, int maxHeight) {
     Input source(input, state, timeoutMs); auto *format = source.context;
+    const auto t_dec_init_start = std::chrono::steady_clock::now();
     const AVCodec *decoder = nullptr;
     const int index = av_find_best_stream(format, AVMEDIA_TYPE_VIDEO, -1, -1, &decoder, 0);
     if (index == AVERROR_DECODER_NOT_FOUND) Fail("FF_DECODER_UNAVAILABLE", index);
@@ -150,19 +159,27 @@ Frame ExtractFrame(const std::string &input, RequestState &state, int timeoutMs,
     if (status < 0) Fail("FF_DECODER_UNAVAILABLE", status);
     codec->thread_count = 1; codec->max_pixels = 32 * 1024 * 1024;
     status = avcodec_open2(codec.get(), decoder, nullptr); if (status < 0) Fail("FF_DECODER_UNAVAILABLE", status);
+    const auto t_dec_init_end = std::chrono::steady_clock::now();
+    const int64_t decoderInitMs = std::chrono::duration_cast<std::chrono::milliseconds>(t_dec_init_end - t_dec_init_start).count();
+
     const int64_t start = stream->start_time == AV_NOPTS_VALUE ? 0 : stream->start_time;
     const int64_t offset = av_rescale_q(timeMs, AVRational{1, 1000}, stream->time_base);
     if (offset < 0 || start > INT64_MAX - offset) Fail("FF_DECODE_FAILED");
     const int64_t target = offset + start;
+    int64_t seekMs = 0;
     if (timeMs > 0) {
+        const auto t_seek_start = std::chrono::steady_clock::now();
         status = av_seek_frame(format, index, target, AVSEEK_FLAG_BACKWARD);
         if (status < 0) { Check(state); Fail("FF_DECODE_FAILED", status); }
         avcodec_flush_buffers(codec.get());
+        const auto t_seek_end = std::chrono::steady_clock::now();
+        seekMs = std::chrono::duration_cast<std::chrono::milliseconds>(t_seek_end - t_seek_start).count();
     }
     std::unique_ptr<AVFrame, decltype(&FreeFrame)> frame(av_frame_alloc(), FreeFrame), last(av_frame_alloc(), FreeFrame);
     std::unique_ptr<AVPacket, decltype(&FreePacket)> packet(av_packet_alloc(), FreePacket);
     if (!frame || !last || !packet) Fail("FF_SIZE_REJECTED");
     bool drained = false, selected = false;
+    const auto t_decode_start = std::chrono::steady_clock::now();
     while (!selected) {
         Check(state); status = avcodec_receive_frame(codec.get(), frame.get());
         if (status == 0) {
@@ -184,6 +201,8 @@ Frame ExtractFrame(const std::string &input, RequestState &state, int timeoutMs,
         status = avcodec_send_packet(codec.get(), drained ? nullptr : packet.get());
         av_packet_unref(packet.get()); if (status < 0) Fail("FF_DECODE_FAILED", status);
     }
+    const auto t_decode_end = std::chrono::steady_clock::now();
+    const int64_t decodeMs = std::chrono::duration_cast<std::chrono::milliseconds>(t_decode_end - t_decode_start).count();
     Check(state);
     const auto sar = av_guess_sample_aspect_ratio(format, stream, frame.get());
     const auto dimensions = Fit(frame->width, frame->height, maxWidth, maxHeight, sar.num > 0 && sar.den > 0 ? av_q2d(sar) : 1);
@@ -193,11 +212,19 @@ Frame ExtractFrame(const std::string &input, RequestState &state, int timeoutMs,
     const bool safeStamp = stamp != AV_NOPTS_VALUE && !(start < 0 && stamp > INT64_MAX + start);
     result.timeMs = safeStamp && stamp >= start ? Milliseconds(stamp - start, stream->time_base) : 0;
     result.pixels.resize(bytes);
+    result.openInputMs = source.openMs;
+    result.findStreamInfoMs = source.streamInfoMs;
+    result.decoderInitMs = decoderInitMs;
+    result.seekMs = seekMs;
+    result.decodeMs = decodeMs;
+    const auto t_scale_start = std::chrono::steady_clock::now();
     std::unique_ptr<SwsContext, decltype(&sws_freeContext)> scale(sws_getContext(frame->width, frame->height,
         static_cast<AVPixelFormat>(frame->format), result.width, result.height, AV_PIX_FMT_RGBA, SWS_BILINEAR, nullptr, nullptr, nullptr), sws_freeContext);
     if (!scale) Fail("FF_SIZE_REJECTED");
     uint8_t *output[] = {result.pixels.data(), nullptr, nullptr, nullptr}; int stride[] = {result.width * 4, 0, 0, 0};
     status = sws_scale(scale.get(), frame->data, frame->linesize, 0, frame->height, output, stride);
+    const auto t_scale_end = std::chrono::steady_clock::now();
+    result.scaleMs = std::chrono::duration_cast<std::chrono::milliseconds>(t_scale_end - t_scale_start).count();
     if (status != result.height) Fail("FF_DECODE_FAILED");
     Check(state); return result;
 }

@@ -82,6 +82,12 @@ napi_value FrameValue(napi_env env, const Frame &frame) {
     if (!bytes || frame.pixels.size() != bytes) throw Failure{"FF_SIZE_REJECTED", "Invalid RGBA output size"};
     auto value = Object(env); Number(env, value, "width", frame.width); Number(env, value, "height", frame.height);
     Number(env, value, "timeMs", frame.timeMs); String(env, value, "pixelFormat", "rgba_8888");
+    Number(env, value, "openInputMs", frame.openInputMs);
+    Number(env, value, "findStreamInfoMs", frame.findStreamInfoMs);
+    Number(env, value, "decoderInitMs", frame.decoderInitMs);
+    Number(env, value, "seekMs", frame.seekMs);
+    Number(env, value, "decodeMs", frame.decodeMs);
+    Number(env, value, "scaleMs", frame.scaleMs);
     void *data = nullptr; napi_value buffer;
     Checked(napi_create_arraybuffer(env, bytes, &data, &buffer)); std::memcpy(data, frame.pixels.data(), bytes);
     Checked(napi_set_named_property(env, value, "pixels", buffer)); return value;

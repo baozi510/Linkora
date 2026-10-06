@@ -32,15 +32,58 @@ export class NetworkFileProxyDiagnostics {
   readonly rangeRequests: number;
   readonly bytesRead: number;
   readonly releasedSources: number;
+  readonly rangeTraces: string[];
+  readonly readTraces: Array<[number, number]>;
 
   constructor(activeSources: number, activeClients: number, readRequests: number,
-    bytesRead: number, releasedSources: number, rangeRequests: number = 0) {
+    bytesRead: number, releasedSources: number, rangeRequests: number = 0,
+    rangeTraces: string[] = [], readTraces: Array<[number, number]> = []) {
     this.activeSources = Math.max(0, activeSources);
     this.activeClients = Math.max(0, activeClients);
     this.readRequests = Math.max(0, readRequests);
     this.rangeRequests = Math.max(0, rangeRequests);
     this.bytesRead = Math.max(0, bytesRead);
     this.releasedSources = Math.max(0, releasedSources);
+    this.rangeTraces = rangeTraces.slice(0);
+    this.readTraces = readTraces.slice(0);
+  }
+
+  uniqueByteSpan(): number {
+    if (this.readTraces.length === 0) return 0;
+    const intervals: Array<[number, number]> = this.readTraces
+      .map((r: [number, number]): [number, number] => [r[0], r[0] + r[1]])
+      .sort((a: [number, number], b: [number, number]): number => a[0] - b[0]);
+    let mergedLen = 0;
+    let curStart = intervals[0][0];
+    let curEnd = intervals[0][1];
+    for (let i = 1; i < intervals.length; i++) {
+      if (intervals[i][0] <= curEnd) {
+        curEnd = Math.max(curEnd, intervals[i][1]);
+      } else {
+        mergedLen += curEnd - curStart;
+        curStart = intervals[i][0];
+        curEnd = intervals[i][1];
+      }
+    }
+    mergedLen += curEnd - curStart;
+    return mergedLen;
+  }
+
+  overlappingBytes(): number {
+    return Math.max(0, this.bytesRead - this.uniqueByteSpan());
+  }
+
+  headRereads(): number {
+    let passed1Mb = false;
+    let count = 0;
+    for (const r of this.readTraces) {
+      if (r[0] >= 1048576) {
+        passed1Mb = true;
+      } else if (passed1Mb && r[0] < 1048576) {
+        count++;
+      }
+    }
+    return count;
   }
 }
 
@@ -52,6 +95,8 @@ class ProxySource {
   readRequests: number = 0;
   rangeRequests: number = 0;
   bytesRead: number = 0;
+  readonly rangeTraces: string[] = [];
+  readonly readTraces: Array<[number, number]> = [];
 
   constructor(source: RandomAccessSource, contentType: string) {
     this.source = source;
@@ -68,6 +113,7 @@ class ProxySource {
       const data: ArrayBuffer = await this.source.readAt(offset, length);
       this.readRequests++;
       this.bytesRead += data.byteLength;
+      this.readTraces.push([offset, data.byteLength]);
       return data;
     });
     this.tail = operation.then(() => {}, () => {});
@@ -124,6 +170,8 @@ export class NetworkFileProxy {
   private releasedRangeRequests: number = 0;
   private releasedBytesRead: number = 0;
   private releasedSources: number = 0;
+  private releasedRangeTraces: string[] = [];
+  private releasedReadTraces: Array<[number, number]> = [];
   private readonly sources: Map<string, ProxySource> = new Map();
   private readonly clients: Map<number, ProxyClient> = new Map();
   private readonly releases: Set<Promise<void>> = new Set();
@@ -177,10 +225,14 @@ export class NetworkFileProxy {
     let activeReadRequests: number = 0;
     let activeRangeRequests: number = 0;
     let activeBytesRead: number = 0;
+    const allRangeTraces: string[] = this.releasedRangeTraces.slice(0);
+    const allReadTraces: Array<[number, number]> = this.releasedReadTraces.slice(0);
     this.sources.forEach((source: ProxySource) => {
       activeReadRequests += source.readRequests;
       activeRangeRequests += source.rangeRequests;
       activeBytesRead += source.bytesRead;
+      allRangeTraces.push(...source.rangeTraces);
+      allReadTraces.push(...source.readTraces);
     });
     return new NetworkFileProxyDiagnostics(
       this.sources.size,
@@ -188,7 +240,9 @@ export class NetworkFileProxy {
       this.releasedReadRequests + activeReadRequests,
       this.releasedBytesRead + activeBytesRead,
       this.releasedSources,
-      this.releasedRangeRequests + activeRangeRequests
+      this.releasedRangeRequests + activeRangeRequests,
+      allRangeTraces,
+      allReadTraces
     );
   }
 
@@ -285,6 +339,7 @@ export class NetworkFileProxy {
       resolveHttpByteRange(request[0] === 'HEAD' ? '' : range, proxySource.size());
     if (request[0] === 'GET' && seenRange && result.status === 206) {
       proxySource.rangeRequests++;
+      proxySource.rangeTraces.push(range);
     }
     if (result.status === 400 || result.status === 416) {
       await this.respond(client, result.status, 0, result.contentRange); return;
@@ -362,6 +417,8 @@ export class NetworkFileProxy {
     this.releasedReadRequests += proxySource.readRequests;
     this.releasedRangeRequests += proxySource.rangeRequests;
     this.releasedBytesRead += proxySource.bytesRead;
+    this.releasedRangeTraces.push(...proxySource.rangeTraces);
+    this.releasedReadTraces.push(...proxySource.readTraces);
     this.releasedSources++;
     proxySource.source.cancel();
     const operation: Promise<void> = this.dispose(proxySource);

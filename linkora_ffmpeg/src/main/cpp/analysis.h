@@ -20,7 +20,10 @@ struct Probe {
     std::vector<Chapter> chapters;
     std::map<std::string, std::string> tags;
 };
-struct Frame { int width = 0, height = 0; double timeMs = 0; std::vector<uint8_t> pixels; };
+struct Frame {
+    int width = 0, height = 0; double timeMs = 0; std::vector<uint8_t> pixels;
+    int64_t openInputMs = 0, findStreamInfoMs = 0, decoderInitMs = 0, seekMs = 0, decodeMs = 0, scaleMs = 0;
+};
 struct Failure { std::string code, detail; };
 Probe ProbeInput(const std::string &input, RequestState &state, int timeoutMs);
 Frame ExtractFrame(const std::string &input, RequestState &state, int timeoutMs,
