@@ -1729,50 +1729,256 @@ subtitle correctness
 
 ---
 
-# 51. 固定测试媒体矩阵
+# 51. 固定 Media Capability Corpus
 
-建立永久测试集：
+建立**一套永久媒体能力测试集**，由 Analysis、Playback、Advanced AV 共用。
+
+原则：
 
 ```text
-MP4 H264 AAC
-MP4 HEVC AAC
-
-MKV H264
-MKV HEVC
-HEVC Main10
-
-HDR10
-HLG
-Dolby Vision
-
-AC3
-EAC3
-
-DTS
-DTS-HD MA
-
-TrueHD
-
-ASS
-PGS
-
-multiple audio tracks
-multiple subtitles
-
-long GOP
-
-4K remux
-
-broken / unusual container
+同一 fixture
+   ↓
+System metadata
+FFmpeg metadata
+System thumbnail
+FFmpeg thumbnail
+System playback
+MPV playback
+Advanced AV behavior
 ```
 
-来源：
+**统一 corpus，独立判定。**
+
+禁止：
+
+```text
+MPV 能播放
+→ 自动推导 FFmpeg metadata / thumbnail PASS
+```
+
+也禁止：
+
+```text
+FFmpeg 能 probe
+→ 自动推导 MPV / System playback PASS
+```
+
+每个能力必须实际执行并分别记录：
+
+```text
+PASS
+PARTIAL / DEGRADED
+UNSUPPORTED
+FAIL
+NOT APPLICABLE
+NOT RUN
+```
+
+## 51.1 分级门槛
+
+### Tier A — Release Gate / 主流必须 PASS
+
+目标是当前主流容器、编码和 Linkora 明确承诺的核心能力。
+
+优先覆盖：
+
+```text
+Containers:
+MP4 / M4V / MOV
+Matroska / MKV
+WebM
+MPEG-TS / TS
+M2TS
+
+Video:
+H.264 / AVC Baseline/Main/High
+HEVC / H.265 Main
+HEVC Main10
+AV1
+VP9
+
+HDR:
+HDR10
+HLG
+common Dolby Vision profiles
+
+Audio:
+AAC LC
+HE-AAC
+MP3
+Opus
+Vorbis
+FLAC
+ALAC
+PCM
+AC-3
+E-AC-3
+DTS core
+DTS-HD HRA
+DTS-HD MA
+TrueHD
+
+Subtitle:
+SRT
+ASS
+PGS
+```
+
+Tier A 中与某个 backend 明确不兼容的项目，可以得到 `UNSUPPORTED`，但最终 Auto/产品路径必须有符合产品承诺的可用 backend 或明确降级策略。
+
+### Tier B — 现实存量 / 应尽量兼容
+
+覆盖仍常见于旧媒体库、DVD/Blu-ray rip、NAS 归档的格式：
+
+```text
+Containers:
+AVI
+MPEG-PS / MPG
+VOB
+3GP / 3G2
+FLV
+ASF / WMV
+OGG / OGM
+
+Video:
+MPEG-2 Video
+MPEG-4 Part 2 / DivX / Xvid
+VC-1
+VP8
+MJPEG
+ProRes
+Theora
+FFV1
+
+Audio:
+WMA
+WMA Lossless
+APE
+WavPack
+TTA
+Musepack
+AMR-NB
+AMR-WB
+Speex
+MLP
+```
+
+Tier B 失败需要记录和分析，但可依据真实使用价值、平台限制和 fallback 能力判定为非发布阻塞。
+
+### Tier C — Legacy / Rare / Emerging Compatibility Observation
+
+过时、极少见或尚未成为主流的格式仍应尽量进入测试：
+
+```text
+RealMedia / RM / RMVB / RealVideo
+H.263
+Cinepak
+Indeo
+Sorenson Video
+legacy Microsoft MPEG-4 variants
+ATRAC family
+VVC / H.266
+AC-4
+MPEG-H Audio
+other owned/legally usable rare fixtures
+```
+
+Tier C **不要求必须播放或分析成功**。
+
+最低要求是：
+
+```text
+明确 PASS / UNSUPPORTED / FAIL
+不 crash
+不 ANR
+不无限等待
+不无限 retry
+不错误整文件下载
+不生成损坏 cache
+不污染 database
+资源最终释放
+```
+
+## 51.2 组合策略
+
+不要做所有 container × video × audio 的全笛卡尔积。
+
+采用：
+
+```text
+每个主要 container 至少一个代表 fixture
++
+每个 video codec/profile 至少一个 fixture
++
+每个 audio codec 至少一个 fixture
++
+高风险组合额外覆盖
+```
+
+重点组合包括但不限于：
+
+```text
+MP4 + H264 + AAC
+MP4 + HEVC Main10 + AAC
+MP4 + Dolby Vision + EAC3
+MKV + H264 + AAC
+MKV + HEVC + AAC
+MKV + HEVC Main10 + TrueHD
+MKV + HEVC Main10 + DTS-HD MA
+MKV + H264 + ASS
+MKV + HEVC + PGS
+WebM + AV1 + Opus
+WebM + VP9 + Opus
+M2TS + HEVC + TrueHD
+AVI + MPEG-4 Part 2 + MP3
+VOB + MPEG-2 + AC3
+long-GOP
+4K remux
+broken / unusual index
+multiple audio tracks
+multiple subtitle tracks
+```
+
+来源至少覆盖：
 
 ```text
 Local
 WebDAV
 SMB
 ```
+
+同一内容不必在每个 source family 重复所有 codec 组合；选择代表性 source × capability 交叉矩阵，避免测试集失控。
+
+## 51.3 现有资产
+
+`test-lab/media-compatibility` 是永久 Capability Corpus 的现有种子资产。
+
+它已经可以生成/获取约 59 项短时、可重复样本，覆盖大量主流与 legacy container/video/audio 组合。
+
+历史 `docs/MEDIA_COMPATIBILITY_REPORT.md` 仅证明旧模拟器上的 HarmonyOS System/AVPlayer 行为，不能替代：
+
+- Mate60 real-arm64；
+- MPV；
+- 当前 System backend；
+- FFmpeg Analyzer；
+- HDR/DV/高级音频；
+- seek/长稳。
+
+后续 Playback/Advanced AV 阶段应升级这套资产，而不是另建第二套互相漂移的媒体库。
+
+## 51.4 阶段策略
+
+当前 Analysis 功能验收不因扩大格式覆盖而回退重开。
+
+Phase 7 的 System-vs-FFmpeg benchmark 先解决测量与策略证据。
+
+从 Playback capability 阶段开始，每个新增 fixture 顺便补齐 Analyzer 实际结果，最终形成：
+
+```text
+Linkora Media Capability Matrix
+```
+
+这样格式兼容覆盖随着 Playback / Advanced AV 向前推进，而不是以后单独返回重跑 Analyzer。
 
 ---
 

@@ -61,7 +61,7 @@ No production source change or rerun is required for this ruling.
 
 ### Current architecture action
 
-**Phase 7A — Analysis Benchmark Foundation + real-arm64 WebDAV baseline is in validation.**
+**Phase 7A — Analysis Benchmark Foundation + real-arm64 WebDAV baseline: ACCEPTED.**
 
 This stage adds measurement infrastructure only:
 
@@ -73,9 +73,13 @@ This stage adds measurement infrastructure only:
 
 `ProductionMediaAnalysisPolicy` remains unchanged until benchmark evidence is reviewed.
 
-The first validation attempt stopped before ArkTS/Hvigor execution because Phase 7A timing instrumentation imported a HarmonyOS Kit directly into adapters that are intentionally loaded by the desktop pure harness. GPT corrected this by injecting the clock into the adapters and supplying the real monotonic HarmonyOS clock from target-specific AnalysisComposition. A fresh validation/benchmark rerun is required.
+The first validation attempt exposed a desktop pure-harness/platform-clock boundary defect. GPT corrected it by injecting the clock into the adapters and supplying the real monotonic HarmonyOS clock from target-specific AnalysisComposition.
 
-The initial Mate60 WebDAV baseline still uses the already-controlled H.264/AAC MP4 and HEVC/AAC MKV fixtures with repeated crossover sampling. It validates the benchmark machinery and provides preliminary evidence; it is not by itself the full permanent Local/WebDAV/SMB corpus.
+The corrected rerun passed the full build chain and collected 240 real-Mate60 WebDAV records. GPT independently accepted the baseline at evidence commit `92017b8fd95cb944c03a30c2eb909cd8ad70dff5`.
+
+The baseline shows meaningful System-vs-FFmpeg differences, especially thumbnail latency/upstream bytes, but only for H.264/AAC MP4 and HEVC/AAC MKV. Production analysis routing remains unchanged because two cases are insufficient for a global policy rewrite.
+
+Broader codec/container/audio coverage will not reopen the accepted Analysis phase. It is now part of the shared Media Capability Corpus and will be exercised during Playback/Advanced AV validation with Analyzer and Playback results recorded independently.
 
 
 This file is the current execution status for the architecture migration.

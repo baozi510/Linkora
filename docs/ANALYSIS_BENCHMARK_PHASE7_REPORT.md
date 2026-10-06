@@ -1,8 +1,52 @@
 # Analysis Benchmark + Policy Phase 7 Report
 
-> Status: PASS — PHASE 7A BENCHMARK BASELINE COLLECTED; corrected fresh build chain and 240 real-Mate60 records verified.
+> Status: ACCEPTED — PHASE 7A BENCHMARK BASELINE; 240 real-Mate60 records independently reviewed. Production analysis policy unchanged.
 > Branch: `feat/analysis-benchmark-policy-phase7`
 > Date: 2026-10-06
+
+## GPT final Phase 7A review — 2026-10-06
+
+Reviewed remote evidence commit:
+
+`92017b8fd95cb944c03a30c2eb909cd8ad70dff5`
+
+Final ruling:
+
+**ACCEPTED — PHASE 7A BENCHMARK BASELINE.**
+
+Independent review confirms:
+
+- 240 measured records, 12 groups, 20 records/group;
+- all records are real arm64 target data;
+- all samples succeeded/correct;
+- System ADVANCED is correctly PARTIAL rather than misclassified as failure;
+- `rangeRequests` measures valid proxy GET+Range requests resolved as 206;
+- `readRequests` remains the distinct upstream RandomAccessSource read count;
+- `bytesRead` is upstream delivered bytes and may exceed file size because repeated/overlapping reads are real work;
+- memory is unavailable/null, never coerced to zero;
+- no production policy or Direct I/O change was made during evidence collection.
+
+Observed two-case WebDAV baseline:
+
+- LIST: FFmpeg lower aggregate P50/P95 than System;
+- ADVANCED: FFmpeg lower aggregate P50/P95 and COMPLETE, while System remains PARTIAL;
+- thumbnail: System lower aggregate latency and dramatically lower upstream bytes than FFmpeg on both controlled cases.
+
+These differences are real for this corpus, but the corpus is only H.264/AAC MP4 and HEVC/AAC MKV over WebDAV. They do not justify a global thumbnail-routing rewrite across Main10/HDR/Dolby Vision/4K/long-GOP/other containers or source families.
+
+### Policy decision
+
+`ProductionMediaAnalysisPolicy` remains unchanged.
+
+Reason:
+
+- functional Phase 3 routing is already accepted;
+- the Phase 7A sample is intentionally a measurement-foundation baseline, not a representative full capability corpus;
+- changing global routing from two files would violate the benchmark-driven policy rule by over-generalizing sparse data.
+
+No standalone Analysis-corpus expansion is scheduled now. Broader codec/container/audio coverage will be collected later using the shared Media Capability Corpus during Playback/Advanced AV validation, with Analyzer and Playback outcomes recorded independently.
+
+Direct I/O remains deferred: this evidence does not establish MediaProxy itself as the bottleneck.
 
 ## Current validation — phase7a-rerun-1-analysis-clock-injection
 
