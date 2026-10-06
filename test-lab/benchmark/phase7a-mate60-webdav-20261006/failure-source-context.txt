@@ -30,10 +30,10 @@ scripts/check-ffmpeg-phase1.cjs
 36:   for (const test of tests) {
 
 scripts/verify.ps1
-30: 
+30:
 31:   & $node (Join-Path $PSScriptRoot 'check-simulator-product.cjs')
 32:   if ($LASTEXITCODE -ne 0) { throw 'Simulator product isolation checks failed.' }
-33: 
+33:
 34:   & $node (Join-Path $PSScriptRoot 'check-ffmpeg-phase1.cjs') $StudioRoot
 35:   if ($LASTEXITCODE -ne 0) { throw 'FFmpeg Phase1 pure tests failed.' }
 36:   & $node (Join-Path $PSScriptRoot 'check-ffmpeg-phase1.cjs') $StudioRoot --phase2
@@ -47,7 +47,7 @@ entry/src/main/ets/analysis/FfmpegMediaProbeAdapter.ets
 4: import { MediaAnalysisInputResolver, AnalysisInputLease } from './MediaAnalysisInputResolver';
 5: import { AnalysisLifecycle, AnalysisOperation, AnalysisError } from './AnalysisOperation';
 6: import { systemDateTime } from '@kit.BasicServicesKit';
-7: 
+7:
 8: export class FfmpegMediaProbeAdapter implements IMediaProbe {
 9:   private readonly lifecycle: AnalysisLifecycle = new AnalysisLifecycle();
 10:   private readonly resolver: MediaAnalysisInputResolver;
@@ -87,7 +87,7 @@ entry/src/main/ets/analysis/SystemMediaProbeAdapter.ets
 4: import { AnalysisLifecycle, AnalysisOperation, AnalysisError, AnalysisErrorCode } from './AnalysisOperation';
 5: import { FfmpegMediaProbeAdapter } from './FfmpegMediaProbeAdapter';
 6: import { systemDateTime } from '@kit.BasicServicesKit';
-7: 
+7:
 8: export class SystemAnalysisSnapshot {
 9:   readonly durationMs: number; readonly width: number; readonly height: number;
 10:   constructor(durationMs: number, width: number, height: number) { this.durationMs = durationMs; this.width = width; this.height = height; }
