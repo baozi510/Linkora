@@ -1,0 +1,125 @@
+scripts/check-ffmpeg-phase1.cjs
+8: function load(relative) {
+9:   const file = path.join(root, relative);
+10:   if (!fs.existsSync(file)) return {};
+11:   if (cache.has(file)) return cache.get(file);
+12:   const module = { exports: {} }; cache.set(file, module.exports);
+13:   const code = ts.transpileModule(fs.readFileSync(file, 'utf8'), {
+14:     compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 }
+15:   }).outputText;
+16:   vm.runInNewContext(`(function(require,module,exports){${code}\n})`, {
+17:     ArrayBuffer, Uint8Array, Set, Map, Promise, Error, console
+18:   }, { filename: file })(name => {
+19:     if (name === '@ohos/hypium') return { describe(_name, body) { body(); },
+20:       it(name, _flags, body) { tests.push({ name, body }); }, expect(value) { return {
+21:         assertEqual(expected) { assert.equal(value, expected); }, assertTrue() { assert.equal(value, true); }
+22:       }; } };
+23:     if (name === 'linkora_core') return load('linkora_core/Index.ets');
+24:     if (name === 'linkora_ffmpeg') return load('linkora_ffmpeg/Index.ets');
+25:     if (name.startsWith('.')) return load(path.relative(root, path.resolve(path.dirname(file), name + '.ets')));
+26:     throw Error('Unexpected dependency: ' + name);
+27:   }, module, module.exports);
+28:   return module.exports;
+29: }
+30: (async () => {
+31:   assert.ok(fs.existsSync(path.join(root, 'linkora_ffmpeg/Index.ets')), 'Phase1 module public API is missing');
+32:   const phase2 = process.argv.includes('--phase2');
+33:   if (phase2) assert.ok(fs.existsSync(path.join(root, 'entry/src/main/ets/analysis/MediaAnalysisInputResolver.ets')), 'Phase2 resolver implementation is missing');
+34:   load(phase2 ? 'entry/src/test/MediaAnalysisAdapters.test.ets' : 'entry/src/test/FfmpegAnalysis.test.ets').default();
+35:   let failures = 0;
+36:   for (const test of tests) {
+
+scripts/verify.ps1
+30: 
+31:   & $node (Join-Path $PSScriptRoot 'check-simulator-product.cjs')
+32:   if ($LASTEXITCODE -ne 0) { throw 'Simulator product isolation checks failed.' }
+33: 
+34:   & $node (Join-Path $PSScriptRoot 'check-ffmpeg-phase1.cjs') $StudioRoot
+35:   if ($LASTEXITCODE -ne 0) { throw 'FFmpeg Phase1 pure tests failed.' }
+36:   & $node (Join-Path $PSScriptRoot 'check-ffmpeg-phase1.cjs') $StudioRoot --phase2
+37:   if ($LASTEXITCODE -ne 0) { throw 'Analysis Phase2 pure tests failed.' }
+38:   & $node --test (Join-Path $PSScriptRoot 'check-ffmpeg-artifact.test.cjs')
+
+entry/src/main/ets/analysis/FfmpegMediaProbeAdapter.ets
+1: import { IMediaProbe, MediaSource, MediaInfo, ProbeResult, ProbeRequirement, ProbeCompleteness,
+2:   MediaProbeDiagnostics } from 'linkora_core';
+3: import { FfmpegAnalysis, FfmpegMediaInfoMapper } from 'linkora_ffmpeg';
+4: import { MediaAnalysisInputResolver, AnalysisInputLease } from './MediaAnalysisInputResolver';
+5: import { AnalysisLifecycle, AnalysisOperation, AnalysisError } from './AnalysisOperation';
+6: import { systemDateTime } from '@kit.BasicServicesKit';
+7: 
+8: export class FfmpegMediaProbeAdapter implements IMediaProbe {
+9:   private readonly lifecycle: AnalysisLifecycle = new AnalysisLifecycle();
+10:   private readonly resolver: MediaAnalysisInputResolver;
+11:   private readonly analysis: FfmpegAnalysis;
+12:   private readonly timeoutMs: number;
+13:   constructor(resolver: MediaAnalysisInputResolver, analysis: FfmpegAnalysis, timeoutMs: number = 10000) {
+14:     this.resolver = resolver; this.analysis = analysis; this.timeoutMs = timeoutMs;
+15:   }
+16:   name(): string { return 'ffmpeg'; }
+17:   async canProbe(source: MediaSource): Promise<boolean> { return !this.lifecycle.isClosed() && this.resolver.canResolve(source, 'ffmpeg'); }
+18:   async probe(source: MediaSource, requirement: ProbeRequirement): Promise<ProbeResult> {
+19:     let operation: AnalysisOperation | null = null;
+20:     try { operation = this.lifecycle.begin(); const result = await this.perform(source, requirement, operation); operation.check(); return result; }
+21:     catch (error) { const failed = operation !== null ? operation.failure(error as Object) : AnalysisError.from(error as Object); return new ProbeResult(null, ProbeCompleteness.UNAVAILABLE, [],
+22:       new MediaProbeDiagnostics('ffmpeg', 0, 0, 0, 0, 0, ['error=' + failed.code]), failed.code); }
+23:     finally { if (operation !== null) this.lifecycle.end(operation); }
+24:   }
+25:   private async perform(source: MediaSource, requirement: ProbeRequirement, operation: AnalysisOperation): Promise<ProbeResult> {
+26:     const totalStarted: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP);
+27:     const prepareStarted: number = totalStarted;
+28:     const lease = await this.resolver.resolve(source, 'ffmpeg', operation);
+29:     const prepareMs: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP) - prepareStarted;
+30:     try {
+31:       operation.onCancel(() => this.analysis.cancel(operation.id)); operation.check();
+32:       const probeStarted: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP);
+33:       const native = await this.analysis.probe(operation.id, lease.input.uri, this.timeoutMs); operation.check();
+34:       const probeMs: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP) - probeStarted;
+35:       const mapped = FfmpegMediaInfoMapper.map(native);
+36:       const totalMs: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP) - totalStarted;
+37:       return new ProbeResult(mapped.info, FfmpegMediaProbeAdapter.completeness(mapped.info, requirement), mapped.fieldOrigins,
+38:         FfmpegMediaProbeAdapter.diagnostics('ffmpeg', lease, prepareMs, probeMs, totalMs));
+
+entry/src/main/ets/analysis/SystemMediaProbeAdapter.ets
+1: import { IMediaProbe, MediaSource, MediaInfo, VideoTrackInfo, ProbeResult, ProbeRequirement, ProbeCompleteness,
+2:   ProbeFieldOrigin, MediaProbeDiagnostics } from 'linkora_core';
+3: import { MediaAnalysisInputResolver } from './MediaAnalysisInputResolver';
+4: import { AnalysisLifecycle, AnalysisOperation, AnalysisError, AnalysisErrorCode } from './AnalysisOperation';
+5: import { FfmpegMediaProbeAdapter } from './FfmpegMediaProbeAdapter';
+6: import { systemDateTime } from '@kit.BasicServicesKit';
+7: 
+8: export class SystemAnalysisSnapshot {
+9:   readonly durationMs: number; readonly width: number; readonly height: number;
+10:   constructor(durationMs: number, width: number, height: number) { this.durationMs = durationMs; this.width = width; this.height = height; }
+11: }
+12: export interface SystemAnalysisBackend {
+13:   inspect(input: string): Promise<SystemAnalysisSnapshot>;
+14:   cancel(): void;
+15:   close(): Promise<void>;
+16: }
+17: export class SystemMediaProbeAdapter implements IMediaProbe {
+18:   private readonly lifecycle: AnalysisLifecycle = new AnalysisLifecycle();
+19:   private readonly resolver: MediaAnalysisInputResolver;
+20:   private readonly factory: () => SystemAnalysisBackend;
+21:   constructor(resolver: MediaAnalysisInputResolver, factory: () => SystemAnalysisBackend) { this.resolver = resolver; this.factory = factory; }
+22:   name(): string { return 'system'; }
+23:   async canProbe(source: MediaSource): Promise<boolean> { return !this.lifecycle.isClosed() && this.resolver.canResolve(source, 'system'); }
+24:   async probe(source: MediaSource, requirement: ProbeRequirement): Promise<ProbeResult> {
+25:     let operation: AnalysisOperation | null = null;
+26:     try { operation = this.lifecycle.begin(); const result = await this.perform(source, requirement, operation); operation.check(); return result; }
+27:     catch (error) { const failed = operation !== null ? operation.failure(error as Object, AnalysisErrorCode.SYSTEM_FAILED) : AnalysisError.from(error as Object, AnalysisErrorCode.SYSTEM_FAILED); return new ProbeResult(null, ProbeCompleteness.UNAVAILABLE, [],
+28:       new MediaProbeDiagnostics('system', 0, 0, 0, 0, 0, ['error=' + failed.code]), failed.code); }
+29:     finally { if (operation !== null) this.lifecycle.end(operation); }
+30:   }
+31:   private async perform(source: MediaSource, requirement: ProbeRequirement, operation: AnalysisOperation): Promise<ProbeResult> {
+32:     const totalStarted: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP);
+33:     const prepareStarted: number = totalStarted;
+34:     const lease = await this.resolver.resolve(source, 'system', operation);
+35:     const prepareMs: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP) - prepareStarted;
+36:     let backend: SystemAnalysisBackend | null = null;
+37:     try {
+38:       backend = this.factory(); const currentBackend = backend;
+39:       operation.onCancel(() => currentBackend.cancel()); operation.check();
+40:       const probeStarted: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP);
+41:       const data = await backend.inspect(lease.input.uri); operation.check();
+42:       const probeMs: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP) - probeStarted;

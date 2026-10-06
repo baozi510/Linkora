@@ -1,0 +1,8 @@
+{
+  "command": "pwsh -NoProfile -File scripts/verify.ps1",
+  "startUtc": "2026-10-06T14:21:08.0921070Z",
+  "endUtc": "2026-10-06T14:21:11.0245630Z",
+  "exitCode": 1,
+  "invocationCount": 1,
+  "stage": "first-default"
+}

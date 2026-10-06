@@ -1,0 +1,9 @@
+{
+  "credentialHeaderValueMatches": 0,
+  "privateEndpointServerTargetSSHValueMatches": 0,
+  "signingMaterialOrConfigCollected": false,
+  "benchmarkPrivateConfigCreated": false,
+  "benchmarkRawDatasetProduced": false,
+  "rawSourceContextReviewedAsPublicRepositoryCode": true,
+  "noPerformanceRankingsDerived": true
+}

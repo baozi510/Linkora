@@ -1,0 +1,16 @@
+Error: Unexpected dependency: @kit.BasicServicesKit
+    at D:\Linkora-benchmark-phase7a\scripts\check-ffmpeg-phase1.cjs:26:11
+    at D:\Linkora-benchmark-phase7a\entry\src\main\ets\analysis\FfmpegMediaProbeAdapter.ets:7:33
+    at load (D:\Linkora-benchmark-phase7a\scripts\check-ffmpeg-phase1.cjs:18:25)
+    at D:\Linkora-benchmark-phase7a\scripts\check-ffmpeg-phase1.cjs:25:38
+    at D:\Linkora-benchmark-phase7a\entry\src\test\MediaAnalysisAdapters.test.ets:8:35
+    at load (D:\Linkora-benchmark-phase7a\scripts\check-ffmpeg-phase1.cjs:18:25)
+    at D:\Linkora-benchmark-phase7a\scripts\check-ffmpeg-phase1.cjs:34:3
+    at Object.<anonymous> (D:\Linkora-benchmark-phase7a\scripts\check-ffmpeg-phase1.cjs:42:3)
+    at Module._compile (node:internal/modules/cjs/loader:1812:14)
+    at Object..js (node:internal/modules/cjs/loader:1943:10)
+Exception: D:\Linkora-benchmark-phase7a\scripts\verify.ps1:37
+Line |
+  37 |  …  ($LASTEXITCODE -ne 0) { throw 'Analysis Phase2 pure tests failed.' }
+     |                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Analysis Phase2 pure tests failed.

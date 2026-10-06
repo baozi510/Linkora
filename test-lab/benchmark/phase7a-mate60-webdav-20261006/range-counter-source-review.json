@@ -1,0 +1,9 @@
+{
+  "initialRangeCounterUnitAssertionExists": true,
+  "actualRangeUnitExecution": "NOT RUN — failed default gate precedes actual Hvigor/Hypium",
+  "incrementsOnlyGETWithRangeAndResolved206": true,
+  "releasedSourceRangeCountsRetained": true,
+  "readRequestsSeparateFromRangeRequests": true,
+  "policyUnchanged": true,
+  "scope": "read-only source inspection, no runtime counter claim"
+}

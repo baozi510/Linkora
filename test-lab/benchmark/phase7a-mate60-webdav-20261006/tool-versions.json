@@ -1,0 +1,10 @@
+{
+  "node": "v24.14.1",
+  "ohpm": "26.0.0.630",
+  "powerShell": "7.6.6",
+  "hdc": "Ver: 3.2.0f",
+  "benchmarkLaunchCount": 0,
+  "measuredBenchmarkRecords": 0,
+  "actualHypiumExecutedCount": 0,
+  "hypiumResultFileExists": false
+}

@@ -1,0 +1,19 @@
+{
+  "taskId": "phase7a-analysis-benchmark-foundation-mate60-webdav",
+  "acceptedBase": "4c7a4abe40295d86bb2799efe34c82cb9b505d58",
+  "source": "4f4f583d1f32c412d8f6f5afedd2b8507267e0bf",
+  "head": "de50b0fc0c9da2f508312412751447d592a08bde",
+  "branch": "feat/analysis-benchmark-policy-phase7",
+  "origin": "https://github.com/baozi510/Linkora.git",
+  "initialStatus": "",
+  "allowedDrift": [
+    "docs/CODEX_VALIDATION_TASK.md"
+  ],
+  "submodules": {
+    "entry/src/main/cpp/third_party/libnfs": "cee4ca723e081e6a18f51b838690a4c21e14bb2c",
+    "entry/src/main/cpp/third_party/libsmb2": "b3d560c02fb1268320d2fd1c17fe841b0d93b85f",
+    "entry/src/main/cpp/third_party/mbedtls/framework": "7d726d145d678aa7f5a7df3b9e7ee3dbce6ea1bf"
+  },
+  "productionPolicyDiff": "",
+  "utc": "2026-10-06T14:18:58.275820+00:00"
+}
