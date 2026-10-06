@@ -1,0 +1,12 @@
+{
+  "head": "a517f01d9ea84c7505d61052a320ac18fb1c059c",
+  "remote": "a517f01d9ea84c7505d61052a320ac18fb1c059c",
+  "branch": "feat/ffmpeg-analyzer-policy-phase3",
+  "status": [],
+  "source": "cd12a3869db8a8dbe84730c6f8a118faf73f33e0",
+  "sourceAncestorExit": 0,
+  "drift": [
+    "docs/CODEX_VALIDATION_TASK.md"
+  ],
+  "clean": true
+}

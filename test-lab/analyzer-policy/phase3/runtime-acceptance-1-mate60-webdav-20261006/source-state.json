@@ -1,0 +1,18 @@
+{
+  "taskId": "phase3-runtime-acceptance-1-mate60-webdav",
+  "head": "30c19502aa06e82b4fe75624c9f0d817fd36eb6d",
+  "branch": "feat/ffmpeg-analyzer-policy-phase3",
+  "origin": "https://github.com/baozi510/Linkora.git",
+  "initialStatus": "",
+  "implementationSource": "44d0f62816b73ebd3bab8069be5b74f51e2c6999",
+  "runtimeSource": "4ced68f1b5cae7000ce9a24183d4a1d1b1c747a8",
+  "allowedDrift": [
+    "docs/CODEX_VALIDATION_TASK.md"
+  ],
+  "submodules": {
+    "entry/src/main/cpp/third_party/libnfs": "cee4ca723e081e6a18f51b838690a4c21e14bb2c",
+    "entry/src/main/cpp/third_party/libsmb2": "b3d560c02fb1268320d2fd1c17fe841b0d93b85f",
+    "entry/src/main/cpp/third_party/mbedtls/framework": "7d726d145d678aa7f5a7df3b9e7ee3dbce6ea1bf"
+  },
+  "utc": "2026-10-06T08:02:15.099399+00:00"
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "abi": "arm64-v8a",
+    "library": "libavformat.a",
+    "sha256": "A22A9867605252219990D7883AB26ECA976C5E65E48E4507BA5B279C9E43CBDB",
+    "machine": "Machine:                           AArch64",
+    "sourcePin": "1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7"
+  },
+  {
+    "abi": "arm64-v8a",
+    "library": "libavcodec.a",
+    "sha256": "74F8E78B1C6FCEF48D21AB19E7278F89DFEF9B501CF14A8F8AE78AF9E56CCD80",
+    "machine": "Machine:                           AArch64",
+    "sourcePin": "1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7"
+  },
+  {
+    "abi": "arm64-v8a",
+    "library": "libavutil.a",
+    "sha256": "67E198E0D21EFC54D769B1F6F1B1F5186E838AC17E3705593C89DA54042FE860",
+    "machine": "Machine:                           AArch64",
+    "sourcePin": "1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7"
+  },
+  {
+    "abi": "arm64-v8a",
+    "library": "libswscale.a",
+    "sha256": "27FBAF1614C2D4D53DB7EF996973D6AE0DAF8A8AB55987A52509BB4A014B7718",
+    "machine": "Machine:                           AArch64",
+    "sourcePin": "1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7"
+  },
+  {
+    "abi": "x86_64",
+    "library": "libavformat.a",
+    "sha256": "697CD7D4861418A1091421337B48D6E1DE255F8EE9341005A44DA7AD7EA1AED1",
+    "machine": "Machine:                           Advanced Micro Devices X86-64",
+    "sourcePin": "1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7"
+  },
+  {
+    "abi": "x86_64",
+    "library": "libavcodec.a",
+    "sha256": "9DDD5CE0292E4E372263029DE6AACB00BF8BE5BCED86AF1D989B52D927DD4170",
+    "machine": "Machine:                           Advanced Micro Devices X86-64",
+    "sourcePin": "1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7"
+  },
+  {
+    "abi": "x86_64",
+    "library": "libavutil.a",
+    "sha256": "074AE78E9D6C1BFD9FDAE7A161409F48EABA39D1D979B973C3CA233BA24DBB2A",
+    "machine": "Machine:                           Advanced Micro Devices X86-64",
+    "sourcePin": "1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7"
+  },
+  {
+    "abi": "x86_64",
+    "library": "libswscale.a",
+    "sha256": "452F0BB617EEC5C8A9CE0872AE28B478AE74828A04725971823EB283328D74C9",
+    "machine": "Machine:                           Advanced Micro Devices X86-64",
+    "sourcePin": "1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7"
+  }
+]

@@ -1,0 +1,29 @@
+(node:33784) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Database schema v5 migration failed. code=undefined, message=Injected write failure
+Database schema v5 migration failed. code=undefined, message=Interrupted after SQL
+Database schema v8 migration failed. code=undefined, message=Injected write failure
+Database schema v9 migration failed. code=undefined, message=Injected write failure
+(node:52516) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+Error: ENOENT: no such file or directory, open 'D:\Linkora-validation\entry\AnalysisComposition.ets'
+    at Object.readFileSync (node:fs:440:20)
+    at load (D:\Linkora-validation\scripts\check-network-media-list.cjs:93:38)
+    at D:\Linkora-validation\scripts\check-network-media-list.cjs:97:13
+    at D:\Linkora-validation\entry\src\main\ets\analysis\NetworkMediaAnalysisCoordinator.ets:5:31
+    at load (D:\Linkora-validation\scripts\check-network-media-list.cjs:96:96)
+    at D:\Linkora-validation\scripts\check-network-media-list.cjs:97:13
+    at D:\Linkora-validation\entry\src\main\ets\services\NetworkMediaLoader.ets:9:43
+    at load (D:\Linkora-validation\scripts\check-network-media-list.cjs:96:96)
+    at check (D:\Linkora-validation\scripts\check-network-media-list.cjs:134:34)
+    at Object.<anonymous> (D:\Linkora-validation\scripts\check-network-media-list.cjs:424:1) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: 'D:\\Linkora-validation\\entry\\AnalysisComposition.ets'
+}
+Exception: D:\Linkora-validation\scripts\verify.ps1:77
+Line |
+  77 |  бн DE -ne 0) { throw 'Network media list/cache regression checks failed. бн
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Network media list/cache regression checks failed.

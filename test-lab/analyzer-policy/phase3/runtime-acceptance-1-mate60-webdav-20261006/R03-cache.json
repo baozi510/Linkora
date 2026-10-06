@@ -1,0 +1,10 @@
+{
+  "caseId": "R03-webdav-mkv-cold",
+  "format": "WEBP",
+  "width": 480,
+  "height": 270,
+  "size": 7000,
+  "sha256": "6ffbe6f6314c2d3549e74ce367c598598a98144ef420d8c6f197b62b83a6cc5b",
+  "decoded": true,
+  "cacheArea": "context.cacheDir/network-thumbnails/test-server"
+}

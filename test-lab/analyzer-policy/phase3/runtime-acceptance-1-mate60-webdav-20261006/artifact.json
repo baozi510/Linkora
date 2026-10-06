@@ -1,0 +1,10 @@
+{
+  "logicalPath": "entry/build/default/outputs/default/entry-default-signed.hap",
+  "size": 64492731,
+  "sha256": "A6141D058B29A569546D53A34876C8C25F469561D89ED1DF638788D7A1E574C4",
+  "bundle": "com.linkora.player",
+  "version": "0.1.0",
+  "abi": "arm64-v8a",
+  "profile": "default/debug",
+  "builtFresh": true
+}

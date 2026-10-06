@@ -1,0 +1,16 @@
+{
+  "protectedRegularFiles": 1997,
+  "changed": [],
+  "changedCount": 0,
+  "trackedStatus": [],
+  "submoduleStatus": [
+    " cee4ca723e081e6a18f51b838690a4c21e14bb2c entry/src/main/cpp/third_party/libnfs (libnfs-7.0.1-47-gcee4ca7)",
+    " b3d560c02fb1268320d2fd1c17fe841b0d93b85f entry/src/main/cpp/third_party/libsmb2 (libsmb2-6.2-343-gb3d560c)",
+    " 7d726d145d678aa7f5a7df3b9e7ee3dbce6ea1bf entry/src/main/cpp/third_party/mbedtls/framework (mbedtls-4.2.0_tf-psa-crypto-1.2.0-73-g7d726d145)"
+  ],
+  "submoduleWorktreeStatus": [
+    "Entering 'entry/src/main/cpp/third_party/libnfs'",
+    "Entering 'entry/src/main/cpp/third_party/libsmb2'",
+    "Entering 'entry/src/main/cpp/third_party/mbedtls/framework'"
+  ]
+}

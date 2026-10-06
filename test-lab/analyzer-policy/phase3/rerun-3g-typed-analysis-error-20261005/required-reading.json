@@ -1,0 +1,56 @@
+[
+  {
+    "path": "docs/AI_WORKFLOW.md",
+    "sha256": "9692B25EA6A66960228B9C3869E8731AEA3D8AE29286B33E9F519F3E0B661E4A",
+    "lines": 200,
+    "readComplete": true
+  },
+  {
+    "path": "docs/MASTER_IMPLEMENTATION_PLAN.md",
+    "sha256": "107EF37DA827AB9624A0FA40B82C602A74C7E1C4A17604AD937BD3975C03F5B7",
+    "lines": 2763,
+    "readComplete": true
+  },
+  {
+    "path": "docs/ARCHITECTURE_TARGET.md",
+    "sha256": "11DDF02AE6E521898B792E093677D60DA82592E850B4632CC4BCD35D5A6DEF5F",
+    "lines": 336,
+    "readComplete": true
+  },
+  {
+    "path": "docs/ARCHITECTURE_MIGRATION.md",
+    "sha256": "7280BC51ADB42FE0F04E1FB1892AA7B30D56DC89DD615CE1B4CDDF0DFAB4A746",
+    "lines": 274,
+    "readComplete": true
+  },
+  {
+    "path": "docs/IMPLEMENTATION_STATUS.md",
+    "sha256": "1CA9A78190434F6E845AAAA868547363EFD58E4015FB2AA97B2F185F9628DFD4",
+    "lines": 324,
+    "readComplete": true
+  },
+  {
+    "path": "docs/SESSION_HANDOFF.md",
+    "sha256": "BB62B4A8308D5B96DEE6E9F7972EA62F0CC168A3677198CC8A94510800D1CC22",
+    "lines": 804,
+    "readComplete": true
+  },
+  {
+    "path": "docs/CODEX_VALIDATION_TASK.md",
+    "sha256": "2A66FADC78A657FA8CE62220393A848096DA5C15F392C07926D24748535796F3",
+    "lines": 345,
+    "readComplete": true
+  },
+  {
+    "path": "docs/CODEX_PHASE3_FUNCTIONAL_VALIDATION.md",
+    "sha256": "FDFDBC4CB21CCDF40BB2278A8403F1C8DE874AD064A6241A001344EB6AEFD8B2",
+    "lines": 404,
+    "readComplete": true
+  },
+  {
+    "path": "docs/FFMPEG_ANALYZER_POLICY_PHASE3_REPORT.md",
+    "sha256": "2690FA1D1037F7C51A3F8AEBC6D648D9061FA9A48D49952A34E67C50EC47B346",
+    "lines": 919,
+    "readComplete": true
+  }
+]

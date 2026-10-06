@@ -1,0 +1,9 @@
+{
+  "command": "SDK hdc list targets",
+  "exitCode": 0,
+  "utc": "2026-10-05T14:19:41.0491403Z",
+  "emulatorProcessCount": 0,
+  "signingConfigs": [],
+  "profileObservation": "both product signingConfigs absent in committed build-profile; profiles not changed",
+  "runtimeDecision": "No connected target; no runtime installation, service or production 20-cycle execution"
+}

@@ -1,0 +1,5 @@
+Exception: D:\Linkora-validation\scripts\verify.ps1:57
+Line |
+  57 |      throw 'ArkUI state management V1 usage remains.'
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | ArkUI state management V1 usage remains.

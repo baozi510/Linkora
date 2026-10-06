@@ -1,0 +1,17 @@
+{
+  "result": "PASS",
+  "serverAlias": "user-provided-webdav",
+  "humanDirectedTransportReplacement": true,
+  "TLSVerified": true,
+  "hostPROPFIND": 207,
+  "hostRangeGET": 206,
+  "appNormalSaveAndBrowseConfirmedByUser": true,
+  "appListingIndependentlyObserved": [
+    "mp4",
+    "mkv",
+    "corrupt",
+    "cancel"
+  ],
+  "credentialsPublished": false,
+  "originalUserServersUntouched": true
+}

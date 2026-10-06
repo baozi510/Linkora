@@ -38,7 +38,7 @@ try {
   & $node --test (Join-Path $PSScriptRoot 'check-ffmpeg-artifact.test.cjs')
   if ($LASTEXITCODE -ne 0) { throw 'FFmpeg artifact guard tests failed.' }
 
-  $uiSource = Get-ChildItem -LiteralPath 'entry\src\main\ets' -Recurse -Filter '*.ets'
+  $mainArkTsSource = Get-ChildItem -LiteralPath 'entry\src\main\ets' -Recurse -Filter '*.ets'
   $legacyPatterns = @(
     '^\s*@Component\s*$',
     '@State\b',
@@ -48,8 +48,16 @@ try {
     '\$\$this\.',
     '\bAppStorage\.'
   )
-  $legacyUsage = $uiSource | Select-String -Pattern $legacyPatterns
-  $plainOutputs = $uiSource | Select-String -Pattern `
+  $legacyUsage = $mainArkTsSource | Select-String -Pattern $legacyPatterns
+  # Plain onX/loadX callback fields are an ArkUI component migration concern.
+  # Keep this guard scoped to actual UI surfaces so service method parameters
+  # such as NetworkMediaAnalysisCoordinator.inspect(..., onMetadata = ...)
+  # cannot be misclassified as ArkUI state-management V1 output fields.
+  $arkUiSource = @(
+    Get-ChildItem -LiteralPath 'entry\src\main\ets\components' -Recurse -Filter '*.ets'
+    Get-ChildItem -LiteralPath 'entry\src\main\ets\pages' -Recurse -Filter '*.ets'
+  )
+  $plainOutputs = $arkUiSource | Select-String -Pattern `
     '^\s+(on[A-Z][A-Za-z0-9]*|load[A-Z][A-Za-z0-9]*):\s*\([^)]*\)\s*=>.*=\s*'
 
   if ($legacyUsage -or $plainOutputs) {

@@ -1,0 +1,92 @@
+PATH: entry/src/main/ets/analysis/HarmonyAnalysisInputs.ets
+1: import { common } from '@kit.AbilityKit';
+2: import { MediaSource, RandomAccessSource, RemoteReadSessionAdapter } from 'linkora_core';
+3: import { NetworkFileProxy } from 'linkora_proxy';
+4: import { NetworkServerStore } from '../services/NetworkServerStore';
+5: import { NetworkMediaSourceFactory } from '../services/NetworkMediaSourceFactory';
+6: import { NetworkDirectoryService } from '../services/NetworkDirectoryService';
+7: import { HttpRemoteReadSession } from '../services/HttpRemoteReadSession';
+8: import { AnalysisInputPorts, AnalysisProxyRegistration } from './MediaAnalysisInputResolver';
+9: import { AnalysisOperation, AnalysisError, AnalysisErrorCode } from './AnalysisOperation';
+10: 
+11: /** Composition supplies one shared proxy. This class contains no protocol selection. */
+12: export class HarmonyAnalysisInputs implements AnalysisInputPorts {
+13:   private readonly store: NetworkServerStore;
+14:   private readonly proxy: NetworkFileProxy;
+15:   constructor(context: common.UIAbilityContext, proxy: NetworkFileProxy) {
+16:     this.store = new NetworkServerStore(context); this.proxy = proxy;
+17:   }
+18:   async openRemote(source: MediaSource, operation: AnalysisOperation): Promise<RandomAccessSource> {
+19:     const servers = await this.store.load(); operation.check();
+20:     const server = servers.find((entry) => entry.id === NetworkMediaSourceFactory.serverId(source));
+21:     if (server === undefined) throw new AnalysisError(AnalysisErrorCode.RESOLVE_FAILED);
+22:     const directory = new NetworkDirectoryService(server);
+23:     operation.onCancel(() => directory.cancel());
+24:     // MediaSource.fingerprint is a media/cache identity, not an SFTP host-key fingerprint.
+25:     // Pass an empty per-open override so the SFTP provider keeps ownership of persisted trust.
+26:     let setupSettled: Promise<void> = Promise.resolve();
+27:     try {
+28:       return await directory.openSource(source.locator, '',
+29:         (settled: Promise<void>) => { setupSettled = settled; });
+30:     } catch (error) {
+31:       // Native setup may time out before a late handle finishes opening/closing. Preserve the
+32:       // pre-Phase-3 serialization guarantee so the next loader job does not overlap that cleanup.
+33:       await setupSettled.catch(() => {});
+34:       throw error;
+35:     }
+36:   }
+37:   async openHttp(source: MediaSource, _operation: AnalysisOperation): Promise<RandomAccessSource> {
+38:     // The resolver closes a late HEAD result if cancellation happened while opening.
+39:     return new RemoteReadSessionAdapter(source.sourceId, await HttpRemoteReadSession.open(source.locator, {}));
+40:   }
+41:   async register(source: RandomAccessSource): Promise<AnalysisProxyRegistration> {
+42:     const lease = await this.proxy.buildSourceUrl(source, 'application/octet-stream');
+43:     return new AnalysisProxyRegistration(lease.url, () => lease.release());
+44:   }
+45: }
+PATH: scripts/verify.ps1
+72: 
+73:   & $node (Join-Path $PSScriptRoot 'check-network-media-probe.cjs') --unit
+74:   if ($LASTEXITCODE -ne 0) { throw 'HTTP range adapter regression checks failed.' }
+75: 
+76:   & $node (Join-Path $PSScriptRoot 'check-network-media-list.cjs')
+77:   if ($LASTEXITCODE -ne 0) { throw 'Network media list/cache regression checks failed.' }
+78: 
+79:   & $node (Join-Path $PSScriptRoot 'check-mpv-playback-port.cjs') $StudioRoot
+80:   if ($LASTEXITCODE -ne 0) { throw 'MPV adapter event-mapping regression checks failed.' }
+81: 
+82:   & $hvigor test --mode module -p module=entry@default -p product=default --no-daemon
+83:   if ($LASTEXITCODE -ne 0) {
+84:     throw 'Unit-test compilation failed.'
+85:   }
+86: 
+87:   $result = Get-Content -LiteralPath $testResult -Raw
+88:   if ($result -match 'Failure: [1-9]' -or $result -match 'Error: [1-9]') {
+89:     throw "Unit tests reported a failure. See: $testResult"
+90:   }
+91: 
+92:   foreach ($buildMode in @('debug', 'release')) {
+93:     foreach ($harModule in @('linkora_core', 'linkora_proxy', 'linkora_media_probe', 'linkora_ffmpeg')) {
+94:       & $hvigor assembleHar --mode module -p module=$harModule@default -p product=default `
+95:         -p buildMode=$buildMode --no-daemon
+96:       if ($LASTEXITCODE -ne 0) {
+97:         throw "$harModule $buildMode HAR build failed."
+98:       }
+99:     }
+100: 
+101:     & $hvigor assembleHap --mode module -p module=entry@default -p product=default `
+102:       -p buildMode=$buildMode --no-daemon
+103:     if ($LASTEXITCODE -ne 0) {
+104:       throw "$buildMode HAP build failed."
+105:     }
+106:     $hap = Get-ChildItem -LiteralPath 'entry\build\default\outputs' -Recurse -Filter '*unsigned.hap' |
+107:       Sort-Object LastWriteTimeUtc | Select-Object -Last 1
+108:     if ($null -eq $hap) { throw 'Default unsigned HAP missing for native ABI audit.' }
+109:     & $node (Join-Path $PSScriptRoot 'check-ffmpeg-artifact.cjs') $hap.FullName arm64-v8a
+110:     if ($LASTEXITCODE -ne 0) { throw "$buildMode default native ABI audit failed." }
+111:   }
+112: 
+113:   Write-Host 'Verification completed: architecture boundaries, persistence checks, unit tests, HAR and HAP builds passed.'
+114: } finally {
+115:   Pop-Location
+116: }

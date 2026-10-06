@@ -1,0 +1,25 @@
+{
+  "serverAlias": "user-provided-webdav",
+  "fixtureDirectory": "phase3-runtime-acceptance-1-20261006",
+  "status": 207,
+  "folders": [
+    {
+      "id": "mp4",
+      "present": true
+    },
+    {
+      "id": "mkv",
+      "present": true
+    },
+    {
+      "id": "corrupt",
+      "present": true
+    },
+    {
+      "id": "cancel",
+      "present": true
+    }
+  ],
+  "tlsValidationBypassed": false,
+  "transportChange": "Explicit human direction replaces local HDC-reverse WebDAV; source/build/test/case gates unchanged"
+}

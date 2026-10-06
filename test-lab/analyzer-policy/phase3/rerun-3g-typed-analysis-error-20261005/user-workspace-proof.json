@@ -1,0 +1,12 @@
+{
+  "workspace": "D:/Linkora",
+  "branch": "main",
+  "head": "ef6ee820a6d010f4ee63a1c0a14c646a717eaa17",
+  "beforeStatusSha256": "648A0D596918685CDA16A5E9CA8102F289C5C21D4838C4646C54240652512DE4",
+  "afterStatusSha256": "648A0D596918685CDA16A5E9CA8102F289C5C21D4838C4646C54240652512DE4",
+  "beforeDiffSha256": "2F10CDD611132E2170F8466E5CBB3E136A44BFB06F0312A01E48DB73FEEBC9E2",
+  "afterDiffSha256": "2F10CDD611132E2170F8466E5CBB3E136A44BFB06F0312A01E48DB73FEEBC9E2",
+  "match": true,
+  "commands": "read-only git status --porcelain=v1 --untracked-files=all; git diff --binary HEAD; git branch --show-current; git rev-parse HEAD",
+  "mutations": 0
+}

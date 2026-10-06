@@ -1,0 +1,64 @@
+[
+  {
+    "file": "entry/build/default/outputs/default/entry-default-unsigned.hap",
+    "hapSha256": "799af4ccee8b480a0fa3a812a30196d7657cc2570b7fe32d9949cb56e8784d18",
+    "native": [
+      {
+        "name": "libs/arm64-v8a/libaki_jsbind.so",
+        "machine": 183,
+        "sha256": "10ef2c85cee19eee7fc1d123e7b4627ae3f8245d2590d1cc98817ce3b63d75a1"
+      },
+      {
+        "name": "libs/arm64-v8a/libc++_shared.so",
+        "machine": 183,
+        "sha256": "f69947af100b652e349ae51e4a4888bcc7a327db9085272d318176ef1782bf0f"
+      },
+      {
+        "name": "libs/arm64-v8a/liblinkora_ffmpeg.so",
+        "machine": 183,
+        "sha256": "17c0a58a9d72f763a4636de8214f0c51202383ac23ebbf38c49fe3b41c94a20b"
+      },
+      {
+        "name": "libs/arm64-v8a/liblinkora_ftp.so",
+        "machine": 183,
+        "sha256": "38585c8f92e69976df951f2a121b24f5bdc9ac4906b8a7a7b07a96f175f96591"
+      },
+      {
+        "name": "libs/arm64-v8a/liblinkora_nfs.so",
+        "machine": 183,
+        "sha256": "ebeb790647019de292b011c578e142da718494666fb40f93ace5433991ff78c4"
+      },
+      {
+        "name": "libs/arm64-v8a/liblinkora_sftp.so",
+        "machine": 183,
+        "sha256": "a064c9bc7db64a97a5b2a3ed32eff4b6a6daf8a19a9f0c6feb883dc3f80208d8"
+      },
+      {
+        "name": "libs/arm64-v8a/liblinkora_smb.so",
+        "machine": 183,
+        "sha256": "cce9a33217eb3e83b61b9a0a8f46549df10e86f02e26950399e5c8f896fb048b"
+      },
+      {
+        "name": "libs/arm64-v8a/libmpv.so",
+        "machine": 183,
+        "sha256": "672e98d497199a89e20893979ecec686dee1113bbe1b609c9a9266aa1679bd32"
+      },
+      {
+        "name": "libs/arm64-v8a/libmpv_wrapper.so",
+        "machine": 183,
+        "sha256": "7ecd48d92861f2dad0310c3b716d00a396de376be7bbc54b24a9579a1f805928"
+      }
+    ]
+  },
+  {
+    "file": "entry/build/simulator/outputs/simulator/linkora-simulator-unsigned.hap",
+    "hapSha256": "943e8552a5e6347b461e4e7c1351022dc180b1401db4a2377db44a633c8d4cd4",
+    "native": [
+      {
+        "name": "libs/x86_64/liblinkora_ffmpeg.so",
+        "machine": 62,
+        "sha256": "622f9692046e89ac0180e77c94626a1db93041d87fee5d1c05ecea7fe57c2363"
+      }
+    ]
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "taskId": "phase3-rerun-3f-probe-wrapper-forwarding",
+  "source": "0d87488dc92f3cd8bc77319ec61197520695597e",
+  "testedHead": "24812a98fd1a01d6f7a1cfee18843ceb783cd382",
+  "checkout": "D:/Linkora-validation-phase3-3f-20261005",
+  "conclusion": "FAIL — BUILD",
+  "stop": "ArkTS compile: HarmonyAnalysisInputs.ets:34:7; verify.ps1:84",
+  "compilerDiagnostic": "10605087 arkts-limited-throw: throw statements cannot accept values of arbitrary types",
+  "fullDefaultInvocations": 1,
+  "ohpmInstallInvocations": 1,
+  "hypiumAttempted": true,
+  "hypiumExecuted": 0,
+  "hypiumResultExists": false,
+  "loaderHarness": "PASS — desktop mock/static only; both normal markers reached",
+  "runtimeCycles": 0,
+  "simulator": "NOT RUN",
+  "immediateDefault": "NOT RUN",
+  "debugReleaseHarHap": "NOT RUN",
+  "finalAbiAudit": "NOT RUN",
+  "productionRuntime": "NOT RUN",
+  "requiredReading": "All nine completely read in dispatch order",
+  "rootCauseScope": "Read-only source and compiler evidence: catch(error) awaits setupSettled then rethrows unconstrained error. No fix/reproduction/retry."
+}

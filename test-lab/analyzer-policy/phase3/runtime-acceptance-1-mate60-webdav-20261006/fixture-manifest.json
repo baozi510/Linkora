@@ -1,0 +1,33 @@
+[
+  {
+    "id": "webdav-mp4",
+    "name": "h264-aac.mp4",
+    "sha256": "B7CCE175483CD3314FAE1BB79E0F5F04754C3239CC5657805F5427AEF60D644B",
+    "size": 7925471,
+    "container": "mov,mp4,m4a,3gp,3g2,mj2",
+    "videoCodec": "h264",
+    "audioCodec": "aac",
+    "width": 1280,
+    "height": 720,
+    "durationSeconds": "20.000000"
+  },
+  {
+    "id": "webdav-mkv",
+    "name": "hevc-aac.mkv",
+    "sha256": "C4F8B62BB10ADDC7A7F7896A4C2435DEB6550ABA530A9495BDC296B7D5E249D4",
+    "size": 5524022,
+    "container": "matroska,webm",
+    "videoCodec": "hevc",
+    "audioCodec": "aac",
+    "width": 1280,
+    "height": 720,
+    "durationSeconds": "20.021000"
+  },
+  {
+    "id": "webdav-corrupt",
+    "name": "corrupt.mp4",
+    "sha256": "CD91A015352207B7CC3F8790D5A6970AAD890A8F91C26554D7D2DC5304B2A80B",
+    "size": 37,
+    "intentionallyInvalid": true
+  }
+]

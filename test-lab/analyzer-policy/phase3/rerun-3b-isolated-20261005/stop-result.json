@@ -1,0 +1,11 @@
+{
+  "command": "git diff --exit-code -- '*oh-package-lock.json5'",
+  "exitCode": 0,
+  "protectedRegularFiles": 1997,
+  "byteChangedFiles": 4,
+  "verifierExecuted": false,
+  "hypiumExecuted": false,
+  "hypiumExecutedCount": 0,
+  "hdcTargets": "Empty",
+  "stopReason": "Dependency install rewrote protected lockfile EOLs; validation worktree not clean; no manual normalization or restore attempted"
+}

@@ -1,0 +1,8 @@
+{
+  "command": "DevEco bundled node artifacts/phase3-rerun-3g/functional-check.cjs",
+  "startedAt": "2026-10-05T14:19:17.1218912Z",
+  "completedAt": "2026-10-05T14:19:17.7236681Z",
+  "exitCode": 0,
+  "invocationCount": 1,
+  "scope": "Supplemental desktop execution of unchanged production PolicyMediaProbe/AnalysisOperation with synthetic adapters; no existing test/source edits"
+}

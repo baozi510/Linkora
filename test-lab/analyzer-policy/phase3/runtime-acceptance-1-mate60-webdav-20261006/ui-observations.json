@@ -1,0 +1,28 @@
+{
+  "R01": {
+    "controlledFile": "webdav-mp4",
+    "duration": "0:20",
+    "resolutionBadge": "720P",
+    "thumbnailRendered": true
+  },
+  "R03": {
+    "controlledFile": "webdav-mkv",
+    "duration": "0:20",
+    "resolutionBadge": "720P",
+    "thumbnailRendered": true
+  },
+  "R05": {
+    "controlledFile": "webdav-corrupt",
+    "bytes": 37,
+    "placeholderRendered": true
+  },
+  "R10": {
+    "controlledFile": "local-basic",
+    "duration": "0:20",
+    "resolutionBadge": "720P",
+    "thumbnailRendered": false,
+    "playbackRendered": true,
+    "decodedVideoDimensions": "1280x720"
+  },
+  "rawPhoneScreenshotsNotPublished": "Status-bar/personal UI privacy; all retained only in ignored local captures"
+}

@@ -1,0 +1,9 @@
+10-06 16:28:29.521 [app-pid] [app-pid] I A03D00/com.linkora.player/JSAPP: Network media analysis: {"metadataEngine":"system","thumbnailEngine":"ffmpeg","thumbnailPlan":"4000:480:270:80:1"}
+10-06 16:34:52.294 [app-pid] [app-pid] I A03D00/com.linkora.player/JSAPP: Network media analysis: {"metadataEngine":"system","thumbnailEngine":"ffmpeg","thumbnailPlan":"4004:480:270:80:1"}
+10-06 16:39:50.522 [app-pid] [app-pid] W C02B2D/com.linkora.player/AVMetadataExtractorNapi: #1106 failed to get autoFlip
+10-06 16:39:50.556 [app-pid] [app-pid] W C02B2D/com.linkora.player/AVMetadataExtractorNapi: #839 set pixel map failed
+10-06 16:41:04.833 [app-pid] [app-pid] I C02B2D/com.linkora.player/AVMetadataExtractorNapi: #178 JsCreateAVMetadataExtractor In
+10-06 16:41:04.838 [app-pid] [app-pid] I C02B2D/com.linkora.player/AVMetadataExtractorNapi: #210 JsResolveMetadata In
+10-06 16:41:05.002 [app-pid] [app-pid] I C02B2D/com.linkora.player/AVMetadataExtractorNapi: #851 JsRelease In
+10-06 16:41:05.002 [app-pid] [app-pid] I C02B2D/com.linkora.player/AVMetadataExtractorNapi: #881 JsRelease Out
+10-06 16:42:13.975 [app-pid] [app-pid] I A03D00/com.linkora.player/JSAPP: Network media analysis: {"metadataEngine":"","thumbnailEngine":"ffmpeg","thumbnailPlan":"4000:480:270:80:1"}

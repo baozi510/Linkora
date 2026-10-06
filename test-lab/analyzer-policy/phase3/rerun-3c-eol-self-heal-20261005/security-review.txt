@@ -1,0 +1,8 @@
+Fresh evidence security review, 2026-10-05.
+Reviewed captured stdout/stderr, EOL/install/submodule records, JSON metadata, path/hash CSVs and numbered source context.
+Keyword scan: Authorization, Cookie, password, token, private key, signing/key blocks and HTTP URLs.
+Matches contain repository path names, source identifiers (this.server.password/PRIVATE_KEY), public GitHub submodule URLs, functional authorization test labels and synthetic loopback http://127.0.0.1/test only.
+No Authorization/Cookie value, password/private credential, proxy token, sensitive upstream URL/path or signing material found.
+Local checkout/SDK paths are environment provenance. Hash CSVs contain paths and SHA256 only, no file contents.
+Raw verifier logs retained; stderr source echo has replacement characters from redirection, separately clarified by source excerpts.
+No production runtime log audit possible after mandatory default-gate stop. No performance comparison collected/interpreted.

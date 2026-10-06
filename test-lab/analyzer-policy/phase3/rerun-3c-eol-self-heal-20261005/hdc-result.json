@@ -1,0 +1,8 @@
+{
+  "command": "hdc list targets",
+  "exitCode": 0,
+  "output": [
+    "[Empty]",
+    ""
+  ]
+}

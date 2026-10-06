@@ -1,5 +1,113 @@
 # Linkora Session Handoff
 
+## CURRENT STATE — read this before historical sections
+
+Repository: `baozi510/Linkora`
+
+Current branch: `feat/ffmpeg-analyzer-policy-phase3`
+
+Current phase: **FFmpeg Analyzer Production Policy Phase 3 — ACCEPTED.**
+
+Implementation source:
+
+`44d0f62816b73ebd3bab8069be5b74f51e2c6999`
+
+Reviewed build/static evidence:
+
+`e95feef35fa2541322216f9ce9336da3cad9060f`
+
+Reviewed Mate60 runtime evidence:
+
+`bf99989fff7cbcf17e2410e5df5258a586f12e6f`
+
+### Phase 3 acceptance ruling
+
+Accepted runtime evidence establishes:
+
+- exact-source signed arm64 artifact provenance;
+- real Mate60 deployment;
+- authenticated production WebDAV browse;
+- MP4 cold/reopen PASS;
+- HEVC/MKV cold/reopen PASS;
+- FFmpeg-first WebP thumbnails PASS;
+- corrupt/both-unavailable behavior PASS;
+- observed cancellation/refresh/stale behavior PASS in naturally exercisable scope;
+- 20/20 lifecycle PASS;
+- no observed crash/ANR or stale-row accumulation.
+
+Direct shared-proxy counters remain NOT RUN because the app exposes no production diagnostic endpoint. That is explicitly non-blocking.
+
+### LOCAL_DOCUMENT clarification
+
+R10 import, metadata and playback all passed.
+
+The DocumentViewPicker item kept a placeholder because the pre-existing `LocalMediaThumbnailLoader` only queries PhotoAsset-backed URIs. Independent review confirmed that file is unchanged from at least `15db3f8a3e87f75edc209c1919f944f39c0b9fcb` through the accepted Phase 3 source.
+
+This is a known local-document thumbnail limitation, not a Phase 3 regression. It does not require a Phase 3 source change or rerun.
+
+### Next action
+
+There is **no active Phase 3 Codex validation task** after acceptance.
+
+The next analyzer phase is real-arm64 Analysis Benchmark + Policy. Do not start it until GPT reviews the current benchmark assets and publishes a dedicated task.
+
+Performance conclusions must remain separate from this functional acceptance.
+
+### Durable conversation workflow
+
+Read `docs/AI_WORKFLOW.md`.
+
+New GPT sessions and Codex sessions are intentionally disposable. GitHub is the durable project memory.
+
+For a new GPT session, the user can send only:
+
+`打开 GitHub 仓库 baozi510/Linkora，按照 docs/AI_WORKFLOW.md 的 New GPT Session 流程恢复项目上下文；先审查当前状态，不要直接改代码。`
+
+For a new Codex validation session, the user can send only:
+
+`读取仓库 docs/CODEX_VALIDATION_TASK.md 并严格按其中要求执行本轮测试和取证；不要修改生产源码。`
+
+Every validation round uses the single fixed file `docs/CODEX_VALIDATION_TASK.md`; Git history preserves old tasks.
+
+### Source-of-truth order
+
+1. `docs/MASTER_IMPLEMENTATION_PLAN.md`
+2. later explicitly approved architecture decisions
+3. `docs/ARCHITECTURE_TARGET.md`
+4. `docs/ARCHITECTURE_MIGRATION.md`
+5. `docs/IMPLEMENTATION_STATUS.md`
+6. this CURRENT STATE
+7. current phase report / validation evidence
+8. actual branch/HEAD and affected source
+
+Do not rely on prior chat memory.
+
+### Phase 3 invariants
+
+- LIST: System primary, controlled FFmpeg fallback for resolvable file-like sources.
+- DETAIL / ADVANCED: FFmpeg primary, System fallback only when FFmpeg is unusable.
+- no System+FFmpeg field merger in Phase 3.
+- remote thumbnail: FFmpeg primary + existing System fallback.
+- HLS / DASH / LOCAL_DOCUMENT: System-only.
+- remote analysis remains RandomAccessSource -> shared MediaProxy -> localhost.
+- FFmpeg remains protocol-agnostic.
+- WebP/cache/time policy remains unchanged.
+- PlaybackBackendSelector and Auto/System/MPV routing remain unchanged.
+- performance ranking remains deferred to real arm64 hardware.
+
+### Next action
+
+Use the READY task in `docs/CODEX_VALIDATION_TASK.md` after the validation-dispatch commit is present.
+
+Codex remains test/report-only. Any source/test-infrastructure failure that requires modification returns to GPT.
+
+Performance remains deferred to real arm64 hardware.
+
+
+# Historical milestones
+
+> The material below is preserved for provenance. It contains earlier "current" statements that may now be stale. For present work, the CURRENT STATE and source-of-truth order above take precedence.
+
 ## Purpose
 
 This file is the durable context handoff for a new ChatGPT/Codex session.
@@ -650,3 +758,57 @@ Do not use x86 simulator data for:
 Remote byte/range counters may only be used to verify functional random-access behavior and cleanup.
 
 Performance benchmarking and performance-based policy decisions are deferred to real arm64 device testing.
+
+
+## FFmpeg Analyzer Production Policy Phase 3 — implemented, awaiting test-only validation
+
+Current branch:
+
+`feat/ffmpeg-analyzer-policy-phase3`
+
+Implementation ownership for this phase:
+
+- ChatGPT implements/fixes source;
+- Codex tests and reports only;
+- Codex must not patch source on validation failures.
+
+Implemented functional policy:
+
+```text
+LOCAL_DOCUMENT / HLS / DASH
+  -> System-only policy
+
+file-like REMOTE_FILE / HTTP
+  LIST
+    -> System first
+    -> FFmpeg only if System is incomplete/unusable
+
+  DETAIL / ADVANCED
+    -> FFmpeg first
+    -> System only if FFmpeg is unusable
+    -> no field merger
+
+thumbnail
+  -> FFmpeg first
+  -> existing System thumbnail fallback
+  -> common WebP encoder/cache
+```
+
+Production `NetworkMediaLoader` now uses `NetworkMediaAnalysisCoordinator`.
+
+Additional lifecycle/security fixes in this phase:
+
+- policy cancellation cannot start a later fallback engine;
+- coordinator cancellation cannot continue into thumbnail fallback;
+- `MediaSource.fingerprint` is no longer misused as an SFTP host-key fingerprint;
+- FFmpeg raw RGBA frames use the existing System WebP encoder;
+- no performance-based routing was introduced.
+
+Read for validation:
+
+1. `docs/CODEX_PHASE3_FUNCTIONAL_VALIDATION.md`
+2. `docs/FFMPEG_ANALYZER_POLICY_PHASE3_REPORT.md`
+
+Performance remains deferred to arm64 real-device testing.
+
+If Codex reports a source failure, return to ChatGPT for the fix. Do not let Codex patch the implementation branch.

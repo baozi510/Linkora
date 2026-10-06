@@ -1,0 +1,18 @@
+Source: entry/src/main/ets/analysis/NetworkMediaAnalysisCoordinator.ets
+85:   async inspect(source: MediaSource, durationHintMs: number = 0,
+86:     widthHint: number = 0, heightHint: number = 0,
+87:     onMetadata: (durationMs: number, width: number, height: number, engine: string) => void = () => {}):
+88:     Promise<NetworkMediaAnalysisResult> {
+89:     if (this.closed) return new NetworkMediaAnalysisResult(
+90:       durationHintMs, widthHint, heightHint, null);
+91:     const generation: number = this.cancellationGeneration;
+
+Verifier: scripts/verify.ps1
+51:   $legacyUsage = $uiSource | Select-String -Pattern $legacyPatterns
+52:   $plainOutputs = $uiSource | Select-String -Pattern `
+53:     '^\s+(on[A-Z][A-Za-z0-9]*|load[A-Z][A-Za-z0-9]*):\s*\([^)]*\)\s*=>.*=\s*'
+54: 
+55:   if ($legacyUsage -or $plainOutputs) {
+56:     @($legacyUsage) + @($plainOutputs) | ForEach-Object { Write-Host $_ }
+57:     throw 'ArkUI state management V1 usage remains.'
+58:   }

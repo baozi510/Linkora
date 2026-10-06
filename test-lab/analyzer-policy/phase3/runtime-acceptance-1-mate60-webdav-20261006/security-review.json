@@ -1,0 +1,10 @@
+{
+  "exactCredentialAndPrivateHostDeviceValueMatches": 0,
+  "rawSigningDiffOrMaterialPublished": false,
+  "passwordsOrAuthorizationCookieValuesPublished": false,
+  "proxyTokenURLsPublished": false,
+  "rawAppDataOrScreenshotsPublished": false,
+  "performanceRankingsCollected": false,
+  "sourceTestsBuildSemanticsChanged": false,
+  "evidenceFileCount": 35
+}

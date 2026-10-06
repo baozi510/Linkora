@@ -1,0 +1,87 @@
+Simulator product parity/isolation checks passed.
+Using multi-target task: assembleHapSeq
+> hvigor [32mRunning command: hvigorw assembleHap --mode module -p module=entry@simulator -p seq=true -p product=simulator -p buildMode=debug --parallel --incremental --info --analyze=normal --no-daemon[39m
+> hvigor [32mstart to execute ohpm install[39m
+ohpm INFO: remove useless folder succeed: "D:\Linkora-validation-phase3-3g-20261005\oh_modules\.ohpm\@mpv-ohos+mpv-arkts@1.0.0"
+ohpm INFO: remove project useless folder succeed: "D:\Linkora-validation-phase3-3g-20261005\oh_modules\.ohpm\oh_modules\@mpv-ohos\mpv-arkts"
+ohpm INFO: delete useless empty folder succeed: "D:\Linkora-validation-phase3-3g-20261005\oh_modules\.ohpm\oh_modules\@mpv-ohos"
+[32minstall completed in 0s 94ms[39m
+> hvigor [32mFinished :entry:simulator@PreBuild... after 112 ms [39m
+> hvigor [32mFinished :linkora_ffmpeg:simulator@PreBuild... after 36 ms [39m
+> hvigor [32mFinished :linkora_core:default@PreBuild... after 12 ms [39m
+> hvigor [32mFinished :linkora_media_probe:default@PreBuild... after 9 ms [39m
+> hvigor [32mFinished :linkora_proxy:default@PreBuild... after 10 ms [39m
+> hvigor [32mFinished :entry:simulator@CreateModuleInfo... after 1 ms [39m
+> hvigor [32mFinished :entry:simulator@GenerateMetadata... after 2 ms [39m
+> hvigor [32mFinished :entry:simulator@PreCheckSyscap... after 1 ms [39m
+> hvigor [32mFinished :entry:simulator@GeneratePkgSdkInfo... after 3 ms [39m
+> hvigor [32mFinished :entry:simulator@ProcessIntegratedHsp... after 1 ms [39m
+> hvigor [32mFinished :linkora_core:default@CreateHarBuildProfile... after 2 ms [39m
+> hvigor [32mFinished :linkora_core:default@ConfigureCmake... after 1 ms [39m
+> hvigor [32mFinished :linkora_core:default@MergeProfile... after 3 ms [39m
+> hvigor [32mFinished :linkora_media_probe:default@CreateHarBuildProfile... after 1 ms [39m
+> hvigor [32mFinished :linkora_media_probe:default@ConfigureCmake... after 1 ms [39m
+> hvigor [32mFinished :linkora_media_probe:default@MergeProfile... after 2 ms [39m
+> hvigor [32mFinished :entry:simulator@SyscapTransform... after 1 ms [39m
+> hvigor [32mFinished :linkora_ffmpeg:simulator@CreateHarBuildProfile... after 1 ms [39m
+> hvigor [32mFinished :linkora_proxy:default@CreateHarBuildProfile... after 1 ms [39m
+> hvigor [32mFinished :linkora_core:default@BuildNativeWithCmake... after 1 ms [39m
+> hvigor [32mFinished :linkora_ffmpeg:simulator@MergeProfile... after 2 ms [39m
+> hvigor [32mFinished :linkora_proxy:default@MergeProfile... after 2 ms [39m
+> hvigor [32mFinished :linkora_media_probe:default@BuildNativeWithCmake... after 1 ms [39m
+> hvigor [32mFinished :entry:simulator@CreateBuildProfile... after 11 ms [39m
+> hvigor [32mFinished :linkora_ffmpeg:simulator@ConfigureCmake... after 5 ms [39m
+> hvigor [32mFinished :linkora_core:default@BuildNativeWithNinja... after 1 ms [39m
+> hvigor [32mFinished :linkora_proxy:default@ConfigureCmake... after 1 ms [39m
+> hvigor [32mFinished :entry:simulator@MergeProfile... after 33 ms [39m
+> hvigor [32mFinished :linkora_media_probe:default@BuildNativeWithNinja... after 1 ms [39m
+> hvigor [32mFinished :linkora_core:default@ProcessLibs... after 8 ms [39m
+> hvigor [32mFinished :linkora_proxy:default@BuildNativeWithCmake... after 1 ms [39m
+> hvigor [32mFinished :entry:simulator@MakePackInfo... after 3 ms [39m
+> hvigor [32mFinished :linkora_media_probe:default@ProcessLibs... after 3 ms [39m
+> hvigor [32mFinished :linkora_core:default@DoNativeStrip... after 3 ms [39m
+> hvigor [32mFinished :linkora_media_probe:default@DoNativeStrip... after 2 ms [39m
+> hvigor [32mFinished :linkora_proxy:default@BuildNativeWithNinja... after 1 ms [39m
+> hvigor [32mFinished :linkora_proxy:default@ProcessLibs... after 3 ms [39m
+> hvigor [32mFinished :linkora_proxy:default@DoNativeStrip... after 2 ms [39m
+> hvigor [32mFinished :linkora_ffmpeg:simulator@BuildNativeWithCmake... after 4 s 155 ms [39m
+> hvigor [32mFinished :entry:simulator@ConfigureCmake... after 1 ms [39m
+> hvigor [32mFinished :entry:simulator@GeneratePkgContextInfo... after 14 ms [39m
+> hvigor [32mFinished :entry:simulator@BuildNativeWithCmake... after 1 ms [39m
+> hvigor [32mFinished :entry:simulator@ProcessProfile... after 88 ms [39m
+> hvigor [32mFinished :entry:simulator@ProcessRouterMap... after 3 ms [39m
+> hvigor [32mFinished :entry:simulator@ProcessShareConfig... after 3 ms [39m
+> hvigor [32mFinished :entry:simulator@ProcessStartupConfig... after 2 ms [39m
+> hvigor [32mFinished :entry:simulator@ProcessResource... after 3 ms [39m
+> hvigor [32mFinished :entry:simulator@GenerateLoaderJson... after 12 ms [39m
+> hvigor [32mFinished :entry:simulator@CompileResource... after 289 ms [39m
+> hvigor [32mFinished :entry:simulator@BuildJS... after 3 ms [39m
+> hvigor [32mFinished :linkora_ffmpeg:simulator@BuildNativeWithNinja... after 5 s 317 ms [39m
+> hvigor [32mFinished :linkora_ffmpeg:simulator@ProcessLibs... after 123 ms [39m
+> hvigor [32mFinished :linkora_ffmpeg:simulator@DoNativeStrip... after 174 ms [39m
+> hvigor [32mFinished :entry:simulator@BuildNativeWithNinja... after 1 ms [39m
+> hvigor [32mFinished :entry:simulator@ProcessLibs... after 5 ms [39m
+> hvigor [32mFinished :entry:simulator@DoNativeStrip... after 55 ms [39m
+> hvigor [32mFinished :entry:simulator@CacheNativeLibs... after 4 ms [39m
+> hvigor [32mFinished :entry:simulator@CompileArkTS... after 11 s 18 ms [39m
+> hvigor [32mFinished :entry:simulator@GeneratePkgModuleJson... after 2 ms [39m
+> hvigor [32mFinished :entry:simulator@ProcessCompiledResources... after 1 ms [39m
+> hvigor [32mFinished :entry:simulator@PackageHap... after 498 ms [39m
+> hvigor [32mFinished :entry:simulator@PackingCheck... after 4 ms [39m
+> hvigor [32mFinished :entry:simulator@SignHap... after 2 ms [39m
+> hvigor [32mFinished :entry:simulator@CollectDebugSymbol... after 1 ms [39m
+> hvigor [32mFinished :entry:assembleHap... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 21 s 67 ms [39m
+
+65 tasks in total: 65 executed, 0 up-to-date
+> hvigor [32mFinished ::assembleHapSeq... after 21 s 863 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 23 s 194 ms [39m
+
+1 tasks in total: 1 executed, 0 up-to-date
+FFmpeg/native artifact ABI audit PASS: 1 libraries (x86_64)
+Simulator HAP verified: D:\Linkora-validation-phase3-3g-20261005\entry\build\simulator\outputs\simulator\linkora-simulator-unsigned.hap
+Simulator HAP native whitelist passed (FFmpeg analyzer only).
+Restoring the default dependency graph after simulator target resolution...
+ohpm INFO: MetaDataFetcher fetching meta info of package '@mpv-ohos/mpv-arkts' from https://ohpm.openharmony.cn/ohpm/
+ohpm INFO: fetch meta info of package '@mpv-ohos/mpv-arkts' success https://ohpm.openharmony.cn/ohpm/@mpv-ohos/mpv-arkts
+[32minstall completed in 0s 748ms[39m

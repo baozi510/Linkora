@@ -1,0 +1,2 @@
+docs/AI_WORKFLOW.md
+docs/CODEX_VALIDATION_TASK.md

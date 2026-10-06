@@ -1,0 +1,4 @@
+{
+  "command": "git submodule update --init --recursive",
+  "exitCode": 0
+}

@@ -1,0 +1,7 @@
+{
+  "command": "& 'C:\\Program Files\\PowerShell\\7\\pwsh.exe' -NoProfile -File scripts/verify.ps1",
+  "cwd": "D:\\Linkora-validation-phase3-3c-20261005",
+  "exitCode": 1,
+  "startedUtc": "2026-10-05T07:57:09.9027182Z",
+  "finishedUtc": "2026-10-05T07:57:14.9218158Z"
+}

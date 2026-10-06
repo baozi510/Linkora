@@ -1,0 +1,7 @@
+{
+  "command": "C:/Program Files/Huawei/DevEco Studio/tools/hvigor/bin/hvigorw.bat assembleHap --mode module -p module=entry@default -p product=default -p buildMode=debug --no-daemon",
+  "startUtc": "2026-10-06T08:04:03.4489688Z",
+  "endUtc": "2026-10-06T08:05:40.3764149Z",
+  "exitCode": 0,
+  "invocationCount": 1
+}

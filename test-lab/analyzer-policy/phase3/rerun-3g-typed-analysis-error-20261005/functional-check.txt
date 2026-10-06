@@ -1,0 +1,11 @@
+PASS ADVANCED complete exact result identity / fallback / no merge
+PASS ADVANCED partial exact result identity / fallback / no merge
+PASS ADVANCED unavailable exact result identity / fallback / no merge
+PASS ADVANCED cancellation starts no fallback
+PASS typed boundary preserves AnalysisError identity
+PASS typed boundary maps generic provider failure to RESOLVE_FAILED
+PASS typed boundary prioritizes CANCELLED
+PASS MP4 / local_document System-only
+PASS HLS / remote_file System-only
+PASS DASH / remote_file System-only
+Supplemental desktop functional checks: 10/10 PASS; no native/UI runtime

@@ -1,0 +1,121 @@
+[
+  {
+    "caseId": "R01-webdav-mp4-cold",
+    "result": "PASS",
+    "metadataUI": "0:20 / 720P",
+    "metadataEngine": "system",
+    "thumbnailEngine": "ffmpeg",
+    "thumbnailPlan": "4000:480:270:80:1",
+    "WebPDecoded": true,
+    "coldProof": "newly created remote path and new test server; no prior media open",
+    "evidence": [
+      "R01-cache.json",
+      "runtime-log.txt"
+    ]
+  },
+  {
+    "caseId": "R02-webdav-mp4-reopen",
+    "result": "PASS",
+    "metadataAndThumbnailRemainVisible": true,
+    "persistentFileSameSizeAndMtime": true,
+    "noNewAnalysisCompletionLogObserved": true
+  },
+  {
+    "caseId": "R03-webdav-mkv-cold-reopen",
+    "result": "PASS",
+    "metadataUI": "0:20 / 720P",
+    "metadataEngine": "system",
+    "thumbnailEngine": "ffmpeg",
+    "thumbnailPlan": "4004:480:270:80:1",
+    "WebPDecoded": true,
+    "reopenSameSizeAndMtime": true
+  },
+  {
+    "caseId": "R04-natural-thumbnail-fallback",
+    "result": "NOT RUN",
+    "reason": "NO SAFE NATURAL FALLBACK FIXTURE"
+  },
+  {
+    "caseId": "R05-both-engines-unavailable",
+    "result": "PASS",
+    "fileRowVisible": true,
+    "placeholderCorrectlyRetained": true,
+    "noInvalidThumbnailPersisted": true,
+    "listRemainedResponsive": true,
+    "backoffObservation": {
+      "caseId": "R05-both-engines-unavailable",
+      "threeViewRebindingsWithinBackoffWindow": true,
+      "beforeSystemFailureEvents": 1,
+      "newSystemFailureEvents": 0,
+      "sourceBackoffMs": 30000,
+      "observedNoUnboundedRetry": true
+    },
+    "noCrashObserved": true
+  },
+  {
+    "caseId": "R06-cancel-refresh",
+    "result": "PASS",
+    "rapidColdEntryThenBackExercised": true,
+    "afterRapidLeaveNoNewTestThumbnail": true,
+    "parentHasOnlyFourFolderRows": true,
+    "rapidLeaveReenterAndPullRefreshExercised": true,
+    "subsequentPreviewCorrectAndSingleRow": true,
+    "noLateVisibleFallbackResult": true,
+    "noCrashObserved": true,
+    "directEngineStartAfterCancellation": "NOT RUN — no existing external production trace endpoint",
+    "refreshDuringActiveAnalysis": "NOT RUN — completion preceded observation of refresh gesture; no artificial delay added"
+  },
+  {
+    "caseId": "R07-lifecycle-20",
+    "result": "PASS",
+    "completedCycles": 20,
+    "perCycleTable": "lifecycle-20.json",
+    "allCyclesMetadataPreviewUniqueAndCleanAfterLeave": true,
+    "sameApplicationProcessThroughout": true,
+    "directCounters": "NOT RUN — NO PRODUCTION DIAGNOSTIC ENDPOINT"
+  },
+  {
+    "caseId": "R08-hls",
+    "result": "NOT RUN",
+    "reason": "NO PREPARED STREAMING FIXTURE"
+  },
+  {
+    "caseId": "R09-dash",
+    "result": "NOT RUN",
+    "reason": "NO PREPARED STREAMING FIXTURE"
+  },
+  {
+    "caseId": "R10-local",
+    "result": "BLOCKED",
+    "reason": "LOCAL_DOCUMENT THUMBNAIL ACCEPTANCE — valid controlled DocumentViewPicker MP4 remains a placeholder; existing PhotoAsset-only loader has no document frame-extraction fallback",
+    "normalDocumentPickerSelection": true,
+    "importedRecordLocatedBySearch": true,
+    "metadataUI": "0:20 / 720P",
+    "playback": "Playing at 0:02, then completed at 0:20; decoded fixture pattern visible",
+    "playbackDimensions": "1280x720",
+    "systemMetadataFDObserved": true,
+    "nativeFFmpegAnalysisNotDemonstratedForLocal": true,
+    "noURINativePathWorkaround": true,
+    "noSourceChangeAttempted": true
+  },
+  {
+    "caseId": "ADVANCED-native",
+    "result": "NOT RUN",
+    "reason": "NO EXISTING AUTHORIZED PRODUCTION DIAGNOSTIC ENTRY"
+  },
+  {
+    "caseId": "SFTP-native",
+    "result": "NOT RUN",
+    "reason": "OPTIONAL; no prepared app-side SFTP credential/trust fixture for this round"
+  },
+  {
+    "caseId": "legacy-JPEG-compatibility",
+    "result": "NOT RUN",
+    "reason": "NO SAFE PREEXISTING JPEG FIXTURE"
+  },
+  {
+    "caseId": "direct-proxy-counters",
+    "result": "NOT RUN",
+    "reason": "NO PRODUCTION DIAGNOSTIC ENDPOINT"
+  }
+]

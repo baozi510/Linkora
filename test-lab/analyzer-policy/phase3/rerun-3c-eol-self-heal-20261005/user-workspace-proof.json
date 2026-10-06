@@ -1,0 +1,16 @@
+{
+  "before": {
+    "branch": "main",
+    "head": "ef6ee820a6d010f4ee63a1c0a14c646a717eaa17",
+    "statusSha256": "648A0D596918685CDA16A5E9CA8102F289C5C21D4838C4646C54240652512DE4",
+    "diffSha256": "2F10CDD611132E2170F8466E5CBB3E136A44BFB06F0312A01E48DB73FEEBC9E2"
+  },
+  "after": {
+    "branch": "main",
+    "head": "ef6ee820a6d010f4ee63a1c0a14c646a717eaa17",
+    "statusSha256": "648A0D596918685CDA16A5E9CA8102F289C5C21D4838C4646C54240652512DE4",
+    "diffSha256": "2F10CDD611132E2170F8466E5CBB3E136A44BFB06F0312A01E48DB73FEEBC9E2"
+  },
+  "equal": true,
+  "scope": "Branch, HEAD, complete porcelain status and tracked binary diff; no file writes in original workspace."
+}

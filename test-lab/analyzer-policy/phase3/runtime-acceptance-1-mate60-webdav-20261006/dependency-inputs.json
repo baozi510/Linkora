@@ -1,0 +1,36 @@
+{
+  "scope": "dependency reuse only; fresh application HAP will be built",
+  "commit": "1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7",
+  "abi": "arm64-v8a",
+  "manifestSha256": "8EF1E5E306705F73007B1D79A23064AF469A381347C7F7B11E10B58B3DD0B03F",
+  "archives": [
+    {
+      "name": "libavformat.a",
+      "sha256": "A22A9867605252219990D7883AB26ECA976C5E65E48E4507BA5B279C9E43CBDB",
+      "size": 32052280,
+      "members": 396,
+      "machine": "AArch64"
+    },
+    {
+      "name": "libavcodec.a",
+      "sha256": "74F8E78B1C6FCEF48D21AB19E7278F89DFEF9B501CF14A8F8AE78AF9E56CCD80",
+      "size": 87837490,
+      "members": 865,
+      "machine": "AArch64"
+    },
+    {
+      "name": "libavutil.a",
+      "sha256": "67E198E0D21EFC54D769B1F6F1B1F5186E838AC17E3705593C89DA54042FE860",
+      "size": 3297022,
+      "members": 102,
+      "machine": "AArch64"
+    },
+    {
+      "name": "libswscale.a",
+      "sha256": "27FBAF1614C2D4D53DB7EF996973D6AE0DAF8A8AB55987A52509BB4A014B7718",
+      "size": 4486068,
+      "members": 38,
+      "machine": "AArch64"
+    }
+  ]
+}

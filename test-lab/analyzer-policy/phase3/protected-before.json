@@ -1,0 +1,3166 @@
+[
+  {
+    "path": "build-profile.json5",
+    "sha256": "05C4F7CE7E8B6C2783E232AE1F25AB38B1905F6D83F72A162378430C6BC5224E"
+  },
+  {
+    "path": "entry/build-profile.json5",
+    "sha256": "67205948B0CBA1E1A264BC1491A672C26200F93C2FE1A1565B791880F2BA9814"
+  },
+  {
+    "path": "entry/oh-package-lock.json5",
+    "sha256": "AA9212C10B775C2C0A1132F65AF282BCD8E6EBAEE2969C40C7DD8FB62A3CB0A9"
+  },
+  {
+    "path": "entry/simulator-stubs/mpv-arkts/Index.ets",
+    "sha256": "025D8EEAAFCFAF6B47F9D751649B933E6CEA52DB091BDF0AF3470496A9577028"
+  },
+  {
+    "path": "entry/src/default/AnalysisComposition.ets",
+    "sha256": "9A4233C6A00F05EF928505530B8312D5078B1D38E91395D9D0D3B492DEAFF04F"
+  },
+  {
+    "path": "entry/src/default/PlaybackComposition.ets",
+    "sha256": "657441B18FA864787CD9E9420717D9B2410496458BBFC87DCACA29CDCABB87DA"
+  },
+  {
+    "path": "entry/src/default/RuntimeDiagnostics.ets",
+    "sha256": "AE2FFC0DC8546D9115EECEB8A74083DA422704777537F4A3AAC3369ADF75A118"
+  },
+  {
+    "path": "entry/src/default/RuntimeProfile.ets",
+    "sha256": "331FB012625ACF6F2529C667679933ED260702E8D03D507BA233BF6E98D35524"
+  },
+  {
+    "path": "entry/src/main/cpp/ftp_init.cpp",
+    "sha256": "C5562C2CE8B28E1AF1F7856467AD1AA8AB34BFC4564191E78DBBCC1BE3AC6667"
+  },
+  {
+    "path": "entry/src/main/cpp/napi_init.cpp",
+    "sha256": "945C7C12D986D1BCDF482D9CE4B921952A9ABE2D280BA84A1DE4D960D993D64F"
+  },
+  {
+    "path": "entry/src/main/cpp/nfs_init.cpp",
+    "sha256": "96B7347DAA345F98B144C0E35B280422EA4509EF284614EBB583BA8AFB965234"
+  },
+  {
+    "path": "entry/src/main/cpp/remote_reader.h",
+    "sha256": "28A7BCDF3CAE9C84B8A98C666F0E925B71B12947A092AEF8D441A6652C86EAFD"
+  },
+  {
+    "path": "entry/src/main/cpp/sftp_init.cpp",
+    "sha256": "585AF108DED9102602B8F307A6FBB66D41EF383FA1E5B03EB3D6DB8ED5A06126"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/direct_tcpip.c",
+    "sha256": "68DAAADA1ED5894D6C4A1CB90894410832FDE871D129362D4826D7B0FA319BF9"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/scp.c",
+    "sha256": "BCE418BA7890DCFB96788CF28A461757258748FDDD068EEB91D7ACEC303FA48C"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/scp_nonblock.c",
+    "sha256": "738AA5C544FE014EFDA7E89A07A34F1B5AD1B0BD68BF4D77BCA60CAA6E47C107"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/scp_write.c",
+    "sha256": "7BD5E660E099D751EE14BD2066BF7E27B4F89400BB4F92248ECA8BBA49348F41"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/scp_write_nonblock.c",
+    "sha256": "B64532DB5FAB0BACD15DD2ADF55C3F4D5C1800B7211CDB8997AC3D9BE429FC80"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/sftp.c",
+    "sha256": "7FDC824B13376D24ED3C2D947538C63D998BAE0C6A6F5B0B80304308CE622227"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/sftp_RW_nonblock.c",
+    "sha256": "1952CF118E992703D334D87823C7B4E19DB687771B12FBAC2250540FAB222787"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/sftp_append.c",
+    "sha256": "DF6A4A29718B3D57409D4544C8079BAFD1BA047ACF2BD69207439FAD05A4B73E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/sftp_mkdir.c",
+    "sha256": "5313FE7FB8084C2838C8C3E0DC4C4D749DA50F94968982DB1DE4302552FA8D57"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/sftp_mkdir_nonblock.c",
+    "sha256": "D48A3BFE02658066E0C40E44FE3CF16207F68D37A7221EC35D0737A3F9DA8044"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/sftp_nonblock.c",
+    "sha256": "1B3763877259B5452C77ACB37AF23A1261C0C432D63E0E271A23C63E32A84A36"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/sftp_write.c",
+    "sha256": "94803E560521D76A2C5879101760403EFB69296C4288EEBD1059A7E41E62CAD7"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/sftp_write_nonblock.c",
+    "sha256": "E87FC6ADDCBE36018A99A6DA4A18D65F2E195E64E97E58048CE8A4FC3FAD47E9"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/sftp_write_sliding.c",
+    "sha256": "C21E78B82A93AD855BE8BF849995ECA10E2BD84C9016E093F6F2EEA30DD9EDD3"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/sftpdir.c",
+    "sha256": "F5B1E65950A97A11B84E4514D5C3775520DDC4496C43F379EC7E92DE06EF7B86"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/sftpdir_nonblock.c",
+    "sha256": "408C8A0CE7163CF219E304432DF56D24A1A958CE05C5D5BFF547655A6D4E7A27"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/ssh2.c",
+    "sha256": "A1604DC5E145B0C7CF10312A7F18C290555543BC1F7647265F7127F7163FD24D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/ssh2_agent.c",
+    "sha256": "7DBF6ED7F37440E1F2187C57C1A9CB38CC7378656BB026E46BE7E899D23934A8"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/ssh2_agent_forwarding.c",
+    "sha256": "3C740FAA0B39CDF2260D1BBA07E1AC10AB38E0141904D1DB4EBFAB803AD2AD57"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/ssh2_echo.c",
+    "sha256": "94C6DD445E1ECB1ADA839D1F3D61B4ECB8C934B092B5463CB0032B8A91E5504D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/ssh2_exec.c",
+    "sha256": "F8DAC3FF221D2AA160EE833D02A8744A132F14FEA1676A81A12E7F5DDA911542"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/subsystem_netconf.c",
+    "sha256": "73ABCA20C2BCAE9AE9831F021D5BAE1F3DCE0C2D87625A8A5E82751966C63AD5"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/tcpip-forward.c",
+    "sha256": "06AB17115D979E50414A3A248FAD101E30AC83BA5F2184FD5366B6AFDACB0CA1"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/example/x11.c",
+    "sha256": "8B22D52AC83B3EC9CCFD6A1FB65E7A1684074F5D2741DBFCEF1689F2A75358AC"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/include/libssh2.h",
+    "sha256": "767D54FF5AE2CD0DAB48895CCBCB8EE045A17F826F77A24C06461634FEF62778"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/include/libssh2_publickey.h",
+    "sha256": "F1CD086F3950E65635827EE3332C1C6CA62887C0F84369EC58E31974DEBB36E9"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/include/libssh2_sftp.h",
+    "sha256": "B5D864F19AF69521278ED953B20B76A32CFDC08014DA81D38F59964E7E2E2575"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/os400/ccsid.c",
+    "sha256": "E5609B4F10ABA9D9B637935CD28457A82A6AD36F7F57CCC11F7A1F82C8607FB5"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/os400/include/alloca.h",
+    "sha256": "352A872D5813F335AA576E0FAAAAD3F947D498242FF5698FEC52E4618A7D72AC"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/os400/include/assert.h",
+    "sha256": "F1BB79E1196F04B1790B7D0B7A5EBCB32B45B9E7AF034E8E704FABD67E5E562F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/os400/include/sys/socket.h",
+    "sha256": "7D8D5DE13859F12478C37781F83BE6E1817B8658C51B67F349BA30A68416FA47"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/os400/libssh2_ccsid.h",
+    "sha256": "4D6B17BD62C2AFF7EDD21268C273517946CBE2D00873F3230E58DC947BD027EF"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/os400/libssh2_config.h",
+    "sha256": "22FA8CC100A1D597C709EBDF2416D372F107328E5C1A4288F8B0158D88C389CF"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/os400/macros.h",
+    "sha256": "8D76E1BE524A0B00AADE2AB7B4D0FF7CB94BA3EAB6D67035C058DDB21AC2A056"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/os400/os400sys.c",
+    "sha256": "0EFB7CE541BFDBA6A1B5E46447BBA19C28334BAB50648E9C1BE75A11297F2253"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/agent.c",
+    "sha256": "A2E9B5A7C2BCBA8FD252219F4308DDF5C192695A0957E1934000A9D3A6CBD470"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/agent_win.c",
+    "sha256": "3236E068F656CB381FAC00350F14B281CB55CC84E1495AF41DFEC930E85C2F5D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/bcrypt_pbkdf.c",
+    "sha256": "8DF5F079C77AE9E5B452A575E2ECF33BF4478B356D2975C9A55EEF364C84A415"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/blowfish.c",
+    "sha256": "BAEEDAC57701200CE12AB4BEEF6FF56DD6BFB787EAA9D9C1F4FE16FBDF690A32"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/chacha.c",
+    "sha256": "0A1EFB5884580F0B279FCD8782E455F8E3CA07BBDFEBC457706F6E8BF18F296C"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/chacha.h",
+    "sha256": "B42346B01ACD60D6502E689802059648205C118035EDE40BEC8E0D60CF238518"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/channel.c",
+    "sha256": "79C49C36E65178847087EB3A1C140772C291899B838C705B579214929A14742E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/channel.h",
+    "sha256": "0ED48DA58C98AB7AFCBB9A86177A29C92BB66DBD8793E1A8E477DA0EF2F66E6D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/cipher-chachapoly.c",
+    "sha256": "D9F806B81541DE62184E3190B7E1C4F7AB576FD290E3558FE25BF0E00F115F5D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/cipher-chachapoly.h",
+    "sha256": "F6A69FB48994DA6BF7F286884ED473EE0546027BBA3AF433B38B95D1B4442F5F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/comp.c",
+    "sha256": "B2D1642BC02E0B50B02F2619393AC9AFD15985BDBC088231A6EA876A82F23226"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/comp.h",
+    "sha256": "95AA07DEE4C6F2C33F6BC762C6532997E37303BF1BE1BB1276F4ECD5E7092443"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/crypt.c",
+    "sha256": "2D69312C6059192560BB72E4BFA967E4B6E7C4453383580DA90AB86233E98AA4"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/crypto.c",
+    "sha256": "F3EAF5A3A69D91B144F3D4C2F36313DC3264AADA85AA1F42D7C1F6BBF969116F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/crypto.h",
+    "sha256": "1D3D7A56800F0B5B0D008A68D09AAAA26E326879CFD8ACE7DF8B99406E97F659"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/crypto_config.h",
+    "sha256": "E541D1A3B2A5E74733CE745A4D016175FA4ED1FB6571B8A4D69FDF5EFDB576C2"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/global.c",
+    "sha256": "A6C325A335875D6D0FA0DBE544334A469CEC32B45879B9372A49419DA13BB492"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/hostkey.c",
+    "sha256": "32EDCF5A3023C67740B8A5E290A2DB4957A547BE7FB9F1778C143F08A622B65F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/keepalive.c",
+    "sha256": "93C0427472296781C0E01275E60B1D74C0F678112C45EEBD5E233B31F4E4BBCA"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/kex.c",
+    "sha256": "50B90F522575D794B853802221E8B2F2CC99C3B68FF191E1252D70ED1276B6B5"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/knownhost.c",
+    "sha256": "F466648BFF0197C06E3EA2380B9083B634F0002D41293F1102341247DD208872"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/libgcrypt.c",
+    "sha256": "90C46B20D6CC0288F4F3F272D5A4E8D2C0495D3F728D0B62ED9E0E026BAF2532"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/libgcrypt.h",
+    "sha256": "0AE0284295424A04DBA948432527B70FB12D447E8BE8CE28E2BE1E480323D4AC"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/libssh2_priv.h",
+    "sha256": "C3DA0FFF8726B52B3DD2429BBAF26F75D93F0188367D650557D6710017EBB890"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/libssh2_setup.h",
+    "sha256": "D5D1C31758F49EF67E6AFAC92A7C8FC0CCB53B1FD2BBA550E57A3042C17BA55B"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/mac.c",
+    "sha256": "B21E1B85582E43C9696C74FCE826C664003326522D1BAFB7A9BA6B28A0A6F64D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/mac.h",
+    "sha256": "ACDC44807370D226C64958E870F3DAEC767378B45246BBCDEE37DB87120DAB61"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/mbedtls.c",
+    "sha256": "E56B0DAFC27140DE389926BB7E8417AB3E5255E74126EE4A588C18D70AD188CD"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/mbedtls.h",
+    "sha256": "F26002E949125AAC18471F10E590CBB5BEE47C70DE8A7798763604EF0DDCD44C"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/misc.c",
+    "sha256": "C4E749F78C4F5224FCB02EB50DE65DC804ED4AAAA59A734B10A12F54FE2FA085"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/misc.h",
+    "sha256": "608EB5736EB367B82E93C96B8BC94FB87B23141F4658EE991307E64A721C4FA9"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/openssl.c",
+    "sha256": "684F67A0CC3AF33017CBA458C8885B8CBB549834409CF1D9AFD1B35ACB131444"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/openssl.h",
+    "sha256": "BDC6CC39F5A075D4497CC0222892AC371418133E6CFCAA357B131CD62D54E82A"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/os400qc3.c",
+    "sha256": "31E230FDEF9ACDB23CD2DE667B532F7B6853AACD403F54DBF1F700D2E68DBACA"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/os400qc3.h",
+    "sha256": "C1F8A950A42A8A05CA00AC142915D9FD5BD99EF0C9A3545A12823C03CCB8673D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/packet.c",
+    "sha256": "D8D433C7BB61F277ABBD9985F0437378D26781737E173E6BD77415FB3726E54F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/packet.h",
+    "sha256": "66DED0EEA0BE5B4C1F5217E053941A848E5106311EB9338DD39F1BC48713A4C4"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/pem.c",
+    "sha256": "EBA1A89BA4BEB0AA9AAF4E4DA68BE5F2F890E7367001E8BB705C697B9485D416"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/poly1305.c",
+    "sha256": "CC0597E7DE057AB22AB988BB98D4418D716EA26BB2AD418879007DD38DCE2EBF"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/poly1305.h",
+    "sha256": "58A34BE15D390CAE4CB5A215CCF139F0CA359CDB47EA846E6E7E1E6141D3409E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/publickey.c",
+    "sha256": "CB3C555CC4E57CE10205C0A2B57253BE89DFBDAFB1AB19E65DC0B066E0E86801"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/scp.c",
+    "sha256": "6A12DDC4C246B510FF61337D908C683714D4223FDB27F1256605A29F3925DC1A"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/session.c",
+    "sha256": "9F9C0A55EE7CA5204F73F2EB6E6C37957D1FE3F160EA7A819248310E1A58D8AA"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/session.h",
+    "sha256": "19EBEE873E9F5E1F56850BF263053D2527C28A184F30AC42F66AA09FB38D1B5A"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/sftp.c",
+    "sha256": "99246F4FB07C99467FDEA51D75263E1F56D1888D5E24195B3F46AD77436557E5"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/sftp.h",
+    "sha256": "9C53D613CFDB14D4244AB0643918DE60363D9A360A40413CD2E4D682F3E32125"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/transport.c",
+    "sha256": "ADCBDC912A3DE76FC87A9018FEAE1EBAC2BFE3705B34DDEDB3FF47EEA144FBC9"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/transport.h",
+    "sha256": "F2A55152B28AB3290D426767D9E33B053312300B0B4105CC0D20814C1B133FF3"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/userauth.c",
+    "sha256": "078C333A95E634352B91EE6D992A7DA161C4184C25C8099409CDFF2074F01C32"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/userauth.h",
+    "sha256": "23EB97C342AB6BC51606FE917828E8C01CD4BDA4C956D5F22B66D86B6DB0D1A3"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/userauth_kbd_packet.c",
+    "sha256": "E58477FF04C25B7A7F3C0654E36CBC483EEF6A4CCC2D66B88223678D757502D2"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/userauth_kbd_packet.h",
+    "sha256": "570D9CBCA0E3969D1F7DAC2E3D89B0AD3B79BD9F0993D60B830A3B30113AE9F3"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/version.c",
+    "sha256": "2710ABB5561557C62613F1780FB593D9BC423105BDEE81D0ACE9BC1AB3B5FB23"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/wincng.c",
+    "sha256": "CD98E55761C4ADEBEC10256EBE0F0B4F59AB23605D5663F5CCB7E7E2827DEBFE"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/src/wincng.h",
+    "sha256": "78DEB417E2CB9E514AD9DA35DB2F918D2649034318959B2B7A0FA15A9E5F960A"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/cmake/test.c",
+    "sha256": "793B9AD5346EEA8BD0CCA226B57262F0FC64BEDA3C8D7793A8A13C53207F30F0"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/openssh_fixture.c",
+    "sha256": "E7B974E97F77CA54C825E35FE69D7C23D98DB75E9915EF4D802ECD846E50EB84"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/openssh_fixture.h",
+    "sha256": "D0E69C560F7860C0AD2BE34F9F2DA6138056293B2B1AE77C1D757ED033BFBB8F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/ossfuzz/ssh2_client_fuzzer.cc",
+    "sha256": "1157B49ED0E6AD58655E7A62E9222572ED494CB8707F855C9A33D0E7B6133155"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/ossfuzz/standaloneengine.cc",
+    "sha256": "F1E29E90D5863E502E3D0A1482CA3DAED8080D9400CF97FFF9474EA974B73DBC"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/ossfuzz/testinput.h",
+    "sha256": "E2F1261EAFD6BCCFA257AB16AEA206C17DF35594A8E0ECE26F075EAA2A709F46"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/runner.c",
+    "sha256": "CFEC0FF0176CFF917802F35C4EC2DB4D97048A2DD637251AD90D9228C43E8580"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/runner.h",
+    "sha256": "1533882D631BF38FFA5D35912101280007545A9DF2E7580298CB48313DF15529"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/session_fixture.c",
+    "sha256": "C5A4F87A80B5EDA90B1A4440707233A41C83E1BD545146E9902C0DBE4649FD68"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/session_fixture.h",
+    "sha256": "CDC83AB83E4B2E5C9A608E60F197607BB645A1494097E0177C287F2BA5865314"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_aa_warmup.c",
+    "sha256": "A1BDACFEEEF2772E066FBB05BAFCFE46C17073B728494D3B72319E142AC2FFF2"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_agent_forward_ok.c",
+    "sha256": "08BF8B64F867357796AFF457A78743443E91CEED5264FD3BFA65ED7357A4F49E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_auth_keyboard_fail.c",
+    "sha256": "0C2E2DAFB39BA6C6A9B5C65976C322F4614E5105B009D41C0818BBE2C3162AC5"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_auth_keyboard_info_request.c",
+    "sha256": "6DA9D1C05A9A6FF2659327064A1ED7F49A46DB68CEAE47EE349861EEAEF778AE"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_auth_keyboard_ok.c",
+    "sha256": "1EDF4E66D37D93986E419CAE853D14234C27B30DED7651427F088211309A8468"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_auth_password_fail_password.c",
+    "sha256": "ECE5F3B10FC0FAF435C9DFC210893F771A8A4DEBAA8F253DB0DA93C705502B16"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_auth_password_fail_username.c",
+    "sha256": "4E5B4D42BD4B9D3E3B8D8DA1940584AA994F9C821AB3B546CC57A61C550FA6A8"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_auth_password_ok.c",
+    "sha256": "24A78008F23015D230CB667CFE874655203C33AC82F04A3F5B3E6C65D3C3A59F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_auth_pubkey_fail.c",
+    "sha256": "89C824DEE6FDB37E0E300A21435E811A1E11C0D63B7A4875BCB6CB60664E741A"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_auth_pubkey_ok_dsa.c",
+    "sha256": "B18264DD1F934C8ABE422994606BFA913939EC2E91F118764262D8B6C826EAA8"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_auth_pubkey_ok_ecdsa.c",
+    "sha256": "B550C6FA56C93402C4B5721F2D7645FB2C323E6D75D6075EAC93C1D6D312516E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_auth_pubkey_ok_ecdsa_signed.c",
+    "sha256": "D5B8E5EECA916D486B6C158EDBD0339B0459DA4627C216775BA9EE1417DCDBFC"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_auth_pubkey_ok_ed25519.c",
+    "sha256": "9725C8BD014892F087CD4B5A96D622F9AA88D917B1EA31EDEFD9800D650611E3"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_auth_pubkey_ok_ed25519_encrypted.c",
+    "sha256": "09A56256E80C001AEF16D2046D56E0DB3D1010E3805A52F7FD751B2123CC9B7D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_auth_pubkey_ok_ed25519_mem.c",
+    "sha256": "44F2C3315136A9D6A8FABBF012976FCFC37842D52733704EC5D68FA090B6FEDC"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_auth_pubkey_ok_rsa.c",
+    "sha256": "BACDEB5E38D8747082B7A480E1A2D573756B6052F927E289A9935D2041A7643E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_auth_pubkey_ok_rsa_aes256gcm.c",
+    "sha256": "5B6BC31BE900678235793BBA87003E4300ACE6CB4BA17A8C052897E1A25D5F6E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_auth_pubkey_ok_rsa_encrypted.c",
+    "sha256": "536FB2B59121161EADD82305E96F40F733F53C823AC5DA2F9FE7A7D19EC93395"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_auth_pubkey_ok_rsa_openssh.c",
+    "sha256": "5844D18D571B4D174355A23FCF44137C9A91AC5A4D1B3E9C4A31251A6D40B2FE"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_auth_pubkey_ok_rsa_sha2_256_signed.c",
+    "sha256": "513B24645D0E702FEFFA49191B85322B8144548F23EEE60D4A61E6F2AC8BE5DD"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_auth_pubkey_ok_rsa_signed.c",
+    "sha256": "7F5A22FE6B1CA625820A5B0FB010A4399CCB6AC0210180E6E747E72B13B52B92"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_hostkey.c",
+    "sha256": "399C9DBD53616AA079B19F46CE2AA4B9CE1D18D0A58AB30249050AE45DB22C64"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_hostkey_hash.c",
+    "sha256": "B42EE0F1C5E93E7F95AA4CD333AF37E71EE6FB77835B774B2EB1ACFE0D72CEED"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_read.c",
+    "sha256": "EE4C5E2B25A28221D776AE113F8BDECE63C678D6E42538791F909453A39FBB9D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_simple.c",
+    "sha256": "A0E0F09FAD26CE3E76042DA91806029A2F880FA3BC9A23DE13E71A941E3029E6"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/tests/test_ssh2.c",
+    "sha256": "BF12424B3C361A848B79F4B3433CCF8B47AADB1E8C9038BC74CBBC0361EDB7D6"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/vms/libssh2_config.h",
+    "sha256": "6199C5B68ECAED22081FBA2C075D17DAC4FA7932645DA49B01B73B56FB64E4AB"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/libssh2/vms/man2help.c",
+    "sha256": "0C22202516114C60F4997347077C434A9C8FEE41D8187DC03552FD79C220E2D2"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/everest/include/everest/Hacl_Curve25519.h",
+    "sha256": "463D56088A31CBACF694EB20A7397E1689DA0BA5FC0B37445784C08DF5465FC0"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/everest/include/everest/everest.h",
+    "sha256": "DDC6C96EC9598FE10C389C155467D4A2CDEDF488DA8D2186303442EDE7A4DB08"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/everest/include/everest/kremlib.h",
+    "sha256": "05DB27DDA38B43F0D9745A36E20F6EC5CE18FD6F8C130D64C3B8FAF27400B4FB"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/everest/include/everest/kremlib/FStar_UInt128.h",
+    "sha256": "4B1EE5B71376AF6E6D2F80303B7FDDA4427CDF0BE8C153DD6821215434ED5588"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/everest/include/everest/kremlib/FStar_UInt64_FStar_UInt32_FStar_UInt16_FStar_UInt8.h",
+    "sha256": "32BA176EECED425DA0D539D3A406275BB880CC78FA67C5E3A4937206F0E42122"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/everest/include/everest/kremlin/c_endianness.h",
+    "sha256": "68FBE51F16D70A3085DADAE798FD533CAA9B14218C77B50CD39655D7F8BF2C41"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/everest/include/everest/kremlin/internal/builtin.h",
+    "sha256": "836D849EB5F824531D5C4E9D3BEC50D203461B672B868D17F8F618BD60655FD5"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/everest/include/everest/kremlin/internal/callconv.h",
+    "sha256": "6F52B321C73C19EF5235032F9AE2BBD1958DA44A6B982715CD2382D60BAD1AD2"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/everest/include/everest/kremlin/internal/compat.h",
+    "sha256": "7304C71089F76077AE2B5CBCC9493512BB71C8A615BBEC5EB3823F5D3F9B4888"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/everest/include/everest/kremlin/internal/debug.h",
+    "sha256": "F154EE91DEE1DBA31C1039D28B3B39EDD9D08B20ABAC62C33EF6CFFF1363EBFC"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/everest/include/everest/kremlin/internal/target.h",
+    "sha256": "923A6430D90E681115C7467DC553A54750292DA2D5119B40E2D144D4550969AA"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/everest/include/everest/kremlin/internal/types.h",
+    "sha256": "C3DEF1C71D571F97BE579E535AD79F892BE998B1B5702BD68608925B2A63AE8E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/everest/include/everest/kremlin/internal/wasmsupport.h",
+    "sha256": "6E1B236E46BA8F6DF8B503A0EC4283B795DB56950EB24623C96801A072F78716"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/everest/include/everest/vs2013/Hacl_Curve25519.h",
+    "sha256": "C2E5A6EE616F8410CE8581DD1740A5B3D56DD036904A24EC431BBF0CCFCFEB0D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/everest/include/everest/x25519.h",
+    "sha256": "DA28AEBD8413EBFBE7B0D8069D40AB7CEBF24725B5C41C83A3DBD316622C8F2C"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/everest/library/Hacl_Curve25519.c",
+    "sha256": "FF662CFAE5E65D968D487A687DB5FDC05C357EC9B2035AC9E380C9F8EC7EB6EB"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/everest/library/Hacl_Curve25519_joined.c",
+    "sha256": "84C977B884645C365E7D5BD9FA224177A26B01E9112EAD8AA5D4B05A2FBB05EC"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/everest/library/everest.c",
+    "sha256": "2D7F6FCCC2E11F3EAFEA2E606F23EF57D55FCC83F346B8B178A4CDC0D3036BD7"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/everest/library/kremlib/FStar_UInt128_extracted.c",
+    "sha256": "B75508632B4729497AE042851E3E3B996A93E2EF5AD0688785931725361BC88F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/everest/library/kremlib/FStar_UInt64_FStar_UInt32_FStar_UInt16_FStar_UInt8.c",
+    "sha256": "9A3504B115DCC34581DFF4DD1F4ADB96F7119D2D4D5E0612FC0342A1562727DC"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/everest/library/legacy/Hacl_Curve25519.c",
+    "sha256": "FD769BA72BED1CA61A4E286D7EF1751931FDA5707881DF514335F97CCAFB5984"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/everest/library/x25519.c",
+    "sha256": "D1123CA0218A146D06338E703D6132827ED702B8494549EE3ADF23E548EDE84E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/p256-m/p256-m/p256-m.c",
+    "sha256": "F546B6E993E268DD2FA464C68B740F708498D480C1F74AA1BBDA518D1F7BB770"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/p256-m/p256-m/p256-m.h",
+    "sha256": "AE61836D9E8083177E25168DF7E35F77A65C5E3443CA0980053863CA07E334D0"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/p256-m/p256-m_driver_entrypoints.c",
+    "sha256": "36DB3E42A3CA76CE803BB346761AAAD85D829FC6077F75934F87B1EC435FF329"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/3rdparty/p256-m/p256-m_driver_entrypoints.h",
+    "sha256": "07EE2EE0551BCB8D3193D6D31E64D45A6278C3539D7DD3454B207BBBC279F27B"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/configs/config-ccm-psk-dtls1_2.h",
+    "sha256": "EB5337714C105D86987E73BB76FC8A97020783CE1CFC3EE2E85D7FAD50650946"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/configs/config-ccm-psk-tls1_2.h",
+    "sha256": "722725B61455DFA7C9AA204A4808F4F06CA1D89A4D49C846FD7E466B38DDC9DD"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/configs/config-no-entropy.h",
+    "sha256": "DF44697CE81757547A15490D53656582AC4B5159DB0C2E72EDB00EFE57BBBA59"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/configs/config-suite-b.h",
+    "sha256": "743E34B41B51350DF697CA1F0B695FDAFE66425B0B5B70E662AA1F647828627B"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/configs/config-symmetric-only.h",
+    "sha256": "AA11D1A999F1F55CA5DBE5272C52C0CB08EFB5ECE279680C2D6BD8E50EEF3B3F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/configs/config-tfm.h",
+    "sha256": "63F4BF6B55B4F4F167D23E55F034891F575EB789C6ED918A8AAA81C7D860EC9D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/configs/config-thread.h",
+    "sha256": "20DE9540FC4E86332E105E802EB6500073E04CC6CB48AAED76E8D4B78AEA226F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/configs/crypto-config-ccm-aes-sha256.h",
+    "sha256": "7703E4C1FB3F0E2F31E358D238634B94C8596B7272F371E84A4C0BE30A291188"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/configs/ext/config_tfm.h",
+    "sha256": "E1F2385BCC70D96B36E69510B23EA3987CB02402B261723A22D85F761B638E91"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/configs/ext/crypto_config_profile_medium.h",
+    "sha256": "B9110019982400496D0BA66CF8D94E45A0DD07258C7F81965BD1B8AF017BC5AA"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/configs/ext/mbedtls_entropy_nv_seed_config.h",
+    "sha256": "E1F2385BCC70D96B36E69510B23EA3987CB02402B261723A22D85F761B638E91"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/configs/ext/tfm_mbedcrypto_config_profile_medium.h",
+    "sha256": "EE95D321C5DCF5C4749A8EA9AB184E814BC5C5C9EAB8B144B1B69425D22E87D4"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/doxygen/input/doc_encdec.h",
+    "sha256": "503A97B689135747451C1CFD9BA5990CB606107401107C0183D73B29DDD02657"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/doxygen/input/doc_hashing.h",
+    "sha256": "C1E600E5DC99D75D0AFFC9FCD8C09ECCBFCCB5200374D366CF89634F6E105692"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/doxygen/input/doc_mainpage.h",
+    "sha256": "63EAB3F90DD92BE6D80B6E11389A923440B9C52DC5FF11179D28EF9C647C7CDB"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/doxygen/input/doc_rng.h",
+    "sha256": "D67B7383B89F71F62BEC824F965DF30114595799DAD8A34936B53BB6DD0DE875"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/doxygen/input/doc_ssltls.h",
+    "sha256": "3023FE21B3B398AFD527FF00A38D142E883B1256BD510E140A364EFF5C51F4FA"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/doxygen/input/doc_tcpip.h",
+    "sha256": "21355833CBC6D797B675FBE968F4A86066DCD9DBBEAA3684822BE876E76231E5"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/doxygen/input/doc_x509.h",
+    "sha256": "ADE5C11CE2BE981F62D75D737A5327DA1AD7A7742ECBF702C490299C5798952F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/aes.h",
+    "sha256": "CE71F35D91CF1609BDDFF21D613863C1177BCCC97327F7994C39965EBF044B56"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/aria.h",
+    "sha256": "71FADC4B862611C8A75DE841CCF4A346F756CEC7345D34D2ED58398EBF79C72A"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/asn1.h",
+    "sha256": "BFF209B57C95FEB92EDF78194F77BCC139172FF2C78B5AA0AD25A9739CE570BC"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/asn1write.h",
+    "sha256": "28187D70E8E6ED663053C748628EFF16AA94AACF356664CAA646139F30B27AE4"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/base64.h",
+    "sha256": "30F5BFB1B8AF6ECC035D005126F25395ECC5164B810B3D8C6ADE74B1ACF46848"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/bignum.h",
+    "sha256": "F4167D7A91C3431F37341D0D32C72280FD912DFAF360D6FCCB1CD9C5FA9DA92C"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/block_cipher.h",
+    "sha256": "EDDDBF6B03A54E04B2AE3EE3DA00A7E243A7EF3F81DB5747C69884B222980898"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/build_info.h",
+    "sha256": "4BB715278F3199298220B930514ACE4F461ED0E9FF27B656D6E2616A1CA3287F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/camellia.h",
+    "sha256": "32E959E91FD7CCE4F9B6FA204AFAF6A713E34C7940A35E716FA5E3681AADF6BD"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/ccm.h",
+    "sha256": "7A71BA5BBA1AF8CB6D79474AE9130D9A88319BB15034F331ACAAB755B1C6764C"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/chacha20.h",
+    "sha256": "EBBCED7D6162FDA31D953B5DE77733371375B5BBEBA959C14EB8576C18773C2B"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/chachapoly.h",
+    "sha256": "EDEF9E38E446B87289B20BB7B7DB6A9F5792A25AD00BEB567732088D4E4BA67F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/check_config.h",
+    "sha256": "66696DF9CC3F7CBBE84786046937242B18140963B94C34347404F7827C428EFA"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/cipher.h",
+    "sha256": "9DC945CC9AD4A97E656D435ECE879C207DF249B037D8B7CD1A5D9EFECEEEB577"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/cmac.h",
+    "sha256": "181015EAE9AF1A0E3ED94F54D42C806EE7897F623968EEECE045D7C46CC347E9"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/compat-2.x.h",
+    "sha256": "9E10B95F0C0C920B1F41152E6D81D48B5DF1AB166DBC27C2689546C9079774FA"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/config_adjust_legacy_crypto.h",
+    "sha256": "F404960E2878C21C22A5D67CABA6CD1D29F382B3D913A56CE856931DD15B2886"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/config_adjust_legacy_from_psa.h",
+    "sha256": "8E031E9153F87FD3456CF2B997B9F37DE9B39AF57E62665E1500E3CDC8D7DAF4"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/config_adjust_psa_from_legacy.h",
+    "sha256": "4311A3E3A393677FD329006D7C88941311E7BCEB94E81763A300754F721DB78D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/config_adjust_psa_superset_legacy.h",
+    "sha256": "347736D9DF62E4B874D06EE5D76B3D135D693D498A9EBAD30EED4F4CDB65825A"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/config_adjust_ssl.h",
+    "sha256": "2D37A7552566E9FBD8A5A8B3E6CF6D4E21125A5E48A7E24CA30F3C683D141871"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/config_adjust_x509.h",
+    "sha256": "92909D91C59340F13EB2B447CF44E0075A0EE742A18F22FB7843F6A18C5AF5DC"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/config_psa.h",
+    "sha256": "1C65CB4B836AEEFA764BF7DDF69090347D4D4021379B0CEF6201C6ED0F3DC7F8"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/constant_time.h",
+    "sha256": "1F4196ABB876364C85BCC044990B01661114E32D5DDEADE427259ADB58BB0C79"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/ctr_drbg.h",
+    "sha256": "601DB8F2EB7A1269807547180F5D46249C07968A9191A187E0E88ABA312BC74A"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/debug.h",
+    "sha256": "AD575EF8B6FC99409BE0F0D56A622147F8EF088E8E9B5814E7664BD823ACC0CC"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/des.h",
+    "sha256": "05DDC8143AC3C6287946C73556C7A0EE50ECAA74132CF9D7895D9B894A115310"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/dhm.h",
+    "sha256": "92D8CED06E17876B72DF79D08F931B1642C53618B4F63E2ADD804FB5CFB94977"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/ecdh.h",
+    "sha256": "638011CD4D5A40DE48639169C4CE6C24104B2BB369CAF2321F2FE453258B0568"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/ecdsa.h",
+    "sha256": "C4E419B690D0DA2631D7C1F6893E392F7AD02A818B8CB24A323B66CAEA9EADA0"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/ecjpake.h",
+    "sha256": "13A7908D6C9193EF176BAF4250BD235AE6813B2A44D7C5DC2692294587DF5D42"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/ecp.h",
+    "sha256": "F0CB2C6D6962623E7B379BCACB8A188CEE24285ADB31823B89FE05749187ED36"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/entropy.h",
+    "sha256": "9C3FC1D14497C0989C0F2EA590F708093F4DAC39228353EEB1F5F83392DF3DCA"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/error.h",
+    "sha256": "DDCB14C1BF9D6FD2F2F1D2EB62117CE9BF05A0F9430C6931D7555B23F9ED3DDB"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/gcm.h",
+    "sha256": "E28C3E5923269DBC921BC57E83E0AB2A6488A16E1BCBAE943E5AD36CCC57D1F4"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/hkdf.h",
+    "sha256": "58C991C0BC9E821EE8ABCDED770B83B40682CCC3C12B1BC58B35A853D104A12A"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/hmac_drbg.h",
+    "sha256": "08A52034212DCD99AEFC603C9EB62CCE1C3D33D41142EFCA626D7BAA80B73630"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/lms.h",
+    "sha256": "00A6E65CA542180223B60180790A9FCE8903EE85644ECA914C9F7AE86F626350"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/mbedtls_config.h",
+    "sha256": "004EDFAA0F9877A9F3BAA7911AB708FD9D7C615F836F6B6674434E337145B7BE"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/md.h",
+    "sha256": "89C41B36251AB26FACDEDC7B379AD5236AF8F941CAE58941BE7F6DE690FECD4E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/md5.h",
+    "sha256": "21893A1FFCB6D65057178A45977774ED249387ACE6D733F32434D8546DD827F7"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/memory_buffer_alloc.h",
+    "sha256": "CF561B299149797735DD23E5CD898AA503A6E4E35FE196E3D8A3D74D2D16BB94"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/net_sockets.h",
+    "sha256": "61BA8B8AC6AAFB07AC3E147645579F7DCA872E3F95B309036804DDA2D909EA6F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/nist_kw.h",
+    "sha256": "A63A6452D9DE9F8F84CBF05CC6F3A710C1AD7B4FC305C04924A12C7EE97DDC8D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/oid.h",
+    "sha256": "43B033FFCF575A549267F5A561C40EBD33D6FF6DEA12981DD186B9EDC2FFE9DE"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/pem.h",
+    "sha256": "DF7044DBD27684D4305A93077A3BD5AF661A21443897F81A8A0A82CEC6A8FDBF"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/pk.h",
+    "sha256": "B6974AFCC43DBCDDBCB222A689CACCC011044F2C8B8843571B4584254C500BC2"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/pkcs12.h",
+    "sha256": "37EA587A2BE9212B54DC65AAF3916165241B241C925B7368A22D22ACB20B39E4"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/pkcs5.h",
+    "sha256": "D461711E57754093228A127268303BF03F33522D05AFF3D1E0F3915BB5E4E370"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/pkcs7.h",
+    "sha256": "565D6BAF3C1CC3EB7CD27BB6560E6E4F5A78B3EB82854150261360EABA9F015F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/platform.h",
+    "sha256": "E6E1EDC99D90698ACF751D5D837C9B59898D7277DEB993BCBF7473172B7A3523"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/platform_time.h",
+    "sha256": "5BAF1588BCCB5EF634E765012E4E1D680F1DED4D62E2A6573B5C238546F71327"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/platform_util.h",
+    "sha256": "1237D849E96BC15B479E8086160E4568C1DE86563BB51C60EEAD45B99AD1B4AC"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/poly1305.h",
+    "sha256": "393389D0F437930FAE11E0CC1F325BBD82282723DFFD57F080A08F82453D1E6E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/private_access.h",
+    "sha256": "C897213B3E534E8D5DB83629177F9C01D90461ED6FEA57906836262DBA87056D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/psa_util.h",
+    "sha256": "382C0CC5184A102F7A6EE2ADA6EBAF95C327BAD7E08D9FA2FF2940E9585DDE1B"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/ripemd160.h",
+    "sha256": "138B3CD792A3301FB869E5303FE0DD317743B2009B7A8F8423A51511444E23DC"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/rsa.h",
+    "sha256": "FF1C3DD80DFDAECEA95BDCDD9C525CD1AD816A1590B65234CD4B7DF84E08CB81"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/sha1.h",
+    "sha256": "E644D96D46D44DA66E160EB69AD637F13CAEF1D192E3361616833B342C6A859B"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/sha256.h",
+    "sha256": "A2EE050CA15B7598A8D227CAC0E0EC9FD6C38615B817737A8007E90B3FEAB0D9"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/sha3.h",
+    "sha256": "8CC0B3928976871E2A4847D0F6BF02DA4663A94CC0779AFDEC3438A0C76A5499"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/sha512.h",
+    "sha256": "0F77ABF1B4DFC18B865725E8A221D5D9279899C274E993005359BE182B7574A2"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/ssl.h",
+    "sha256": "8163FA47C3A8605A5EB58C6ED258C98EA846863A22026A6FD7A38D8FB1244184"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/ssl_cache.h",
+    "sha256": "30211032125E7EA766170195F86A69CE44846488D2828467C9A7E5B210BD491E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/ssl_ciphersuites.h",
+    "sha256": "F7C3136EBD9AB933AA94544880A20C1FB97FF71D320DC47F97AE70023DF8270C"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/ssl_cookie.h",
+    "sha256": "DD533EA587703B57769785747D3497CBC58E0E0582D1B9A6D9EEADFC7A32E59C"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/ssl_ticket.h",
+    "sha256": "1E6EDBE8C647A6471472FC82BA262BD36159A6C6B0E0D340B741006560A39700"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/threading.h",
+    "sha256": "5688B2BEF81FA61B9D29BCA9383931DB26B7DCB8A96785DBC957B95E01292B72"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/timing.h",
+    "sha256": "177074F8D1699BFD8940EEF3749E018F10298AD39AF1CBE3A48C04126408CE1C"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/version.h",
+    "sha256": "ED3E527B2F2AB3B9C9E2633A1A49A764FB3854FC44835AFA07F325CE671334DE"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/x509.h",
+    "sha256": "AA138F6080869285173296AFD08727E0AB0313CCA959B830250B72A3C37A3BC4"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/x509_crl.h",
+    "sha256": "F5FA1C1BFEAC75548FD9B68903E05C5A4435634C1F1457D0FFDD2BECD0CD72F1"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/x509_crt.h",
+    "sha256": "2BC2F06295BCE2B267A4EFB608B2E6F8F751F0C58ACF35A63D47B946860AFD80"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/mbedtls/x509_csr.h",
+    "sha256": "DD0BCEA7E36DDB018AFFC8B7B52F1F7E9FB12B5F69C8C712F9C2B7FD2972ED07"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/build_info.h",
+    "sha256": "9EB0DBED47AC851ACEE62BD0829CE177AAC6FE8515A4CE7E904ECF71829CB3D0"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/crypto.h",
+    "sha256": "1F5B3A248A348EA39D093208067E377E5C8908718E71E396F9FF4D2C7FB5EBDD"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/crypto_adjust_auto_enabled.h",
+    "sha256": "34EA7513C9ED3467B5D185EC350F207CAF31160AD1D24369B86593050449EDAE"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/crypto_adjust_config_dependencies.h",
+    "sha256": "7DAE42EFB18E0F3D428FD0E4B4223534B66B650A56B7CF7302B4E179E81E2F56"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/crypto_adjust_config_key_pair_types.h",
+    "sha256": "9CB1FBA3C26AB4FEADA289813242545670F9703C5EBE9F5AB336F3DBDEA4A1B5"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/crypto_adjust_config_synonyms.h",
+    "sha256": "039EB983EB52A46BC273D513E0E17817BD77015004EFDB3F9CD8B65EAC02DE77"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/crypto_builtin_composites.h",
+    "sha256": "1E2EEC329B2B4EC3B5DA3F9D5761BC5645833445401A43CBFF812FDB76B0AE9E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/crypto_builtin_key_derivation.h",
+    "sha256": "8B3D5D3174DBD33E5E332F51E5F00D2734716F3E744656631BCCB4D355E92BDC"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/crypto_builtin_primitives.h",
+    "sha256": "A3078C5637A4EF2A40EF022F89881B8CA5D3321BCAB31F6F550C6154C58543C5"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/crypto_compat.h",
+    "sha256": "0C0396D7F339F9207AF3A003E98E9921516367C71D53724CB42E32F0F66142F7"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/crypto_config.h",
+    "sha256": "DD8222851BF799827F45AAB2B7783D5E65C8E54C24092EC0DBAFA2B259612BEF"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/crypto_driver_common.h",
+    "sha256": "25207D12A91FC8C0670370596C3306C256EC054B4D6A6D1DD9B5BBB7D5BBE35B"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/crypto_driver_contexts_composites.h",
+    "sha256": "9F6BC40047A2D0D48361D82E5A5B05C477D946518B0091A3D4CB8C2CD0C877FD"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/crypto_driver_contexts_key_derivation.h",
+    "sha256": "77C8EF9B7A8FAC177A53472C7A39A9835DA61BF864DF951979CD15F71143796F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/crypto_driver_contexts_primitives.h",
+    "sha256": "829AAA3FBF90BEEB20BF989A9DB20829469D4875D514D0CC18591F8748A0BA0C"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/crypto_extra.h",
+    "sha256": "7357E1A806B9CF2FC677D9B0D4890EB1876A9430167955921BCA6B8B0B98D2A0"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/crypto_legacy.h",
+    "sha256": "51C4415DCAE97A01F1F0F3901E3E7D91B623CBC30D02E8D9496542545966AAE4"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/crypto_platform.h",
+    "sha256": "26DB28657E60FF6C3198B83E10BA86B25CED721CDDA1D67E1C0EC679F1F7D041"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/crypto_se_driver.h",
+    "sha256": "CECF5150230F20D60AD8DF60FA96982BB40ECBBB90FF54A14C98F180438B62E1"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/crypto_sizes.h",
+    "sha256": "A2EC8EBD505BA034EA8916CACD10734C9B82850B120A78C0CE7944E26EE0FB2B"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/crypto_struct.h",
+    "sha256": "0F5B72D1C0F7FF64A4823998D4641C80F29091A372BCE8385261BF7419C81655"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/crypto_types.h",
+    "sha256": "219AC995D8C48EE0A70A35F1BB70C92215151862C2A1C22385C7018C9CCB7AA6"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/include/psa/crypto_values.h",
+    "sha256": "BBB8FEA69782EB077317E973E6BA92D3024E69932F284265041CADC35307F0E3"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/aes.c",
+    "sha256": "F30E6B7139527B41C32F68CC5430CEAFA213E7FDF7A39BF4981F6A20CD0E77A1"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/aesce.c",
+    "sha256": "2674C0205E9743CC8B169058B934AEDEAAE282268A9E344974E03A756A0C148D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/aesce.h",
+    "sha256": "554A363178D24668D52A8036ECD403B43AA43CA02748FEC168FEA4079DA6CF28"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/aesni.c",
+    "sha256": "A49C2513F08B692DCDFC612CBBB520A009D7B3BD22F9E1A00C5C4F2D54057770"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/aesni.h",
+    "sha256": "43DFAB1DEB659D5E3DA152FDC6341C354A93135010BD27EAE696D5B1A3D311D6"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/alignment.h",
+    "sha256": "E97B8844ABFADC4CC2FECCE5B040D58CD53F549C42712205A267E00E372EFD3D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/aria.c",
+    "sha256": "DF4A23F6139064AAD80E0A284EAD99A2E1B68698DA4006B4EB7EB98FDAF020AD"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/asn1parse.c",
+    "sha256": "D7D4AB84977626F3CB741EC6D606591F1665DEFAD6D8C17E1C957022803D3DED"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/asn1write.c",
+    "sha256": "96813AEC0001D0B4B212FFE834178E96A793E3157D4B987021D59D89EF47D8D2"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/base64.c",
+    "sha256": "42FB3F63678521D4BA877DC7227337B5534813AA3B8E7BEDA87335E598BBAB6C"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/base64_internal.h",
+    "sha256": "A6D1C16C6E57EAF9A20266C28E57A4AC55DB69179E34F355FA2AED5196344587"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/bignum.c",
+    "sha256": "8AEAD491E4F7756E4E112E4731CB74F43B3FD736D08E5009443436B7C15F431D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/bignum_core.c",
+    "sha256": "0881AACCE52499184AA33641C24CA6075BF533B31F61C5358923A655490BCFA6"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/bignum_core.h",
+    "sha256": "1DF926337D83ADDDD398A979ED580C037E595B592699C68DBE2867B26EB9003A"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/bignum_core_invasive.h",
+    "sha256": "502ECDB0E785711A5A0CD9A318E9868501856FBFF9F4A9A65C051964DBA8B215"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/bignum_internal.h",
+    "sha256": "4EBA771567115B06EDB44E2AC5AD1CDAD9BE7BAAB568942BEB7A6A62EF23847F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/bignum_mod.c",
+    "sha256": "DE6608FC08ED5E61D22AC11F2369484C5A837AC4E1F58D450BEFC51D3674E68E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/bignum_mod.h",
+    "sha256": "734A0BA272BC72DDFAE51CC677258E6EF8E8CFCD65B6925CF78F2FEA59AE996F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/bignum_mod_raw.c",
+    "sha256": "77D7B5FA4FE55D982D5A7BE330FB0CA2DE9BB254736C2A3E7716029FEC49D118"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/bignum_mod_raw.h",
+    "sha256": "6AAB39228A6108D0BE8916F89CA87576A4CAB3133AA4208114FD15B6BF0356C3"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/bignum_mod_raw_invasive.h",
+    "sha256": "117AA1EDDE39685FDD9ED64CCBB550A47578B7124CC52A929E6ED3C1C2F43C55"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/block_cipher.c",
+    "sha256": "90D8A053A836D747D5EAD61890E711F7150987017912FAFC00C4BA08D6A80796"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/block_cipher_internal.h",
+    "sha256": "CFAF450DE93ABF79AE6EFC3B66F2C97E4389730F48B50ABD323929A0E4CE30AA"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/bn_mul.h",
+    "sha256": "245587DBAE16540F6109D0E670F544D1A3C512EDC3C463541A0D02CCB512AA10"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/camellia.c",
+    "sha256": "956E808FF56D48B52B35E73722BE61F0C42E575676C9CBD224D04A1CEB40F685"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ccm.c",
+    "sha256": "14FCBA1014FB21C5EBF65BB1FA7B58F67848DE99CAB8AA1E5B836C7BF3708ACE"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/chacha20.c",
+    "sha256": "B97789595E2AFC19D0D492F43415296598E83292F0CC962489E03A9DECA1049E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/chacha20_internal.h",
+    "sha256": "394D1780BADF2A7CAA10487395964D2A70804BB65CC286326806F78244F86312"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/chachapoly.c",
+    "sha256": "8F10BDC6B1AA537485BA095853848BF8E9EF525C5283A9D04E7658AEF99EE07E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/check_crypto_config.h",
+    "sha256": "880F5C95273E75F8C83ABF972EB640C31596236F5DCAC4AA3FE3CAADF65BD068"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/cipher.c",
+    "sha256": "E9E81DEB2E31BFED80278428959B0A115DE4CD454A13ECFFB913748FD9937EFF"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/cipher_invasive.h",
+    "sha256": "341DE23DFC22ECCDD51201042EE6872DE82BCAEC96A650E5AE5100ABA72CAA6B"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/cipher_wrap.c",
+    "sha256": "FB742E7FD4E2C7A8DBF67206E554EC20095A2F6CAB3F4D38D1CC846466FEA673"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/cipher_wrap.h",
+    "sha256": "A3741799BFF6784116725DB4204E75BB645191EA7F87A94FF2CAE0B2DC565FF6"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/cmac.c",
+    "sha256": "62B3AE25E4E63F9AD75DB1D6BCC03BC98CC44E05315ADCE421975FE59D80BE94"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/common.h",
+    "sha256": "ADFD493F8ECB11F87F7E75F270A97CBD05D1902345EF32DB51D39C076E4F8FDE"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/constant_time.c",
+    "sha256": "1A573EDD420FECE73F996B70CDF6BB58A05A468E434A6AC0C562DF592048D3C6"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/constant_time_impl.h",
+    "sha256": "5AFBDAA93EAA2C750C4F3F2D0338409D8E15845823F870A39744D1CC197B4E60"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/constant_time_internal.h",
+    "sha256": "CB5ACFF773C6129B5DCC29052DC927D9AA474A2E6B7F7E27E5FAC0E7D7023463"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ctr.h",
+    "sha256": "63331EB36D8EA69B4B4DCD2EC059582BCABF51A8EA891DB26D37AB033967789F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ctr_drbg.c",
+    "sha256": "2B074C5ED907B092AD28449361AF822FDD78710606263453F8348421CA4AB6F0"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/debug.c",
+    "sha256": "1D7199EE90602FBD87E682AB40B87F1D1DE2F4A269CD0C5C463BDF4C97D8AECD"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/debug_internal.h",
+    "sha256": "281F30A42928AED6866A47454E8487921809B27FF396CEC4E9D472A3F1E4F387"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/des.c",
+    "sha256": "B3D91E02055FC05F0D28F820E8731445EEEB73A6708BBAFC3C988BF631A243B0"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/dhm.c",
+    "sha256": "6FBEE2ACFC4C7E732FF784D8DB8355E976CB579EACE3E0238B04CC34F9BCDB20"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ecdh.c",
+    "sha256": "4C0BD59F3746F3366ABE647771F3EA4BF750201969225789969DBADD0B0234BC"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ecdsa.c",
+    "sha256": "9C02115727714C0D6FFF5CC47CA01C5F375B0E8EDA54F935B0C16D23E45B0325"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ecjpake.c",
+    "sha256": "E6D2BF5A93D7CDB77910335A1058C3D3264643778EBACAEFAD6314958CC95BA5"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ecp.c",
+    "sha256": "9F2385F20E34DF5E469EED28337738C28FDF99925A10492646C1A767BAB465E6"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ecp_curves.c",
+    "sha256": "DB2D2C08FD5B7A28D9A082CDCE1AF6C266BAFD5DFBDEE0F162183A07FA0BFE86"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ecp_curves_new.c",
+    "sha256": "C6466B6BBC781931565F3819482B2668949C340FB43E613240C444A1DB04BF38"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ecp_internal_alt.h",
+    "sha256": "F6D3594E9E3CAB0D3D79BB9C3B054AC2558559BA6456299B6B230B0718C5ABDA"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ecp_invasive.h",
+    "sha256": "F50A6CA7196B8B828AC5A82E4AC5EB262CA7BCF8051E18A39FFEBA5E94F46EBD"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/entropy.c",
+    "sha256": "2D3240FC621027EC74805B32B73DBA246584494A96BFB2F509E26B96A3672C5F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/entropy_poll.c",
+    "sha256": "472E1BA8DFCD751CAC88DA649987C1422D0E263FFB57AD406BC6652282D48BC4"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/entropy_poll.h",
+    "sha256": "0A31C6CF0E23BE40374C4204143625B61710D95777B63E8644AEC527CB1D0443"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/error.c",
+    "sha256": "3D8E0B0E49A3BF0D0D323EC16FADC79E145B772A11BB5FBB924A3729B34488C5"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/gcm.c",
+    "sha256": "202AC639D0C3CE4D34025C68614023C1AC9381E80F0B210ACF3204FF4A97F8B3"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/hkdf.c",
+    "sha256": "C23DDF951E5037CF279A8974A6B228711ECDC0E7ADA33B0EB3937F540079391C"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/hmac_drbg.c",
+    "sha256": "D7217E21593F85C74D3EED0909EA7453169606B1FB6EF906A3FDAA2CC392D7EF"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/lmots.c",
+    "sha256": "4441AEF3DFDF080A23034A79252C68EF101AF1617001C45C1733F31CF1B24818"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/lmots.h",
+    "sha256": "B99B298FFB0BF7A8A0E9D9D67DB5F3784BF72FDE98445D97826345E8E3E34E6B"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/lms.c",
+    "sha256": "1A0C98C39BB79535B837CB0531F40396860F99C3384BBE2CB8123E9E176D750E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/md.c",
+    "sha256": "5BA79D51FF85951CB4001A22B2428568E4BC1072B367222808F3EAC1AD91884D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/md5.c",
+    "sha256": "887ECA6A51F8DFD8C3FD1A9DAB6FF083E1795644E88B39C87640B56FCD33503B"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/md_psa.h",
+    "sha256": "F0E399C9EFE9B4A79B67DA247945FB54407B2AAA3BC2A60C38C3472FB54751AB"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/md_wrap.h",
+    "sha256": "383077E483C60893F8256DB246A7BD1FB1FC30BC7DD8E15133D2CB16B9DC5C82"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/memory_buffer_alloc.c",
+    "sha256": "B177E81E8F15838BCBFA27516886D93DD0B16AD3DEBD3396138535A8ADED6B12"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/mps_common.h",
+    "sha256": "3DFFFD9855B73EBFDD08EE764F24E8EB09F5A1E3A0333F1E8E23D33AE81328AA"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/mps_error.h",
+    "sha256": "BDF857247917B234F0264500345F8A3025A2DFDB85C726C0480F4973BEA4BD4A"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/mps_reader.c",
+    "sha256": "B54DD060387DD4E01B993B3D579C64F36B125C8AB694F686AA727BE8673266FD"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/mps_reader.h",
+    "sha256": "5210C86B7808831D74D2A8425EFAB2B7286D4FEDCAAFBED6354E1311B2046BDD"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/mps_trace.c",
+    "sha256": "C66424D20CB5371E6881EAC9943252B74B13BA45D59A0E3485C27C3231CA7E7A"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/mps_trace.h",
+    "sha256": "A3F50E5620A829AC8781DB1CF82C019609A4E210E1A8E5960295D926AA273051"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/net_sockets.c",
+    "sha256": "5009B8E19F3CF62A2D921058F032624E005CEEC389ABA83174C47E9EB58E5BB4"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/nist_kw.c",
+    "sha256": "2D0BB3B6309609888D3AB58FE391E276ADBA0AE6E23F53C6B3C90970D77D5D00"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/oid.c",
+    "sha256": "6E279E9F6C4D036588DA7729B1FD432992D3BC1AD36D852ECA76286C015CCF4D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/padlock.c",
+    "sha256": "05FBF8168E6BFF3D578E066776280DCA143F9579F3C2D6AF4E33DEC26F6F383B"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/padlock.h",
+    "sha256": "31A39D0A3D6D8B569AB20E1F5E0B6CC576C2997F0B7F2D4B175586963199FD5F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/pem.c",
+    "sha256": "A44CEFB9CEEC63AEDF056FB3ECA93ADE2A420A658C994DFE2269DB1B3B079AE7"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/pk.c",
+    "sha256": "1BB16CD908EBF84742AA65A9F465878963AED45771CC374ABBB82FE765536DAF"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/pk_ecc.c",
+    "sha256": "8987A5885BC71E34E8DCC9720461376AD84217555739DA6A3EAC105036A49ADB"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/pk_internal.h",
+    "sha256": "53EB8041DEF4909442A539FFBF8E3464CD453DF2DC0D4CB0D5B5D0367AC33F44"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/pk_wrap.c",
+    "sha256": "BA74BD58DE5786AFB59D6B9791E1E42D2ED42B74D8BB962E018B41D7B7760779"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/pk_wrap.h",
+    "sha256": "4E5A90F444C6296AA4CF5CCA9375C10BE84FDCDC7BCCC1D93D2A054D1019E0CF"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/pkcs12.c",
+    "sha256": "3C29C70011F35ACC5AA46413F5A3D343FA57F8DB85115FF896DCD94A3D415174"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/pkcs5.c",
+    "sha256": "1D29EDC77054F108A204B7358EB039DBC506ED485871708DC35857D7836EEE07"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/pkcs7.c",
+    "sha256": "7B1D62AE723CDD5AA1B578D918B9F01EA77810A78C23391701C51EC34F0C2C05"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/pkparse.c",
+    "sha256": "36C0590C516A1B4AD99BFEFC213DA1A19A2E27638EE3F267EA3365CC738ECF17"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/pkwrite.c",
+    "sha256": "A9BEFEA5AB74E3D9D7448F9790D7640B95FEDF3C8386545BD7837962D26167C7"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/pkwrite.h",
+    "sha256": "BB9F55BBD5707ECB7FB8E52103148289EF6D118B6A46F433F3DF10251D35DC1F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/platform.c",
+    "sha256": "69F5E0C95478D792AC5654AF56817C8272A68C322010E342AFACC90E6D57524D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/platform_util.c",
+    "sha256": "83051FDDCD37171831FF5706613DC3D336B2E53C42E6515F2F14AC0F8AA649F1"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/poly1305.c",
+    "sha256": "0B75E7BAD92AEF2248529D89C1E2BCEC1B62058E02B29E49232A244B063D8D86"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto.c",
+    "sha256": "7211DE317476BFBFF417F96AB86ED4C4EE114112CA39208E13A17213D2313DAF"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_aead.c",
+    "sha256": "B6A04A0EECF4E85E8E7E1E2D478A268DE3E8C3FC3C351B4BD4E4B4AAF34BC028"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_aead.h",
+    "sha256": "B5EDD072D6CA8A54319940A2918C84BBC6F9E0F096C037D5F21F3C7D0F55FC1E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_cipher.c",
+    "sha256": "FD8C2C86AA35DE230A7943DF7D1B5C0D83F68C2B37344F856796622450ED4B3E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_cipher.h",
+    "sha256": "2DB07A79C66DA2A951227A714FB0F5391F64C740A6D210BB1AF5B5E454CB65DF"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_client.c",
+    "sha256": "0C20995C1AAE03B39467C4F453FA551F7BAF4F01AF023FA66BA4D79F81FD52D9"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_core.h",
+    "sha256": "730395ED9213EDE4A9B821A78F5F7F22BC1416FB51F5B5300CBB1F3658EAC14A"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_core_common.h",
+    "sha256": "C57B2C11636815F8482158F7B82B6EA3448F676278526A0A71B266B5535460E9"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_driver_wrappers.h",
+    "sha256": "3DCACF15533857E5A9F41D674BF7125E4896C0855ECABFE1D051A77E61F156F5"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_driver_wrappers_no_static.c",
+    "sha256": "DFEDAB7DF2E48F8222D0C037328D16A852E9B94A3231251B7765A8155F641B86"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_driver_wrappers_no_static.h",
+    "sha256": "9F55A031408BCD97E495D9FBB17D7DEA99CA61081FD089FF8C3133CF8F2B7D7D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_ecp.c",
+    "sha256": "B90D1FABE0E4AA6C61267B89B6DC7AF1394AC70FAA0345FBABB0A20421DC3D71"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_ecp.h",
+    "sha256": "C91E3A3D6E85569209711051523FF4CC478AAB8126EC9E931DC41D354E48B1F3"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_ffdh.c",
+    "sha256": "BDF9C341C6D35984B7AAAEF2CA8E6CFBD6EF01D2C7511D2A33B7FFC19C919949"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_ffdh.h",
+    "sha256": "A0E5137B1724FC4A97361C7515206E0EA8DA93AFD42D5F4CEC518CEB2D905224"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_hash.c",
+    "sha256": "1EF65E3222FA93DB85259EF2B3284E14DA987144B309C630629E5550A748C6C4"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_hash.h",
+    "sha256": "64393F07001809D66B1D7DD2660BFF61F6ED46997CFCD8D3A4FA5558C324DE2F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_invasive.h",
+    "sha256": "EF2562D1A4F6AB23E48C43FD1FF9D56EF66DFF3152A75566441E10B4B1D4FD16"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_its.h",
+    "sha256": "880F792A1DCE84F9FB661355D04DCE8144B30F9DBC8BA22C2D0A697CD9605552"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_mac.c",
+    "sha256": "B39FB752FD3D27342144496AA109038BF8ACFED0FFEE2009C7BBD481E3F7B95F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_mac.h",
+    "sha256": "1D3D6BB5BCD2052EF8BE653B3D7DB5BD0FD31CE1A56380EE2BCE27DE98DC1D46"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_pake.c",
+    "sha256": "16633B0E5292913A51D895C2F017CB4820DBA24C90EA628DCE37D30C17B570B2"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_pake.h",
+    "sha256": "BEBEA5EB9D854F90004B85F6EC907FA26EE505D53109FCE068583247879876DF"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_random.c",
+    "sha256": "36BAFE1266FA7EF1DC247CFB59844E451CC6EC27E33DBFD28D316BC234848A16"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_random.h",
+    "sha256": "D85AE6878E90F968987A82133A4AD9A0C5A4084F3722D70614142EA21D91FF94"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_random_impl.h",
+    "sha256": "34570EF88E61EA09D3234FEF8403101051640F12AA131D33B163E9B818074F82"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_rsa.c",
+    "sha256": "F7FB88CCBA3AFDDF5DDCC8234555BE923FC5DA24395C050123AB0470E3FCAFE5"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_rsa.h",
+    "sha256": "F691E8445D555D216C2A086BF28D92F3804B4F07685211636782BD59E6C88089"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_se.c",
+    "sha256": "9B8B2A6A24B1FF34FE4787E256707B9E3A9B62D1619BF0D8FD76F91C09931EC2"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_se.h",
+    "sha256": "39A26B6BE83AE274EAECAEC21E9685C95A85AEE5D6C2AADA29F42DEF35E978E4"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_slot_management.c",
+    "sha256": "F3449507BE992B384092F16ACFC1AF6665614D6F50F152699B3A5FBA6F01148A"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_slot_management.h",
+    "sha256": "C42741242C1986C0524D6144F50FC23D493B02B40265CC9567F11A9C2FDE91ED"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_storage.c",
+    "sha256": "55EF84FCC6148D416D334CEBBA87C758C5E02F46757344189DE098E5BFFA131E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_crypto_storage.h",
+    "sha256": "C659AEAAFEC9652947907932741ABB0CD7F56AF863572B08A4A1A48B7CED91D4"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_its_file.c",
+    "sha256": "6AC463382B8C578D43E59B43B78D0E947B3358DF4C24A94215575050D59B575C"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_util.c",
+    "sha256": "60B3AC409CB132EB13C3FE6E003477311E124E636BFE5797EA2EF40FAB5D5E9C"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/psa_util_internal.h",
+    "sha256": "342D2699A1AD757D27325BE03B06501B4E3ACC46D8E72DDCDA6238ECDCCA447B"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ripemd160.c",
+    "sha256": "B65EED58592FEC5BE5880D4A737607CEDCEE548BA39261F0509CB565911734F4"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/rsa.c",
+    "sha256": "4856D43DC23D7AB702B003112F9D624B8B0FBA303F311F0E852F2100E5AD8E4B"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/rsa_alt_helpers.c",
+    "sha256": "AB9E5AF60E571F85E49FDD7AB9CA57F8CD3C6F9017FF326F45276AA9A596DF3D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/rsa_alt_helpers.h",
+    "sha256": "CA0E1FF5C83C7C527AD9FF957CCEFD99EA300206EF1140B6472BBBC6DD45E917"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/rsa_internal.h",
+    "sha256": "AA043EDE40150636726FEF71C04D2BB104C87333743378DEFE8FDE2DF8409DF3"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/sha1.c",
+    "sha256": "277B7499FE8315A46442C39C762E8768056114E3694215E4E2CADBD1EBFBCE12"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/sha256.c",
+    "sha256": "632672D0C954D8BC0E20FDC8370C9F1725F3FFC5FCDAACC14949E42A1B5424D7"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/sha3.c",
+    "sha256": "466ADF0180FD971413A6FF120BAE953E4B52F9E8BD6C93A155D3D05C6816B692"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/sha512.c",
+    "sha256": "D5F237A4F40660DD4FCD09EE995A67A2811A62F4E93348F837BC30E3A76693B7"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ssl_cache.c",
+    "sha256": "E317A52B5AC69C280D8D8A2C5AC190F71A8827FC4A9AB1557A207FC3D864E171"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ssl_ciphersuites.c",
+    "sha256": "C1EA9C74805E037BC1F67ECA7AECFCC4E9151BD5DFC944ECBC688C2B0C624CA7"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ssl_ciphersuites_internal.h",
+    "sha256": "B8263632AB930997989CDF7CC09D35BEDF5C416507D758B157B3B3973251CF27"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ssl_client.c",
+    "sha256": "EF3B810D412FFA433E9D5AE100A50EE4927A6EE2B65079AE055B12ED08F17AF0"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ssl_client.h",
+    "sha256": "410A3488D6B9FB4E991540640DC76FFCCD8CFACF523FEA478F632BAD2BF0B3C2"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ssl_cookie.c",
+    "sha256": "574D9592D590D17D8FE0B189418180544F7FD27B76F9621AA57ED7C0D6E38552"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ssl_debug_helpers.h",
+    "sha256": "8139B3473A6ED6F1D27520814D2FA0CD0A46829696F03358DDC7B0DE2921D05F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ssl_debug_helpers_generated.c",
+    "sha256": "B8DFB4BB9945B420F48D7F429DB27EDA6AB4F8A7D3DD43C91C54FF306FC509D2"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ssl_misc.h",
+    "sha256": "2A44CFCF5ADF8CF0B4DAE5CE3A05D15E3EEF244912777C990E301637126BC56C"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ssl_msg.c",
+    "sha256": "D9E0E14242DC8994AAB3FEE670023171C9EB1049EF0EE3964E385FE3A95B3BB6"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ssl_ticket.c",
+    "sha256": "2EFCF8B2E5DAC0DF0FBC26D80BCD50CC3E00580230DACE64DFA608C550C33F48"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ssl_tls.c",
+    "sha256": "15A7C17F7CE02F116F502B1616BA02F9432C069FE5175D1709E95B33D4FF636C"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ssl_tls12_client.c",
+    "sha256": "EB169EB2C8FBACDD13833A69FB87CB150FD5B548079B50FD86D5E79245768341"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ssl_tls12_server.c",
+    "sha256": "68A512CE2455365C444EB1483B166E7F405158711758F2547D391A578A137520"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ssl_tls13_client.c",
+    "sha256": "5A4AFBFC69DF5638496E98A3B345DC71EDED33D227606615F23DE24D5B7C8316"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ssl_tls13_generic.c",
+    "sha256": "F767733831B15A24D2AFDC87071E7BA638733111C117FF22779D18FB2800A488"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ssl_tls13_invasive.h",
+    "sha256": "F65A2EE6C7A9B2B1407F219E9C0AD19F7CA2B0357BB1D9FC9FAAFAF7E86662C5"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ssl_tls13_keys.c",
+    "sha256": "9A38ABAA2BD372FCA190F018786A1001C831E8DB31010C6A88E2987F66125A68"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ssl_tls13_keys.h",
+    "sha256": "6A0AC8D34A0DEB9D8E41AC863C9A08A7DB1D4D7FDACFED62923607858F52B6DF"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/ssl_tls13_server.c",
+    "sha256": "C64F241EF06D4445DF4BE9DAFB513FBBDC85658184036474A970C1D61A897425"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/threading.c",
+    "sha256": "07E96688358432839BD84807BE09862E25B8C04CF183D76B4E3E6B97327212FF"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/threading_internal.h",
+    "sha256": "08347420C45A7B160E3B0732BE31708F9A3A0D2683D9E3038D77909F010CFE98"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/timing.c",
+    "sha256": "066A2D6DFA1B1D1BCA0E54FEFCB5C8C0788AAF1B07002029834AF4969E92303E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/version.c",
+    "sha256": "8A76E2B4647B9D26EAA49A9F297F245C99B2A2F05A29E30227CFA9FC6A95CADC"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/version_features.c",
+    "sha256": "1EE99D29240A558C8631566215A6704EB13EE73D3840559E72CBC5FF304F3BA6"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/x509.c",
+    "sha256": "CDD67A9F53F3029C712CFD843038FFAF25DC477F9DE215F55E585A15BC164995"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/x509_create.c",
+    "sha256": "0C5606AA5AC776F41839733573F0ACDBED6E62499048EEBDAE4E6E7F2512A361"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/x509_crl.c",
+    "sha256": "F09F815C604201AB6E34C0BFE1C5C5C36EF80FB06D9CB9BEB335D1E4F536FBDD"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/x509_crt.c",
+    "sha256": "3B484DEBF0811BABAA87450F689E38D7ED60257193C67BBE78F2C89D4226B027"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/x509_csr.c",
+    "sha256": "1048C76B6EEC3E2B8A84ECAD354D0EA435A778F6DBE104BFE92FE03F439012F0"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/x509_internal.h",
+    "sha256": "B61E3BA8E90AF7AF995AFAFC914048315AFC995CB87FFAC054E60FC4B391350E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/x509write.c",
+    "sha256": "A8F6A9606A9984B1DC6FB6EEF25195A58EDF546B47DB58EC7B641DA268C87F76"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/x509write_crt.c",
+    "sha256": "ABE7E21079F1FE73E4A2673456A802CA74E4DC2C6417E1B220D457258801F378"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/library/x509write_csr.c",
+    "sha256": "22EC5AF466127FECF2E935B25F50AF5A1AC1076E8C702650A574B03B541DF3AE"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/aes/crypt_and_hash.c",
+    "sha256": "4BED0ABC6B25442BDA8FA90E49049A5365952320A5A91A5BFA5B3420EE472CB0"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/cipher/cipher_aead_demo.c",
+    "sha256": "600D1D9DDC4AF49FE0A0EF7036DBB63AA07FDEE78B8210BD11F1E138E3C96271"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/fuzz/common.c",
+    "sha256": "CA7E5CF5FB629C8CF151D82313761429479AB87A2EF69687C2E68C7FD3B1B43F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/fuzz/common.h",
+    "sha256": "98E0A561E8F60E262251F81AED6FA9E4324AFA9D0EF9B2EC2CBCA3FC64B74E56"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/fuzz/fuzz_client.c",
+    "sha256": "61F69FEC73F02B3BC01BA3CA8CC10EB4825C68A3E9183E66A9F3DF418E5EABE0"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/fuzz/fuzz_dtlsclient.c",
+    "sha256": "CBF552F52534BC10EDF5794F5B7A752D45986CB618D27449A8E4AC9913A584ED"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/fuzz/fuzz_dtlsserver.c",
+    "sha256": "4AA7AA3DA301DBD52BFCC95DC2FC1CB2F3A2A167C2D3B7169BB8770B262502C0"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/fuzz/fuzz_pkcs7.c",
+    "sha256": "1748B7438EE017FAEC2948E0CB92CA2DE1AA949670B0B193701CA483D714D138"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/fuzz/fuzz_privkey.c",
+    "sha256": "E39D9448229921577C93468DB4C7E4EEFEAA512221F2E12BBC1BC125B0E32032"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/fuzz/fuzz_pubkey.c",
+    "sha256": "7539DE30194A19F20AA02088A7C95CA214A614785F084AA7CF83FF1087582E05"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/fuzz/fuzz_server.c",
+    "sha256": "7CCD7ACE18DFB4C10E101190B12839205BE15BFC840BBC84CBFA67F76809D203"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/fuzz/fuzz_x509crl.c",
+    "sha256": "4C714876A2823367B8D9746A17E3BCCD9ECB1052F517175F545A629D05B0A2CE"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/fuzz/fuzz_x509crt.c",
+    "sha256": "669D2FFEA43813FAA621F993425FCDEEC7B375BA998AFE73BF961612AA144BB8"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/fuzz/fuzz_x509csr.c",
+    "sha256": "88F10E6F437BB0A5324E24C5EC1C85C2252BA814F2B4449E8104C5BD4613D05F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/fuzz/onefile.c",
+    "sha256": "5C53661CEFFD510A4510B6A58EDD03DE12CBCAE8D98F15B76FA6AAF3BBF3811C"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/hash/generic_sum.c",
+    "sha256": "5EB5988E3AFDA3E73FDAE73C7FF384BBC39258E8FC9AD0BA41908E1B06CF9427"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/hash/hello.c",
+    "sha256": "5DC968E405D974AF644AC76965499A6AA69FDB83189F973A15530F4A4B9190A6"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/hash/md_hmac_demo.c",
+    "sha256": "5D278E06D6ADD18416A432FFA9BDE653EB4CB44B406E1AE0BA95AD2D502E2CE7"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/pkey/dh_client.c",
+    "sha256": "B0430B0D4B092C773B9FE48104EBFDFBD467E524B7CBA684456B2B773AF52F0D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/pkey/dh_genprime.c",
+    "sha256": "9C24DED8ABD53CA95EB0862232AE5AE8AA8EBFA3FFAB1C3AE80F719469CAB067"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/pkey/dh_server.c",
+    "sha256": "ABC3BFBCF24F110E1A924C84DD0D2C7CA9A69B46065651685423521A62F72C2F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/pkey/ecdh_curve25519.c",
+    "sha256": "C7A2ADBF5CE23A8EDD22605D5A165F6E609F2CC26A626EC052E0FA3E34DCC0A1"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/pkey/ecdsa.c",
+    "sha256": "97381D55A2FF2F5436D8650FF24B817AA8608C83028EF33AE952429B80751F0B"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/pkey/gen_key.c",
+    "sha256": "6CAE5CB2469208DC4DBA05E18F5C3FAA800909D77CDC60CD6B4EE8885A0005FD"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/pkey/key_app.c",
+    "sha256": "8CC87EAA555AAD76AD48A926E0EBADD3E3B53C1C97F58B8C9F35CC8EBD31C608"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/pkey/key_app_writer.c",
+    "sha256": "D870FE38E603BB467347F3021B56A48D7C8880D3F9CBACEC44A6266F76375CAB"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/pkey/mpi_demo.c",
+    "sha256": "34A797B49DD8EF7D73659B22001BF00F6E7F6F24E03E27E9D0029F9AE00EE598"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/pkey/pk_decrypt.c",
+    "sha256": "20321816A85F22B623EED56983765C3E33C4CD317BBC695ECF45CCBC21AA0034"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/pkey/pk_encrypt.c",
+    "sha256": "F679E8E56C2023681460C2C87850BDDADDF240B7AF95C63EC0CA50A3A5CB85B7"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/pkey/pk_sign.c",
+    "sha256": "C7CDD2EC43C81956C63463630EED825D5E6B8B2A805137643B77979F64AC921F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/pkey/pk_verify.c",
+    "sha256": "85629661CAE9AF0558B8DD7A3420152A276C0FA94F4BC3E75C0768A6449D31C3"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/pkey/rsa_decrypt.c",
+    "sha256": "953641EE1529E9B69D0E8471E761D8B66B203328726DADC6FD0F315E6E4C51A5"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/pkey/rsa_encrypt.c",
+    "sha256": "85E3EC32077F856C776C166544C7668348AB08CA845EC1C4759FD558BA57CFC1"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/pkey/rsa_genkey.c",
+    "sha256": "5C3E4B79F71E116FBB221B85684C54BFFF69955715302D0D3A58B78BD5110E94"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/pkey/rsa_sign.c",
+    "sha256": "FCF75ED953356B6C84F762BCA9E8CE26BF8A7DDAFFF29DF716A71A74B57EE405"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/pkey/rsa_sign_pss.c",
+    "sha256": "706E5E14B977780D206C2305ED26DCB6549972B3C708778D25C756802CBC21BF"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/pkey/rsa_verify.c",
+    "sha256": "FABEE71B89B0C079B88A013F2014570CF8E5BB2641E6BA534441C74CE4C9CC4F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/pkey/rsa_verify_pss.c",
+    "sha256": "DD3C6A0DD79DA937233199D26A7F1E8F68E56C0E39D62C1009AF65DA3334E007"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/psa/aead_demo.c",
+    "sha256": "2F2DBDA3661970D83D6D0C99B33CB60B9FF3B0682AF386FD6AF5B9A2BF7C4C93"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/psa/crypto_examples.c",
+    "sha256": "0D6FB86F599DCB107149B0596B1E6089D466830F6962D7150127975358C1B3C5"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/psa/hmac_demo.c",
+    "sha256": "B972362FA41DF645E04FD7632B3DDC83C140259CC7789CFFA34BB849BEE4D014"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/psa/key_ladder_demo.c",
+    "sha256": "BA42FA9D158EC89928A68FA4ED84864D597925D1068304C0ACE521F41F3D42BF"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/psa/psa_constant_names.c",
+    "sha256": "5B5893E7A6E7E2B0389524A6CA6EA5349A328BF71B5C2643F0E80853AE37F5FF"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/psa/psa_constant_names_generated.c",
+    "sha256": "DE1060C42FF9C18A13F389E2B92A9D56F88FE99D8C9C865778FF9AD83AAEAD00"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/psa/psa_hash.c",
+    "sha256": "7CDE6616573161649180A3C0C7AA5033B1D7A758244DF1803583B6C5D203EF1E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/random/gen_entropy.c",
+    "sha256": "B1F2318751B31BC2D1ABE947C468F9F465DA297B6CD75930494FBFE6D6B4B91A"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/random/gen_random_ctr_drbg.c",
+    "sha256": "15A263B8543C659D38BBC87978AD8B6213580FDEBC5D5DBF8907488C3B177761"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/ssl/dtls_client.c",
+    "sha256": "6EF49764C0D2C5D72709BBF312F6C9802559E4AD3356414C343BF0F070177164"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/ssl/dtls_server.c",
+    "sha256": "61B4A2DA3EC3C219F90D030C713DC0F31CBBD691A48A693C61D1822BD1216439"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/ssl/mini_client.c",
+    "sha256": "8DFA970F30860467F8B9E06F135389FBB671E679E34EE6A2EE1FB44BE6C49212"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/ssl/ssl_client1.c",
+    "sha256": "F36B6C0187D5FCEF4829676FBAE05B4E27F8358CF84D19A701407386D34FA13B"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/ssl/ssl_client2.c",
+    "sha256": "29EAE8277007A14AAEDD1994FC6D4C496EE25DA0EC5718D1AC3A2C60C3CA6A33"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/ssl/ssl_context_info.c",
+    "sha256": "99EBE18B894D30A198ED8085AED3B9FEF5EF2CAFEEB7BF562F514C55830D1269"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/ssl/ssl_fork_server.c",
+    "sha256": "57AE869422F4991A88E1ED1FAC51DC4DB3393CC6165150D838A7FE5BF7C7FCFB"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/ssl/ssl_mail_client.c",
+    "sha256": "EF8AA40AA397E951172EE9E0AEC792C859DCFFDC0F006DCC7B2E74FC01396859"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/ssl/ssl_pthread_server.c",
+    "sha256": "89A46075E0E9918363332F6A55D0BD531B2E8C9B877B584371A501369C43ED5D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/ssl/ssl_server.c",
+    "sha256": "C2C70A6DFA401E814455740B6AD256FEF58D8427BDB2503A9DC607B55D1C67A3"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/ssl/ssl_server2.c",
+    "sha256": "6C328CA1E724A31C32D7C2C71A114B6B1EADBAE95EC98B25CE25E1584B1DF8BE"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/ssl/ssl_test_common_source.c",
+    "sha256": "05CE9841C0624EB40E40166163D25AD7001FE8F5FF1E7643336BABEF846817DC"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/ssl/ssl_test_lib.c",
+    "sha256": "BC05F8C48D2D0D6DE04C593C4F2ECBF258546E51CFD5638C4600F5096E4C3977"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/ssl/ssl_test_lib.h",
+    "sha256": "EB35ED53571CEB782BA5CD0BEA858568E19DF6E2378A9838DB73A8FF3C78B2B0"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/test/benchmark.c",
+    "sha256": "369A1C4D69A24B2DE2CA5C16DB901C4F2B98DBB4265F533A70BB96092A02FC7B"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/test/cmake_package/cmake_package.c",
+    "sha256": "AE01394C811CEB80FCC5F25A4FC770B5F030B9324F4014E6AC7E1B2633FA6962"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/test/cmake_package_install/cmake_package_install.c",
+    "sha256": "9448E70FD64D877473B06DF9AF20DB93B67B2FD898FFA42884C0E3FDDAE77ADB"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/test/cmake_subproject/cmake_subproject.c",
+    "sha256": "D3242CB8671587FC56B66806DDAA8DDC7FA49F32F95C3D17A7FAF2A4C991A7B6"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/test/dlopen.c",
+    "sha256": "D677DE03361EE1C65FCD7FD8E41AE9BAA564295CEE8EE149F789ACECCFD7069F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/test/query_config.c",
+    "sha256": "5290A02ADCC39E568D539CD98BFF059049BA0A9FAC614046B5A3A5621FC72AC1"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/test/selftest.c",
+    "sha256": "AB9A72D766BBF8013B1892009BEC12C18E958F56C12D990359270158C011519E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/test/udp_proxy.c",
+    "sha256": "F29063402BF1DFABBE8CA040E295CA378CFA7ABF0E252F41A25977EB1EAFB9A4"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/util/pem2der.c",
+    "sha256": "973F5DD4153AC752A5F93EA40461A7A789F61EC822447C2BBF3D205E6DB9BEEE"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/util/strerror.c",
+    "sha256": "92804977A41C384F6E704083F7BDD3BD7DA233589CA3E376082BE575EA292331"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/wince_main.c",
+    "sha256": "31571695C3D1103B417DF7C3D10F79415993503F847709ABD4CCCAEAD8D3A65D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/x509/cert_app.c",
+    "sha256": "7E30F0719D8AE13D7CCA0F50D4D3D859E48C53F32A44A5EC2488F9DD2267048F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/x509/cert_req.c",
+    "sha256": "C7475A1587CEC5ECA156C31955C3CF45B04348C16213D8AD96D246517DCFD53E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/x509/cert_write.c",
+    "sha256": "DA8EBF3DD580C7E7254D23EB25626BFADD190FAB1DF96ED1EA90CC6881BBA15C"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/x509/crl_app.c",
+    "sha256": "7913F9247C2572387B9138758FE40BB359CFC7C33FE8FD53AFFF22FF6BFBEA39"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/x509/load_roots.c",
+    "sha256": "6C9D297BFF96EAB1AA5E5995E7F9F02042F861534FCD592E585AECD9D1AB123E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/programs/x509/req_app.c",
+    "sha256": "7DDA05EABC89E448AD96456FF812FF1C48568FC51E74C7078F6075B52E9D6D14"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/configs/config_test_driver.h",
+    "sha256": "75BA0E8E3A993A8602D4004897E14F319D4AB9F313FA1343D233EA9F94706CBA"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/configs/crypto_config_test_driver_extension.h",
+    "sha256": "F33CB3B6426634E80386D65B9FFCCBA1DB0A8D706F2E5ED3D68F523E41FB1B9D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/configs/tls13-only.h",
+    "sha256": "97556A10FEC996D0FBD131A818E03A1B43CD2CC960723E77FB1AFB5C609BCD7F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/configs/user-config-for-test.h",
+    "sha256": "DF35F5E4D925157C940CA104C3CC3F46716AF789C7C8EA3A54AE5D79071A4B59"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/configs/user-config-malloc-0-null.h",
+    "sha256": "C58A0AD80A156A91982F93DD6C7EDFB02C60203AEA2DCEEE9957B0BFC30E9A3C"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/configs/user-config-zeroize-memset.h",
+    "sha256": "3C81218BDD88065DCB7600B40C499A984CE72124A3C6E3D80BAA320105037E25"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/aes_alt.h",
+    "sha256": "A3EB88FEE1C97B29790020EB329104E2C6A496414103650FD4EDB9C8C42168A7"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/aria_alt.h",
+    "sha256": "D7852CE196606B907E1EA4360942721A3C40BAA4DA307D754558CB153C798697"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/camellia_alt.h",
+    "sha256": "4292BDEAF223E5C0E030E3C3DA298D57C114F4C0F79827749D738EF8461CBF8F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/ccm_alt.h",
+    "sha256": "762D75CE428FC3E7840734E2BDADDF108ED2A4BF9136D73CC317D0CEFF070B20"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/chacha20_alt.h",
+    "sha256": "41F7B8D207C0B97EBD4AB6C55EBE8747332CEAE8580DA244DA1DDF778DA21309"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/chachapoly_alt.h",
+    "sha256": "D95FC87C22EB8DBFD84BEA6E8BF9415B29ECDA07A5174580FE41E7FE9B30B8C3"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/cmac_alt.h",
+    "sha256": "9D662829429032D03A0BEBF249EBE2B0E39548915CF7CA536015D6B80DCEB161"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/des_alt.h",
+    "sha256": "9ABA5B1DF4426B07252755587EB632141B198EADB471C630FBFC7C784384AC03"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/dhm_alt.h",
+    "sha256": "407FB601BAE039F214153835C4EBECABB5BC533466F01B12F3972F8E34BB480C"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/ecjpake_alt.h",
+    "sha256": "38BDFAA9CB7A1F1B6B1CF2109C81518EA0C657E4FEE708347AE6571E98D06FDE"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/ecp_alt.h",
+    "sha256": "55E51E5D7C35D8A7BA3E4DCCD34CFE2C68D411B8B81F04EDAA4EB053BF2AE0C6"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/gcm_alt.h",
+    "sha256": "B709FA47CC16762B67029A97C5E3CC80ECC83EE57C34B651C278EBFBD1696179"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/md5_alt.h",
+    "sha256": "C867E17912D03F59C03C3A7A76325F75EF7FEAF076E73811C214D22FEAD5B65D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/nist_kw_alt.h",
+    "sha256": "C1297854B1FEBAB50D4FC162E9EF6AB184356D2D7E1E3ED239224E9C114E9175"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/platform_alt.h",
+    "sha256": "E99A926EA635A5063465C31F96848DE66D1A8FC2016CAFDD69B2C99715E9CF90"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/poly1305_alt.h",
+    "sha256": "2E55443FFBEC2C7DDFD3D4AFA1331917F569FE32022A2710E4B592644478F9A6"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/ripemd160_alt.h",
+    "sha256": "9995120175E5E5A864BD4585F501E55ED53EA3A97034D1263AFD7EFC4343B940"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/rsa_alt.h",
+    "sha256": "50A47DFE24038F8566B04280BFDFFBE58E3A4F97F5FB939BE9628801D5619C63"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/sha1_alt.h",
+    "sha256": "26130A2F2C1FC19EDCF247E3E215CDD9D908A2A149D69CA71A0EBE3596501499"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/sha256_alt.h",
+    "sha256": "402D269B22F5D3B27E42A10F3A30E2B1EF5F7C52E6CACAB60AA01C03FB2FAB2E"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/sha512_alt.h",
+    "sha256": "05D54BFACD413D0652F68BF36264CC335DD0132FA66C4328A7DB8D282933F962"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/threading_alt.h",
+    "sha256": "A769A9FE9ACA497258CCAEDFE2061CC4BD5C3AB3E546C6DE49D9000E9658433C"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/alt-dummy/timing_alt.h",
+    "sha256": "4E9C3BF968F332F2B92760DE78D2338DC6C569BF6E59EB11B6A896430C52FD93"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/test/certs.h",
+    "sha256": "31DAA6A8C04B6E209EB961F37028241598D034EF328718037E8DC161C55B2D82"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/test/psa_test_wrappers.h",
+    "sha256": "39D1D56EA8D241FFE72A380519E9924822900CF5BFF2AE8FC06111C66CE6CF3C"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/test/ssl_helpers.h",
+    "sha256": "103936ADA8806AC6E58AD2725EE886652A98655CB0A1597D4DB3FC1522E62CD7"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/test/test_certs.h",
+    "sha256": "18A4CB7C9DA91634DC52A8D6CFEE2773FED2D2290B4F060829C2A4A46D4ED0C0"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/include/test/test_keys.h",
+    "sha256": "364DE63328A8FB98B37B522FBE94F1D3CAE0E6F84A96910670883E474DFA3E9F"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/src/certs.c",
+    "sha256": "D79E5B1B8F06A1936AC484FE3E05285A41305AA5DAD5487EF9B7D102E738462D"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/src/psa_test_wrappers.c",
+    "sha256": "FEBC59FEBE81CF0D9E1DBE52EDE06378F76083C044CE423F854A6660B22EC1F0"
+  },
+  {
+    "path": "entry/src/main/cpp/third_party/mbedtls/tests/src/test_helpers/ssl_helpers.c",
+    "sha256": "8B2A2A2167C1145FBFEABC3ABBC91C8478FC6204256911986D8E23BAF54C747C"
+  },
+  {
+    "path": "entry/src/main/ets/adapters/FtpProtocolTestAdapter.ets",
+    "sha256": "B1487033413135D535AD41E1C32B39098C458B8173E93F73BED811FFF05FCEC9"
+  },
+  {
+    "path": "entry/src/main/ets/adapters/HarmonyLocalFilePickerGateway.ets",
+    "sha256": "5A2BEEBB31891F9CDA70E7C3278D9758013DEA531CDF7B23B8BD2352FF133687"
+  },
+  {
+    "path": "entry/src/main/ets/adapters/HarmonyMediaLibraryGateway.ets",
+    "sha256": "8D283064E0560DF2CED31FE130825E6BEE225767231246448B0373C3D68DE51C"
+  },
+  {
+    "path": "entry/src/main/ets/adapters/HarmonyNetworkAccessPolicy.ets",
+    "sha256": "1445CB4F24B715F0C591C75FD70BD54C3B83ECCDB52270506A9BA8967C851114"
+  },
+  {
+    "path": "entry/src/main/ets/adapters/HarmonyNetworkConnectionTester.ets",
+    "sha256": "01360D7B8ECD9AC756528E93F92D147F88310B9E1D362B8EDBFB64330821C4B0"
+  },
+  {
+    "path": "entry/src/main/ets/adapters/HarmonyNetworkProbe.ets",
+    "sha256": "35CB2B7C09AE3F2BAFE893434ED1BC4727313BC622D69F2A990314F304DC5799"
+  },
+  {
+    "path": "entry/src/main/ets/adapters/HttpProtocolTestAdapter.ets",
+    "sha256": "C5CC7DDE0A41C43E3DFC00C8CD27D1107A36E9507C7D6D39D9CFC6216315D340"
+  },
+  {
+    "path": "entry/src/main/ets/adapters/NetworkProtocolTestRegistry.ets",
+    "sha256": "F50C296648BA7CE95DE55A59935907E11D55BFD3D9DE07DC553A4B2CFA4488E5"
+  },
+  {
+    "path": "entry/src/main/ets/adapters/NfsProtocolTestAdapter.ets",
+    "sha256": "FD0E5ABE71DD96BF43305AB2D4CEAFFAFEEAB10AC8BC1E0CB4C6DE2897D960A0"
+  },
+  {
+    "path": "entry/src/main/ets/adapters/ProtocolTestSupport.ets",
+    "sha256": "AD727AEFAD97C28C6B3D0C2581B8C7E7F594E265FD7C2905082F8BA985E0E3BB"
+  },
+  {
+    "path": "entry/src/main/ets/adapters/SftpProtocolTestAdapter.ets",
+    "sha256": "130F01B9DAAC1C50AD4B326BA75DB95A447765DBF02F775AB86353C07F9C4803"
+  },
+  {
+    "path": "entry/src/main/ets/adapters/SmbProtocolTestAdapter.ets",
+    "sha256": "0171CCCC2DBECE68C50D16132E501FC4E95346ECD246AA13EFB3719F5D3E00B2"
+  },
+  {
+    "path": "entry/src/main/ets/adapters/WebDavProtocolTestAdapter.ets",
+    "sha256": "E74AE9A3DEA91C1D8C5A84FFF2DD9F50265EEFAD571F684F08372AB273B00B24"
+  },
+  {
+    "path": "entry/src/main/ets/analysis/AnalysisOperation.ets",
+    "sha256": "884596F7739720208FBB90219DD5545209B6C63B2BD44A988A85D65CC63D90B6"
+  },
+  {
+    "path": "entry/src/main/ets/analysis/FfmpegMediaProbeAdapter.ets",
+    "sha256": "2387D1D4A8FB1D1061188ED73060189446C799E5394AFB831B1E8AFBAD0BF15A"
+  },
+  {
+    "path": "entry/src/main/ets/analysis/FfmpegThumbnailExtractorAdapter.ets",
+    "sha256": "40A5F8F0FDC0913A37A8BB2651552C26DF7F5178C3698AE55208506AA61FF54B"
+  },
+  {
+    "path": "entry/src/main/ets/analysis/HarmonyAnalysisInputs.ets",
+    "sha256": "4E246605333D7972869E3D9CFE2604CCEC02C592DBCBD3AA550691E10D5E75ED"
+  },
+  {
+    "path": "entry/src/main/ets/analysis/HarmonySystemAnalysisBackend.ets",
+    "sha256": "5C5A838DC9B424259EB237B7C66BF40665E07E2150141D9956EC17AF8CCC3241"
+  },
+  {
+    "path": "entry/src/main/ets/analysis/MediaAnalysisComparison.ets",
+    "sha256": "6462BDC775A062F941D4EC8B1714074A73F77FF9A59776C7A2429CA49AABCA8F"
+  },
+  {
+    "path": "entry/src/main/ets/analysis/MediaAnalysisInputResolver.ets",
+    "sha256": "9B8539A30033EC569A75BA2ABDDA8EA7891BB17F587E62C261280C520D61FF13"
+  },
+  {
+    "path": "entry/src/main/ets/analysis/NetworkMediaAnalysisCoordinator.ets",
+    "sha256": "4BD3CFE47C38AF4BFF21DC91EF00239DF7E7A569B7442354A215774912E3F322"
+  },
+  {
+    "path": "entry/src/main/ets/analysis/PolicyMediaProbe.ets",
+    "sha256": "C1D4C19F7F54C8A05156C8BD93B613040BD89A2A0773FD32E0AB3921078630C2"
+  },
+  {
+    "path": "entry/src/main/ets/analysis/ProductionMediaAnalysisPolicy.ets",
+    "sha256": "48D660119E4602DFA957AD06DDDE15445D98CD243A9D29EC9320B7124F28116C"
+  },
+  {
+    "path": "entry/src/main/ets/analysis/SystemMediaProbeAdapter.ets",
+    "sha256": "ED2462D57188EC4835E00CED437AA4D6BEED8D3245AB6B70E4E3DBB2FA66658F"
+  },
+  {
+    "path": "entry/src/main/ets/analysis/SystemThumbnailFallback.ets",
+    "sha256": "2F86E461F457CF81153BFE8C88B2D5DCCED813376340D3DF1D81328E1E847752"
+  },
+  {
+    "path": "entry/src/main/ets/components/AdaptiveAppShell.ets",
+    "sha256": "BA213ECAA975E70A6C9E25641A1266AE168F201489AAFD02A3DC1C86C7AAC362"
+  },
+  {
+    "path": "entry/src/main/ets/components/AppActionListItem.ets",
+    "sha256": "52AA575CC979B1053A906A64EEA88E851AC3D0E9843BF4DBAFA9610D9425F109"
+  },
+  {
+    "path": "entry/src/main/ets/components/AppBottomBar.ets",
+    "sha256": "2303E272E5ED4A3EE64C1DCE65EE1A94E15412370C14400423C495F670F1FA76"
+  },
+  {
+    "path": "entry/src/main/ets/components/AppIcon.ets",
+    "sha256": "89004C3FC98DF04D736591B97A49E287FEDA96352119EAD49F02E8DCB0A3CF9A"
+  },
+  {
+    "path": "entry/src/main/ets/components/AppIconButton.ets",
+    "sha256": "E8165D0E0F037EA5338097B9BC134CAD86B54A98B0F42A6A0D4466AA4D86BD47"
+  },
+  {
+    "path": "entry/src/main/ets/components/AppPageHeader.ets",
+    "sha256": "4FC67A7323B57FBD442B7758CAF34D09BB9258D7E7EF862FE48D75D9290564B4"
+  },
+  {
+    "path": "entry/src/main/ets/components/AppSectionHeader.ets",
+    "sha256": "390079C3A70779926B8803D551093F80756D71F7A1972088C3954B38D80F089E"
+  },
+  {
+    "path": "entry/src/main/ets/components/AppSheetHeader.ets",
+    "sha256": "4CA804798564EFC7B6613D5230F619A97DCCFD81ACE868516C5B2DB19A2E438B"
+  },
+  {
+    "path": "entry/src/main/ets/components/AppSheetSurface.ets",
+    "sha256": "097317F9461CAA81693DB46CE420749F784000826D624B9D02B4624B0F0103B6"
+  },
+  {
+    "path": "entry/src/main/ets/components/AppSideBar.ets",
+    "sha256": "AB992B92A2541A82503E2F7B55098B31C2F74F953A841BF7171C0BDB63F5078A"
+  },
+  {
+    "path": "entry/src/main/ets/components/AppToolbar.ets",
+    "sha256": "B9F2315019668918EA35EE94DB2D7B3917C9ADD44BA03B04B1A1E98557087B29"
+  },
+  {
+    "path": "entry/src/main/ets/components/ConnectionTestPanel.ets",
+    "sha256": "825F0226874B9EB82DD63633C15B7D50398D0119A6F41D3F60DBCE98685A78FA"
+  },
+  {
+    "path": "entry/src/main/ets/components/FailureNotice.ets",
+    "sha256": "F9B634B86777CF2649A13EC30E278B91E0EF31094C4458851E42F5A9207895C9"
+  },
+  {
+    "path": "entry/src/main/ets/components/FileBrowserGridLayout.ets",
+    "sha256": "84376B44D5A051DE32B3A10C640293D1D1CF04FE9F4E21156BF3BBF8C72D907D"
+  },
+  {
+    "path": "entry/src/main/ets/components/FileMediaPreview.ets",
+    "sha256": "69DAF4401AE9DE114EBE8D3BA16002534BF71DCD2DF1449518AB453CE491270D"
+  },
+  {
+    "path": "entry/src/main/ets/components/FileTypeIcon.ets",
+    "sha256": "16DED640C598CC398CD055BFAF6B44953CEC2170544373CFDD0EE953C46ADF3E"
+  },
+  {
+    "path": "entry/src/main/ets/components/FolderPreview.ets",
+    "sha256": "AEF279DF6B033BC571C0B3C0121CBA96D5B61D50140D983E927649ADFC1B1391"
+  },
+  {
+    "path": "entry/src/main/ets/components/LocalMediaBrowser.ets",
+    "sha256": "FD0CF287D4B388812663A3590D0C5A3C541C794DEA0A04231672C0569CE796D2"
+  },
+  {
+    "path": "entry/src/main/ets/components/LocalMediaRow.ets",
+    "sha256": "661B88376D6ADDCB432BE6489859F7F60729D4427C1A221AD54E3EBE604F9B4B"
+  },
+  {
+    "path": "entry/src/main/ets/components/MediaSourceCard.ets",
+    "sha256": "4DDC939311668E441A1CFFCCCA95607C1F6D82F13A34A7ADB071CED61CCA7305"
+  },
+  {
+    "path": "entry/src/main/ets/components/MetadataChip.ets",
+    "sha256": "D9FB94DA066DE50E82D31B192EEB0D27D496A679135225214B7FD9BC5E4D4AF6"
+  },
+  {
+    "path": "entry/src/main/ets/components/NetworkBrowserToolbar.ets",
+    "sha256": "A6DA0FC1D5B8F8BC59A84A5AB085F29B78C0B716738EE9F77E9A989FC3883C73"
+  },
+  {
+    "path": "entry/src/main/ets/components/NetworkDirectoryBrowser.ets",
+    "sha256": "4819B776AE1C7100D18D5D9229AF0D905F79EA0A747F9391CC3B42E7B2B851D5"
+  },
+  {
+    "path": "entry/src/main/ets/components/NetworkDirectoryLabels.ets",
+    "sha256": "CF366E9DE81848E27F58E18F2F1E266D1AA1811C6401FE92101AD3D7523BADF8"
+  },
+  {
+    "path": "entry/src/main/ets/components/PlayerControls.ets",
+    "sha256": "2CE115A715CD4D10FFF21972300EAEE710546ECF0C020BB0F19169A193BB7E69"
+  },
+  {
+    "path": "entry/src/main/ets/components/PlayerFailureOverlay.ets",
+    "sha256": "E1B5B78D5EA1BDE1E4A689EABFD25B5C4F9F8561E81E453CA54C18DC7E76D878"
+  },
+  {
+    "path": "entry/src/main/ets/components/PlayerGestureFeedback.ets",
+    "sha256": "705B22B62468BF997A37F15B25B786A39DCDD32B16DF7143623C63536202C4FB"
+  },
+  {
+    "path": "entry/src/main/ets/components/PlayerStatusPanel.ets",
+    "sha256": "89A767B99D70967686C931F8A7D91B5AF25DA1DAC407E8FCF26857466339F499"
+  },
+  {
+    "path": "entry/src/main/ets/components/PlayerTopBar.ets",
+    "sha256": "B23350979A8E3C3260A8EE97C0090EBB1E2DA7606F3E9AA0EEA52D60B76E8FE9"
+  },
+  {
+    "path": "entry/src/main/ets/components/RecentMediaRow.ets",
+    "sha256": "C4672144B5FD2523E09002B354D1E734D986A9659522F3EBAC958CA9E715217B"
+  },
+  {
+    "path": "entry/src/main/ets/components/RecentMediaThumbnail.ets",
+    "sha256": "E8FFC3FDA2BEC92E37270BB976CE3741A3764EB62972AB57321F3997043153B6"
+  },
+  {
+    "path": "entry/src/main/ets/components/generated/MaterialIconRegistry.ets",
+    "sha256": "E75FEFE69FCE2931FFBCA37FE252E66317F0FDD39B357DBB410EFDE11D44DCFE"
+  },
+  {
+    "path": "entry/src/main/ets/entryability/EntryAbility.ets",
+    "sha256": "FD7C7A047EDFE576A874751F46DCB01DA86CB439CCE447128210F563BC81BAF4"
+  },
+  {
+    "path": "entry/src/main/ets/foundation/LinkoraFeatures.ets",
+    "sha256": "77E7F5D4FF6C481AE10BE47F4D2CD45AB6D5CC8F252566E0B075CEED598A2575"
+  },
+  {
+    "path": "entry/src/main/ets/models/AppNavigation.ets",
+    "sha256": "F5AF94E2E7133E6A07A7ED94F783EBAF184DD24517ADE67A331285F9FB2216C9"
+  },
+  {
+    "path": "entry/src/main/ets/models/AppRoute.ets",
+    "sha256": "CF0078C41CCEB4E444AEBB32C20D94DA40D8D4D5A83DF9DFA08DD47BADF1EF63"
+  },
+  {
+    "path": "entry/src/main/ets/models/DirectoryHistory.ets",
+    "sha256": "086A80A8F9D4CE91D3A88EAEAF07056A126D95E6FD1B169F434DA220B934A15D"
+  },
+  {
+    "path": "entry/src/main/ets/models/LocalFolderPageData.ets",
+    "sha256": "CDA9370BF711E7D2818C247266BD5BDB007AD816716FD81FF75A914499004AFD"
+  },
+  {
+    "path": "entry/src/main/ets/models/LocalMediaOrdering.ets",
+    "sha256": "3D6E6594200FA7CC9BA5D96AB97748FF836C5D7B8FDA55B889A2958A439D03F5"
+  },
+  {
+    "path": "entry/src/main/ets/models/LocalMediaViewOptions.ets",
+    "sha256": "D7019334D5CF104310B1D16781E0DD2A0B5F81A19ED1CFC99BECD6FD94BF494F"
+  },
+  {
+    "path": "entry/src/main/ets/models/NetworkAddressParser.ets",
+    "sha256": "51FDB4DCB56291404E4C4406E8F2FD7107E6459CC6F4CC710C4ABB952C9B40AF"
+  },
+  {
+    "path": "entry/src/main/ets/models/NetworkDirectoryState.ets",
+    "sha256": "7BC6B38E8548B8B76E47DB5744B04308E2B6CEC755A6E869E960E1216F6E723D"
+  },
+  {
+    "path": "entry/src/main/ets/pages/HiddenLocalItemsPage.ets",
+    "sha256": "30328954FE0BA865913FF59E38C0EDC73B8E7774DE79B47C2C95BCDD9AE31662"
+  },
+  {
+    "path": "entry/src/main/ets/pages/HistoryPage.ets",
+    "sha256": "FF65A2FF016D4A48053919C50CD428DC110934A73DFB7F0C3FBF391A975EFD78"
+  },
+  {
+    "path": "entry/src/main/ets/pages/Index.ets",
+    "sha256": "91A6E6CA60CFD09ED305D1AF85BE942A0433898E3CF9AFEF9D4DE7DC4FE37388"
+  },
+  {
+    "path": "entry/src/main/ets/pages/LibraryPage.ets",
+    "sha256": "859D2DC6C788CFB954D3535FD1A85725DA59387C2631FA1A674D547802B6408E"
+  },
+  {
+    "path": "entry/src/main/ets/pages/NetworkBrowserPage.ets",
+    "sha256": "21907224AAFB1F81CE2BD9FA3372F9BADE4B6F9C8A176C6A3D65C7A8DDB8E540"
+  },
+  {
+    "path": "entry/src/main/ets/pages/NetworkPage.ets",
+    "sha256": "F6E41DE2EFCA5ECCFF12547716F7D260FCCFAA2B8A885DA4CA7C0B0490A28FC8"
+  },
+  {
+    "path": "entry/src/main/ets/pages/PlayerPage.ets",
+    "sha256": "70736EFE6D3DFA97E04F95532AA289008E8438688C21E433133CE78817A2702F"
+  },
+  {
+    "path": "entry/src/main/ets/pages/SettingsPage.ets",
+    "sha256": "CC5C16B8AE848698D4474EF79A3A74F92C7201442D4880EF802D39B3E7836750"
+  },
+  {
+    "path": "entry/src/main/ets/pages/StreamPage.ets",
+    "sha256": "B3CAEBCF2FCEF56A81E3D8FDEF11B78A5FA5B25BAC8225B7C8CD526835760DC2"
+  },
+  {
+    "path": "entry/src/main/ets/pages/SystemComponentDemoPage.ets",
+    "sha256": "24260CDC39C8D116D6B4EF2FC66A81D2E1EE1AAD9304ED8C23A714A0D71E7F33"
+  },
+  {
+    "path": "entry/src/main/ets/playback/AdaptivePlaybackPort.ets",
+    "sha256": "803FD782E47DC6F20D442E23F767695FCA1239BAD488D0449DD431D20D4154C1"
+  },
+  {
+    "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets",
+    "sha256": "E2891DBED4DA186A35CAAAE8D8FF2F78C3005B40022686948F2D1495CA8C640B"
+  },
+  {
+    "path": "entry/src/main/ets/playback/NetworkPlaybackSourceResolver.ets",
+    "sha256": "E49F368AB11232735C7B5D282E0385BB86FFA7DD5EF1B751552A4CD5619DD663"
+  },
+  {
+    "path": "entry/src/main/ets/playback/ProgressiveDownloadRegistry.ets",
+    "sha256": "8E95AE3972D73F1CA582BD45C2DA6DBE38448A886D2A04AB6838C1AA949D9F94"
+  },
+  {
+    "path": "entry/src/main/ets/playback/SystemPlaybackPort.ets",
+    "sha256": "972CD14657E47C42C8E65A8CB3EF738C823FC437094820647DFA9D45D3FF9E41"
+  },
+  {
+    "path": "entry/src/main/ets/playback/WindowBrightnessController.ets",
+    "sha256": "AAD0C13E857017DC500EE44F8ADDCB6D353399CD54B5AB5279450064D09893AA"
+  },
+  {
+    "path": "entry/src/main/ets/services/AppLifecycleEvents.ets",
+    "sha256": "9661A9CDB7AB71C298ACC174E5DC4DC7C0AD8D685043B641C4B11689551BCDC2"
+  },
+  {
+    "path": "entry/src/main/ets/services/AppSettingsStore.ets",
+    "sha256": "7EDCCEDD946F13B790A20202887899DB7C446657E79F18B48866A653DC483845"
+  },
+  {
+    "path": "entry/src/main/ets/services/DefaultNetworkStorageProviders.ets",
+    "sha256": "B9A302E832BA2CFA374E709CA3BDB1EBB35B4E70397F67FE4E7144BB61C1095A"
+  },
+  {
+    "path": "entry/src/main/ets/services/FileProtocolBrowserService.ets",
+    "sha256": "F5DEAAB5C0B93C1D5DB265AA3238DD230759EAA847F758CF5DDAE1B816DB50EE"
+  },
+  {
+    "path": "entry/src/main/ets/services/HiddenLocalItemStore.ets",
+    "sha256": "DCD6279DF666C0BBD20637C03A5F2E6F1E64808EF6CC4E506BBC3991DA47D69A"
+  },
+  {
+    "path": "entry/src/main/ets/services/HttpRemoteReadSession.ets",
+    "sha256": "8102B428980FCE9D15402DB84F3C97A227F71E1BBCFDDD00F96A5372B47F4890"
+  },
+  {
+    "path": "entry/src/main/ets/services/LinkoraDatabase.ets",
+    "sha256": "D8F0E516258785AD61B64837C45B5C478779B2844C3159A942BE2668D4C9C426"
+  },
+  {
+    "path": "entry/src/main/ets/services/LocalMediaIndexStore.ets",
+    "sha256": "59A385BBDB61486F90D1CC2DBAD92DD732A676B90B0C79804B3FDE20CE63CE1E"
+  },
+  {
+    "path": "entry/src/main/ets/services/LocalMediaMetadataReader.ets",
+    "sha256": "B3FFA8A6FE8AEAD1F8E8F607B327600CF35310D4F23780BFC0B58FDA75CFFAC6"
+  },
+  {
+    "path": "entry/src/main/ets/services/LocalMediaPermission.ets",
+    "sha256": "E017AC17C15CBC95A73CADFA0825672F53DD2098670B919193445E1F643B71DD"
+  },
+  {
+    "path": "entry/src/main/ets/services/LocalMediaPicker.ets",
+    "sha256": "03E11C6112CA920B6281AAB8CF776ABE47F5BDB0FCF9C98EEE1CC59DACFC20A9"
+  },
+  {
+    "path": "entry/src/main/ets/services/LocalMediaScanner.ets",
+    "sha256": "D501AFA34C66D28D8BBE0F2FD286D236A3BA4BACA616E15FBFAA264BCC51B735"
+  },
+  {
+    "path": "entry/src/main/ets/services/LocalMediaThumbnailLoader.ets",
+    "sha256": "9735ACDE602949D3D2337605BFC50186382415DBE24E03A14D0A8089835E52E4"
+  },
+  {
+    "path": "entry/src/main/ets/services/LocalViewSettingsStore.ets",
+    "sha256": "F510D49B91869BFF9295738C8CEE837D698D38227E9363AA4A01B596E4A1DE29"
+  },
+  {
+    "path": "entry/src/main/ets/services/ManualMediaStore.ets",
+    "sha256": "99E513E6E04FF97BB9824B7289F91BBC880D12FE0A630DA637DD5ACE2D9DF214"
+  },
+  {
+    "path": "entry/src/main/ets/services/NativeRemoteReadSession.ets",
+    "sha256": "AE306E6AC16595F5569E22A581BE1DFCA9C14C7B3C90B42B444D50B4E94E825D"
+  },
+  {
+    "path": "entry/src/main/ets/services/NetworkCredentialStore.ets",
+    "sha256": "E239DF3A7EF7D330A4B6A4F87063BDED7FD7EAA36366A24EFD779EAD32F9AA62"
+  },
+  {
+    "path": "entry/src/main/ets/services/NetworkDirectoryService.ets",
+    "sha256": "3D884DB931AE03FB2072F0EACEAF6063EB93421B0251A8329C759ABB1BF2A603"
+  },
+  {
+    "path": "entry/src/main/ets/services/NetworkDirectorySummaryCache.ets",
+    "sha256": "4D88859094963A0F43754EBDD3ADC60123C47EBD63F329968127D09DF17B7BA4"
+  },
+  {
+    "path": "entry/src/main/ets/services/NetworkMediaCache.ets",
+    "sha256": "7EAFCA33E8B7B4254E917BCE5E765B11875ED01C451ABD7F7CCF9A2CCE2E779B"
+  },
+  {
+    "path": "entry/src/main/ets/services/NetworkMediaLoader.ets",
+    "sha256": "D25A56EE56F2BE42A2FA22F4FE177F1CD4617C601E5E645DCC4E09C6798A0528"
+  },
+  {
+    "path": "entry/src/main/ets/services/NetworkMediaMetadataReader.ets",
+    "sha256": "9AE3E1BC80C8537F8C6CF6E826208B8E48A142812CD41274B18E3BF89DDC4341"
+  },
+  {
+    "path": "entry/src/main/ets/services/NetworkMediaProbeSmokeTest.ets",
+    "sha256": "2E05FFA9334130429892A4B9BDF2086391C356A806A4ACEF711FF49AEEA49BC6"
+  },
+  {
+    "path": "entry/src/main/ets/services/NetworkMediaSourceFactory.ets",
+    "sha256": "2B0C17409EE4B2D9B144E68C76F561A3DC6C8A4EEE13CEA37D7745616D3FE07B"
+  },
+  {
+    "path": "entry/src/main/ets/services/NetworkProxySmokeTest.ets",
+    "sha256": "8BFA513F5AC58BFBA1CCB65642DE8EE3AC5D21D08565DA7F5B74D39B64D8A9B4"
+  },
+  {
+    "path": "entry/src/main/ets/services/NetworkServerStore.ets",
+    "sha256": "7AFE7FEE3F61E2F4D5E590B5DB8BB2C2B12FBDFF4765F2D7F55D9AD5FCB9AA7B"
+  },
+  {
+    "path": "entry/src/main/ets/services/NetworkStorageProvider.ets",
+    "sha256": "5699A3BC04AB8D3566F23F67D484024AB4F2FD0903BF0DB9F1504FCA2B51F64B"
+  },
+  {
+    "path": "entry/src/main/ets/services/NetworkThumbnailCache.ets",
+    "sha256": "F37A481B178A12079CBE5CF95612E8D378FD2161692542DF9A822116D096B256"
+  },
+  {
+    "path": "entry/src/main/ets/services/NetworkViewSettingsStore.ets",
+    "sha256": "E821E695018D3D65CB5380C46315BD6F44CC0D2975AB7754A0D06AC45970E459"
+  },
+  {
+    "path": "entry/src/main/ets/services/PlaybackBookmarkStore.ets",
+    "sha256": "C732E3C8CADA8476C2770D61BA82F2EDBE1E33D05A9DEC55E5C3497428F0B3C0"
+  },
+  {
+    "path": "entry/src/main/ets/services/RecentMediaStore.ets",
+    "sha256": "A5D8AB888F5ECDDEFF205482206A086F3E5BDB4AD27BC01F178A0B4C34EAFB46"
+  },
+  {
+    "path": "entry/src/main/ets/services/SensitiveLocatorStore.ets",
+    "sha256": "3E73DB4DD7B765828D20761F1D6BF2F62FDD352614E9FFFB2B6F1852C33B9D4D"
+  },
+  {
+    "path": "entry/src/main/ets/services/SftpBrowserService.ets",
+    "sha256": "38FDB12E3FA94B55F24006C572412B6DB5C56DD756FC982D7EA38F0ECEB9AC3A"
+  },
+  {
+    "path": "entry/src/main/ets/services/SharedNetworkStorageProviders.ets",
+    "sha256": "1C1C4E5776915A85D38E6D89571C722E953A49190C370A1F93ACF9DF78D46A96"
+  },
+  {
+    "path": "entry/src/main/ets/services/SmbBrowserService.ets",
+    "sha256": "60480D8976C731EAF0ABB29A426832598C900203EC1F521730719D8C019B6DA8"
+  },
+  {
+    "path": "entry/src/main/ets/services/SourceIdentity.ets",
+    "sha256": "4F2410DE6DCBB7AF9DF1C9D6520A821277B8871BADEDFF828B45B76D18CF834F"
+  },
+  {
+    "path": "entry/src/main/ets/services/SystemWebPEncoder.ets",
+    "sha256": "A936211F42BF41351F69BA8A56315E885E1EA7FB42297E70B5F33817A872DAA1"
+  },
+  {
+    "path": "entry/src/main/ets/services/UpnpDiscoveryScanner.ets",
+    "sha256": "EB2E00928FF36A130D1DDF1D3E827980884E75321C2A9409599EDBE7E3AA2133"
+  },
+  {
+    "path": "entry/src/main/ets/services/WebDavBrowserService.ets",
+    "sha256": "2A742AF874C24BB05ABC8BD0CEFADDACE349F99204D6A2938A83D84402EF75DA"
+  },
+  {
+    "path": "entry/src/main/ets/ui/AppTheme.ets",
+    "sha256": "2A51C5DE4F643B7C37A7CAC74E9B79193F9966AA1DD95A453C3EEE5862070877"
+  },
+  {
+    "path": "entry/src/main/ets/ui/AppThemeController.ets",
+    "sha256": "01163BA00E19114D288461A433151CAE089BEFDD06648E78627613A0B1CDEF9E"
+  },
+  {
+    "path": "entry/src/simulator/AnalysisComposition.ets",
+    "sha256": "9A4233C6A00F05EF928505530B8312D5078B1D38E91395D9D0D3B492DEAFF04F"
+  },
+  {
+    "path": "entry/src/simulator/PlaybackComposition.ets",
+    "sha256": "92A4FCF767D5138315717617189AA8127874DE22A176E621EF2F61197450B8C9"
+  },
+  {
+    "path": "entry/src/simulator/RuntimeDiagnostics.ets",
+    "sha256": "62ED6EF1AF3F106209342CEF9C338B3B98F6BB00EA2F4F328A72BB004F8BC5AF"
+  },
+  {
+    "path": "entry/src/simulator/RuntimeProfile.ets",
+    "sha256": "E9B353B78AB3C900A8553C31B4A9EFD23D663525DAB945718C3DBE647A354133"
+  },
+  {
+    "path": "entry/src/simulator/ets/adapters/NetworkProtocolTestRegistry.ets",
+    "sha256": "A73B234779B1EECA44BA076B2A587D641BF79639898B9282E3C680314D1D6387"
+  },
+  {
+    "path": "entry/src/simulator/ets/diagnostics/AnalyzerIntegrationSmoke.ets",
+    "sha256": "EBC030E4FD27C78E7004930ED65B7D2DFB00E96F13E2A9D6597A6798A127CCFE"
+  },
+  {
+    "path": "entry/src/simulator/ets/diagnostics/FfmpegRuntimeSmoke.ets",
+    "sha256": "0DBA4A1162AE436198AA390CB76FD3A50B022085D8BC4648578F08AF6D66D390"
+  },
+  {
+    "path": "entry/src/simulator/ets/services/DefaultNetworkStorageProviders.ets",
+    "sha256": "B3E10AB972208DD148A6B521C1CE64DE622C4D183585060E8B6442AE03BBD82A"
+  },
+  {
+    "path": "entry/src/test/AppNavigation.test.ets",
+    "sha256": "CFF9EF5A59D90BF80DE1EA71CEB918F5C954204E8482DED9248B5DD1E4748A32"
+  },
+  {
+    "path": "entry/src/test/ArchitectureContracts.test.ets",
+    "sha256": "050EC48396DDBBD1F3469CEBFD4242D24B6E46DB0BC7D6AAA051694272528697"
+  },
+  {
+    "path": "entry/src/test/FailureCatalog.test.ets",
+    "sha256": "6B906030EA261AA0F7156AC5BC4025CCE50BF925D0BB2B4D750E1CB58AF49664"
+  },
+  {
+    "path": "entry/src/test/FeatureModules.test.ets",
+    "sha256": "0EDA305D9935BDFCFEE6A41BDBD8E05C44F843410B7F6F44DE899EC5721B7F53"
+  },
+  {
+    "path": "entry/src/test/FfmpegAnalysis.test.ets",
+    "sha256": "8A438A062126CA2F59A90FFD9A74F511AF621309873CF137B566311B5171DEFF"
+  },
+  {
+    "path": "entry/src/test/List.test.ets",
+    "sha256": "345CAE756988EA063AFA357B94B6A7E9361B3B38578AF51C678F28DB10E227C5"
+  },
+  {
+    "path": "entry/src/test/LocalMediaAsset.test.ets",
+    "sha256": "796DFA19CBBB860992E1A49DD49C179ADD612ECAA48D9C48D37B05142621C8BB"
+  },
+  {
+    "path": "entry/src/test/LocalMediaOrdering.test.ets",
+    "sha256": "2EBAD220082D422D5C429DB7BAB833D6468B42F3DAD5D2D0C554D4138B86F830"
+  },
+  {
+    "path": "entry/src/test/MediaAnalysisAdapters.test.ets",
+    "sha256": "648AA3C4ACB9F26330E9E908966D9AAA741BBF1EA524E0CA1B8A5C4FA61AAE48"
+  },
+  {
+    "path": "entry/src/test/MediaSource.test.ets",
+    "sha256": "354AA2C135DE7627EF7B7B02ADF564CD8BD93B7BC82670B076A4C29C5B370167"
+  },
+  {
+    "path": "entry/src/test/NetworkAddressParser.test.ets",
+    "sha256": "0B2E88B73B18EAE80F88287B45E83F95A25B8816DA4322C832D38DABF5B11EA4"
+  },
+  {
+    "path": "entry/src/test/NetworkDirectoryState.test.ets",
+    "sha256": "8149DA3CB83BFC547035BD8445264FAD5A5E1E18D29612ECC80614A609372610"
+  },
+  {
+    "path": "entry/src/test/NetworkFileProxy.test.ets",
+    "sha256": "81446D98207E6B75C2E72F8E46CE29940CAC19F9F7E9F99ACEDCCC05C5F8CE24"
+  },
+  {
+    "path": "entry/src/test/NetworkLinkParser.test.ets",
+    "sha256": "97A774A4E7DC0BF1C0239D61D50191BD27255883374B4F249893F0B15AF65F7A"
+  },
+  {
+    "path": "entry/src/test/NetworkMediaProbe.test.ets",
+    "sha256": "DA981D1F1D35E27216171BF919FB110278A451D7BAFF68E3083E17780705464C"
+  },
+  {
+    "path": "entry/src/test/NetworkStorageProvider.test.ets",
+    "sha256": "1D9C3617E71E3299B044F564231766BE507D161B46AD8437D64B5FC9969CB2F3"
+  },
+  {
+    "path": "entry/src/test/PlaybackBookmark.test.ets",
+    "sha256": "0D03090FE0F386EA2577B454EE5C0365ADC97449FE59BDEA7E47CFA2E72BCCD2"
+  },
+  {
+    "path": "entry/src/test/PlaybackEngine.test.ets",
+    "sha256": "5E44A69DD67D9D64C1F7E53CB1681085AAD27CA3EEDA5EF9D1136C355D451525"
+  },
+  {
+    "path": "entry/src/test/PlayerGestureController.test.ets",
+    "sha256": "2CC9302AB342B8FFD4FFF5D115A27B87EA4E55CA1FB4035646F1A30A99763991"
+  },
+  {
+    "path": "entry/src/test/SystemMediaStages.test.ets",
+    "sha256": "F32C14768588912B10F4D8D8186141B6A952D46DF3040AFBC02CFE7F2F4AD104"
+  },
+  {
+    "path": "entry/src/test/ThumbnailPolicy.test.ets",
+    "sha256": "D790044BD481A6E326473489B7D39CEFABCEA6ACB847853D995BA7FE069FB9BB"
+  },
+  {
+    "path": "linkora_core/Index.ets",
+    "sha256": "60D45254BBF420986B11B5F656BD48C4D035D12F335B90D578C73744B9FBBA27"
+  },
+  {
+    "path": "linkora_core/build-profile.json5",
+    "sha256": "F9A1902854AADFC1B21DD1037F7CFD39F37FCF9FC2CB418041FCDB5A5391F083"
+  },
+  {
+    "path": "linkora_core/src/main/ets/contracts/FeaturePorts.ets",
+    "sha256": "7475A4EDE69BD074D2A14BAB8E7063CE371FFE10DA7FD2B212F7EC7B4B83CCAE"
+  },
+  {
+    "path": "linkora_core/src/main/ets/contracts/MediaAnalysisPorts.ets",
+    "sha256": "1F85C205C24F90841D4C6CDACC9AE19883295C0448FA800FDB1762BF7DD41D2F"
+  },
+  {
+    "path": "linkora_core/src/main/ets/contracts/MediaInput.ets",
+    "sha256": "03D791F8D94213FBBC90F396E9041F1D05248649ABC48831808A196EDFF5EA85"
+  },
+  {
+    "path": "linkora_core/src/main/ets/contracts/NetworkPorts.ets",
+    "sha256": "D800256C8A363BE5E01D8AE207E389FA5AD1B486BBE9981E913D77654027E703"
+  },
+  {
+    "path": "linkora_core/src/main/ets/contracts/StoragePorts.ets",
+    "sha256": "DF98157BB7F0ED662C19D355BF0257EC3408DC84B74F05ADB040780C7C05C766"
+  },
+  {
+    "path": "linkora_core/src/main/ets/contracts/ThumbnailPorts.ets",
+    "sha256": "B3FE81DF47B95D1A82460B9D4EC86EC0D1A9050AA8DCDB7ABE1A75913344B290"
+  },
+  {
+    "path": "linkora_core/src/main/ets/errors/AppFailure.ets",
+    "sha256": "13712B8DC8A07552647130564348DFA428732CFD4FFBA7C24C5104E8AF89D25A"
+  },
+  {
+    "path": "linkora_core/src/main/ets/errors/FailureCatalog.ets",
+    "sha256": "65A10EF20C6A875039625DB00AC3139B9C3548FE593412C555E8CB09DCDC6D20"
+  },
+  {
+    "path": "linkora_core/src/main/ets/features/LibraryFeatureController.ets",
+    "sha256": "7087217F207FA639A7C0880737D061EF2B3D544D44FB4CE1DEF6DF29C594360B"
+  },
+  {
+    "path": "linkora_core/src/main/ets/features/NetworkLinkController.ets",
+    "sha256": "24AD07731A9F8088834E7876C47638DE8A971AFDA523D659B8A7FC85526C0191"
+  },
+  {
+    "path": "linkora_core/src/main/ets/features/PlayerFeatureController.ets",
+    "sha256": "8DBA6B3A97FAD663F65680C262F9FDE62E5752C936D6C4BCFBF9BC37EAE9E2E8"
+  },
+  {
+    "path": "linkora_core/src/main/ets/features/PlayerGestureController.ets",
+    "sha256": "B832071AF0AC316766362ACEDE0183DB94DA5F5BEEC8F939B5B934B128B32E19"
+  },
+  {
+    "path": "linkora_core/src/main/ets/features/SettingsFeatureController.ets",
+    "sha256": "25E82D43160A760BAFD330BE354BAF7E4A9CA5B9BF08CED06698A8CE0A0BE10E"
+  },
+  {
+    "path": "linkora_core/src/main/ets/models/AppSettings.ets",
+    "sha256": "D91B1E4AA849579F3A522A2CC1B0DB3A92A028901F13369C22FD53D12ECA9AA9"
+  },
+  {
+    "path": "linkora_core/src/main/ets/models/FileSizeFormatter.ets",
+    "sha256": "C2D2586AEA995C3FDA5B9E874BE13A984E73537B30B885510EA811800CA11757"
+  },
+  {
+    "path": "linkora_core/src/main/ets/models/LocalFileFilter.ets",
+    "sha256": "D28C2A932208A7B361EDC6A62E5CCC60B6F164A3D484EDBD9537541298996096"
+  },
+  {
+    "path": "linkora_core/src/main/ets/models/LocalMediaAsset.ets",
+    "sha256": "03DD347E7C449438876B7D41379004164C2875831A3C75EB6961B8DDA2DA9477"
+  },
+  {
+    "path": "linkora_core/src/main/ets/models/LocalMediaCatalog.ets",
+    "sha256": "FBCB8FACE1E24A4B073EC676D214C9F72D715A55A255236F8683EA1F18CBF989"
+  },
+  {
+    "path": "linkora_core/src/main/ets/models/LocalMediaFolder.ets",
+    "sha256": "FF9F410239C13595A9F3D40CA75BE9816FC16405595E73AB4E2075E90C6A37DD"
+  },
+  {
+    "path": "linkora_core/src/main/ets/models/LocalMediaPlaybackProgress.ets",
+    "sha256": "77D6C67B4219BBAAD582D93158B455E31C584CE13EB7BD758390EF65EEE06C51"
+  },
+  {
+    "path": "linkora_core/src/main/ets/models/LocalMediaScanState.ets",
+    "sha256": "14C5F5D9C89C1207A6EE0A7ADAD042DB53600F20AED6D742AB08DF4E0595DBC5"
+  },
+  {
+    "path": "linkora_core/src/main/ets/models/MediaFormatDetector.ets",
+    "sha256": "4DD642517373980C0A64C328804346A8EDFF8A0ADAA62038DD784707F55C52F3"
+  },
+  {
+    "path": "linkora_core/src/main/ets/models/MediaInfo.ets",
+    "sha256": "8A3767EE4FA56FEBD28FB9FBD026E10394841AD050BF41A3983EA81BDB8579C0"
+  },
+  {
+    "path": "linkora_core/src/main/ets/models/MediaLink.ets",
+    "sha256": "84510C096413E572E9705644C7E0613D113A4BE2DC7C15093D422E80C11B186C"
+  },
+  {
+    "path": "linkora_core/src/main/ets/models/MediaSource.ets",
+    "sha256": "6D7E8BE4F2CDB78C0049DA7E162CE1BD5A219905AB670C90568183DD0268604E"
+  },
+  {
+    "path": "linkora_core/src/main/ets/models/PlaybackBookmark.ets",
+    "sha256": "05C692C479EBD5071DEDE7868CB7BD8273552D14428B3BA632B0D86B0ED892C6"
+  },
+  {
+    "path": "linkora_core/src/main/ets/models/RecentMediaItem.ets",
+    "sha256": "C4061AA431809F17C3818B2209F793A05E79A28B2232325EAAB7B263ADE86AB8"
+  },
+  {
+    "path": "linkora_core/src/main/ets/models/RemoteSource.ets",
+    "sha256": "5E171A6316608AC1EB6F10F7BE0A886B34F13EE25605962E28F66FBA975E58CA"
+  },
+  {
+    "path": "linkora_core/src/main/ets/playback/PlaybackBackend.ets",
+    "sha256": "116B387031D7795538BD18E24B3187C25268D19ACD0EA870248859D6351D0809"
+  },
+  {
+    "path": "linkora_core/src/main/ets/playback/PlaybackBackendSelector.ets",
+    "sha256": "4945715338B7A26F1ED0F568ED845B796C1FA9472194D1E5A720083C4C28EBDC"
+  },
+  {
+    "path": "linkora_core/src/main/ets/playback/PlaybackEngine.ets",
+    "sha256": "CDEE3EEB5CC03DEA6FDCC87BF785C67798EBA6AC7EDD51B44155B18C42DF8D2C"
+  },
+  {
+    "path": "linkora_core/src/main/ets/playback/PlaybackModels.ets",
+    "sha256": "22E56EE731AF0ED46AA5023ED371A6B17DF91C997571802B02B20FA470353B29"
+  },
+  {
+    "path": "linkora_core/src/main/ets/playback/PlaybackPort.ets",
+    "sha256": "C21EC63E9CE2AF9A0516B9E4048C7769F6C1836EC7E21CA4741217DD9DEFC62C"
+  },
+  {
+    "path": "linkora_core/src/main/ets/services/NetworkLinkParser.ets",
+    "sha256": "F8451E9C849942989CC823D954FD356D717D06FEFAD7910C98A4EED451C51427"
+  },
+  {
+    "path": "linkora_core/src/main/ets/sources/DiscoveryPlugin.ets",
+    "sha256": "AF3E5AB5EF623C55B6B86A33262763776CA78485706E2A2AFC4619AC680E3C48"
+  },
+  {
+    "path": "linkora_core/src/main/ets/sources/SourcePlugin.ets",
+    "sha256": "02416BD860C9B7C26AFF3C193889F2BCC5835ED2308726403DC0F8B57E599A76"
+  },
+  {
+    "path": "linkora_core/src/main/ets/thumbnail/ThumbnailPolicy.ets",
+    "sha256": "E9563552AE6FFE6841D6728822C21FB64830F2B11B8828CDA2F430D08D2A5ADE"
+  },
+  {
+    "path": "linkora_ffmpeg/Index.ets",
+    "sha256": "E36E0C67A550A6F620E7A09393F54D65A14AF0C9AC1FD3AE129DFFBF181F2CF4"
+  },
+  {
+    "path": "linkora_ffmpeg/Native.ets",
+    "sha256": "AB2317083D2A91B653A8155E0697CC6A8F9589CF281658C68C1A7FAB2AB1C6D3"
+  },
+  {
+    "path": "linkora_ffmpeg/build-profile.json5",
+    "sha256": "D10716A2739FF06D8034C2EA001E930D3636AE825955401FC139FD6CE400F16B"
+  },
+  {
+    "path": "linkora_ffmpeg/oh-package-lock.json5",
+    "sha256": "E235D9EB5301B90B62DEEEEECFBC3FAABA2D0497B89BC87BD10EFAE7D9B0A54B"
+  },
+  {
+    "path": "linkora_ffmpeg/src/main/cpp/analysis.cpp",
+    "sha256": "2801200C341071FC7DF7C119C7373BDD2D5A2E279C79A9348513101641893F84"
+  },
+  {
+    "path": "linkora_ffmpeg/src/main/cpp/analysis.h",
+    "sha256": "B2185EB9DAE031350C74A6A2EB42DADC286AE2AFC1FF00A5CB30FBC99DAE9762"
+  },
+  {
+    "path": "linkora_ffmpeg/src/main/cpp/napi_init.cpp",
+    "sha256": "595413FDFE1B603D041007093A3691247C24C08518AE4DCB3602744A5DAEA107"
+  },
+  {
+    "path": "linkora_ffmpeg/src/main/cpp/request_state.h",
+    "sha256": "EFF1E0E34A7D25DEED95DE56CEDA2315CA837603AFAA567E3000ED70343A8CA6"
+  },
+  {
+    "path": "linkora_ffmpeg/src/main/cpp/types/liblinkora_ffmpeg/index.d.ets",
+    "sha256": "BC508D069B982FB699B9F611E0672002015FFE0BC8C2C07FBEA802D566BC5A6B"
+  },
+  {
+    "path": "linkora_ffmpeg/src/main/ets/FfmpegAnalysis.ets",
+    "sha256": "4632B0D2508D10E5D733015FC48CFA1291B18D64E7213326BB720FF90026481F"
+  },
+  {
+    "path": "linkora_ffmpeg/src/main/ets/FfmpegMediaInfoMapper.ets",
+    "sha256": "13284635FCBD3BB36A814F54D1BAD8E702B014A7A38B2B31D148838738A32452"
+  },
+  {
+    "path": "linkora_ffmpeg/src/main/ets/FfmpegRawThumbnail.ets",
+    "sha256": "1697AF1D36FA8CF7FC1A96ECC6B53FF27BF8EDC2249F856A2D958FF91404FF3E"
+  },
+  {
+    "path": "linkora_ffmpeg/src/main/ets/NativeModels.ets",
+    "sha256": "5576345DE807F7966E0E7BD99483005CC6424C1D756824BA5C8A5E9FE55D0DC8"
+  },
+  {
+    "path": "linkora_ffmpeg/src/test/cpp/native_core_test.cpp",
+    "sha256": "EF02FBB7F191D4A29CB41F2B6A3377A768CA0077241C3A93E2834DB305DBC5D3"
+  },
+  {
+    "path": "linkora_media_probe/Index.ets",
+    "sha256": "B1D7BF5225F4CD3791E2826054D3532F93462E8D818DFB085A421428EA1EF102"
+  },
+  {
+    "path": "linkora_media_probe/build-profile.json5",
+    "sha256": "F9A1902854AADFC1B21DD1037F7CFD39F37FCF9FC2CB418041FCDB5A5391F083"
+  },
+  {
+    "path": "linkora_media_probe/src/main/ets/NetworkMediaProbe.ets",
+    "sha256": "F57BFE67DA6069B545793BCE8044DA833FBF22B2B4FE5FD40314A235E813F0D8"
+  },
+  {
+    "path": "linkora_media_probe/src/main/ets/SystemMediaProbe.ets",
+    "sha256": "7E972A378AA7C35F619E46E5FBD46B09F6FFC3A24C07AEB3A841BB3EF76B23C2"
+  },
+  {
+    "path": "linkora_media_probe/src/main/ets/SystemThumbnailExtractor.ets",
+    "sha256": "CA5967D18599DF072CFA99B74973454F7FEED503A11E9CF9C51D0B8C52318996"
+  },
+  {
+    "path": "linkora_proxy/Index.ets",
+    "sha256": "4A0E93C426576D040D9704AD7E453690B0FA77124B9556FD84372FAE2AD66C0F"
+  },
+  {
+    "path": "linkora_proxy/build-profile.json5",
+    "sha256": "F9A1902854AADFC1B21DD1037F7CFD39F37FCF9FC2CB418041FCDB5A5391F083"
+  },
+  {
+    "path": "linkora_proxy/oh-package-lock.json5",
+    "sha256": "0A493DF9CC4F864271AA5C06ADABB1D6A2D4D306CB3F73399B3C44B882DA6C6D"
+  },
+  {
+    "path": "linkora_proxy/src/main/ets/HttpByteRange.ets",
+    "sha256": "1E57A5E8E93A2310718FD480A75FB586F6B5A35F661347F161FC93C3C337E88A"
+  },
+  {
+    "path": "linkora_proxy/src/main/ets/NetworkFileProxy.ets",
+    "sha256": "0879A103210CC6996AFC38FDC0C1D9E3FE8B406A58429EE82627D8691DAE4E84"
+  },
+  {
+    "path": "oh-package-lock.json5",
+    "sha256": "9841D31BEF25C8C48F4DD437D40A2BF9A0F635E59486C526B39F8BF8B4C1B2F3"
+  },
+  {
+    "path": "scripts/check-architecture-boundaries.test.cjs",
+    "sha256": "565E8925660CC70C1DD0C50C682BEFC2A13CA49A7C074A371AFD479528F3B260"
+  },
+  {
+    "path": "scripts/check-ffmpeg-artifact.test.cjs",
+    "sha256": "A89E5C1BE20211513818F9E23FA4D229E53833F4D419532B45E07CA9B67A8291"
+  }
+]

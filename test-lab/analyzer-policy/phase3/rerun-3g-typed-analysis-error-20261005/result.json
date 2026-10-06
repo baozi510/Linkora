@@ -1,0 +1,19 @@
+{
+  "task": "phase3-rerun-3g-typed-analysis-error",
+  "source": "44d0f62816b73ebd3bab8069be5b74f51e2c6999",
+  "checkout": "d27845a7dfe26f074756fd8ce76c561b0ecdc952",
+  "decision": "BLOCKED — TEST ENVIRONMENT",
+  "firstDefault": "PASS",
+  "simulator": "PASS",
+  "immediateDefault": "PASS",
+  "hypiumPerDefault": 209,
+  "hypiumFailures": 0,
+  "hypiumErrors": 0,
+  "supplementalDesktop": "10/10 PASS",
+  "stoppedGate": null,
+  "runtimeCycles": 0,
+  "runtime": "BLOCKED/NOT RUN: HDC initial/final empty; no production UI/native runtime",
+  "noHistoricalPassReused": true,
+  "noProtectedFileChanges": true,
+  "manualOhpmBetween": false
+}
