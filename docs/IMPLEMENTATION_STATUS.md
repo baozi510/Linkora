@@ -61,7 +61,9 @@ No production source change or rerun is required for this ruling.
 
 ### Current architecture action
 
-**Phase 7A — Analysis Benchmark Foundation + real-arm64 WebDAV baseline: ACCEPTED.**
+**Phase 8A — real-arm64 System / MPV / Auto playback foundation: READY TO VALIDATE.**
+
+Phase 7A Analysis Benchmark baseline is ACCEPTED.
 
 This stage adds measurement infrastructure only:
 
@@ -80,6 +82,8 @@ The corrected rerun passed the full build chain and collected 240 real-Mate60 We
 The baseline shows meaningful System-vs-FFmpeg differences, especially thumbnail latency/upstream bytes, but only for H.264/AAC MP4 and HEVC/AAC MKV. Production analysis routing remains unchanged because two cases are insufficient for a global policy rewrite.
 
 Broader codec/container/audio coverage will not reopen the accepted Analysis phase. It is now part of the shared Media Capability Corpus and will be exercised during Playback/Advanced AV validation with Analyzer and Playback results recorded independently.
+
+Phase 8A first validates that the current real-arm64 playback foundation itself is trustworthy: System/MPV forced modes, Auto selection/fallback boundary, surface lifecycle, remote MediaProxy playback, seek/EOF/release, and bounded negative behavior. Only after that foundation passes will Phase 8B expand to the full Tier A/B/C capability corpus.
 
 
 This file is the current execution status for the architecture migration.

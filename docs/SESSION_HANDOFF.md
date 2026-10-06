@@ -6,7 +6,7 @@ Repository: `baozi510/Linkora`
 
 Current branch: `feat/ffmpeg-analyzer-policy-phase3`
 
-Current phase: **Phase 7A Analysis Benchmark baseline ACCEPTED; next work moves to real-arm64 Playback capability. Phase 3 remains ACCEPTED.**
+Current phase: **Phase 8A real-arm64 Playback foundation validation. Phase 7A benchmark baseline and Phase 3 analysis policy remain ACCEPTED.**
 
 Implementation source:
 
@@ -47,9 +47,11 @@ This is a known local-document thumbnail limitation, not a Phase 3 regression. I
 
 ### Next action
 
-Do not rerun Phase 7A.
+Follow the READY Phase 8A task on `feat/playback-capability-phase8`.
 
-Move to real-arm64 Playback validation. First prove the current System/MPV/Auto playback foundation on Mate60 with controlled sources. After that baseline is stable, expand using the shared `test-lab/media-compatibility` corpus and record System/MPV/Analyzer capability independently.
+First prove the current System/MPV/Auto playback foundation on Mate60 with controlled WebDAV sources. Do not start the broad 59-case compatibility matrix until this playback foundation is accepted.
+
+After Phase 8A, expand using the shared `test-lab/media-compatibility` corpus and record System/MPV/Analyzer capability independently.
 
 The permanent corpus follows Tier A/B/C rules in `docs/MASTER_IMPLEMENTATION_PLAN.md`: mainstream/core formats are release-gated; legacy/rare formats remain testable but are not all mandatory PASS.
 
