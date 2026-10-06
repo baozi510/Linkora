@@ -1,15 +1,18 @@
 import { common } from '@kit.AbilityKit';
-import { BusinessError, systemDateTime } from '@kit.BasicServicesKit';
+import { systemDateTime } from '@kit.BasicServicesKit';
 import { fileIo } from '@kit.CoreFileKit';
 import { image } from '@kit.ImageKit';
 import { http } from '@kit.NetworkKit';
 import {
   DefaultThumbnailTimePolicy,
+  IMediaProbe,
+  IThumbnailExtractor,
   MediaSource,
   ProbeCompleteness,
   ProbeRequirement,
   ProbeResult,
   RemoteProtocol,
+  RawThumbnail,
   ThumbnailExtractRequest,
   ThumbnailPlan
 } from 'linkora_core';
@@ -70,6 +73,10 @@ interface AnalysisBenchmarkRecord {
   memoryBytes: number | null;
 }
 
+interface BenchmarkErrorShape {
+  code?: string | number;
+}
+
 interface BenchmarkRunState {
   complete: boolean;
   passed: boolean;
@@ -113,12 +120,12 @@ export class AnalysisBenchmarkRunner {
           const engines: string[] = iteration % 2 === 0 ? ['system', 'ffmpeg'] : ['ffmpeg', 'system'];
           for (const engine of engines) {
             const list: AnalysisBenchmarkRecord =
-              await AnalysisBenchmarkRunner.metadata(context, fixture[1], fixture[0], engine,
+              await AnalysisBenchmarkRunner.metadata(fixture[1], fixture[0], engine,
                 ProbeRequirement.LIST, iteration);
             AnalysisBenchmarkRunner.append(outputPath, list); records++; if (!list.success) failed++;
 
             const advanced: AnalysisBenchmarkRecord =
-              await AnalysisBenchmarkRunner.metadata(context, fixture[1], fixture[0], engine,
+              await AnalysisBenchmarkRunner.metadata(fixture[1], fixture[0], engine,
                 ProbeRequirement.ADVANCED, iteration);
             AnalysisBenchmarkRunner.append(outputPath, advanced); records++; if (!advanced.success) failed++;
 
@@ -150,7 +157,7 @@ export class AnalysisBenchmarkRunner {
     }
   }
 
-  private static async metadata(context: common.UIAbilityContext, source: MediaSource,
+  private static async metadata(source: MediaSource,
     benchmarkCase: AnalysisBenchmarkCase, engine: string, requirement: ProbeRequirement,
     iteration: number): Promise<AnalysisBenchmarkRecord> {
     const started: number = AnalysisBenchmarkRunner.now();
@@ -166,8 +173,8 @@ export class AnalysisBenchmarkRunner {
     const elapsedMs: number = AnalysisBenchmarkRunner.now() - started;
     const width: number = AnalysisBenchmarkRunner.width(result);
     const height: number = AnalysisBenchmarkRunner.height(result);
-    const correct: boolean = result?.info !== null &&
-      Math.abs((result?.info?.durationMs ?? 0) - benchmarkCase.expectedDurationMs) <= 250 &&
+    const correct: boolean = result !== null && result.info !== null &&
+      Math.abs(result.info.durationMs - benchmarkCase.expectedDurationMs) <= 250 &&
       width === benchmarkCase.expectedWidth && height === benchmarkCase.expectedHeight;
     return {
       operation: 'analysis.metadata',
@@ -202,7 +209,8 @@ export class AnalysisBenchmarkRunner {
     const proxy: NetworkFileProxy = new NetworkFileProxy();
     const resolver = new MediaAnalysisInputResolver(new HarmonyAnalysisInputs(
       AnalysisBenchmarkRunner.context(), proxy));
-    const probe = engine === 'system' ? AnalysisComposition.system(resolver) : AnalysisComposition.ffmpeg(resolver);
+    const probe: IMediaProbe =
+      engine === 'system' ? AnalysisComposition.system(resolver) : AnalysisComposition.ffmpeg(resolver);
     let result: ProbeResult;
     try {
       result = await probe.probe(source, requirement);
@@ -238,7 +246,7 @@ export class AnalysisBenchmarkRunner {
     const request = new ThumbnailExtractRequest(plan.timeMs, plan.width, plan.height);
     const encoder: SystemWebPEncoder = new SystemWebPEncoder();
     let pixelMap: image.PixelMap | null = null;
-    let raw = null;
+    let raw: RawThumbnail | null = null;
     let encoded: ArrayBuffer | null = null;
     let extractMs: number = 0;
     let encodeMs: number = 0;
@@ -247,8 +255,8 @@ export class AnalysisBenchmarkRunner {
     let height: number = 0;
     let errorCode: number = 0;
     const started: number = AnalysisBenchmarkRunner.now();
-    let system = null;
-    let ffmpeg = null;
+    let system: SystemThumbnailFallback | null = null;
+    let ffmpeg: IThumbnailExtractor | null = null;
     try {
       if (engine === 'system') {
         system = new SystemThumbnailFallback(resolver);
@@ -411,16 +419,18 @@ export class AnalysisBenchmarkRunner {
   }
 
   private static errorCode(error: Object): number {
-    if (error instanceof BusinessError) {
-      const value: number = Number(error.code);
-      return Number.isFinite(value) ? value : 0;
+    const shape: BenchmarkErrorShape = error as BenchmarkErrorShape;
+    if (typeof shape.code === 'number' && Number.isFinite(shape.code)) {
+      return Math.max(0, Math.floor(shape.code));
     }
     return AnalysisError.from(error).code;
   }
 
   private static append(path: string, record: AnalysisBenchmarkRecord): void {
-    const file = fileIo.openSync(path, fileIo.OpenMode.CREATE | fileIo.OpenMode.READ_WRITE | fileIo.OpenMode.APPEND);
-    try { fileIo.writeSync(file.fd, JSON.stringify(record) + '\n'); } finally { fileIo.closeSync(file.fd); }
+    const text: string = JSON.stringify(record) + '\n';
+    const offset: number = fileIo.statSync(path).size;
+    const file = fileIo.openSync(path, fileIo.OpenMode.CREATE | fileIo.OpenMode.READ_WRITE);
+    try { fileIo.writeSync(file.fd, text, { offset }); } finally { fileIo.closeSync(file.fd); }
   }
 
   private static write(path: string, value: string | ArrayBuffer): void {
