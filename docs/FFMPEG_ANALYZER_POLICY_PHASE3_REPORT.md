@@ -1,9 +1,62 @@
 # FFmpeg Analyzer Production Policy Phase 3 Report
 
-> Status: RUNTIME VALIDATION BLOCKED — LOCAL_DOCUMENT THUMBNAIL ACCEPTANCE; network core and 20-cycle PASS. Prior build/static/pure PASS remains separate.
+> Status: ACCEPTED — Phase 3 build/static/pure and Mate60 production runtime acceptance complete; LOCAL_DOCUMENT placeholder classified as a pre-existing non-blocking limitation.
 > Branch: `feat/ffmpeg-analyzer-policy-phase3`
 > Codex role: test/report only; no source fixes.
 > Date: 2026-10-06 (Asia/Shanghai).
+
+## GPT final acceptance review — 2026-10-06
+
+Independent review of remote evidence commit:
+
+`bf99989fff7cbcf17e2410e5df5258a586f12e6f`
+
+Final decision:
+
+**READY FOR PHASE 3 ARCHITECTURE ACCEPTANCE — accepted by GPT review.**
+
+Ruling:
+
+- Evidence commit changed only the authorized Phase 3 report and one sanitized runtime evidence directory.
+- Exact-source signed-HAP provenance and arm64 artifact audit are valid.
+- R01/R02 MP4, R03 HEVC/MKV, R05 corrupt/both-unavailable, naturally exercisable R06 cancellation/stale behavior, and R07 20-cycle lifecycle satisfy the declared runtime acceptance contract.
+- Current generated remote thumbnails are proven as WebP in the production `NetworkThumbnailCache` path.
+- Direct production proxy counters remain NOT RUN because no external production diagnostic endpoint exists; this was explicitly allowed and no behavioral cleanup regression was observed.
+- Natural successful FFmpeg->System thumbnail fallback and HLS/DASH target smoke remain permitted NOT RUN items under this task.
+
+### R10 final ruling
+
+The R10 block was caused only by the phrase requiring existing local thumbnail behavior to remain functional.
+
+The actual Mate60 evidence proves:
+
+- normal DocumentViewPicker selection;
+- import succeeds;
+- metadata is 20 s / 720P;
+- System metadata FD path is observed;
+- local playback renders the controlled fixture at 1280x720 and completes;
+- no native FFmpeg LOCAL_DOCUMENT analysis is demonstrated;
+- no content-URI/native-path workaround was introduced.
+
+The list placeholder is explained by the existing `LocalMediaThumbnailLoader`, which only queries `PhotoAccessHelper` for a matching `PhotoAsset` and returns null when none exists.
+
+Independent comparison confirms `LocalMediaThumbnailLoader.ets` is byte-identical at:
+
+- `15db3f8a3e87f75edc209c1919f944f39c0b9fcb`;
+- `198854ed2e6c14378e692f86852a78656d0aebe8`;
+- `0d87488dc92f3cd8bc77319ec61197520695597e`;
+- accepted implementation `44d0f62816b73ebd3bab8069be5b74f51e2c6999`;
+- runtime evidence `bf99989fff7cbcf17e2410e5df5258a586f12e6f`.
+
+Therefore the DocumentViewPicker placeholder predates the accepted Phase 3 implementation and is outside the Phase 3 remote analyzer regression boundary.
+
+R10 is reclassified for Phase 3 as:
+
+**PASS — LOCAL_DOCUMENT import/metadata/playback and System-only routing preserved; KNOWN LIMITATION — DocumentViewPicker URI has no PhotoAsset thumbnail fallback.**
+
+No production source fix and no repeat runtime execution are required.
+
+The stable runtime manual is clarified accordingly. The original Codex BLOCKED classification below remains preserved as historical run evidence; it is not rewritten to pretend Codex observed a generated local thumbnail.
 
 ## Current runtime validation — phase3-runtime-acceptance-1-mate60-webdav (2026-10-06)
 

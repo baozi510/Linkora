@@ -12,37 +12,60 @@ Phase 3 implementation source:
 
 `44d0f62816b73ebd3bab8069be5b74f51e2c6999`
 
-Latest completed build/static evidence:
+Reviewed build/static evidence:
 
 `e95feef35fa2541322216f9ce9336da3cad9060f`
 
+Reviewed Mate60 runtime evidence:
+
+`bf99989fff7cbcf17e2410e5df5258a586f12e6f`
+
 ### Acceptance status
 
-**Build/static/pure acceptance: PASS.**
+**FFmpeg Analyzer Production Policy Phase 3: ACCEPTED.**
 
-**Production runtime acceptance: ENVIRONMENT PREPARED FOR A TARGETED READY RUN.**
+Build/static/pure acceptance:
 
-Reviewed runtime prerequisites now available:
+- default -> simulator -> immediate-default PASS;
+- ArkTS compilation PASS;
+- Hypium 209/209 PASS twice;
+- Debug/Release HAR/HAP and exact-nine AArch64 audits PASS;
+- Loader/cache/lifecycle and policy pure suites PASS.
 
-- Mate60 ARM64 HarmonyOS target connected through HDC;
-- target architecture/API information available;
-- process Hilog for `com.linkora.player` readable;
-- clean isolated runtime checkout prepared with pinned submodules;
-- DevEco account signed in and development-signing capability available;
-- H.264/AAC MP4, HEVC/AAC MKV and corrupt synthetic fixtures prepared and hashed;
-- isolated read-only authenticated WebDAV fixture service reachable from the target through HDC reverse port 19082;
-- target browser authentication/DAV multistatus confirmed;
-- fixture credentials remain local and uncommitted.
+Production runtime acceptance on Mate60:
 
-The pre-existing installed Linkora app is not accepted as a test artifact because its provenance is unknown.
+- exact-source signed default/debug arm64 HAP provenance established;
+- app-side authenticated WebDAV preflight PASS;
+- H.264/AAC MP4 cold + reopen PASS;
+- HEVC/AAC MKV cold + reopen PASS;
+- FFmpeg-first remote WebP thumbnail generation PASS;
+- corrupt/both-thumbnail-unavailable behavior PASS;
+- observed cancellation/refresh/stale-generation behavior PASS within naturally exercisable scope;
+- production lifecycle 20/20 PASS;
+- no observed crash/ANR or accumulating stale rows;
+- direct proxy counters NOT RUN because no production diagnostic endpoint exists, as allowed by the reviewed contract;
+- natural FFmpeg->System successful fallback NOT RUN because no safe natural fixture exists;
+- HLS/DASH target smoke NOT RUN because no prepared streaming fixture exists; their System-only policy remains covered by fresh 3g pure evidence.
 
-Runtime validation must first produce and explicitly install a fresh signed debug/default arm64 HAP from the dispatched checkout using the manual's temporary signing-only overlay rules.
+### R10 local-document ruling
 
-Direct shared-proxy counters are not externally exposed by the current production app. Their absence is no longer a runtime prerequisite; direct counters are NOT RUN when unavailable, while cleanup is judged through existing production lifecycle/stale-delivery/crash/cache observations.
+The Mate60 run proved DocumentViewPicker import, 20 s / 720P metadata, 1280x720 playback and completion.
 
-No production source change is justified for environment preparation.
+The list thumbnail remained a placeholder because `LocalMediaThumbnailLoader` only resolves `PhotoAsset` thumbnails and has no DocumentViewPicker frame-extraction fallback.
 
-Current Phase 3 functional invariants remain unchanged.
+Independent review confirmed that loader is byte-identical from at least `15db3f8a3e87f75edc209c1919f944f39c0b9fcb` through the accepted Phase 3 implementation and current evidence.
+
+Therefore the placeholder is a **pre-existing document-thumbnail limitation, not a Phase 3 regression**. R10 is accepted for Phase 3 because local import/metadata/playback remain functional, LOCAL_DOCUMENT stays System-only, and no content-URI/native-path workaround was introduced.
+
+No production source change or rerun is required for this ruling.
+
+### Next architecture action
+
+Do not repeat Phase 3 validation.
+
+The next planned analyzer work is real-arm64 **Analysis Benchmark + Policy** from the master plan. Benchmarking is a separate phase; it may collect System-vs-FFmpeg performance/completeness data only under its own future task.
+
+Playback/runtime, SMB and Media Catalog work should be sequenced from the actual repository state rather than by mechanically repeating already-completed plan items.
 
 
 This file is the current execution status for the architecture migration.
@@ -160,43 +183,42 @@ Includes:
 
 ### FFmpeg media analysis
 
-NATIVE RUNTIME VERIFIED; PHASE-2 ANALYZER ADAPTER/COMPARISON INTEGRATION ACTIVE.
+**ACCEPTED THROUGH PHASE 3 PRODUCTION FUNCTIONAL POLICY.**
 
-Current repository state:
+Accepted implementation includes:
 
-- FFmpeg 8.1.3 pinned to commit `1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7`
-- reproducible source fetch script
-- HarmonyOS arm64-v8a bootstrap build script
-- HarmonyOS x86_64 bootstrap build script
-- generated source/build/prebuilt directories excluded from Git
-- intended libraries: libavformat/libavcodec/libavutil/libswscale
-- no CLI programs, encoders, muxers or hwaccels in the initial analyzer profile
+- FFmpeg 8.1.3 pinned to commit `1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7`;
+- native `linkora_ffmpeg` module;
+- System and FFmpeg probe adapters;
+- FFmpeg thumbnail extraction;
+- protocol-agnostic analysis input resolver;
+- shared MediaProxy remote input;
+- production LIST / DETAIL / ADVANCED routing policy;
+- FFmpeg-first remote thumbnail policy with System fallback;
+- common WebP encoding/cache path;
+- cancellation and lifecycle handling;
+- SFTP trust-ownership correction;
+- real Mate60 remote MP4/MKV runtime acceptance.
 
-Verified by simulator validation:
+Latest reviewed runtime evidence:
 
-- x86_64 FFmpeg bootstrap build succeeded
-- arm64-v8a FFmpeg bootstrap build succeeded
-- exact build manifests/audits were captured
-- no HarmonyOS FFmpeg source patch was required for bootstrap
+`bf99989fff7cbcf17e2410e5df5258a586f12e6f`
 
-Current required work:
+Known non-blocking limitation:
 
-- create and link dedicated `linkora_ffmpeg` native module
-- run x86 simulator local/MediaProxy probe + frame smoke
-- build the module for arm64-v8a
-- prove cancellation/timeout/error handling
-- return for review before production policy wiring
+- DocumentViewPicker local-document list thumbnail may remain a placeholder because the pre-existing local thumbnail loader only resolves PhotoAsset-backed URIs.
 
-See:
-
-- `docs/FFMPEG_BOOTSTRAP.md`
-- `docs/FFMPEG_INTEGRATION_BLOCKER.md`
+This limitation is outside the Phase 3 remote analyzer production-policy scope and must not be misreported as an FFmpeg analyzer regression.
 
 ### Analysis benchmark: System vs FFmpeg
 
-BLOCKED by FFmpeg analyzer.
+**NEXT ANALYZER PHASE — READY TO PLAN ON REAL ARM64 HARDWARE.**
 
-The benchmark format and test procedure are defined in test-lab/benchmark and TEST_MANUAL.md.
+Phase 3 production functional policy is accepted. Performance-based routing remains intentionally deferred.
+
+The benchmark format and test procedure are defined in `test-lab/benchmark` and `TEST_MANUAL.md`. Before execution, GPT must review the current benchmark assets against the accepted Phase 3 architecture and dispatch a dedicated benchmark task.
+
+Do not derive final routing policy from x86/simulator data.
 
 ### Playback benchmark: System vs MPV
 
@@ -296,7 +318,14 @@ Performance benchmarking and performance-based policy decisions are deferred to 
 
 ### Phase 3 — FFmpeg analyzer production functional policy
 
-IMPLEMENTED; FIRST TEST-ONLY RUN STOPPED AT A REVIEWED STATIC-CHECK FALSE POSITIVE. CHECKER FIXED IN CURRENT REVIEW COMMIT; FULL VALIDATION RERUN REQUIRED.
+**ACCEPTED — BUILD/STATIC/PURE + MATE60 PRODUCTION RUNTIME.**
+
+Reviewed evidence:
+
+- build/static/pure: `e95feef35fa2541322216f9ce9336da3cad9060f`;
+- Mate60 runtime: `bf99989fff7cbcf17e2410e5df5258a586f12e6f`.
+
+No Phase 3 rerun is pending.
 
 Current branch:
 

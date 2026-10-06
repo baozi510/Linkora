@@ -6,34 +6,52 @@ Repository: `baozi510/Linkora`
 
 Current branch: `feat/ffmpeg-analyzer-policy-phase3`
 
-Current phase: **FFmpeg Analyzer Production Policy Phase 3 — build/static/pure acceptance passed; Mate60 runtime environment is prepared; next action is a targeted production runtime READY validation.**
+Current phase: **FFmpeg Analyzer Production Policy Phase 3 — ACCEPTED.**
 
 Implementation source:
 
 `44d0f62816b73ebd3bab8069be5b74f51e2c6999`
 
-Latest completed build/static evidence:
+Reviewed build/static evidence:
 
 `e95feef35fa2541322216f9ce9336da3cad9060f`
 
-### Runtime preparation review
+Reviewed Mate60 runtime evidence:
 
-Environment preparation has established:
+`bf99989fff7cbcf17e2410e5df5258a586f12e6f`
 
-- real Mate60 ARM64 target connected and launch/log access available;
-- isolated clean runtime checkout and pinned submodules;
-- synthetic MP4/MKV/corrupt fixtures;
-- isolated read-only authenticated WebDAV fixture service;
-- HDC reverse `tcp:19082 -> tcp:19082`;
-- device browser authentication and DAV multistatus containing all three fixtures.
+### Phase 3 acceptance ruling
 
-The pre-existing installed `com.linkora.player` is not source-provenance evidence.
+Accepted runtime evidence establishes:
 
-The runtime task must build and install a fresh signed HAP from the dispatched checkout. A temporary local signing overlay is allowed only in root `build-profile.json5`, only for signing-related semantics, never committed, and restored to HEAD before evidence publication.
+- exact-source signed arm64 artifact provenance;
+- real Mate60 deployment;
+- authenticated production WebDAV browse;
+- MP4 cold/reopen PASS;
+- HEVC/MKV cold/reopen PASS;
+- FFmpeg-first WebP thumbnails PASS;
+- corrupt/both-unavailable behavior PASS;
+- observed cancellation/refresh/stale behavior PASS in naturally exercisable scope;
+- 20/20 lifecycle PASS;
+- no observed crash/ANR or stale-row accumulation.
 
-The shared production `NetworkFileProxy.diagnostics()` has no external app endpoint. Direct counters are optional/NOT RUN when unavailable and do not block acceptance. Cleanup is still mandatory and is evaluated with the production UI/lifecycle/stale-delivery/crash/cache evidence defined in `docs/PHASE3_RUNTIME_ACCEPTANCE_MANUAL.md`.
+Direct shared-proxy counters remain NOT RUN because the app exposes no production diagnostic endpoint. That is explicitly non-blocking.
 
-No production source/test change is required for this preparation.
+### LOCAL_DOCUMENT clarification
+
+R10 import, metadata and playback all passed.
+
+The DocumentViewPicker item kept a placeholder because the pre-existing `LocalMediaThumbnailLoader` only queries PhotoAsset-backed URIs. Independent review confirmed that file is unchanged from at least `15db3f8a3e87f75edc209c1919f944f39c0b9fcb` through the accepted Phase 3 source.
+
+This is a known local-document thumbnail limitation, not a Phase 3 regression. It does not require a Phase 3 source change or rerun.
+
+### Next action
+
+There is **no active Phase 3 Codex validation task** after acceptance.
+
+The next analyzer phase is real-arm64 Analysis Benchmark + Policy. Do not start it until GPT reviews the current benchmark assets and publishes a dedicated task.
+
+Performance conclusions must remain separate from this functional acceptance.
 
 ### Durable conversation workflow
 

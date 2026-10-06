@@ -546,14 +546,38 @@ These cases validate routing correctness, not FFmpeg capability.
 
 Use `local-basic`.
 
+The purpose of R10 is to prove that Phase 3 does not regress or reroute the pre-existing local-document flow.
+
 Required:
 
-- existing local media flow works;
+- DocumentViewPicker import/open works;
+- duration/resolution metadata remains usable through the existing System/local path;
+- playback succeeds through the existing local playback path;
 - Phase 3 does not route LOCAL_DOCUMENT into native FFmpeg analysis;
-- no content-URI-to-native-path workaround is introduced;
-- existing System/local thumbnail behavior remains functional.
+- no content-URI-to-native-path workaround is introduced.
 
-Do not infer this PASS only from policy unit tests when a runtime target is available.
+### Existing document-thumbnail limitation
+
+`LocalMediaThumbnailLoader` currently resolves thumbnails through `PhotoAccessHelper` / `PhotoAsset.getThumbnail()`.
+
+A DocumentViewPicker URI that is not represented by a `PhotoAsset` may therefore remain a list placeholder. That behavior is a pre-existing product limitation and is **not itself a Phase 3 regression** when all of the following are true:
+
+- the local document imports successfully;
+- metadata remains correct;
+- playback succeeds;
+- LOCAL_DOCUMENT remains System-only;
+- no native-path workaround is added;
+- `LocalMediaThumbnailLoader` is unchanged by the Phase 3 implementation.
+
+For that DocumentViewPicker subcase, record the placeholder as:
+
+`KNOWN LIMITATION — DOCUMENT URI HAS NO PHOTOASSET THUMBNAIL FALLBACK`
+
+Do not mislabel the placeholder as a generated thumbnail and do not require a Phase 3 source fix solely for it.
+
+A regression of a previously supported PhotoAsset-backed thumbnail path would still fail the local regression smoke, but that is a distinct case and must be supported by evidence.
+
+Do not infer R10 PASS only from policy unit tests when a runtime target is available.
 
 ## 18. Direct HTTP/HTTPS file-like path
 
@@ -734,7 +758,7 @@ At minimum, when the current task follows this manual, core Phase 3 **remote-fil
 - both-engines-unavailable/corrupt behavior PASS;
 - cancellation/refresh/stale-generation PASS in naturally exercisable cases;
 - 20-cycle lifecycle PASS;
-- LOCAL_DOCUMENT smoke PASS when the target can import/open the prepared MP4 safely;
+- LOCAL_DOCUMENT import/metadata/playback smoke PASS, with a DocumentViewPicker list placeholder allowed only under the documented pre-existing PhotoAsset-only thumbnail limitation;
 - no unresolved required cleanup/lifecycle regression;
 - security evidence review PASS.
 
