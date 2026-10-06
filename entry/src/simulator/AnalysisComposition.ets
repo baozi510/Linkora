@@ -4,16 +4,21 @@ import { FfmpegMediaProbeAdapter } from '../main/ets/analysis/FfmpegMediaProbeAd
 import { FfmpegThumbnailExtractorAdapter } from '../main/ets/analysis/FfmpegThumbnailExtractorAdapter';
 import { SystemMediaProbeAdapter } from '../main/ets/analysis/SystemMediaProbeAdapter';
 import { HarmonySystemAnalysisBackend } from '../main/ets/analysis/HarmonySystemAnalysisBackend';
+import { systemDateTime } from '@kit.BasicServicesKit';
 
 /** Target-specific analysis factories used by the production functional policy. */
 export class AnalysisComposition {
   static ffmpeg(resolver: MediaAnalysisInputResolver, timeoutMs: number = 10000): FfmpegMediaProbeAdapter {
-    return new FfmpegMediaProbeAdapter(resolver, createFfmpegAnalysis(), timeoutMs);
+    return new FfmpegMediaProbeAdapter(resolver, createFfmpegAnalysis(), timeoutMs, AnalysisComposition.now);
   }
   static system(resolver: MediaAnalysisInputResolver): SystemMediaProbeAdapter {
-    return new SystemMediaProbeAdapter(resolver, () => new HarmonySystemAnalysisBackend());
+    return new SystemMediaProbeAdapter(resolver, () => new HarmonySystemAnalysisBackend(), AnalysisComposition.now);
   }
   static thumbnail(resolver: MediaAnalysisInputResolver, timeoutMs: number = 10000): FfmpegThumbnailExtractorAdapter {
     return new FfmpegThumbnailExtractorAdapter(resolver, createFfmpegAnalysis(), timeoutMs);
+  }
+
+  private static now(): number {
+    return systemDateTime.getUptime(systemDateTime.TimeType.STARTUP);
   }
 }

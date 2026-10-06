@@ -3,7 +3,6 @@ import { IMediaProbe, MediaSource, MediaInfo, VideoTrackInfo, ProbeResult, Probe
 import { MediaAnalysisInputResolver } from './MediaAnalysisInputResolver';
 import { AnalysisLifecycle, AnalysisOperation, AnalysisError, AnalysisErrorCode } from './AnalysisOperation';
 import { FfmpegMediaProbeAdapter } from './FfmpegMediaProbeAdapter';
-import { systemDateTime } from '@kit.BasicServicesKit';
 
 export class SystemAnalysisSnapshot {
   readonly durationMs: number; readonly width: number; readonly height: number;
@@ -18,7 +17,11 @@ export class SystemMediaProbeAdapter implements IMediaProbe {
   private readonly lifecycle: AnalysisLifecycle = new AnalysisLifecycle();
   private readonly resolver: MediaAnalysisInputResolver;
   private readonly factory: () => SystemAnalysisBackend;
-  constructor(resolver: MediaAnalysisInputResolver, factory: () => SystemAnalysisBackend) { this.resolver = resolver; this.factory = factory; }
+  private readonly now: () => number;
+  constructor(resolver: MediaAnalysisInputResolver, factory: () => SystemAnalysisBackend,
+    now: () => number = () => Date.now()) {
+    this.resolver = resolver; this.factory = factory; this.now = now;
+  }
   name(): string { return 'system'; }
   async canProbe(source: MediaSource): Promise<boolean> { return !this.lifecycle.isClosed() && this.resolver.canResolve(source, 'system'); }
   async probe(source: MediaSource, requirement: ProbeRequirement): Promise<ProbeResult> {
@@ -29,17 +32,17 @@ export class SystemMediaProbeAdapter implements IMediaProbe {
     finally { if (operation !== null) this.lifecycle.end(operation); }
   }
   private async perform(source: MediaSource, requirement: ProbeRequirement, operation: AnalysisOperation): Promise<ProbeResult> {
-    const totalStarted: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP);
+    const totalStarted: number = this.now();
     const prepareStarted: number = totalStarted;
     const lease = await this.resolver.resolve(source, 'system', operation);
-    const prepareMs: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP) - prepareStarted;
+    const prepareMs: number = this.now() - prepareStarted;
     let backend: SystemAnalysisBackend | null = null;
     try {
       backend = this.factory(); const currentBackend = backend;
       operation.onCancel(() => currentBackend.cancel()); operation.check();
-      const probeStarted: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP);
+      const probeStarted: number = this.now();
       const data = await backend.inspect(lease.input.uri); operation.check();
-      const probeMs: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP) - probeStarted;
+      const probeMs: number = this.now() - probeStarted;
       const duration = Number.isFinite(data.durationMs) && data.durationMs > 0 ? data.durationMs : 0;
       const width = Number.isFinite(data.width) && data.width > 0 ? data.width : 0;
       const height = Number.isFinite(data.height) && data.height > 0 ? data.height : 0;
@@ -53,7 +56,7 @@ export class SystemMediaProbeAdapter implements IMediaProbe {
         width > 0 || height > 0 ? [new VideoTrackInfo('primary', '', '', '', width, height)] : []) : null;
       const completeness = !useful ? ProbeCompleteness.UNAVAILABLE :
         requirement === ProbeRequirement.LIST && duration > 0 && width > 0 && height > 0 ? ProbeCompleteness.COMPLETE : ProbeCompleteness.PARTIAL;
-      const totalMs: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP) - totalStarted;
+      const totalMs: number = this.now() - totalStarted;
       return new ProbeResult(info, completeness, origins,
         FfmpegMediaProbeAdapter.diagnostics('system', lease, prepareMs, probeMs, totalMs));
     } finally { try { await backend?.close(); } finally { await lease.release(); } }

@@ -61,7 +61,7 @@ No production source change or rerun is required for this ruling.
 
 ### Current architecture action
 
-**Phase 7A — Analysis Benchmark Foundation + real-arm64 WebDAV baseline is now in implementation.**
+**Phase 7A — Analysis Benchmark Foundation + real-arm64 WebDAV baseline is in validation.**
 
 This stage adds measurement infrastructure only:
 
@@ -73,7 +73,9 @@ This stage adds measurement infrastructure only:
 
 `ProductionMediaAnalysisPolicy` remains unchanged until benchmark evidence is reviewed.
 
-The initial Mate60 WebDAV baseline uses the already-controlled H.264/AAC MP4 and HEVC/AAC MKV fixtures with repeated crossover sampling. It validates the benchmark machinery and provides preliminary evidence; it is not by itself the full permanent Local/WebDAV/SMB corpus.
+The first validation attempt stopped before ArkTS/Hvigor execution because Phase 7A timing instrumentation imported a HarmonyOS Kit directly into adapters that are intentionally loaded by the desktop pure harness. GPT corrected this by injecting the clock into the adapters and supplying the real monotonic HarmonyOS clock from target-specific AnalysisComposition. A fresh validation/benchmark rerun is required.
+
+The initial Mate60 WebDAV baseline still uses the already-controlled H.264/AAC MP4 and HEVC/AAC MKV fixtures with repeated crossover sampling. It validates the benchmark machinery and provides preliminary evidence; it is not by itself the full permanent Local/WebDAV/SMB corpus.
 
 
 This file is the current execution status for the architecture migration.

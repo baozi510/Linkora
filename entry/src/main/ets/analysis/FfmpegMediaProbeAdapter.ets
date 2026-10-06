@@ -3,15 +3,16 @@ import { IMediaProbe, MediaSource, MediaInfo, ProbeResult, ProbeRequirement, Pro
 import { FfmpegAnalysis, FfmpegMediaInfoMapper } from 'linkora_ffmpeg';
 import { MediaAnalysisInputResolver, AnalysisInputLease } from './MediaAnalysisInputResolver';
 import { AnalysisLifecycle, AnalysisOperation, AnalysisError } from './AnalysisOperation';
-import { systemDateTime } from '@kit.BasicServicesKit';
 
 export class FfmpegMediaProbeAdapter implements IMediaProbe {
   private readonly lifecycle: AnalysisLifecycle = new AnalysisLifecycle();
   private readonly resolver: MediaAnalysisInputResolver;
   private readonly analysis: FfmpegAnalysis;
   private readonly timeoutMs: number;
-  constructor(resolver: MediaAnalysisInputResolver, analysis: FfmpegAnalysis, timeoutMs: number = 10000) {
-    this.resolver = resolver; this.analysis = analysis; this.timeoutMs = timeoutMs;
+  private readonly now: () => number;
+  constructor(resolver: MediaAnalysisInputResolver, analysis: FfmpegAnalysis,
+    timeoutMs: number = 10000, now: () => number = () => Date.now()) {
+    this.resolver = resolver; this.analysis = analysis; this.timeoutMs = timeoutMs; this.now = now;
   }
   name(): string { return 'ffmpeg'; }
   async canProbe(source: MediaSource): Promise<boolean> { return !this.lifecycle.isClosed() && this.resolver.canResolve(source, 'ffmpeg'); }
@@ -23,17 +24,17 @@ export class FfmpegMediaProbeAdapter implements IMediaProbe {
     finally { if (operation !== null) this.lifecycle.end(operation); }
   }
   private async perform(source: MediaSource, requirement: ProbeRequirement, operation: AnalysisOperation): Promise<ProbeResult> {
-    const totalStarted: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP);
+    const totalStarted: number = this.now();
     const prepareStarted: number = totalStarted;
     const lease = await this.resolver.resolve(source, 'ffmpeg', operation);
-    const prepareMs: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP) - prepareStarted;
+    const prepareMs: number = this.now() - prepareStarted;
     try {
       operation.onCancel(() => this.analysis.cancel(operation.id)); operation.check();
-      const probeStarted: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP);
+      const probeStarted: number = this.now();
       const native = await this.analysis.probe(operation.id, lease.input.uri, this.timeoutMs); operation.check();
-      const probeMs: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP) - probeStarted;
+      const probeMs: number = this.now() - probeStarted;
       const mapped = FfmpegMediaInfoMapper.map(native);
-      const totalMs: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP) - totalStarted;
+      const totalMs: number = this.now() - totalStarted;
       return new ProbeResult(mapped.info, FfmpegMediaProbeAdapter.completeness(mapped.info, requirement), mapped.fieldOrigins,
         FfmpegMediaProbeAdapter.diagnostics('ffmpeg', lease, prepareMs, probeMs, totalMs));
     } finally { await lease.release(); }

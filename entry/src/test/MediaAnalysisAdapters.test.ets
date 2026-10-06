@@ -76,6 +76,15 @@ function file(format: MediaFormat = MediaFormat.MP4): MediaSource {
 }
 function resolver(inputs: TestInputs): MediaAnalysisInputResolver { return new MediaAnalysisInputResolver(inputs); }
 
+function fakeClock(values: number[]): () => number {
+  let index: number = 0;
+  return (): number => {
+    const value: number = values[Math.min(index, values.length - 1)];
+    index++;
+    return value;
+  };
+}
+
 class TestPolicyProbe implements IMediaProbe {
   readonly engine: string;
   result: ProbeResult;
@@ -220,6 +229,33 @@ export default function mediaAnalysisAdaptersTest(): void {
       expect(code).assertEqual(AnalysisErrorCode.CANCELLED); expect(ports.source.closes).assertEqual(1);
       expect(ports.registered).assertEqual(0);
     });
+    it('benchmark timing diagnostics use injected clock without platform dependency', 0, async () => {
+      const ffmpegPorts = new TestInputs();
+      const ffmpeg = new FfmpegMediaProbeAdapter(
+        resolver(ffmpegPorts),
+        new FfmpegAnalysis(new TestNative()),
+        10000,
+        fakeClock([100, 130, 140, 190, 205])
+      );
+      const ffmpegResult = await ffmpeg.probe(file(), ProbeRequirement.LIST);
+      expect(ffmpegResult.diagnostics.prepareMs).assertEqual(30);
+      expect(ffmpegResult.diagnostics.probeMs).assertEqual(50);
+      expect(ffmpegResult.diagnostics.totalMs).assertEqual(105);
+      await ffmpeg.close();
+
+      const systemPorts = new TestInputs();
+      const system = new SystemMediaProbeAdapter(
+        resolver(systemPorts),
+        () => new TestSystem(),
+        fakeClock([200, 225, 240, 270, 300])
+      );
+      const systemResult = await system.probe(file(), ProbeRequirement.LIST);
+      expect(systemResult.diagnostics.prepareMs).assertEqual(25);
+      expect(systemResult.diagnostics.probeMs).assertEqual(30);
+      expect(systemResult.diagnostics.totalMs).assertEqual(100);
+      await system.close();
+    });
+
     for (const requirement of [ProbeRequirement.LIST, ProbeRequirement.DETAIL, ProbeRequirement.ADVANCED]) {
       it('FFmpeg completeness satisfies ' + requirement + ' without optional chapters/tags', 0, async () => {
         const ports = new TestInputs(); const native = new TestNative();

@@ -1,8 +1,52 @@
 # Analysis Benchmark + Policy Phase 7 Report
 
-> Status: FAIL — BUILD; first default desktop adapter module-loading gate stopped. Real-arm64 benchmark NOT RUN.
+> Status: GPT-REVIEWED BUILD FAILURE CORRECTED — fresh Phase 7A rerun required; real-arm64 benchmark still NOT RUN.
 > Branch: `feat/analysis-benchmark-policy-phase7`
 > Date: 2026-10-06
+
+## GPT review of first Phase 7A failure — 2026-10-06
+
+Reviewed remote evidence:
+
+`36593af5263684cd1c687bcda4621c0f21a8197e`
+
+Classification:
+
+**VALID BUILD/TEST-INFRASTRUCTURE COMPATIBILITY DEFECT IN PHASE 7A SOURCE.**
+
+The failure is accurately reported:
+
+```text
+Unexpected dependency: @kit.BasicServicesKit
+-> FfmpegMediaProbeAdapter
+-> scripts/check-ffmpeg-phase1.cjs --phase2
+```
+
+The adapter/policy desktop harness deliberately loads the analysis adapters without platform Kit modules. Phase 7A introduced `systemDateTime` directly into both metadata adapters, violating that existing pure-load boundary.
+
+### Correction
+
+The fix does **not** add a fake `@kit.BasicServicesKit` shim to the desktop harness.
+
+Instead:
+
+- `FfmpegMediaProbeAdapter` receives an injectable clock function;
+- `SystemMediaProbeAdapter` receives the same style of injectable clock;
+- their platform-free default remains suitable for direct/pure construction;
+- target-specific default/simulator `AnalysisComposition` supplies HarmonyOS monotonic `systemDateTime.getUptime(STARTUP)`;
+- a pure regression test verifies prepare/probe/total timing with a deterministic injected clock.
+
+This preserves:
+
+- real Mate60 monotonic benchmark timing;
+- the existing desktop pure-adapter boundary;
+- production policy behavior;
+- MediaProxy/range instrumentation;
+- benchmark schema and sampling design.
+
+`ProductionMediaAnalysisPolicy` is unchanged.
+
+The first run remains historically `FAIL — BUILD` below. No benchmark record from that run exists or is promoted.
 
 ## Current validation — phase7a-analysis-benchmark-foundation-mate60-webdav
 

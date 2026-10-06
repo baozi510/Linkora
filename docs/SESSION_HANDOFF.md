@@ -6,7 +6,7 @@ Repository: `baozi510/Linkora`
 
 Current branch: `feat/ffmpeg-analyzer-policy-phase3`
 
-Current phase: **Phase 7A — Analysis Benchmark Foundation + real-arm64 WebDAV baseline. Phase 3 remains ACCEPTED.**
+Current phase: **Phase 7A — Analysis Benchmark Foundation + real-arm64 WebDAV baseline; first build gate failure corrected, fresh rerun pending. Phase 3 remains ACCEPTED.**
 
 Implementation source:
 
@@ -47,7 +47,7 @@ This is a known local-document thumbnail limitation, not a Phase 3 regression. I
 
 ### Next action
 
-Build/validate the Phase 7A benchmark foundation, then run a dedicated Mate60 benchmark task.
+Re-run the corrected Phase 7A foundation validation, then collect the dedicated Mate60 benchmark baseline.
 
 Phase 7A measures System vs FFmpeg explicitly on the same production WebDAV/MediaProxy source path. It does not change production routing.
 
