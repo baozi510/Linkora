@@ -1,0 +1,1 @@
+FFmpeg/native artifact ABI audit PASS: 9 libraries (arm64-v8a)

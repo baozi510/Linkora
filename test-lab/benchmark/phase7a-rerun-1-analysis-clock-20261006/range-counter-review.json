@@ -1,0 +1,6 @@
+{
+  "freshZeroBaselineUnitPresentAndExecuted": true,
+  "GETRangeResolved206Only": true,
+  "releasedRangeAggregation": true,
+  "readRequestsSeparate": true
+}

@@ -1,0 +1,8 @@
+{
+  "adaptersKitFree": true,
+  "adaptersInjectedClock": true,
+  "bothTargetCompositionsRealMonotonicClock": true,
+  "timingRegressionExists": true,
+  "harnessUnchangedSincePriorFailedEvidence": true,
+  "productionPolicyUnchangedFromAcceptedBase": true
+}

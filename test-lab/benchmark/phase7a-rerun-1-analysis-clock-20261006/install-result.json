@@ -1,0 +1,7 @@
+{
+  "exitCode": 0,
+  "command": "SDK hdc install -r <exact hashed signed HAP>",
+  "uninstallAttempted": false,
+  "invocationCount": 1,
+  "utc": "2026-10-06T15:08:36.9518531Z"
+}

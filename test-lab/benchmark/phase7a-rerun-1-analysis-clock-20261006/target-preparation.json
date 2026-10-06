@@ -1,0 +1,8 @@
+{
+  "connectedTargetCount": 1,
+  "privateIdentityOmitted": true,
+  "hdcVersion": "Ver: 3.2.0f",
+  "api": "26",
+  "abi": "arm64-v8a",
+  "architecture": "aarch64"
+}

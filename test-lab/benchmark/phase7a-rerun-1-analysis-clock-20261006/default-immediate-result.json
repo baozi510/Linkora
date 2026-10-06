@@ -1,0 +1,9 @@
+{
+  "command": "pwsh -NoProfile -File scripts/verify.ps1",
+  "stage": "immediate-default",
+  "startUtc": "2026-10-06T15:00:15.9252100Z",
+  "endUtc": "2026-10-06T15:03:27.9600318Z",
+  "exitCode": 0,
+  "invocationCount": 1,
+  "manualInstallBetweenSimulatorAndDefault": false
+}

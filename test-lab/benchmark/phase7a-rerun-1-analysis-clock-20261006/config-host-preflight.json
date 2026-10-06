@@ -1,0 +1,8 @@
+{
+  "hostConfigStatus": 200,
+  "schemaVersion": 1,
+  "warmups": 2,
+  "repetitions": 20,
+  "caseCount": 2,
+  "privateFieldsOmitted": true
+}

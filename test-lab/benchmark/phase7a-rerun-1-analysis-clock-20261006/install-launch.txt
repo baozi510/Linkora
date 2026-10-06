@@ -1,0 +1,4 @@
+SDK hdc install -r <exact hashed default/debug signed HAP>: success.
+SDK hdc shell aa start -b com.linkora.player -a EntryAbility: success.
+Bundle/version debug identity verified on target. No uninstall/app-data reset.
+Benchmark Want invocation recorded exactly once; normal UI used only before sampling.

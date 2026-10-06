@@ -1,0 +1,21 @@
+{
+  "taskId": "phase7a-rerun-1-analysis-clock-injection",
+  "acceptedBase": "4c7a4abe40295d86bb2799efe34c82cb9b505d58",
+  "source": "df88a0514acaf18b003c5fe1115ced965b1bc285",
+  "head": "ccc3b850478f92e864c91b258a163d371066fa50",
+  "branch": "feat/analysis-benchmark-policy-phase7",
+  "origin": "https://github.com/baozi510/Linkora.git",
+  "initialStatus": "",
+  "allowedDrift": [
+    "docs/CODEX_VALIDATION_TASK.md"
+  ],
+  "submodules": {
+    "entry/src/main/cpp/third_party/libnfs": "cee4ca723e081e6a18f51b838690a4c21e14bb2c",
+    "entry/src/main/cpp/third_party/libsmb2": "b3d560c02fb1268320d2fd1c17fe841b0d93b85f",
+    "entry/src/main/cpp/third_party/mbedtls/framework": "7d726d145d678aa7f5a7df3b9e7ee3dbce6ea1bf"
+  },
+  "productionPolicyDiff": "",
+  "utc": "2026-10-06T22:49:43.838654+08:00",
+  "priorFailedEvidence": "36593af5263684cd1c687bcda4621c0f21a8197e",
+  "requiredAncestorChecksPassed": true
+}

@@ -1,0 +1,20 @@
+{
+  "records": 240,
+  "groups": 12,
+  "recordsPerGroup": 20,
+  "iterationSetsComplete": true,
+  "engineOrderAlternates": true,
+  "timingsCountsNonnegativeOrAllowedNull": true,
+  "timingStageSumsBoundedByTotal": true,
+  "successfulThumbnailPositiveWebPBytes": true,
+  "onlyRealArm64Dataset": true,
+  "memoryUnavailableNull": true,
+  "privateValueMatches": 0,
+  "rawRecordsRemoved": 0,
+  "failedRecordsRetained": 0,
+  "rawSha256": "632ca13760d4266aaac993c57ac5590409bf691133245a56a0c48e7cd2b6638c",
+  "completenessCounts": {
+    "complete": 200,
+    "partial": 40
+  }
+}

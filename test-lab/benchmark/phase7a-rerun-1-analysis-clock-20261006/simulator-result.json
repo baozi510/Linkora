@@ -1,0 +1,8 @@
+{
+  "command": "pwsh -NoProfile -File scripts/verify-simulator.ps1",
+  "stage": "simulator",
+  "startUtc": "2026-10-06T14:57:49.3658669Z",
+  "endUtc": "2026-10-06T14:58:20.0472959Z",
+  "exitCode": 0,
+  "invocationCount": 1
+}

@@ -1,0 +1,56 @@
+{
+  "('analysis.metadata', 'list', 'system')": {
+    "p50": 366,
+    "p95": 454,
+    "avgBytes": 543840.5,
+    "avgRanges": 2.5,
+    "success": 40,
+    "complete": 40,
+    "N": 40
+  },
+  "('analysis.metadata', 'advanced', 'system')": {
+    "p50": 331,
+    "p95": 464,
+    "avgBytes": 543840.5,
+    "avgRanges": 2.5,
+    "success": 40,
+    "complete": 0,
+    "N": 40
+  },
+  "('analysis.thumbnail', 'thumbnail', 'system')": {
+    "p50": 719,
+    "p95": 794,
+    "avgBytes": 681500.1,
+    "avgRanges": 3.0,
+    "success": 40,
+    "complete": 40,
+    "N": 40
+  },
+  "('analysis.metadata', 'list', 'ffmpeg')": {
+    "p50": 245,
+    "p95": 404,
+    "avgBytes": 673274.1,
+    "avgRanges": 2.0,
+    "success": 40,
+    "complete": 40,
+    "N": 40
+  },
+  "('analysis.metadata', 'advanced', 'ffmpeg')": {
+    "p50": 230,
+    "p95": 391,
+    "avgBytes": 686381.3,
+    "avgRanges": 2.0,
+    "success": 40,
+    "complete": 40,
+    "N": 40
+  },
+  "('analysis.thumbnail', 'thumbnail', 'ffmpeg')": {
+    "p50": 1030,
+    "p95": 1894,
+    "avgBytes": 7190497.9,
+    "avgRanges": 3.0,
+    "success": 40,
+    "complete": 40,
+    "N": 40
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "command": "SDK hdc shell aa start -b com.linkora.player -a EntryAbility --ps linkoraAnalysisBenchmarkConfig <private loopback uuid endpoint>",
+  "exitCode": 0,
+  "invocationCount": 1,
+  "startUtc": "2026-10-06T15:12:23.9986692Z",
+  "warmups": 2,
+  "repetitions": 20,
+  "cases": 2,
+  "expectedMeasuredRecords": 240,
+  "normalNetworkUIDuringBenchmark": false
+}

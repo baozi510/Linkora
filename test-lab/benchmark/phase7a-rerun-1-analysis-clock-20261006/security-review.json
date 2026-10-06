@@ -1,0 +1,11 @@
+{
+  "privateValueMatches": 0,
+  "privateConfigSigningDiffMaterialPublished": false,
+  "HAPOrAppDataPublished": false,
+  "normalUIDuringBenchmark": false,
+  "sourceOrExpectationsModified": false,
+  "productionPolicyModified": false,
+  "DirectIOImplemented": false,
+  "rawResultsCopiedByteForByte": true,
+  "rawMeasuredSamplesExcluded": 0
+}

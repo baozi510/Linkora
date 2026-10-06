@@ -1,0 +1,7 @@
+{
+  "command": "DevEco hvigorw assembleHap --mode module -p module=entry@default -p product=default -p buildMode=debug --no-daemon",
+  "startUtc": "2026-10-06T15:06:53.3111566Z",
+  "endUtc": "2026-10-06T15:07:05.2934074Z",
+  "exitCode": 0,
+  "invocationCount": 1
+}

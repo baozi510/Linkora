@@ -1,0 +1,23 @@
+[
+  {
+    "stage": "default-first",
+    "originalRawSha256": "f316e11cbe59119ff6962e0d43cd95c2324b9191401cb4b2e81076b378df9c53",
+    "gzipArchive": "default-first.stderr.original.txt.gz",
+    "decompressedByteIdentical": true,
+    "readableTextNormalization": "trailing space/tab only; original exact bytes retained in gzip"
+  },
+  {
+    "stage": "simulator",
+    "originalRawSha256": "ba425d56fd4d576cab7232eefbd26775e389c472f4eb6445f9d555bfe7c7c8bf",
+    "gzipArchive": "simulator.stderr.original.txt.gz",
+    "decompressedByteIdentical": true,
+    "readableTextNormalization": "trailing space/tab only; original exact bytes retained in gzip"
+  },
+  {
+    "stage": "default-immediate",
+    "originalRawSha256": "8e486e697dbf2c0bd51dd231532d10ae56578ae95872a50fc342b1e5c5e472f4",
+    "gzipArchive": "default-immediate.stderr.original.txt.gz",
+    "decompressedByteIdentical": true,
+    "readableTextNormalization": "trailing space/tab only; original exact bytes retained in gzip"
+  }
+]

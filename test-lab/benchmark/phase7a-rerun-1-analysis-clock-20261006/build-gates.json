@@ -1,0 +1,64 @@
+{
+  "default-first": {
+    "exitCode": 0,
+    "phase1Pure": 15,
+    "adapterPure": 46,
+    "clockRegressionPassed": true,
+    "HypiumPass": 210,
+    "HypiumFailure": 0,
+    "HypiumError": 0,
+    "HypiumIgnore": 0,
+    "AArch64AuditMarkers": 2,
+    "architectureFixtures": 5,
+    "artifactGuardFixtures": 17,
+    "MPVFixtures": 5,
+    "fullCompletion": true,
+    "command": {
+      "command": "pwsh -NoProfile -File scripts/verify.ps1",
+      "stage": "first-default",
+      "startUtc": "2026-10-06T14:51:13.6307259Z",
+      "endUtc": "2026-10-06T14:56:24.1967851Z",
+      "exitCode": 0,
+      "invocationCount": 1
+    }
+  },
+  "default-immediate": {
+    "exitCode": 0,
+    "phase1Pure": 15,
+    "adapterPure": 46,
+    "clockRegressionPassed": true,
+    "HypiumPass": 210,
+    "HypiumFailure": 0,
+    "HypiumError": 0,
+    "HypiumIgnore": 0,
+    "AArch64AuditMarkers": 2,
+    "architectureFixtures": 5,
+    "artifactGuardFixtures": 17,
+    "MPVFixtures": 5,
+    "fullCompletion": true,
+    "command": {
+      "command": "pwsh -NoProfile -File scripts/verify.ps1",
+      "stage": "immediate-default",
+      "startUtc": "2026-10-06T15:00:15.9252100Z",
+      "endUtc": "2026-10-06T15:03:27.9600318Z",
+      "exitCode": 0,
+      "invocationCount": 1,
+      "manualInstallBetweenSimulatorAndDefault": false
+    }
+  },
+  "simulator": {
+    "exitCode": 0,
+    "x86Whitelist": true,
+    "nativeLibraries": 1,
+    "defaultDependencyAutomaticRestore": true,
+    "manualReinstallBetweenSimulatorAndDefault": false,
+    "command": {
+      "command": "pwsh -NoProfile -File scripts/verify-simulator.ps1",
+      "stage": "simulator",
+      "startUtc": "2026-10-06T14:57:49.3658669Z",
+      "endUtc": "2026-10-06T14:58:20.0472959Z",
+      "exitCode": 0,
+      "invocationCount": 1
+    }
+  }
+}

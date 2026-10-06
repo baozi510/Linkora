@@ -1,0 +1,143 @@
+entry/src/default/AnalysisComposition.ets
+1: import { createFfmpegAnalysis } from 'linkora_ffmpeg/Native';
+2: import { MediaAnalysisInputResolver } from '../main/ets/analysis/MediaAnalysisInputResolver';
+3: import { FfmpegMediaProbeAdapter } from '../main/ets/analysis/FfmpegMediaProbeAdapter';
+4: import { FfmpegThumbnailExtractorAdapter } from '../main/ets/analysis/FfmpegThumbnailExtractorAdapter';
+5: import { SystemMediaProbeAdapter } from '../main/ets/analysis/SystemMediaProbeAdapter';
+6: import { HarmonySystemAnalysisBackend } from '../main/ets/analysis/HarmonySystemAnalysisBackend';
+7: import { systemDateTime } from '@kit.BasicServicesKit';
+8:
+9: /** Target-specific analysis factories used by the production functional policy. */
+10: export class AnalysisComposition {
+11:   static ffmpeg(resolver: MediaAnalysisInputResolver, timeoutMs: number = 10000): FfmpegMediaProbeAdapter {
+12:     return new FfmpegMediaProbeAdapter(resolver, createFfmpegAnalysis(), timeoutMs, AnalysisComposition.now);
+13:   }
+14:   static system(resolver: MediaAnalysisInputResolver): SystemMediaProbeAdapter {
+15:     return new SystemMediaProbeAdapter(resolver, () => new HarmonySystemAnalysisBackend(), AnalysisComposition.now);
+16:   }
+17:   static thumbnail(resolver: MediaAnalysisInputResolver, timeoutMs: number = 10000): FfmpegThumbnailExtractorAdapter {
+18:     return new FfmpegThumbnailExtractorAdapter(resolver, createFfmpegAnalysis(), timeoutMs);
+19:   }
+20:
+21:   private static now(): number {
+22:     return systemDateTime.getUptime(systemDateTime.TimeType.STARTUP);
+23:   }
+24: }
+
+entry/src/simulator/AnalysisComposition.ets
+1: import { createFfmpegAnalysis } from 'linkora_ffmpeg/Native';
+2: import { MediaAnalysisInputResolver } from '../main/ets/analysis/MediaAnalysisInputResolver';
+3: import { FfmpegMediaProbeAdapter } from '../main/ets/analysis/FfmpegMediaProbeAdapter';
+4: import { FfmpegThumbnailExtractorAdapter } from '../main/ets/analysis/FfmpegThumbnailExtractorAdapter';
+5: import { SystemMediaProbeAdapter } from '../main/ets/analysis/SystemMediaProbeAdapter';
+6: import { HarmonySystemAnalysisBackend } from '../main/ets/analysis/HarmonySystemAnalysisBackend';
+7: import { systemDateTime } from '@kit.BasicServicesKit';
+8:
+9: /** Target-specific analysis factories used by the production functional policy. */
+10: export class AnalysisComposition {
+11:   static ffmpeg(resolver: MediaAnalysisInputResolver, timeoutMs: number = 10000): FfmpegMediaProbeAdapter {
+12:     return new FfmpegMediaProbeAdapter(resolver, createFfmpegAnalysis(), timeoutMs, AnalysisComposition.now);
+13:   }
+14:   static system(resolver: MediaAnalysisInputResolver): SystemMediaProbeAdapter {
+15:     return new SystemMediaProbeAdapter(resolver, () => new HarmonySystemAnalysisBackend(), AnalysisComposition.now);
+16:   }
+17:   static thumbnail(resolver: MediaAnalysisInputResolver, timeoutMs: number = 10000): FfmpegThumbnailExtractorAdapter {
+18:     return new FfmpegThumbnailExtractorAdapter(resolver, createFfmpegAnalysis(), timeoutMs);
+19:   }
+20:
+21:   private static now(): number {
+22:     return systemDateTime.getUptime(systemDateTime.TimeType.STARTUP);
+23:   }
+24: }
+
+entry/src/test/MediaAnalysisAdapters.test.ets
+230:       expect(ports.registered).assertEqual(0);
+231:     });
+232:     it('benchmark timing diagnostics use injected clock without platform dependency', 0, async () => {
+233:       const ffmpegPorts = new TestInputs();
+234:       const ffmpeg = new FfmpegMediaProbeAdapter(
+235:         resolver(ffmpegPorts),
+236:         new FfmpegAnalysis(new TestNative()),
+237:         10000,
+238:         fakeClock([100, 130, 140, 190, 205])
+239:       );
+240:       const ffmpegResult = await ffmpeg.probe(file(), ProbeRequirement.LIST);
+241:       expect(ffmpegResult.diagnostics.prepareMs).assertEqual(30);
+242:       expect(ffmpegResult.diagnostics.probeMs).assertEqual(50);
+243:       expect(ffmpegResult.diagnostics.totalMs).assertEqual(105);
+244:       await ffmpeg.close();
+245:
+246:       const systemPorts = new TestInputs();
+247:       const system = new SystemMediaProbeAdapter(
+248:         resolver(systemPorts),
+249:         () => new TestSystem(),
+250:         fakeClock([200, 225, 240, 270, 300])
+251:       );
+252:       const systemResult = await system.probe(file(), ProbeRequirement.LIST);
+253:       expect(systemResult.diagnostics.prepareMs).assertEqual(25);
+254:       expect(systemResult.diagnostics.probeMs).assertEqual(30);
+255:       expect(systemResult.diagnostics.totalMs).assertEqual(100);
+256:       await system.close();
+257:     });
+258:
+259:     for (const requirement of [ProbeRequirement.LIST, ProbeRequirement.DETAIL, ProbeRequirement.ADVANCED]) {
+260:       it('FFmpeg completeness satisfies ' + requirement + ' without optional chapters/tags', 0, async () => {
+
+linkora_proxy/src/main/ets/NetworkFileProxy.ets
+174:   }
+175:
+176:   diagnostics(): NetworkFileProxyDiagnostics {
+177:     let activeReadRequests: number = 0;
+178:     let activeRangeRequests: number = 0;
+179:     let activeBytesRead: number = 0;
+180:     this.sources.forEach((source: ProxySource) => {
+181:       activeReadRequests += source.readRequests;
+182:       activeRangeRequests += source.rangeRequests;
+183:       activeBytesRead += source.bytesRead;
+184:     });
+185:     return new NetworkFileProxyDiagnostics(
+186:       this.sources.size,
+187:       this.clients.size,
+188:       this.releasedReadRequests + activeReadRequests,
+189:       this.releasedBytesRead + activeBytesRead,
+190:       this.releasedSources,
+191:       this.releasedRangeRequests + activeRangeRequests
+192:     );
+193:   }
+194:
+
+linkora_proxy/src/main/ets/NetworkFileProxy.ets
+279:     if (!request[1].startsWith('/') || proxySource === undefined || !proxySource.active) {
+280:       await this.respond(client, 404); return;
+281:     }
+282:
+283:     client.source = proxySource;
+284:     const result: HttpByteRange =
+285:       resolveHttpByteRange(request[0] === 'HEAD' ? '' : range, proxySource.size());
+286:     if (request[0] === 'GET' && seenRange && result.status === 206) {
+287:       proxySource.rangeRequests++;
+288:     }
+289:     if (result.status === 400 || result.status === 416) {
+290:       await this.respond(client, result.status, 0, result.contentRange); return;
+291:     }
+292:
+293:     let position: number = result.offset;
+294:     let remaining: number = result.length;
+
+linkora_proxy/src/main/ets/NetworkFileProxy.ets
+355:     await client.connection.close().catch(() => {});
+356:   }
+357:
+358:   private release(token: string, proxySource: ProxySource): Promise<void> {
+359:     if (!proxySource.active) return Promise.resolve();
+360:     proxySource.active = false;
+361:     this.sources.delete(token);
+362:     this.releasedReadRequests += proxySource.readRequests;
+363:     this.releasedRangeRequests += proxySource.rangeRequests;
+364:     this.releasedBytesRead += proxySource.bytesRead;
+365:     this.releasedSources++;
+366:     proxySource.source.cancel();
+367:     const operation: Promise<void> = this.dispose(proxySource);
+368:     this.releases.add(operation);
+369:     operation.then(() => this.releases.delete(operation), () => this.releases.delete(operation));
+370:     return operation;

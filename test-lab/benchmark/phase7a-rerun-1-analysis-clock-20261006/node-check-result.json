@@ -1,0 +1,5 @@
+{
+  "exitCode": 0,
+  "command": "bundled node --check scripts/summarize-benchmark.cjs",
+  "invocationCount": 1
+}

@@ -1,0 +1,6 @@
+{
+  "serverAlias": "controlled-webdav",
+  "tlsValidationBypassed": false,
+  "hostPreflightStatus": 207,
+  "configReadyToPrepare": true
+}
