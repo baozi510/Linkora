@@ -1,0 +1,22 @@
+[
+  {
+    "relativePath": "mp4/h264-aac.mp4",
+    "sha256": "b7cce175483cd3314fae1bb79e0f5f04754c3239cc5657805f5427aef60d644b",
+    "matchesPreparedManifest": true
+  },
+  {
+    "relativePath": "mkv/hevc-aac.mkv",
+    "sha256": "c4f8b62bb10addc7a7f7896a4c2435deb6550aba530a9495bdc296b7d5e249d4",
+    "matchesPreparedManifest": true
+  },
+  {
+    "relativePath": "corrupt/corrupt.mp4",
+    "sha256": "cd91a015352207b7cc3f8790d5a6970aad890a8f91c26554d7d2dc5304b2a80b",
+    "matchesPreparedManifest": true
+  },
+  {
+    "relativePath": "cancel/h264-aac.mp4",
+    "sha256": "b7cce175483cd3314fae1bb79e0f5f04754c3239cc5657805f5427aef60d644b",
+    "matchesPreparedManifest": true
+  }
+]

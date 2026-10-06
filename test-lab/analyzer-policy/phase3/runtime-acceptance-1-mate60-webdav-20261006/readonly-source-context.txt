@@ -1,0 +1,50 @@
+entry/src/main/ets/services/LocalMediaThumbnailLoader.ets
+86:       const helper: photoAccessHelper.PhotoAccessHelper =
+87:         photoAccessHelper.getPhotoAccessHelper(this.context);
+88:       const predicates: dataSharePredicates.DataSharePredicates =
+89:         new dataSharePredicates.DataSharePredicates();
+90:       predicates.equalTo(photoAccessHelper.PhotoKeys.URI, uri);
+91:       const options: photoAccessHelper.FetchOptions = {
+92:         fetchColumns: [],
+93:         predicates: predicates
+94:       };
+95:       result = await helper.getAssets(options);
+96:       if (result.getCount() === 0) {
+97:         return null;
+98:       }
+99:       const asset: photoAccessHelper.PhotoAsset = await result.getFirstObject();
+100:       const size: image.Size = { width: THUMBNAIL_WIDTH, height: THUMBNAIL_HEIGHT };
+101:       thumbnail = await asset.getThumbnail(size);
+102:       const info: image.ImageInfo = await thumbnail.getImageInfo();
+103:       const pixels: ArrayBuffer = new ArrayBuffer(thumbnail.getPixelBytesNumber());
+104:       await thumbnail.readPixelsToBuffer(pixels);
+105:       return new ThumbnailPixels(uri, pixels, info);
+106:     } catch (_error) {
+107:       return null;
+108:     } finally {
+109:       if (thumbnail !== null) {
+110:         try {
+111:           await thumbnail.release();
+112:         } catch (_releaseError) {
+113:         }
+114:       }
+115:       if (result !== null) {
+116:         try {
+117:           result.close();
+118:         } catch (_error) {
+119:         }
+120:       }
+121:     }
+
+entry/src/main/ets/services/LinkoraDatabase.ets
+253:   private async open(): Promise<relationalStore.RdbStore> {
+254:     try {
+255:       console.info('Database initialization started.');
+256:       const config: relationalStore.StoreConfig = {
+257:         name: DATABASE_NAME,
+258:         securityLevel: relationalStore.SecurityLevel.S2,
+259:         encrypt: true
+260:       };
+261:       const store: relationalStore.RdbStore = await relationalStore.getRdbStore(this.context, config);
+262:       console.info(`Database opened. schemaVersion=${store.version}`);
+263:       await store.execute('PRAGMA foreign_keys = ON');

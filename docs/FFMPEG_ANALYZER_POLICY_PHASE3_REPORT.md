@@ -1,9 +1,70 @@
 # FFmpeg Analyzer Production Policy Phase 3 Report
 
-> Status: REVIEWED — BUILD/STATIC/PURE ACCEPTANCE PASS; production runtime acceptance BLOCKED only by missing HarmonyOS target.
+> Status: RUNTIME VALIDATION BLOCKED — LOCAL_DOCUMENT THUMBNAIL ACCEPTANCE; network core and 20-cycle PASS. Prior build/static/pure PASS remains separate.
 > Branch: `feat/ffmpeg-analyzer-policy-phase3`
 > Codex role: test/report only; no source fixes.
-> Date: 2026-10-05 (Asia/Shanghai).
+> Date: 2026-10-06 (Asia/Shanghai).
+
+## Current runtime validation — phase3-runtime-acceptance-1-mate60-webdav (2026-10-06)
+
+**Decision: BLOCKED — LOCAL_DOCUMENT THUMBNAIL ACCEPTANCE.** Network production acceptance passed in the declared scopes; full Phase 3 architecture acceptance is not claimed pending the local-thumbnail ruling.
+
+- Implementation source: `44d0f62816b73ebd3bab8069be5b74f51e2c6999`.
+- Reviewed runtime source: `4ced68f1b5cae7000ce9a24183d4a1d1b1c747a8`; actual tested HEAD: `30c19502aa06e82b4fe75624c9f0d817fd36eb6d`.
+- Repository/branch: `baozi510/Linkora`, `feat/ffmpeg-analyzer-policy-phase3`; isolated checkout `D:/Linkora-runtime-phase3`.
+- Fresh fetch/clean-state/ancestor checks pass; runtime-source->HEAD changes only `docs/CODEX_VALIDATION_TASK.md`. All ten required documents completely read, SESSION_HANDOFF CURRENT STATE first.
+- Evidence: [runtime-acceptance-1-mate60-webdav-20261006](../test-lab/analyzer-policy/phase3/runtime-acceptance-1-mate60-webdav-20261006/).
+- Target: real Mate60, arm64-v8a/aarch64, API 26, HDC 3.2.0f; private device identity omitted.
+
+### Fresh artifact and source provenance
+
+Exactly one normal DevEco bundled `ohpm install` succeeded. Only four task-allowlisted locks acquired CRLF; normalized Git blobs, normalized bytes and line contents equal HEAD. Exact locks restored after strict proof; clean, no reinstall. Generated pinned arm64 FFmpeg inputs were reused as dependency inputs only and freshly checked: four archive hashes/all-member AArch64 checks and exact manifest pin `1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7`; no old HAP or runtime PASS reused.
+
+A temporary signing-only overlay reused the user's existing local references read-only. Only root `build-profile.json5` changed; canonical comparison proved every non-signing semantic unchanged, material references existed, and default selected the config. Overlay SHA-256: `5143AE29AFDA4A20ECECCDD7495E1B1759FD40A77A0312BBCFD63F97E04E9F6C`; no raw signing diff/material/secret path published.
+
+Actual build: DevEco `tools/hvigor/bin/hvigorw.bat assembleHap --mode module -p module=entry@default -p product=default -p buildMode=debug --no-daemon`, once, exit 0 (UTC 08:04:03–08:05:40). Fresh `entry-default-signed.hap`, 64,492,731 bytes, SHA-256 **`A6141D058B29A569546D53A34876C8C25F469561D89ED1DF638788D7A1E574C4`**. Existing checker on that exact signed HAP passed: exactly nine native libraries, all AArch64; individual native hashes/ELF machine 183 recorded. Bundle `com.linkora.player`, version `0.1.0`. Signing overlay restored to HEAD before runtime cases, checkout clean. Explicit `hdc install -r <exact hashed HAP>` succeeded; no uninstall or app-data reset. EntryAbility launched and process Hilog readable.
+
+No `verify.ps1`, simulator verifier, Hypium or green build matrix rerun. Reviewed 3g build/static/pure evidence `e95feef35fa2541322216f9ce9336da3cad9060f` remains distinct historical acceptance, not fresh runtime execution.
+
+### Human-directed fixture environment and preflight
+
+The user paused initial form automation before a media case was executed, then explicitly supplied a replacement HTTPS WebDAV and authorized SSH fixture preparation under a media directory. This overrides only the task's prepared local endpoint, not source/build/permissions/test assertions or stop conditions. Original developer workspace and pre-existing media/server entries were preserved.
+
+A new isolated child directory holds separate MP4, MKV, corrupt and cancellation folders. MP4/MKV/corrupt hashes match the controlled synthetic corpus; cancellation copy is identical to MP4. Normal TLS validation remained enabled. Authenticated PROPFIND returned 207; Range GET returned 206. No claim is made that the external account itself is read-only; test clients used read operations only, with authorized filesystem fixture creation via SSH. Full endpoint, credentials and SSH/device identities are withheld.
+
+The human saved the test server using the normal app form and confirmed browse; independent SDK UI capture showed all four folders on the freshly installed app. App-side transport preflight PASS. Earlier interrupted/unsaved form activity and one coordinate click on a changed screen executed no media case and supply no PASS. Subsequent actions used fresh UI layouts. UI-helper target/encoding issues before actions/cycles were retained locally and did not cause a source/expectation change or erase an application gate failure.
+
+### Runtime results
+
+| Case | Result | Fresh evidence/limits |
+| --- | --- | --- |
+| R01 MP4 cold | PASS | Controlled new server/path; UI 0:20/720P and test-pattern thumbnail; safe log metadataEngine=system, thumbnailEngine=ffmpeg, plan 4000:480:270:80:1; persisted WebP 7,102 bytes, decoded 480x270 |
+| R02 MP4 reopen | PASS | Correct metadata/preview, same persistent size+mtime, no new analysis completion observed |
+| R03 HEVC/AAC MKV cold + reopen | PASS | UI 0:20/720P, FFmpeg thumbnail log, plan 4004:480:270:80:1; persisted WebP 7,000 bytes, decoded 480x270; reopen same size+mtime |
+| R05 corrupt/both unavailable | PASS | Usable 37-byte file row, correct placeholder, no invalid thumbnail/new JPEG; three rapid view rebindings within 30-second backoff produced no new System failure event; list responsive |
+| R06 cancel/refresh/stale generation | PASS in observed behavior | Rapid cold entry/Back left parent with only four folders and no new thumbnail; rapid leave/re-enter/pull refresh then single correct preview, no late visible fallback/stale row/crash. Native fallback-start trace unavailable; refresh was not proved before analysis completion, that subcase NOT RUN |
+| R07 lifecycle | PASS, 20/20 | Exactly twenty fresh open-server/open-MP4/stable-preview/leave-folder/leave-page cycles; metadata correct, one media row, rendered test-pattern pixels, no late row after leave; same process, no observed crash/ANR; cache remained usable and unchanged |
+| R10 LOCAL_DOCUMENT | BLOCKED for thumbnail acceptance | System DocumentViewPicker selected the controlled MP4; import and 0:20/720P metadata PASS; normal local playback rendered the fixture, showed 1280x720, and completed at 0:20. System metadata FileDescriptor API observed. List thumbnail remains placeholder; see ruling request below |
+
+Direct production proxy counters: **NOT RUN — NO PRODUCTION DIAGNOSTIC ENDPOINT**, as explicitly permitted by this task. No instrumentation/reflection or independent smoke counter substituted. Cleanup conclusions use real UI/lifecycle/process/cache evidence and retain this visibility limit.
+
+Optional/unavailable: natural FFmpeg->System successful-thumbnail fallback NOT RUN (no safe natural fixture); HLS/DASH NOT RUN (no prepared streaming fixture); target-native ADVANCED NOT RUN (no existing authorized diagnostic entry); SFTP NOT RUN (no prepared app-side credential/trust fixture); legacy JPEG compatibility NOT RUN (no safe existing JPEG fixture). No benchmark/performance rankings collected.
+
+### Cache/metadata evidence and local-thumbnail ruling request
+
+Actual module cache is `<context.cacheDir>/network-thumbnails/<test-server>/<key>.webp`; physical inspection resolved the **entry module** cache directory. An earlier app-level cache-path probe was incorrect and is not used as a cache verdict. Current test cache ended with three WebPs (MP4, MKV, cancellation copy), no corrupt thumbnail. MP4 file size+mtime remained unchanged after twenty cycles; JPEG counts in inspected current/compatibility areas were zero. WebP file hashes/decode dimensions are published, raw private app data is not.
+
+The app RDB uses `encrypt: true`. Stock readonly sqlite reported `file is not a database`; this is an observer limitation, not proof of corruption. No dump/decryption bypass. Available metadata is verified through normal page reopen/UI; exact RDB fields were not independently extracted.
+
+The controlled local document is imported and plays normally, but its list image remains a placeholder. Read-only `LocalMediaThumbnailLoader.fetch()` queries PhotoAccessHelper assets by URI and returns null for unavailable assets; it has no DocumentViewPicker frame-extraction fallback. That file is unchanged at the dispatched implementation. This supports an existing document-thumbnail limitation and does **not** establish a new Phase 3 regression. Because the runtime manual requires existing System/local thumbnail behavior to remain functional, Codex leaves the local-thumbnail acceptance unresolved rather than silently relaxing that criterion or calling the placeholder a generated thumbnail. GPT must decide whether this existing limitation is outside the exact smoke contract, requires an explicit task clarification, or warrants a source fix and fresh dispatch. No local/native-path workaround, source fix, expectation change or rerun after this ruling request.
+
+### Integrity, security and handoff
+
+All 2,204 pre-recorded tracked regular files remain byte-identical before report publication, three Gitlinks pinned; checkout clean after overlay restore. Original dirty `D:/Linkora` stays on main with the same HEAD/status/diff hashes before/after, including read-only signing access. No production/test/task/profile/manifest/CMake/semantic-lock change is committed.
+
+Evidence value scan finds no provided passwords/private endpoint/SSH host/device ID or signing material. Raw private layouts, phone screenshots/status bars, full Hilog, signing diff, keys, signed HAP and app database remain local/ignored. Published routing logs contain the safe engine/plan fields; selected native System lifecycle lines are sanitized. Incidental command timestamps are not performance measurements.
+
+Only this report and the new evidence directory are authorized outputs. Commit/push without force or merge; re-fetch and verify remote evidence containment before handoff. Return the remotely visible evidence SHA separately; the commit cannot contain its own SHA. Final decision remains **BLOCKED — LOCAL_DOCUMENT THUMBNAIL ACCEPTANCE**, with remote/network results preserved for review. Do not merge or begin another phase.
 
 ## GPT review after phase3-rerun-3g
 
@@ -59,9 +120,9 @@ Cleanup-observability ruling:
 
 This readiness review does not itself execute any runtime acceptance case and does not alter the prior 3g PASS/BLOCKED evidence.
 
-## Current validation — phase3-rerun-3g-typed-analysis-error
+## Latest reviewed build/static validation — phase3-rerun-3g-typed-analysis-error
 
-Only this section is current-run evidence. All following review/validation sections are historical and provide no PASS for 3g.
+This section preserves the reviewed 3g build/static run. It supplies no freshly executed runtime PASS for the Mate60 round above. All following review/validation sections are historical and provide no PASS for 3g.
 
 - Repository/branch: `baozi510/Linkora`, `feat/ffmpeg-analyzer-policy-phase3`.
 - Validation source SHA: `44d0f62816b73ebd3bab8069be5b74f51e2c6999`.

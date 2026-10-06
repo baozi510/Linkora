@@ -1,0 +1,19 @@
+{
+  "actualGeneratedArea": "context.cacheDir/network-thumbnails/test-server",
+  "physicalAppCacheWasEntryModuleSpecific": true,
+  "earlierAppLevelPathProbeWasIncorrectAndNotUsedAsCacheVerdict": true,
+  "MP4ReopenSameSizeAndMtime": true,
+  "MP4After20CyclesSameSizeAndMtime": true,
+  "MKVReopenSameSizeAndMtime": true,
+  "testServerWebPCountFinal": 3,
+  "newTestThumbnails": [
+    "webdav-mp4",
+    "webdav-mkv",
+    "cancel-copy"
+  ],
+  "corruptGeneratedNoAdditionalThumbnail": true,
+  "currentJPEGCount": 0,
+  "compatibilityJPEGCount": 0,
+  "directMetadataSQL": "NOT RUN — RDB configured encrypt=true; readonly stock sqlite cannot read it; no decrypt workaround attempted",
+  "metadataReopenObservedThroughNormalUI": true
+}

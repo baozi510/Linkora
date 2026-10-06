@@ -1,0 +1,9 @@
+{
+  "command": "SDK hdc install -r <exact hashed entry-default-signed.hap>",
+  "startUtc": "2026-10-06T08:06:23.5236909Z",
+  "endUtc": "2026-10-06T08:06:26.0455075Z",
+  "exitCode": 0,
+  "artifactSha256": "A6141D058B29A569546D53A34876C8C25F469561D89ED1DF638788D7A1E574C4",
+  "uninstallAttempted": false,
+  "invocationCount": 1
+}

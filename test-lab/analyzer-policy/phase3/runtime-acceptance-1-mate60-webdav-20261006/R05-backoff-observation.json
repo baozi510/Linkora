@@ -1,0 +1,8 @@
+{
+  "caseId": "R05-both-engines-unavailable",
+  "threeViewRebindingsWithinBackoffWindow": true,
+  "beforeSystemFailureEvents": 1,
+  "newSystemFailureEvents": 0,
+  "sourceBackoffMs": 30000,
+  "observedNoUnboundedRetry": true
+}

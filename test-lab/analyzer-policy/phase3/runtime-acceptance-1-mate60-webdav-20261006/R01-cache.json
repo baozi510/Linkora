@@ -1,0 +1,14 @@
+{
+  "caseId": "R01-webdav-mp4-cold",
+  "cacheArea": "context.cacheDir/network-thumbnails/test-server",
+  "extension": ".webp",
+  "size": 7102,
+  "sha256": "8592d336da1057610a7c67775ebf560a1092739c137e1c0f787b59d829281138",
+  "format": "WEBP",
+  "width": 480,
+  "height": 270,
+  "decoded": true,
+  "persistentStat": "7102,1791275309",
+  "cacheKeyHash": "95fb3ee4e59cd0214d3f9d8b2268386e711e45907d17b76401f80e40fb0af292",
+  "cachePathResolvedToEntryModule": true
+}

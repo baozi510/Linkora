@@ -1,0 +1,12 @@
+{
+  "result": "BLOCKED — LOCAL_DOCUMENT THUMBNAIL ACCEPTANCE",
+  "R10Import": "PASS",
+  "R10Metadata": "PASS — 20 seconds, 720P",
+  "R10Playback": "PASS — 1280x720, playback completed",
+  "R10Thumbnail": "BLOCKED — observed placeholder; PhotoAsset-only existing loader, document thumbnail not demonstrated",
+  "R10SystemMetadataObserved": true,
+  "runtimeCycles": 20,
+  "sourceModified": false,
+  "testExpectationsModified": false,
+  "stopUtc": "2026-10-06T09:47:56.0076778Z"
+}

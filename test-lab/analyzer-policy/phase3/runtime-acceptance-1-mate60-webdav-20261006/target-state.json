@@ -1,0 +1,12 @@
+{
+  "targetAlias": "mate60-validation-target",
+  "count": 1,
+  "hdcVersion": "Ver: 3.2.0f",
+  "architecture": "aarch64",
+  "api": "26",
+  "abi": "arm64-v8a",
+  "connected": true,
+  "privateIdentifierOmitted": true,
+  "reversePort": 19082,
+  "reversePresent": true
+}

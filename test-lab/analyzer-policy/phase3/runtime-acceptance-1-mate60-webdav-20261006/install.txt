@@ -1,0 +1,3 @@
+[Info]App install path:D:\Linkora-runtime-phase3\entry\build\default\outputs\default\entry-default-signed.hap msg:install bundle successfully. 
+AppMod finish
+

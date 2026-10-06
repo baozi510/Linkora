@@ -1,0 +1,14 @@
+{
+  "caseId": "R10-local",
+  "result": "BLOCKED",
+  "reason": "LOCAL_DOCUMENT THUMBNAIL ACCEPTANCE — valid controlled DocumentViewPicker MP4 remains a placeholder; existing PhotoAsset-only loader has no document frame-extraction fallback",
+  "normalDocumentPickerSelection": true,
+  "importedRecordLocatedBySearch": true,
+  "metadataUI": "0:20 / 720P",
+  "playback": "Playing at 0:02, then completed at 0:20; decoded fixture pattern visible",
+  "playbackDimensions": "1280x720",
+  "systemMetadataFDObserved": true,
+  "nativeFFmpegAnalysisNotDemonstratedForLocal": true,
+  "noURINativePathWorkaround": true,
+  "noSourceChangeAttempted": true
+}

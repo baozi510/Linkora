@@ -1,0 +1,9 @@
+{
+  "freshInstalledBundle": "com.linkora.player",
+  "version": "0.1.0",
+  "debug": true,
+  "launchSucceeded": true,
+  "processVisible": true,
+  "processHilogReadable": true,
+  "checkoutCleanAfterOverlayRestore": true
+}
