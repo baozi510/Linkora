@@ -15,6 +15,7 @@ export default function networkFileProxyTest(): void {
       expect(diagnostics.activeClients).assertEqual(0);
       expect(diagnostics.bytesRead).assertEqual(0);
       expect(diagnostics.readRequests).assertEqual(0);
+      expect(diagnostics.rangeRequests).assertEqual(0);
       await proxy.close();
     });
 

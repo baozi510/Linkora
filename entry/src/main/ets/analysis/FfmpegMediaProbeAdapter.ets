@@ -3,6 +3,7 @@ import { IMediaProbe, MediaSource, MediaInfo, ProbeResult, ProbeRequirement, Pro
 import { FfmpegAnalysis, FfmpegMediaInfoMapper } from 'linkora_ffmpeg';
 import { MediaAnalysisInputResolver, AnalysisInputLease } from './MediaAnalysisInputResolver';
 import { AnalysisLifecycle, AnalysisOperation, AnalysisError } from './AnalysisOperation';
+import { systemDateTime } from '@kit.BasicServicesKit';
 
 export class FfmpegMediaProbeAdapter implements IMediaProbe {
   private readonly lifecycle: AnalysisLifecycle = new AnalysisLifecycle();
@@ -22,13 +23,19 @@ export class FfmpegMediaProbeAdapter implements IMediaProbe {
     finally { if (operation !== null) this.lifecycle.end(operation); }
   }
   private async perform(source: MediaSource, requirement: ProbeRequirement, operation: AnalysisOperation): Promise<ProbeResult> {
+    const totalStarted: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP);
+    const prepareStarted: number = totalStarted;
     const lease = await this.resolver.resolve(source, 'ffmpeg', operation);
+    const prepareMs: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP) - prepareStarted;
     try {
       operation.onCancel(() => this.analysis.cancel(operation.id)); operation.check();
+      const probeStarted: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP);
       const native = await this.analysis.probe(operation.id, lease.input.uri, this.timeoutMs); operation.check();
+      const probeMs: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP) - probeStarted;
       const mapped = FfmpegMediaInfoMapper.map(native);
+      const totalMs: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP) - totalStarted;
       return new ProbeResult(mapped.info, FfmpegMediaProbeAdapter.completeness(mapped.info, requirement), mapped.fieldOrigins,
-        FfmpegMediaProbeAdapter.diagnostics('ffmpeg', lease));
+        FfmpegMediaProbeAdapter.diagnostics('ffmpeg', lease, prepareMs, probeMs, totalMs));
     } finally { await lease.release(); }
   }
   static completeness(info: MediaInfo, requirement: ProbeRequirement): ProbeCompleteness {
@@ -43,9 +50,10 @@ export class FfmpegMediaProbeAdapter implements IMediaProbe {
     const advanced = structure && basic && info.videoTracks.every((v) => v.bitDepth > 0 && v.frameRate > 0);
     return (requirement === ProbeRequirement.DETAIL ? structure : advanced) ? ProbeCompleteness.COMPLETE : ProbeCompleteness.PARTIAL;
   }
-  static diagnostics(engine: string, lease: AnalysisInputLease): MediaProbeDiagnostics {
-    // Source reads are not proxy HTTP request counts. Existing timing fields remain zero and are not compared.
-    return new MediaProbeDiagnostics(engine, 0, 0, 0, lease.access.bytesRead, 0,
+  static diagnostics(engine: string, lease: AnalysisInputLease, prepareMs: number = 0,
+    probeMs: number = 0, totalMs: number = 0): MediaProbeDiagnostics {
+    // rangeRequests is measured by NetworkFileProxy in the benchmark runner. Source reads remain a separate metric.
+    return new MediaProbeDiagnostics(engine, prepareMs, probeMs, totalMs, lease.access.bytesRead, 0,
       ['access=' + lease.access.semantics(), 'source_reads=' + lease.access.readRequests]);
   }
   cancel(): void { this.lifecycle.cancel(); }

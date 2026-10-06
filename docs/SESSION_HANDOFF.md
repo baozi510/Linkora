@@ -6,7 +6,7 @@ Repository: `baozi510/Linkora`
 
 Current branch: `feat/ffmpeg-analyzer-policy-phase3`
 
-Current phase: **FFmpeg Analyzer Production Policy Phase 3 — ACCEPTED.**
+Current phase: **Phase 7A — Analysis Benchmark Foundation + real-arm64 WebDAV baseline. Phase 3 remains ACCEPTED.**
 
 Implementation source:
 
@@ -47,11 +47,11 @@ This is a known local-document thumbnail limitation, not a Phase 3 regression. I
 
 ### Next action
 
-There is **no active Phase 3 Codex validation task** after acceptance.
+Build/validate the Phase 7A benchmark foundation, then run a dedicated Mate60 benchmark task.
 
-The next analyzer phase is real-arm64 Analysis Benchmark + Policy. Do not start it until GPT reviews the current benchmark assets and publishes a dedicated task.
+Phase 7A measures System vs FFmpeg explicitly on the same production WebDAV/MediaProxy source path. It does not change production routing.
 
-Performance conclusions must remain separate from this functional acceptance.
+After the benchmark evidence is pushed, GPT decides whether to expand the corpus/source families or make a narrowly supported policy change. Direct I/O remains deferred unless benchmark evidence identifies MediaProxy as a real bottleneck.
 
 ### Durable conversation workflow
 

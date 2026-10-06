@@ -3,6 +3,7 @@ import { IMediaProbe, MediaSource, MediaInfo, VideoTrackInfo, ProbeResult, Probe
 import { MediaAnalysisInputResolver } from './MediaAnalysisInputResolver';
 import { AnalysisLifecycle, AnalysisOperation, AnalysisError, AnalysisErrorCode } from './AnalysisOperation';
 import { FfmpegMediaProbeAdapter } from './FfmpegMediaProbeAdapter';
+import { systemDateTime } from '@kit.BasicServicesKit';
 
 export class SystemAnalysisSnapshot {
   readonly durationMs: number; readonly width: number; readonly height: number;
@@ -28,12 +29,17 @@ export class SystemMediaProbeAdapter implements IMediaProbe {
     finally { if (operation !== null) this.lifecycle.end(operation); }
   }
   private async perform(source: MediaSource, requirement: ProbeRequirement, operation: AnalysisOperation): Promise<ProbeResult> {
+    const totalStarted: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP);
+    const prepareStarted: number = totalStarted;
     const lease = await this.resolver.resolve(source, 'system', operation);
+    const prepareMs: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP) - prepareStarted;
     let backend: SystemAnalysisBackend | null = null;
     try {
       backend = this.factory(); const currentBackend = backend;
       operation.onCancel(() => currentBackend.cancel()); operation.check();
+      const probeStarted: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP);
       const data = await backend.inspect(lease.input.uri); operation.check();
+      const probeMs: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP) - probeStarted;
       const duration = Number.isFinite(data.durationMs) && data.durationMs > 0 ? data.durationMs : 0;
       const width = Number.isFinite(data.width) && data.width > 0 ? data.width : 0;
       const height = Number.isFinite(data.height) && data.height > 0 ? data.height : 0;
@@ -47,7 +53,9 @@ export class SystemMediaProbeAdapter implements IMediaProbe {
         width > 0 || height > 0 ? [new VideoTrackInfo('primary', '', '', '', width, height)] : []) : null;
       const completeness = !useful ? ProbeCompleteness.UNAVAILABLE :
         requirement === ProbeRequirement.LIST && duration > 0 && width > 0 && height > 0 ? ProbeCompleteness.COMPLETE : ProbeCompleteness.PARTIAL;
-      return new ProbeResult(info, completeness, origins, FfmpegMediaProbeAdapter.diagnostics('system', lease));
+      const totalMs: number = systemDateTime.getUptime(systemDateTime.TimeType.STARTUP) - totalStarted;
+      return new ProbeResult(info, completeness, origins,
+        FfmpegMediaProbeAdapter.diagnostics('system', lease, prepareMs, probeMs, totalMs));
     } finally { try { await backend?.close(); } finally { await lease.release(); } }
   }
   cancel(): void { this.lifecycle.cancel(); }

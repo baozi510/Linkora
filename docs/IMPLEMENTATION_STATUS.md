@@ -59,13 +59,21 @@ Therefore the placeholder is a **pre-existing document-thumbnail limitation, not
 
 No production source change or rerun is required for this ruling.
 
-### Next architecture action
+### Current architecture action
 
-Do not repeat Phase 3 validation.
+**Phase 7A — Analysis Benchmark Foundation + real-arm64 WebDAV baseline is now in implementation.**
 
-The next planned analyzer work is real-arm64 **Analysis Benchmark + Policy** from the master plan. Benchmarking is a separate phase; it may collect System-vs-FFmpeg performance/completeness data only under its own future task.
+This stage adds measurement infrastructure only:
 
-Playback/runtime, SMB and Media Catalog work should be sequenced from the actual repository state rather than by mechanically repeating already-completed plan items.
+- target-side debug benchmark runner using the accepted System/FFmpeg adapters;
+- real MediaProxy HTTP Range counting;
+- adapter prepare/probe timing;
+- NDJSON schema and summary tooling;
+- stable Phase 7 benchmark manual.
+
+`ProductionMediaAnalysisPolicy` remains unchanged until benchmark evidence is reviewed.
+
+The initial Mate60 WebDAV baseline uses the already-controlled H.264/AAC MP4 and HEVC/AAC MKV fixtures with repeated crossover sampling. It validates the benchmark machinery and provides preliminary evidence; it is not by itself the full permanent Local/WebDAV/SMB corpus.
 
 
 This file is the current execution status for the architecture migration.

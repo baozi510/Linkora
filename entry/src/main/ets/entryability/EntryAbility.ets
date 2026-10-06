@@ -10,10 +10,12 @@ import { NetworkProxySmokeTest } from '../services/NetworkProxySmokeTest';
 import { MediaProbeBuildProfile } from 'linkora_media_probe';
 import { NetworkMediaProbeSmokeTest } from '../services/NetworkMediaProbeSmokeTest';
 import { RuntimeDiagnostics } from 'entry/RuntimeDiagnostics';
+import { AnalysisBenchmarkRunner } from '../benchmark/AnalysisBenchmarkRunner';
 
 export default class EntryAbility extends UIAbility {
   private mediaProbeSmokeConfig: string = '';
   private proxySmokeConfig: string = '';
+  private analysisBenchmarkConfig: string = '';
   onCreate(want: Want): void {
     RuntimeDiagnostics.configure(want);
     if (MediaProbeBuildProfile.DEBUG && typeof want.parameters?.linkoraMediaProbeSmokeConfig === 'string') {
@@ -21,6 +23,9 @@ export default class EntryAbility extends UIAbility {
     }
     if (ProxyBuildProfile.DEBUG && typeof want.parameters?.linkoraProxySmokeConfig === 'string') {
       this.proxySmokeConfig = want.parameters.linkoraProxySmokeConfig as string;
+    }
+    if (MediaProbeBuildProfile.DEBUG && typeof want.parameters?.linkoraAnalysisBenchmarkConfig === 'string') {
+      this.analysisBenchmarkConfig = want.parameters.linkoraAnalysisBenchmarkConfig as string;
     }
   }
   private registerIconFonts(windowStage: window.WindowStage): void {
@@ -53,6 +58,9 @@ export default class EntryAbility extends UIAbility {
       }
       if (this.proxySmokeConfig.length > 0) {
         NetworkProxySmokeTest.run(context, this.proxySmokeConfig).catch(() => {});
+      }
+      if (this.analysisBenchmarkConfig.length > 0) {
+        AnalysisBenchmarkRunner.run(context, this.analysisBenchmarkConfig).catch(() => {});
       }
       LinkoraDatabase.shared(context).initialize().catch((error: BusinessError) => {
         console.error(`Failed to initialize the local database. code=${error.code}, message=${error.message}`);
