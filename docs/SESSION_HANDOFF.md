@@ -6,7 +6,7 @@ Repository: `baozi510/Linkora`
 
 Current branch: `feat/ffmpeg-analyzer-policy-phase3`
 
-Current phase: **Phase 8A real-arm64 Playback foundation rerun after GPT correction of P02 MPV state/EOF/surface defects. Phase 7A benchmark baseline and Phase 3 analysis policy remain ACCEPTED.**
+Current phase: **Phase 8A focused real-arm64 fullscreen/orientation rerun after rerun 1 passed P01–P05/lifecycle and exposed a shared PlayerPage fullscreen overflow. Phase 7A benchmark baseline and Phase 3 analysis policy remain ACCEPTED.**
 
 Implementation source:
 
@@ -56,7 +56,17 @@ GPT independently reviewed evidence commit `08852ccc0ae1806b8270f2a248113eeedd61
 - vp -> physical-pixel conversion before setting MPV surface size;
 - pure MPV event-order regressions.
 
-Follow the latest READY rerun task on `feat/playback-capability-phase8`. Do not promote the prior P01 PASS as a substitute for fresh exact-source build/deployment requirements unless the new task explicitly permits a focused continuation.
+Rerun 1 evidence at `e894775c0bc81b39a6217a0a0516cec46158b82b` freshly passed P01-P05, System/MKV observation, corrupt-MPV recovery, 20/20 MPV lifecycle and background/foreground on corrected source `5146ff923900fd73ff25769783fb2d9732cfad5c`.
+
+It stopped at fullscreen/orientation because the shared PlayerPage's unconditional 16:9 width-derived surface became 2688x1512 inside a 2688x1216 landscape viewport, clipping the bottom 296 px.
+
+GPT corrected the layout boundary so:
+- fullscreen videoSurface fills the actual viewport;
+- non-fullscreen alone owns the 16:9 wrapper;
+- existing vp->px playback surface conversion remains;
+- no MPV state/Auto/transport policy changed.
+
+Follow the latest focused READY task on `feat/playback-capability-phase8`. The next task may reuse the accepted rerun-1 functional evidence only where it explicitly says so; it still requires a fresh build/exact-source artifact and focused real-device layout checks.
 
 Do not start the broad 59-case compatibility matrix until this playback foundation is accepted.
 

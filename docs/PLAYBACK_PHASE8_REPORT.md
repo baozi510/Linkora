@@ -1,8 +1,84 @@
 # Playback Phase 8 Report
 
-> Status: FAIL — MPV PLAYBACK FOUNDATION. Fresh rerun passes P01–P05 and lifecycle, but fullscreen clips the video; independent review pending.
+> Status: CORRECTION SOURCE PREPARED — rerun 1 evidence accepted through P01–P05/lifecycle; fullscreen shared-layout defect corrected; focused rerun required.
 > Branch: `feat/playback-capability-phase8`
 > Validation date: 2026-10-07 (Asia/Shanghai)
+
+## GPT independent review of rerun 1 and fullscreen correction — 2026-10-07
+
+Reviewed remote evidence commit:
+
+`e894775c0bc81b39a6217a0a0516cec46158b82b`
+
+Ruling:
+
+**VALID SHARED PLAYERPAGE FULLSCREEN LAYOUT DEFECT.**
+
+The rerun's fresh P01-P05, System/MKV capability observation, corrupt-MPV recovery, 20/20 MPV lifecycle and background/foreground results are retained as historical evidence for corrected source `5146ff923900fd73ff25769783fb2d9732cfad5c`. Phase 8A remains unaccepted because fullscreen/orientation stopped the task.
+
+The geometry evidence is internally exact:
+
+```text
+landscape viewport:         2688 x 1216
+XComponent original bounds: 2688 x 1512
+visible bounds:             2688 x 1216
+source:                     1280 x 720
+```
+
+`1512 = 2688 * 9 / 16`, exactly matching PlayerPage's unconditional:
+
+```text
+.width('100%')
+.aspectRatio(16 / 9)
+```
+
+Therefore the surface itself exceeded the fullscreen viewport by 296 physical pixels. The defect is above both playback backends; it is not evidence of an MPV decoder/scaler failure.
+
+Repository binary-file access through the GitHub connector cannot render the two PNG blobs directly in this review environment, so no new visual-content claim is made beyond their committed SHA/provenance and the independently reviewed geometry/source evidence. The focused rerun must visually confirm the correction on-device.
+
+### Correction
+
+PlayerPage now separates the surface viewport from the portrait/non-fullscreen presentation frame:
+
+```text
+fullscreen
+-> videoSurface fills parent 100% x 100%
+-> real viewport constrains XComponent
+-> backend aspect-fits inside surface
+
+non-fullscreen
+-> outer 16:9 Stack
+-> videoSurface fills that frame
+```
+
+The old unconditional 16:9 constraint was removed from `videoSurface()`.
+
+Fullscreen also no longer renders the trailing layout `Blank()`; portrait/non-fullscreen controls/status/Blank remain in their existing branch.
+
+The existing vp-to-physical-px conversion at the playback surface-size boundary is unchanged.
+
+A new pure source/layout regression guard asserts:
+
+- videoSurface itself fills its container and does not own a 16:9 ratio;
+- fullscreen renders it directly;
+- only the non-fullscreen wrapper owns `aspectRatio(16 / 9)`.
+
+No MPV state mapping, Auto policy, MediaProxy behavior, Direct I/O, capability matrix, advanced AV logic, or thumbnail research was changed.
+
+### Validation boundary
+
+This source correction does not convert the prior fullscreen failure into PASS.
+
+A focused fresh exact-source arm64 rerun must prove:
+
+- portrait MPV smoke remains correct;
+- fullscreen XComponent original/visible bounds fit the viewport;
+- the controlled 16:9 frame is fully visible without bottom crop;
+- fullscreen controls/gesture interaction still works;
+- orientation back to portrait restores the 16:9 frame;
+- System fullscreen also receives one smoke check because the layout boundary is shared;
+- leave/release remains clean.
+
 
 ## Fresh rerun 1 — state/EOF/portrait correction passes; fullscreen overflow fails
 

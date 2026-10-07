@@ -61,6 +61,7 @@ Same functional expectations as P01, plus:
 - MPV surface attach works;
 - surface receives real video;
 - rendered video uses the actual XComponent surface bounds and is not confined to a density-scaled lower-left rectangle;
+- fullscreen surface is constrained to the real viewport and does not crop a 16:9 source by deriving height from full landscape width;
 - unified state becomes PLAYING after autoplay command and exposes a pause action;
 - EOF remains COMPLETED even if the wrapper subsequently reports playing=false;
 - no recoverable MPV log line is promoted to fatal playback failure;
