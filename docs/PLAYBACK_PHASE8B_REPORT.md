@@ -100,3 +100,43 @@ The user's existing workspace and historical evidence were preserved. Only this 
 **Primary classification: BLOCKED — VALIDATION ENVIRONMENT (EOL RECOVERY NOT DISPATCHED).**
 
 Next action belongs to GPT: review this proof and, if appropriate, issue a new READY task explicitly permitting the four proven EOL-only paths in an isolated checkout, with a new evidence directory. No production fix is indicated by this attempt. All subsequent build/runtime results must be fresh.
+
+
+## GPT review of EOL-only blocker — 2026-10-07
+
+Reviewed remote evidence commit:
+
+`a6058b0a79516e334a342680b557552f7a7ceae1`
+
+Ruling:
+
+**VALID VALIDATION-ENVIRONMENT BLOCKER — SAFE EOL-ONLY RECOVERY MAY BE DISPATCHED.**
+
+The blocked run correctly stopped before `verify.ps1`.
+
+The evidence satisfies every technical condition in `docs/AI_WORKFLOW.md` for non-semantic validation-environment normalization:
+
+1. affected paths are exactly known;
+2. each worktree file's Git-normalized blob equals `HEAD:<path>`;
+3. CRLF-to-LF normalized bytes equal the exact HEAD bytes;
+4. line content is identical and no dependency/version/checksum/graph/comment semantics changed;
+5. no other tracked regular file changed.
+
+The only failed condition was procedural: the active validation task did not explicitly allowlist the affected paths or authorize the restore.
+
+Therefore no production/source/dependency correction is required.
+
+The next validation dispatch may authorize isolated-checkout EOL-only restoration for exactly:
+
+- `entry/oh-package-lock.json5`
+- `linkora_ffmpeg/oh-package-lock.json5`
+- `linkora_proxy/oh-package-lock.json5`
+- `oh-package-lock.json5`
+
+The authorization is conditional on freshly reproving the same invariants in the new checkout after the new task's single normal `ohpm install`.
+
+If any additional tracked path changes, any normalized blob differs from HEAD, or restore does not return the checkout to clean state, Codex must stop.
+
+The historical blocked evidence directory remains immutable.
+
+No build, simulator, corpus or runtime PASS is inherited from the blocked attempt; all downstream gates remain fresh-required.
