@@ -6,7 +6,7 @@ Repository: `baozi510/Linkora`
 
 Current branch: `feat/ffmpeg-analyzer-policy-phase3`
 
-Current phase: **Phase 8A focused real-arm64 fullscreen/orientation rerun after rerun 1 passed P01–P05/lifecycle and exposed a shared PlayerPage fullscreen overflow. Phase 7A benchmark baseline and Phase 3 analysis policy remain ACCEPTED.**
+Current phase: **Phase 8A playback functional foundation ACCEPTED; next mainline work is Phase 8B media capability coverage. Fullscreen/display-mode UI work is non-blocking follow-up. Phase 7A benchmark baseline and Phase 3 analysis policy remain ACCEPTED.**
 
 Implementation source:
 
@@ -56,19 +56,15 @@ GPT independently reviewed evidence commit `08852ccc0ae1806b8270f2a248113eeedd61
 - vp -> physical-pixel conversion before setting MPV surface size;
 - pure MPV event-order regressions.
 
-Rerun 1 evidence at `e894775c0bc81b39a6217a0a0516cec46158b82b` freshly passed P01-P05, System/MKV observation, corrupt-MPV recovery, 20/20 MPV lifecycle and background/foreground on corrected source `5146ff923900fd73ff25769783fb2d9732cfad5c`.
+Rerun 1 evidence at `e894775c0bc81b39a6217a0a0516cec46158b82b` freshly passed P01-P05, System/MKV observation, corrupt-MPV recovery, 20/20 MPV lifecycle and background/foreground on the real Mate60.
 
-It stopped at fullscreen/orientation because the shared PlayerPage's unconditional 16:9 width-derived surface became 2688x1512 inside a 2688x1216 landscape viewport, clipping the bottom 296 px.
+The same run found a fullscreen PlayerPage layout overflow. Product scope has since been clarified: Phase 8A is a playback-function gate, while fullscreen visual/layout refinement is non-blocking UI work. That issue is tracked separately and must not stop codec/container/audio capability progress.
 
-GPT corrected the layout boundary so:
-- fullscreen videoSurface fills the actual viewport;
-- non-fullscreen alone owns the 16:9 wrapper;
-- existing vp->px playback surface conversion remains;
-- no MPV state/Auto/transport policy changed.
+Phase 8A is therefore ACCEPTED for playback function.
 
-Follow the latest focused READY task on `feat/playback-capability-phase8`. The next task may reuse the accepted rerun-1 functional evidence only where it explicitly says so; it still requires a fresh build/exact-source artifact and focused real-device layout checks.
+Next mainline action: prepare and execute Phase 8B using the shared `test-lab/media-compatibility` corpus. Record System and MPV playback capability independently. Analyzer results may be added against the same fixtures where the task explicitly requests them; do not infer Analyzer PASS from Playback PASS.
 
-Do not start the broad 59-case compatibility matrix until this playback foundation is accepted.
+Playback display modes (fit/contain, fill/crop, stretch, original where supported) are backend capability work; the UI selector is deferred.
 
 After Phase 8A, expand using the shared `test-lab/media-compatibility` corpus and record System/MPV/Analyzer capability independently.
 

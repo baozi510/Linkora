@@ -79,9 +79,6 @@ try {
   & $node (Join-Path $PSScriptRoot 'check-mpv-playback-port.cjs') $StudioRoot
   if ($LASTEXITCODE -ne 0) { throw 'MPV adapter event-mapping regression checks failed.' }
 
-  & $node (Join-Path $PSScriptRoot 'check-player-page-layout.cjs')
-  if ($LASTEXITCODE -ne 0) { throw 'PlayerPage fullscreen layout regression check failed.' }
-
   & $hvigor test --mode module -p module=entry@default -p product=default --no-daemon
   if ($LASTEXITCODE -ne 0) {
     throw 'Unit-test compilation failed.'

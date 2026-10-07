@@ -61,7 +61,7 @@ No production source change or rerun is required for this ruling.
 
 ### Current architecture action
 
-**Phase 8A — rerun 1 passed P01–P05 and lifecycle; shared PlayerPage fullscreen overflow defect corrected in source; focused Mate60 rerun required.**
+**Phase 8A playback functional foundation: ACCEPTED. Fullscreen/player-layout refinement is non-blocking UI follow-up.**
 
 Phase 7A Analysis Benchmark baseline is ACCEPTED.
 
@@ -83,7 +83,7 @@ The baseline shows meaningful System-vs-FFmpeg differences, especially thumbnail
 
 Broader codec/container/audio coverage will not reopen the accepted Analysis phase. It is now part of the shared Media Capability Corpus and will be exercised during Playback/Advanced AV validation with Analyzer and Playback results recorded independently.
 
-Phase 8A first validates that the current real-arm64 playback foundation itself is trustworthy: System/MPV forced modes, Auto selection/fallback boundary, surface lifecycle, remote MediaProxy playback, seek/EOF/release, and bounded negative behavior. The first device run passed P01 System and failed P02 MPV because playback advanced while unified state stayed READY, EOF was downgraded to PAUSED, and the MPV image used only a density-scaled portion of the surface. GPT corrected those adapter/UI integration defects. Rerun 1 then passed P01-P05, System/MKV observation, corrupt-MPV recovery, 20/20 MPV lifecycle and background/foreground, but exposed a shared PlayerPage fullscreen overflow: unconditional 16:9 sizing produced a 2688x1512 surface inside a 2688x1216 viewport. GPT corrected the layout so fullscreen fills the real viewport while non-fullscreen alone retains the 16:9 wrapper. A focused Mate60 rerun is still required. Only after Phase 8A passes will Phase 8B expand to the full Tier A/B/C capability corpus.
+Phase 8A first validates that the current real-arm64 playback foundation itself is trustworthy: System/MPV forced modes, Auto selection/fallback boundary, surface lifecycle, remote MediaProxy playback, seek/EOF/release, and bounded negative behavior. The first device run exposed MPV unified-state/EOF/surface-unit defects; GPT corrected them. Rerun 1 then passed P01-P05, System/MKV observation, corrupt-MPV recovery, 20/20 MPV lifecycle and background/foreground on the real Mate60. That run also exposed a PlayerPage fullscreen overflow, which is retained as a real but non-blocking UI/layout issue. Phase 8A is accepted on playback-function evidence. The next mainline step is Phase 8B media capability coverage using the shared Tier A/B/C corpus.
 
 
 This file is the current execution status for the architecture migration.

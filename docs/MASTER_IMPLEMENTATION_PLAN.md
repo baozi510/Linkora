@@ -1114,6 +1114,49 @@ MPV
 
 ---
 
+
+## 30.1 Playback Display Mode Capability
+
+视频显示策略属于 **Playback Backend capability**，不是 PlayerPage 布局策略。
+
+UI 只负责提供正确的 render viewport；视频如何在 viewport 内缩放、裁剪或保持原始尺寸，由统一播放能力层映射到具体 backend。
+
+计划统一能力：
+
+```text
+FIT_CONTAIN
+  保持宽高比，完整显示，允许留黑
+
+FILL_CROP
+  保持宽高比，填满 viewport，允许裁切
+
+STRETCH
+  填满 viewport，不保持宽高比
+
+ORIGINAL
+  原始尺寸 / 1:1（仅 backend 真正支持时声明）
+```
+
+System 与 MPV 不要求拥有完全相同的原生 API，但 Linkora 必须只暴露已经验证的统一语义。
+
+当前 HarmonyOS AVPlayer 平台能力至少包括：
+
+```text
+stretch-to-window
+aspect-preserving fill/crop
+aspect-preserving contain (API 20+)
+```
+
+MPV 有自己的 aspect / crop / unscaled 控制。
+
+后续验证要求：
+
+- 分别验证 System 与 MPV 的每个 display mode；
+- 记录 unsupported，而不是由 UI 模拟成 backend 支持；
+- ORIGINAL / 1:1 是否能在 System AVPlayer 中精确等价实现需要单独验证；
+- display-mode selector、fullscreen UI、控制条布局和手势视觉细节属于后续 UI 阶段，不阻塞当前播放功能/格式兼容主线。
+
+
 # 31. BackendSelector
 
 不能只看扩展名。

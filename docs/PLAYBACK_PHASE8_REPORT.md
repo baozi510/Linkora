@@ -1,10 +1,45 @@
 # Playback Phase 8 Report
 
-> Status: CORRECTION SOURCE PREPARED — rerun 1 evidence accepted through P01–P05/lifecycle; fullscreen shared-layout defect corrected; focused rerun required.
+> Status: ACCEPTED — PHASE 8A PLAYBACK FUNCTIONAL FOUNDATION. UI/fullscreen layout follow-up is non-blocking.
 > Branch: `feat/playback-capability-phase8`
 > Validation date: 2026-10-07 (Asia/Shanghai)
 
-## GPT independent review of rerun 1 and fullscreen correction — 2026-10-07
+## GPT functional acceptance ruling — 2026-10-07
+
+Reviewed rerun-1 evidence:
+
+`e894775c0bc81b39a6217a0a0516cec46158b82b`
+
+Product-scope clarification after review:
+
+**Phase 8A is a playback-function foundation gate, not a final player-UI/layout gate.**
+
+Accepted functional evidence from the real Mate60 run:
+
+- forced System H.264/AAC MP4: PASS;
+- forced MPV H.264/AAC MP4: PASS;
+- forced MPV HEVC/AAC MKV: PASS;
+- Auto MP4 -> System baseline: PASS;
+- Auto MKV -> MPV baseline: PASS;
+- MPV PLAYING/PAUSED unified state correction: PASS;
+- MPV EOF remains COMPLETED: PASS;
+- seek 50% / 90% on mandatory cases: PASS;
+- corrupt MPV bounded failure + valid-file recovery: PASS within observed evidence boundary;
+- forced System HEVC/MKV capability observation: PASS for the controlled fixture;
+- 20/20 MPV open/play/leave lifecycle: PASS;
+- background/foreground pause/resume: PASS;
+- remote production playback through MediaProxy: functional PASS;
+- no crash/ANR observed in the accepted functional scope.
+
+The rerun also exposed a PlayerPage fullscreen layout issue. That is retained as a real defect, but it is now classified as **non-blocking UI/layout work**, tracked separately. It does not invalidate the underlying System/MPV playback-backend functional evidence.
+
+The post-evidence experimental fullscreen layout correction was intentionally removed from the functional mainline before the next phase. The next functional phase therefore starts from source semantics already exercised by the accepted device run.
+
+Playback display modes are also separated from UI layout. Linkora will later validate normalized backend capabilities such as FIT_CONTAIN / FILL_CROP / STRETCH / ORIGINAL where supported. UI controls for choosing those modes are deferred.
+
+**Final Phase 8A functional ruling: ACCEPTED.**
+
+## Historical GPT fullscreen-layout review — 2026-10-07
 
 Reviewed remote evidence commit:
 

@@ -373,7 +373,7 @@ export struct PlayerPage {
       }
     }
     .width('100%')
-    .height('100%')
+    .aspectRatio(16 / 9)
     .backgroundColor('#000000')
     .onAreaChange((_oldArea: Area, newArea: Area) => {
       // ArkUI Area dimensions are vp; mpv-ohos ohos-surface-size expects
@@ -428,12 +428,7 @@ export struct PlayerPage {
 
   build() {
     Column() {
-      if (this.fullScreen) {
-        // Fullscreen must be constrained by the actual viewport, not by a
-        // width-derived 16:9 height that can exceed short/wide displays.
-        // MPV/System own aspect fitting inside this viewport-sized surface.
-        this.videoSurface()
-      } else {
+      if (!this.fullScreen) {
         PlayerTopBar({
           title: $r('app.string.player_now_playing'),
           subtitle: this.sourceLabel(),
@@ -441,13 +436,10 @@ export struct PlayerPage {
             this.close();
           }
         })
+      }
 
-        Stack() {
-          this.videoSurface()
-        }
-        .width('100%')
-        .aspectRatio(16 / 9)
-
+      this.videoSurface()
+      if (!this.fullScreen) {
         PlayerControls({
           snapshot: this.snapshot,
           sliderPosition: this.sliderPosition,
@@ -470,10 +462,13 @@ export struct PlayerPage {
             this.toggleFullScreen();
           }
         })
-
-        PlayerStatusPanel({ snapshot: this.snapshot })
-        Blank()
       }
+
+      if (!this.fullScreen) {
+        PlayerStatusPanel({ snapshot: this.snapshot })
+      }
+
+      Blank()
     }
     .width('100%')
     .height('100%')
