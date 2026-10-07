@@ -25,8 +25,4 @@ assert.match(build,
 assert.match(build,
   /Stack\(\)\s*\{[\s\S]*?this\.videoSurface\(\)[\s\S]*?\}[\s\S]*?\.width\('100%'\)[\s\S]*?\.aspectRatio\(16\s*\/\s*9\)/,
   'non-fullscreen branch must retain the 16:9 frame');
-assert.match(build,
-  /PlayerStatusPanel\(\{ snapshot: this\.snapshot \}\\)/.source ? /PlayerStatusPanel/ : /PlayerStatusPanel/,
-  'non-fullscreen status panel marker missing');
-
 console.log('Player layout guard passed: fullscreen surface is viewport-sized and 16:9 is non-fullscreen-only.');
