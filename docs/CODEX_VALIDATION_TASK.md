@@ -219,6 +219,29 @@ Failure => `FAIL — MPV PLAYBACK FOUNDATION`.
 
 Enter fullscreen/orientation using the production UI.
 
+### Scope clarification: viewport vs MPV scaling policy
+
+This gate validates the **PlayerPage viewport boundary**, not a permanent video scaling policy.
+
+PlayerPage owns only the render viewport. MPV owns how the source image is transformed inside that viewport.
+
+The current production configuration does not expose user-selectable Original / Fit / Fill / Stretch modes in Linkora yet. Therefore this task validates only the **current default MPV display behavior** after the viewport is corrected.
+
+Do not implement or tune mpv `keepaspect`, `video-unscaled`, `panscan`, `video-zoom`, or equivalent display-mode controls in this task.
+
+A future playback UX/capability task may define explicit display modes such as:
+
+- Fit / contain;
+- Fill / crop;
+- Stretch;
+- Original / 1:1.
+
+Those modes must operate inside the correctly sized viewport established here.
+
+This task must not infer that a full-frame default-Fit result means Fill/Stretch/Original are unsupported.
+
+
+
 Once stable in landscape, collect fresh raw geometry.
 
 Require:
@@ -240,14 +263,28 @@ surface:  <= 2688 x 1216
 
 Do not hard-code those exact numbers if device/window metrics differ during the fresh run; compare against the actual fresh viewport.
 
-### Visual frame
+### Visual frame under current default MPV behavior
 
 Using the controlled owned fixture:
 
-- entire expected frame content must be visible;
-- rerun-1 bottom crop must not recur;
-- normal aspect-preserving bars are allowed;
-- stretching/cropping to fill the viewport is not required.
+- rerun-1 **external layout crop** must not recur;
+- with the current default MPV behavior, the full controlled frame should remain visible inside the correctly bounded viewport;
+- normal aspect-preserving pillarbox/letterbox is expected and allowed;
+- do not require stretching or intentional fill/crop;
+- do not interpret this result as a test of future Original / Fill / Stretch modes.
+
+The critical distinction is:
+
+```text
+invalid:
+MPV renders into an oversized XComponent
+-> ArkUI clips the XComponent
+
+valid:
+XComponent == actual viewport
+-> MPV decides fit/crop/stretch inside that viewport
+```
+
 
 A new sanitized screenshot may be published only if it contains no private source/server/device information.
 
