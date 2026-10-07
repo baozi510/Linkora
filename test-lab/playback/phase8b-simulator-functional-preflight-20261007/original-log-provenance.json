@@ -1,0 +1,14 @@
+[
+  {
+    "stream": "stdout",
+    "originalBytes": 40,
+    "originalSha256": "F27968B9B21614CFA3C77768F9C0E55974A4B0526E878212556CC1717A1009F2",
+    "decompressedBytesEqualOriginal": true
+  },
+  {
+    "stream": "stderr",
+    "originalBytes": 0,
+    "originalSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "decompressedBytesEqualOriginal": true
+  }
+]

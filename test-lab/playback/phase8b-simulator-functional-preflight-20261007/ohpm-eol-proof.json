@@ -1,0 +1,61 @@
+{
+  "status": "BLOCKED \u2014 VALIDATION ENVIRONMENT (EOL RECOVERY NOT DISPATCHED)",
+  "affectedPaths": [
+    "entry/oh-package-lock.json5",
+    "linkora_ffmpeg/oh-package-lock.json5",
+    "linkora_proxy/oh-package-lock.json5",
+    "oh-package-lock.json5"
+  ],
+  "proofs": [
+    {
+      "path": "entry/oh-package-lock.json5",
+      "headBlob": "68d0837470f09dc81b4d1f787f19eee84254e02a",
+      "gitNormalizedWorkBlob": "68d0837470f09dc81b4d1f787f19eee84254e02a",
+      "normalizedBytesEqual": true,
+      "lineContentEqual": true,
+      "headSha256": "4A98D59C3010E0B601450FEE4042FE5EE963749C2370E8F042B8B949795EBEC4",
+      "workSha256": "AA9212C10B775C2C0A1132F65AF282BCD8E6EBAEE2969C40C7DD8FB62A3CB0A9",
+      "headCrlfCount": 0,
+      "workCrlfCount": 89
+    },
+    {
+      "path": "linkora_ffmpeg/oh-package-lock.json5",
+      "headBlob": "c66641fbf373f8393d7934a5707736a01e74a3b7",
+      "gitNormalizedWorkBlob": "c66641fbf373f8393d7934a5707736a01e74a3b7",
+      "normalizedBytesEqual": true,
+      "lineContentEqual": true,
+      "headSha256": "FB8D8B816D3638BE90C434936E63322C5037FFFC3BC7A497486743399FAFFB34",
+      "workSha256": "E235D9EB5301B90B62DEEEEECFBC3FAABA2D0497B89BC87BD10EFAE7D9B0A54B",
+      "headCrlfCount": 0,
+      "workCrlfCount": 25
+    },
+    {
+      "path": "linkora_proxy/oh-package-lock.json5",
+      "headBlob": "afb5eb1cc7995e641bde032527090ed43d2a33bd",
+      "gitNormalizedWorkBlob": "afb5eb1cc7995e641bde032527090ed43d2a33bd",
+      "normalizedBytesEqual": true,
+      "lineContentEqual": true,
+      "headSha256": "C51640D60C0626E19C11302A51B76E66167D0ABE4CFB28F4E43227283924D514",
+      "workSha256": "0A493DF9CC4F864271AA5C06ADABB1D6A2D4D306CB3F73399B3C44B882DA6C6D",
+      "headCrlfCount": 0,
+      "workCrlfCount": 18
+    },
+    {
+      "path": "oh-package-lock.json5",
+      "headBlob": "9f659f79cdaf13e186013d40e3a0ba54174de6da",
+      "gitNormalizedWorkBlob": "9f659f79cdaf13e186013d40e3a0ba54174de6da",
+      "normalizedBytesEqual": true,
+      "lineContentEqual": true,
+      "headSha256": "74F90B34AE5109819F2DC362DE7342692DF6B54BD1A66781C1AEDAC93905A28D",
+      "workSha256": "9841D31BEF25C8C48F4DD437D40A2BF9A0F635E59486C526B39F8BF8B4C1B2F3",
+      "headCrlfCount": 0,
+      "workCrlfCount": 19
+    }
+  ],
+  "noOtherTrackedBytesChanged": true,
+  "normalizedTrackedDiffEmpty": true,
+  "taskHasEolRestoreAllowlist": false,
+  "restorePerformed": false,
+  "retryPerformed": false,
+  "utc": "2026-10-07T10:54:26.774127+00:00"
+}

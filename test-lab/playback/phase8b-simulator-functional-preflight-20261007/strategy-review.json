@@ -1,0 +1,15 @@
+{
+  "scope": "read-only source inspection; build and runtime not executed after installation drift",
+  "defaultProductionAbi": "arm64-v8a",
+  "simulatorAbi": "x86_64",
+  "sharedAdaptivePlayback": true,
+  "sharedHttpWebdavProviders": true,
+  "mpvReplacement": "target dependency package boundary; constructor explicitly unavailable",
+  "nativeStorageReplacement": "final simulator transport boundary",
+  "ffmpegSimulatorNativeModule": "real x86_64 configured; runtime NOT RUN",
+  "defaultRestoreFinally": "verify-simulator.ps1 invokes normal ohpm install in finally",
+  "immediateMate60MatrixSuperseded": true,
+  "simulatorPackagingAudit": "NOT RUN",
+  "realDeviceWait": false,
+  "uiPolishOrPolicyChanges": false
+}

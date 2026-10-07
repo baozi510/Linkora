@@ -1,0 +1,9 @@
+{
+  "scope": "authorized report and all new evidence; gzip originals decompressed for scanning",
+  "knownPrivateValuesChecked": true,
+  "credentialHeadersAndCookieChecked": true,
+  "hostEndpointPathsIdentifiersChecked": true,
+  "proxyTokenAndSigningSshChecked": true,
+  "findings": [],
+  "generatedMediaHapCredentialsPrivateScreenshotsIncluded": false
+}
