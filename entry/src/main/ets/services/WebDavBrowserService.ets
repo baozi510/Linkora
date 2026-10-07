@@ -38,6 +38,7 @@ export class WebDavBrowserEntry {
 }
 
 export class WebDavBrowserService {
+  static benchmarkProxy: http.HttpProxy | null = null;
   private static directoryCache: Map<string, WebDavBrowserEntry[]> =
     new Map<string, WebDavBrowserEntry[]>();
   private server: NetworkServerEntry;
@@ -63,7 +64,7 @@ export class WebDavBrowserService {
         depth: '1',
         'Content-Type': 'application/xml; charset=utf-8'
       };
-      const response: http.HttpResponse = await request.request(this.url(path), {
+      const options: http.HttpRequestOptions = {
         // NetStack forwards the enum's string value, so WebDAV's standard
         // extension verb can be supplied even though RequestMethod only lists
         // the core HTTP verbs in its type declaration.
@@ -75,7 +76,11 @@ export class WebDavBrowserService {
         maxLimit: LIST_RESPONSE_LIMIT,
         connectTimeout: LIST_CONNECT_TIMEOUT,
         readTimeout: LIST_READ_TIMEOUT
-      });
+      };
+      if (WebDavBrowserService.benchmarkProxy !== null) {
+        options.usingProxy = WebDavBrowserService.benchmarkProxy;
+      }
+      const response: http.HttpResponse = await request.request(this.url(path), options);
       const statusCode: number = Number(response.responseCode);
       if (statusCode === 401 || statusCode === 403) {
         throw new Error('账号或密码不正确，服务器拒绝访问。');

@@ -3,6 +3,7 @@ import { RemoteReadSession } from 'linkora_core';
 
 /** Bounded authenticated byte ranges for the existing loopback proxy. No file cache. */
 export class HttpRemoteReadSession implements RemoteReadSession {
+  static benchmarkProxy: http.HttpProxy | null = null;
   private readonly source: string;
   private readonly headers: Record<string, string>;
   private readonly length: number;
@@ -17,9 +18,13 @@ export class HttpRemoteReadSession implements RemoteReadSession {
   static async open(source: string, headers: Record<string, string>): Promise<HttpRemoteReadSession> {
     const client = http.createHttp();
     try {
-      const response = await client.request(source, { method: http.RequestMethod.HEAD, header: headers,
+      const options: http.HttpRequestOptions = { method: http.RequestMethod.HEAD, header: headers,
         usingCache: false, expectDataType: http.HttpDataType.ARRAY_BUFFER,
-        connectTimeout: 8000, readTimeout: 8000, maxLimit: 262144 });
+        connectTimeout: 8000, readTimeout: 8000, maxLimit: 262144 };
+      if (HttpRemoteReadSession.benchmarkProxy !== null) {
+        options.usingProxy = HttpRemoteReadSession.benchmarkProxy;
+      }
+      const response = await client.request(source, options);
       const length: number = Number(HttpRemoteReadSession.header(response, 'content-length'));
       if (response.responseCode !== 200 || !Number.isSafeInteger(length) || length < 0 ||
         HttpRemoteReadSession.header(response, 'content-length').length === 0) throw new Error('HTTP source unavailable');
@@ -42,9 +47,13 @@ export class HttpRemoteReadSession implements RemoteReadSession {
     headers['Accept-Encoding'] = 'identity';
     this.work = (async (): Promise<ArrayBuffer> => {
       try {
-        const response = await client.request(this.source, { method: http.RequestMethod.GET, header: headers,
+        const options: http.HttpRequestOptions = { method: http.RequestMethod.GET, header: headers,
           usingCache: false, expectDataType: http.HttpDataType.ARRAY_BUFFER,
-          connectTimeout: 8000, readTimeout: 8000, maxLimit: count });
+          connectTimeout: 8000, readTimeout: 8000, maxLimit: count };
+        if (HttpRemoteReadSession.benchmarkProxy !== null) {
+          options.usingProxy = HttpRemoteReadSession.benchmarkProxy;
+        }
+        const response = await client.request(this.source, options);
         const data: ArrayBuffer = response.result as ArrayBuffer;
         const range: string = HttpRemoteReadSession.header(response, 'content-range');
         if (this.stopped || response.responseCode !== 206 ||

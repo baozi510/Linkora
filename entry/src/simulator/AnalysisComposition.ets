@@ -1,4 +1,5 @@
 import { createFfmpegAnalysis } from 'linkora_ffmpeg/Native';
+import { FfmpegAnalysis } from 'linkora_ffmpeg';
 import { MediaAnalysisInputResolver } from '../main/ets/analysis/MediaAnalysisInputResolver';
 import { FfmpegMediaProbeAdapter } from '../main/ets/analysis/FfmpegMediaProbeAdapter';
 import { FfmpegThumbnailExtractorAdapter } from '../main/ets/analysis/FfmpegThumbnailExtractorAdapter';
@@ -16,6 +17,9 @@ export class AnalysisComposition {
   }
   static thumbnail(resolver: MediaAnalysisInputResolver, timeoutMs: number = 10000): FfmpegThumbnailExtractorAdapter {
     return new FfmpegThumbnailExtractorAdapter(resolver, createFfmpegAnalysis(), timeoutMs);
+  }
+  static createAnalysis(): FfmpegAnalysis {
+    return createFfmpegAnalysis();
   }
 
   private static now(): number {
