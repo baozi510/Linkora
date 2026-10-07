@@ -2025,6 +2025,80 @@ Linkora Media Capability Matrix
 
 ---
 
+
+# Development Execution Rule — Simulator-first / ARM64-build-always / Device-batched
+
+从 Phase 8B 开始，Linkora 默认开发与验证节奏调整为：
+
+```text
+Simulator first
+-> 功能、状态机、网络、数据库、runner、x86 native 功能先稳定
+
+ARM64 build always
+-> 每个主线 source 仍保持 default/arm64 build、link、artifact/ABI audit 全绿
+
+Real device batched
+-> 原生后端、硬件 codec/output、性能与最终设备能力在阶段节点集中验收
+```
+
+这不是用模拟器替代真机，而是减少日常主线在真机/UI 操作上的往返成本。
+
+## 模拟器优先解决
+
+优先在 x86_64 simulator 完成：
+
+- ArkUI / navigation / settings / persistence；
+- PlaybackEngine / AdaptivePlaybackPort / session isolation / error recovery；
+- System AVPlayer 基础功能（结果仅代表 simulator platform）；
+- WebDAV / HTTP / RandomAccessSource / MediaProxy；
+- capability corpus generation / truth / orchestration / result schema / summarizer；
+- real x86_64 `linkora_ffmpeg` Analyzer/thumbnail 功能；
+- cancellation / retry / stale state；
+- database/cache/catalog functional behavior；
+- MPV unavailable stub boundary 和 Auto fallback 控制逻辑；
+- native-storage unavailable boundary 的上层业务逻辑。
+
+## 持续 ARM64 构建门禁
+
+不得把 ARM64 编译问题累计到项目末尾。
+
+每个影响生产代码/依赖/native boundary 的主线 source 仍必须保持：
+
+- default arm64 build PASS；
+- native link PASS；
+- exact ABI/artifact audit PASS；
+- real MPV dependency 能被 production target 正确解析；
+- ARM64 FFmpeg/native storage 依赖不被 simulator dependency graph 污染。
+
+可以批量延后的，是**真机 runtime/capability 验收**，不是编译/链接是否成立。
+
+## 真机集中验证
+
+以下不能由 simulator 最终证明，集中到 real-device gate：
+
+- real `libmpv` runtime；
+- MPV codec/container capability；
+- ARM64 FFmpeg runtime/ABI/load behavior；
+- device-specific System codec capability；
+- hardware decode；
+- HDR10/HLG/Dolby Vision output；
+- advanced audio decode/passthrough/output；
+- power/thermal/performance；
+- real native SMB/SFTP/FTP/NFS I/O where simulator uses unavailable boundaries；
+- device-only surface/GPU/runtime integration issues。
+
+模拟器的 codec `UNSUPPORTED` 不能外推为 Mate60 `UNSUPPORTED`；真机 PASS 也不能反推 simulator 应 PASS。
+
+## 阶段原则
+
+除非某功能本身只有 real device 才存在，否则：
+
+1. 先在 simulator 完成功能；
+2. 同时保持 default ARM64 build 绿；
+3. 不因为 simulator 的硬件/codec 限制修改 production policy；
+4. 功能阶段累计到明确 native/device boundary 后，再执行一轮集中 real-device acceptance。
+
+
 # 52. Security
 
 网络凭据：

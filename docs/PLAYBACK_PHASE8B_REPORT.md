@@ -1,6 +1,6 @@
 # Playback Phase 8B Capability Report
 
-> Status: SOURCE PREPARED — real-arm64 System/MPV capability matrix pending.
+> Status: STRATEGY UPDATED — simulator functional/corpus preflight first; real-arm64 System/MPV capability matrix deferred to a later batched device gate.
 > Branch: `feat/playback-capability-phase8`
 > Date: 2026-10-07
 
@@ -19,3 +19,21 @@ Execute the 59-case permanent compatibility corpus against forced System and for
 This phase measures compatibility/function only.
 
 No performance, Auto policy, UI scaling-mode or advanced-AV conclusion is authorized.
+
+
+## Execution strategy update — 2026-10-07
+
+The previously dispatched immediate Mate60 118-record matrix is superseded before execution.
+
+New order:
+
+1. simulator functional/corpus preflight;
+2. continue mainline functional work using simulator-first validation;
+3. keep default ARM64 build/link/artifact gates green continuously;
+4. batch real MPV, ARM64 FFmpeg runtime, device-specific System codec and advanced native/hardware capability into later real-device acceptance gates.
+
+Simulator results are platform observations, not final product codec capability.
+
+Real MPV remains unavailable in simulator because the simulator target intentionally uses the MPV package stub. The stub is useful for candidate/fallback/error-boundary behavior only.
+
+The x86_64 `linkora_ffmpeg` module is real native FFmpeg and can be functionally exercised in simulator; ARM64 runtime correctness remains a later device gate.
