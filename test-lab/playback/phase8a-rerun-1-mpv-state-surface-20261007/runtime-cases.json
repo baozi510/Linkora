@@ -1,0 +1,102 @@
+{
+  "primaryClassification": "FAIL — MPV PLAYBACK FOUNDATION",
+  "cases": {
+    "P01": {
+      "result": "PASS",
+      "backend": "System",
+      "fixture": "H264/AAC MP4",
+      "forcedOrAuto": "forced System",
+      "pauseResume": true,
+      "seek50And90Observed": true,
+      "eof": "COMPLETED / 播放完成",
+      "finalProgressSliderMs": 20000.0,
+      "displayedDuration": "0:20",
+      "releaseSurfaceRemoved": true,
+      "releaseAudioRendererCount": 0,
+      "nativeBackendEvidence": "AVPlayer callbacks/instances",
+      "noErrorOrOtherCandidateStateObserved": true
+    },
+    "P02": {
+      "result": "PASS",
+      "backend": "MPV",
+      "fixture": "H264/AAC MP4",
+      "forcedOrAuto": "forced MPV",
+      "pauseResume": true,
+      "seek50And90Observed": true,
+      "eof": "COMPLETED / 播放完成",
+      "finalProgressSliderMs": 19976.0,
+      "displayedDuration": "0:20",
+      "releaseSurfaceRemoved": true,
+      "releaseAudioRendererCount": 0,
+      "nativeBackendEvidence": "MPV forced/Auto source selection; no AVPlayer instance; real video/native audio stream",
+      "noErrorOrOtherCandidateStateObserved": true,
+      "stableCompletionObservationGapSeconds": 10.993387,
+      "portraitSurfaceBoundsPx": [
+        0,
+        354,
+        1216,
+        1038
+      ],
+      "portraitFrameUsesFullSurface": true
+    },
+    "P03": {
+      "result": "PASS",
+      "backend": "MPV",
+      "fixture": "HEVC/AAC MKV",
+      "forcedOrAuto": "forced MPV",
+      "pauseResume": true,
+      "seek50And90Observed": true,
+      "eof": "COMPLETED / 播放完成",
+      "finalProgressSliderMs": 19967.0,
+      "displayedDuration": "0:20",
+      "releaseSurfaceRemoved": true,
+      "releaseAudioRendererCount": 0,
+      "nativeBackendEvidence": "MPV forced/Auto source selection; no AVPlayer instance; real video/native audio stream",
+      "noErrorOrOtherCandidateStateObserved": true
+    },
+    "P04": {
+      "result": "PASS",
+      "backend": "System",
+      "fixture": "H264/AAC MP4",
+      "forcedOrAuto": "Auto",
+      "pauseResume": true,
+      "seek50And90Observed": true,
+      "eof": "COMPLETED / 播放完成",
+      "finalProgressSliderMs": 20000.0,
+      "displayedDuration": "0:20",
+      "releaseSurfaceRemoved": true,
+      "releaseAudioRendererCount": 0,
+      "nativeBackendEvidence": "AVPlayer callbacks/instances",
+      "noErrorOrOtherCandidateStateObserved": true
+    },
+    "P05": {
+      "result": "PASS",
+      "backend": "MPV",
+      "fixture": "HEVC/AAC MKV",
+      "forcedOrAuto": "Auto",
+      "pauseResume": true,
+      "seek50And90Observed": true,
+      "eof": "COMPLETED / 播放完成",
+      "finalProgressSliderMs": 20021.0,
+      "displayedDuration": "0:20",
+      "releaseSurfaceRemoved": true,
+      "releaseAudioRendererCount": 0,
+      "nativeBackendEvidence": "MPV forced/Auto source selection; no AVPlayer instance; real video/native audio stream",
+      "noErrorOrOtherCandidateStateObserved": true
+    }
+  },
+  "O01": {
+    "result": "PASS capability observation only",
+    "forcedSystemMkvFirstFramePlaying": true,
+    "completed": true,
+    "released": true
+  },
+  "F01": {
+    "result": "FAIL",
+    "reason": "Fullscreen 2688x1512 original XComponent clipped to 2688x1216 display; lower 296px / approximately 19.6% of video not visible",
+    "evidence": "fullscreen-geometry.json",
+    "noRetryOrFix": true
+  },
+  "noHistoricalPassReused": true,
+  "backendFieldLimitation": "Internal committed-backend field not exposed by UI. Selection is corroborated using settings/source factory and native AVPlayer presence/absence; no production observer added."
+}

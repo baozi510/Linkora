@@ -1,0 +1,9 @@
+{
+  "audit": "PASS exact-nine AArch64",
+  "testedHead": "53d37b5caf1b80e88ccce92d7756009878fe7106",
+  "bytes": 64545852,
+  "source": "5146ff923900fd73ff25769783fb2d9732cfad5c",
+  "logicalPath": "entry/build/default/outputs/default/entry-default-signed.hap",
+  "freshSignedBuildCount": 1,
+  "sha256": "AA79CD5F08E4136361C47543E13C027CEF82179F78A44D3895A48D38430567DA"
+}

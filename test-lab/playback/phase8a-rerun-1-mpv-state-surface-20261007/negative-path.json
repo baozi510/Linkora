@@ -1,0 +1,15 @@
+{
+  "result": "PASS functional bounded failure/recovery",
+  "singleCorruptOpening": true,
+  "errorUi": "无法播放该媒体 / LNK-PLAY-007",
+  "noInfiniteLoadingAtFinalObservation": true,
+  "sourcePrepareTimeoutMs": 12000,
+  "timingLimit": "Opening/connecting observed in early captures; terminal error observed in a later capture about 165 s after opening. Exact transition time was not sampled during the host-side gap. Do not claim a measured 12 s latency; 12 s is the source timer.",
+  "forcedMpvNoSystemFallbackObserved": true,
+  "diagnosticCredentialUpstreamProxyTokenAbsent": true,
+  "appAlive": true,
+  "leftAudioRendererCount": 0,
+  "recoveryObservation": "L01-playing",
+  "recoveryValidControlledFramePlaying": true,
+  "preNegativeNavigationPause": "Phone left foreground before corrupt fixture was opened. Restored foreground; no completed runtime case or corrupt opening was repeated."
+}

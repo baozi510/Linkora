@@ -1,0 +1,36 @@
+{
+  "case": "F01",
+  "result": "FAIL",
+  "nativeScreenshotSize": [
+    2688,
+    1216
+  ],
+  "xcomponentOriginalBounds": [
+    0,
+    0,
+    2688,
+    1512
+  ],
+  "xcomponentVisibleBounds": [
+    0,
+    0,
+    2688,
+    1216
+  ],
+  "sourceFrameSize": [
+    1280,
+    720
+  ],
+  "sourceFrameMs": 4667,
+  "sourceFileSha256": "B7CCE175483CD3314FAE1BB79E0F5F04754C3239CC5657805F5427AEF60D644B",
+  "expectedHeightAtFullWidthPx": 1512,
+  "clippedHeightPx": 296,
+  "clippedFractionOfFrameHeight": 0.19576719576719576,
+  "observation": "At fullscreen the entire 16:9 image is scaled to width 2688 (scale 2.1), requiring height 1512; the display exposes only 1216. This clips approximately the bottom 19.6% rather than fitting the image with aspect-preserving borders. The source frame and native screenshot show the same counter/frame 140.",
+  "screenshotSha256": "BBDF5EE50853803CC1B8068293D39D0533341F685D226AE2E466C05D1ED03C79",
+  "referenceImageSha256": "A9FA39204FA88DFEB7313AABF0AFCA2111E84271C63B4DDCEC6CB2F3769117B3",
+  "screenshotPublishedUnmodified": true,
+  "reference": "Decoded frame from the hash-identical owned controlled fixture; no phone screenshot edited.",
+  "privacyReview": "Fullscreen hides system bars; only owned fixture filename, controlled frame and player controls are visible. No private server/source alias/path/credentials/device identifier/signing material.",
+  "cleanup": "Returned to portrait and left once; no retry or source/layout patch."
+}

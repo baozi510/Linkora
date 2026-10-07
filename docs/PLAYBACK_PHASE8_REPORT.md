@@ -1,8 +1,86 @@
 # Playback Phase 8 Report
 
-> Status: CORRECTION SOURCE PREPARED — prior P02 FAIL independently reviewed; fresh Mate60 rerun required.
+> Status: FAIL — MPV PLAYBACK FOUNDATION. Fresh rerun passes P01–P05 and lifecycle, but fullscreen clips the video; independent review pending.
 > Branch: `feat/playback-capability-phase8`
 > Validation date: 2026-10-07 (Asia/Shanghai)
+
+## Fresh rerun 1 — state/EOF/portrait correction passes; fullscreen overflow fails
+
+Task: `phase8a-rerun-1-mpv-state-eof-surface`.
+
+- Corrected source: `5146ff923900fd73ff25769783fb2d9732cfad5c`.
+- Actual tested dispatch HEAD: `53d37b5caf1b80e88ccce92d7756009878fe7106`.
+- Prior failed evidence: `08852ccc0ae1806b8270f2a248113eeedd61b5f9`, verified ancestor of corrected source.
+- Corrected source is an ancestor of tested HEAD; the only source-to-HEAD change is `docs/CODEX_VALIDATION_TASK.md`.
+- New isolated clone and pinned submodules; original workspace preserved. All prior failed evidence remains byte-identical.
+- New evidence: [phase8a-rerun-1-mpv-state-surface-20261007](../test-lab/playback/phase8a-rerun-1-mpv-state-surface-20261007/).
+
+### Fresh build and exact artifact
+
+Exactly one normal install and one full default verifier passed. Strict normalization proved all four affected lockfiles identical to HEAD after CRLF-to-LF conversion; only those files were restored in the isolated clone.
+
+Fresh counts: architecture fixtures **5/5**, FFmpeg pure **15/15**, analysis pure **46/46**, artifact fixtures **17/17**, MPV mapping **7/7**, Hypium **210 PASS / 0 Failure / 0 Error / 0 Ignore**. Debug/Release HAR/HAP, two exact-nine AArch64 audits and final verifier marker passed. The two new MPV event-order regressions passed. No earlier PASS was reused.
+
+One fresh signed default/debug arm64 HAP was built, audited and explicitly installed, without uninstalling or clearing data. The root signing-only overlay was restored and clean checkout proven before installation.
+
+- HAP SHA-256: `AA79CD5F08E4136361C47543E13C027CEF82179F78A44D3895A48D38430567DA`.
+- HAP size: **64,545,852 bytes**.
+- Signing-only overlay SHA-256: `5143AE29AFDA4A20ECECCDD7495E1B1759FD40A77A0312BBCFD63F97E04E9F6C`.
+- Target: real Mate60, aarch64/API 26, `com.linkora.player` / `0.1.0`, debug; launch successful.
+
+The same existing private signing material was checked afresh; only signing fields changed temporarily. Fresh controlled MP4/MKV/corrupt hashes and TLS-verified Range/206 checks passed.
+
+### Fresh runtime outcomes
+
+| Item | Result | Observed behavior |
+| --- | --- | --- |
+| P01 forced System / H.264 MP4 | PASS | Real frame; PLAYING; pause/resume; ~50%/~90% seek; COMPLETED; clean leave. |
+| P02 forced MPV / H.264 MP4 | PASS | PLAYING and real pause action; PAUSED/resume; both seeks; correct portrait surface; stable COMPLETED; clean leave. |
+| P03 forced MPV / HEVC MKV | PASS | Real frame; PLAYING; pause/resume; both seeks; COMPLETED; clean leave. |
+| P04 Auto / H.264 MP4 | PASS | System baseline corroborated by AVPlayer callbacks/instances; controls, seeks, EOF and release passed. |
+| P05 Auto / HEVC MKV | PASS | MPV baseline corroborated by forced/Auto factory selection, real video/audio and no AVPlayer instance; controls, seeks, EOF and release passed. |
+| O01 forced System / HEVC MKV | PASS observation | This controlled file reached first frame/PLAYING and EOF on this target; clean release. No broad format or policy inference. |
+| Corrupt forced MPV | PASS functional failure/recovery | Explicit generic failure `LNK-PLAY-007`; no continuing loader at final observation, no System fallback, no sensitive diagnostic, zero renderer after leave; valid file reopened in cycle 1. |
+| 20 MPV open/play/leave cycles | **20/20 PASS** | Real frame across surface, PLAYING, native audio RUNNING; every leave removed surface and all app audio renderers; same app process throughout. |
+| Background/foreground | PASS | Home paused native audio; foreground retained frame/PAUSED; normal resume advanced position, then pause succeeded. |
+| Fullscreen/orientation | **FAIL** | Landscape surface overflows display and clips the bottom of the video; returned to portrait and released as cleanup. |
+
+P02 remained COMPLETED across observations separated by **10.993 s**, with no trailing downgrade to PAUSED. Its final progress was approximately **19.976 s / 20 s**; the UI floors that to `0:19`. The MPV terminal event was observed and not inferred solely from the slider. Portrait surface was **1216×684**; image inspection and six samples across the controlled color bars confirmed that the old small lower-left rectangle did not recur.
+
+The corrupt test's exact transition time was not sampled during a host-side gap: early captures still showed connecting, and the later capture showed terminal failure about 165 s after opening. The source timeout is 12,000 ms, but this report does **not** claim a measured 12 s runtime latency. A navigation/foreground interruption happened before the corrupt file was opened; foreground was restored without repeating a completed case. The error UI did not expose credentials, upstream URL or concrete proxy token.
+
+Audio evidence uses AudioPolicy renderer blocks matched to the app's private UID: SDK states RUNNING=2 and PAUSED=5, with zero app renderer blocks after leave. No subjective loudspeaker-output result is claimed. UI, screenshots and audio dumps are collected sequentially, so a near-EOF UI snapshot can precede the audio dump by seconds.
+
+### New stopping defect: fullscreen geometry
+
+For the paused controlled frame at **4.667 s / frame 140**, landscape screen size was **2688×1216**, but XComponent geometry was:
+
+```text
+origBounds: [0,0][2688,1512]
+visible bounds: [0,0][2688,1216]
+```
+
+Scaling the 1280×720 source to width 2688 requires height 1512. Only 1216 pixels are visible, so the bottom **296 pixels**, approximately **19.6%** of the frame, are clipped. This is not aspect-preserving fitting with borders. The unchanged native screenshot and a decoded reference from the hash-identical controlled file show the same frame/counter and establish the lost lower portion:
+
+- [Fullscreen native screenshot](../test-lab/playback/phase8a-rerun-1-mpv-state-surface-20261007/fullscreen-controlled-source.png).
+- [Controlled source reference frame](../test-lab/playback/phase8a-rerun-1-mpv-state-surface-20261007/controlled-reference-4667.png).
+- [Geometry and provenance](../test-lab/playback/phase8a-rerun-1-mpv-state-surface-20261007/fullscreen-geometry.json).
+
+The fullscreen image contains only the owned fixture, its filename and player controls; system bars/private source alias are absent. It is published unchanged. The reference was decoded from the hash-matching owned video; no phone screenshot was edited.
+
+Read-only review points to the shared PlayerPage's unconditional 16:9 surface layout exceeding the landscape viewport. This was observed while using MPV; System fullscreen was not tested, so no System fullscreen outcome is claimed. GPT owns the diagnosis and any correction.
+
+After detecting the failure, no playback opening or retry occurred. Cleanup returned to portrait (1216×684, normal frame again), left the player, confirmed no surface and zero app audio renderers, and restored the initial Auto UI preference. No layout/source/test/policy change was made.
+
+### Transport, protection and limits
+
+REMOTE_FILE playback continues through `NetworkDirectoryService.openSource -> RandomAccessSource -> NetworkFileProxy -> localhost UUID URL -> backend`. Fresh remote playback and seek passed; all five case leaves and twenty cycle leaves released visible playback/audio resources. Direct token invalidation and exact upstream high-offset accounting are **NOT PROVEN**: no safe complete production diagnostics surface exists, and UI seek progress is not byte-offset proof. No instrumentation was added.
+
+All **2,360** initially tracked files were compared before report editing; other protected files and the old failed evidence directory remained unchanged. Original workspace HEAD/branch/status/diff hashes were unchanged. Only this report and the authorized new evidence directory are published. Raw build outputs are preserved in exact gzip originals; readable versions normalize whitespace/encoding only. Private portrait screenshots, layouts, logs, config and signing material remain local.
+
+No crash/ANR was observed during the fresh cases and twenty cycles. This functional run makes no performance ranking, global Auto policy, broad codec, HDR/passthrough, memory/power/thermal, Direct I/O or Phase 8B claim.
+
+**Final classification: FAIL — MPV PLAYBACK FOUNDATION (fullscreen layout boundary).** P01–P05 and the newly executed later passes are evidence from this corrected source, not relabeling of the historical NOT RUN items. Push and remote containment verification are required before handoff; independent review remains pending.
 
 ## GPT independent review and correction — 2026-10-07
 
@@ -68,7 +146,7 @@ No Auto policy, MediaProxy transport, Direct I/O, codec matrix, thumbnail resear
 The correction is not accepted runtime evidence until a fresh exact-source signed arm64 run passes the READY rerun task.
 
 
-## Fresh Phase 8A validation
+## Historical initial Phase 8A validation — failure retained
 
 Task: `phase8a-mate60-playback-foundation`.
 

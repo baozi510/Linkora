@@ -1,0 +1,21 @@
+{
+  "trackedFilesCompared": 2360,
+  "changedProtectedFiles": [],
+  "baselineHashMapSha256": "59CD6E5DFCEC98307A73DFBFA231EAA3FC83D5DA1F7A7F9A062CC6BA2358808C",
+  "signingOverlayRestored": true,
+  "productionTestsBuildTaskPolicyUnchanged": true,
+  "userWorkspaceBefore": {
+    "head": "1ee944e68e8b885b5b542dda0fb6854401d67923",
+    "branch": "test/system-thumbnail-cost-compat",
+    "statusSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "trackedDiffSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  "userWorkspaceAfter": {
+    "head": "1ee944e68e8b885b5b542dda0fb6854401d67923",
+    "branch": "test/system-thumbnail-cost-compat",
+    "statusSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "trackedDiffSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  "userWorkspaceUnchanged": true,
+  "auditUtc": "2026-10-07T09:58:10.566924+00:00"
+}

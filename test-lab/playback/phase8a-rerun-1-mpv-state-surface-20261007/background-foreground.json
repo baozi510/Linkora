@@ -1,0 +1,52 @@
+{
+  "result": "PASS",
+  "beforeHome": [
+    "‹",
+    "正在播放",
+    "0:00",
+    "0:20",
+    "1×",
+    "❚❚",
+    "全屏",
+    "音量",
+    "连接状态",
+    "播放中",
+    "视频尺寸",
+    "1280 × 720"
+  ],
+  "backgroundRendererStates": [
+    5
+  ],
+  "foregroundUi": [
+    "‹",
+    "正在播放",
+    "0:02",
+    "0:20",
+    "1×",
+    "▶",
+    "全屏",
+    "音量",
+    "连接状态",
+    "已暂停",
+    "视频尺寸",
+    "1280 × 720"
+  ],
+  "resumeThenPauseUi": [
+    "‹",
+    "正在播放",
+    "0:04",
+    "0:20",
+    "1×",
+    "▶",
+    "全屏",
+    "音量",
+    "连接状态",
+    "已暂停",
+    "视频尺寸",
+    "1280 × 720"
+  ],
+  "normalPausedBackground": true,
+  "foregroundFrameUsesSurface": true,
+  "positionAdvancedFrom2To4SecondsAfterResume": true,
+  "noBlackSurfaceObserved": true
+}

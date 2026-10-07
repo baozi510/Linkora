@@ -1,0 +1,21 @@
+{
+  "commit": "08852ccc0ae1806b8270f2a248113eeedd61b5f9",
+  "classification": "FAIL — MPV PLAYBACK FOUNDATION",
+  "reviewed": "Report, source/protection/build/signing provenance, runtime snapshots/native events and security findings; historical failure and NOT RUN kept immutable.",
+  "noPriorPassUsedForFreshRerun": true,
+  "samePreviouslyCompletelyReadDocuments": [
+    "docs/AI_WORKFLOW.md",
+    "docs/MASTER_IMPLEMENTATION_PLAN.md",
+    "docs/ARCHITECTURE_TARGET.md",
+    "docs/ARCHITECTURE_MIGRATION.md",
+    "docs/MEDIA_COMPATIBILITY_REPORT.md",
+    "test-lab/media-compatibility/README.md"
+  ],
+  "changedDocsFreshlyRead": [
+    "docs/IMPLEMENTATION_STATUS.md",
+    "docs/SESSION_HANDOFF.md",
+    "docs/CODEX_VALIDATION_TASK.md",
+    "docs/PLAYBACK_PHASE8_MATE60_RUNBOOK.md",
+    "docs/PLAYBACK_PHASE8_REPORT.md"
+  ]
+}

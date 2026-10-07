@@ -1,0 +1,987 @@
+> hvigor WARN: linkora_ffmpeg: HAR modules cannot be installed independently. As a result, the "applyToProducts" configuration will not take effect. See more details.
+> hvigor WARN: The version number of the 'linkora_ffmpeg' module does not comply with the SemVer specification.
+               This will affect the installation and publication by ohpm.
+               Make sure the value of version in the oh-package.json5 file of the module complies with the SemVer specification.
+> hvigor WARN: linkora_core: HAR modules cannot be installed independently. As a result, the "applyToProducts" configuration will not take effect. See more details.
+> hvigor WARN: linkora_media_probe: HAR modules cannot be installed independently. As a result, the "applyToProducts" configuration will not take effect. See more details.
+> hvigor WARN: The version number of the 'linkora_media_probe' module does not comply with the SemVer specification.
+               This will affect the installation and publication by ohpm.
+               Make sure the value of version in the oh-package.json5 file of the module complies with the SemVer specification.
+> hvigor WARN: linkora_proxy: HAR modules cannot be installed independently. As a result, the "applyToProducts" configuration will not take effect. See more details.
+> hvigor WARN: The version number of the 'linkora_proxy' module does not comply with the SemVer specification.
+               This will affect the installation and publication by ohpm.
+               Make sure the value of version in the oh-package.json5 file of the module complies with the SemVer specification.
+> hvigor WARN: WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/MpvLib.d.ets:2:1
+ Switching off type checks with in-place comments is not allowed (arkts-strict-typing-required)
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/models/Chapter.d.ets:2:1
+ Switching off type checks with in-place comments is not allowed (arkts-strict-typing-required)
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/models/AudioParams.d.ets:2:1
+ Switching off type checks with in-place comments is not allowed (arkts-strict-typing-required)
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/models/Track.d.ets:2:1
+ Switching off type checks with in-place comments is not allowed (arkts-strict-typing-required)
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/models/Media.d.ets:2:1
+ Switching off type checks with in-place comments is not allowed (arkts-strict-typing-required)
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/models/Playlist.d.ets:2:1
+ Switching off type checks with in-place comments is not allowed (arkts-strict-typing-required)
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/models/VideoParams.d.ets:2:1
+ Switching off type checks with in-place comments is not allowed (arkts-strict-typing-required)
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/models/PlaylistMode.d.ets:2:1
+ Switching off type checks with in-place comments is not allowed (arkts-strict-typing-required)
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/models/PlayerState.d.ets:2:1
+ Switching off type checks with in-place comments is not allowed (arkts-strict-typing-required)
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/models/PlayerLog.d.ets:2:1
+ Switching off type checks with in-place comments is not allowed (arkts-strict-typing-required)
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/utils/Stream.d.ets:2:1
+ Switching off type checks with in-place comments is not allowed (arkts-strict-typing-required)
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/models/PlayerStream.d.ets:2:1
+ Switching off type checks with in-place comments is not allowed (arkts-strict-typing-required)
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/models/PlayerConfig.d.ets:2:1
+ Switching off type checks with in-place comments is not allowed (arkts-strict-typing-required)
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets:2:1
+ Switching off type checks with in-place comments is not allowed (arkts-strict-typing-required)
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/PlayerSurface.d.ets:2:1
+ Switching off type checks with in-place comments is not allowed (arkts-strict-typing-required)
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/oh_modules/.ohpm/@mpv-ohos+mpv-arkts@1.0.0/oh_modules/@mpv-ohos/mpv-arkts/Index.d.ets:2:1
+ Switching off type checks with in-place comments is not allowed (arkts-strict-typing-required)
+
+WARN: ArkTS:WARN: For details about ArkTS syntax errors, see FAQs
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LinkoraDatabase.ets:319:11
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LinkoraDatabase.ets:346:59
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LinkoraDatabase.ets:348:21
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LinkoraDatabase.ets:349:20
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LinkoraDatabase.ets:349:37
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LinkoraDatabase.ets:355:14
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/linkora_proxy/src/main/ets/NetworkFileProxy.ets:340:31
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaScanner.ets:247:34
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaScanner.ets:248:49
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaScanner.ets:255:31
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaScanner.ets:257:61
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaScanner.ets:272:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaScanner.ets:273:49
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaScanner.ets:280:30
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaScanner.ets:282:61
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaScanner.ets:311:29
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaScanner.ets:312:36
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaScanner.ets:313:84
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaScanner.ets:323:28
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaScanner.ets:324:36
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaScanner.ets:325:84
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:120:11
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:176:11
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:234:17
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:262:17
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:278:17
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:290:19
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:296:17
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:312:17
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:329:30
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:342:30
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:358:21
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:360:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:360:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:361:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:361:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:362:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:362:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:363:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:363:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:364:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:364:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:365:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:365:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:366:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:366:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:367:34
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:367:51
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:368:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:368:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:393:28
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:400:21
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:402:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:402:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:403:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:403:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:404:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:404:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:405:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:405:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:406:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:406:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:407:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:407:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:408:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:408:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:409:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:409:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:410:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:410:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:425:28
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:427:21
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:427:44
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:427:59
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:436:28
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:440:19
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:444:16
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:444:31
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:445:16
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:445:31
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:446:16
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:446:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:455:28
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaIndexStore.ets:459:21
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/SourceIdentity.ets:12:58
+ The system capacity of this api 'createMd' is not supported on all devices
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/SourceIdentity.ets:14:20
+ The system capacity of this api 'update' is not supported on all devices
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/SourceIdentity.ets:15:47
+ The system capacity of this api 'digest' is not supported on all devices
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkMediaCache.ets:108:20
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkMediaCache.ets:108:45
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkMediaCache.ets:112:20
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkMediaCache.ets:112:45
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkMediaCache.ets:158:27
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkMediaCache.ets:159:24
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkMediaCache.ets:160:24
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkMediaCache.ets:161:14
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:272:28
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:276:21
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:278:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:278:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:279:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:279:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:280:32
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:280:49
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:281:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:281:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:282:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:282:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:283:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:283:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:284:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:284:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:285:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:285:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:286:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:286:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:287:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:287:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:288:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:288:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:289:53
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:289:70
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:308:23
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:327:28
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:329:21
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:330:16
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkServerStore.ets:330:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/playback/SystemPlaybackPort.ets:38:44
+ The system capacity of this api 'media' is not supported on all devices
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/playback/SystemPlaybackPort.ets:109:32
+ The system capacity of this api 'media' is not supported on all devices
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/playback/SystemPlaybackPort.ets:167:30
+ The system capacity of this api 'audio' is not supported on all devices
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/playback/SystemPlaybackPort.ets:168:28
+ The system capacity of this api 'audio' is not supported on all devices
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/playback/SystemPlaybackPort.ets:323:14
+ The system capacity of this api 'media' is not supported on all devices
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/playback/SystemPlaybackPort.ets:326:14
+ The system capacity of this api 'media' is not supported on all devices
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/playback/SystemPlaybackPort.ets:329:14
+ The system capacity of this api 'media' is not supported on all devices
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/playback/SystemPlaybackPort.ets:331:12
+ The system capacity of this api 'media' is not supported on all devices
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/playback/SystemPlaybackPort.ets:363:18
+ The system capacity of this api 'media' is not supported on all devices
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/playback/SystemPlaybackPort.ets:366:18
+ The system capacity of this api 'media' is not supported on all devices
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/playback/SystemPlaybackPort.ets:369:18
+ The system capacity of this api 'media' is not supported on all devices
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/PlaybackBookmarkStore.ets:143:28
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/PlaybackBookmarkStore.ets:146:21
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/PlaybackBookmarkStore.ets:148:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/PlaybackBookmarkStore.ets:148:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/PlaybackBookmarkStore.ets:149:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/PlaybackBookmarkStore.ets:149:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/PlaybackBookmarkStore.ets:150:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/PlaybackBookmarkStore.ets:150:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/PlaybackBookmarkStore.ets:151:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/PlaybackBookmarkStore.ets:151:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/LocalMediaMetadataReader.ets:51:27
+ The system capacity of this api 'media' is not supported on all devices
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:376:17
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:393:19
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:406:19
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:418:19
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:428:17
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:443:17
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:450:17
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:462:17
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:488:28
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:501:21
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:502:46
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:502:63
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:504:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:504:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:505:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:505:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:506:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:506:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:507:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:507:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:508:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:508:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:509:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:509:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:510:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:510:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:511:34
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:511:51
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:514:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:514:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:516:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:516:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:528:28
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:538:21
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:539:42
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:539:59
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:541:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:541:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:543:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:543:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:544:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:544:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:545:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:545:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:546:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:546:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:547:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:547:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:548:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:548:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:549:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:549:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:563:28
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:571:21
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:572:42
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:572:59
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:574:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:574:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:575:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:575:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:576:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:576:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:577:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:577:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:578:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:578:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:579:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:579:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:580:34
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:580:51
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:582:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:582:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:615:28
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:620:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:620:42
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:620:57
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:632:28
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:638:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:639:39
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:639:54
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:640:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:640:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:641:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:641:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:654:28
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:662:21
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:663:45
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:663:60
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:664:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:664:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:665:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:665:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:677:28
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:681:21
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:682:48
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:682:63
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:683:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:683:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:694:28
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:697:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:697:42
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:697:57
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:703:17
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/ManualMediaStore.ets:705:17
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/linkora_media_probe/src/main/ets/SystemMediaProbe.ets:26:56
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/linkora_media_probe/src/main/ets/SystemThumbnailExtractor.ets:38:55
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/linkora_media_probe/src/main/ets/SystemThumbnailExtractor.ets:40:7
+ The system capacity of this api 'media' is not supported on all devices
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/linkora_media_probe/src/main/ets/NetworkMediaProbe.ets:76:81
+ The system capacity of this api 'media' is not supported on all devices
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/SystemWebPEncoder.ets:35:27
+ 'packing' has been deprecated.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkProxySmokeTest.ets:128:40
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkProxySmokeTest.ets:130:20
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkProxySmokeTest.ets:130:67
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkProxySmokeTest.ets:306:20
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkProxySmokeTest.ets:308:22
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkProxySmokeTest.ets:323:22
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkProxySmokeTest.ets:344:27
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkMediaProbeSmokeTest.ets:141:41
+ 'packing' has been deprecated.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkMediaProbeSmokeTest.ets:186:37
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkMediaProbeSmokeTest.ets:193:25
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkMediaProbeSmokeTest.ets:194:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkMediaProbeSmokeTest.ets:194:64
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/benchmark/AnalysisBenchmarkRunner.ets:395:56
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/benchmark/AnalysisBenchmarkRunner.ets:431:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/benchmark/AnalysisBenchmarkRunner.ets:432:25
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/benchmark/AnalysisBenchmarkRunner.ets:433:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/benchmark/AnalysisBenchmarkRunner.ets:433:75
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/benchmark/AnalysisBenchmarkRunner.ets:437:25
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/benchmark/AnalysisBenchmarkRunner.ets:438:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/benchmark/AnalysisBenchmarkRunner.ets:438:64
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/HiddenLocalItemStore.ets:125:28
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/HiddenLocalItemStore.ets:128:21
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/HiddenLocalItemStore.ets:129:42
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/HiddenLocalItemStore.ets:129:59
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/HiddenLocalItemStore.ets:132:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/HiddenLocalItemStore.ets:132:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/HiddenLocalItemStore.ets:133:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/HiddenLocalItemStore.ets:133:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/HiddenLocalItemStore.ets:134:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/HiddenLocalItemStore.ets:134:35
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/HiddenLocalItemStore.ets:135:18
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/HiddenLocalItemStore.ets:135:33
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/HiddenLocalItemStore.ets:139:16
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/pages/LibraryPage.ets:344:45
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/pages/LibraryPage.ets:353:45
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkMediaMetadataReader.ets:41:56
+ The system capacity of this api 'media' is not supported on all devices
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkMediaMetadataReader.ets:41:62
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkMediaMetadataReader.ets:48:22
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/pages/StreamPage.ets:207:45
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkViewSettingsStore.ets:37:62
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkViewSettingsStore.ets:38:17
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/services/NetworkViewSettingsStore.ets:39:17
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/pages/Index.ets:155:45
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/pages/Index.ets:225:47
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/pages/Index.ets:246:47
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/pages/Index.ets:248:47
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/pages/Index.ets:270:45
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/pages/Index.ets:285:45
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/pages/Index.ets:298:45
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/pages/Index.ets:311:45
+ Function may throw exceptions. Special handling is required.
+
+WARN: ArkTS:WARN File: D:/Linkora-playback-phase8a-rerun1/entry/src/main/ets/pages/Index.ets:324:45
+ Function may throw exceptions. Special handling is required.
+
+WARN:  ArkTS:WARN Property 'sourceMapsPath' not found in '@mpv-ohos/mpv-arkts'.

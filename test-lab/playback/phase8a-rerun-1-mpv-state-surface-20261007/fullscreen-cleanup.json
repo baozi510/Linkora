@@ -1,0 +1,22 @@
+{
+  "result": "FAIL fullscreen geometry; cleanup PASS",
+  "landscapeOriginalSize": [
+    2688,
+    1512
+  ],
+  "landscapeVisibleSize": [
+    2688,
+    1216
+  ],
+  "portraitRestoredSurfaceBounds": [
+    0,
+    354,
+    1216,
+    1038
+  ],
+  "portraitFrameSaneAgain": true,
+  "afterLeaveSurfaceNodes": 0,
+  "afterLeaveAudioRendererCount": 0,
+  "initialAutoPreferenceRestored": true,
+  "noPostFailureNewOpening": true
+}

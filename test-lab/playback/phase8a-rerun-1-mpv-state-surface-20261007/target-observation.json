@@ -1,0 +1,15 @@
+{
+  "bundle": "com.linkora.player",
+  "version": "0.1.0",
+  "debug": true,
+  "architecture": "aarch64",
+  "api": 26,
+  "explicitInstallAndLaunch": "PASS",
+  "appAliveAfterFailureCleanup": true,
+  "lifecycle20SameProcess": true,
+  "noCrashAnrObservedDuringCasesAndCycles": true,
+  "audioEvidence": "AudioPolicy renderer blocks matched private bundle UID; RUNNING=2, PAUSED=5 from local SDK AudioState. Zero app renderer blocks after leave. No subjective loudspeaker-output claim.",
+  "testWindowLocal": "2026-10-07 17:25–18:08 Asia/Shanghai",
+  "cleanupLocal": "18:10",
+  "faultHistory": "Fresh fault listing retained privately; historical exits preceding this run are not attributed to current cases."
+}

@@ -1,0 +1,34 @@
+{
+  "explicitPlayPauseUnifiedState": true,
+  "prePrepareStateStillGated": true,
+  "terminalEofGuardAgainstPlayingFalse": true,
+  "seekReplayClearsTerminalGuard": true,
+  "gestureGeometryRemainsVp": true,
+  "activeUIContextVpToPxAtSurfaceBoundaryOnly": true,
+  "existingOhosSurfaceSizeProperty": true,
+  "twoEventOrderingRegressionsPresent": true,
+  "expectedMpvTests": 7,
+  "autoSelectorAdaptivePortUnchanged": true,
+  "files": [
+    {
+      "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets",
+      "sha256": "04ce48cddc4898e2ae4189f4a2b5b7ff0c514fd92052918f1551171824d8ee96"
+    },
+    {
+      "path": "entry/src/main/ets/pages/PlayerPage.ets",
+      "sha256": "87aa1c5adab7b04c27f5845d302ca22555c0e58dc14d167a20c4fb020073c3dc"
+    },
+    {
+      "path": "scripts/check-mpv-playback-port.cjs",
+      "sha256": "32235f5b072bab3a2a71bda2e1ce585762571e0cf674001e56e233df6aa2be8d"
+    },
+    {
+      "path": "entry/src/main/ets/playback/AdaptivePlaybackPort.ets",
+      "sha256": "803fd782e47dc6f20d442e23f767695fca1239bad488d0449dd431d20d4154c1"
+    },
+    {
+      "path": "linkora_core/src/main/ets/playback/PlaybackBackendSelector.ets",
+      "sha256": "4945715338b7a26f1ed0f568ed845b796c1fa9472194d1e5a720083c4c28ebdc"
+    }
+  ]
+}

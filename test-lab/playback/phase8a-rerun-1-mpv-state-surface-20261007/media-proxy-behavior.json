@@ -1,0 +1,10 @@
+{
+  "sourcePath": "REMOTE_FILE -> NetworkDirectoryService.openSource -> RandomAccessSource -> NetworkFileProxy -> localhost UUID URL -> backend",
+  "sourceReview": "PASS; unchanged from prior source",
+  "localhostAndOpaqueUuidSourceInvariant": true,
+  "upstreamCredentialPathNotInSourceConstructedTokenUrl": true,
+  "realRemotePlaybackAndSeek": "PASS across fresh P01-P05",
+  "releaseBehavior": "All 5 case leaves and all 20 cycle leaves remove XComponent and app audio renderer; production release closes the source lease. Direct token invalidation not externally observed.",
+  "highOffsetRangeRequests": "NOT PROVEN: existing app/native captures do not expose safe complete upstream range/offset accounting; production diagnostics endpoint absent. UI seek is not treated as upstream-offset proof.",
+  "productionInstrumentationAdded": false
+}

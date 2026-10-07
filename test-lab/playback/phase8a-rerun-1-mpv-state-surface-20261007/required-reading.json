@@ -1,0 +1,63 @@
+[
+  {
+    "path": "docs/AI_WORKFLOW.md",
+    "sha256": "9692B25EA6A66960228B9C3869E8731AEA3D8AE29286B33E9F519F3E0B661E4A",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/MASTER_IMPLEMENTATION_PLAN.md",
+    "sha256": "D10CC15FA669FA6471E81D9D02896C597EC373BD99903124664EFDC455C0151C",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/ARCHITECTURE_TARGET.md",
+    "sha256": "11DDF02AE6E521898B792E093677D60DA82592E850B4632CC4BCD35D5A6DEF5F",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/ARCHITECTURE_MIGRATION.md",
+    "sha256": "7280BC51ADB42FE0F04E1FB1892AA7B30D56DC89DD615CE1B4CDDF0DFAB4A746",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/IMPLEMENTATION_STATUS.md",
+    "sha256": "D70CB595A2D2C1FD2025D9EE2FD8B05419C0454F8386312C9A5BD1689E3D1EF2",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/SESSION_HANDOFF.md",
+    "sha256": "CADA95649D77A1B5F9DAC9C77101F4F631AADD8596A2C83531E8C26D001E59D8",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/CODEX_VALIDATION_TASK.md",
+    "sha256": "C764A33D1B2EF1273692F3002709A0F92B80F35AC803C614BE9108B3AE6593B7",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/PLAYBACK_PHASE8_MATE60_RUNBOOK.md",
+    "sha256": "32F9E7281ACC08A1FC17D075E16A306488EED44B7616AB5846750052A70B4B40",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/PLAYBACK_PHASE8_REPORT.md",
+    "sha256": "3C6E68F32636C3508737090F9D193F24F898732819E2AD8FB35C729C3A0E457E",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/MEDIA_COMPATIBILITY_REPORT.md",
+    "sha256": "4DD48C575F732DA806FCD6E9F159EEF7DBAEEB4AAAD3F18504FE28A85DA7CB04",
+    "fullyRead": true
+  },
+  {
+    "path": "test-lab/media-compatibility/README.md",
+    "sha256": "F331703A7E2BB926AECCBD63B437D88644A59F660CE88FCE295E1F9A73F96735",
+    "fullyRead": true
+  },
+  {
+    "referenceCommit": "08852ccc0ae1806b8270f2a248113eeedd61b5f9",
+    "path": "docs/PLAYBACK_PHASE8_REPORT.md and test-lab/playback/phase8a-mate60-foundation-20261006/ at prior failed evidence",
+    "fullyRead": true,
+    "scope": "Historical failure/evidence review only; no reused fresh PASS."
+  }
+]
