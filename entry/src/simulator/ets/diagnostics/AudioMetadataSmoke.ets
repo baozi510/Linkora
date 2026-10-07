@@ -48,12 +48,9 @@ interface AudioMetadataEvidence {
   readRequests?: number;
   rangeRequests?: number;
   activeSources?: number;
-}
-
-interface AudioMetadataSummary {
-  total: number;
-  passed: number;
-  failed: number;
+  total?: number;
+  passed?: number;
+  failed?: number;
 }
 
 /**
@@ -96,13 +93,12 @@ export class AudioMetadataSmoke {
         errorCode: AnalysisError.from(error as Object).code
       });
     } finally {
-      const summary: AudioMetadataSummary = { total, passed, failed };
       await AudioMetadataSmoke.emit({
         caseId: 'summary',
         status: failed === 0 && total > 0 ? 'PASS' : 'FAIL',
-        audioTracks: summary.total,
-        videoTracks: summary.passed,
-        errorCode: summary.failed
+        total,
+        passed,
+        failed
       });
     }
   }
@@ -114,15 +110,19 @@ export class AudioMetadataSmoke {
     const resolver = new MediaAnalysisInputResolver(new HarmonyAnalysisInputs(context, proxy));
     const probe: IMediaProbe = AnalysisComposition.ffmpeg(resolver, 10000);
     let result: ProbeResult;
+    let diagnostics: NetworkFileProxyDiagnostics;
     try {
       AudioMetadataSmoke.check(await probe.canProbe(source));
       result = await probe.probe(source, ProbeRequirement.DETAIL);
     } finally {
       await probe.close().catch(() => {});
-      await proxy.close().catch(() => {});
     }
+    diagnostics = proxy.diagnostics();
+    AudioMetadataSmoke.check(diagnostics.activeSources === 0);
+    await proxy.close().catch(() => {});
 
-    const diagnostics: NetworkFileProxyDiagnostics = proxy.diagnostics();
+    const finalDiagnostics: NetworkFileProxyDiagnostics = proxy.diagnostics();
+    AudioMetadataSmoke.check(finalDiagnostics.activeSources === 0);
     const info = result.info;
     const track = info?.audioTracks[0];
     const success: boolean = result.isUsable() && result.errorCode === 0 && info !== null &&
@@ -130,7 +130,7 @@ export class AudioMetadataSmoke {
       track !== undefined && track.codec.toLowerCase() === fixture.expectedCodec.toLowerCase() &&
       track.channels > 0 && track.sampleRate > 0 &&
       result.completeness !== ProbeCompleteness.UNAVAILABLE &&
-      diagnostics.activeSources === 0;
+      finalDiagnostics.activeSources === 0;
 
     await AudioMetadataSmoke.emit({
       caseId: fixture.caseId,
@@ -144,10 +144,10 @@ export class AudioMetadataSmoke {
       codec: track?.codec ?? '',
       channels: track?.channels ?? 0,
       sampleRate: track?.sampleRate ?? 0,
-      bytesRead: diagnostics.bytesRead,
-      readRequests: diagnostics.readRequests,
-      rangeRequests: diagnostics.rangeRequests,
-      activeSources: diagnostics.activeSources
+      bytesRead: finalDiagnostics.bytesRead,
+      readRequests: finalDiagnostics.readRequests,
+      rangeRequests: finalDiagnostics.rangeRequests,
+      activeSources: finalDiagnostics.activeSources
     });
     AudioMetadataSmoke.check(success);
   }
