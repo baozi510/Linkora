@@ -1,0 +1,7 @@
+{
+  "name": "default-first",
+  "exitCode": 0,
+  "completedUtc": "2026-10-07T20:00:50.2663369Z",
+  "script": "./scripts/verify.ps1",
+  "startedUtc": "2026-10-07T19:55:55.8395232Z"
+}

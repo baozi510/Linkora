@@ -1,0 +1,8 @@
+{
+  "scope": "report and all new evidence; compressed originals scanned after decompression",
+  "credentialAndCookieHeadersChecked": true,
+  "knownPrivateHostPathAndIdentifierValuesChecked": true,
+  "proxyTokensAndSigningSshPatternsChecked": true,
+  "findings": [],
+  "privateConfigsScreenshotsMediaHapAndSigningMaterialExcluded": true
+}

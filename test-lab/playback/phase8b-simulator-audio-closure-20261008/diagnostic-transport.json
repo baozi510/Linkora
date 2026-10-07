@@ -1,0 +1,51 @@
+{
+  "configGetAfterColdDispatch": 1,
+  "evidencePosts": 7,
+  "singleDiagnosticLaunch": true,
+  "postRecordsMatchIndependentHilog": true,
+  "structuredRecordSha256": "99256FD8763B294702A824FA98B6DFCDA4F84BEDFE42C8BB211C14B54F88D7AA",
+  "firstEventUtc": "2026-10-07T20:06:48.271417+00:00",
+  "summaryEventUtc": "2026-10-07T20:06:48.977026+00:00",
+  "noAlternativeEndpointOrSourceModification": true,
+  "eventLedger": [
+    {
+      "method": "GET",
+      "utc": "2026-10-07T20:06:48.271417+00:00"
+    },
+    {
+      "method": "POST",
+      "caseId": "audio-mp3",
+      "utc": "2026-10-07T20:06:48.654124+00:00"
+    },
+    {
+      "method": "POST",
+      "caseId": "audio-flac",
+      "utc": "2026-10-07T20:06:48.731522+00:00"
+    },
+    {
+      "method": "POST",
+      "caseId": "audio-truehd",
+      "utc": "2026-10-07T20:06:48.823548+00:00"
+    },
+    {
+      "method": "POST",
+      "caseId": "audio-truehd",
+      "utc": "2026-10-07T20:06:48.840529+00:00"
+    },
+    {
+      "method": "POST",
+      "caseId": "audio-wavpack",
+      "utc": "2026-10-07T20:06:48.931631+00:00"
+    },
+    {
+      "method": "POST",
+      "caseId": "audio-wavpack",
+      "utc": "2026-10-07T20:06:48.963021+00:00"
+    },
+    {
+      "method": "POST",
+      "caseId": "summary",
+      "utc": "2026-10-07T20:06:48.977026+00:00"
+    }
+  ]
+}

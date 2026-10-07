@@ -1,0 +1,162 @@
+{
+  "status": "PASS",
+  "singleOpen": true,
+  "forcedBackend": "System",
+  "afterNormalColdLaunchWithoutDiagnostic": true,
+  "realFrameProof": "captured native XComponent ROI matches controlled multicolor video bars; six RGB samples and screenshot digest retained",
+  "positionBeforeMs": 168.0,
+  "positionAfterMs": 17848.0,
+  "positionAdvancedMs": 17680.0,
+  "playingBothSnapshots": true,
+  "releaseSampledZeroSurfacePlayerAudio": true,
+  "runtimePlayerServiceCountSemantics": "matching service entries, not independent instance count",
+  "observations": [
+    {
+      "label": "normal-system-first",
+      "utc": "2026-10-07T20:09:16.326659+00:00",
+      "appAlive": true,
+      "ui": [
+        "‹",
+        "正在播放",
+        "0:00",
+        "0:20",
+        "1×",
+        "❚❚",
+        "全屏",
+        "音量",
+        "连接状态",
+        "播放中",
+        "视频尺寸",
+        "1280 × 720"
+      ],
+      "surfaceNodes": 1,
+      "layoutSha256": "0ee3f4721422d1ec8966fc583c6f6f92481bd7ae0efe4450248e1ca3bb26f96a",
+      "screenshotSha256": "38a32dcc714b63dd2060d483562fa8475cff6ce2c59b6f71c36c5c3b0be720ef",
+      "systemPlayerInstancesForApp": 2,
+      "appAudioRendererCount": 1,
+      "appAudioRendererStates": [
+        2
+      ],
+      "surfaceBoundsPx": [
+        0,
+        402,
+        1256,
+        1109
+      ],
+      "surfaceRowSamplesRGB": [
+        [
+          252,
+          0,
+          0
+        ],
+        [
+          0,
+          254,
+          0
+        ],
+        [
+          253,
+          254,
+          0
+        ],
+        [
+          0,
+          0,
+          253
+        ],
+        [
+          255,
+          4,
+          254
+        ],
+        [
+          0,
+          254,
+          254
+        ]
+      ]
+    },
+    {
+      "label": "normal-system-progress",
+      "utc": "2026-10-07T20:09:44.819498+00:00",
+      "appAlive": true,
+      "ui": [
+        "‹",
+        "正在播放",
+        "0:18",
+        "0:20",
+        "1×",
+        "❚❚",
+        "全屏",
+        "音量",
+        "连接状态",
+        "播放中",
+        "视频尺寸",
+        "1280 × 720"
+      ],
+      "surfaceNodes": 1,
+      "layoutSha256": "d75d1311fbd3bca0602407e7ec2bbd1246191457180feb2e1436b45a59745469",
+      "screenshotSha256": "02d0ef742e18c5bf06036ccf1714aa172ed304ab461ffae5c8b476780d4dac27",
+      "systemPlayerInstancesForApp": 2,
+      "appAudioRendererCount": 1,
+      "appAudioRendererStates": [
+        2
+      ],
+      "surfaceBoundsPx": [
+        0,
+        402,
+        1256,
+        1109
+      ],
+      "surfaceRowSamplesRGB": [
+        [
+          252,
+          0,
+          0
+        ],
+        [
+          0,
+          254,
+          0
+        ],
+        [
+          253,
+          254,
+          0
+        ],
+        [
+          0,
+          0,
+          253
+        ],
+        [
+          253,
+          0,
+          252
+        ],
+        [
+          0,
+          254,
+          254
+        ]
+      ]
+    },
+    {
+      "label": "normal-system-left",
+      "utc": "2026-10-07T20:09:48.103239+00:00",
+      "appAlive": true,
+      "ui": [
+        "0:20"
+      ],
+      "surfaceNodes": 0,
+      "layoutSha256": "dffbf920cd55e9e92a0ff1016cd29b44e04a7778e004a9b471bc327ab518be09",
+      "screenshotSha256": "8a0a774aa520737cfebf5f3a3d0a7fb01e4c04582ab2f40aca9caff814a93c44",
+      "systemPlayerInstancesForApp": 0,
+      "appAudioRendererCount": 0,
+      "appAudioRendererStates": []
+    }
+  ],
+  "orchestrationNotes": [
+    "Output encoding exception occurred after first observation was persisted; continued same existing open without relaunch/reopen or source change."
+  ]
+}

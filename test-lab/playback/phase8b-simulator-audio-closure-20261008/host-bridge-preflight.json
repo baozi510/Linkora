@@ -1,0 +1,8 @@
+{
+  "ownedProfileVisibleUnique": true,
+  "hostConfigGetExact": true,
+  "listenerLoopbackOnly": true,
+  "configContainsCredentialValues": false,
+  "optionalShellCurlProbe": "utility absent; no route verdict",
+  "simulatorRouteProof": "first actual diagnostic GET/POST ledger; no alternate endpoint or source patch"
+}

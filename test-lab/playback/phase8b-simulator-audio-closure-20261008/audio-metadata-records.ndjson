@@ -1,0 +1,7 @@
+{"caseId":"audio-mp3","status":"PASS","errorCode":0,"completeness":"complete","container":"mp3","durationMs":3000,"videoTracks":0,"audioTracks":1,"codec":"mp3","channels":1,"sampleRate":48000,"bytesRead":48813,"readRequests":1,"rangeRequests":1,"activeSources":0}
+{"caseId":"audio-flac","status":"PASS","errorCode":0,"completeness":"complete","container":"flac","durationMs":3000,"videoTracks":0,"audioTracks":1,"codec":"flac","channels":1,"sampleRate":48000,"bytesRead":47895,"readRequests":1,"rangeRequests":1,"activeSources":0}
+{"caseId":"audio-truehd","status":"FAIL","errorCode":23002,"completeness":"unavailable","container":"","durationMs":0,"videoTracks":0,"audioTracks":0,"codec":"","channels":0,"sampleRate":0,"bytesRead":103200,"readRequests":1,"rangeRequests":1,"activeSources":0}
+{"caseId":"audio-truehd","status":"FAIL","errorCode":21007}
+{"caseId":"audio-wavpack","status":"FAIL","errorCode":23002,"completeness":"unavailable","container":"","durationMs":0,"videoTracks":0,"audioTracks":0,"codec":"","channels":0,"sampleRate":0,"bytesRead":76831,"readRequests":1,"rangeRequests":1,"activeSources":0}
+{"caseId":"audio-wavpack","status":"FAIL","errorCode":21007}
+{"caseId":"summary","status":"FAIL","total":4,"passed":2,"failed":2}

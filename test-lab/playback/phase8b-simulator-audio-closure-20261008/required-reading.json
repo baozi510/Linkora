@@ -1,0 +1,79 @@
+[
+  {
+    "path": "docs/AI_WORKFLOW.md",
+    "sha256": "9692B25EA6A66960228B9C3869E8731AEA3D8AE29286B33E9F519F3E0B661E4A",
+    "fullyRead": true,
+    "gitBlob": "d4ccb0284c2c5560dc54d440a4c4d1c0363faf96",
+    "readingMethod": "full previously completed reading revalidated byte-identical Git blob"
+  },
+  {
+    "path": "docs/MASTER_IMPLEMENTATION_PLAN.md",
+    "sha256": "69C50B6B81CEC243934BF38077E24621EF6470000118A779F66B0025A692BC84",
+    "fullyRead": true,
+    "gitBlob": "e3b4b4dcd179fe06210fe6dab27ea98255e05e46",
+    "readingMethod": "full file reading plus prior unchanged-section reading verified by exact Git diff"
+  },
+  {
+    "path": "docs/IMPLEMENTATION_STATUS.md",
+    "sha256": "4E2F066EA68736081E7BAB405F2E8A848AE942404935A787E8B1D6874FAFF650",
+    "fullyRead": true,
+    "gitBlob": "8d3ade61228a06dde9422a0eb9837b4f07ea698d",
+    "readingMethod": "full file reading plus prior unchanged-section reading verified by exact Git diff"
+  },
+  {
+    "path": "docs/SESSION_HANDOFF.md",
+    "sha256": "9F7C16183BFD95D79ED1D20359B436CBE4BD9071D24B2BF5BE8E8DA430581361",
+    "fullyRead": true,
+    "gitBlob": "8aebb299d225b40da304603ec51e2c0c419788d0",
+    "readingMethod": "full file reading plus prior unchanged-section reading verified by exact Git diff"
+  },
+  {
+    "path": "docs/CODEX_VALIDATION_TASK.md",
+    "sha256": "44B4677755F3197F406A989047C9E043F40F4EC70496F9F84B30EA6BD8011BA3",
+    "fullyRead": true,
+    "gitBlob": "0bb300b0a84788cba238e8ef7d80a188a46b6254",
+    "readingMethod": "full file reading plus prior unchanged-section reading verified by exact Git diff"
+  },
+  {
+    "path": "docs/PLAYBACK_PHASE8B_SIMULATOR_RUNBOOK.md",
+    "sha256": "7776CEDE7ABA657CDA2AF87138DCCD854A693B62324B55082DFA40DDD011A7D4",
+    "fullyRead": true,
+    "gitBlob": "76961a63e2f95e933fb9f0ba1e21bfc8ff5d83d2",
+    "readingMethod": "full file reading plus prior unchanged-section reading verified by exact Git diff"
+  },
+  {
+    "path": "docs/PLAYBACK_PHASE8B_REPORT.md",
+    "sha256": "BDDFF22B9274E477144758D57E2AE2ED3ACD3920DC3137919B64FB3927B8E57F",
+    "fullyRead": true,
+    "gitBlob": "2e041033ba61e33549a9e4b2cadbddd0e16903dc",
+    "readingMethod": "full file reading plus prior unchanged-section reading verified by exact Git diff"
+  },
+  {
+    "path": "entry/src/simulator/ets/diagnostics/AudioMetadataSmoke.ets",
+    "sha256": "9FEC1BF67AEBFAF861FC81FDC2268752DC2F4CCA7A0E91734A092A08CC06F973",
+    "fullyRead": true,
+    "gitBlob": "21a7db06d16cc06feeeee4d3823b504cdaa54b9e",
+    "readingMethod": "full new file reading"
+  },
+  {
+    "path": "entry/src/simulator/RuntimeDiagnostics.ets",
+    "sha256": "8712DF646306C008858909C05B077B8C6E48C63C5D3CC78E74D9810395B97713",
+    "fullyRead": true,
+    "gitBlob": "537095fd23b5ec47fc678bb153850c224abe459e",
+    "readingMethod": "full file reading plus prior unchanged-section reading verified by exact Git diff"
+  },
+  {
+    "path": "scripts/check-audio-metadata-smoke.cjs",
+    "sha256": "69F43378B859F0F1EA2C12D7B34AC06A63FAB5FC568B9B171F4127794666902D",
+    "fullyRead": true,
+    "gitBlob": "5fad4da2f438e932a676780e7c19d43a31bfe214",
+    "readingMethod": "full new file reading"
+  },
+  {
+    "path": "scripts/verify-simulator.ps1",
+    "sha256": "B416A26B5DC87C79F38AD0507067E548D8E010E07F51B4363D477A9B776C9269",
+    "fullyRead": true,
+    "gitBlob": "b930e6eb3e8121b9470f3efd88f2efcc72bf0806",
+    "readingMethod": "full file reading plus prior unchanged-section reading verified by exact Git diff"
+  }
+]

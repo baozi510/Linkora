@@ -1,0 +1,81 @@
+{
+  "scope": "pending gaps only, not a repeat of completed matrix/stress; future work requires a new READY dispatch",
+  "completedPriorWork": [
+    "59 forced-System rows",
+    "MPV-stub forced/Auto subset",
+    "nine x86 FFmpeg video representatives",
+    "20 open/leave",
+    "10 background/foreground",
+    "10 Auto fallback",
+    "WebDAV seek/cancel/recovery",
+    "schema/summarizer controls"
+  ],
+  "items": [
+    {
+      "id": "system-simulator-six-observations",
+      "status": "PENDING_INVESTIGATION",
+      "existingEvidence": {
+        "priorCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+        "limit": "Two HLS initialization FAIL observations and four unestablished-first-frame observations remain bounded simulator data."
+      },
+      "nextSimulatorAction": "Inspect actual HLS input/AVPlayer boundary and improve independent frame observation before a new dispatch; retain historical verdicts.",
+      "testableWithoutDevice": true,
+      "scope": "System simulator + controlled corpus"
+    },
+    {
+      "id": "audio-diagnostic-failure-record-contract",
+      "status": "PENDING_REVIEW",
+      "existingEvidence": {
+        "priorCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+        "limit": "AudioMetadataSmoke emits a detailed FAIL and then an additional code-only FAIL when its post-emit assertion throws; exception paths may omit detailed fields. Successful-case records remain usable."
+      },
+      "nextSimulatorAction": "Owner review failure-path schema and pre-final-close telemetry; no source changes in this validation.",
+      "testableWithoutDevice": true,
+      "scope": "simulator diagnostic/test infrastructure"
+    },
+    {
+      "id": "runtime-fallback-stale-callback-telemetry",
+      "status": "PENDING_VALIDATION",
+      "existingEvidence": {
+        "priorCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+        "limit": "Prior deterministic gates and runtime final-state observations passed, but independent runtime candidate/fallback counts and exhaustive callback injection were NOT PROVEN."
+      },
+      "nextSimulatorAction": "A separately dispatched bounded diagnostic can verify exact one-shot count/event isolation; do not rerun completed ordinary cycles.",
+      "testableWithoutDevice": true,
+      "scope": "shared playback contracts + stub boundary"
+    },
+    {
+      "id": "settings-catalog-persistence-breadth",
+      "status": "PENDING_VALIDATION",
+      "existingEvidence": {
+        "priorCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+        "limit": "Prior runs retained playback preference and owned server profile, but do not claim comprehensive catalog/database migration, fingerprint/incremental scan/history/cache integrity."
+      },
+      "nextSimulatorAction": "Source-audit current catalog implementation and dispatch only implemented persistence/scanning contracts; future feature work belongs to GPT.",
+      "testableWithoutDevice": true,
+      "scope": "simulator database/catalog/settings"
+    },
+    {
+      "id": "network-negative-contract-breadth",
+      "status": "PENDING_VALIDATION",
+      "existingEvidence": {
+        "priorCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+        "limit": "WebDAV play/seek and controlled cancel/retry/recovery passed; credential expiry, redirect/range-edge/connection-change integration are not covered comprehensively by this focused run."
+      },
+      "nextSimulatorAction": "Inspect existing pure coverage, then dispatch missing bounded provider/MediaProxy contracts without repeating accepted stress.",
+      "testableWithoutDevice": true,
+      "scope": "controlled simulator HTTP/WebDAV"
+    },
+    {
+      "id": "native-first-unified-player-capabilities",
+      "status": "PENDING_DESIGN_REVIEW",
+      "existingEvidence": {
+        "priorCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+        "limit": "MASTER requires native-first audit; existing PlaybackPort exposes baseline controls and track observations, not a complete future display/track-switch/external-subtitle capability contract."
+      },
+      "nextSimulatorAction": "Review actual installed SDK and upstream MPV APIs before designing mappings; contract/static/System-simulator checks can proceed without a device. Real MPV rendering/output remains in the device backlog.",
+      "testableWithoutDevice": true,
+      "scope": "official/current docs, installed SDK, actual dependency source"
+    }
+  ]
+}

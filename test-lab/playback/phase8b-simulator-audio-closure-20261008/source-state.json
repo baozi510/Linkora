@@ -1,0 +1,18 @@
+{
+  "taskId": "phase8b-sim-rerun-2-audio-metadata-and-device-backlog",
+  "state": "READY",
+  "repository": "https://github.com/baozi510/Linkora.git",
+  "branch": "feat/playback-capability-phase8",
+  "source": "1c02e84f7afdc938de2b2723bae07c5869e560f1",
+  "head": "5b528e5e7a6ec3338435ec765b380e50182800a7",
+  "drift": [
+    "docs/CODEX_VALIDATION_TASK.md"
+  ],
+  "clean": true,
+  "submodules": {
+    "entry/src/main/cpp/third_party/libnfs": "cee4ca723e081e6a18f51b838690a4c21e14bb2c",
+    "entry/src/main/cpp/third_party/libsmb2": "b3d560c02fb1268320d2fd1c17fe841b0d93b85f",
+    "entry/src/main/cpp/third_party/mbedtls/framework": "7d726d145d678aa7f5a7df3b9e7ee3dbce6ea1bf"
+  },
+  "utc": "2026-10-07T19:54:47.124158+00:00"
+}

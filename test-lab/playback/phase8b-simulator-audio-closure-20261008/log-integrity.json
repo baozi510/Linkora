@@ -1,0 +1,72 @@
+[
+  {
+    "name": "install.stdout",
+    "originalBytes": 40,
+    "originalSha256": "2E0A2EB59FA9EB6903F67BB1F27D51A340B34B4B46FF46941BA0C0DA8827C7C3",
+    "decompressionExact": true,
+    "readableCopy": "UTF-8, CRLF-to-LF, ANSI color removal and trailing whitespace normalization only; no warnings/results dropped"
+  },
+  {
+    "name": "install.stderr",
+    "originalBytes": 0,
+    "originalSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "decompressionExact": true,
+    "readableCopy": "UTF-8, CRLF-to-LF, ANSI color removal and trailing whitespace normalization only; no warnings/results dropped"
+  },
+  {
+    "name": "default-first.stdout",
+    "originalBytes": 51222,
+    "originalSha256": "952DC846AF499DE0EA4D1ECB240DC1B555460241176E7D470E35D87E0802D66B",
+    "decompressionExact": true,
+    "readableCopy": "UTF-8, CRLF-to-LF, ANSI color removal and trailing whitespace normalization only; no warnings/results dropped"
+  },
+  {
+    "name": "default-first.stderr",
+    "originalBytes": 281443,
+    "originalSha256": "600C9C112365E54782BD4E47EA79C5DF4058B16CE74097B9CBD86195706237D8",
+    "decompressionExact": true,
+    "readableCopy": "UTF-8, CRLF-to-LF, ANSI color removal and trailing whitespace normalization only; no warnings/results dropped"
+  },
+  {
+    "name": "simulator.stdout",
+    "originalBytes": 6937,
+    "originalSha256": "CEFA8C69E712B9C4A932BA6895AB4C5C26A9F85E535B0D0BCA841AE4968463CE",
+    "decompressionExact": true,
+    "readableCopy": "UTF-8, CRLF-to-LF, ANSI color removal and trailing whitespace normalization only; no warnings/results dropped"
+  },
+  {
+    "name": "simulator.stderr",
+    "originalBytes": 61911,
+    "originalSha256": "97C0D4C85E64D1C3526192E657117DED721A733099D035FC5D05C654534DFB86",
+    "decompressionExact": true,
+    "readableCopy": "UTF-8, CRLF-to-LF, ANSI color removal and trailing whitespace normalization only; no warnings/results dropped"
+  },
+  {
+    "name": "default-final.stdout",
+    "originalBytes": 50327,
+    "originalSha256": "073FB80D23C92F5FA7BF50815AD944110720FE843FD520E93C7F36E9D8ADADE8",
+    "decompressionExact": true,
+    "readableCopy": "UTF-8, CRLF-to-LF, ANSI color removal and trailing whitespace normalization only; no warnings/results dropped"
+  },
+  {
+    "name": "default-final.stderr",
+    "originalBytes": 197370,
+    "originalSha256": "03C8C22636A2ABF5F68702F26E190CE6FEB2209F9C24E54842E06C524E27F0DF",
+    "decompressionExact": true,
+    "readableCopy": "UTF-8, CRLF-to-LF, ANSI color removal and trailing whitespace normalization only; no warnings/results dropped"
+  },
+  {
+    "name": "default-first-hypium",
+    "originalBytes": 14596,
+    "originalSha256": "AF333AC54C490612F5AC26AD104102F3FF081C6E8F882338392F3E4201EA7B5B",
+    "decompressionExact": true,
+    "readableCopy": "UTF-8, CRLF-to-LF, ANSI color removal and trailing whitespace normalization only; no warnings/results dropped"
+  },
+  {
+    "name": "default-final-hypium",
+    "originalBytes": 14596,
+    "originalSha256": "AF333AC54C490612F5AC26AD104102F3FF081C6E8F882338392F3E4201EA7B5B",
+    "decompressionExact": true,
+    "readableCopy": "UTF-8, CRLF-to-LF, ANSI color removal and trailing whitespace normalization only; no warnings/results dropped"
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "diagnosticSummary": {
+    "caseId": "summary",
+    "status": "FAIL",
+    "total": 4,
+    "passed": 2,
+    "failed": 2
+  },
+  "rawEventCount": 7,
+  "detailedCaseRecords": 4,
+  "postAssertionNotes": 2,
+  "postAssertionNoteCode": 21007,
+  "mandatoryPass": 2,
+  "optionalBoundedOpenFailures": 2,
+  "postRecordsEqualIndependentHilogRecords": true,
+  "allEmittedActiveSourcesZero": true,
+  "preFinalProxyCloseSourceAssertionExecutedForAllDetailedRows": true,
+  "preCloseCounterNotSeparatelyEmitted": true,
+  "thumbnailFrameOutputAbsent": true,
+  "appAliveAfterDiagnostic": true,
+  "ordinarySmoke": "PASS"
+}

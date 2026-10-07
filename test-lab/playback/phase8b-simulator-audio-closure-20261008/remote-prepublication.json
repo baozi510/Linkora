@@ -1,0 +1,9 @@
+{
+  "remote": "baozi510/Linkora",
+  "branch": "feat/playback-capability-phase8",
+  "fetchedUtc": "2026-10-07T20:14:00.314454+00:00",
+  "remoteHead": "5b528e5e7a6ec3338435ec765b380e50182800a7",
+  "equalsTestedDispatch": true,
+  "protectedRemoteDrift": false,
+  "forceOrMergePermitted": false
+}

@@ -1,8 +1,72 @@
 # Playback Phase 8B Capability Report
 
-> Status: CORRECTION SOURCE PREPARED — audio-only FFmpeg metadata diagnostic added; focused simulator closure required.
+> Status: PASS — PHASE 8B SIMULATOR FUNCTIONAL PREFLIGHT COLLECTED.
 > Branch: `feat/playback-capability-phase8`
-> Date: 2026-10-07
+> Date: 2026-10-08
+
+## Current focused closure — 2026-10-08
+
+**PASS — PHASE 8B SIMULATOR FUNCTIONAL PREFLIGHT COLLECTED.**
+
+Task: `phase8b-sim-rerun-2-audio-metadata-and-device-backlog`.
+
+Validation source: `1c02e84f7afdc938de2b2723bae07c5869e560f1`; actual tested dispatch HEAD: `5b528e5e7a6ec3338435ec765b380e50182800a7`.
+
+Evidence: `test-lab/playback/phase8b-simulator-audio-closure-20261008/`.
+
+This focused run closes the audio-only instrumentation gap. The 59-case System matrix, nine x86 FFmpeg video representatives and stress/recovery results remain attributable to prior evidence `4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6`; they were not repeated or relabeled as new execution. The six historical System FAIL observations retain their simulator-only scope.
+
+### Fresh source and build proof
+
+The fresh isolated checkout matched repository/branch/READY task/dispatch HEAD. Prior evidence is an ancestor of source, source is an ancestor of HEAD, and source-to-HEAD drift is exactly `docs/CODEX_VALIDATION_TASK.md`. Three pinned submodules were initialized at their committed revisions. Required reading and read-only correction review are recorded with exact file hashes; unchanged previously read sections were checked against Git history. Production analysis policy and Phase 7 benchmark semantics are unchanged.
+
+Exactly one initial normal `ohpm install` succeeded. Its four allowlisted lockfiles received fresh Git-normalized blob, exact CRLF-to-LF byte, line-content and full tracked-byte proofs before isolated restore. The simulator verifier's normal internal finally install received its own fresh proof/restore. No reinstall repaired a failure; no semantic dependency change occurred.
+
+Fresh default → simulator → immediate default all passed. Each default invocation passed architecture fixtures 5, FFmpeg pure 15/15, analysis pure 46/46, artifact fixtures 17, MPV mapping 7 and Hypium **210 PASS / 0 Failure / 0 Error / 0 Ignore**. Debug/Release HARs for four modules and HAPs passed; each default invocation produced two exact-nine AArch64 audits. Both Hypium original files were preserved separately before overwrite. Simulator parity/isolation and the new audio metadata guard passed; its artifact contains only real x86_64 `liblinkora_ffmpeg.so`, with no real MPV or production native-storage library. Eight reused FFmpeg dependency archives were freshly hashed and all ELF members audited; no old app artifact or test result was reused.
+
+Target: x86_64, API 26, OpenHarmony 7.0.0.105, HDC 3.2.0f; bundle `com.linkora.player`, debug 0.1.0.
+
+Fresh unsigned HAP SHA-256: `E35BA74D53335CE851C9AD726EAEFD6FF16DCADAB72A311A5FABAA4D7E353244` (25,087,171 bytes). Its normal replace-install was rejected solely by signature enforcement, code 9568332; HDC transport exit 0 was not mistaken for installation success. The existing authorized profile was freshly checked to include this simulator. The accepted unchanged SDK signing procedure signed that exact input without changing source, profiles, dependency/ABI resolution or signature/permission checks. Signed native audit, explicit replace-install and cold launch passed; app data was retained.
+
+Installed signed HAP SHA-256: `C9A27B313E6B3466DEFEB99900B4745EE2D8BECE5666A186705E4F6BBAFA6A2E` (25,281,141 bytes).
+
+### Audio-only real x86 FFmpeg metadata
+
+All four retained owned fixture files were independently fresh-hashed against committed prior truth, re-probed with host ffprobe, and whole-GET/Range 206/PROPFIND 207 checked through authenticated WebDAV with TLS verification enabled. The persisted owned WebDAV profile was present uniquely. The private loopback config endpoint contains no credential values; the actual diagnostic made one config GET and seven evidence POSTs after its single cold dispatch. Independent app hilog records exactly match the POST records. No audio case was retried.
+
+The unchanged diagnostic exercises REMOTE_FILE → NetworkDirectoryService/resolver → shared NetworkFileProxy → real FfmpegMediaProbeAdapter, requesting DETAIL metadata only.
+
+| Case | Actual metadata verdict | Code | Container / duration | Tracks / codec / channels / sample rate | Proxy bytes / reads / Range | Final activeSources |
+| --- | --- | ---: | --- | --- | --- | ---: |
+| audio-mp3 | PASS, complete | 0 | mp3 / 3000 ms | 0 video, 1 audio / mp3 / 1 / 48000 Hz | 48813 / 1 / 1 | 0 |
+| audio-flac | PASS, complete | 0 | flac / 3000 ms | 0 video, 1 audio / flac / 1 / 48000 Hz | 47895 / 1 / 1 | 0 |
+| audio-truehd | bounded FAIL, unavailable | 23002 | empty / 0 ms | 0 video, 0 audio; unavailable values remain empty/zero | 103200 / 1 / 1 | 0 |
+| audio-wavpack | bounded FAIL, unavailable | 23002 | empty / 0 ms | 0 video, 0 audio; unavailable values remain empty/zero | 76831 / 1 / 1 | 0 |
+
+TrueHD/WavPack `OPEN_FAILED / FF_OPEN_FAILED` are x86 capability observations permitted by this task, not MP3/FLAC failure or infrastructure failure. No ARM64 or playback/output compatibility conclusion follows from these metadata results.
+
+**Raw summary remains FAIL: total 4, passed 2, failed 2.** The preserved NDJSON has four detailed case records, two additional post-assertion notes (`FAILED / 21007`, one for each optional failed case) and one summary: seven events in total, not seven independent samples. The additional notes follow the diagnostic's post-emit assertion/outer catch. They do not replace the detailed native 23002 errors or represent extra runs. The required MP3/FLAC gate passed; the task's final classification follows its explicit mandatory/optional rule. Failure-note schema clarity is retained in the simulator backlog for owner review.
+
+The diagnostic asserts zero activeSources after probe.close and before final proxy.close; every detailed row is emitted only after that assertion. It separately emits final activeSources=0 for all four cases. The intermediate numeric snapshot is not separately exposed, so no independent pre-close telemetry file is invented. The proxy is closed unconditionally in finally. No thumbnail/frame request, output or fabricated video dimensions occurred in the audio diagnostic. Proxy counters are functional observations, not speed or efficiency comparisons; these short controlled files may be read in full.
+
+### Ordinary runtime regression and cleanup
+
+After the audio diagnostic, the app was cold-launched normally without any diagnostic parameter. The original Auto preference was recorded, then forced System was verified before one owned 20-second H.264/AAC MP4 open. Its WebDAV bytes were freshly hashed against retained controlled truth.
+
+The normal player reached PLAYING; native XComponent screenshots show the real controlled multicolor frame (six RGB samples and image digests are published, private screenshots are retained locally). Two playing snapshots and the exact progress-slider observations demonstrate **168 ms → 17,848 ms**. App audio renderer state was RUNNING. One leave produced zero sampled XComponent, app player service entries and app audio renderer. Service entry matches are not advertised as independent instance counts. No crash/ANR was observed within this focused run; comprehensive leak freedom is not claimed.
+
+Ignored host orchestration encountered output-encoding/localized-label/navigation checks. They were corrected before dependent operations or resumed the same already-open player; no source, expected verdict or completed case was patched/retried. The first playing observation survived its output-encoding exception and remains in the evidence. An optional shell curl preflight found the utility absent; this was not mislabeled a network-route failure. Actual diagnostic GET/POST delivery supplies route proof.
+
+Original Auto was restored. The owned config server was stopped; no HDC forward was created. The valid owned WebDAV profile and all owned remote media remain for future tests as instructed. No unrelated data or the user's existing workspace was changed.
+
+### Work that can continue and device boundary
+
+`device-required-backlog.json` classifies 15 actual backend/hardware acceptance groups with reasons, existing proof limits and a next-device gate: real ARM64 MPV load/matrix, ARM64 FFmpeg runtime, target System codecs, hardware decode, HDR10, HLG, DV, advanced audio/output/passthrough/routes, performance/power/thermal, real native storage, GPU/surface and exact real-backend/device display behavior.
+
+`simulator-continuable-backlog.json` distinguishes six remaining simulator/software gaps: the six System observations, audio diagnostic failure-note contract, exact runtime fallback/stale-callback telemetry, broader persistence/catalog validation, additional controlled network negative integration, and native-first unified capability research/design. Already-collected baseline playback/recovery/matrix/stress is explicitly excluded from invented pending work. Actual real-MPV rendering/output belongs to the device backlog; source/SDK research and shared contracts can proceed without a device.
+
+**No real-device test was started.** No policy tuning, Direct I/O, display-mode UI, thumbnail research or Phase 7 reopening occurred. Only this report and the new dispatched evidence directory are authorized for publication; source/test/task/profile/manifest/lockfile/policy bytes and old evidence are protected. Build originals are compressed with exact decompression/hash proof; private endpoints/paths/aliases, credentials, identifiers, signing material, media/HAP and screenshots are excluded. Completion additionally requires normal push and fresh remote containment proof.
+
 
 ## GPT independent review of simulator rerun 1 — 2026-10-08
 

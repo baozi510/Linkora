@@ -1,0 +1,14 @@
+{
+  "simulatorOnly": true,
+  "nativeFFmpegFactory": true,
+  "remoteFileResolverProxyPath": true,
+  "requirement": "DETAIL",
+  "requiresZeroVideoTracks": true,
+  "requiresPositiveDurationAudioTracksCodecChannelsSampleRate": true,
+  "preProxyCloseActiveSourcesCheckedAfterProbeClose": true,
+  "finallyClosesProxyRegardlessAssertions": true,
+  "thumbnailFrameCallsAbsent": true,
+  "productionPolicyAndPhase7BenchmarkSemanticsUnchangedFromPriorEvidence": true,
+  "simulatorVerifierCallsStaticGuard": true,
+  "limitation": "pre-final-close activeSources snapshot is asserted in source but not separately emitted; final activeSources is emitted"
+}

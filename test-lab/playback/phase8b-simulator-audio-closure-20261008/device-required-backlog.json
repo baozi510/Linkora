@@ -1,0 +1,170 @@
+{
+  "scope": "real backend/hardware acceptance only; software work is classified separately",
+  "items": [
+    {
+      "id": "mpv-arm64-runtime",
+      "status": "DEVICE_REQUIRED",
+      "whySimulatorInsufficient": "The simulator resolves MPV to an unavailable package stub, with no real libmpv.",
+      "requiredBackendOrHardware": "ARM64 HarmonyOS + production MPV",
+      "existingEvidence": {
+        "priorSimulatorCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+        "scope": "build/static, simulator System function, MPV boundary, x86 FFmpeg only; earlier Phase8A device foundation is not full capability acceptance"
+      },
+      "nextDeviceGate": "Fresh exact-HAP real-library load/create/open/play/release."
+    },
+    {
+      "id": "mpv-codec-container-matrix",
+      "status": "DEVICE_REQUIRED",
+      "whySimulatorInsufficient": "Stub control flow contains no MPV demux or decode execution.",
+      "requiredBackendOrHardware": "ARM64 production MPV + owned 59-case corpus",
+      "existingEvidence": {
+        "priorSimulatorCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+        "scope": "build/static, simulator System function, MPV boundary, x86 FFmpeg only; earlier Phase8A device foundation is not full capability acceptance"
+      },
+      "nextDeviceGate": "Run independent forced-MPV codec/container matrix with real frame/audio/progress/release."
+    },
+    {
+      "id": "ffmpeg-arm64-runtime",
+      "status": "DEVICE_REQUIRED",
+      "whySimulatorInsufficient": "AArch64 compile/ELF audits and x86 execution do not establish ARM64 runtime loading or native behavior.",
+      "requiredBackendOrHardware": "ARM64 real linkora_ffmpeg",
+      "existingEvidence": {
+        "priorSimulatorCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+        "scope": "build/static, simulator System function, MPV boundary, x86 FFmpeg only; earlier Phase8A device foundation is not full capability acceptance"
+      },
+      "nextDeviceGate": "Exact-source native load/probe/frame/cancel/cleanup on retained corpus."
+    },
+    {
+      "id": "device-system-codecs",
+      "status": "DEVICE_REQUIRED",
+      "whySimulatorInsufficient": "System simulator codec availability is platform-specific; the 14 unsupported and six FAIL observations do not determine device capability.",
+      "requiredBackendOrHardware": "Target HarmonyOS System AVPlayer",
+      "existingEvidence": {
+        "priorSimulatorCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+        "scope": "build/static, simulator System function, MPV boundary, x86 FFmpeg only; earlier Phase8A device foundation is not full capability acceptance"
+      },
+      "nextDeviceGate": "Independent forced-System corpus matrix, labelled with actual target/API."
+    },
+    {
+      "id": "hardware-decoder",
+      "status": "DEVICE_REQUIRED",
+      "whySimulatorInsufficient": "The x86 simulator does not expose the target decoder/GPU path.",
+      "requiredBackendOrHardware": "Target hardware decoder + production backend diagnostics",
+      "existingEvidence": {
+        "priorSimulatorCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+        "scope": "build/static, simulator System function, MPV boundary, x86 FFmpeg only; earlier Phase8A device foundation is not full capability acceptance"
+      },
+      "nextDeviceGate": "Verify selected decoder, software fallback and clean transitions on owned profiles."
+    },
+    {
+      "id": "hdr10-output",
+      "status": "DEVICE_REQUIRED",
+      "whySimulatorInsufficient": "Metadata or x86 decoded frames do not prove HDR presentation and display signalling.",
+      "requiredBackendOrHardware": "HDR-capable target/display/output pipeline",
+      "existingEvidence": {
+        "priorSimulatorCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+        "scope": "build/static, simulator System function, MPV boundary, x86 FFmpeg only; earlier Phase8A device foundation is not full capability acceptance"
+      },
+      "nextDeviceGate": "HDR10 decode/render/output correctness and explicit SDR degradation."
+    },
+    {
+      "id": "hlg-output",
+      "status": "DEVICE_REQUIRED",
+      "whySimulatorInsufficient": "Simulator presentation cannot establish target HLG transfer/output handling.",
+      "requiredBackendOrHardware": "HLG-capable target/display",
+      "existingEvidence": {
+        "priorSimulatorCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+        "scope": "build/static, simulator System function, MPV boundary, x86 FFmpeg only; earlier Phase8A device foundation is not full capability acceptance"
+      },
+      "nextDeviceGate": "HLG render/output and fallback correctness."
+    },
+    {
+      "id": "dolby-vision-output",
+      "status": "DEVICE_REQUIRED",
+      "whySimulatorInsufficient": "DV metadata handling is distinct from target profile decode, output signalling and certification.",
+      "requiredBackendOrHardware": "Supported DV profiles + target output path",
+      "existingEvidence": {
+        "priorSimulatorCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+        "scope": "build/static, simulator System function, MPV boundary, x86 FFmpeg only; earlier Phase8A device foundation is not full capability acceptance"
+      },
+      "nextDeviceGate": "Record each owned DV profile and distinguish DV-aware processing from native DV output."
+    },
+    {
+      "id": "advanced-audio-device-output",
+      "status": "DEVICE_REQUIRED",
+      "whySimulatorInsufficient": "Audio metadata and basic simulator playback do not prove target multichannel decode/output fidelity.",
+      "requiredBackendOrHardware": "ARM64 production backend + applicable output hardware",
+      "existingEvidence": {
+        "priorSimulatorCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+        "scope": "build/static, simulator System function, MPV boundary, x86 FFmpeg only; earlier Phase8A device foundation is not full capability acceptance"
+      },
+      "nextDeviceGate": "Independent advanced audio decode/PCM output/channel-layout checks."
+    },
+    {
+      "id": "audio-passthrough",
+      "status": "DEVICE_REQUIRED",
+      "whySimulatorInsufficient": "Decoded PCM does not establish DTS-HD/TrueHD/Atmos/DTS:X bitstream or object semantics.",
+      "requiredBackendOrHardware": "Capable target route/receiver + supported backend",
+      "existingEvidence": {
+        "priorSimulatorCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+        "scope": "build/static, simulator System function, MPV boundary, x86 FFmpeg only; earlier Phase8A device foundation is not full capability acceptance"
+      },
+      "nextDeviceGate": "Test each applicable passthrough format/route; mark hardware-inapplicable explicitly."
+    },
+    {
+      "id": "audio-route-constraints",
+      "status": "DEVICE_REQUIRED",
+      "whySimulatorInsufficient": "The simulator audio service does not represent target speaker/Bluetooth/USB/HDMI routes.",
+      "requiredBackendOrHardware": "Actual target audio routes",
+      "existingEvidence": {
+        "priorSimulatorCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+        "scope": "build/static, simulator System function, MPV boundary, x86 FFmpeg only; earlier Phase8A device foundation is not full capability acceptance"
+      },
+      "nextDeviceGate": "Route change, negotiated output, channels and reconnect constraints."
+    },
+    {
+      "id": "performance-power-thermal",
+      "status": "DEVICE_REQUIRED",
+      "whySimulatorInsufficient": "x86 timings and host resources do not represent ARM64 power, thermal or hardware efficiency.",
+      "requiredBackendOrHardware": "Real ARM64 target + stable measurement conditions",
+      "existingEvidence": {
+        "priorSimulatorCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+        "scope": "build/static, simulator System function, MPV boundary, x86 FFmpeg only; earlier Phase8A device foundation is not full capability acceptance"
+      },
+      "nextDeviceGate": "Dedicated reviewed benchmark with sampling contract; no policy inference here."
+    },
+    {
+      "id": "native-storage-arm64",
+      "status": "DEVICE_REQUIRED",
+      "whySimulatorInsufficient": "Simulator transports replace real SMB/SFTP/FTP/NFS native modules with unavailable boundaries.",
+      "requiredBackendOrHardware": "ARM64 native storage libraries + controlled protocol fixtures",
+      "existingEvidence": {
+        "priorSimulatorCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+        "scope": "build/static, simulator System function, MPV boundary, x86 FFmpeg only; earlier Phase8A device foundation is not full capability acceptance"
+      },
+      "nextDeviceGate": "Authenticated list/stat/random-read/proxy/play/probe/cancel/reconnect on each protocol."
+    },
+    {
+      "id": "device-gpu-surface",
+      "status": "DEVICE_REQUIRED",
+      "whySimulatorInsufficient": "System x86 surfaces and MPV stub do not exercise target GPU/real-MPV rendering integration.",
+      "requiredBackendOrHardware": "Target GPU/surface + real MPV",
+      "existingEvidence": {
+        "priorSimulatorCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+        "scope": "build/static, simulator System function, MPV boundary, x86 FFmpeg only; earlier Phase8A device foundation is not full capability acceptance"
+      },
+      "nextDeviceGate": "Attach/resize/detach/background/EOF/release under actual rendering backend."
+    },
+    {
+      "id": "display-mode-device-semantics",
+      "status": "DEVICE_REQUIRED",
+      "whySimulatorInsufficient": "Exact real-MPV/device rendering cannot be inferred from a package stub or simulator-only pixels.",
+      "requiredBackendOrHardware": "Real MPV and target System rendering",
+      "existingEvidence": {
+        "priorSimulatorCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+        "scope": "build/static, simulator System function, MPV boundary, x86 FFmpeg only; earlier Phase8A device foundation is not full capability acceptance"
+      },
+      "nextDeviceGate": "After native-first capability mapping, verify supported mode semantics on target; UI selector remains deferred."
+    }
+  ]
+}
