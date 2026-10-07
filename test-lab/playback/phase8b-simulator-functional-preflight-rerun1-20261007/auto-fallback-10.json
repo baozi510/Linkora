@@ -1,0 +1,105 @@
+{
+  "scope": "source-defined MPV-first simulator stub to System; no standalone candidate-call counter",
+  "cycles": [
+    {
+      "cycle": 1,
+      "mode": "Auto",
+      "caseId": "mkv-h264-aac",
+      "finalSystemPlaying": true,
+      "realFrame": true,
+      "candidateErrorNotDisplayedInCommittedSnapshot": true,
+      "releaseClean": true,
+      "nativeMpvCodecClaim": false
+    },
+    {
+      "cycle": 2,
+      "mode": "Auto",
+      "caseId": "mkv-h264-aac",
+      "finalSystemPlaying": true,
+      "realFrame": true,
+      "candidateErrorNotDisplayedInCommittedSnapshot": true,
+      "releaseClean": true,
+      "nativeMpvCodecClaim": false
+    },
+    {
+      "cycle": 3,
+      "mode": "Auto",
+      "caseId": "mkv-h264-aac",
+      "finalSystemPlaying": true,
+      "realFrame": true,
+      "candidateErrorNotDisplayedInCommittedSnapshot": true,
+      "releaseClean": true,
+      "nativeMpvCodecClaim": false
+    },
+    {
+      "cycle": 4,
+      "mode": "Auto",
+      "caseId": "mkv-h264-aac",
+      "finalSystemPlaying": true,
+      "realFrame": true,
+      "candidateErrorNotDisplayedInCommittedSnapshot": true,
+      "releaseClean": true,
+      "nativeMpvCodecClaim": false
+    },
+    {
+      "cycle": 5,
+      "mode": "Auto",
+      "caseId": "mkv-h264-aac",
+      "finalSystemPlaying": true,
+      "realFrame": true,
+      "candidateErrorNotDisplayedInCommittedSnapshot": true,
+      "releaseClean": true,
+      "nativeMpvCodecClaim": false
+    },
+    {
+      "cycle": 6,
+      "mode": "Auto",
+      "caseId": "mkv-h264-aac",
+      "finalSystemPlaying": true,
+      "realFrame": true,
+      "candidateErrorNotDisplayedInCommittedSnapshot": true,
+      "releaseClean": true,
+      "nativeMpvCodecClaim": false
+    },
+    {
+      "cycle": 7,
+      "mode": "Auto",
+      "caseId": "mkv-h264-aac",
+      "finalSystemPlaying": true,
+      "realFrame": true,
+      "candidateErrorNotDisplayedInCommittedSnapshot": true,
+      "releaseClean": true,
+      "nativeMpvCodecClaim": false
+    },
+    {
+      "cycle": 8,
+      "mode": "Auto",
+      "caseId": "mkv-h264-aac",
+      "finalSystemPlaying": true,
+      "realFrame": true,
+      "candidateErrorNotDisplayedInCommittedSnapshot": true,
+      "releaseClean": true,
+      "nativeMpvCodecClaim": false
+    },
+    {
+      "cycle": 9,
+      "mode": "Auto",
+      "caseId": "mkv-h264-aac",
+      "finalSystemPlaying": true,
+      "realFrame": true,
+      "candidateErrorNotDisplayedInCommittedSnapshot": true,
+      "releaseClean": true,
+      "nativeMpvCodecClaim": false
+    },
+    {
+      "cycle": 10,
+      "mode": "Auto",
+      "caseId": "mkv-h264-aac",
+      "finalSystemPlaying": true,
+      "realFrame": true,
+      "candidateErrorNotDisplayedInCommittedSnapshot": true,
+      "releaseClean": true,
+      "nativeMpvCodecClaim": false
+    }
+  ]
+}

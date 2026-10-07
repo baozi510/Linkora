@@ -1,0 +1,74 @@
+{
+  "cycles": [
+    {
+      "cycle": 1,
+      "homeIssued": true,
+      "foregroundLaunchSuccess": true,
+      "pausedSessionPreserved": true,
+      "sameProcess": true
+    },
+    {
+      "cycle": 2,
+      "homeIssued": true,
+      "foregroundLaunchSuccess": true,
+      "pausedSessionPreserved": true,
+      "sameProcess": true
+    },
+    {
+      "cycle": 3,
+      "homeIssued": true,
+      "foregroundLaunchSuccess": true,
+      "pausedSessionPreserved": true,
+      "sameProcess": true
+    },
+    {
+      "cycle": 4,
+      "homeIssued": true,
+      "foregroundLaunchSuccess": true,
+      "pausedSessionPreserved": true,
+      "sameProcess": true
+    },
+    {
+      "cycle": 5,
+      "homeIssued": true,
+      "foregroundLaunchSuccess": true,
+      "pausedSessionPreserved": true,
+      "sameProcess": true
+    },
+    {
+      "cycle": 6,
+      "homeIssued": true,
+      "foregroundLaunchSuccess": true,
+      "pausedSessionPreserved": true,
+      "sameProcess": true
+    },
+    {
+      "cycle": 7,
+      "homeIssued": true,
+      "foregroundLaunchSuccess": true,
+      "pausedSessionPreserved": true,
+      "sameProcess": true
+    },
+    {
+      "cycle": 8,
+      "homeIssued": true,
+      "foregroundLaunchSuccess": true,
+      "pausedSessionPreserved": true,
+      "sameProcess": true
+    },
+    {
+      "cycle": 9,
+      "homeIssued": true,
+      "foregroundLaunchSuccess": true,
+      "pausedSessionPreserved": true,
+      "sameProcess": true
+    },
+    {
+      "cycle": 10,
+      "homeIssued": true,
+      "foregroundLaunchSuccess": true,
+      "pausedSessionPreserved": true,
+      "sameProcess": true
+    }
+  ]
+}

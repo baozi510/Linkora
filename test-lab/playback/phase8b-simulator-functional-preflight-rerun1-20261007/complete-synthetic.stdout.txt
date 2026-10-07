@@ -1,0 +1,43 @@
+{
+  "manifestCases": 59,
+  "expectedRecords": 118,
+  "actualRecords": 118,
+  "missing": [],
+  "backendSummary": {
+    "system": {
+      "PASS": 59,
+      "UNSUPPORTED": 0,
+      "FAIL": 0,
+      "TIMEOUT": 0,
+      "NOT_RUN": 0
+    },
+    "mpv": {
+      "PASS": 59,
+      "UNSUPPORTED": 0,
+      "FAIL": 0,
+      "TIMEOUT": 0,
+      "NOT_RUN": 0
+    }
+  },
+  "tierSummary": {
+    "A": {
+      "cases": 36,
+      "productPass": 36,
+      "productUnsupported": 0
+    },
+    "B": {
+      "cases": 21,
+      "productPass": 21,
+      "productUnsupported": 0
+    },
+    "C": {
+      "cases": 2,
+      "productPass": 2,
+      "productUnsupported": 0
+    }
+  },
+  "tierAFailures": [],
+  "infrastructureFailures": [],
+  "complete": true,
+  "productGatePass": true
+}

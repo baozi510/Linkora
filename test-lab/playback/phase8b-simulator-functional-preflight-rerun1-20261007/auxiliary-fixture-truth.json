@@ -1,0 +1,32 @@
+{
+  "logicalRelativePath": "functional/long-h264-aac.mp4",
+  "sha256": "b7cce175483cd3314fae1bb79e0f5f04754c3239cc5657805f5427aef60d644b",
+  "bytes": 7925471,
+  "provenance": "previously owned generated fixture input only; hash/truth refreshed; no historical result reused",
+  "truth": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "sample_rate": "48000",
+        "channels": 1
+      }
+    ],
+    "format": {
+      "duration": "20.000000",
+      "size": "7925471"
+    }
+  },
+  "retainRemoteAsAuthorized": true,
+  "remoteWholeGetHashEqual": true,
+  "remoteRange206Verified": true,
+  "tlsVerificationEnabled": true
+}

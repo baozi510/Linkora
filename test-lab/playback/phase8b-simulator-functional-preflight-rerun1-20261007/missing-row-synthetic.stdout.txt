@@ -1,0 +1,45 @@
+{
+  "manifestCases": 59,
+  "expectedRecords": 118,
+  "actualRecords": 117,
+  "missing": [
+    "dash-h264-aac|mpv"
+  ],
+  "backendSummary": {
+    "system": {
+      "PASS": 59,
+      "UNSUPPORTED": 0,
+      "FAIL": 0,
+      "TIMEOUT": 0,
+      "NOT_RUN": 0
+    },
+    "mpv": {
+      "PASS": 58,
+      "UNSUPPORTED": 0,
+      "FAIL": 0,
+      "TIMEOUT": 0,
+      "NOT_RUN": 0
+    }
+  },
+  "tierSummary": {
+    "A": {
+      "cases": 36,
+      "productPass": 35,
+      "productUnsupported": 0
+    },
+    "B": {
+      "cases": 21,
+      "productPass": 21,
+      "productUnsupported": 0
+    },
+    "C": {
+      "cases": 2,
+      "productPass": 2,
+      "productUnsupported": 0
+    }
+  },
+  "tierAFailures": [],
+  "infrastructureFailures": [],
+  "complete": false,
+  "productGatePass": false
+}

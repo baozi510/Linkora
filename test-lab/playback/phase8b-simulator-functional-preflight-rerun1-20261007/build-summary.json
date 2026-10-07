@@ -1,0 +1,41 @@
+{
+  "default1": "PASS, exit0, completed verifier terminal stream observed",
+  "default2": "PASS, exit0, full marker captured in stdout",
+  "freshPureCounts": {
+    "architectureFixtures": 5,
+    "ffmpeg": 15,
+    "analysis": 46,
+    "artifactFixtures": 17,
+    "mpvMapping": 7
+  },
+  "hypium": {
+    "default1ObservedBeforeSimulator": {
+      "tests": 210,
+      "pass": 210,
+      "failure": 0,
+      "error": 0,
+      "ignore": 0
+    },
+    "default1RawFilePreserved": false,
+    "default1CountProvenance": "fresh file read before simulator; later default test invocation overwrote original location; do not treat default2 file as default1 original",
+    "default2RawFile": "default2-hypium-result.txt"
+  },
+  "defaultDebugReleaseHarModules": [
+    "linkora_core",
+    "linkora_proxy",
+    "linkora_media_probe",
+    "linkora_ffmpeg"
+  ],
+  "defaultArm64HapAudits": {
+    "default1": 2,
+    "default2": 2,
+    "librariesEach": 9
+  },
+  "simulatorAudit": {
+    "libraries": 1,
+    "abi": "x86_64",
+    "library": "liblinkora_ffmpeg.so",
+    "realMpvOrNativeStorageLibraries": false
+  },
+  "postSimulatorEolRestoredAndDefaultGraphValidated": true
+}

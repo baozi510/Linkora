@@ -1,0 +1,187 @@
+{
+  "backend": "forced-system",
+  "sourceType": "controlled-http",
+  "caseId": "mp4-h264-aac",
+  "cycles": [
+    {
+      "cycle": 1,
+      "startedUtc": "2026-10-07T15:50:45.135539+00:00",
+      "playingObserved": true,
+      "realFrameObserved": true,
+      "releaseClean": true,
+      "appAlive": true,
+      "nativeMpvCapabilityClaim": false
+    },
+    {
+      "cycle": 2,
+      "startedUtc": "2026-10-07T15:50:52.857179+00:00",
+      "playingObserved": true,
+      "realFrameObserved": true,
+      "releaseClean": true,
+      "appAlive": true,
+      "nativeMpvCapabilityClaim": false
+    },
+    {
+      "cycle": 3,
+      "startedUtc": "2026-10-07T15:51:00.568511+00:00",
+      "playingObserved": true,
+      "realFrameObserved": true,
+      "releaseClean": true,
+      "appAlive": true,
+      "nativeMpvCapabilityClaim": false
+    },
+    {
+      "cycle": 4,
+      "startedUtc": "2026-10-07T15:51:08.338326+00:00",
+      "playingObserved": true,
+      "realFrameObserved": true,
+      "releaseClean": true,
+      "appAlive": true,
+      "nativeMpvCapabilityClaim": false
+    },
+    {
+      "cycle": 5,
+      "startedUtc": "2026-10-07T15:51:16.180143+00:00",
+      "playingObserved": true,
+      "realFrameObserved": true,
+      "releaseClean": true,
+      "appAlive": true,
+      "nativeMpvCapabilityClaim": false
+    },
+    {
+      "cycle": 6,
+      "startedUtc": "2026-10-07T15:51:23.782958+00:00",
+      "playingObserved": true,
+      "realFrameObserved": true,
+      "releaseClean": true,
+      "appAlive": true,
+      "nativeMpvCapabilityClaim": false
+    },
+    {
+      "cycle": 7,
+      "startedUtc": "2026-10-07T15:51:31.433506+00:00",
+      "playingObserved": true,
+      "realFrameObserved": true,
+      "releaseClean": true,
+      "appAlive": true,
+      "nativeMpvCapabilityClaim": false
+    },
+    {
+      "cycle": 8,
+      "startedUtc": "2026-10-07T15:51:39.070477+00:00",
+      "playingObserved": true,
+      "realFrameObserved": true,
+      "releaseClean": true,
+      "appAlive": true,
+      "nativeMpvCapabilityClaim": false
+    },
+    {
+      "cycle": 9,
+      "startedUtc": "2026-10-07T15:51:46.645398+00:00",
+      "playingObserved": true,
+      "realFrameObserved": true,
+      "releaseClean": true,
+      "appAlive": true,
+      "nativeMpvCapabilityClaim": false
+    },
+    {
+      "cycle": 10,
+      "startedUtc": "2026-10-07T15:51:54.469086+00:00",
+      "playingObserved": true,
+      "realFrameObserved": true,
+      "releaseClean": true,
+      "appAlive": true,
+      "nativeMpvCapabilityClaim": false
+    },
+    {
+      "cycle": 11,
+      "startedUtc": "2026-10-07T15:52:02.148237+00:00",
+      "playingObserved": true,
+      "realFrameObserved": true,
+      "releaseClean": true,
+      "appAlive": true,
+      "nativeMpvCapabilityClaim": false
+    },
+    {
+      "cycle": 12,
+      "startedUtc": "2026-10-07T15:52:09.685255+00:00",
+      "playingObserved": true,
+      "realFrameObserved": true,
+      "releaseClean": true,
+      "appAlive": true,
+      "nativeMpvCapabilityClaim": false
+    },
+    {
+      "cycle": 13,
+      "startedUtc": "2026-10-07T15:52:17.405404+00:00",
+      "playingObserved": true,
+      "realFrameObserved": true,
+      "releaseClean": true,
+      "appAlive": true,
+      "nativeMpvCapabilityClaim": false
+    },
+    {
+      "cycle": 14,
+      "startedUtc": "2026-10-07T15:52:25.145045+00:00",
+      "playingObserved": true,
+      "realFrameObserved": true,
+      "releaseClean": true,
+      "appAlive": true,
+      "nativeMpvCapabilityClaim": false
+    },
+    {
+      "cycle": 15,
+      "startedUtc": "2026-10-07T15:52:32.823526+00:00",
+      "playingObserved": true,
+      "realFrameObserved": true,
+      "releaseClean": true,
+      "appAlive": true,
+      "nativeMpvCapabilityClaim": false
+    },
+    {
+      "cycle": 16,
+      "startedUtc": "2026-10-07T15:52:40.320499+00:00",
+      "playingObserved": true,
+      "realFrameObserved": true,
+      "releaseClean": true,
+      "appAlive": true,
+      "nativeMpvCapabilityClaim": false
+    },
+    {
+      "cycle": 17,
+      "startedUtc": "2026-10-07T15:52:48.074165+00:00",
+      "playingObserved": true,
+      "realFrameObserved": true,
+      "releaseClean": true,
+      "appAlive": true,
+      "nativeMpvCapabilityClaim": false
+    },
+    {
+      "cycle": 18,
+      "startedUtc": "2026-10-07T15:52:55.717318+00:00",
+      "playingObserved": true,
+      "realFrameObserved": true,
+      "releaseClean": true,
+      "appAlive": true,
+      "nativeMpvCapabilityClaim": false
+    },
+    {
+      "cycle": 19,
+      "startedUtc": "2026-10-07T15:53:03.300617+00:00",
+      "playingObserved": true,
+      "realFrameObserved": true,
+      "releaseClean": true,
+      "appAlive": true,
+      "nativeMpvCapabilityClaim": false
+    },
+    {
+      "cycle": 20,
+      "startedUtc": "2026-10-07T15:53:10.882289+00:00",
+      "playingObserved": true,
+      "realFrameObserved": true,
+      "releaseClean": true,
+      "appAlive": true,
+      "nativeMpvCapabilityClaim": false
+    }
+  ]
+}

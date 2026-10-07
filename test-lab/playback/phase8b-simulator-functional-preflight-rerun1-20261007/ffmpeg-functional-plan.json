@@ -1,0 +1,19 @@
+{
+  "purpose": "functional observations only; no speed ranking, policy or Phase7 acceptance",
+  "videoCaseIds": [
+    "mp4-h264-aac",
+    "mp4-hevc-aac",
+    "mkv-h264-aac",
+    "mkv-hevc-aac",
+    "webm-vp9-opus",
+    "ts-h264-aac",
+    "avi-mpeg4-mp3",
+    "vob-mpeg2-ac3",
+    "rm-rv20"
+  ],
+  "warmups": 0,
+  "repetitions": 5,
+  "expectedVideoFunctionalRecords": 270,
+  "audioOnlyCase": "NOT RUN: current unmodified runner requires positive video dimensions and always attempts thumbnails; task forbids audio thumbnail attempts",
+  "audioProbeGapRequiresOwnerReview": true
+}

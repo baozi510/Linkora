@@ -1,0 +1,33 @@
+{
+  "caseId": "audio-aiff-pcm",
+  "classification": "INVALID TEST INPUT \u2014 ORCHESTRATION ERROR",
+  "actualNativeError": 5411007,
+  "httpResponse": 404,
+  "inputSchemesObserved": 2,
+  "literalDeclaredFixtureUrlMatched": false,
+  "productionDefectClaim": false,
+  "originalObservationRetained": {
+    "caseId": "audio-aiff-pcm",
+    "backend": "system",
+    "scope": "simulator-x86_64",
+    "sourceType": "controlled-http-byte-identical-corpus",
+    "verdict": "FAIL",
+    "prepareObserved": false,
+    "playingObserved": false,
+    "firstFrameObserved": null,
+    "positionAdvanced": false,
+    "positionSamplesMs": [
+      0.0
+    ],
+    "audioRendererObserved": false,
+    "errorCode": "LNK-PLAY-007",
+    "releaseClean": true,
+    "crash": false,
+    "anr": false,
+    "unbounded": false,
+    "screenshotSha256": "a3cfd3a38a50beac8afeba54071a60b95de30fd21a7e86999b41c373c53af7fa",
+    "notes": "native player failure; classification from unchanged FailureCatalog unsupported mapping only"
+  },
+  "reexecutionOfValidFixture": false,
+  "reason": "previous and new URLs concatenated by native inputText; fixture not requested"
+}

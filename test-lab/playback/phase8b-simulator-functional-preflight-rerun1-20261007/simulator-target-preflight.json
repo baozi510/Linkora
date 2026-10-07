@@ -1,0 +1,10 @@
+{
+  "targetsObserved": [
+    {
+      "simulator": true,
+      "abi": "x86_64"
+    }
+  ],
+  "x86TargetAvailable": true,
+  "hdcVersion": "Ver: 3.2.0f"
+}

@@ -1,0 +1,11 @@
+{
+  "stallStartUtc": "2026-10-07T16:07:04.533297+00:00",
+  "stalledPrepareObservedNotPlaying": true,
+  "prepareCancellationBoundedBySuccessfulLeave": true,
+  "missingFileFailureObserved": true,
+  "explicitSingleRetryRemainedBoundedFailure": true,
+  "nextValidSystemPlayingAndFrameObserved": true,
+  "noStaleErrorInNextValidPlayingSnapshot": true,
+  "releaseCleanAfterEach": true,
+  "scope": "external controlled HTTP stall/missing data only; unchanged production backend; no repeated failed corpus case"
+}

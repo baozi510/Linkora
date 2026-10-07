@@ -1,0 +1,18 @@
+{
+  "taskId": "phase8b-sim-rerun-1-eol-recovery",
+  "state": "READY",
+  "repository": "https://github.com/baozi510/Linkora.git",
+  "branch": "feat/playback-capability-phase8",
+  "source": "cd5b1d98baba8b80f6910d040cf43c36f1a9ab71",
+  "head": "d360055bd30bb670fc7f1e44f7f4f37e2bf564bf",
+  "drift": [
+    "docs/CODEX_VALIDATION_TASK.md"
+  ],
+  "clean": true,
+  "submodules": {
+    "entry/src/main/cpp/third_party/libnfs": "cee4ca723e081e6a18f51b838690a4c21e14bb2c",
+    "entry/src/main/cpp/third_party/libsmb2": "b3d560c02fb1268320d2fd1c17fe841b0d93b85f",
+    "entry/src/main/cpp/third_party/mbedtls/framework": "7d726d145d678aa7f5a7df3b9e7ee3dbce6ea1bf"
+  },
+  "utc": "2026-10-07T13:04:35.623319+00:00"
+}

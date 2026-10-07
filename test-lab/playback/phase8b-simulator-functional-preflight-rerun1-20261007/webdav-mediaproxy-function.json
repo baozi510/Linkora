@@ -1,0 +1,24 @@
+{
+  "case": "controlled-long-h264-aac",
+  "source": "authenticated user WebDAV through unchanged RemoteFile -> shared MediaProxy -> System path",
+  "startedUtc": "2026-10-07T16:02:57.682186+00:00",
+  "playingAndRealFrameObserved": true,
+  "seeks": [
+    {
+      "requestedFraction": 0.5,
+      "requestedPositionMs": 10000,
+      "observedPositionMs": 10033.0,
+      "pausedIntentPreserved": true
+    },
+    {
+      "requestedFraction": 0.9,
+      "requestedPositionMs": 18000,
+      "observedPositionMs": 18033.0,
+      "pausedIntentPreserved": true
+    }
+  ],
+  "resumePositionAdvanced": true,
+  "releaseClean": true,
+  "proxyExactCounters": "NOT PROVEN: no production diagnostics endpoint; not inferred from Back",
+  "uriTokensNotPublished": true
+}

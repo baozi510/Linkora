@@ -1,0 +1,86 @@
+[
+  {
+    "file": "ohpm.stdout.original.txt.gz",
+    "originalBytes": 40,
+    "originalSha256": "d12cb0ef454990a1835ce532f6644d4e9be0c0fde1422b245fb55ea45c196f9f",
+    "decompressedBytesEqualOriginal": true
+  },
+  {
+    "file": "ohpm.stderr.original.txt.gz",
+    "originalBytes": 0,
+    "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "decompressedBytesEqualOriginal": true
+  },
+  {
+    "file": "default1.stdout.original.txt.gz",
+    "originalBytes": 51859,
+    "originalSha256": "0af7fc811e220acb2cd5d4d1031c45bd3ba1589a6148eb57b45d0f5c90a8b3b1",
+    "decompressedBytesEqualOriginal": true
+  },
+  {
+    "file": "default1.stderr.original.txt.gz",
+    "originalBytes": 278331,
+    "originalSha256": "e13a3256d521cca7d9d08739efb951574a1dfdc892ab920502fcac61e011043b",
+    "decompressedBytesEqualOriginal": true
+  },
+  {
+    "file": "simulator.stdout.original.txt.gz",
+    "originalBytes": 6881,
+    "originalSha256": "93443677b06aa4a157e0ef6613e64436580ff25298c9b53569159f0108d931bd",
+    "decompressedBytesEqualOriginal": true
+  },
+  {
+    "file": "simulator.stderr.original.txt.gz",
+    "originalBytes": 60578,
+    "originalSha256": "1fd3ffb4dd7817f7ab6ea204c02b274fde5263ef6d045445fe8852d8d681e8aa",
+    "decompressedBytesEqualOriginal": true
+  },
+  {
+    "file": "default2.stdout.original.txt.gz",
+    "originalBytes": 50325,
+    "originalSha256": "963cddeb0b9786ba95bb01d0b09223dc593e982625bceb09a9c9efcd498c9467",
+    "decompressedBytesEqualOriginal": true
+  },
+  {
+    "file": "default2.stderr.original.txt.gz",
+    "originalBytes": 194430,
+    "originalSha256": "d2d9978c009d847e43fa97205e118b8fb4a50a73278bd3dbe45a2989ad536841",
+    "decompressedBytesEqualOriginal": true
+  },
+  {
+    "file": "corpus-generate.stdout.original.txt.gz",
+    "originalBytes": 1826,
+    "originalSha256": "0f54cb8cd9b6017e87ab56278ff34ad6c5b10375600f1ad7c8004bb4d329620b",
+    "decompressedBytesEqualOriginal": true
+  },
+  {
+    "file": "corpus-generate.stderr.original.txt.gz",
+    "originalBytes": 0,
+    "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "decompressedBytesEqualOriginal": true
+  },
+  {
+    "file": "corpus-fetch.stdout.original.txt.gz",
+    "originalBytes": 125,
+    "originalSha256": "9c0e4a810c1f87f87ddce3a82b1e731ea97bc8d7e92ca96259641da98ee0211d",
+    "decompressedBytesEqualOriginal": true
+  },
+  {
+    "file": "corpus-fetch.stderr.original.txt.gz",
+    "originalBytes": 0,
+    "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "decompressedBytesEqualOriginal": true
+  },
+  {
+    "file": "signed-audit.stdout.original.txt.gz",
+    "originalBytes": 60,
+    "originalSha256": "525d3009a3312ca2a5bf218df84bd9d615dec5a26d4e078c8d5d8e4496068bfa",
+    "decompressedBytesEqualOriginal": true
+  },
+  {
+    "file": "signed-audit.stderr.original.txt.gz",
+    "originalBytes": 0,
+    "originalSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "decompressedBytesEqualOriginal": true
+  }
+]

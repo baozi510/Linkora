@@ -1,0 +1,381 @@
+{
+  "logicalSource": "user-authorized controlled WebDAV; independent owned corpus directory",
+  "tlsVerificationEnabled": true,
+  "caseCount": 59,
+  "filesIncludingSegments": 74,
+  "allWholeGetHashesEqual": true,
+  "propfind207": true,
+  "existingMediaOverwritten": false,
+  "records": [
+    {
+      "relativePath": "mp4_h264_aac.mp4",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "mp4_hevc_aac.mp4",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "mp4_av1_aac.mp4",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "mp4_mpeg4_aac.mp4",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "m4v_h264_aac.m4v",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "mov_h264_aac.mov",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "mp4_h264_high_1080p.mp4",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "mp4_h264_high_4k.mp4",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "mp4_h264_10bit_aac.mp4",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "mp4_vp9_aac.mp4",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "mkv_h264_aac.mkv",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "mkv_hevc_aac.mkv",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "mkv_vp9_opus.mkv",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "mkv_h264_ac3.mkv",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "mkv_h264_eac3.mkv",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "mkv_h264_dts.mkv",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "mkv_h264_flac.mkv",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "mkv_h264_opus.mkv",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "mkv_h264_aac_srt.mkv",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "webm_vp8_vorbis.webm",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "webm_vp9_opus.webm",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "ts_h264_aac.ts",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "ts_hevc_aac.ts",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "m2ts_h264_aac.m2ts",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "avi_mpeg4_mp3.avi",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "avi_mjpeg_pcm.avi",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "flv_h264_aac.flv",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "mpeg_mpeg2_mp2.mpg",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "wmv_wmv2_wma.wmv",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "3gp_h263_aac.3gp",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "ogv_theora_vorbis.ogv",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "mov_prores_pcm.mov",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "vob_mpeg2_ac3.vob",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "rm_rv20.rm",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "mkv_ffv1_flac.mkv",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "audio_mp3.mp3",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "audio_aac.aac",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "audio_m4a_aac.m4a",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "audio_m4a_alac.m4a",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "audio_flac.flac",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "audio_ogg_vorbis.ogg",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "audio_opus.opus",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "audio_wav_pcm.wav",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "audio_amr_nb.amr",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "audio_amr_wb.amr",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "audio_ac3.ac3",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "audio_eac3.eac3",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "audio_dts.dts",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "audio_wma.wma",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "audio_wavpack.wv",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "audio_tta.tta",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "audio_truehd.thd",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "audio_mlp.mlp",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "audio_aiff_pcm.aiff",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "audio_caf_alac.caf",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "audio_ape.ape",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "hls_h264/index.m3u8",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "hls_hevc/index.m3u8",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "dash_h264/index.mpd",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "hls_h264/segment_000.ts",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "hls_h264/segment_001.ts",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "hls_h264/segment_002.ts",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "hls_hevc/segment_000.ts",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "hls_hevc/segment_001.ts",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "hls_hevc/segment_002.ts",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "dash_h264/chunk-stream0-00001.m4s",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "dash_h264/chunk-stream0-00002.m4s",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "dash_h264/chunk-stream0-00003.m4s",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "dash_h264/chunk-stream1-00001.m4s",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "dash_h264/chunk-stream1-00002.m4s",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "dash_h264/chunk-stream1-00003.m4s",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "dash_h264/chunk-stream1-00004.m4s",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "dash_h264/init-stream0.m4s",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    },
+    {
+      "relativePath": "dash_h264/init-stream1.m4s",
+      "wholeGetSha256Equal": true,
+      "range206PrefixBytesEqual": true
+    }
+  ]
+}

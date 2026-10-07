@@ -1,0 +1,48 @@
+{
+  "manifestCases": 59,
+  "uniqueCaseIds": 59,
+  "officialShapeExpectedRecords": 118,
+  "runtimeCapabilityClaimsFromSyntheticInputs": false,
+  "checks": [
+    {
+      "control": "complete-synthetic",
+      "syntheticOnly": true,
+      "inputRecords": 118,
+      "inputSha256": "33c9decd69cf9d863ea417817140cc87d9f0845e697d041cb6462fa0b0f70235",
+      "actualExitCode": 0,
+      "expectedOutcomeObserved": true
+    },
+    {
+      "control": "duplicate-synthetic",
+      "syntheticOnly": true,
+      "inputRecords": 119,
+      "inputSha256": "c4da1580285f38ee81cd7bee39ddbc50bb2ee0a5cd4e9945ddc51a9c11840459",
+      "actualExitCode": 1,
+      "expectedOutcomeObserved": true
+    },
+    {
+      "control": "invalid-verdict-synthetic",
+      "syntheticOnly": true,
+      "inputRecords": 118,
+      "inputSha256": "d4d613304ef10306e8bc77886c01a509489dddddbe15d1ecb5c405191216a2d5",
+      "actualExitCode": 1,
+      "expectedOutcomeObserved": true
+    },
+    {
+      "control": "unexpected-case-synthetic",
+      "syntheticOnly": true,
+      "inputRecords": 118,
+      "inputSha256": "d173ce9e0e351258d4a8cf29d830fc74126f5caf669f4b44fbed28fd966a87bd",
+      "actualExitCode": 1,
+      "expectedOutcomeObserved": true
+    },
+    {
+      "control": "missing-row-synthetic",
+      "syntheticOnly": true,
+      "inputRecords": 117,
+      "inputSha256": "f9031bdf91391566c5710da4d79b4b9216da6706a8960dcd426ecc74d3c95d98",
+      "actualExitCode": 1,
+      "expectedOutcomeObserved": true
+    }
+  ]
+}

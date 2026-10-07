@@ -1,0 +1,55 @@
+{
+  "scope": "x86 simulator functional observations only; not benchmark acceptance or performance ranking",
+  "systemRecords": 59,
+  "systemVerdicts": {
+    "PASS": 39,
+    "SYSTEM_SIMULATOR_UNSUPPORTED": 14,
+    "FAIL": 6
+  },
+  "failureCases": [
+    {
+      "caseId": "hls-h264-aac",
+      "errorCode": "LNK-PLAY-006",
+      "firstFrameObserved": false,
+      "positionAdvanced": false
+    },
+    {
+      "caseId": "hls-hevc-aac",
+      "errorCode": "LNK-PLAY-006",
+      "firstFrameObserved": false,
+      "positionAdvanced": false
+    },
+    {
+      "caseId": "mkv-ffv1-flac",
+      "errorCode": null,
+      "firstFrameObserved": false,
+      "positionAdvanced": true
+    },
+    {
+      "caseId": "mov-prores-pcm",
+      "errorCode": null,
+      "firstFrameObserved": false,
+      "positionAdvanced": true
+    },
+    {
+      "caseId": "ogv-theora-vorbis",
+      "errorCode": null,
+      "firstFrameObserved": false,
+      "positionAdvanced": true
+    },
+    {
+      "caseId": "wmv-wmv2-wma",
+      "errorCode": null,
+      "firstFrameObserved": false,
+      "positionAdvanced": true
+    }
+  ],
+  "x86VideoCaseCount": 9,
+  "videoRecords": 270,
+  "ffmpegRecords": 135,
+  "ffmpegSuccess": 120,
+  "rv20NativeResult": "FF_OPEN_FAILED / numeric 23002, unavailable; no codec capability inference",
+  "audioOnlyFfmpegProbe": "NOT RUN; unchanged runner enforces video dimensions and unconditionally attempts thumbnail",
+  "audioInstrumentationGap": true,
+  "physicalArm64Runtime": "DEVICE REQUIRED / NOT RUN"
+}

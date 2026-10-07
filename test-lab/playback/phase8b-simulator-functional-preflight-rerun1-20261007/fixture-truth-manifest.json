@@ -1,0 +1,2529 @@
+{
+  "cases": 59,
+  "fileCases": 56,
+  "streamCases": 3,
+  "uniqueCaseIds": true,
+  "allFilesFreshGeneratedOrChecksumFetched": true,
+  "records": [
+    {
+      "caseId": "mp4-h264-aac",
+      "relativePath": "mp4_h264_aac.mp4",
+      "size": 270257,
+      "sha256": "BD8933E5A54B1054350D49DE32C1E664E0EC9BAB60255010B0BDCEF2D6B4531A",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "Constrained Baseline",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "duration": "3.000000",
+          "size": "270257"
+        }
+      }
+    },
+    {
+      "caseId": "mp4-hevc-aac",
+      "relativePath": "mp4_hevc_aac.mp4",
+      "size": 121081,
+      "sha256": "78A060E8C2337F55F61A2ED408E1167DAFFD71339120AA2232347657576DD4F5",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "hevc",
+            "codec_long_name": "H.265 / HEVC (High Efficiency Video Coding)",
+            "profile": "Main",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "duration": "3.000000",
+          "size": "121081"
+        }
+      }
+    },
+    {
+      "caseId": "mp4-av1-aac",
+      "relativePath": "mp4_av1_aac.mp4",
+      "size": 76556,
+      "sha256": "BA203748F6A6F4737D020225F03DAF4A9F26CF71C6EAA32CD052B2FC1F136AF7",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "av1",
+            "codec_long_name": "Alliance for Open Media AV1",
+            "profile": "Main",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "duration": "3.000000",
+          "size": "76556"
+        }
+      }
+    },
+    {
+      "caseId": "mp4-mpeg4-aac",
+      "relativePath": "mp4_mpeg4_aac.mp4",
+      "size": 293882,
+      "sha256": "B640C26D11177D522669E19368FE14C54FF2C30804A3A54C3A1549C537B03CA1",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "B",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "mpeg4",
+            "codec_long_name": "MPEG-4 part 2",
+            "profile": "Simple Profile",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "duration": "3.000000",
+          "size": "293882"
+        }
+      }
+    },
+    {
+      "caseId": "m4v-h264-aac",
+      "relativePath": "m4v_h264_aac.m4v",
+      "size": 270257,
+      "sha256": "24D4E93A62F7A2B32E87EDF037927AFCF0E8E0598250F6CC539C725348DD0C05",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "Constrained Baseline",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "duration": "3.000000",
+          "size": "270257"
+        }
+      }
+    },
+    {
+      "caseId": "mov-h264-aac",
+      "relativePath": "mov_h264_aac.mov",
+      "size": 270308,
+      "sha256": "8A496E2A818AF31B75624ADBE92CD11083055CAC0E5EB05F08143F50EF2B094E",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "Constrained Baseline",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "duration": "3.000000",
+          "size": "270308"
+        }
+      }
+    },
+    {
+      "caseId": "mp4-h264-high-1080p",
+      "relativePath": "mp4_h264_high_1080p.mp4",
+      "size": 1242767,
+      "sha256": "367CB176C2C742FAE09AB50446D0C0696A774020637D852C1F27DB84474726FB",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "High",
+            "codec_type": "video",
+            "width": 1920,
+            "height": 1080,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "duration": "2.000000",
+          "size": "1242767"
+        }
+      }
+    },
+    {
+      "caseId": "mp4-h264-high-4k",
+      "relativePath": "mp4_h264_high_4k.mp4",
+      "size": 4356138,
+      "sha256": "579169629A4D580C40021A20469C601B409ECA053B80CCDA07E11ADA4CDF46A9",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "High",
+            "codec_type": "video",
+            "width": 3840,
+            "height": 2160,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "duration": "2.000000",
+          "size": "4356138"
+        }
+      }
+    },
+    {
+      "caseId": "mp4-h264-high10",
+      "relativePath": "mp4_h264_10bit_aac.mp4",
+      "size": 260072,
+      "sha256": "65A36504B130F6BCFC5D21254CF265C2A08D0BE078521B510332A38C0EF53507",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "B",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "High 10",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p10le",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "duration": "3.000000",
+          "size": "260072"
+        }
+      }
+    },
+    {
+      "caseId": "mp4-vp9-aac",
+      "relativePath": "mp4_vp9_aac.mp4",
+      "size": 154301,
+      "sha256": "3212C46DF8772D40DBF206B210FE1EE95161CEECCDD9CF7C53A37E9212E722B8",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "vp9",
+            "codec_long_name": "Google VP9",
+            "profile": "Profile 0",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "duration": "3.000000",
+          "size": "154301"
+        }
+      }
+    },
+    {
+      "caseId": "mkv-h264-aac",
+      "relativePath": "mkv_h264_aac.mkv",
+      "size": 269685,
+      "sha256": "10CD39F1F737D5CF75F8A462D89F57CA435894603E2CB8D8600C798008974033",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "Constrained Baseline",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "matroska,webm",
+          "format_long_name": "Matroska / WebM",
+          "duration": "3.021000",
+          "size": "269685"
+        }
+      }
+    },
+    {
+      "caseId": "mkv-hevc-aac",
+      "relativePath": "mkv_hevc_aac.mkv",
+      "size": 119814,
+      "sha256": "BF9AA9B8AA8970061C868BBC5858F974FF8E17B499161F04796B67E022053ABB",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "hevc",
+            "codec_long_name": "H.265 / HEVC (High Efficiency Video Coding)",
+            "profile": "Main",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "matroska,webm",
+          "format_long_name": "Matroska / WebM",
+          "duration": "3.021000",
+          "size": "119814"
+        }
+      }
+    },
+    {
+      "caseId": "mkv-vp9-opus",
+      "relativePath": "mkv_vp9_opus.mkv",
+      "size": 168721,
+      "sha256": "A5A17EC39FA688D6B1078213ACD47BDA8143383398A335D574DCBDCAD20812D5",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "vp9",
+            "codec_long_name": "Google VP9",
+            "profile": "Profile 0",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "opus",
+            "codec_long_name": "Opus (Opus Interactive Audio Codec)",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "matroska,webm",
+          "format_long_name": "Matroska / WebM",
+          "duration": "3.008000",
+          "size": "168721"
+        }
+      }
+    },
+    {
+      "caseId": "mkv-h264-ac3",
+      "relativePath": "mkv_h264_ac3.mkv",
+      "size": 305035,
+      "sha256": "FB50D7A551064E9E15A30C17299683FDFB1B8705135DE1A9D54DC20B675D90B6",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "Constrained Baseline",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "ac3",
+            "codec_long_name": "ATSC A/52A (AC-3)",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "matroska,webm",
+          "format_long_name": "Matroska / WebM",
+          "duration": "3.000000",
+          "size": "305035"
+        }
+      }
+    },
+    {
+      "caseId": "mkv-h264-eac3",
+      "relativePath": "mkv_h264_eac3.mkv",
+      "size": 305023,
+      "sha256": "BD8D21F3D40FCF78FE980F4A55674B6893F2F779C03D1DB147AE7996105AA52C",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "Constrained Baseline",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "eac3",
+            "codec_long_name": "ATSC A/52B (AC-3, E-AC-3)",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "matroska,webm",
+          "format_long_name": "Matroska / WebM",
+          "duration": "3.000000",
+          "size": "305023"
+        }
+      }
+    },
+    {
+      "caseId": "mkv-h264-dts",
+      "relativePath": "mkv_h264_dts.mkv",
+      "size": 522906,
+      "sha256": "8055C755D7E070676E0E8C44EE51A16677417208CA73809B7CD540313DE779A7",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "Constrained Baseline",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "dts",
+            "codec_long_name": "DCA (DTS Coherent Acoustics)",
+            "profile": "DTS",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "matroska,webm",
+          "format_long_name": "Matroska / WebM",
+          "duration": "3.000000",
+          "size": "522906"
+        }
+      }
+    },
+    {
+      "caseId": "mkv-h264-flac",
+      "relativePath": "mkv_h264_flac.mkv",
+      "size": 272041,
+      "sha256": "3F1362AC836349910B4DDF382CC0CC0233F4D075D3DACAE28E09AE141EAB9FD8",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "Constrained Baseline",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "flac",
+            "codec_long_name": "FLAC (Free Lossless Audio Codec)",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "matroska,webm",
+          "format_long_name": "Matroska / WebM",
+          "duration": "3.000000",
+          "size": "272041"
+        }
+      }
+    },
+    {
+      "caseId": "mkv-h264-opus",
+      "relativePath": "mkv_h264_opus.mkv",
+      "size": 284776,
+      "sha256": "DACA4F71325C4A3CE6CA2A7CD6BB1B79EAF66B073A52CBB6C58594801CEC69BE",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "Constrained Baseline",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "opus",
+            "codec_long_name": "Opus (Opus Interactive Audio Codec)",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "matroska,webm",
+          "format_long_name": "Matroska / WebM",
+          "duration": "3.008000",
+          "size": "284776"
+        }
+      }
+    },
+    {
+      "caseId": "mkv-h264-aac-srt",
+      "relativePath": "mkv_h264_aac_srt.mkv",
+      "size": 233174,
+      "sha256": "25576E20AAA6EAF42F30E39CCB84FE57E61BDAC619757C32CAB445EA15D253D6",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "Constrained Baseline",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          },
+          {
+            "index": 2,
+            "codec_name": "subrip",
+            "codec_long_name": "SubRip subtitle",
+            "codec_type": "subtitle",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "matroska,webm",
+          "format_long_name": "Matroska / WebM",
+          "duration": "2.602000",
+          "size": "233174"
+        }
+      }
+    },
+    {
+      "caseId": "webm-vp8-vorbis",
+      "relativePath": "webm_vp8_vorbis.webm",
+      "size": 164062,
+      "sha256": "6E2A5591816EDE8369C0016B22744B1CEEA099356B1642654BE7C33B78EAA60A",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "B",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "vp8",
+            "codec_long_name": "On2 VP8",
+            "profile": "0",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "vorbis",
+            "codec_long_name": "Vorbis",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "matroska,webm",
+          "format_long_name": "Matroska / WebM",
+          "duration": "3.003000",
+          "size": "164062"
+        }
+      }
+    },
+    {
+      "caseId": "webm-vp9-opus",
+      "relativePath": "webm_vp9_opus.webm",
+      "size": 168649,
+      "sha256": "CE0152C821F3CDA7FDD3FC91F4FF26DEAA2A9F4D82F988A4DB4253F468F76BA0",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "vp9",
+            "codec_long_name": "Google VP9",
+            "profile": "Profile 0",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "opus",
+            "codec_long_name": "Opus (Opus Interactive Audio Codec)",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "matroska,webm",
+          "format_long_name": "Matroska / WebM",
+          "duration": "3.008000",
+          "size": "168649"
+        }
+      }
+    },
+    {
+      "caseId": "ts-h264-aac",
+      "relativePath": "ts_h264_aac.ts",
+      "size": 293844,
+      "sha256": "19D169CBFBA8A875E309110273CAEE273B9789956A6A4522F17A67AE7EE5A353",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [
+          {
+            "streams": [
+              {
+                "index": 0,
+                "codec_name": "h264",
+                "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                "profile": "Constrained Baseline",
+                "codec_type": "video",
+                "width": 320,
+                "height": 180,
+                "pix_fmt": "yuv420p",
+                "r_frame_rate": "24/1"
+              },
+              {
+                "index": 1,
+                "codec_name": "aac",
+                "codec_long_name": "AAC (Advanced Audio Coding)",
+                "profile": "LC",
+                "codec_type": "audio",
+                "sample_rate": "48000",
+                "channels": 1,
+                "channel_layout": "mono",
+                "r_frame_rate": "0/0"
+              }
+            ]
+          }
+        ],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "Constrained Baseline",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "mpegts",
+          "format_long_name": "MPEG-TS (MPEG-2 Transport Stream)",
+          "duration": "3.029333",
+          "size": "293844"
+        }
+      }
+    },
+    {
+      "caseId": "ts-hevc-aac",
+      "relativePath": "ts_hevc_aac.ts",
+      "size": 146264,
+      "sha256": "80481BD28BD608BD60C7990FB0925D441B68032A601D964AF90EDB3E50D96BA7",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [
+          {
+            "streams": [
+              {
+                "index": 0,
+                "codec_name": "hevc",
+                "codec_long_name": "H.265 / HEVC (High Efficiency Video Coding)",
+                "profile": "Main",
+                "codec_type": "video",
+                "width": 320,
+                "height": 180,
+                "pix_fmt": "yuv420p",
+                "r_frame_rate": "24/1"
+              },
+              {
+                "index": 1,
+                "codec_name": "aac",
+                "codec_long_name": "AAC (Advanced Audio Coding)",
+                "profile": "LC",
+                "codec_type": "audio",
+                "sample_rate": "48000",
+                "channels": 1,
+                "channel_layout": "mono",
+                "r_frame_rate": "0/0"
+              }
+            ]
+          }
+        ],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "hevc",
+            "codec_long_name": "H.265 / HEVC (High Efficiency Video Coding)",
+            "profile": "Main",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "mpegts",
+          "format_long_name": "MPEG-TS (MPEG-2 Transport Stream)",
+          "duration": "3.029333",
+          "size": "146264"
+        }
+      }
+    },
+    {
+      "caseId": "m2ts-h264-aac",
+      "relativePath": "m2ts_h264_aac.m2ts",
+      "size": 301056,
+      "sha256": "D1B09D0AC3504EC523982864A79276764B2D6A37C7C90F4703E7CFB66CE6E809",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [
+          {
+            "streams": [
+              {
+                "index": 0,
+                "codec_name": "h264",
+                "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                "profile": "Constrained Baseline",
+                "codec_type": "video",
+                "width": 320,
+                "height": 180,
+                "pix_fmt": "yuv420p",
+                "r_frame_rate": "24/1"
+              },
+              {
+                "index": 1,
+                "codec_name": "aac",
+                "codec_long_name": "AAC (Advanced Audio Coding)",
+                "profile": "LC",
+                "codec_type": "audio",
+                "sample_rate": "48000",
+                "channels": 1,
+                "channel_layout": "mono",
+                "r_frame_rate": "0/0"
+              }
+            ]
+          }
+        ],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "Constrained Baseline",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "mpegts",
+          "format_long_name": "MPEG-TS (MPEG-2 Transport Stream)",
+          "duration": "3.029333",
+          "size": "301056"
+        }
+      }
+    },
+    {
+      "caseId": "avi-mpeg4-mp3",
+      "relativePath": "avi_mpeg4_mp3.avi",
+      "size": 317856,
+      "sha256": "276D4F1A5A2023B2861608F990C805986C91773D8DEB901B65780AFFFAFD6C08",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "B",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "mpeg4",
+            "codec_long_name": "MPEG-4 part 2",
+            "profile": "Simple Profile",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "mp3",
+            "codec_long_name": "MP3 (MPEG audio layer 3)",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "avi",
+          "format_long_name": "AVI (Audio Video Interleaved)",
+          "duration": "3.041667",
+          "size": "317856"
+        }
+      }
+    },
+    {
+      "caseId": "avi-mjpeg-pcm",
+      "relativePath": "avi_mjpeg_pcm.avi",
+      "size": 875630,
+      "sha256": "FDD6AD6C843F44164A520840BCCE4C310F23C57A0A70E8F44D24899C95FAEDAA",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "B",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "mjpeg",
+            "codec_long_name": "Motion JPEG",
+            "profile": "Baseline",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuvj420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "pcm_s16le",
+            "codec_long_name": "PCM signed 16-bit little-endian",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "avi",
+          "format_long_name": "AVI (Audio Video Interleaved)",
+          "duration": "3.000000",
+          "size": "875630"
+        }
+      }
+    },
+    {
+      "caseId": "flv-h264-aac",
+      "relativePath": "flv_h264_aac.flv",
+      "size": 271592,
+      "sha256": "C7E41A216379A0E428DDD851AB082358532722BF01295497F64BDC151AA44A33",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "B",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "Constrained Baseline",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "flv",
+          "format_long_name": "FLV (Flash Video)",
+          "duration": "3.021000",
+          "size": "271592"
+        }
+      }
+    },
+    {
+      "caseId": "mpeg-mpeg2-mp2",
+      "relativePath": "mpeg_mpeg2_mp2.mpg",
+      "size": 370688,
+      "sha256": "9DE37FFECB90F52486CEC76D172CFAC1A9381477750A172A90B71A190719EA4D",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "B",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "mpeg2video",
+            "codec_long_name": "MPEG-2 video",
+            "profile": "Main",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1",
+            "side_data_list": [
+              {}
+            ]
+          },
+          {
+            "index": 1,
+            "codec_name": "mp2",
+            "codec_long_name": "MP2 (MPEG audio layer 2)",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "mpeg",
+          "format_long_name": "MPEG-PS (MPEG-2 Program Stream)",
+          "duration": "3.010023",
+          "size": "370688"
+        }
+      }
+    },
+    {
+      "caseId": "wmv-wmv2-wma",
+      "relativePath": "wmv_wmv2_wma.wmv",
+      "size": 349713,
+      "sha256": "733D7FE93FF9328D0ED24838DD94CD3EED80035370BD5F2D31F045050CA381D0",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "B",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "wmv2",
+            "codec_long_name": "Windows Media Video 8",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "wmav2",
+            "codec_long_name": "Windows Media Audio 2",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "asf",
+          "format_long_name": "ASF (Advanced / Active Streaming Format)",
+          "duration": "3.086000",
+          "size": "349713"
+        }
+      }
+    },
+    {
+      "caseId": "3gp-h263-aac",
+      "relativePath": "3gp_h263_aac.3gp",
+      "size": 179733,
+      "sha256": "9311A02C4A2747BBBE9CD45F7F9A999685621C2FF86CF5BEE3460F0017FA7966",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "C",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h263",
+            "codec_long_name": "H.263 / H.263-1996, H.263+ / H.263-1998 / H.263 version 2",
+            "codec_type": "video",
+            "width": 176,
+            "height": 144,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "15/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "8000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "duration": "3.000000",
+          "size": "179733"
+        }
+      }
+    },
+    {
+      "caseId": "ogv-theora-vorbis",
+      "relativePath": "ogv_theora_vorbis.ogv",
+      "size": 149505,
+      "sha256": "82F15C071D3DA4E79F861A0B57A2228BED18080E973F6E79421562A8721AD279",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "B",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "theora",
+            "codec_long_name": "Theora",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "vorbis",
+            "codec_long_name": "Vorbis",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "ogg",
+          "format_long_name": "Ogg",
+          "duration": "3.000000",
+          "size": "149505"
+        }
+      }
+    },
+    {
+      "caseId": "mov-prores-pcm",
+      "relativePath": "mov_prores_pcm.mov",
+      "size": 875939,
+      "sha256": "B65C7D05F94C0803576A1B970155F108C91441AA33879D3BF8B3781D8F63C5C4",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "B",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "prores",
+            "codec_long_name": "Apple ProRes (iCodec Pro)",
+            "profile": "Proxy",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv422p10le",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "pcm_s16le",
+            "codec_long_name": "PCM signed 16-bit little-endian",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "duration": "3.000000",
+          "size": "875939"
+        }
+      }
+    },
+    {
+      "caseId": "vob-mpeg2-ac3",
+      "relativePath": "vob_mpeg2_ac3.vob",
+      "size": 372736,
+      "sha256": "32CFEC307009D361CA43373093F1C951131F7E66B88E4C9FF1A9AE7BBBD33468",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "B",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "mpeg2video",
+            "codec_long_name": "MPEG-2 video",
+            "profile": "Main",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1",
+            "side_data_list": [
+              {}
+            ]
+          },
+          {
+            "index": 1,
+            "codec_name": "ac3",
+            "codec_long_name": "ATSC A/52A (AC-3)",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "mpeg",
+          "format_long_name": "MPEG-PS (MPEG-2 Program Stream)",
+          "duration": "3.005334",
+          "size": "372736"
+        }
+      }
+    },
+    {
+      "caseId": "rm-rv20",
+      "relativePath": "rm_rv20.rm",
+      "size": 242839,
+      "sha256": "A75825A2FFBCDFF124DCACBA45D3904321309B8C392B74886E0AB57004006D5C",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "C",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "rv20",
+            "codec_long_name": "RealVideo 2.0",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          }
+        ],
+        "format": {
+          "format_name": "rm",
+          "format_long_name": "RealMedia",
+          "duration": "3.000000",
+          "size": "242839"
+        }
+      }
+    },
+    {
+      "caseId": "mkv-ffv1-flac",
+      "relativePath": "mkv_ffv1_flac.mkv",
+      "size": 520358,
+      "sha256": "7EF6A847FA66C6C3A47BCCAFFCA08BED3DCEA499A90E693915C231C3142F5B78",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "B",
+      "mediaType": "video",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "ffv1",
+            "codec_long_name": "FFmpeg video codec #1",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "flac",
+            "codec_long_name": "FLAC (Free Lossless Audio Codec)",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "matroska,webm",
+          "format_long_name": "Matroska / WebM",
+          "duration": "3.000000",
+          "size": "520358"
+        }
+      }
+    },
+    {
+      "caseId": "audio-mp3",
+      "relativePath": "audio_mp3.mp3",
+      "size": 48813,
+      "sha256": "6DC789C4E66D31394D028CC9142F68444512F75B76D234159C4352D20FBC9231",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "audio",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "mp3",
+            "codec_long_name": "MP3 (MPEG audio layer 3)",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "mp3",
+          "format_long_name": "MP2/3 (MPEG audio layer 2/3)",
+          "duration": "3.000000",
+          "size": "48813"
+        }
+      }
+    },
+    {
+      "caseId": "audio-aac",
+      "relativePath": "audio_aac.aac",
+      "size": 37505,
+      "sha256": "8832C236D1D8088EDF9CD7435F129C7A74A23AC8DD767D14F409B1A607039745",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "audio",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "aac",
+          "format_long_name": "raw ADTS AAC (Advanced Audio Coding)",
+          "duration": "3.012510",
+          "size": "37505"
+        }
+      }
+    },
+    {
+      "caseId": "audio-m4a-aac",
+      "relativePath": "audio_m4a_aac.m4a",
+      "size": 37886,
+      "sha256": "5308C89E1244D296677EA3A142B569430CE9BFDEB1FABA2D248CBCD6DFC1BC3D",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "audio",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "duration": "3.000000",
+          "size": "37886"
+        }
+      }
+    },
+    {
+      "caseId": "audio-m4a-alac",
+      "relativePath": "audio_m4a_alac.m4a",
+      "size": 61152,
+      "sha256": "31F1FC1C9C99EAA62C1F4CE7D8CF313C4137799FF43246EE526CD134C8791CC9",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "audio",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "alac",
+            "codec_long_name": "ALAC (Apple Lossless Audio Codec)",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "duration": "3.000000",
+          "size": "61152"
+        }
+      }
+    },
+    {
+      "caseId": "audio-flac",
+      "relativePath": "audio_flac.flac",
+      "size": 47895,
+      "sha256": "11EBD4B0E93EB3B9A96F7E2C218CF88CA95A69E8847DDC8838558083B7C21BC8",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "audio",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "flac",
+            "codec_long_name": "FLAC (Free Lossless Audio Codec)",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "flac",
+          "format_long_name": "raw FLAC",
+          "duration": "3.000000",
+          "size": "47895"
+        }
+      }
+    },
+    {
+      "caseId": "audio-ogg-vorbis",
+      "relativePath": "audio_ogg_vorbis.ogg",
+      "size": 9899,
+      "sha256": "B86A66A937824E685B7547B02175DF598671C053EEF76BB5228CBFB2136D7620",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "audio",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "vorbis",
+            "codec_long_name": "Vorbis",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "ogg",
+          "format_long_name": "Ogg",
+          "duration": "3.000000",
+          "size": "9899"
+        }
+      }
+    },
+    {
+      "caseId": "audio-opus",
+      "relativePath": "audio_opus.opus",
+      "size": 52048,
+      "sha256": "0CC5F0935ABAA97D748A0ECDC5389E6AD5764FB6F0C8EF75AD7BFDF983614C5C",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "audio",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "opus",
+            "codec_long_name": "Opus (Opus Interactive Audio Codec)",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "ogg",
+          "format_long_name": "Ogg",
+          "duration": "3.006500",
+          "size": "52048"
+        }
+      }
+    },
+    {
+      "caseId": "audio-wav-pcm",
+      "relativePath": "audio_wav_pcm.wav",
+      "size": 288078,
+      "sha256": "2F992C6BCA5511C5BA044A13B8768ADC3156919FA357CA2E84C061EAB3B66C51",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "audio",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "pcm_s16le",
+            "codec_long_name": "PCM signed 16-bit little-endian",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "wav",
+          "format_long_name": "WAV / WAVE (Waveform Audio)",
+          "duration": "3.000000",
+          "size": "288078"
+        }
+      }
+    },
+    {
+      "caseId": "audio-amr-nb",
+      "relativePath": "audio_amr_nb.amr",
+      "size": 4838,
+      "sha256": "A10616FB8CDB9FD71E65BEA156F026161A4EDE2A9227792F331E380571A4F2FC",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "B",
+      "mediaType": "audio",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "amr_nb",
+            "codec_long_name": "AMR-NB (Adaptive Multi-Rate NarrowBand)",
+            "codec_type": "audio",
+            "sample_rate": "8000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "amr",
+          "format_long_name": "3GPP AMR",
+          "duration": "3.117375",
+          "size": "4838"
+        }
+      }
+    },
+    {
+      "caseId": "audio-amr-wb",
+      "relativePath": "audio_amr_wb.amr",
+      "size": 9159,
+      "sha256": "DDDB9D7723493068822BC64FABFA0031A32CE34BCD215A83181EC71E9EECF427",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "B",
+      "mediaType": "audio",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "amr_wb",
+            "codec_long_name": "AMR-WB (Adaptive Multi-Rate WideBand)",
+            "codec_type": "audio",
+            "sample_rate": "16000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "amr",
+          "format_long_name": "3GPP AMR",
+          "duration": "3.101688",
+          "size": "9159"
+        }
+      }
+    },
+    {
+      "caseId": "audio-ac3",
+      "relativePath": "audio_ac3.ac3",
+      "size": 72192,
+      "sha256": "603B760E3325A69764A8EB872936A097541131286F7DC39D6AFCA4B43B274B5E",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "audio",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "ac3",
+            "codec_long_name": "ATSC A/52A (AC-3)",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "ac3",
+          "format_long_name": "raw AC-3",
+          "duration": "3.008000",
+          "size": "72192"
+        }
+      }
+    },
+    {
+      "caseId": "audio-eac3",
+      "relativePath": "audio_eac3.eac3",
+      "size": 72192,
+      "sha256": "A0E7DF4B12DF7FDC9819C50F1480D2AC86DCF41D21DFAFFD1919B84ABA82B565",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "audio",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "eac3",
+            "codec_long_name": "ATSC A/52B (AC-3, E-AC-3)",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "eac3",
+          "format_long_name": "raw E-AC-3",
+          "duration": "3.008000",
+          "size": "72192"
+        }
+      }
+    },
+    {
+      "caseId": "audio-dts",
+      "relativePath": "audio_dts.dts",
+      "size": 288768,
+      "sha256": "A9E7DE50BBD1AEA2311879EF0FF4E87118C5A8D0C98442F05EC059CC356A9269",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "audio",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "dts",
+            "codec_long_name": "DCA (DTS Coherent Acoustics)",
+            "profile": "DTS",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "dts",
+          "format_long_name": "raw DTS",
+          "duration": "3.008000",
+          "size": "288768"
+        }
+      }
+    },
+    {
+      "caseId": "audio-wma",
+      "relativePath": "audio_wma.wma",
+      "size": 58144,
+      "sha256": "1916ADAA89D0A0B24A10DE82A44019BB272D4C89AE5E0C51C54C8D07DCF3ABFE",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "B",
+      "mediaType": "audio",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "wmav2",
+            "codec_long_name": "Windows Media Audio 2",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "asf",
+          "format_long_name": "ASF (Advanced / Active Streaming Format)",
+          "duration": "3.000000",
+          "size": "58144"
+        }
+      }
+    },
+    {
+      "caseId": "audio-wavpack",
+      "relativePath": "audio_wavpack.wv",
+      "size": 76831,
+      "sha256": "48099A5C661597EAB9C9F40476E32E08B9E301667CB6E0EC15C6FFE174ED583D",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "B",
+      "mediaType": "audio",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "wavpack",
+            "codec_long_name": "WavPack",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "wv",
+          "format_long_name": "WavPack",
+          "duration": "3.000000",
+          "size": "76831"
+        }
+      }
+    },
+    {
+      "caseId": "audio-tta",
+      "relativePath": "audio_tta.tta",
+      "size": 66774,
+      "sha256": "C5C24430D3CA927E3158F1D201AD95A18C7E157F05EAC91505FF3C93D401D725",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "B",
+      "mediaType": "audio",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "tta",
+            "codec_long_name": "TTA (True Audio)",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "tta",
+          "format_long_name": "TTA (True Audio)",
+          "duration": "3.000000",
+          "size": "66774"
+        }
+      }
+    },
+    {
+      "caseId": "audio-truehd",
+      "relativePath": "audio_truehd.thd",
+      "size": 103200,
+      "sha256": "0C6477E81407B642E5D593374A2ECD3705994572D77F91214BF2E04880520EC4",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "audio",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "truehd",
+            "codec_long_name": "TrueHD",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "truehd",
+          "format_long_name": "raw TrueHD",
+          "size": "103200"
+        }
+      }
+    },
+    {
+      "caseId": "audio-mlp",
+      "relativePath": "audio_mlp.mlp",
+      "size": 103200,
+      "sha256": "38FC237A9E7A6B8E34294B801736475B7C1A02E646C8DCCAB4199A5B1F5C7AC2",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "B",
+      "mediaType": "audio",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "mlp",
+            "codec_long_name": "MLP (Meridian Lossless Packing)",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "mlp",
+          "format_long_name": "raw MLP",
+          "size": "103200"
+        }
+      }
+    },
+    {
+      "caseId": "audio-aiff-pcm",
+      "relativePath": "audio_aiff_pcm.aiff",
+      "size": 288054,
+      "sha256": "A6D54F1580333E8728AFED98FC77E268508C57EF2411AE040E7364089D0CDFC2",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "B",
+      "mediaType": "audio",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "pcm_s16be",
+            "codec_long_name": "PCM signed 16-bit big-endian",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "aiff",
+          "format_long_name": "Audio IFF",
+          "duration": "3.000000",
+          "size": "288054"
+        }
+      }
+    },
+    {
+      "caseId": "audio-caf-alac",
+      "relativePath": "audio_caf_alac.caf",
+      "size": 60571,
+      "sha256": "CC5668825C063EA795EBF0FC9E2BB7879730A5CBA023E21AC85301E3D55DC0D8",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "B",
+      "mediaType": "audio",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "alac",
+            "codec_long_name": "ALAC (Apple Lossless Audio Codec)",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "caf",
+          "format_long_name": "Apple CAF (Core Audio Format)",
+          "duration": "3.000000",
+          "size": "60571"
+        }
+      }
+    },
+    {
+      "caseId": "audio-ape",
+      "relativePath": "audio_ape.ape",
+      "size": 6510317,
+      "sha256": "6A7B79A6D530E9847C18119D627BD43C8D27DCEFB3EC7EC979B9B6306E34AC15",
+      "provenance": "fresh fetch-external-samples.ps1 with pinned checksum",
+      "tier": "B",
+      "mediaType": "audio",
+      "ffprobe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "ape",
+            "codec_long_name": "Monkey's Audio",
+            "codec_type": "audio",
+            "sample_rate": "44100",
+            "channels": 2,
+            "channel_layout": "stereo",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "ape",
+          "format_long_name": "Monkey's Audio",
+          "duration": "60.480000",
+          "size": "6510317"
+        }
+      }
+    },
+    {
+      "caseId": "hls-h264-aac",
+      "relativePath": "hls_h264/index.m3u8",
+      "size": 187,
+      "sha256": "531A32E12F07C6C82E2D08F0DDD581F79E3F19B998E08576E3CA221597AAD4C7",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "stream",
+      "ffprobe": {
+        "programs": [
+          {
+            "streams": [
+              {
+                "index": 0,
+                "codec_name": "h264",
+                "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                "profile": "Constrained Baseline",
+                "codec_type": "video",
+                "width": 320,
+                "height": 180,
+                "pix_fmt": "yuv420p",
+                "r_frame_rate": "24/1"
+              },
+              {
+                "index": 1,
+                "codec_name": "aac",
+                "codec_long_name": "AAC (Advanced Audio Coding)",
+                "profile": "LC",
+                "codec_type": "audio",
+                "sample_rate": "48000",
+                "channels": 1,
+                "channel_layout": "mono",
+                "r_frame_rate": "0/0"
+              }
+            ]
+          }
+        ],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "Constrained Baseline",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "hls",
+          "format_long_name": "Apple HTTP Live Streaming",
+          "duration": "3.000000",
+          "size": "187"
+        }
+      },
+      "manifestAndSegments": [
+        {
+          "relativePath": "hls_h264/index.m3u8",
+          "size": 187,
+          "sha256": "531A32E12F07C6C82E2D08F0DDD581F79E3F19B998E08576E3CA221597AAD4C7"
+        },
+        {
+          "relativePath": "hls_h264/segment_000.ts",
+          "size": 93248,
+          "sha256": "E8178021313B1783EFAA77269D877E61093A26C521037FB4931BCA72B6822E78"
+        },
+        {
+          "relativePath": "hls_h264/segment_001.ts",
+          "size": 93812,
+          "sha256": "ADB34655C00CDCDB61A1C9D435449A0E95496E3627D169C9EB93F8110BA8EAD6"
+        },
+        {
+          "relativePath": "hls_h264/segment_002.ts",
+          "size": 98888,
+          "sha256": "3389D35E37F289D5FD6BFCE4E72BAFA4760E0D580AC0752AB2EABCE22C1196A3"
+        }
+      ]
+    },
+    {
+      "caseId": "hls-hevc-aac",
+      "relativePath": "hls_hevc/index.m3u8",
+      "size": 187,
+      "sha256": "AC6BC3D9133FB270A8FE6785FD27FA4F2694D44A9EE64C1AAAAD7B7028BDB555",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "stream",
+      "ffprobe": {
+        "programs": [
+          {
+            "streams": [
+              {
+                "index": 0,
+                "codec_name": "hevc",
+                "codec_long_name": "H.265 / HEVC (High Efficiency Video Coding)",
+                "profile": "Main",
+                "codec_type": "video",
+                "width": 320,
+                "height": 180,
+                "pix_fmt": "yuv420p",
+                "r_frame_rate": "24/1"
+              },
+              {
+                "index": 1,
+                "codec_name": "aac",
+                "codec_long_name": "AAC (Advanced Audio Coding)",
+                "profile": "LC",
+                "codec_type": "audio",
+                "sample_rate": "48000",
+                "channels": 1,
+                "channel_layout": "mono",
+                "r_frame_rate": "0/0"
+              }
+            ]
+          }
+        ],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "hevc",
+            "codec_long_name": "H.265 / HEVC (High Efficiency Video Coding)",
+            "profile": "Main",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "hls",
+          "format_long_name": "Apple HTTP Live Streaming",
+          "duration": "3.125000",
+          "size": "187"
+        }
+      },
+      "manifestAndSegments": [
+        {
+          "relativePath": "hls_hevc/index.m3u8",
+          "size": 187,
+          "sha256": "AC6BC3D9133FB270A8FE6785FD27FA4F2694D44A9EE64C1AAAAD7B7028BDB555"
+        },
+        {
+          "relativePath": "hls_hevc/segment_000.ts",
+          "size": 40232,
+          "sha256": "F0F9A62154ACA9452CA089F76EDA94AF23D37EAB06242ABD010479F8234733F2"
+        },
+        {
+          "relativePath": "hls_hevc/segment_001.ts",
+          "size": 43616,
+          "sha256": "DF34BDAC61A7FD44BD891D9C149F0F7AEF29705612A7962A4DE18EF2B240560B"
+        },
+        {
+          "relativePath": "hls_hevc/segment_002.ts",
+          "size": 54520,
+          "sha256": "6591178796DFEA986ECBBCE6FB46A233BC9DAF6F163FEC3BC0F83A6EB5BF880E"
+        }
+      ]
+    },
+    {
+      "caseId": "dash-h264-aac",
+      "relativePath": "dash_h264/index.mpd",
+      "size": 1914,
+      "sha256": "21F947FC5851A27ECE23DE32968FC8FDF44D19A874B9B535399BB8BB83293008",
+      "provenance": "fresh generate-samples.ps1",
+      "tier": "A",
+      "mediaType": "stream",
+      "ffprobe": {
+        "programs": [
+          {
+            "streams": [
+              {
+                "index": 0,
+                "codec_name": "h264",
+                "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+                "profile": "Constrained Baseline",
+                "codec_type": "video",
+                "width": 320,
+                "height": 180,
+                "pix_fmt": "yuv420p",
+                "r_frame_rate": "24/1"
+              },
+              {
+                "index": 1,
+                "codec_name": "aac",
+                "codec_long_name": "AAC (Advanced Audio Coding)",
+                "profile": "LC",
+                "codec_type": "audio",
+                "sample_rate": "48000",
+                "channels": 1,
+                "channel_layout": "mono",
+                "r_frame_rate": "0/0"
+              }
+            ]
+          }
+        ],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "Constrained Baseline",
+            "codec_type": "video",
+            "width": 320,
+            "height": 180,
+            "pix_fmt": "yuv420p",
+            "r_frame_rate": "24/1"
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "r_frame_rate": "0/0"
+          }
+        ],
+        "format": {
+          "format_name": "dash",
+          "format_long_name": "Dynamic Adaptive Streaming over HTTP",
+          "duration": "3.000000",
+          "size": "1914"
+        }
+      },
+      "manifestAndSegments": [
+        {
+          "relativePath": "dash_h264/chunk-stream0-00001.m4s",
+          "size": 74837,
+          "sha256": "E6B134BC37132630DEE4086E43D1C687B1B3CFFD0E6195194480D327FBA7A274"
+        },
+        {
+          "relativePath": "dash_h264/chunk-stream0-00002.m4s",
+          "size": 75532,
+          "sha256": "0D472AE6C284C936996980DB832B0DE4A9952542545324905241A6A705069157"
+        },
+        {
+          "relativePath": "dash_h264/chunk-stream0-00003.m4s",
+          "size": 81289,
+          "sha256": "604D9AEC32B781A2D3082347B85F01C59C87C9D6EA88876BA95DF89206303ED0"
+        },
+        {
+          "relativePath": "dash_h264/chunk-stream1-00001.m4s",
+          "size": 12529,
+          "sha256": "DFCF8FBD40BE1BEDF71AC526EED0E31BE49C6EA1B0F6684C8DF2E14BD2823092"
+        },
+        {
+          "relativePath": "dash_h264/chunk-stream1-00002.m4s",
+          "size": 12417,
+          "sha256": "8CE7552930DB4DC4DF62ED3ECAD72B118EB7D5D22DD29FE062280C6E0D7E3D1B"
+        },
+        {
+          "relativePath": "dash_h264/chunk-stream1-00003.m4s",
+          "size": 12436,
+          "sha256": "59A0F152F79B4A49D2966D009ED076603F8769D6BF2969667ECA54C649EAC995"
+        },
+        {
+          "relativePath": "dash_h264/chunk-stream1-00004.m4s",
+          "size": 429,
+          "sha256": "57298C78B7B011430176FE62EFEC7EEF8E4500A2C53B030C6455CBB282F3260B"
+        },
+        {
+          "relativePath": "dash_h264/index.mpd",
+          "size": 1914,
+          "sha256": "21F947FC5851A27ECE23DE32968FC8FDF44D19A874B9B535399BB8BB83293008"
+        },
+        {
+          "relativePath": "dash_h264/init-stream0.m4s",
+          "size": 807,
+          "sha256": "AC4C95F1352C30E9B12021D6DC71480AC8D2279B94074DE04D08723EACEDF38D"
+        },
+        {
+          "relativePath": "dash_h264/init-stream1.m4s",
+          "size": 765,
+          "sha256": "9F0CD2FB600F24B0B5FE6699B14408DF7AFEEFFED39810D6A709291E9BEDCC5D"
+        }
+      ]
+    }
+  ]
+}

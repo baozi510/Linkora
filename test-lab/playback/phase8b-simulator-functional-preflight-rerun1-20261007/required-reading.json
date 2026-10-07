@@ -1,0 +1,72 @@
+[
+  {
+    "path": "docs/AI_WORKFLOW.md",
+    "sha256": "9692B25EA6A66960228B9C3869E8731AEA3D8AE29286B33E9F519F3E0B661E4A",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/MASTER_IMPLEMENTATION_PLAN.md",
+    "sha256": "807DE0E14363C9E35E460F5E1FA11DE718858EDEA47F54F5C24A9A5F2387C851",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/IMPLEMENTATION_STATUS.md",
+    "sha256": "1601EFB194437080824C3080C6553D9B63C9136D91054B64FC65C1CD2E31C0AB",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/SESSION_HANDOFF.md",
+    "sha256": "666A1264ED82CE126272588763012C2C18F807CBCF320AE5FE24D466E3F36864",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/CODEX_VALIDATION_TASK.md",
+    "sha256": "638577DF8BC5C23A40A2EE0D15B3507BF7B397F5843BD1727B22929DC5463BE2",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/PLAYBACK_PHASE8B_SIMULATOR_RUNBOOK.md",
+    "sha256": "164C19AF058C37F4CBE186794FBE5C78CB119F020B8BDE47DC9307283681B126",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/PLAYBACK_PHASE8B_RUNBOOK.md",
+    "sha256": "9F69C81A9B817A39F29E387D201F2F0E4DC3AF7FEB8CE42DE43A88DCE82ADAB4",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/PLAYBACK_PHASE8B_REPORT.md",
+    "sha256": "A110CB961292714B031390A542478E86D111DD5AD8875E3F9D5241EB5F0DEB2B",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/SIMULATOR_TEST_MANUAL.md",
+    "sha256": "9840A656BC1931C8FD379D5C9F243C8F929E90C799EB286495F28B70933E621E",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/SIMULATOR_VALIDATION_REPORT.md",
+    "sha256": "8926CD98153450EC063A9FC45F50B4A41F13014D8D12FD328405A80E2657428D",
+    "fullyRead": true
+  },
+  {
+    "path": "test-lab/media-compatibility/README.md",
+    "sha256": "E5D9F0BCDDC96FD4F6E96FE2A6E452DA420AECB613F585C6C52D3ED0410E864D",
+    "fullyRead": true
+  },
+  {
+    "path": "test-lab/media-compatibility/cases.json",
+    "sha256": "45DD55584A3E644F7AB2DEA138EA5091262395DC177A93A9E4D9D779998581E0",
+    "fullyRead": true
+  },
+  {
+    "path": "test-lab/media-compatibility/generate-samples.ps1",
+    "sha256": "1400258A324D479A1664A6B9C320462C71E212DACEE3118E3929DD489EE678AB",
+    "fullyRead": true
+  },
+  {
+    "path": "test-lab/media-compatibility/fetch-external-samples.ps1",
+    "sha256": "AE255608BDB42D2A676CF28CC87B5C79B71E0EC048189A9BE05B16AE63AAB533",
+    "fullyRead": true
+  }
+]

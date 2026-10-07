@@ -1,0 +1,43 @@
+{
+  "scope": "simulator stub control flow only; no MPV capability matrix",
+  "records": [
+    {
+      "caseId": "mp4-h264-aac",
+      "mode": "forced-mpv",
+      "startedUtc": "2026-10-07T15:35:44.218189+00:00",
+      "boundedFailureObserved": true,
+      "systemPlayerNotCommitted": true,
+      "noAudioRenderer": true,
+      "releaseClean": true,
+      "nativeMpvRuntime": "DEVICE REQUIRED",
+      "boundaryEvidence": "fresh exact-HAP package stub constructor plus production Adaptive path and observed failure; no codec claim"
+    },
+    {
+      "caseId": "mkv-h264-aac",
+      "mode": "forced-mpv",
+      "startedUtc": "2026-10-07T15:36:01.050793+00:00",
+      "boundedFailureObserved": true,
+      "systemPlayerNotCommitted": true,
+      "noAudioRenderer": true,
+      "releaseClean": true,
+      "nativeMpvRuntime": "DEVICE REQUIRED",
+      "boundaryEvidence": "fresh exact-HAP package stub constructor plus production Adaptive path and observed failure; no codec claim"
+    },
+    {
+      "caseId": "mp4-h264-aac",
+      "mode": "system-recovery-after-forced-stub",
+      "playingObserved": true,
+      "releaseClean": true
+    },
+    {
+      "caseId": "mkv-h264-aac",
+      "mode": "auto-mpv-first",
+      "finalSystemPlayingObserved": true,
+      "realFrameObserved": true,
+      "candidateFailureNotShownInCommittedPlayingSnapshot": true,
+      "releaseClean": true,
+      "atMostOneFallback": "audited unchanged AdaptivePlaybackPort plus fresh Hypium; final runtime System corroboration, no standalone constructor counter",
+      "nativeMpvCapabilityClaim": false
+    }
+  ]
+}
