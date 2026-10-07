@@ -6,7 +6,7 @@ Repository: `baozi510/Linkora`
 
 Current branch: `feat/ffmpeg-analyzer-policy-phase3`
 
-Current phase: **Phase 8A playback functional foundation ACCEPTED; next mainline work is Phase 8B media capability coverage. Fullscreen/display-mode UI work is non-blocking follow-up. Phase 7A benchmark baseline and Phase 3 analysis policy remain ACCEPTED.**
+Current phase: **Phase 8A playback functional foundation ACCEPTED; Phase 8B real-arm64 System/MPV media capability matrix is next. Fullscreen/display-mode UI work is non-blocking follow-up. Phase 7A benchmark baseline and Phase 3 analysis policy remain ACCEPTED.**
 
 Implementation source:
 

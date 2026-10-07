@@ -58,3 +58,30 @@ Acceptance tiers are defined in `docs/MASTER_IMPLEMENTATION_PLAN.md`:
 - Tier C: rare/obsolete/emerging observation coverage; successful handling is desirable but not mandatory, while crashes/hangs/resource leaks remain unacceptable.
 
 The historical simulator report remains historical System/AVPlayer evidence only. Real-arm64 System/MPV/Analyzer results must be collected afresh.
+
+
+## Machine-readable capability manifest
+
+`cases.json` is the authoritative seed manifest for the 59-case compatibility lab.
+
+Each case records:
+
+- stable case ID and relative fixture path;
+- Tier A/B/C;
+- media kind;
+- container;
+- representative video/audio/subtitle codec identity;
+- whether it is generated or externally fetched;
+- whether it participates in the Tier A product gate.
+
+Playback results are recorded independently for `system` and `mpv`.
+
+Tier A does **not** require every backend to PASS. It requires a usable product path: at least one backend must PASS, while the other may be explicitly UNSUPPORTED.
+
+Tier B/C failures are compatibility observations unless they reveal infrastructure defects. At every tier, crash, ANR, unbounded wait/retry, cross-session leakage or failure to release resources is unacceptable.
+
+Use:
+
+`node scripts/summarize-playback-capability.cjs <raw.ndjson>`
+
+to validate matrix completeness and produce the aggregate summary.

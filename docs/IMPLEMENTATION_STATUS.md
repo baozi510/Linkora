@@ -61,7 +61,7 @@ No production source change or rerun is required for this ruling.
 
 ### Current architecture action
 
-**Phase 8A playback functional foundation: ACCEPTED. Fullscreen/player-layout refinement is non-blocking UI follow-up.**
+**Phase 8A playback functional foundation: ACCEPTED. Phase 8B System/MPV media capability matrix infrastructure is prepared; real-arm64 matrix validation is next.**
 
 Phase 7A Analysis Benchmark baseline is ACCEPTED.
 

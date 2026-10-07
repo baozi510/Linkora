@@ -1,0 +1,1018 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Shared Linkora Media Capability Corpus seed manifest",
+  "verdicts": [
+    "PASS",
+    "UNSUPPORTED",
+    "FAIL",
+    "TIMEOUT",
+    "NOT_RUN"
+  ],
+  "backendRule": "System and MPV outcomes are independent. Tier A product coverage requires at least one backend PASS; an individual backend may be UNSUPPORTED.",
+  "stabilityRule": "Crash, ANR, unbounded wait/retry, unreleased resources or cross-session leakage are infrastructure failures at every tier.",
+  "cases": [
+    {
+      "id": "mp4-h264-aac",
+      "path": "mp4_h264_aac.mp4",
+      "tier": "A",
+      "mediaType": "video",
+      "container": "MP4",
+      "videoCodec": "H.264",
+      "audioCodec": "AAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mp4-hevc-aac",
+      "path": "mp4_hevc_aac.mp4",
+      "tier": "A",
+      "mediaType": "video",
+      "container": "MP4",
+      "videoCodec": "HEVC",
+      "audioCodec": "AAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mp4-av1-aac",
+      "path": "mp4_av1_aac.mp4",
+      "tier": "A",
+      "mediaType": "video",
+      "container": "MP4",
+      "videoCodec": "AV1",
+      "audioCodec": "AAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mp4-mpeg4-aac",
+      "path": "mp4_mpeg4_aac.mp4",
+      "tier": "B",
+      "mediaType": "video",
+      "container": "MP4",
+      "videoCodec": "MPEG-4 Part 2",
+      "audioCodec": "AAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "m4v-h264-aac",
+      "path": "m4v_h264_aac.m4v",
+      "tier": "A",
+      "mediaType": "video",
+      "container": "M4V/MP4",
+      "videoCodec": "H.264",
+      "audioCodec": "AAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mov-h264-aac",
+      "path": "mov_h264_aac.mov",
+      "tier": "A",
+      "mediaType": "video",
+      "container": "MOV",
+      "videoCodec": "H.264",
+      "audioCodec": "AAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mp4-h264-high-1080p",
+      "path": "mp4_h264_high_1080p.mp4",
+      "tier": "A",
+      "mediaType": "video",
+      "container": "MP4",
+      "videoCodec": "H.264 High",
+      "audioCodec": "AAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mp4-h264-high-4k",
+      "path": "mp4_h264_high_4k.mp4",
+      "tier": "A",
+      "mediaType": "video",
+      "container": "MP4",
+      "videoCodec": "H.264 High 4K",
+      "audioCodec": "AAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mp4-h264-high10",
+      "path": "mp4_h264_10bit_aac.mp4",
+      "tier": "B",
+      "mediaType": "video",
+      "container": "MP4",
+      "videoCodec": "H.264 High10",
+      "audioCodec": "AAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mp4-vp9-aac",
+      "path": "mp4_vp9_aac.mp4",
+      "tier": "A",
+      "mediaType": "video",
+      "container": "MP4",
+      "videoCodec": "VP9",
+      "audioCodec": "AAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mkv-h264-aac",
+      "path": "mkv_h264_aac.mkv",
+      "tier": "A",
+      "mediaType": "video",
+      "container": "MKV",
+      "videoCodec": "H.264",
+      "audioCodec": "AAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mkv-hevc-aac",
+      "path": "mkv_hevc_aac.mkv",
+      "tier": "A",
+      "mediaType": "video",
+      "container": "MKV",
+      "videoCodec": "HEVC",
+      "audioCodec": "AAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mkv-vp9-opus",
+      "path": "mkv_vp9_opus.mkv",
+      "tier": "A",
+      "mediaType": "video",
+      "container": "MKV",
+      "videoCodec": "VP9",
+      "audioCodec": "Opus",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mkv-h264-ac3",
+      "path": "mkv_h264_ac3.mkv",
+      "tier": "A",
+      "mediaType": "video",
+      "container": "MKV",
+      "videoCodec": "H.264",
+      "audioCodec": "AC-3",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mkv-h264-eac3",
+      "path": "mkv_h264_eac3.mkv",
+      "tier": "A",
+      "mediaType": "video",
+      "container": "MKV",
+      "videoCodec": "H.264",
+      "audioCodec": "E-AC-3",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mkv-h264-dts",
+      "path": "mkv_h264_dts.mkv",
+      "tier": "A",
+      "mediaType": "video",
+      "container": "MKV",
+      "videoCodec": "H.264",
+      "audioCodec": "DTS core",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mkv-h264-flac",
+      "path": "mkv_h264_flac.mkv",
+      "tier": "A",
+      "mediaType": "video",
+      "container": "MKV",
+      "videoCodec": "H.264",
+      "audioCodec": "FLAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mkv-h264-opus",
+      "path": "mkv_h264_opus.mkv",
+      "tier": "A",
+      "mediaType": "video",
+      "container": "MKV",
+      "videoCodec": "H.264",
+      "audioCodec": "Opus",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mkv-h264-aac-srt",
+      "path": "mkv_h264_aac_srt.mkv",
+      "tier": "A",
+      "mediaType": "video",
+      "container": "MKV",
+      "videoCodec": "H.264",
+      "audioCodec": "AAC",
+      "subtitleCodec": "SRT",
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "webm-vp8-vorbis",
+      "path": "webm_vp8_vorbis.webm",
+      "tier": "B",
+      "mediaType": "video",
+      "container": "WebM",
+      "videoCodec": "VP8",
+      "audioCodec": "Vorbis",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "webm-vp9-opus",
+      "path": "webm_vp9_opus.webm",
+      "tier": "A",
+      "mediaType": "video",
+      "container": "WebM",
+      "videoCodec": "VP9",
+      "audioCodec": "Opus",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "ts-h264-aac",
+      "path": "ts_h264_aac.ts",
+      "tier": "A",
+      "mediaType": "video",
+      "container": "MPEG-TS",
+      "videoCodec": "H.264",
+      "audioCodec": "AAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "ts-hevc-aac",
+      "path": "ts_hevc_aac.ts",
+      "tier": "A",
+      "mediaType": "video",
+      "container": "MPEG-TS",
+      "videoCodec": "HEVC",
+      "audioCodec": "AAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "m2ts-h264-aac",
+      "path": "m2ts_h264_aac.m2ts",
+      "tier": "A",
+      "mediaType": "video",
+      "container": "M2TS",
+      "videoCodec": "H.264",
+      "audioCodec": "AAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "avi-mpeg4-mp3",
+      "path": "avi_mpeg4_mp3.avi",
+      "tier": "B",
+      "mediaType": "video",
+      "container": "AVI",
+      "videoCodec": "MPEG-4 Part 2",
+      "audioCodec": "MP3",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "avi-mjpeg-pcm",
+      "path": "avi_mjpeg_pcm.avi",
+      "tier": "B",
+      "mediaType": "video",
+      "container": "AVI",
+      "videoCodec": "MJPEG",
+      "audioCodec": "PCM",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "flv-h264-aac",
+      "path": "flv_h264_aac.flv",
+      "tier": "B",
+      "mediaType": "video",
+      "container": "FLV",
+      "videoCodec": "H.264",
+      "audioCodec": "AAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mpeg-mpeg2-mp2",
+      "path": "mpeg_mpeg2_mp2.mpg",
+      "tier": "B",
+      "mediaType": "video",
+      "container": "MPEG-PS",
+      "videoCodec": "MPEG-2 Video",
+      "audioCodec": "MP2",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "wmv-wmv2-wma",
+      "path": "wmv_wmv2_wma.wmv",
+      "tier": "B",
+      "mediaType": "video",
+      "container": "ASF/WMV",
+      "videoCodec": "WMV2",
+      "audioCodec": "WMA",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "3gp-h263-aac",
+      "path": "3gp_h263_aac.3gp",
+      "tier": "C",
+      "mediaType": "video",
+      "container": "3GP",
+      "videoCodec": "H.263",
+      "audioCodec": "AAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "ogv-theora-vorbis",
+      "path": "ogv_theora_vorbis.ogv",
+      "tier": "B",
+      "mediaType": "video",
+      "container": "Ogg/OGV",
+      "videoCodec": "Theora",
+      "audioCodec": "Vorbis",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mov-prores-pcm",
+      "path": "mov_prores_pcm.mov",
+      "tier": "B",
+      "mediaType": "video",
+      "container": "MOV",
+      "videoCodec": "ProRes",
+      "audioCodec": "PCM",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "vob-mpeg2-ac3",
+      "path": "vob_mpeg2_ac3.vob",
+      "tier": "B",
+      "mediaType": "video",
+      "container": "VOB",
+      "videoCodec": "MPEG-2 Video",
+      "audioCodec": "AC-3",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "rm-rv20",
+      "path": "rm_rv20.rm",
+      "tier": "C",
+      "mediaType": "video",
+      "container": "RealMedia",
+      "videoCodec": "RealVideo/RV20",
+      "audioCodec": null,
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "mkv-ffv1-flac",
+      "path": "mkv_ffv1_flac.mkv",
+      "tier": "B",
+      "mediaType": "video",
+      "container": "MKV",
+      "videoCodec": "FFV1",
+      "audioCodec": "FLAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "audio-mp3",
+      "path": "audio_mp3.mp3",
+      "tier": "A",
+      "mediaType": "audio",
+      "container": "MP3",
+      "videoCodec": null,
+      "audioCodec": "MP3",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "audio-aac",
+      "path": "audio_aac.aac",
+      "tier": "A",
+      "mediaType": "audio",
+      "container": "ADTS",
+      "videoCodec": null,
+      "audioCodec": "AAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "audio-m4a-aac",
+      "path": "audio_m4a_aac.m4a",
+      "tier": "A",
+      "mediaType": "audio",
+      "container": "M4A",
+      "videoCodec": null,
+      "audioCodec": "AAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "audio-m4a-alac",
+      "path": "audio_m4a_alac.m4a",
+      "tier": "A",
+      "mediaType": "audio",
+      "container": "M4A",
+      "videoCodec": null,
+      "audioCodec": "ALAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "audio-flac",
+      "path": "audio_flac.flac",
+      "tier": "A",
+      "mediaType": "audio",
+      "container": "FLAC",
+      "videoCodec": null,
+      "audioCodec": "FLAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "audio-ogg-vorbis",
+      "path": "audio_ogg_vorbis.ogg",
+      "tier": "A",
+      "mediaType": "audio",
+      "container": "Ogg",
+      "videoCodec": null,
+      "audioCodec": "Vorbis",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "audio-opus",
+      "path": "audio_opus.opus",
+      "tier": "A",
+      "mediaType": "audio",
+      "container": "Ogg/Opus",
+      "videoCodec": null,
+      "audioCodec": "Opus",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "audio-wav-pcm",
+      "path": "audio_wav_pcm.wav",
+      "tier": "A",
+      "mediaType": "audio",
+      "container": "WAV",
+      "videoCodec": null,
+      "audioCodec": "PCM",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "audio-amr-nb",
+      "path": "audio_amr_nb.amr",
+      "tier": "B",
+      "mediaType": "audio",
+      "container": "AMR",
+      "videoCodec": null,
+      "audioCodec": "AMR-NB",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "audio-amr-wb",
+      "path": "audio_amr_wb.amr",
+      "tier": "B",
+      "mediaType": "audio",
+      "container": "AMR",
+      "videoCodec": null,
+      "audioCodec": "AMR-WB",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "audio-ac3",
+      "path": "audio_ac3.ac3",
+      "tier": "A",
+      "mediaType": "audio",
+      "container": "raw AC-3",
+      "videoCodec": null,
+      "audioCodec": "AC-3",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "audio-eac3",
+      "path": "audio_eac3.eac3",
+      "tier": "A",
+      "mediaType": "audio",
+      "container": "raw E-AC-3",
+      "videoCodec": null,
+      "audioCodec": "E-AC-3",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "audio-dts",
+      "path": "audio_dts.dts",
+      "tier": "A",
+      "mediaType": "audio",
+      "container": "raw DTS",
+      "videoCodec": null,
+      "audioCodec": "DTS core",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "audio-wma",
+      "path": "audio_wma.wma",
+      "tier": "B",
+      "mediaType": "audio",
+      "container": "ASF/WMA",
+      "videoCodec": null,
+      "audioCodec": "WMA",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "audio-wavpack",
+      "path": "audio_wavpack.wv",
+      "tier": "B",
+      "mediaType": "audio",
+      "container": "WavPack",
+      "videoCodec": null,
+      "audioCodec": "WavPack",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "audio-tta",
+      "path": "audio_tta.tta",
+      "tier": "B",
+      "mediaType": "audio",
+      "container": "TTA",
+      "videoCodec": null,
+      "audioCodec": "TTA",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "audio-truehd",
+      "path": "audio_truehd.thd",
+      "tier": "A",
+      "mediaType": "audio",
+      "container": "raw TrueHD",
+      "videoCodec": null,
+      "audioCodec": "TrueHD",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "audio-mlp",
+      "path": "audio_mlp.mlp",
+      "tier": "B",
+      "mediaType": "audio",
+      "container": "raw MLP",
+      "videoCodec": null,
+      "audioCodec": "MLP",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "audio-aiff-pcm",
+      "path": "audio_aiff_pcm.aiff",
+      "tier": "B",
+      "mediaType": "audio",
+      "container": "AIFF",
+      "videoCodec": null,
+      "audioCodec": "PCM",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "audio-caf-alac",
+      "path": "audio_caf_alac.caf",
+      "tier": "B",
+      "mediaType": "audio",
+      "container": "CAF",
+      "videoCodec": null,
+      "audioCodec": "ALAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "audio-ape",
+      "path": "audio_ape.ape",
+      "tier": "B",
+      "mediaType": "audio",
+      "container": "APE",
+      "videoCodec": null,
+      "audioCodec": "Monkey's Audio",
+      "subtitleCodec": null,
+      "generated": false,
+      "productGate": false,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": "External FFmpeg sample; fixed SHA-256 in fetch-external-samples.ps1."
+    },
+    {
+      "id": "hls-h264-aac",
+      "path": "hls_h264/index.m3u8",
+      "tier": "A",
+      "mediaType": "stream",
+      "container": "HLS",
+      "videoCodec": "H.264",
+      "audioCodec": "AAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "hls-hevc-aac",
+      "path": "hls_hevc/index.m3u8",
+      "tier": "A",
+      "mediaType": "stream",
+      "container": "HLS",
+      "videoCodec": "HEVC",
+      "audioCodec": "AAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    },
+    {
+      "id": "dash-h264-aac",
+      "path": "dash_h264/index.mpd",
+      "tier": "A",
+      "mediaType": "stream",
+      "container": "DASH",
+      "videoCodec": "H.264",
+      "audioCodec": "AAC",
+      "subtitleCodec": null,
+      "generated": true,
+      "productGate": true,
+      "requiredBackends": [
+        "system",
+        "mpv"
+      ],
+      "notes": ""
+    }
+  ]
+}
