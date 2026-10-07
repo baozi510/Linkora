@@ -372,8 +372,12 @@ export struct PlayerPage {
     .aspectRatio(16 / 9)
     .backgroundColor('#000000')
     .onAreaChange((_oldArea: Area, newArea: Area) => {
-      this.surfaceWidth = Number(newArea.width);
-      this.surfaceHeight = Number(newArea.height);
+      // ArkUI Area dimensions are vp; mpv-ohos ohos-surface-size expects
+      // physical pixels. Passing vp directly renders only a density-scaled
+      // sub-rectangle of the XComponent surface on real devices.
+      const uiContext = this.getUIContext();
+      this.surfaceWidth = uiContext.vp2px(Number(newArea.width));
+      this.surfaceHeight = uiContext.vp2px(Number(newArea.height));
       this.controller?.setSurfaceSize(this.surfaceWidth, this.surfaceHeight);
     })
     .gesture(

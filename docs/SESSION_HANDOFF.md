@@ -6,7 +6,7 @@ Repository: `baozi510/Linkora`
 
 Current branch: `feat/ffmpeg-analyzer-policy-phase3`
 
-Current phase: **Phase 8A real-arm64 Playback foundation validation. Phase 7A benchmark baseline and Phase 3 analysis policy remain ACCEPTED.**
+Current phase: **Phase 8A real-arm64 Playback foundation rerun after GPT correction of P02 MPV state/EOF/surface defects. Phase 7A benchmark baseline and Phase 3 analysis policy remain ACCEPTED.**
 
 Implementation source:
 
@@ -47,9 +47,18 @@ This is a known local-document thumbnail limitation, not a Phase 3 regression. I
 
 ### Next action
 
-Follow the READY Phase 8A task on `feat/playback-capability-phase8`.
+The first Phase 8A Mate60 run stopped at P02 with a valid MPV foundation failure. P01 System passed; all later cases remain NOT RUN.
 
-First prove the current System/MPV/Auto playback foundation on Mate60 with controlled WebDAV sources. Do not start the broad 59-case compatibility matrix until this playback foundation is accepted.
+GPT independently reviewed evidence commit `08852ccc0ae1806b8270f2a248113eeedd61b5f9` and corrected:
+
+- explicit unified PLAYING/PAUSED state after successful MPV commands;
+- EOF terminal-state protection against the wrapper's trailing playing=false;
+- vp -> physical-pixel conversion before setting MPV surface size;
+- pure MPV event-order regressions.
+
+Follow the latest READY rerun task on `feat/playback-capability-phase8`. Do not promote the prior P01 PASS as a substitute for fresh exact-source build/deployment requirements unless the new task explicitly permits a focused continuation.
+
+Do not start the broad 59-case compatibility matrix until this playback foundation is accepted.
 
 After Phase 8A, expand using the shared `test-lab/media-compatibility` corpus and record System/MPV/Analyzer capability independently.
 

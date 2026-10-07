@@ -30,6 +30,7 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
   private surfaceAttached: boolean = false;
   private released: boolean = false;
   private prepared: boolean = false;
+  private completed: boolean = false;
   private firstFrameSignaled: boolean = false;
   private prepareResolve: (() => void) | null = null;
   private prepareReject: ((error: PlaybackPortError) => void) | null = null;
@@ -116,16 +117,26 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
 
   async play(): Promise<void> {
     this.ensureReady();
+    this.completed = false;
     this.player.play();
+    // mpv-arkts may emit its START_FILE playing=true before FILE_LOADED/commit,
+    // and setting pause=false again does not guarantee another property callback.
+    // A successful explicit play command is therefore also the adapter's
+    // authoritative unified-state transition.
+    this.observer.onStateChange(PortPlaybackState.PLAYING);
   }
 
   async pause(): Promise<void> {
     this.ensureReady();
     this.player.pause();
+    if (!this.completed) {
+      this.observer.onStateChange(PortPlaybackState.PAUSED);
+    }
   }
 
   seek(position: number): void {
     this.ensureReady();
+    this.completed = false;
     this.seekPending = true;
     this.player.seek(Math.max(0, position) / 1000);
   }
@@ -203,10 +214,19 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
       if (!this.prepared || this.released) {
         return;
       }
+      // mpv-arkts emits eof=true and then playing=false. Once EOF is terminal,
+      // that trailing false must not downgrade COMPLETED to PAUSED.
+      if (!playing && this.completed) {
+        return;
+      }
       this.observer.onStateChange(playing ? PortPlaybackState.PLAYING : PortPlaybackState.PAUSED);
     });
     this.player.stream.eof.listen((eof: boolean) => {
-      if (eof && !this.released) {
+      if (this.released) {
+        return;
+      }
+      this.completed = eof;
+      if (eof) {
         this.observer.onStateChange(PortPlaybackState.COMPLETED);
       }
     });

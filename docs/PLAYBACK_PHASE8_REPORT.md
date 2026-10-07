@@ -1,8 +1,72 @@
 # Playback Phase 8 Report
 
-> Status: FAIL — MPV PLAYBACK FOUNDATION. Stopped at P02; awaiting independent review.
+> Status: CORRECTION SOURCE PREPARED — prior P02 FAIL independently reviewed; fresh Mate60 rerun required.
 > Branch: `feat/playback-capability-phase8`
 > Validation date: 2026-10-07 (Asia/Shanghai)
+
+## GPT independent review and correction — 2026-10-07
+
+Reviewed remote evidence commit:
+
+`08852ccc0ae1806b8270f2a248113eeedd61b5f9`
+
+Ruling:
+
+**VALID RUNTIME DEFECT — MPV unified-state/EOF mapping, with a separate confirmed surface-unit integration defect.**
+
+The failed run remains a failure. P03-P05, lifecycle, negative path and remote seek-byte behavior remain NOT RUN / NOT PROVEN.
+
+### Root cause: unified MPV state
+
+The upstream `@mpv-ohos/mpv-arkts` wrapper emits `stream.playing=true` on `MPV_EVENT_START_FILE`, before Linkora's `FILE_LOADED` preparation boundary can complete. Linkora's `MpvPlaybackPort` intentionally ignored playing changes while `prepared=false`. A later explicit `player.play()` only sets mpv's pause property; it does not provide Linkora with a guaranteed fresh stream callback. Therefore the underlying player can advance while `PlaybackEngine` remains READY.
+
+Correction:
+
+- a successful Linkora `play()` command now publishes `PortPlaybackState.PLAYING` explicitly;
+- a successful `pause()` command publishes `PAUSED` explicitly;
+- native stream callbacks remain useful confirmations/externally-originated transitions.
+
+### Root cause: EOF ordering
+
+The upstream wrapper handles `eof-reached=true` by publishing EOF and then publishing `playing=false`. Linkora previously mapped those as:
+
+```text
+COMPLETED
+-> PAUSED
+```
+
+Correction:
+
+- `MpvPlaybackPort` tracks terminal completion;
+- trailing `playing=false` after EOF cannot downgrade COMPLETED;
+- seek/play clears the terminal guard so replay can become PLAYING normally.
+
+Pure MPV adapter regression coverage now includes both ordering defects.
+
+### Surface-size correction
+
+The device run showed MPV video confined to a small lower-left rectangle.
+
+ArkUI `onAreaChange` dimensions are logical vp. The mpv-ohos `ohos-surface-size` property expects physical pixel dimensions. Linkora previously forwarded Area values unchanged.
+
+Correction:
+
+```text
+Area width/height (vp)
+-> UIContext.vp2px
+-> PlaybackEngine/AdaptivePlaybackPort
+-> MpvPlaybackPort
+-> ohos-surface-size (px)
+```
+
+This code correction still requires the fresh Mate60 rerun to prove actual rendering.
+
+### Validation boundary
+
+No Auto policy, MediaProxy transport, Direct I/O, codec matrix, thumbnail research, or advanced AV behavior was changed.
+
+The correction is not accepted runtime evidence until a fresh exact-source signed arm64 run passes the READY rerun task.
+
 
 ## Fresh Phase 8A validation
 

@@ -61,7 +61,7 @@ No production source change or rerun is required for this ruling.
 
 ### Current architecture action
 
-**Phase 8A — real-arm64 System / MPV / Auto playback foundation: READY TO VALIDATE.**
+**Phase 8A — real-arm64 System / MPV / Auto playback foundation: P02 MPV runtime defect corrected in source; fresh rerun required.**
 
 Phase 7A Analysis Benchmark baseline is ACCEPTED.
 
@@ -83,7 +83,7 @@ The baseline shows meaningful System-vs-FFmpeg differences, especially thumbnail
 
 Broader codec/container/audio coverage will not reopen the accepted Analysis phase. It is now part of the shared Media Capability Corpus and will be exercised during Playback/Advanced AV validation with Analyzer and Playback results recorded independently.
 
-Phase 8A first validates that the current real-arm64 playback foundation itself is trustworthy: System/MPV forced modes, Auto selection/fallback boundary, surface lifecycle, remote MediaProxy playback, seek/EOF/release, and bounded negative behavior. Only after that foundation passes will Phase 8B expand to the full Tier A/B/C capability corpus.
+Phase 8A first validates that the current real-arm64 playback foundation itself is trustworthy: System/MPV forced modes, Auto selection/fallback boundary, surface lifecycle, remote MediaProxy playback, seek/EOF/release, and bounded negative behavior. The first device run passed P01 System and failed P02 MPV because playback advanced while unified state stayed READY, EOF was downgraded to PAUSED, and the MPV image used only a density-scaled portion of the surface. GPT corrected those adapter/UI integration defects; the correction still requires a fresh Mate60 rerun. Only after that foundation passes will Phase 8B expand to the full Tier A/B/C capability corpus.
 
 
 This file is the current execution status for the architecture migration.
