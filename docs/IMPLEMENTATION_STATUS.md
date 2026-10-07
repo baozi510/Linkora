@@ -61,7 +61,7 @@ No production source change or rerun is required for this ruling.
 
 ### Current architecture action
 
-**Phase 8A playback functional foundation: ACCEPTED. Mainline now uses simulator-first functional development with continuous ARM64 build gates; Phase 8B begins with simulator functional/corpus preflight, while real MPV/device capability is batched for a later device gate.**
+**Phase 8A playback functional foundation: ACCEPTED. Phase 8B simulator preflight collected the full System matrix/stress evidence and exposed only an audio-only FFmpeg metadata diagnostic gap; an audio-safe simulator diagnostic is now prepared for focused closure before the batched real-device gate.**
 
 Phase 7A Analysis Benchmark baseline is ACCEPTED.
 

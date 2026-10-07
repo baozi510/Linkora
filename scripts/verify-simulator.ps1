@@ -30,6 +30,11 @@ try {
     throw 'Simulator product static checks failed.'
   }
 
+  & $node (Join-Path $PSScriptRoot 'check-audio-metadata-smoke.cjs')
+  if ($LASTEXITCODE -ne 0) {
+    throw 'Audio-only metadata diagnostic static checks failed.'
+  }
+
   $taskOutput = (& $hvigor tasks --no-daemon 2>&1 | Out-String)
   $seqTask = ($taskOutput -split "\r?\n" |
     ForEach-Object { ($_ -split '\s+')[0].Trim() } |

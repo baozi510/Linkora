@@ -1,8 +1,93 @@
 # Playback Phase 8B Capability Report
 
-> Status: BLOCKED — RUNNER INSTRUMENTATION GAP (AUDIO-ONLY METADATA)
+> Status: CORRECTION SOURCE PREPARED — audio-only FFmpeg metadata diagnostic added; focused simulator closure required.
 > Branch: `feat/playback-capability-phase8`
 > Date: 2026-10-07
+
+## GPT independent review of simulator rerun 1 — 2026-10-08
+
+Reviewed remote evidence commit:
+
+`4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6`
+
+Ruling:
+
+**VALID SIMULATOR PREFLIGHT EVIDENCE WITH ONE TEST-INSTRUMENTATION GAP.**
+
+### System simulator matrix
+
+The 59 System rows are internally consistent:
+
+- 39 PASS;
+- 14 SYSTEM_SIMULATOR_UNSUPPORTED;
+- 6 bounded FAIL observations;
+- no TIMEOUT / NOT_RUN.
+
+The six FAIL rows are not one category:
+
+1. `hls-h264-aac` and `hls-hevc-aac` failed before prepare/play with `LNK-PLAY-006`. These remain simulator-System HLS failure observations. They do not establish Mate60 behavior.
+2. `mkv-ffv1-flac`, `mov-prores-pcm`, `ogv-theora-vorbis`, and `wmv-wmv2-wma` reached PLAYING and advanced position, but the required real-frame observation was not established. Their FAIL verdict is valid under the dispatched evidence rule, but it must not be interpreted as proven permanent black video, decoder failure, or layout failure.
+
+None of these bounded simulator capability observations is by itself a production-infrastructure blocker.
+
+### x86 FFmpeg video
+
+The explicit-engine production adapter/input path produced complete records for the nine requested video representatives. Eight common cases succeeded; RV20 produced bounded `FF_OPEN_FAILED / 23002`.
+
+This is useful x86 functional evidence only and does not reopen Phase 7 performance policy.
+
+### Audio-only gap
+
+The prior runner choice genuinely cannot satisfy the dispatched audio-only requirement without falsifying video assumptions:
+
+- `AnalysisBenchmarkRunner` requires positive expected video dimensions;
+- its execution loop unconditionally invokes thumbnail extraction;
+- `AnalyzerIntegrationSmoke` is video/thumbnail oriented;
+- `FfmpegRuntimeSmoke` has fixed video assertions.
+
+The correct repair is **not** to give audio fake dimensions and **not** to ask an audio file for a thumbnail.
+
+A new simulator-only `AudioMetadataSmoke` now exercises:
+
+```text
+controlled WebDAV fixture
+-> NetworkDirectoryService / REMOTE_FILE
+-> MediaAnalysisInputResolver
+-> NetworkFileProxy
+-> FfmpegMediaProbeAdapter
+-> ProbeRequirement.DETAIL
+```
+
+It asserts:
+
+- usable metadata;
+- duration > 0;
+- zero video tracks;
+- at least one audio track;
+- expected codec;
+- positive channels/sample rate;
+- bounded cleanup / zero active proxy sources.
+
+The diagnostic contains no thumbnail/frame extraction path.
+
+A simulator static guard enforces that boundary and is executed by `verify-simulator.ps1`.
+
+No production analysis policy, benchmark semantics, thumbnail policy or playback code changed.
+
+### Next step
+
+Run one focused fresh simulator closure on this exact source:
+
+- normal EOL-safe dependency setup;
+- fresh default ARM64 build gate;
+- fresh simulator build/isolation gate;
+- install/launch exact simulator artifact;
+- run audio-only FFmpeg metadata on controlled MP3, FLAC, TrueHD and WavPack fixtures;
+- one known-good normal System H.264 smoke after diagnostic startup;
+- clean release/security/protected audit.
+
+The historical 59-case System matrix and stress evidence remain attributable to the prior source; they do not need repetition because this correction changes only simulator diagnostic/test infrastructure.
+
 
 ## Current rerun result — Phase 8B simulator functional preflight
 

@@ -178,6 +178,63 @@ MediaProbeService
 ThumbnailService
 ```
 
+### 播放器功能 Native-first 能力审计
+
+任何播放器功能在 Linkora 自己实现前，必须先查证 System AVPlayer 和 MPV 是否已有原生能力。
+
+顺序固定为：
+
+```text
+功能需求
+↓
+查 System 原生 API / 当前 API level / 语义 / 限制
+↓
+查 MPV 原生 property / command / event / 依赖与限制
+↓
+比较真实语义
+↓
+定义 Linkora unified capability / contract
+↓
+backend adapter 映射到原生能力
+↓
+只有原生能力不存在或语义不满足时，才允许 Linkora 自实现
+```
+
+适用于所有播放器能力，包括但不限于：
+
+- play / pause / stop / replay；
+- seek / seek-complete；
+- speed / volume / mute；
+- buffering；
+- track enumeration / audio/subtitle switching；
+- external subtitle / subtitle delay / audio delay；
+- fit / fill / crop / stretch / original-size；
+- rotation / zoom / pan；
+- frame step / chapters / loop / AB repeat；
+- screenshot / frame capture；
+- deinterlace / video filter / audio filter；
+- hardware decode / fallback；
+- HDR / tone mapping / color controls；
+- passthrough / bitstream；
+- cache / buffer controls；
+- backend-owned reconnect/retry；
+- resume/start position；
+- surface/window/render options；
+- 未来 UI 暴露的任何 player control。
+
+如果两套 backend 能力不一致：
+
+```text
+明确 capability declaration / UNSUPPORTED
+```
+
+禁止为了“看起来统一”而在 UI 或 controller 中伪造相同语义。
+
+如果最终必须由 Linkora 实现，设计/提交必须记录为什么原生 backend 能力不足。
+
+当能力是否存在、当前 HarmonyOS API 语义、MPV property/command 行为或平台限制不确定时，必须先搜索当前官方/上游资料并检查实际仓库/依赖源码；禁止依赖记忆、旧资料、命名猜测或惯性。
+
+
 ### MPV 与 System Player 都是 Backend
 
 UI 不允许知道具体播放器。

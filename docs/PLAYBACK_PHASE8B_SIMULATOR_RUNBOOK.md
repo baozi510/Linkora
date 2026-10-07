@@ -156,3 +156,36 @@ A successful simulator phase means:
 - functionality/test infrastructure is stable enough to continue development without frequent Mate60 round trips;
 - ARM64 production builds remain continuously green;
 - remaining device-only questions are explicitly catalogued, not guessed.
+
+
+## Audio-only metadata diagnostic
+
+Audio-only analysis must never be forced through a video benchmark shape.
+
+Use simulator `AudioMetadataSmoke` for audio-only FFmpeg metadata.
+
+It intentionally runs metadata only:
+
+```text
+REMOTE_FILE / controlled WebDAV
+-> MediaAnalysisInputResolver
+-> NetworkFileProxy
+-> FfmpegMediaProbeAdapter
+-> DETAIL metadata
+```
+
+It must not request thumbnails or fabricate width/height.
+
+For representative audio-only fixtures record:
+
+- duration;
+- container;
+- zero video-track count;
+- audio track codec;
+- channels;
+- sample rate;
+- completeness/error;
+- proxy read diagnostics;
+- zero active source after cleanup.
+
+This diagnostic is simulator/test infrastructure only. It does not change production analysis policy or Phase 7 benchmark semantics.
