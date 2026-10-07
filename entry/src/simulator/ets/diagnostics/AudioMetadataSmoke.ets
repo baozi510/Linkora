@@ -110,18 +110,17 @@ export class AudioMetadataSmoke {
     const resolver = new MediaAnalysisInputResolver(new HarmonyAnalysisInputs(context, proxy));
     const probe: IMediaProbe = AnalysisComposition.ffmpeg(resolver, 10000);
     let result: ProbeResult;
-    let diagnostics: NetworkFileProxyDiagnostics;
+    let preCloseDiagnostics: NetworkFileProxyDiagnostics;
     try {
       AudioMetadataSmoke.check(await probe.canProbe(source));
       result = await probe.probe(source, ProbeRequirement.DETAIL);
     } finally {
       await probe.close().catch(() => {});
+      preCloseDiagnostics = proxy.diagnostics();
+      await proxy.close().catch(() => {});
     }
-    diagnostics = proxy.diagnostics();
-    AudioMetadataSmoke.check(diagnostics.activeSources === 0);
-    await proxy.close().catch(() => {});
-
     const finalDiagnostics: NetworkFileProxyDiagnostics = proxy.diagnostics();
+    AudioMetadataSmoke.check(preCloseDiagnostics.activeSources === 0);
     AudioMetadataSmoke.check(finalDiagnostics.activeSources === 0);
     const info = result.info;
     const track = info?.audioTracks[0];
