@@ -1,0 +1,47 @@
+{
+  "classification": "FAIL — MPV PLAYBACK FOUNDATION",
+  "P01": {
+    "result": "PASS: functional case only",
+    "forcedMode": "System",
+    "backendIdentityEvidence": "User-selected forced System, source has no forced fallback, actual AVPlayer prepare/play/frame/seek callbacks and player instances; no injected runtime observer",
+    "visibleFrame": true,
+    "durationMs": 20000,
+    "resolution": "1280x720",
+    "pauseResume": true,
+    "seekTargetsMs": [
+      10000,
+      18000
+    ],
+    "eofUi": "播放完成 / COMPLETED",
+    "leaveSurfaceNodes": 0,
+    "leaveSystemPlayerInstances": 0
+  },
+  "P02": {
+    "result": "FAIL",
+    "forcedMode": "MPV",
+    "openAttempts": 1,
+    "backendIdentityEvidence": "Forced MPV selection confirmed again in Settings at cleanup; real controlled video visible, no AVPlayer instances; production factory/selector source verified. Internal committed backend field is not exposed by UI. Process maps access was denied.",
+    "prepareDurationResolution": "20 s / 1280x720 observed",
+    "visibleFrame": true,
+    "surfaceAttachedBehaviorally": true,
+    "initialPauseAction": "NOT EXECUTED: pause button absent; fresh UI refused guessed click",
+    "playingState": "READY and PLAY button despite position progression to 13.733 s",
+    "eofState": "At 20/20 s UI displayed PAUSED rather than COMPLETED",
+    "additionalVisualObservation": "Controlled video rendered as a small rectangle at lower-left of the otherwise black video surface. No surface-size correction attempted.",
+    "seek50": "NOT RUN after failure",
+    "seek90": "NOT RUN after failure",
+    "leaveSurfaceNodes": 0,
+    "leaveSystemPlayerInstances": 0,
+    "appAliveAfterLeave": true,
+    "recoverableDiagnosticHandling": "Fresh pure regression PASS; naturally recoverable runtime log was not independently exercised"
+  },
+  "P03": "NOT RUN: STOP after P02",
+  "P04": "NOT RUN: STOP after P02",
+  "P05": "NOT RUN: STOP after P02",
+  "O01SystemMkv": "NOT RUN: STOP after P02",
+  "corruptMpv": "NOT RUN: fixture preflight PASS, but STOP after P02",
+  "20MpvCycles": "NOT RUN: STOP after P02",
+  "backgroundForeground": "NOT RUN: STOP after P02",
+  "fullscreenOrientation": "NOT RUN: STOP after P02",
+  "cleanup": "Released existing player and restored the initial Auto UI preference. No retry, new source opening, data reset or production policy change."
+}

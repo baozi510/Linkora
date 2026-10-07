@@ -1,0 +1,13 @@
+{
+  "bundle": "com.linkora.player",
+  "versionName": "0.1.0",
+  "debug": true,
+  "launchReportedSuccess": true,
+  "appSurvivedP01P02": true,
+  "crashAnrDuringObservedUi": "None observed",
+  "faultHistory": "Read-only fault listing showed LowMemoryKill records before runtime test start; these were not relabeled as test crashes.",
+  "processMaps": "NOT AVAILABLE: OS returned Operation not permitted",
+  "testWindowLocal": "2026-10-07 16:44–16:49 Asia/Shanghai",
+  "postStopCleanupLocal": "16:55–16:56",
+  "audioScope": "No subjective listening result claimed; 20-cycle residual-audio gate NOT RUN."
+}

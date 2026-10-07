@@ -1,0 +1,12 @@
+10-07 16:45:29.146 42769 42832 I C02B2B/com.linkora.player/AVPlayerCallback: #1491 [handle] OnDurationUpdateCb is called, duration: 20000
+10-07 16:45:29.147 42769 42832 I C02B2B/com.linkora.player/AVPlayerCallback: #1623 [handle] OnVideoSizeChangedCb is called, width = 1280, height = 720
+10-07 16:45:29.147 42769 42832 I C02B2B/com.linkora.player/AVPlayerNapi: #4854 [handle] notify prepared
+10-07 16:45:29.156 42769 42832 I C02B2B/com.linkora.player/AVPlayerCallback: #1599 OnStartRenderFrameCb is called
+10-07 16:45:29.177 42769 42832 I C02B2B/com.linkora.player/AVPlayerNapi: #4854 [handle] notify playing
+10-07 16:45:30.658 42769 42832 I C02B2B/com.linkora.player/AVPlayerNapi: #4854 [handle] notify paused
+10-07 16:46:03.647 42769 42880 I C02B2B/com.linkora.player/AVPlayerCallback: #1386 [handle] OnSeekDone is called, currentPositon: 10000
+10-07 16:46:08.461 42769 42880 I C02B2B/com.linkora.player/AVPlayerNapi: #4854 [handle] notify playing
+10-07 16:46:14.156 42769 42832 I C02B2B/com.linkora.player/AVPlayerCallback: #1386 [handle] OnSeekDone is called, currentPositon: 18000
+10-07 16:46:16.240 42769 44151 I C02B2B/com.linkora.player/AVPlayerNapi: #4854 [handle] notify completed
+10-07 16:46:42.975 42769 43713 I C02B2B/com.linkora.player/AVPlayerNapi: #4854 [handle] notify released
+10-07 16:46:42.975 42769 43713 I C02B2B/com.linkora.player/AVPlayerNapi: #829 [handle] Release Task Out

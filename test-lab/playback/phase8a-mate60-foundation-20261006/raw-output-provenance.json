@@ -1,0 +1,82 @@
+[
+  {
+    "readableFile": "ohpm.stdout.txt",
+    "originalGzipFile": "ohpm.stdout.txt.original.gz",
+    "originalSha256": "FF332712FE36CBB5C7259FD68060C62944391503FDA9185779954F30D101AE74",
+    "originalBytes": 40,
+    "decompressionByteEquivalent": true,
+    "readableNormalization": "UTF-8 BOM/line endings/trailing whitespace only; original preserved"
+  },
+  {
+    "readableFile": "ohpm.stderr.txt",
+    "originalGzipFile": "ohpm.stderr.txt.original.gz",
+    "originalSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "originalBytes": 0,
+    "decompressionByteEquivalent": true,
+    "readableNormalization": "UTF-8 BOM/line endings/trailing whitespace only; original preserved"
+  },
+  {
+    "readableFile": "verify.stdout.txt",
+    "originalGzipFile": "verify.stdout.txt.original.gz",
+    "originalSha256": "D530FB792659FC39D510AA2A58D054AABA8CE977AB80527F15E2F2B874B1AAC6",
+    "originalBytes": 51026,
+    "decompressionByteEquivalent": true,
+    "readableNormalization": "UTF-8 BOM/line endings/trailing whitespace only; original preserved"
+  },
+  {
+    "readableFile": "verify.stderr.txt",
+    "originalGzipFile": "verify.stderr.txt.original.gz",
+    "originalSha256": "23B1664D2B5BF6345D83EF4DDA9198353D4A29333E71B50D701A85AE04178DC0",
+    "originalBytes": 267582,
+    "decompressionByteEquivalent": true,
+    "readableNormalization": "UTF-8 BOM/line endings/trailing whitespace only; original preserved"
+  },
+  {
+    "readableFile": "hypium.txt",
+    "originalGzipFile": "hypium.txt.original.gz",
+    "originalSha256": "AF333AC54C490612F5AC26AD104102F3FF081C6E8F882338392F3E4201EA7B5B",
+    "originalBytes": 14596,
+    "decompressionByteEquivalent": true,
+    "readableNormalization": "UTF-8 BOM/line endings/trailing whitespace only; original preserved"
+  },
+  {
+    "readableFile": "signed-build.stdout.txt",
+    "originalGzipFile": "signed-build.stdout.txt.original.gz",
+    "originalSha256": "FAC84E86B3534C586CA387169A9B5C89132E02AB8439F4D953EB04458DFCCAA4",
+    "originalBytes": 5196,
+    "decompressionByteEquivalent": true,
+    "readableNormalization": "UTF-8 BOM/line endings/trailing whitespace only; original preserved"
+  },
+  {
+    "readableFile": "signed-build.stderr.txt",
+    "originalGzipFile": "signed-build.stderr.txt.original.gz",
+    "originalSha256": "2040E80B3902154EF0B06B3300D27C55B4D63ED8C2BEE89F3B87D4AC986B9489",
+    "originalBytes": 59946,
+    "decompressionByteEquivalent": true,
+    "readableNormalization": "UTF-8 BOM/line endings/trailing whitespace only; original preserved"
+  },
+  {
+    "readableFile": "signed-artifact-audit.txt",
+    "originalGzipFile": "signed-artifact-audit.txt.original.gz",
+    "originalSha256": "F3AC8A7C93F7121391E75CDDA30F0A62596ACD78EA29A8D07B313D9A9082B0BA",
+    "originalBytes": 63,
+    "decompressionByteEquivalent": true,
+    "readableNormalization": "UTF-8 BOM/line endings/trailing whitespace only; original preserved"
+  },
+  {
+    "readableFile": "signed-artifact-audit.stderr.txt",
+    "originalGzipFile": "signed-artifact-audit.stderr.txt.original.gz",
+    "originalSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "originalBytes": 0,
+    "decompressionByteEquivalent": true,
+    "readableNormalization": "UTF-8 BOM/line endings/trailing whitespace only; original preserved"
+  },
+  {
+    "readableFile": "launch.txt",
+    "originalGzipFile": "launch.txt.original.gz",
+    "originalSha256": "BC4BD248D1572C3F2E55D8F5B81EA541E62C0D6C7AC7A903B220E672E2F0C83A",
+    "originalBytes": 29,
+    "decompressionByteEquivalent": true,
+    "readableNormalization": "UTF-8 BOM/line endings/trailing whitespace only; original preserved"
+  }
+]

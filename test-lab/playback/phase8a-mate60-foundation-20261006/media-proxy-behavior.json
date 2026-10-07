@@ -1,0 +1,9 @@
+{
+  "sourcePath": "REMOTE_FILE -> NetworkDirectoryService.openSource -> RandomAccessSource -> NetworkFileProxy -> localhost UUID URL -> backend",
+  "sourceReview": "PASS",
+  "localHostBinding": "Source confirms 127.0.0.1; upstream credentials/path are not encoded in UUID URL",
+  "P01SeekRuntime": "AVPlayer seekDone at 10000 ms and 18000 ms; playback resumed and completed",
+  "highOffsetRemoteRequests": "NOT RUN / NOT PROVEN: no direct production diagnostics endpoint; STOP at P02 before further behavioral evidence collection. Seek progress alone is not proof of upstream byte offsets.",
+  "leaseReleaseBehavior": "P01 player instances became zero and XComponent removed; P02 XComponent removed and app responsive. Direct token invalidation/counter proof not collected.",
+  "instrumentationAdded": false
+}

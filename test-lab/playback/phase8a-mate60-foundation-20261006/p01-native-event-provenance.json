@@ -1,0 +1,29 @@
+{
+  "privateSources": [
+    {
+      "originalPrivateLogSha256": "54104891E59EF93EB3BB77156177CF3374AE9AE258F2070FC4F306B3DF1F9A8B",
+      "label": "P01-eof"
+    },
+    {
+      "originalPrivateLogSha256": "7C53A503897253698823DE2281FE474DDF43A9A2846E0C36F1B323CCE0F92971",
+      "label": "P01-left"
+    },
+    {
+      "originalPrivateLogSha256": "1E7071C3D5D7F11B4346DFE6B07E7BC8EA9BA925BDC5EBEE20E206654488A763",
+      "label": "P01-paused"
+    },
+    {
+      "originalPrivateLogSha256": "64ACF0AE819C0B807BD282BB5AFEB0FEE1D1AC7914FB0E001D4FDF2FBAFBC2FB",
+      "label": "P01-resumed"
+    },
+    {
+      "originalPrivateLogSha256": "F4E66C4A5F62A6BB8C754A5AB3B887C0093BF763402F7F564665E19E53B88D9A",
+      "label": "P01-seek50-paused"
+    }
+  ],
+  "selectedNativeCallbackLines": 12,
+  "selection": "duration, video size, start frame, seek done, prepared/playing/paused/completed/released and release-task callbacks",
+  "sanitization": "Opaque native handle addresses redacted; nonselected lines remain private.",
+  "seek10000Verified": true,
+  "seek18000Verified": true
+}

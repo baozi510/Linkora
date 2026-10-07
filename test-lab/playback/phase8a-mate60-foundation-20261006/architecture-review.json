@@ -1,0 +1,57 @@
+{
+  "forcedSystemMpvAuto": true,
+  "autoPrepareFallbackAtMostOnce": true,
+  "candidateObserverOnlyForwardsCommittedEvents": true,
+  "remoteSourceOpenedViaNetworkDirectoryServiceRandomAccess": true,
+  "sourceLeaseResolvedToLocalhostUuidUrl": true,
+  "productionCompositionContainsBothBackends": true,
+  "mpvAttachesXComponentSurface": true,
+  "mpvFileLoadedPlaybackRestartEofHandled": true,
+  "mpvErrorStreamDiagnosticNotAutomaticFatal": true,
+  "preparationCommitDocsOnly": true,
+  "preparationDiff": [
+    "docs/IMPLEMENTATION_STATUS.md",
+    "docs/PLAYBACK_PHASE8_MATE60_RUNBOOK.md",
+    "docs/PLAYBACK_PHASE8_REPORT.md",
+    "docs/SESSION_HANDOFF.md"
+  ],
+  "files": [
+    {
+      "path": "entry/src/main/ets/playback/AdaptivePlaybackPort.ets",
+      "sha256": "803fd782e47dc6f20d442e23f767695fca1239bad488d0449dd431d20d4154c1"
+    },
+    {
+      "path": "entry/src/main/ets/playback/NetworkPlaybackSourceResolver.ets",
+      "sha256": "e49f368ab11232735c7b5d282e0385bb86ffa7dd5ef1b751552a4cd5619dd663"
+    },
+    {
+      "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets",
+      "sha256": "e2891dbed4da186a35caaae8d8ff2f78c3005b40022686948f2d1495ca8c640b"
+    },
+    {
+      "path": "entry/src/main/ets/playback/SystemPlaybackPort.ets",
+      "sha256": "972cd14657e47c42c8e65a8cb3ef738c823fc437094820647dfa9d45d3ff9e41"
+    },
+    {
+      "path": "linkora_core/src/main/ets/playback/PlaybackBackendSelector.ets",
+      "sha256": "4945715338b7a26f1ed0f568ed845b796c1fa9472194d1e5a720083c4c28ebdc"
+    },
+    {
+      "path": "entry/src/default/PlaybackComposition.ets",
+      "sha256": "657441b18fa864787cd9e9420717d9b2410496458bbfc87dcaca29cdcabb87da"
+    },
+    {
+      "path": "entry/src/main/ets/foundation/LinkoraFeatures.ets",
+      "sha256": "77e7f5d4ff6c481ae10be47f4d2cd45ab6d5cc8f252566e0b075ceed598a2575"
+    },
+    {
+      "path": "linkora_proxy/src/main/ets/NetworkFileProxy.ets",
+      "sha256": "c36a2174b6ee2ac82492c81df659edb266e852431ea43eada573264382e27ece"
+    },
+    {
+      "path": "entry/src/main/ets/pages/PlayerPage.ets",
+      "sha256": "70736efe6d3dfa97e04f95532aa289008e8438688c21e433133ce78817a2702f"
+    }
+  ],
+  "notes": "Read-only source confirmation; runtime behavior requires fresh target observations. Historical current branch labels are stale; exact current task/remote branch take precedence."
+}

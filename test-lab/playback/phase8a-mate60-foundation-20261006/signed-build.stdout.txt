@@ -1,0 +1,68 @@
+> hvigor [32mFinished :entry:default@PreBuild... after 119 ms [39m
+> hvigor [32mFinished :linkora_ffmpeg:default@PreBuild... after 41 ms [39m
+> hvigor [32mFinished :linkora_core:default@PreBuild... after 9 ms [39m
+> hvigor [32mFinished :linkora_media_probe:default@PreBuild... after 8 ms [39m
+> hvigor [32mFinished :linkora_proxy:default@PreBuild... after 8 ms [39m
+> hvigor [32mFinished :entry:default@CreateModuleInfo... after 1 ms [39m
+> hvigor [32mFinished :entry:default@GenerateMetadata... after 3 ms [39m
+> hvigor [32mFinished :entry:default@PreCheckSyscap... after 1 ms [39m
+> hvigor [32mFinished :entry:default@GeneratePkgSdkInfo... after 4 ms [39m
+> hvigor [32mFinished :entry:default@ProcessIntegratedHsp... after 1 ms [39m
+> hvigor [32mFinished :linkora_core:default@CreateHarBuildProfile... after 2 ms [39m
+> hvigor [32mFinished :linkora_core:default@ConfigureCmake... after 1 ms [39m
+> hvigor [32mFinished :linkora_core:default@MergeProfile... after 3 ms [39m
+> hvigor [32mFinished :linkora_media_probe:default@CreateHarBuildProfile... after 1 ms [39m
+> hvigor [32mFinished :linkora_media_probe:default@ConfigureCmake... after 1 ms [39m
+> hvigor [32mFinished :linkora_media_probe:default@MergeProfile... after 2 ms [39m
+> hvigor [32mFinished :entry:default@SyscapTransform... after 10 ms [39m
+> hvigor [32mFinished :linkora_ffmpeg:default@CreateHarBuildProfile... after 1 ms [39m
+> hvigor [32mFinished :linkora_proxy:default@CreateHarBuildProfile... after 1 ms [39m
+> hvigor [32mFinished :linkora_core:default@BuildNativeWithCmake... after 1 ms [39m
+> hvigor [32mFinished :linkora_ffmpeg:default@MergeProfile... after 2 ms [39m
+> hvigor [32mFinished :linkora_proxy:default@MergeProfile... after 2 ms [39m
+> hvigor [32mFinished :linkora_media_probe:default@BuildNativeWithCmake... after 1 ms [39m
+> hvigor [32mFinished :entry:default@CreateBuildProfile... after 1 ms [39m
+> hvigor [32mFinished :linkora_ffmpeg:default@ConfigureCmake... after 2 ms [39m
+> hvigor [32mFinished :linkora_core:default@BuildNativeWithNinja... after 1 ms [39m
+> hvigor [32mFinished :linkora_proxy:default@ConfigureCmake... after 1 ms [39m
+> hvigor [32mFinished :entry:default@MergeProfile... after 39 ms [39m
+> hvigor [32mFinished :linkora_media_probe:default@BuildNativeWithNinja... after 1 ms [39m
+> hvigor [32mFinished :linkora_ffmpeg:default@BuildNativeWithCmake... after 11 ms [39m
+> hvigor [32mFinished :linkora_core:default@ProcessLibs... after 8 ms [39m
+> hvigor [32mFinished :linkora_proxy:default@BuildNativeWithCmake... after 1 ms [39m
+> hvigor [32mFinished :entry:default@MakePackInfo... after 3 ms [39m
+> hvigor [32mFinished :linkora_media_probe:default@ProcessLibs... after 3 ms [39m
+> hvigor [32mUP-TO-DATE :linkora_core:default@DoNativeStrip...  [39m
+> hvigor [32mFinished :entry:default@ConfigureCmake... after 12 ms [39m
+> hvigor [32mUP-TO-DATE :linkora_media_probe:default@DoNativeStrip...  [39m
+> hvigor [32mFinished :linkora_proxy:default@BuildNativeWithNinja... after 1 ms [39m
+> hvigor [32mFinished :entry:default@BuildNativeWithCmake... after 10 ms [39m
+> hvigor [32mFinished :linkora_proxy:default@ProcessLibs... after 3 ms [39m
+> hvigor [32mUP-TO-DATE :entry:default@GeneratePkgContextInfo...  [39m
+> hvigor [32mUP-TO-DATE :linkora_proxy:default@DoNativeStrip...  [39m
+> hvigor [32mFinished :entry:default@ProcessProfile... after 119 ms [39m
+> hvigor [32mFinished :entry:default@ProcessRouterMap... after 5 ms [39m
+> hvigor [32mUP-TO-DATE :entry:default@ProcessShareConfig...  [39m
+> hvigor [32mFinished :entry:default@ProcessStartupConfig... after 4 ms [39m
+> hvigor [32mUP-TO-DATE :entry:default@ProcessResource...  [39m
+> hvigor [32mFinished :entry:default@GenerateLoaderJson... after 19 ms [39m
+> hvigor [32mFinished :entry:default@CompileResource... after 295 ms [39m
+> hvigor [32mFinished :entry:default@BuildJS... after 2 ms [39m
+> hvigor [32mFinished :linkora_ffmpeg:default@BuildNativeWithNinja... after 514 ms [39m
+> hvigor [32mFinished :linkora_ffmpeg:default@ProcessLibs... after 129 ms [39m
+> hvigor [32mFinished :linkora_ffmpeg:default@DoNativeStrip... after 107 ms [39m
+> hvigor [32mFinished :entry:default@BuildNativeWithNinja... after 450 ms [39m
+> hvigor [32mFinished :entry:default@ProcessLibs... after 120 ms [39m
+> hvigor [32mFinished :entry:default@DoNativeStrip... after 149 ms [39m
+> hvigor [32mFinished :entry:default@CacheNativeLibs... after 6 ms [39m
+> hvigor [32mFinished :entry:default@CompileArkTS... after 6 s 19 ms [39m
+> hvigor [32mFinished :entry:default@GeneratePkgModuleJson... after 2 ms [39m
+> hvigor [32mFinished :entry:default@ProcessCompiledResources... after 1 ms [39m
+> hvigor [32mFinished :entry:default@PackageHap... after 794 ms [39m
+> hvigor [32mFinished :entry:default@PackingCheck... after 5 ms [39m
+> hvigor [32mFinished :entry:default@SignHap... after 2 s 56 ms [39m
+> hvigor [32mFinished :entry:default@CollectDebugSymbol... after 1 ms [39m
+> hvigor [32mFinished :entry:assembleHap... after 1 ms [39m
+> hvigor [32mBUILD SUCCESSFUL in 13 s 334 ms [39m
+
+65 tasks in total: 59 executed, 6 up-to-date

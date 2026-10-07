@@ -1,0 +1,11 @@
+{
+  "filesScannedIncludingReport": 44,
+  "compressedOriginalsDecompressedAndScanned": true,
+  "knownCredentialEndpointFixtureAliasDeviceSigningSshValuesAbsent": true,
+  "authorizationCookieAndConcreteProxyTokenPatternsAbsent": true,
+  "privateRuntimeCapturesExcluded": true,
+  "findings": [],
+  "protectedFilesComparedAfterReportEdit": 2316,
+  "protectedChanges": [],
+  "utc": "2026-10-07T09:01:01.497057+00:00"
+}

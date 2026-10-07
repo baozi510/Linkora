@@ -1,0 +1,12 @@
+{
+  "status": "Source review hypothesis only; GPT owns diagnosis/fix",
+  "observedDefect": "MPV playback progress/frame and unified UI state diverge; terminal state displays PAUSED, not COMPLETED",
+  "candidateHypotheses": [
+    "CandidateObserver forwards state only after commit and does not replay a cached candidate playback state.",
+    "MpvPlaybackPort ignores playing changes before prepared; a one-time native transition may occur before preparation/commit.",
+    "MPV eof and playing=false streams can overwrite terminal state depending on notification order."
+  ],
+  "secondaryHypothesis": "Surface size supplied from ArkUI Area may need pixel/viewport review because rendered video was much smaller than available surface.",
+  "noSourceFix": true,
+  "noShimOrExpectationChange": true
+}

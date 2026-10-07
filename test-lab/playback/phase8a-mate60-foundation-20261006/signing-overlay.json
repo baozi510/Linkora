@@ -1,0 +1,16 @@
+{
+  "changedTrackedPaths": [
+    "build-profile.json5"
+  ],
+  "signingConfigPresent": true,
+  "defaultProductReferencesSigningConfig": true,
+  "allNonSigningSemanticsUnchanged": true,
+  "signingMaterialFilesExist": {
+    "storeFile": true,
+    "profile": true,
+    "certpath": true
+  },
+  "overlaidProfileSha256": "5143AE29AFDA4A20ECECCDD7495E1B1759FD40A77A0312BBCFD63F97E04E9F6C",
+  "rawDiffReviewedLocallyNotPublished": true,
+  "utc": "2026-10-07T08:42:57.075804+00:00"
+}

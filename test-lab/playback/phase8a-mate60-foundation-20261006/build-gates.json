@@ -1,0 +1,32 @@
+{
+  "normalOhpmInstallCount": 1,
+  "normalOhpmExitCode": 0,
+  "freshVerifierCount": 1,
+  "freshVerifierExitCode": 0,
+  "architectureFixturePass": 5,
+  "ffmpegPurePass": 15,
+  "analysisPurePass": 46,
+  "artifactGuardFixturePass": 17,
+  "mpvMappingPass": 5,
+  "Hypium": {
+    "run": 210,
+    "pass": 210,
+    "failure": 0,
+    "error": 0,
+    "ignore": 0
+  },
+  "debugReleaseHarModules": [
+    "linkora_core",
+    "linkora_proxy",
+    "linkora_media_probe",
+    "linkora_ffmpeg"
+  ],
+  "debugHapPass": true,
+  "releaseHapPass": true,
+  "exactNineAArch64AuditCount": 2,
+  "finalVerifierMarkerPresent": true,
+  "simulatorValidation": "NOT RUN: current task requires one default verifier only",
+  "freshSignedDebugBuildCount": 1,
+  "freshSignedDebugBuildExitCode": 0,
+  "historicalPassReused": false
+}

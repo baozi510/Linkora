@@ -1,0 +1,15 @@
+{
+  "before": {
+    "head": "1ee944e68e8b885b5b542dda0fb6854401d67923",
+    "branch": "test/system-thumbnail-cost-compat",
+    "statusSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "trackedDiffSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  "after": {
+    "head": "1ee944e68e8b885b5b542dda0fb6854401d67923",
+    "branch": "test/system-thumbnail-cost-compat",
+    "statusSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "trackedDiffSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  "unchanged": true
+}

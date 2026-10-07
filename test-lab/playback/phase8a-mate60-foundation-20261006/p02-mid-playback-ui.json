@@ -1,0 +1,12 @@
+{
+  "utc": "2026-10-07T08:47:39.845453Z",
+  "singleOpenAttempt": true,
+  "state": "已就绪 / READY",
+  "button": "▶ / PLAY",
+  "positionText": "0:13",
+  "durationText": "0:20",
+  "progressSliderMs": "13733.000000",
+  "resolution": "1280 × 720",
+  "originalLayoutSha256": "26B7057384617BDB38864B48D4ABB6C8A7C1F0D2456B5EC68454FF1B84300C59",
+  "observation": "Actual progress advanced from 1 s to 13 s while playback state remained READY and the pause action was absent."
+}

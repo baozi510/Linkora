@@ -1,0 +1,19 @@
+{
+  "taskId": "phase8a-mate60-playback-foundation",
+  "acceptedBase": "e81766309fab4bf61222c64f95c25bd9ad5fd148",
+  "source": "fd76b28a85522a94db40e754dd87c62960dc71ad",
+  "head": "38fce8b2ff7feb56cb21aa537ceb90419864987e",
+  "branch": "feat/playback-capability-phase8",
+  "origin": "https://github.com/baozi510/Linkora.git",
+  "initialStatus": "",
+  "allowedDrift": [
+    "docs/CODEX_VALIDATION_TASK.md"
+  ],
+  "submodules": {
+    "entry/src/main/cpp/third_party/libnfs": "cee4ca723e081e6a18f51b838690a4c21e14bb2c",
+    "entry/src/main/cpp/third_party/libsmb2": "b3d560c02fb1268320d2fd1c17fe841b0d93b85f",
+    "entry/src/main/cpp/third_party/mbedtls/framework": "7d726d145d678aa7f5a7df3b9e7ee3dbce6ea1bf"
+  },
+  "productionPolicyDiff": "",
+  "utc": "2026-10-07T08:23:27.904199+00:00"
+}

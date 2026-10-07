@@ -1,0 +1,171 @@
+[
+  {
+    "label": "P01-paused",
+    "utc": "2026-10-07T08:45:33.114070+00:00",
+    "appAlive": true,
+    "ui": [
+      "‹",
+      "正在播放",
+      "0:01",
+      "0:20",
+      "1×",
+      "▶",
+      "全屏",
+      "音量",
+      "连接状态",
+      "已暂停",
+      "视频尺寸",
+      "1280 × 720"
+    ],
+    "surfaceNodes": 1,
+    "layoutSha256": "40aa4483a198375d5cbe30b854b22e23294dc871ab1920ac645f6412e6f0b08e",
+    "screenshotSha256": "452b79b8695fc634fc8b4af4cac77d516576ebd7c571c90a9e87436f5869cb4b",
+    "systemPlayerInstancesForApp": 2,
+    "screenshots": "Original retained privately; source label and system bar contain private information. SHA-256 records original bytes."
+  },
+  {
+    "label": "P01-seek50-paused",
+    "utc": "2026-10-07T08:46:05.140835+00:00",
+    "appAlive": true,
+    "ui": [
+      "‹",
+      "正在播放",
+      "0:10",
+      "0:20",
+      "1×",
+      "▶",
+      "全屏",
+      "音量",
+      "连接状态",
+      "已暂停",
+      "视频尺寸",
+      "1280 × 720"
+    ],
+    "surfaceNodes": 1,
+    "layoutSha256": "b5b9b5f4dc490319a89d3357d3648c2667d0df0b9b08436878a274e6039cd083",
+    "screenshotSha256": "0fb0471297835372453aa3d7a9dbea0246ddb7fbd0e22b7b1f6fa4af0b0ec493",
+    "systemPlayerInstancesForApp": 2,
+    "screenshots": "Original retained privately; source label and system bar contain private information. SHA-256 records original bytes."
+  },
+  {
+    "label": "P01-resumed",
+    "utc": "2026-10-07T08:46:10.390572+00:00",
+    "appAlive": true,
+    "ui": [
+      "‹",
+      "正在播放",
+      "0:11",
+      "0:20",
+      "1×",
+      "❚❚",
+      "全屏",
+      "音量",
+      "连接状态",
+      "播放中",
+      "视频尺寸",
+      "1280 × 720"
+    ],
+    "surfaceNodes": 1,
+    "layoutSha256": "3e05f33fdba5928300dc0f05d9be48fb0ab09773a442d1247db35176b72bdbda",
+    "screenshotSha256": "898e703131b210db9d91352e3f641f3e3257b253fdf68d60cfa982be219233cd",
+    "systemPlayerInstancesForApp": 2,
+    "screenshots": "Original retained privately; source label and system bar contain private information. SHA-256 records original bytes."
+  },
+  {
+    "label": "P01-eof",
+    "utc": "2026-10-07T08:46:39.023895+00:00",
+    "appAlive": true,
+    "ui": [
+      "‹",
+      "正在播放",
+      "0:20",
+      "0:20",
+      "1×",
+      "▶",
+      "全屏",
+      "音量",
+      "连接状态",
+      "播放完成",
+      "视频尺寸",
+      "1280 × 720"
+    ],
+    "surfaceNodes": 1,
+    "layoutSha256": "b396b10a840d8191de09d01564c7ff3e5b51aef051698d43ffb3daa584541e07",
+    "screenshotSha256": "8c9ecb3e973111b402138db6a13d1cf13c1b101cb9e0c5f3ba321522a6ac7878",
+    "systemPlayerInstancesForApp": 2,
+    "screenshots": "Original retained privately; source label and system bar contain private information. SHA-256 records original bytes."
+  },
+  {
+    "label": "P01-left",
+    "utc": "2026-10-07T08:46:44.365854+00:00",
+    "appAlive": true,
+    "ui": [
+      "0:20"
+    ],
+    "surfaceNodes": 0,
+    "layoutSha256": "366bcd34b2e170da515b01af3d5fad05900d0304b610bb039bd88cec196e80a1",
+    "screenshotSha256": "cb21a98fcd6ea84fefa8573739b529472d2db3a0be2541aea096ebd9c9559fa7",
+    "systemPlayerInstancesForApp": 0,
+    "screenshots": "Original retained privately; source label and system bar contain private information. SHA-256 records original bytes."
+  },
+  {
+    "label": "P02-paused",
+    "utc": "2026-10-07T08:47:30.650642+00:00",
+    "appAlive": true,
+    "ui": [
+      "‹",
+      "正在播放",
+      "0:01",
+      "0:20",
+      "1×",
+      "▶",
+      "全屏",
+      "音量",
+      "连接状态",
+      "视频尺寸",
+      "1280 × 720"
+    ],
+    "surfaceNodes": 1,
+    "layoutSha256": "df74ea937eaecace27dfb02ad8d6afcf2d715a0a53b35cb8f255d6d9bd7857d8",
+    "screenshotSha256": "585d877940d798747bd737c7aa218cfe9309dc005350c97e0e46c3ff9f745307",
+    "systemPlayerInstancesForApp": 0,
+    "screenshots": "Original retained privately; source label and system bar contain private information. SHA-256 records original bytes."
+  },
+  {
+    "label": "P02-current",
+    "utc": "2026-10-07T08:48:12.369177+00:00",
+    "appAlive": true,
+    "ui": [
+      "‹",
+      "正在播放",
+      "0:20",
+      "0:20",
+      "1×",
+      "▶",
+      "全屏",
+      "音量",
+      "连接状态",
+      "已暂停",
+      "视频尺寸",
+      "1280 × 720"
+    ],
+    "surfaceNodes": 1,
+    "layoutSha256": "cf2bb03ce7a2e565059bec55e772ebb6383fb7a39bc59dda81c3c05903701c48",
+    "screenshotSha256": "5791396e9d6be2d614e414e76a4e0d8a33e8f8a06e3b4df94e95523649275d02",
+    "systemPlayerInstancesForApp": 0,
+    "screenshots": "Original retained privately; source label and system bar contain private information. SHA-256 records original bytes."
+  },
+  {
+    "label": "P02-left-after-stop",
+    "utc": "2026-10-07T08:48:58.854074+00:00",
+    "appAlive": true,
+    "ui": [
+      "0:20"
+    ],
+    "surfaceNodes": 0,
+    "layoutSha256": "b040cc24ffa51097c36e32fcccdcb5518160c9e1a7e395f484b01c393ae17147",
+    "screenshotSha256": "11cfa98eefd95e44bef4908703d9ca5b5fdc0b31c81dabd9e82b4761b75de5b8",
+    "systemPlayerInstancesForApp": 0,
+    "screenshots": "Original retained privately; source label and system bar contain private information. SHA-256 records original bytes."
+  }
+]
