@@ -1,8 +1,32 @@
 # Playback Phase 8B Capability Report
 
-> Status: PASS — PHASE 8B SIMULATOR FUNCTIONAL PREFLIGHT COLLECTED.
+> Status: ACCEPTED — PHASE 8B SIMULATOR FUNCTIONAL PREFLIGHT. Device-only capability remains batched.
 > Branch: `feat/playback-capability-phase8`
 > Date: 2026-10-08
+
+## GPT acceptance of focused simulator closure — 2026-10-08
+
+Reviewed evidence commit:
+
+`dcb34487e2043ba37f763c2ee50f4e040b597fbd`
+
+Ruling:
+
+**ACCEPTED — PHASE 8B SIMULATOR FUNCTIONAL PREFLIGHT.**
+
+- mandatory MP3 and FLAC audio-only FFmpeg DETAIL metadata passed through the real REMOTE_FILE/resolver/MediaProxy/FfmpegMediaProbeAdapter path;
+- TrueHD and WavPack returned bounded x86 `FF_OPEN_FAILED / 23002` and remain optional x86 capability observations;
+- zero emitted active sources and normal post-diagnostic System playback were demonstrated;
+- prior 59-case System matrix, MPV-stub control flow, x86-video representatives and stress evidence remain correctly attributed to `4e3ff969...`;
+- the 15-item device backlog is genuinely target/backend/hardware dependent;
+- the six simulator-continuable items are correctly retained for software-side work.
+
+The seven raw audio events are not seven executions. They are four detailed fixture records, two redundant post-assertion failure notes and one summary. The redundant failure-note behavior is a diagnostic schema issue only and is corrected in the next source so future runs emit one case verdict per fixture.
+
+No simulator observation is promoted to Mate60/real-MPV product capability.
+
+**Phase 8B-SIM is complete.**
+
 
 ## Current focused closure — 2026-10-08
 

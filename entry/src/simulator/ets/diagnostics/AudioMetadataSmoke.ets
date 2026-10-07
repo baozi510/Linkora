@@ -74,8 +74,12 @@ export class AudioMetadataSmoke {
       for (const fixture of config.fixtures) {
         total++;
         try {
-          await AudioMetadataSmoke.runFixture(context, server, fixture);
-          passed++;
+          const success: boolean = await AudioMetadataSmoke.runFixture(context, server, fixture);
+          if (success) {
+            passed++;
+          } else {
+            failed++;
+          }
         } catch (error) {
           failed++;
           await AudioMetadataSmoke.emit({
@@ -104,7 +108,7 @@ export class AudioMetadataSmoke {
   }
 
   private static async runFixture(context: common.UIAbilityContext, server: NetworkServerEntry,
-    fixture: AudioMetadataFixture): Promise<void> {
+    fixture: AudioMetadataFixture): Promise<boolean> {
     const source: MediaSource = await AudioMetadataSmoke.source(server, fixture);
     const proxy: NetworkFileProxy = new NetworkFileProxy();
     const resolver = new MediaAnalysisInputResolver(new HarmonyAnalysisInputs(context, proxy));
@@ -148,7 +152,7 @@ export class AudioMetadataSmoke {
       rangeRequests: finalDiagnostics.rangeRequests,
       activeSources: finalDiagnostics.activeSources
     });
-    AudioMetadataSmoke.check(success);
+    return success;
   }
 
   private static async source(server: NetworkServerEntry,

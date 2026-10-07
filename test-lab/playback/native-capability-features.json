@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Native-first playback capability audit seed. Do not infer support from names; verify current System SDK and pinned MPV/upstream sources.",
+  "evidencePriority": {
+    "system": [
+      "installed DevEco/HarmonyOS SDK declarations",
+      "current official Huawei/OpenHarmony documentation",
+      "simulator runtime where semantics are testable"
+    ],
+    "mpv": [
+      "pinned @mpv-ohos/mpv-arkts source used by Linkora",
+      "current upstream mpv manual/source",
+      "real-device runtime only where wrapper/VO/AO semantics require it"
+    ]
+  },
+  "verdicts": [
+    "NATIVE_VERIFIED",
+    "NATIVE_PARTIAL",
+    "NATIVE_ABSENT",
+    "WRAPPER_NOT_EXPOSED",
+    "DEVICE_CONFIRMATION_REQUIRED",
+    "NOT_APPLICABLE"
+  ],
+  "features": [
+    {
+      "id": "transport.play",
+      "category": "transport",
+      "label": "play/start",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "transport.pause",
+      "category": "transport",
+      "label": "pause",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "transport.stop-replay",
+      "category": "transport",
+      "label": "stop / replay after completion",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "timeline.seek",
+      "category": "timeline",
+      "label": "seek + completion semantics",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "timeline.speed",
+      "category": "timeline",
+      "label": "playback speed",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "audio.volume-mute",
+      "category": "audio",
+      "label": "volume + mute",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "state.buffering",
+      "category": "state",
+      "label": "buffering state/progress",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "tracks.enumerate",
+      "category": "tracks",
+      "label": "enumerate video/audio/subtitle tracks",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "tracks.audio-select",
+      "category": "tracks",
+      "label": "select audio track",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "tracks.subtitle-select",
+      "category": "tracks",
+      "label": "select embedded subtitle track",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "subtitles.external",
+      "category": "subtitles",
+      "label": "load/select external subtitle",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "subtitles.delay",
+      "category": "subtitles",
+      "label": "subtitle delay",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "audio.delay",
+      "category": "audio",
+      "label": "audio delay / AV sync",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "display.fit-contain",
+      "category": "display",
+      "label": "aspect-preserving contain",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "display.fill-crop",
+      "category": "display",
+      "label": "aspect-preserving fill/crop",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "display.stretch",
+      "category": "display",
+      "label": "stretch to viewport",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "display.original",
+      "category": "display",
+      "label": "original / 1:1 unscaled",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "display.aspect-override",
+      "category": "display",
+      "label": "aspect ratio override",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "display.rotation",
+      "category": "display",
+      "label": "rotation / transform",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "display.zoom-pan",
+      "category": "display",
+      "label": "zoom + pan",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "timeline.frame-step",
+      "category": "timeline",
+      "label": "frame step",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "navigation.chapters",
+      "category": "navigation",
+      "label": "chapter enumerate/seek",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "repeat.loop",
+      "category": "repeat",
+      "label": "single-file repeat",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "repeat.ab",
+      "category": "repeat",
+      "label": "A-B repeat",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "capture.screenshot",
+      "category": "capture",
+      "label": "video frame/screenshot capture",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "processing.deinterlace",
+      "category": "processing",
+      "label": "deinterlace",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "processing.video-filter",
+      "category": "processing",
+      "label": "video filters",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "processing.audio-filter",
+      "category": "processing",
+      "label": "audio filters",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "decode.hw-select",
+      "category": "decode",
+      "label": "hardware decode selection",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "decode.hw-fallback",
+      "category": "decode",
+      "label": "hardware/software decode fallback",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "color.hdr",
+      "category": "color",
+      "label": "HDR metadata/output controls",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "color.tonemap",
+      "category": "color",
+      "label": "tone mapping",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "color.adjust",
+      "category": "color",
+      "label": "brightness/contrast/gamma/color controls at playback backend",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "audio.passthrough",
+      "category": "audio",
+      "label": "encoded audio passthrough/bitstream",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "network.cache-buffer",
+      "category": "network",
+      "label": "player-owned cache/buffer controls",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "network.reconnect",
+      "category": "network",
+      "label": "player-owned reconnect/retry",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "timeline.start-position",
+      "category": "timeline",
+      "label": "start/resume position",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "surface.render-options",
+      "category": "surface",
+      "label": "surface/window/render properties",
+      "status": "AUDIT_REQUIRED"
+    },
+    {
+      "id": "background.media-session",
+      "category": "lifecycle",
+      "label": "background/media-session native integration",
+      "status": "AUDIT_REQUIRED"
+    }
+  ]
+}

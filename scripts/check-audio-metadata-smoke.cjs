@@ -20,6 +20,12 @@ assert.match(source, /info\.audioTracks\.length\s*>\s*0/,
   'audio metadata smoke must require an audio track');
 assert.doesNotMatch(source, /AnalysisComposition\.thumbnail|ThumbnailExtractRequest|extractFrame\s*\(/,
   'audio metadata smoke must never request a thumbnail/frame');
+assert.match(source, /private static async runFixture[\s\S]*?: Promise<boolean>/,
+  'audio metadata fixture execution must return a verdict instead of throwing after detailed evidence');
+assert.match(source, /return success;/,
+  'audio metadata fixture execution must return the detailed-record verdict');
+assert.doesNotMatch(source, /AudioMetadataSmoke\.check\(success\)/,
+  'a bounded capability failure must not emit a second assertion-failure record');
 assert.match(runtime, /linkoraAudioMetadataSmoke/,
   'simulator RuntimeDiagnostics must expose the audio-only metadata diagnostic');
 assert.match(runtime, /AudioMetadataSmoke\.run\(context, endpoint\)/,

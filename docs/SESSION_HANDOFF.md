@@ -6,7 +6,7 @@ Repository: `baozi510/Linkora`
 
 Current branch: `feat/ffmpeg-analyzer-policy-phase3`
 
-Current phase: **Phase 8A playback functional foundation ACCEPTED. Phase 8B simulator preflight has collected 59-case System/stress/x86-video evidence; GPT added an audio-only FFmpeg metadata diagnostic to close the sole instrumentation gap before the batched real-device gate. Execution remains simulator-first / ARM64-build-always / device-batched.**
+Current phase: **Phase 8A playback functional foundation ACCEPTED. Phase 8B simulator functional preflight ACCEPTED at evidence dcb34487e2043ba37f763c2ee50f4e040b597fbd. No physical device is required for current work: continue native-first playback capability audit and other simulator-testable backlog; retain genuine ARM64/real-MPV/hardware items for the batched device gate.**
 
 Implementation source:
 
