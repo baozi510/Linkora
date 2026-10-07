@@ -148,7 +148,11 @@ export struct PlayerPage {
     if (surfaceId.length === 0) {
       return;
     }
-    this.controller?.setSurfaceSize(this.surfaceWidth, this.surfaceHeight);
+    const uiContext = this.getUIContext();
+    this.controller?.setSurfaceSize(
+      uiContext.vp2px(this.surfaceWidth),
+      uiContext.vp2px(this.surfaceHeight)
+    );
     this.controller?.attachSurface(surfaceId);
   }
 
@@ -375,10 +379,13 @@ export struct PlayerPage {
       // ArkUI Area dimensions are vp; mpv-ohos ohos-surface-size expects
       // physical pixels. Passing vp directly renders only a density-scaled
       // sub-rectangle of the XComponent surface on real devices.
+      this.surfaceWidth = Number(newArea.width);
+      this.surfaceHeight = Number(newArea.height);
       const uiContext = this.getUIContext();
-      this.surfaceWidth = uiContext.vp2px(Number(newArea.width));
-      this.surfaceHeight = uiContext.vp2px(Number(newArea.height));
-      this.controller?.setSurfaceSize(this.surfaceWidth, this.surfaceHeight);
+      this.controller?.setSurfaceSize(
+        uiContext.vp2px(this.surfaceWidth),
+        uiContext.vp2px(this.surfaceHeight)
+      );
     })
     .gesture(
       GestureGroup(GestureMode.Exclusive,
