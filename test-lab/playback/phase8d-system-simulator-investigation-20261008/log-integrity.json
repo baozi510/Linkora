@@ -1,0 +1,152 @@
+[
+  {
+    "name": "ohpm.stdout",
+    "privateOriginalSha256": "F806395787355EDB5E5914B463C4E8A3D05ED6DA4822FFB68E1FBCA57BB56BE6",
+    "privateOriginalBytes": 40,
+    "publicSanitizedSha256": "7CD2A3E030D7B56FE66EAAAA683C1B3F737726957C4851423C39E747545E792A",
+    "publicSanitizedBytes": 30,
+    "gzipSha256": "57857680800957D6978BE82ADC56F23B10C2FFF74CCC0515ED610A2102E979E5",
+    "gzipDecompressionExact": true,
+    "transformations": "UTF8/newline/ANSI/trailing whitespace and private absolute workspace/SDK path replacement only; no warning/result removed. Originals retained locally PRIVATE."
+  },
+  {
+    "name": "ohpm.stderr",
+    "privateOriginalSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "privateOriginalBytes": 0,
+    "publicSanitizedSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "publicSanitizedBytes": 0,
+    "gzipSha256": "46B50C321B39E89A491B6727A01628C34245605A30BEB3E7414C5E01CFF90E6E",
+    "gzipDecompressionExact": true,
+    "transformations": "UTF8/newline/ANSI/trailing whitespace and private absolute workspace/SDK path replacement only; no warning/result removed. Originals retained locally PRIVATE."
+  },
+  {
+    "name": "default-first.stdout",
+    "privateOriginalSha256": "07E99313CF0793627BF499E8822A63438F1A1F15DBAF103A0FE309F65F83B4AB",
+    "privateOriginalBytes": 51210,
+    "publicSanitizedSha256": "62C6028ECA866AE57283E0FC13A20A0D4C8D99BC7F082DAF722629E883293D52",
+    "publicSanitizedBytes": 46059,
+    "gzipSha256": "A23409AFA45FCD2DCE4CE9468E0021768E52C84C0B8B6587385A0DB75BF7A660",
+    "gzipDecompressionExact": true,
+    "transformations": "UTF8/newline/ANSI/trailing whitespace and private absolute workspace/SDK path replacement only; no warning/result removed. Originals retained locally PRIVATE."
+  },
+  {
+    "name": "default-first.stderr",
+    "privateOriginalSha256": "4FC09D12F9E545D7343677D02BC0270248B6521B4B953F6ADCBD47134A8AFC05",
+    "privateOriginalBytes": 297123,
+    "publicSanitizedSha256": "7FC8EC043C1DCA9F4FC8CFD1AB0F1DD91BE83D3B1D897760AE79B742967622C2",
+    "publicSanitizedBytes": 249343,
+    "gzipSha256": "9F6DB9C21399F3114727B92C43703500D4B0F10CCB328F475DCD88B61C85A997",
+    "gzipDecompressionExact": true,
+    "transformations": "UTF8/newline/ANSI/trailing whitespace and private absolute workspace/SDK path replacement only; no warning/result removed. Originals retained locally PRIVATE."
+  },
+  {
+    "name": "simulator.stdout",
+    "privateOriginalSha256": "509AEF47FCE31F5723B7C77C460810514B5E6A64A35B1AD4E318B3C567BE57B2",
+    "privateOriginalBytes": 7003,
+    "publicSanitizedSha256": "8172DC44CA5756E992B705BB4A1FF7E4D1B23D49CD3112512BAA5F869FB837AC",
+    "publicSanitizedBytes": 6067,
+    "gzipSha256": "46DF89B229046D8557454BD92C57078C88801DFB861C4F6CF2BACF028B6C11CB",
+    "gzipDecompressionExact": true,
+    "transformations": "UTF8/newline/ANSI/trailing whitespace and private absolute workspace/SDK path replacement only; no warning/result removed. Originals retained locally PRIVATE."
+  },
+  {
+    "name": "simulator.stderr",
+    "privateOriginalSha256": "F294FA0FB3A7587432D5692D6EB60CBB3F646F1C9D97C1B395AD23445A831770",
+    "privateOriginalBytes": 66951,
+    "publicSanitizedSha256": "4165E61BFD2E9FA13374FB26873FE314B36768B53CADFC06DD3F00772E787A3B",
+    "publicSanitizedBytes": 54607,
+    "gzipSha256": "3A18E3347A2C7DCDC39E95D6AB15627616C9FD427CA7AC1B17426E12FBCDD3A0",
+    "gzipDecompressionExact": true,
+    "transformations": "UTF8/newline/ANSI/trailing whitespace and private absolute workspace/SDK path replacement only; no warning/result removed. Originals retained locally PRIVATE."
+  },
+  {
+    "name": "default-final.stdout",
+    "privateOriginalSha256": "3F1FA86318B36C48E64617C53FFB79D4BD5E7BE288990B8DD6E7D5C39F3DD96C",
+    "privateOriginalBytes": 50339,
+    "publicSanitizedSha256": "0182DC58D515737EECBDBEC54E37A14EA7AE4478738555D252C89A10CA06497E",
+    "publicSanitizedBytes": 45212,
+    "gzipSha256": "1A1687ECD53DFE036DE6C105A3C312A33C8D374E0E6120D0D441ECD229D1E88C",
+    "gzipDecompressionExact": true,
+    "transformations": "UTF8/newline/ANSI/trailing whitespace and private absolute workspace/SDK path replacement only; no warning/result removed. Originals retained locally PRIVATE."
+  },
+  {
+    "name": "default-final.stderr",
+    "privateOriginalSha256": "35A2C948E5CBD3000BE8F189603E2626B4B20C1ACAA3D163C17F6484F276FCB1",
+    "privateOriginalBytes": 213051,
+    "publicSanitizedSha256": "5FA92FEB0967D0F88699B179ED24DBF5E8D5458CB90B0A6EC32855CAAE368158",
+    "publicSanitizedBytes": 174765,
+    "gzipSha256": "8EA4300D92A0DAA0804CFB94E39C6943D4E0A59CC6D498462C37A3F6AFAE94D1",
+    "gzipDecompressionExact": true,
+    "transformations": "UTF8/newline/ANSI/trailing whitespace and private absolute workspace/SDK path replacement only; no warning/result removed. Originals retained locally PRIVATE."
+  },
+  {
+    "name": "default-first-hypium",
+    "privateOriginalSha256": "AF333AC54C490612F5AC26AD104102F3FF081C6E8F882338392F3E4201EA7B5B",
+    "privateOriginalBytes": 14596,
+    "publicSanitizedSha256": "AF333AC54C490612F5AC26AD104102F3FF081C6E8F882338392F3E4201EA7B5B",
+    "publicSanitizedBytes": 14596,
+    "gzipSha256": "20538C5A6AAE797C3726C41B2666CD8249CA63109A028A797FEE520417BB0DCC",
+    "gzipDecompressionExact": true,
+    "transformations": "UTF8/newline/ANSI/trailing whitespace and private absolute workspace/SDK path replacement only; no warning/result removed. Originals retained locally PRIVATE."
+  },
+  {
+    "name": "default-final-hypium",
+    "privateOriginalSha256": "AF333AC54C490612F5AC26AD104102F3FF081C6E8F882338392F3E4201EA7B5B",
+    "privateOriginalBytes": 14596,
+    "publicSanitizedSha256": "AF333AC54C490612F5AC26AD104102F3FF081C6E8F882338392F3E4201EA7B5B",
+    "publicSanitizedBytes": 14596,
+    "gzipSha256": "20538C5A6AAE797C3726C41B2666CD8249CA63109A028A797FEE520417BB0DCC",
+    "gzipDecompressionExact": true,
+    "transformations": "UTF8/newline/ANSI/trailing whitespace and private absolute workspace/SDK path replacement only; no warning/result removed. Originals retained locally PRIVATE."
+  },
+  {
+    "name": "signed-abi-audit",
+    "privateOriginalSha256": "525D3009A3312CA2A5BF218DF84BD9D615DEC5A26D4E078C8D5D8E4496068BFA",
+    "privateOriginalBytes": 60,
+    "publicSanitizedSha256": "525D3009A3312CA2A5BF218DF84BD9D615DEC5A26D4E078C8D5D8E4496068BFA",
+    "publicSanitizedBytes": 60,
+    "gzipSha256": "E433F9D53C4100A8A5D2ADAD8B1B999310780CBD311F0F4E2F6B8FF9D81CDA6C",
+    "gzipDecompressionExact": true,
+    "transformations": "UTF8/newline/ANSI/trailing whitespace and private absolute workspace/SDK path replacement only; no warning/result removed. Originals retained locally PRIVATE."
+  },
+  {
+    "name": "signed-abi-audit.stderr",
+    "privateOriginalSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "privateOriginalBytes": 0,
+    "publicSanitizedSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "publicSanitizedBytes": 0,
+    "gzipSha256": "46B50C321B39E89A491B6727A01628C34245605A30BEB3E7414C5E01CFF90E6E",
+    "gzipDecompressionExact": true,
+    "transformations": "UTF8/newline/ANSI/trailing whitespace and private absolute workspace/SDK path replacement only; no warning/result removed. Originals retained locally PRIVATE."
+  },
+  {
+    "name": "forward-create",
+    "privateOriginalSha256": "8BDB477C0E0A9A985E95A0685D0FB5F2759260BE961922BA4317B0AD2D5A44C0",
+    "privateOriginalBytes": 40,
+    "publicSanitizedSha256": "8E481A5B2C2CC9774C04A553980DD3662927CDFBF4BC01A7EC539792E6C00E40",
+    "publicSanitizedBytes": 38,
+    "gzipSha256": "E05398478CF6072FDFAF0292C9F20F8124BCEFA1739DD7D7A9B55DE03C1C6D46",
+    "gzipDecompressionExact": true,
+    "transformations": "UTF8/newline/ANSI/trailing whitespace and private absolute workspace/SDK path replacement only; no warning/result removed. Originals retained locally PRIVATE."
+  },
+  {
+    "name": "forward-before",
+    "privateOriginalSha256": "464AF7000A09A91E3E07A3CA940EA0273EEB9CE35B4EAE73B5F2641110C7E58F",
+    "privateOriginalBytes": 10,
+    "publicSanitizedSha256": "465C6EA0BE785220B2D054AB72C80DC4E33E546475E18D1B788545F4AB4B279B",
+    "publicSanitizedBytes": 8,
+    "gzipSha256": "C7452DE28417B92DE4DC32BFC98E237E8AF429AD119EC31D1C925FCF53C15827",
+    "gzipDecompressionExact": true,
+    "transformations": "UTF8/newline/ANSI/trailing whitespace and private absolute workspace/SDK path replacement only; no warning/result removed. Originals retained locally PRIVATE."
+  },
+  {
+    "name": "forward-after",
+    "privateOriginalSha256": "464AF7000A09A91E3E07A3CA940EA0273EEB9CE35B4EAE73B5F2641110C7E58F",
+    "privateOriginalBytes": 10,
+    "publicSanitizedSha256": "465C6EA0BE785220B2D054AB72C80DC4E33E546475E18D1B788545F4AB4B279B",
+    "publicSanitizedBytes": 8,
+    "gzipSha256": "C7452DE28417B92DE4DC32BFC98E237E8AF429AD119EC31D1C925FCF53C15827",
+    "gzipDecompressionExact": true,
+    "transformations": "UTF8/newline/ANSI/trailing whitespace and private absolute workspace/SDK path replacement only; no warning/result removed. Originals retained locally PRIVATE."
+  }
+]

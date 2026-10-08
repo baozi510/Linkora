@@ -1,0 +1,44 @@
+{
+  "exactFreshArtifact": true,
+  "source": "e19123a0e110cebb479d24dbdf72d6d3c9169a5b",
+  "dispatch": "0a5e1af4be94a2528dcbc968f42f1883d9c22c3b",
+  "unsigned": {
+    "utc": "2026-10-08T06:53:53.372945+00:00",
+    "artifactSha256": "E5D29D40AE724F3D914391A57C40D03DE611E157388074C475337C0E0A868642",
+    "artifactBytes": 25087238,
+    "signed": false,
+    "transportExitCode": 0,
+    "installSuccess": false,
+    "signatureRejectionCode9568332": true,
+    "dataClearedOrUninstalled": false
+  },
+  "signing": {
+    "operation": "SDK hap-sign-tool sign-app localSign",
+    "sdkCredentialHandling": "unchanged installed Hvigor DecipherUtil",
+    "existingProfileIncludesSimulator": true,
+    "sourceInputSha256": "E5D29D40AE724F3D914391A57C40D03DE611E157388074C475337C0E0A868642",
+    "exitCode": 0,
+    "trackedBuildProfileModified": false,
+    "signatureOrPermissionChecksDisabled": false,
+    "outputExists": true,
+    "signedSha256": "0004679B25960C6F1A1C0787A58D189F705A166332C9EFCF4B00F70554C95340",
+    "signedBytes": 25281137
+  },
+  "installed": {
+    "utc": "2026-10-08T06:54:08.098452+00:00",
+    "artifactSha256": "0004679B25960C6F1A1C0787A58D189F705A166332C9EFCF4B00F70554C95340",
+    "artifactBytes": 25281137,
+    "signed": true,
+    "transportExitCode": 0,
+    "installSuccess": true,
+    "signatureRejectionCode9568332": false,
+    "dataClearedOrUninstalled": false
+  },
+  "abi": "x86_64",
+  "nativeWhitelist": [
+    "liblinkora_ffmpeg.so"
+  ],
+  "profileUnmodified": true,
+  "permissionAndSignatureChecksEnabled": true,
+  "officialPlaybackFixturesAttempted": 0
+}

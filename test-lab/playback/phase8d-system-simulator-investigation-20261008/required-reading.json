@@ -1,0 +1,97 @@
+[
+  {
+    "path": "docs/AI_WORKFLOW.md",
+    "sha256": "9692B25EA6A66960228B9C3869E8731AEA3D8AE29286B33E9F519F3E0B661E4A",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/MASTER_IMPLEMENTATION_PLAN.md",
+    "sha256": "69C50B6B81CEC243934BF38077E24621EF6470000118A779F66B0025A692BC84",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/ARCHITECTURE_TARGET.md",
+    "sha256": "11DDF02AE6E521898B792E093677D60DA82592E850B4632CC4BCD35D5A6DEF5F",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/ARCHITECTURE_MIGRATION.md",
+    "sha256": "7280BC51ADB42FE0F04E1FB1892AA7B30D56DC89DD615CE1B4CDDF0DFAB4A746",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/IMPLEMENTATION_STATUS.md",
+    "sha256": "EDC79B5D677A2E7138762064613DFF7D5754FFBCDA50C967AF6EF03E4B19E393",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/SESSION_HANDOFF.md",
+    "sha256": "73243059B36A7D7C0C96E9EF703A8E9D5434C7DF7A14E3AD137D28C13FA971BC",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/CODEX_VALIDATION_TASK.md",
+    "sha256": "7FB6554B1066DACF8F3373780B80F74E4D191AFA6C4A6D9A68246D8032C8260F",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/PLAYBACK_PHASE8B_REPORT.md",
+    "sha256": "274B6821D59692D5FACB9431BE72E47E97095F7A563F7B0FFF31C4B68F30DC91",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/PLAYBACK_PHASE8B_SIMULATOR_RUNBOOK.md",
+    "sha256": "7776CEDE7ABA657CDA2AF87138DCCD854A693B62324B55082DFA40DDD011A7D4",
+    "fullyRead": true
+  },
+  {
+    "path": "docs/PLAYBACK_NATIVE_CAPABILITY_AUDIT_REPORT.md",
+    "sha256": "F816D912C1953FC1E115D17B887D90423D56BA23012A4CF7EFEE06D7FC042CDA",
+    "fullyRead": true
+  },
+  {
+    "path": "entry/src/main/ets/playback/SystemPlaybackPort.ets",
+    "sha256": "972CD14657E47C42C8E65A8CB3EF738C823FC437094820647DFA9D45D3FF9E41",
+    "fullyRead": true
+  },
+  {
+    "path": "entry/src/main/ets/pages/PlayerPage.ets",
+    "sha256": "87AA1C5ADAB7B04C27F5845D302CA22555C0E58DC14D167A20C4FB020073C3DC",
+    "fullyRead": true
+  },
+  {
+    "path": "linkora_core/src/main/ets/playback/PlaybackEngine.ets",
+    "sha256": "CDEE3EEB5CC03DEA6FDCC87BF785C67798EBA6AC7EDD51B44155B18C42DF8D2C",
+    "fullyRead": true
+  },
+  {
+    "path": "linkora_core/src/main/ets/playback/PlaybackPort.ets",
+    "sha256": "C21EC63E9CE2AF9A0516B9E4048C7769F6C1836EC7E21CA4741217DD9DEFC62C",
+    "fullyRead": true
+  },
+  {
+    "path": "linkora_core/src/main/ets/playback/PlaybackBackend.ets",
+    "sha256": "116B387031D7795538BD18E24B3187C25268D19ACD0EA870248859D6351D0809",
+    "fullyRead": true
+  },
+  {
+    "path": "entry/src/main/ets/playback/AdaptivePlaybackPort.ets",
+    "sha256": "803FD782E47DC6F20D442E23F767695FCA1239BAD488D0449DD431D20D4154C1",
+    "fullyRead": true
+  },
+  {
+    "path": "test-lab/media-compatibility/cases.json",
+    "sha256": "45DD55584A3E644F7AB2DEA138EA5091262395DC177A93A9E4D9D779998581E0",
+    "fullyRead": true
+  },
+  {
+    "path": "test-lab/media-compatibility/generate-samples.ps1",
+    "sha256": "1400258A324D479A1664A6B9C320462C71E212DACEE3118E3929DD489EE678AB",
+    "fullyRead": true
+  },
+  {
+    "path": "test-lab/media-compatibility/fetch-external-samples.ps1",
+    "sha256": "AE255608BDB42D2A676CF28CC87B5C79B71E0EC048189A9BE05B16AE63AAB533",
+    "fullyRead": true
+  }
+]

@@ -1,0 +1,73 @@
+{
+  "exactCaseIds": [
+    "hls-h264-aac",
+    "hls-hevc-aac",
+    "mkv-ffv1-flac",
+    "mov-prores-pcm",
+    "ogv-theora-vorbis",
+    "wmv-wmv2-wma"
+  ],
+  "officialAttempts": 0,
+  "records": [
+    {
+      "caseId": "hls-h264-aac",
+      "attempted": false,
+      "officialExecutionCount": 0,
+      "result": "NOT RUN",
+      "reason": "Controlled target-loopback HTTP forward preflight failed before any fixture opening. Strict STOP; no alternate port/route or retry used.",
+      "nativeStates": "NOT OBSERVED",
+      "frameVisibility": "NOT PROVEN",
+      "causeOfHistoricalFail": "UNRESOLVED \u2014 not investigated in this run"
+    },
+    {
+      "caseId": "hls-hevc-aac",
+      "attempted": false,
+      "officialExecutionCount": 0,
+      "result": "NOT RUN",
+      "reason": "Controlled target-loopback HTTP forward preflight failed before any fixture opening. Strict STOP; no alternate port/route or retry used.",
+      "nativeStates": "NOT OBSERVED",
+      "frameVisibility": "NOT PROVEN",
+      "causeOfHistoricalFail": "UNRESOLVED \u2014 not investigated in this run"
+    },
+    {
+      "caseId": "mkv-ffv1-flac",
+      "attempted": false,
+      "officialExecutionCount": 0,
+      "result": "NOT RUN",
+      "reason": "Controlled target-loopback HTTP forward preflight failed before any fixture opening. Strict STOP; no alternate port/route or retry used.",
+      "nativeStates": "NOT OBSERVED",
+      "frameVisibility": "NOT PROVEN",
+      "causeOfHistoricalFail": "UNRESOLVED \u2014 not investigated in this run"
+    },
+    {
+      "caseId": "mov-prores-pcm",
+      "attempted": false,
+      "officialExecutionCount": 0,
+      "result": "NOT RUN",
+      "reason": "Controlled target-loopback HTTP forward preflight failed before any fixture opening. Strict STOP; no alternate port/route or retry used.",
+      "nativeStates": "NOT OBSERVED",
+      "frameVisibility": "NOT PROVEN",
+      "causeOfHistoricalFail": "UNRESOLVED \u2014 not investigated in this run"
+    },
+    {
+      "caseId": "ogv-theora-vorbis",
+      "attempted": false,
+      "officialExecutionCount": 0,
+      "result": "NOT RUN",
+      "reason": "Controlled target-loopback HTTP forward preflight failed before any fixture opening. Strict STOP; no alternate port/route or retry used.",
+      "nativeStates": "NOT OBSERVED",
+      "frameVisibility": "NOT PROVEN",
+      "causeOfHistoricalFail": "UNRESOLVED \u2014 not investigated in this run"
+    },
+    {
+      "caseId": "wmv-wmv2-wma",
+      "attempted": false,
+      "officialExecutionCount": 0,
+      "result": "NOT RUN",
+      "reason": "Controlled target-loopback HTTP forward preflight failed before any fixture opening. Strict STOP; no alternate port/route or retry used.",
+      "nativeStates": "NOT OBSERVED",
+      "frameVisibility": "NOT PROVEN",
+      "causeOfHistoricalFail": "UNRESOLVED \u2014 not investigated in this run"
+    }
+  ]
+}

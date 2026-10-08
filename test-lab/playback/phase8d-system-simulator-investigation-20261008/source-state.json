@@ -1,0 +1,18 @@
+{
+  "taskId": "phase8d-sim-system-hls-first-frame-root-cause",
+  "state": "READY",
+  "repository": "https://github.com/baozi510/Linkora.git",
+  "branch": "feat/playback-capability-phase8",
+  "source": "e19123a0e110cebb479d24dbdf72d6d3c9169a5b",
+  "head": "0a5e1af4be94a2528dcbc968f42f1883d9c22c3b",
+  "drift": [
+    "docs/CODEX_VALIDATION_TASK.md"
+  ],
+  "clean": true,
+  "submodules": {
+    "entry/src/main/cpp/third_party/libnfs": "cee4ca723e081e6a18f51b838690a4c21e14bb2c",
+    "entry/src/main/cpp/third_party/libsmb2": "b3d560c02fb1268320d2fd1c17fe841b0d93b85f",
+    "entry/src/main/cpp/third_party/mbedtls/framework": "7d726d145d678aa7f5a7df3b9e7ee3dbce6ea1bf"
+  },
+  "utc": "2026-10-08T04:32:31.018782+00:00"
+}

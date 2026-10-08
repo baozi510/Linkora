@@ -1,0 +1,7 @@
+{
+  "publicFilesChecked": 53,
+  "credentialsAndEndpointAndPrivatePathScanPass": true,
+  "privateScreenshotsDeviceIdsLogsAndSigningInputsExcluded": true,
+  "generatedMediaAndHapExcluded": true,
+  "logLabelsExplicitlySanitized": true
+}

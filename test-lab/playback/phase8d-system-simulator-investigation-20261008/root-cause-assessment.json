@@ -1,0 +1,16 @@
+{
+  "primary": "BLOCKED \u2014 SIMULATOR ENVIRONMENT",
+  "failedStage": "controlled target-loopback HTTP forwarding preflight",
+  "actualHdcMessage": "[Fail]TCP Port listen failed at 19084",
+  "forwardListBefore": "[Empty]",
+  "forwardListAfter": "[Empty]",
+  "listenFailureOwnerOrMechanism": "NOT PROVEN; no unrelated process/port intervention",
+  "serverHostFixtureInputsVerified": true,
+  "productionDefectIdentified": false,
+  "historicalSixFailuresUnchanged": true,
+  "fixtureAndMediaBytesNotModified": true,
+  "retryOrAlternateRouteUsed": false,
+  "sixHistoricalCausesRemainUnresolved": true,
+  "officialRuntimeAttempts": 0,
+  "nextOwnerAction": "GPT review actual failure and dispatch an explicitly scoped environment/route preflight recovery task if appropriate; do not reuse build PASS for a future fresh task."
+}
