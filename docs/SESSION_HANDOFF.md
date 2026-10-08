@@ -1,6 +1,25 @@
 # Linkora Session Handoff
 
-## CURRENT STATE — 2026-10-08 Phase 8E cancellation FAIL and unvalidated adaptive ownership fix
+## CURRENT STATE — 2026-10-08 Phase 8F helper criterion stopped; lifecycle repair still awaiting cancellation validation
+
+**Repository:** `baozi510/Linkora`. **Branch:** `feat/playback-capability-phase8`.
+
+**Reviewed stop:** `ACCEPTED — FAIL — REQUIRED TEST GATE`, Phase 8F `phase8f-sim-adaptive-pending-candidate-cancel-recovery`, source `8174e6e4f0214958fb83fef46e92170c4c10263a`, dispatch `616e0ed6ddb838edb2b7cc50dcd88fff1193f46f`, evidence `202fdab4f77365bd62ec60fe5af2c2fb9cc9364c`. Do NOT rerun previous task ID or rewrite its report.
+
+All full fresh default/sim/default build gates PASS, two independently captured Hypium 210/210, four total exact-nine ARM64 library checks, signed simulator HAP/ABI/replace install and one proper owned `hdc rport tcp:19084 tcp:19084` route. **Only one official MP4 healthy control opened**. Native prepared→play→playing, real callback + colored pixels, position161→927ms, normal clean leave. Original private helper `>=800ms` progress predicate produced `positionAdvanced=false` and AssertionError/exit1 because **+766ms**. Written task required strict positive progress, not >=800ms. Accept the bounded evidence and retain FAIL gate; no established production playback regression.
+
+Both HLS opens, FFV1, pending cancellation and subsequent healthy recovery **NOT RUN**. Therefore new Adaptive `pendingCandidate` release/stale-commit repair from `8174e6e4f0214958fb83fef46e92170c4c10263a` is still **UNVALIDATED in cancellation/recovery runtime**, despite having compiled. No source patch or old-test expectation change is needed from the +766ms sample alone.
+
+**Next dispatch:** NEW distinct task with task-specific fresh private passive observer, without modifying original helper/tests. It must **not invoke the old >=800ms-asserting focus runner as an authoritative gate**. Keep old raw Boolean and original FAIL unchanged; independently predefine monotonic-positive healthy acceptance from two timestamped position samples, native frame and actual pixels/route/clean leave; finite observation window. Any newly invoked old helper nonzero remains STOP, never reinterpret failed gate as PASS. Then HLS/legacy/cancellation tests, and only after normal cleanup (zero service/audio/surface without force-stop) a fresh post-cancel MP4 recovery. Fresh builds and signed simulator HAP mandatory; all historical source and device boundaries preserved.
+
+No physical arm64 device now; x86 FFmpeg result ≠ ARM64 runtime; simulator MPV stub ≠ real MPV; no hardware codec/HDR/DV/passthrough or device-output claims. Existing Phase8B/D/E findings unchanged. Do not query quota or poll under this task; remote new `docs/CODEX_VALIDATION_TASK.md` is sole execution authority.
+
+The prior Phase 8E CURRENT STATE below is historical.
+
+---
+
+
+## HISTORICAL STATE — 2026-10-08 Phase 8E cancellation FAIL and unvalidated adaptive ownership fix
 
 **Branch:** `feat/playback-capability-phase8`, repository `baozi510/Linkora`.
 

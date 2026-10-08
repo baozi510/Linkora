@@ -1,6 +1,25 @@
 # Linkora Player Architecture — Implementation Status
 
-## CURRENT EXECUTION SUMMARY — 2026-10-08 (Phase 8E failure reviewed; ownership correction awaiting validation)
+## CURRENT EXECUTION SUMMARY — 2026-10-08 (Phase 8F helper-gate stop independently reviewed; new progress-contract task pending)
+
+**Repo / branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`.
+
+**Owner review:** `ACCEPTED — FAIL — REQUIRED TEST GATE` for executed and remotely published `phase8f-sim-adaptive-pending-candidate-cancel-recovery` at evidence `202fdab4f77365bd62ec60fe5af2c2fb9cc9364c`. Actual source `8174e6e4f0214958fb83fef46e92170c4c10263a`, dispatch `616e0ed6ddb838edb2b7cc50dcd88fff1193f46f`. One authorized new report and evidence commit, 85 paths; source→dispatch drift task-only; no protected source/tests/media/history drift. **This task is complete as a STOP; never repeat its task ID.**
+
+- Fresh normal install and both 4-lock independently verified EOL-only restore operations, default → simulator → immediate default build gates PASS. Both original Hypium outputs 210/210, two exact-nine AArch64 native ABI audits per default, x86 simulator FFmpeg-only whitelist, legally signed and installed fresh HAP. No real ARM64 runtime.
+- One fresh healthy MP4 official open only: real device→host reverse port19084 and AVPlayer GET/Range206; native initialized→prepared→play→playing, actual first-frame callback, native video size320×180, independently sampled XComponent test-color pixels, positions161→927ms (**positive +766ms**), and normal sampled surface/service/audio cleanup0. No playback production failure established.
+- **Exact stop:** old private focus-run helper evaluated `positionAdvanced = (delta >= 800ms)`, yielding `false`, original `BOUNDED FAIL / UNRESOLVED`, and `AssertionError`/exit1. It was a **real failed helper/test gate** and remains FAILED. However this task's written healthy-progress criterion is **monotonic positive (>0ms)**, which fresh +766ms meets. Do not change old helper/raw Boolean/test expectation, infer player regression from 34ms shortfall, or claim the existing helper PASS.
+- **NOT RUN:** both HLS format checks, FFV1 representative, pending HLS cancellation, and distinct post-cancel healthy recovery. Adaptive pending-candidate ownership fix from source `8174e6e4f0214958fb83fef46e92170c4c10263a` compiled, but **has not received any actual cancellation/recovery runtime validation**. This review makes **no** new production patch and no codec/device outcome judgment.
+- One preliminary signed native ABI CLI `--abi=x86_64` was rejected (expects positional `x86_64`); the unchanged exact signed HAP subsequently passed the correctly invoked strict audit. Do not conceal rejected setup invocation or claim repeat build/sign/install/media attempt. Original 23 sanitized gzip integrity reports and protected 2872 old regular blobs remain evidence; logs are sanitized subsets where designated and full private screenshot/hilog/HAP unavailable for independent replay.
+- **Next owner decision:** use a NEW distinct READY task with a **preauthorized independent fresh private non-invasive runtime observer/collector** for the healthy System control, while preserving the old private helper's `>=800ms` raw output/threshold semantics. The healthy task gate is: valid native prepared-before-play, playing, real first-frame callback AND independent colored pixels, matching target HTTP route, **two correctly ordered position samples with strict delta >0ms**, and zero sampled clean leave. Require a bounded declared observation window; do not change repo tests or historical helper, reinterpret an invoked failed gate as PASS, retry an official failed case, or broaden compatibility acceptance. If old helper is invoked and exits nonzero, record and STOP; do not silently ignore it.
+- If new independent healthy observation gate passes, freshly run HLS H264/HEVC, one FFV1 representative, one pending-HLS cancellation **with native release and zero app-matching service/audio records without force-stop**, then and only then distinct recovery MP4. Fresh builds are required anew, no inherited earlier PASS. Existing 8B/8D/8E FAIL/NOT RUN immutable, Phase 8C native-first 39-feature static audit scoped, simulator MPV stub ≠ real MPV and simulator ≠ Mate60.
+
+Previous Phase 8E current execution summary below is now **historical**.
+
+---
+
+
+## HISTORICAL EXECUTION SUMMARY — 2026-10-08 (Phase 8E failure reviewed; ownership correction awaiting validation)
 
 **Repository/branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`.
 
