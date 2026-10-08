@@ -1,57 +1,59 @@
 # Codex Validation Task
 
 > State: READY
-> Task ID: phase8d-sim-rerun1-hdc-rport-six-case
+> Task ID: phase8e-sim-system-prepared-state-gate
 > Repository: `baozi510/Linkora`
 > Branch: `feat/playback-capability-phase8`
-> Validation source SHA: `c0d37ef9aaeba31c512743fe704e8d91ba1c0c48`
-> Unchanged production playback baseline: `99ab47020f81391b7640d44c58ccb719491b4106`
-> Prior blocked Phase 8D evidence: `391d56e4c0b36f19d4a52f8d77a4adab2db87b8b`
-> Role: BUILD / VALIDATION ENVIRONMENT PREFLIGHT / SYSTEM SIMULATOR FUNCTIONAL INVESTIGATION / EVIDENCE / REPORT ONLY
+> Validation source SHA: `68452df5486cf568da66a5c52352841cb7e64c5f`
+> Pre-fix production baseline: `99ab47020f81391b7640d44c58ccb719491b4106`
+> Accepted investigation evidence (collection only): `9c4f6ded7cc86afad1052eb448ce3172b3232db6`
+> Role: Codex BUILD/TEST/EVIDENCE/REPORT ONLY; GPT owns production changes
 
-## 0. Scope and operating authority
+## 0. New task and exact owner change
 
-This is a **new, distinct rerun-1 task** correcting the **validation-environment setup** that stopped the prior Phase 8D task. The previous task `phase8d-sim-system-hls-first-frame-root-cause` has been executed, published and independently reviewed as `BLOCKED — SIMULATOR ENVIRONMENT`. Its original logs/FAIL/NOT RUN are immutable. **Do not re-run the previous task ID, repeat Phase 8C's 39-feature audit, or relabel historical Phase 8B observations.**
+This is a **new Phase 8E simulator validation of a GPT-owned System playback readiness safety correction**, not a rerun of any previous task ID.
 
-No physical ARM64 device is available; run Simulator-first and ARM64-build-always. MPV simulator is stub, x86 FFmpeg does not prove ARM64 runtime, and System simulator results do not prove Mate60. Real MPV, HDR, Dolby Vision, passthrough, native storage runtime and device output remain separate batched gates. This task is a focused investigation of two historical HLS initialization FAIL and four historical first-frame-evidence FAIL using unchanged System playback.
+Prior completed tasks: `phase8c-sim-native-first-capability-audit`, `phase8d-sim-system-hls-first-frame-root-cause`, `phase8d-sim-rerun1-hdc-rport-six-case`. Do **not** execute them again.
 
-Neither chat messages nor prior evidence authorize deviation from this exact committed task. Codex is test/report-only: **do not change production source, tests/scripts, runtime logging hooks, native packages, fixtures, signing/profile settings, player policy, Auto, Direct I/O, UI/display modes or thumbnail research / Issue #17**.
+GPT independently accepted Phase 8D-SIM Rerun 1 as `PASS — FOCUSED SYSTEM SIMULATOR INVESTIGATION COLLECTED` **only for bounded investigation scope**. Healthy MP4 passed; two HLS remained native `initialized` when Linkora called play, despite HLS manifest/segments GET200; four legacy System videos showed native size0x0, no frame callback and black sampled ROI with positive position deltas. Historical Phase 8B six FAIL, prior Phase 8D BLOCKED/NOT RUN and Phase 8D rerun bounded FAIL remain immutable. No codec, hardware, audio output or Mate60 support was accepted.
 
-## 1. Repository/source gate — before any install/build
+**Changed source:** `entry/src/main/ets/playback/SystemPlaybackPort.ets` now requires ALL THREE before `prepare()` fulfills its app-level contract: successful underlying `AVPlayer.prepare()` Promise, explicit native `stateChange('prepared')` notification, and current native `AVPlayer.state === 'prepared'`. The new wait is bounded by `PREPARATION_TIMEOUT = 20000` ms. Timeout/native error/release rejects the pending preparation, clears the timer and prevents `AdaptivePlaybackPort` from committing/emitting its synthetic PREPARED early. Native play should **never** occur in `initialized` just because a native Promise returned. Source may still fail HLS with a bounded timeout; **HLS format playback is not an expected PASS gate**.
 
-1. Fresh fetch branch `feat/playback-capability-phase8`, initialize/check all pinned submodules, verify repository, task ID, READY, source SHA and clean isolated validation checkout.
-2. Leave the user's existing dirty `D:/Linkora` untouched: no stash/checkout/reset/clean in that workspace. Use a distinct isolated clone/worktree.
-3. Verify blocked evidence `391d56e4c0b36f19d4a52f8d77a4adab2db87b8b` is ancestor of exact source `c0d37ef9aaeba31c512743fe704e8d91ba1c0c48`, and source is ancestor of actual fetched HEAD.
-4. Record and inspect `git diff --name-only c0d37ef9aaeba31c512743fe704e8d91ba1c0c48..HEAD`. The **only permitted drift** is `docs/CODEX_VALIDATION_TASK.md`. Anything else, including a report or old evidence change, => STOP with source-drift evidence.
-5. Record full implementation source SHA and actual dispatch HEAD SHA separately. Do not substitute any prior run's build/test results.
+Source is **NOT YET COMPILED/VALIDATED** by GPT; your full fresh builds and target checks are mandatory. Native-first SDK contract research remains the scope; don't add workarounds/format blacklists, change System-only HLS routing, or claim device runtime.
 
-## 2. Mandatory complete reading
+## 1. Fresh source/checkout isolation
 
-Read these files and current portions fully (with required-reading provenance):
+1. Fresh-fetch `baozi510/Linkora` branch `feat/playback-capability-phase8`. Validate current task state=READY, task ID and exact implementation SOURCE_SHA `68452df5486cf568da66a5c52352841cb7e64c5f`; save actual fetched dispatch HEAD and branch metadata.
+2. Verify source SHA is an ancestor of the actual dispatch HEAD. Run `git diff --name-only 68452df5486cf568da66a5c52352841cb7e64c5f..HEAD`: the ONLY ALLOWED DRIFT is **`docs/CODEX_VALIDATION_TASK.md`**. An extra tracked path => STOP with exact evidence, no run.
+3. Check complete ancestry back to accepted Phase 8D evidence `9c4f6ded7cc86afad1052eb448ce3172b3232db6`; pin three native submodules to committed SHA. Clean isolated checkout/worktree only; do not stash/reset/clean/checkout the user's dirty `D:/Linkora`.
+4. If an **optional extra recursive remote submodule fetch** hits TLS errors, do not disable certificate verification, change Git file protocol security rules or accept unverified pins. Existing trusted local Git repositories may be used for explicit normal clones only after fresh pin/hash provenance and exact Git object verification, followed by normal submodule absorption and origin URL synchronization; record truthfully or STOP if unprovable.
+5. No old app artifact, test result, signed HAP, historical PASS or previous evidence may replace a new invocation.
 
-1. `docs/AI_WORKFLOW.md`
-2. `docs/MASTER_IMPLEMENTATION_PLAN.md`
-3. `docs/ARCHITECTURE_TARGET.md`
-4. `docs/ARCHITECTURE_MIGRATION.md`
-5. `docs/IMPLEMENTATION_STATUS.md` latest CURRENT EXECUTION SUMMARY, distinguish historical summaries
-6. `docs/SESSION_HANDOFF.md` latest CURRENT STATE, distinguish history
-7. `docs/CODEX_VALIDATION_TASK.md` (this task)
-8. `docs/PLAYBACK_PHASE8D_SIMULATOR_INVESTIGATION_REPORT.md`
-9. `test-lab/playback/phase8d-system-simulator-investigation-20261008/preflight-command-diagnosis.json`, `root-cause-assessment.json`, `six-case-observations.json`, `source-state.json`
-10. `docs/PLAYBACK_PHASE8B_REPORT.md` and `docs/PLAYBACK_PHASE8B_SIMULATOR_RUNBOOK.md`
-11. `docs/PLAYBACK_NATIVE_CAPABILITY_AUDIT_REPORT.md` (boundaries only; no Phase 8C rerun)
-12. `test-lab/media-compatibility/` manifest / fixture truth for six IDs + healthy System MP4, the original Phase 8B simulator matrix/evidence and its input routing
-13. `entry/src/main/ets/playback/SystemPlaybackPort.ets`, `entry/src/main/ets/pages/PlayerPage.ets`
-14. `linkora_core/src/main/ets/playback/PlaybackPort.ets`, `PlaybackBackend.ets`, `PlaybackEngine.ets`, `AdaptivePlaybackPort.ets` if present
-15. Actual installed HDC help for `fport`, `rport` and forwarding list/removal syntax.
+## 2. Required reading — actual current source and history
 
-If the exact historical file naming differs, locate actual tracked files before continuing. Do not invent a path or invoke the wrong API based on memory.
+Read and record complete relevant content:
+- `docs/AI_WORKFLOW.md`
+- `docs/MASTER_IMPLEMENTATION_PLAN.md`
+- `docs/ARCHITECTURE_TARGET.md`, `docs/ARCHITECTURE_MIGRATION.md`
+- latest CURRENT EXECUTION SUMMARY of `docs/IMPLEMENTATION_STATUS.md`
+- latest CURRENT STATE of `docs/SESSION_HANDOFF.md`; distinguish historical snapshots
+- entire `docs/CODEX_VALIDATION_TASK.md` (this task)
+- `docs/PLAYBACK_PHASE8D_SIMULATOR_RERUN1_REPORT.md`, `docs/PLAYBACK_PHASE8D_SIMULATOR_INVESTIGATION_REPORT.md`, `docs/PLAYBACK_PHASE8B_REPORT.md` and `docs/PLAYBACK_PHASE8B_SIMULATOR_RUNBOOK.md`
+- `test-lab/playback/phase8d-system-simulator-rport-rerun1-20261008/native-event-analysis.json`, `official-attempt-ledger.ndjson`, `root-cause-assessment.json`, `target-route-proof.json` and `six-case-observations.json`; read bounded prior source and observed differences, DO NOT inherit as new PASS
+- `docs/PLAYBACK_NATIVE_CAPABILITY_AUDIT_REPORT.md` for installed SDK/native-first limitations
+- `entry/src/main/ets/playback/SystemPlaybackPort.ets` at SOURCE and pre-fix revision (diff)
+- `entry/src/main/ets/playback/AdaptivePlaybackPort.ets`, `entry/src/main/ets/playback/NetworkPlaybackSourceResolver.ets`, `entry/src/main/ets/pages/PlayerPage.ets`
+- `linkora_core/src/main/ets/playback/PlaybackPort.ets`, `PlaybackEngine.ets`, `PlaybackModels.ets`, `PlaybackBackend.ets`
+- controlled Phase 8B fixture manifest/truth in `test-lab/media-compatibility/` for MP4 healthy control, both HLS cases and one selected legacy video, including exact HLS segment payloads
+- installed API26 MediaKit `AVPlayer.prepare()/play()`, `state` and `stateChange` declarations, and installed HDC 3.2.0f `rport` and removal syntax, cross-check current official primary docs.
 
-## 3. Initial installation and EOL-only normalization
+Keep accurate per-file SHA/provenance. If a named historical path differs in actual repository, locate the exact tracked file rather than inventing it.
 
-Execute **exactly one initial normal** `ohpm install`; simulator verify's standard internal dependency-restore install is permitted later.
+## 3. Normal ohpm, EOL-only recovery and strict source protection
 
-Only these tracked paths may be restored to HEAD for **freshly proven, semantically identical Windows EOL-only drift in the isolated checkout**:
+Run one normal initial `ohpm install` and do not attempt a second repair install.
+
+The only tracked paths permitted for **freshly proven Windows EOL-only temporary restore inside the isolated validation checkout**:
 
 ```text
 entry/oh-package-lock.json5
@@ -60,11 +62,13 @@ linkora_proxy/oh-package-lock.json5
 oh-package-lock.json5
 ```
 
-For each affected path prove (a) allowlisted; (b) Git-normalized worktree blob == exact checkout HEAD blob; (c) CRLF→LF normalized bytes == exact HEAD bytes; (d) no dependency/version/checksum/graph/comment change; (e) no other tracked-byte/path change. Restore only those proven EOL-only files from checkout HEAD and verify clean. Independently repeat the same proof after the simulator verifier's own dependency restoration. Failed proof / any semantic or other drift / dirty checkout after restore => `BLOCKED — VALIDATION ENVIRONMENT`, STOP. Never normalize the developer's unrelated workspace.
+For each affected path prove exact allowlist, Git-normalized blob equality to the checkout HEAD, CRLF→LF exact HEAD-byte equality, unchanged dependency/version/graph/checksum/comment semantics, and no other tracked byte change. Only then restore those exact files to HEAD in isolated checkout; verify fully clean. Repeat independent fresh proof after simulator verifier's normal dependency-restore install. Any other worktree drift or semantic discrepancy => STOP `BLOCKED — VALIDATION ENVIRONMENT`.
 
-## 4. Fresh build, artifact and simulator install gates
+Do not edit production/test scripts, profiles, lockfile semantics, dependency versions, simulator stubs, package/native source, fixture bytes or test thresholds. All source fixes return to GPT for a new source/review commit.
 
-Execute in this exact order **fresh for this new task**:
+## 4. Fresh non-negotiable build gates
+
+In exact order:
 
 ```powershell
 ./scripts/verify.ps1
@@ -72,105 +76,88 @@ Execute in this exact order **fresh for this new task**:
 ./scripts/verify.ps1
 ```
 
-Require independent actual outputs for both default runs: architecture-boundary fixtures, FFmpeg/analysis pure suites, MPV mapping, Hypium original files/counters, Debug/Release HAR/HAP, two exact-nine AArch64 native artifact/ABI audits in **each** default run. Require simulator parity/isolation, audio-metadata static guard, exact x86_64 FFmpeg-only native library whitelist; final default restores production MPV/native dependencies.
+Preserve both actual Hypium originals before overwrite and separately record each command exit status. Require architecture fixtures, FFmpeg and analysis pure tests, artifact fixtures, MPV mapping, Debug/Release HAR/HAP for four modules, each default's two exact-nine AArch64 native library/ABI audits, simulator parity/isolation/audio-only metadata static guard, x86 simulator FFmpeg-only native whitelist and final restored production native deps. STOP on ANY compile failure or required failed gate: no target runtime after failed build. Classify `FAIL — ARM64 BUILD GATE`, `FAIL — SIMULATOR BUILD` or exact test failure truthfully.
 
-Audit the freshly built simulator HAP. Use only the existing legitimate SDK signing tool and existing profile to sign the exact artifact if the normal unsigned install is rejected by signature enforcement. Never bypass signature/permission checks, alter sign profiles or accept HDC transport exit0 as install proof. Independently audit signed artifact native ABI/whitelist, explicitly replace-install without clearing app data, and cold launch. Save hashes and private signing provenance only, never publish secrets/HAP.
+Use only an unchanged legal SDK signing mechanism and existing appropriate simulator profile if normal unsigned HAP install is rejected by signature enforcement. Audit exact fresh signed x86_64 native whitelist/ABI after signing; explicitly replace-install the exact signed artifact and cold-launch, recording actual status beyond HDC exit0. Do not disable signing/permission checks, edit profiles or wipe application data. Never publish signing secret/HAP/device IDs.
 
-On any failed build/Hypium/native whitelist/artifact/install gate: STOP before fixture or route runtime tests and publish accurate FAIL/BLOCKED with evidence. Previous Phase 8D passes are historical, not this round's substitutes.
+## 5. Controlled reverse mapping and native route proof
 
-## 5. Mandatory corrected HDC reverse-port setup — before official media opens
+Keep the **same controlled owned fixture server, same literal simulator loopback HTTP URI/port19084 and same retained exact fixture media** as Phase 8D rerun. The previous fix was environment setup, not a license to bypass production route.
 
-**This round fixes validation setup, not playback.** Keep the same owned controlled fixture media, same host fixture server, same intended HTTP fixture URI on simulator loopback, and same port 19084. Do not change server/path/manifest/segments or use a different port, direct WebDAV playback, rewriting the URL, or a temporary application hook to force a PASS.
+- Check installed HDC help: `fport` host→device; `rport` device→host. Inspect host19084 listener ownership and existing reverse/forward list before touching anything; don't disturb unrelated services. Start only the owned fixture server listening 127.0.0.1:19084; verify actual owner/bytes.
+- Create exactly one `hdc rport tcp:19084 tcp:19084`, confirm actual `[Reverse]` list and status while server stays running. Never use `fport` to create this device→host route; don't change port/URI/host.
+- Demonstrate actual simulator→host request, correlated to one official healthy unchanged app MP4 open and native AVPlayer GET/Range events (not just host curl). The healthy case counts once. If target route cannot be shown, STOP `BLOCKED — SIMULATOR ENVIRONMENT`; do not proceed using host-only GET as a substitute.
+- Freshly prove controlled inputs and HLS manifest/three segments for BOTH targets by local and authenticated TLS WebDAV hash/wholeGET/Range206 plus owned host served-byte proof against committed truth. No reencoding, regeneration, manifest rewrite, mixed media or fake codec fields.
 
-Run the following ordered preflight, with sanitized command/status/time evidence:
+## 6. Scoped runtime contract regression (not codec certification)
 
-1. Independently inspect installed HDC version/help. Confirm `fport localnode remotenode` is **host→device** and `rport remotenode localnode` is **device→host**. The intended fixture path is **device→host**. **Do not issue `fport` for this route.**
-2. Inspect host TCP19084 listener ownership and HDC forward/reverse lists **before** starting services or mapping. Do not close or replace unrelated listeners/mappings. If TCP19084 is unexpectedly occupied by a different process or a conflicting mapping exists, STOP as `BLOCKED — SIMULATOR ENVIRONMENT`; record nonprivate bounded evidence.
-3. Start only the designated owned fixture server on host 127.0.0.1:19084, verify it is this owned process and actually serves expected controlled manifest/bytes. Preserve the expected server and retained media.
-4. Create a single **reverse** mapping, verified against installed HDC syntax, exactly:
+**Contract invariants under test:**
 
-```powershell
-hdc rport tcp:19084 tcp:19084
-```
+A. A healthy System MP4 control must still play: native initialization → actual prepared notification, underlying Promise fulfillment, app PREPARED only after native prepared confirmation, native play then playing, video320×180, actual first-frame submission callback and separately observed colored XComponent pixels, positive position progress, sampled clean leave.
 
-Here `remotenode=tcp:19084` is the simulator's listening endpoint and `localnode=tcp:19084` is the already-running host fixture server. The host server **must stay running**. Confirm command-level result and the **actual reverse mapping** list. Ignore neither a rejected command nor a stale/unrelated mapping. Never treat an empty fport list alone as proof of an active rport mapping.
-5. Establish an actual **simulator/device→host** HTTP request against the unchanged controlled server, observe matching host access trace/status/body/hash or controlled nonsecret probe. A host-only curl/whole-GET is **not** target-route proof. If the installed target shell has no HTTP client, the first **unchanged app's healthy forced-System MP4 open** may serve as the target-route proof: require correlated target/app activity and host GET on the exact route; count it as the healthy-control official execution, not an extra anonymous PASS.
-6. If reverse mapping creation or the genuine target HTTP route fails, STOP: capture exact command/error/host-listener evidence, **do not retry using fport**, change ports, kill unrelated services, alter URI/route, or start the six-case matrix. No source patch.
+B. Two HLS cases independently: `hls-h264-aac` and `hls-hevc-aac` (exact HLS input/route as original). Each gets **one distinct official prepared/playback attempt**; don't retry a completed failed case. Record controlled manifest+segments GET200 and actual native event timeline. The expected owner **safety** verdict is either:
+  - native genuinely transitions to `prepared`, only THEN a play occurs, and actual output (if any) is judged independently, OR
+  - native remains `initialized` and the app **does not** issue play/emit false PREPARED; preparation terminates on the explicitly bounded 20s timeout/error with concrete mapped failure and sampled release.
+Do not call an HLS timeout a format PASS, do not infer a decoder unsupported verdict. `JsPlay` while native still initialized **or** synthetic PREPARED emitted without native prepared is a **production regression FAIL**, even if no crash. An unbounded hang beyond the configured bounded gate is FAIL/STOP.
 
-Record host/server side and target side provenance without publishing endpoints, process identifiers or private paths. A successful `rport` status alone is not sufficient if no device-side HTTP request is demonstrated.
+C. Cancellation/leave scenario distinct from official HLS format attempts: open one controlled HLS input and intentionally leave **while preparing**, before native `prepared`; record it as a separately labeled cancellation test, not a second format verdict or replacement run. Require timely release of pending preparation without stale PREPARED/play/error leaking into next controlled healthy session, with sampled surface/player/audio/forward cleanup. If native preparation cannot be held open reproducibly, report this exact guard as NOT PROVEN, do not synthesize PASS.
 
-## 6. Seven actual scoped executions — only after the route is proven
+D. One separate legacy video **representative** from the four Phase 8D samples (suggest `mkv-ffv1-flac`), one official fresh System attempt after the change to establish no new app synthetic-ready regression. Record native prepared and native play ordering, size callback, actual first-frame callback vs registration, ROI pixels, duration/position samples and raw helper Boolean. This case is **not expected to show playable video**; preserve any new black result and distinguish positive delta from >=800ms helper predicate. Do not re-run all six legacy issues as a hidden compatibility ranking.
 
-Use only the retained owned corpus. Freshly hash all seven fixture inputs (including six HLS segments/manifests: 13 files total) against committed truth, TLS-verify owned authenticated WebDAV whole-GET and Range206 where supported, check host ffprobe truth. Do not regenerate/change media, reencode or change decoder settings. Source/type/URI must match the original Phase 8B System path.
+E. Preserve existing forced System / Auto decision policy. No MPV real runtime claim: simulator has only a stub. Any observed Auto fallback is recorded as software control flow only, never real MPV codec success. No new fatal error after release; restore original Auto user selection.
 
-After successful preflight execute **one healthy forced-System H.264/AAC MP4 control**, proving true visible native XComponent pixel samples, PLAYING/position progress and one leave cleanup, and then independently execute **exactly six** targeted historical cases via unchanged forced System:
+All new verdicts must distinguish:
+- compile/test gates versus runtime functional results;
+- native Promise resolution versus `stateChange('prepared')` and `player.state`;
+- app synthetic PREPARED versus true native readiness;
+- first-frame callback versus actual visible frame;
+- raw >=800ms progress predicate versus strictly positive deltas;
+- simulator System versus Mate60 real ARM64;
+- scoped native failure versus proven codec/system-wide support.
 
-| Case | Historical Phase 8B observation | New investigation objective |
-| --- | --- | --- |
-| `hls-h264-aac` | `LNK-PLAY-006` during initialize | correlate URL, HLS manifest/segments, native state/prepare/error and server request trace |
-| `hls-hevc-aac` | `LNK-PLAY-006` during initialize | same independently; don't infer H.264 result |
-| `mkv-ffv1-flac` | PLAYING and progressing, no proven visible frame | distinguish frame-submission signal, video size, ROI/pixels, black/unchanged vs visible content |
-| `mov-prores-pcm` | PLAYING and progressing, no proven visible frame | independent same |
-| `ogv-theora-vorbis` | PLAYING and progressing, no proven visible frame | independent same |
-| `wmv-wmv2-wma` | PLAYING and progressing, no proven visible frame | independent same |
+No implicit retry, no changing verdict/threshold/fixture midrun. If orchestration itself fails before the official run, record invalid setup separately; only clean, documented preflight correction is allowed. If a production or test-instrumentation change is needed, STOP with exact proof, never patch code from Codex.
 
-Record actual official attempts separately. Per HLS fixture capture sanitized URI/source type, host GET/Range/manifest/segment response trace if requested, elapsed prepare/state/error/native log details and whether error originates before AVPlayer. Do not attribute a 404/route failure to decoder unsupported. HLS/DASH remain System-only; no backend policy changes.
+## 7. Review and root-cause decision limits
 
-Per frame fixture capture unchanged source's native `startRenderFrame` indication if observable, PLAYING/status and monotonic position, videoSizeChange, actual XComponent surface bounds, pixel ROI and real expected color samples/verified digest if feasible, and resource cleanup. A callback or progress without actual pixels remains **NOT PROVEN**. If capture inaccessible, record exact instrument limit rather than call it black video. Avoid injecting temporary code or tweaking layout to improve screenshots.
+The initial Phase 8D evidence already exposed HLS prepare Promise-vs-state mismatch. The GPT fix is a **defensive app-contract correction only**. The fact that an HLS clip still fails to play is not enough to fail this fix if it is **bounded and cannot call play in initialized**. Conversely, if native prepared never arrives, do not pretend the codec or hardware works.
 
-A valid completed failed run remains a new, separate FAIL/UNRESOLVED record. Do not automatically retry or overwrite a completed failed case. A procedural invalid-input event before the official case may be documented separately and corrected without relabeling the original failed execution. If valid input is lost, STOP and report NOT RUN/BLOCKED. If a genuine production/test-code defect is identified, STOP and report details to GPT; Codex must not patch.
+Record the SDK `stateChange` correlation and any timer/release races with timestamps (e.g. native prepare Task In/Out, prepared notification, app onStateChange, JsPlay, async reject). If app contract telemetry cannot be observed without code changes, report NOT PROVEN instead of relying only on UI.
 
-## 7. Diagnosis and immutable history
+Do not promote System simulator HLS/legacy findings to real-device acceptance. Do not modify System-only HLS/DASH routing, Auto, Direct I/O, playback speed, buffer contract, seek UI, display fit, tracks, HDR/DV or advanced audio output. Their Phase 8C native-first owner backlog remains separate.
 
-Classify each historical cause narrowly as supported: reproducible adapter/UI defect, native simulator System limitation, source/manifest/route issue, observation gap or unresolved. Keep history untouched:
+## 8. Mandatory cleanup and confidentiality
 
-- Phase 8B: two HLS initialization **FAIL**, four first-frame-evidence **FAIL**.
-- Phase 8D first attempt: `BLOCKED — SIMULATOR ENVIRONMENT`, seven runtime checks **NOT RUN**, `fport` wrong direction, original evidence preserved.
-- Phase 8C: accepted *static* native-first audit; no new full-matrix research.
-- MPV simulator is stub, no real MPV device result; no Mate60 capability, encoded passthrough, HDR/DV, or ARM64 FFmpeg runtime inference.
-- Do not use x86 results for System/MPV performance ranking, Auto changes or global codec policy.
+Remove **only this task's** reverse mapping using installed HDC removal syntax (e.g. supported `fport rm` with exact owned mapping), prove no owned reverse remains; do not remove unrelated mapping. Stop only the owned fixture server, verify host listener cleanup and leave other services/media intact. Remove only owned temporary HTTP UI row, restore saved Auto preference/layout, check sampled surface, app player service entries, app audio renderer count zero after each leave (not proof of leak freedom). Preserve user dirty D:/Linkora, retained WebDAV profile, media corpus and all historical evidence.
 
-Fresh new results live only in the new task's own report/new directory. Distinguish evidence of native frame submission from visible output; keep telemetry precise. Diagnostic analysis should not silently turn a historical FAIL into a PASS or reuse old screenshot/hilog/build PASS.
+Never publish private endpoint/host identifiers/PIDs, credentials, tokens, device IDs, signing/profile secrets, HAPs, raw screenshots/hilog or absolute SDK/checkout paths. Redacted native log excerpts must state actual selection/subset method and distinguish from private complete native hilog. Publish sanitized build logs with original local file hash, gzip exact decompression/hash proof, and preserve every warning and test verdict. Do not query Codex quota/usage and do not add quota checks as a gate.
 
-## 8. Stop conditions, cleanup, security
+## 9. Authorized new outputs ONLY
 
-STOP on branch/source mismatch or protected drift, build gate failure, semantic EOL difference, incorrect port listener owner, failed `rport`, target-route proof failure, unexpected authentication/fixture hashes, inability to keep source and expected path intact, test instrumentation requiring code modifications, observed user-secret exposure, or a reproducible production defect requiring GPT fix. Report all actions already done before STOP honestly, without calling omitted stages PASS.
-
-After normal completion or stop, remove **only the reverse mapping created in this run** using installed HDC removal syntax, verify forward and reverse lists, and stop only the host server created by this run. Do not modify unrelated host listeners/forwards, user services, dirty worktree, stored passwords or data. Restore original backend selection/app preferences if changed; retain user-owned controlled WebDAV media and other fixtures. Sample post-leave surface/player/audio counts, without claiming exhaustive leak freedom.
-
-Do not publish credentials, private URLs/hostnames, IDs/port-owner PIDs, absolute SDK/checkout paths, local host shell transcripts with secrets, signing/profile files, private images/video/screenshots/HAP, generated/owned media or unsanitized logs. Retain accurate SHA/byte provenance and explicitly label sanitized readable and compressed logs; no false original-byte identity claim. No test result/metric rewriting.
-
-## 9. Authorized report/evidence output
-
-Codex may add/update **only**:
+Codex may create/update **only** the following two paths:
 
 ```text
-docs/PLAYBACK_PHASE8D_SIMULATOR_RERUN1_REPORT.md
-test-lab/playback/phase8d-system-simulator-rport-rerun1-20261008/
+docs/PLAYBACK_PHASE8E_SYSTEM_READINESS_VALIDATION_REPORT.md
+test-lab/playback/phase8e-system-prepared-readiness-sim-20261008/
 ```
 
-Suggested new evidence: `source-state.json`, `required-reading.json`, `initial-eol-proof.json`, `post-simulator-eol-proof.json`, `build-results.json`, separately preserved sanitized original-gate logs/Hypium, `artifact-install-proof.json`, `fixture-proof.json`, `hdc-command-help.json`, `host-listener-preflight.json`, `reverse-mapping-proof.json`, `target-route-proof.json`, `healthy-control.json`, `six-case-observations.json`, `root-cause-assessment.json`, `cleanup.json`, `protected-audit.json`, `security-review.json`.
+Suggested evidence within the new directory: `source-state.json`, `required-reading.json`, `protected-audit.json`, `security-review.json`, `initial-eol-proof.json`, `post-simulator-eol-proof.json`, fresh independent Hypium/build logs/results, `signed-artifact-install.json`, `fixture-truth.json`, `reverse-mapping-proof.json`, `target-route-proof.json`, `native-readiness-timeline.json`, `healthy-control.json`, `hls-two-case-results.json`, `leave-during-prepare.json`, `legacy-representative.json`, `cleanup.json`, `log-integrity.json`.
 
-Never alter `docs/CODEX_VALIDATION_TASK.md` after dispatch; don't touch Phase 8B/C/D old report/evidence. Raw private files remain outside Git.
+Never rewrite `docs/CODEX_VALIDATION_TASK.md` after dispatch; never touch old report/evidence or test assertions.
 
-## 10. Publish/fresh remote verification
+## 10. Exact publication and primary classification
 
-1. Ensure changed tracked paths are only new authorized report/new directory, no old tracked source/report/test/config/lock drift.
-2. Fresh fetch remote; if unrelated protected remote drift appears, STOP rather than merging or replacing it.
-3. Commit only allowed outputs and normal push (no force/merge).
-4. Fresh fetch again; verify remote HEAD contains new evidence commit SHA, all pushed report/evidence blobs remotely accessible and exact allowed-diff containment; output full 40-character evidence SHA.
-5. If push failed, report `BLOCKED — EVIDENCE NOT PUSHED` and local commit SHA; don't claim completed handoff.
+1. Before push, verify tracked diff contains **only** new allowed report/new evidence directory; do not commit source/tests/scripts/lock/profile/old evidence.
+2. Fetch remote branch fresh and stop on unexpected protected advancement.
+3. Commit allowed outputs and normal push only (no force/no merge).
+4. Fetch remote again; prove exact evidence SHA is remotely contained, all promised new blobs available, historical tracked blobs unchanged, sanitized gzip integrity, checkout clean. Report 40-char evidence SHA.
+5. If push not confirmed, report `BLOCKED — EVIDENCE NOT PUSHED` with local SHA; do not claim delivery.
 
-Exactly one final primary classification:
+Choose exactly one truthful primary result:
+- `PASS — SYSTEM NATIVE PREPARED-STATE GUARD VALIDATED` **only** when fresh builds pass, healthy control PASS, both HLS show no premature native play/synthetic PREPARED and bounded resolution, and required leave/cancellation safety is actually verified. Legacy case may remain bounded video-output FAIL, explicitly.
+- `FAIL — SYSTEM PREPARED-STATE GUARD REGRESSION` for early play/synthetic ready, unbounded wait, incorrect error/cancellation or severe functional regression.
+- `FAIL — ARM64 BUILD GATE` / `FAIL — SIMULATOR BUILD` / `FAIL — REQUIRED TEST GATE`.
+- `FAIL — INVESTIGATION EVIDENCE INCOMPLETE` when required observability is absent despite executed runtime.
+- `BLOCKED — VALIDATION ENVIRONMENT` / `BLOCKED — SIMULATOR ENVIRONMENT` / `BLOCKED — EVIDENCE NOT PUSHED`.
+- `PENDING — INTERRUPTED` for honestly incomplete work, no quota inference or query.
 
-- `PASS — FOCUSED SYSTEM SIMULATOR INVESTIGATION COLLECTED` only if all six were freshly attempted with bounded evidence and the healthy control plus valid target route were established (some cases may remain FAIL/UNRESOLVED, explicitly);
-- `FAIL — PLAYBACK FUNCTIONAL DEFECT IDENTIFIED`;
-- `FAIL — ARM64 BUILD GATE`;
-- `FAIL — SIMULATOR BUILD`;
-- `FAIL — INVESTIGATION EVIDENCE INCOMPLETE`;
-- `BLOCKED — VALIDATION ENVIRONMENT`;
-- `BLOCKED — SIMULATOR ENVIRONMENT`;
-- `BLOCKED — EVIDENCE NOT PUSHED`;
-- another precise observed infrastructure classification if required.
-
-Do not query Codex usage/remaining quota. No quota check is a test or dispatch precondition. If interrupted, retain exact completed/NOT RUN state without fabricating work; the repository and final evidence, not conversation cadence, are the source of truth.
+No old task rerun. No old FAIL/NOT RUN reclassification. GPT independently reviews remote evidence after publication.
