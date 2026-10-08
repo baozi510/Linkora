@@ -20,6 +20,11 @@ import { SystemPlaybackPort } from './SystemPlaybackPort';
 
 type BackendFactory = (observer: PlaybackPortObserver) => Promise<PlaybackBackend>;
 
+interface PreparedCandidate {
+  backend: PlaybackBackend;
+  gate: CandidateObserver;
+}
+
 class CandidateObserver {
   committed: boolean = false;
   error: PlaybackPortError | null = null;
@@ -105,6 +110,8 @@ export class AdaptivePlaybackPort implements PlaybackPort {
   private surfaceId: string = '';
   private resolved: ResolvedPlaybackSource | null = null;
   private backend: PlaybackBackend | null = null;
+  // Own the candidate until its preparation has finished and it is committed.
+  private pendingCandidate: PlaybackBackend | null = null;
   private released: boolean = false;
   private surfaceWidth: number = 0;
   private surfaceHeight: number = 0;
@@ -146,27 +153,46 @@ export class AdaptivePlaybackPort implements PlaybackPort {
   async prepare(): Promise<void> {
     const source: MediaSource | null = this.source;
     if (this.released || source === null || this.surfaceId.length === 0) {
-      throw new PlaybackPortError(0, 'Adaptive playback backend is not configured');
+      throw this.cancelledError();
     }
 
-    this.resolved = await this.resolver.resolve(source);
+    // Resolver completion can also race with a page leave. Never retain a
+    // source lease returned after release().
+    const resolved: ResolvedPlaybackSource = await this.resolver.resolve(source);
+    if (this.released) {
+      await resolved.release().catch(() => {});
+      throw this.cancelledError();
+    }
+    this.resolved = resolved;
     const selected: PlayerBackendKind = this.selector.select(source, this.preference);
+    let candidate: PreparedCandidate;
     try {
-      this.backend = await this.prepareBackend(selected, this.resolved.source);
+      candidate = await this.prepareBackend(selected, resolved.source);
     } catch (firstError) {
-      if (this.preference !== PlayerBackendPreference.AUTO) {
+      if (this.released || this.preference !== PlayerBackendPreference.AUTO) {
         await this.releaseResolved();
         throw this.asPortError(firstError);
       }
       const fallback: PlayerBackendKind = this.selector.fallback(selected);
       try {
-        this.backend = await this.prepareBackend(fallback, this.resolved.source);
+        candidate = await this.prepareBackend(fallback, resolved.source);
       } catch (secondError) {
         await this.releaseResolved();
         throw this.asPortError(secondError);
       }
     }
-    this.observer.onStateChange(PortPlaybackState.PREPARED);
+
+    // release() claims the pending candidate first. Recheck after await:
+    // no stale observer commit, synthetic PREPARED or implicit Auto fallback.
+    if (this.released) {
+      throw this.cancelledError();
+    }
+    this.pendingCandidate = null;
+    this.backend = candidate.backend;
+    candidate.gate.commit(candidate.backend.backendKind());
+    if (!this.released) {
+      this.observer.onStateChange(PortPlaybackState.PREPARED);
+    }
   }
 
   async play(): Promise<void> {
@@ -195,7 +221,13 @@ export class AdaptivePlaybackPort implements PlaybackPort {
     }
     this.released = true;
     const backend: PlaybackBackend | null = this.backend;
+    const pending: PlaybackBackend | null = this.pendingCandidate;
     this.backend = null;
+    this.pendingCandidate = null;
+    // Stop an in-flight native prepare before releasing its source lease.
+    if (pending !== null && pending !== backend) {
+      await pending.release().catch(() => {});
+    }
     await backend?.release().catch(() => {});
     await this.releaseResolved();
     if (backend === null) {
@@ -203,24 +235,37 @@ export class AdaptivePlaybackPort implements PlaybackPort {
     }
   }
 
-  private async prepareBackend(kind: PlayerBackendKind, source: MediaSource): Promise<PlaybackBackend> {
+  private async prepareBackend(kind: PlayerBackendKind, source: MediaSource): Promise<PreparedCandidate> {
     const gate = new CandidateObserver(this.observer);
     const factory: BackendFactory =
       kind === PlayerBackendKind.MPV ? this.mpvFactory : this.systemFactory;
     const backend: PlaybackBackend = await factory(gate.observer);
+    // The factory can itself resolve after a release. Own the new object
+    // immediately so the cancellation/error path disposes of it.
+    this.pendingCandidate = backend;
     try {
+      if (this.released) {
+        throw this.cancelledError();
+      }
       backend.configure(source, this.surfaceId);
       if (this.surfaceWidth > 0 && this.surfaceHeight > 0) {
         backend.setSurfaceSize(this.surfaceWidth, this.surfaceHeight);
       }
       await backend.prepare();
+      if (this.released) {
+        throw this.cancelledError();
+      }
       if (gate.error !== null) {
         throw gate.error;
       }
-      gate.commit(backend.backendKind());
-      return backend;
+      return { backend, gate };
     } catch (error) {
-      await backend.release().catch(() => {});
+      // release() takes exclusive disposal ownership by clearing this slot.
+      // Never concurrently call native release() twice for the same candidate.
+      if (this.pendingCandidate === backend) {
+        this.pendingCandidate = null;
+        await backend.release().catch(() => {});
+      }
       throw error as Error;
     }
   }
@@ -236,6 +281,10 @@ export class AdaptivePlaybackPort implements PlaybackPort {
     const resolved: ResolvedPlaybackSource | null = this.resolved;
     this.resolved = null;
     await resolved?.release().catch(() => {});
+  }
+
+  private cancelledError(): PlaybackPortError {
+    return new PlaybackPortError(5400104, 'Playback preparation cancelled');
   }
 
   private asPortError(error: Object): PlaybackPortError {

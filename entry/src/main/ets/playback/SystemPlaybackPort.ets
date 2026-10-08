@@ -37,6 +37,9 @@ export class SystemPlaybackPort implements PlaybackBackend {
       this.resolveInitialization = resolve;
       this.rejectInitialization = reject;
     });
+    // Cancellation can precede the first await on initializationPromise.
+    // Handle an early rejection without consuming it for the actual awaiter.
+    this.initializationPromise.catch((_error: PlaybackPortError) => {});
     this.registerEvents();
   }
 
@@ -154,7 +157,10 @@ export class SystemPlaybackPort implements PlaybackBackend {
 
   async release(): Promise<void> {
     this.released = true;
-    this.failPreparation(new PlaybackPortError(5400104, 'AVPlayer released during preparation'));
+    const cancelled: PlaybackPortError = new PlaybackPortError(5400104,
+      'AVPlayer released during preparation');
+    this.failInitialization(cancelled);
+    this.failPreparation(cancelled);
     try {
       if (this.player.state !== 'released') {
         await this.player.release();
@@ -217,6 +223,9 @@ export class SystemPlaybackPort implements PlaybackBackend {
   }
 
   private completeInitialization(): void {
+    if (this.released) {
+      return;
+    }
     const resolve: (() => void) | null = this.resolveInitialization;
     if (resolve === null) {
       return;

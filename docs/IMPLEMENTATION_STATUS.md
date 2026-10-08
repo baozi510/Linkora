@@ -1,6 +1,25 @@
 # Linkora Player Architecture — Implementation Status
 
-## CURRENT EXECUTION SUMMARY — 2026-10-08 (Phase 8D-SIM Rerun 1 independently reviewed; System ready gate pending validation)
+## CURRENT EXECUTION SUMMARY — 2026-10-08 (Phase 8E failure reviewed; ownership correction awaiting validation)
+
+**Repository/branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`.
+
+**Owner ruling:** `ACCEPTED — FAIL — SYSTEM PREPARED-STATE GUARD REGRESSION`, task `phase8e-sim-system-prepared-state-gate`, tested source `68452df5486cf568da66a5c52352841cb7e64c5f`, dispatch `ff5917e912c310d52fda747b2a8089109a170954`, remotely reviewed evidence `e99ad8928811d394e65efb1ca31d77fb1c885c72`. Its 99 changed files are entirely one authorized report and new evidence directory, no production/test/historical changes. This task is closed as FAIL; never rerun under old ID.
+
+Fresh default→simulator→default PASS: two independent Hypium 210/210; each default had two exact-nine AArch64 ABI audits; one legal signed x86 HAP/whitelist/replace-install/coldlaunch; valid 19084 reverse target route. Exactly five new opens, zero retry: healthy H.264 MP4 PASS with visible pixels; HLS H.264 native prepared→play, first-frame callback but late colored video NOT independently proven (335ms positive, raw>=800 false); HLS HEVC native 5400106 decoder-type bounded simulator error; FFV1 size0x0/black ROI/no actual frame submission (positive 768ms, raw>=800 false); separate HLS cancellation while initialized/JsPrepare.
+
+**Cancellation failure:** after leave, sampled app-matching PlayerDistributedService entries2 persisted >20s, later audio renderer records1; normal cleanup FAIL. These are service/renderer records, not asserted unique AVPlayer instance counts or audible sound. Only forced owned-app stop plus coldlaunch (no media) cleared samples, which cannot be called release PASS. Post-cancel healthy recovery was NOT RUN. Native excerpts selected after-minus-before; complete private hilog and screenshots unavailable for independent replay. Five opens observed, no synthetic PREPARED/timer-clear direct telemetry.
+
+**Confirmed source ownership bug:** Adaptive candidate only lived in local `prepareBackend` variable and committed before being assigned to `this.backend`; release saw null during async prepare, so new System reject-on-release could not execute. Stale commit possible after cancellation. **GPT correction in this review/implementation commit, VALIDATION NOT RUN:** `AdaptivePlaybackPort` owns pending candidate through native preparation, releases it before source lease on page leave, checks release after resolver/factory/prepare awaits and prevents fallback/late commit/synthetic PREPARED. Error path avoids duplicate release ownership. `SystemPlaybackPort` release additionally rejects pending initialization and ignores initialized notifications after release. System prepared-state confirmation and 20s timeout remain unchanged. No decoder, Auto, UI, test or fixture alterations.
+
+**Next:** distinct Phase 8F Codex validation task from exact review source SHA: fresh build chain and simulator forced System health/HLS/cancellation+healthy recovery, candidate lifecycle proof. Any remaining native service/audio records beyond bound are FAIL; forced cleanup never passes. Preserve old Phase8B/D/E results, hardware/codec capability classifications, real MPV/ARM64/HDR/audio NOT PROVEN. Do not query quota.
+
+The preceding Phase 8D/8E summaries below remain historical, not current instructions.
+
+---
+
+
+## HISTORICAL EXECUTION SUMMARY — 2026-10-08 (Phase 8D-SIM Rerun 1 independently reviewed; System ready gate pending validation)
 
 **Active branch:** `feat/playback-capability-phase8`.
 

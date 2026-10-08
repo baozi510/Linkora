@@ -1,6 +1,23 @@
 # Linkora Session Handoff
 
-## CURRENT STATE — 2026-10-08 Phase 8D-SIM collection accepted, readiness fix unvalidated
+## CURRENT STATE — 2026-10-08 Phase 8E cancellation FAIL and unvalidated adaptive ownership fix
+
+**Branch:** `feat/playback-capability-phase8`, repository `baozi510/Linkora`.
+
+**Reviewed evidence:** `e99ad8928811d394e65efb1ca31d77fb1c885c72` for completed Phase 8E task `phase8e-sim-system-prepared-state-gate`, source `68452df5486cf568da66a5c52352841cb7e64c5f`, dispatch `ff5917e912c310d52fda747b2a8089109a170954`. Decision `ACCEPTED — FAIL — SYSTEM PREPARED-STATE GUARD REGRESSION`. Never re-execute old task or overwrite old evidence.
+
+Fresh full build/simulator/ABI/signing gates PASS, healthy MP4 native state and pixels PASS. HLS H.264 native prepared before play but late pixels not proven; HLS HEVC simulator native5400106; FFV1 sampled black output/size0x0. Pending HLS leave leaked app-associated service records (>20s entries2) and audio renderer records1. Normal cancellation FAIL; force-stop/coldlaunch cleanup zero is not release PASS; subsequent healthy recovery NOT RUN. Exact native object identity and direct JS promise telemetry NOT PROVEN.
+
+**Production repair committed here but NOT TESTED:** `AdaptivePlaybackPort` explicitly holds pending backend across async prepare, routes leave release to it before disposing source lease, prevents late factory/prepare commit and cancelled Auto fallback. It safely discards source resolver results returned after cancellation and avoids double candidate release. `SystemPlaybackPort` release additionally rejects initialization and ignores late initialized surface binding. Existing native prepared-state confirmation/20s timeout remain. These source changes require a separate new Phase 8F Codex task for fresh ARM64 build/simulator cancellation and post-cancel healthy recovery; no inherited PASS. No codec blacklist, policies, Direct I/O, UI or media edits.
+
+Old Phase8B six FAIL, Phase8D first BLOCKED, Phase8D rerun collection accepted (six bounded FAIL), Phase8C static native audit limits unchanged. MPV stub ≠ real MPV; no physical ARM64 device or hardware/output/HDR/DV validation. Newest `docs/CODEX_VALIDATION_TASK.md` is sole execution authority. No quota checking.
+
+Previous CURRENT sections below are demoted to historical.
+
+---
+
+
+## HISTORICAL STATE — 2026-10-08 Phase 8D-SIM collection accepted, readiness fix unvalidated
 
 **Repo/branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`.
 
