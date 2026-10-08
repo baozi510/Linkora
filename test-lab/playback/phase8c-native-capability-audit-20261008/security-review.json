@@ -1,0 +1,7 @@
+{
+  "scope": "report and every new evidence file, compressed sanitized logs after decompression",
+  "knownPrivateEndpointsPathsAliasesCredentialsIdentifiersTokensAndSigningMaterialChecked": true,
+  "absoluteInstalledStudioPathsChecked": true,
+  "findings": [],
+  "nativePrivateSourceSnapshotsScreenshotsMediaHapAndCredentialsExcluded": true
+}

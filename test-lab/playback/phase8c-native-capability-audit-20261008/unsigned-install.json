@@ -1,0 +1,10 @@
+{
+  "utc": "2026-10-08T00:47:11.198394+00:00",
+  "artifactSha256": "E445315C36A671DF826425152664286B6F0E6922AB63A4A507C5BDFF85E74C49",
+  "artifactBytes": 25087238,
+  "signed": false,
+  "transportExitCode": 0,
+  "installSuccess": false,
+  "signatureRejectionCode9568332": true,
+  "dataClearedOrUninstalled": false
+}

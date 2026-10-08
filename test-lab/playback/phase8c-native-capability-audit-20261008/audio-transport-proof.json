@@ -1,0 +1,37 @@
+{
+  "configGetAfterColdDispatch": 1,
+  "evidencePosts": 5,
+  "singleDiagnosticDispatch": true,
+  "postEventsEqualIndependentHilog": true,
+  "eventLedger": [
+    {
+      "method": "GET",
+      "utc": "2026-10-08T00:48:03.344516+00:00"
+    },
+    {
+      "method": "POST",
+      "caseId": "audio-mp3",
+      "utc": "2026-10-08T00:48:03.796153+00:00"
+    },
+    {
+      "method": "POST",
+      "caseId": "audio-flac",
+      "utc": "2026-10-08T00:48:03.872857+00:00"
+    },
+    {
+      "method": "POST",
+      "caseId": "audio-truehd",
+      "utc": "2026-10-08T00:48:03.966533+00:00"
+    },
+    {
+      "method": "POST",
+      "caseId": "audio-wavpack",
+      "utc": "2026-10-08T00:48:04.044772+00:00"
+    },
+    {
+      "method": "POST",
+      "caseId": "summary",
+      "utc": "2026-10-08T00:48:04.059776+00:00"
+    }
+  ]
+}

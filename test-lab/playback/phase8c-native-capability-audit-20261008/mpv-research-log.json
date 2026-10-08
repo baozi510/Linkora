@@ -1,0 +1,1613 @@
+{
+  "schemaVersion": 1,
+  "retrievedAtUtc": "2026-10-08T00:58:01Z",
+  "scope": "READ-ONLY MPV native-first audit; no package changes, builds, runtime, media or UI tests performed by this agent.",
+  "versionContext": {
+    "stable": {
+      "version": "v0.41.0",
+      "publishedAt": "2025-12-21T19:17:10Z",
+      "releaseUrl": "https://github.com/mpv-player/mpv/releases/tag/v0.41.0",
+      "discoveryUrl": "https://github.com/mpv-player/mpv/releases/latest",
+      "metadataUrl": "https://api.github.com/repos/mpv-player/mpv/releases/tags/v0.41.0",
+      "manualUrl": "https://mpv.io/manual/stable/"
+    },
+    "bundled": {
+      "package": "@mpv-ohos/mpv-arkts@1.0.0",
+      "embeddedCore": "mpv v0.41.0-dev-g6edeee00a",
+      "embeddedFFmpeg": "n8.0",
+      "matchingUpstreamCommit": "6edeee00a07b9b76f197aa71eee3d029fb090de4",
+      "commitDate": "2026-07-13T05:30:42Z",
+      "commitSubject": "feat: ohos support",
+      "commitMetadataUrl": "https://api.github.com/repos/mpv-player/mpv/commits/6edeee00a",
+      "treeDiscoveryUrl": "https://api.github.com/repos/mpv-player/mpv/git/trees/6edeee00a?recursive=1",
+      "limitation": "Actual ELF build provenance is embedded identity/hash and wrapper mapping, not a reproducible native-source build. Custom compiled behavior must be device-checked."
+    },
+    "comparison": "Matching commit input.rst hash equals stable v0.41.0 input.rst. options.c differs; matching commit includes OHOS surface controls and native rendering/audio integration, which must be consulted instead of assuming stable's platform notes describe this later build."
+  },
+  "sourceInventory": [
+    {
+      "sha256": "A9F43312ED502A878ED77DED996F280C7E68A42FBEBE87033148E2D7CFACEF19",
+      "bytes": 45581,
+      "id": "stable-options",
+      "url": "https://raw.githubusercontent.com/mpv-player/mpv/v0.41.0/options/options.c",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    },
+    {
+      "sha256": "EE424502462D34E50E9235BA99F2D74DDE2BA8824E6FAC7B5C149743AFE1BD31",
+      "bytes": 181703,
+      "id": "stable-input",
+      "url": "https://raw.githubusercontent.com/mpv-player/mpv/v0.41.0/DOCS/man/input.rst",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    },
+    {
+      "sha256": "75B5C9EE515BD8F28A4224272FB1F9F1E65ECFE598F2CAB10EFD46539DCA6AA1",
+      "bytes": 390184,
+      "id": "stable-man-options",
+      "url": "https://raw.githubusercontent.com/mpv-player/mpv/v0.41.0/DOCS/man/options.rst",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    },
+    {
+      "sha256": "482651D193104AA21F48C8AD4535A200CFD5E55C55173E63B672E2628F5EC4A3",
+      "bytes": 45683,
+      "id": "core-options",
+      "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/options/options.c",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    },
+    {
+      "sha256": "EE424502462D34E50E9235BA99F2D74DDE2BA8824E6FAC7B5C149743AFE1BD31",
+      "bytes": 181703,
+      "id": "core-input",
+      "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/DOCS/man/input.rst",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    },
+    {
+      "sha256": "4058B34E8BC23EEE4F3DB965E164790EAEC57FFAC1F7E3112806B0726A7ECC21",
+      "bytes": 277757,
+      "id": "core-command",
+      "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/player/command.c",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    },
+    {
+      "sha256": "3C073236A09CB456C6E80587D5523C8771C32FB22CA014E0F99CC3D43905B75C",
+      "bytes": 85973,
+      "id": "core-libmpv",
+      "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/include/mpv/client.h",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    },
+    {
+      "sha256": "8AD8D74DFC21944D8D60C71C9DC54B8C89C478A6AD9E8F3CB5E4147BD5AD5129",
+      "bytes": 161894,
+      "id": "core-demux",
+      "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/demux/demux.c",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    },
+    {
+      "sha256": "740EF757A686037175FBABED7C14C2460407C826F884689C67CF6EC1863491CD",
+      "bytes": 157196,
+      "id": "core-gpu",
+      "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/video/out/gpu/video.c",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    },
+    {
+      "sha256": "C37959A7B47B0A6C3EDB3EA6E4A75B940ADB17BCC635E659F0834C467C407240",
+      "bytes": 18158,
+      "id": "core-lavf",
+      "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/stream/stream_lavf.c",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    },
+    {
+      "sha256": "04FB05EF3863519AF08D5535146DE7EB1E2318D18761A32DE05E3C7828696349",
+      "bytes": 74097,
+      "id": "ffmpeg-http",
+      "url": "https://raw.githubusercontent.com/FFmpeg/FFmpeg/n8.0/libavformat/http.c",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    },
+    {
+      "sha256": "22135E5BAD9C3822B7B5DBAC98086BD4CBF60CDE8CD20739E8CE32247069FFD0",
+      "bytes": 96335,
+      "id": "video-out-vo_gpu_next.c",
+      "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/video/out/vo_gpu_next.c",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    },
+    {
+      "sha256": "2609B509776C9962BF8C7DB33DF584DDA2BD6652AE93D337C5F8AECEB9B83140",
+      "bytes": 49508,
+      "id": "video-decode-vd_lavc.c",
+      "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/video/decode/vd_lavc.c",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    },
+    {
+      "sha256": "F33E920DEE19891EB5F108BD94395DDD5D9DBA27D0F8F0FDE6888DDA1D49E9BD",
+      "bytes": 21354,
+      "id": "video-csputils.c",
+      "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/video/csputils.c",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    },
+    {
+      "sha256": "2757FFDAEC1A8EE4126717F0F714EE584B0320D6FC757DBA92F3EF2AEF87B335",
+      "bytes": 3793,
+      "id": "video-out-opengl-context_ohos.c",
+      "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/video/out/opengl/context_ohos.c",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    },
+    {
+      "sha256": "A3E83B8746711BFD2E3E18CB6C15BF3F98338B913B0B1C5230EF677F5A1D973A",
+      "bytes": 8227,
+      "id": "audio-out-ao_ohaudio.c",
+      "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/audio/out/ao_ohaudio.c",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    },
+    {
+      "sha256": "CFDA05798DA709524F947BB77D6437945BCAA1721556C649E94C6ABD3267AFD8",
+      "bytes": 8234,
+      "id": "video-out-ohos_common.c",
+      "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/video/out/ohos_common.c",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    },
+    {
+      "sha256": "BF938F7ECA34133D16D63231049B1F51EE1D2BED1EAA769B6FF16C791058BA2D",
+      "bytes": 2917,
+      "id": "video-out-vulkan-context_ohos.c",
+      "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/video/out/vulkan/context_ohos.c",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    },
+    {
+      "sha256": "064F23B34CDF424A583D35D2D12D9A3760AFF901F5AE15C82E30FAA0CFFCC80B",
+      "bytes": 38859,
+      "id": "filters-f_lavfi.c",
+      "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/filters/f_lavfi.c",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    },
+    {
+      "sha256": "E24BC67CD49CE05B59D05089518ACCB68C641555606F2B08E859B02467A67EA6",
+      "bytes": 22955,
+      "id": "filters-f_output_chain.c",
+      "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/filters/f_output_chain.c",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    },
+    {
+      "sha256": "75D8D0907AC3D89D30076D9D8E4AF8B93E9A7CE2A18F87CDAC537BA322BB2979",
+      "bytes": 13379,
+      "id": "audio-filter-af_lavcac3enc.c",
+      "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/audio/filter/af_lavcac3enc.c",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    },
+    {
+      "sha256": "C4C4AAD4F2907B7FFFDD0DA7BFB4CE8F46BD5BD25ED9B6E1509E9C0F6833C7BB",
+      "bytes": 46401,
+      "id": "video-out-vo.c",
+      "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/video/out/vo.c",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    },
+    {
+      "sha256": "54D8B8808471D4A0E3CBDEFE65FEA9E3549A9F8949D3201202E061641F6BFD41",
+      "bytes": 8626,
+      "id": "video-out-hwdec-hwdec_ohcodec.c",
+      "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/video/out/hwdec/hwdec_ohcodec.c",
+      "retrieval": "HTTP 200 fetched from primary raw repository; exact bytes saved privately; no full source redistribution in public draft"
+    }
+  ],
+  "queries": [
+    {
+      "topic": "Exact pinned wrapper resolution/exposure",
+      "sources": [
+        "mpv-package-provenance.json",
+        "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets:16",
+        "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/MpvLib.d.ets:58-67"
+      ],
+      "conclusion": "byteCode HAR public Player.native provides generic properties/commands; no ArkTS name whitelist. Convenience absence does not mean wrapper not exposed.",
+      "unresolved": "C++ binding's native error-return/exception conversion was not proved by Ark bytecode alone."
+    },
+    {
+      "topic": "Identify actual bundled native core before applying upstream semantics",
+      "sources": [
+        "libs/arm64-v8a/libmpv.so SHA256 in wrapper evidence",
+        "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/options/options.c"
+      ],
+      "conclusion": "Embedded version references the resolved OHOS-support commit, FFmpeg n8.0 and compiled GPU/libplacebo features; matching upstream differs from latest stable.",
+      "unresolved": "No claim downstream build exactly matches unmodified commit; target runtime remains required."
+    },
+    {
+      "topic": "Baseline buffer timestamp versus duration",
+      "sources": [
+        "Player bytecode mapping 3639-3653",
+        "Player bytecode observe format 2496-2503",
+        "entry/src/main/ets/playback/MpvPlaybackPort.ets:245-249",
+        "linkora_core/src/main/ets/playback/PlaybackEngine.ets:311-313",
+        "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/player/command.c",
+        "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/DOCS/man/input.rst"
+      ],
+      "conclusion": "Cache-time returns cache-end timestamp; wrapper buffer passes it through and Linkora stores it as cached duration. INT64 wrapper observation loses subsecond precision. This is a statically established mismatch.",
+      "unresolved": "Actual unavailable-property/stale-value and fractional conversion behavior needs target confirmation; no fix authorized."
+    },
+    {
+      "topic": "Absolute seek precision and completion",
+      "sources": [
+        "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/DOCS/man/input.rst",
+        "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/include/mpv/client.h",
+        "Player bytecode seek 4210-4247",
+        "entry/src/main/ets/playback/MpvPlaybackPort.ets:194-202"
+      ],
+      "conclusion": "Wrapper absolute request has no explicit +exact, but matching manual defaults absolute seeks to exact. Adapter's single seekPending boolean is completed by next playback restart, without request ID.",
+      "unresolved": "Actual precision and rapid/paused request correlation need controlled native target tests."
+    },
+    {
+      "topic": "First visible video frame",
+      "sources": [
+        "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/include/mpv/client.h",
+        "entry/src/main/ets/playback/MpvPlaybackPort.ets:194-198"
+      ],
+      "conclusion": "Native playback restart is playback reinitialization/discontinuity/seek-complete signal. It does not establish first frame physically rendered. Adapter maps it to onFirstFrame once.",
+      "unresolved": "Rendered frame evidence on real surface and audio-only behavior remain target checks."
+    },
+    {
+      "topic": "OHOS HDR compared with current stable manual",
+      "sources": [
+        "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/video/out/ohos_common.c",
+        "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/video/out/opengl/context_ohos.c",
+        "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/video/out/vulkan/context_ohos.c",
+        "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/video/out/vo_gpu_next.c",
+        "https://mpv.io/manual/stable/#options-target-colorspace-hint"
+      ],
+      "conclusion": "Matching core explicitly sets NativeWindow PQ/HLG colorspace and HDR metadata. It is incorrect to infer OHOS absence from stable manual's older platform list.",
+      "unresolved": "Real metadata API success, display/compositor color path, HDR10/HLG output and Dolby Vision native output are not proven."
+    },
+    {
+      "topic": "Encoded audio passthrough platform path",
+      "sources": [
+        "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/audio/out/ao_ohaudio.c",
+        "https://raw.githubusercontent.com/mpv-player/mpv/v0.41.0/DOCS/man/options.rst"
+      ],
+      "conclusion": "audio-spdif is native and generically reachable; matching OHAudio AO defaults RAW and coerces to PCM formats. OHAudio encoding_type 0..2 alone is not proof receiver-facing bitstream output.",
+      "unresolved": "Active AO, encoded transport format/route and receiver behavior need target evidence; verdict NATIVE_PARTIAL, not guessed support."
+    },
+    {
+      "topic": "Protocol-owned reconnect/retry",
+      "sources": [
+        "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a07b9b76f197aa71eee3d029fb090de4/stream/stream_lavf.c",
+        "https://raw.githubusercontent.com/FFmpeg/FFmpeg/n8.0/libavformat/http.c"
+      ],
+      "conclusion": "mpv lavf stream sets reconnect=1/reconnect_delay_max=7; configurable FFmpeg HTTP flags cover disconnection/EOF/connect/HTTP errors separately, not universal playback retry.",
+      "unresolved": "Actual selected protocol path/server Range semantics and retry outcomes require native target fault injection."
+    },
+    {
+      "topic": "Platform media-session ownership",
+      "sources": [
+        "Distributed Player/MpvLib declarations and bytecode",
+        "Matching OHAudio output",
+        "include/mpv/client.h"
+      ],
+      "conclusion": "AVSession/background-task integration is a separate HarmonyOS lifecycle owner. Generic mpv property access does not expose those platform APIs. MPV row NOT_APPLICABLE.",
+      "unresolved": "Future AVSession/background feature requires separate platform audit/implementation, not a fabricated MPV-native device backlog item."
+    },
+    {
+      "topic": "Source path discovery failures",
+      "sources": [
+        "Primary Git tree for matching commit"
+      ],
+      "conclusion": "Initial guessed ao_ohos.c/ao_ohos.cpp, old vf.c/af.c and image_options.c paths were 404; Git tree identified ao_ohaudio.c and filters/f_lavfi.c/f_output_chain.c. Final evidence uses successfully retrieved source files.",
+      "unresolved": "No remaining feature verdict depends on a failed URL."
+    }
+  ],
+  "featureResearch": [
+    {
+      "topic": "transport.play",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/input.rst"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/options/options.c"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "pause=false; loadfile/playlist-pos; eof-reached; convenience-and-generic",
+      "unresolved": [
+        "Confirm loaded-file start/resume, EOF replay and native error versus adapter optimistic PLAYING."
+      ]
+    },
+    {
+      "topic": "transport.pause",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/input.rst"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/options/options.c"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "pause=true; convenience-and-generic",
+      "unresolved": [
+        "Confirm pause freezes media and resumed position is retained."
+      ]
+    },
+    {
+      "topic": "transport.stop-replay",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/input.rst"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/options/options.c"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "stop; playlist-clear; seek 0 absolute; playlist-pos; convenience-and-generic",
+      "unresolved": [
+        "Confirm completion replay returns to beginning; stopped file needs reloading."
+      ]
+    },
+    {
+      "topic": "timeline.seek",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/input.rst"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/include/mpv/client.h"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "seek <seconds> absolute|relative|absolute-percent [exact|keyframes]; SEEK/PLAYBACK_RESTART; convenience-and-generic",
+      "unresolved": [
+        "No exact seek flag in current adapter. Native seek-complete is not request-correlated by existing boolean."
+      ]
+    },
+    {
+      "topic": "timeline.speed",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/input.rst"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/options/options.c"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "speed; audio-pitch-correction; convenience-and-generic",
+      "unresolved": [
+        "Confirm requested and actual speed, pitch, and acceptable extremes."
+      ]
+    },
+    {
+      "topic": "audio.volume-mute",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/input.rst"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/options/options.c"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "volume; volume-max; mute; convenience-and-generic",
+      "unresolved": [
+        "Confirm audible gain, mute independence and volume restoration."
+      ]
+    },
+    {
+      "topic": "state.buffering",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/input.rst"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/player/command.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/demux/demux.c"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "paused-for-cache; cache-buffering-state; demuxer-cache-time; demuxer-cache-duration; convenience-and-generic",
+      "unresolved": [
+        "CONFIRMED_STATIC_SEMANTIC_MISMATCH: absolute cache-end becomes bufferedDuration; no production fix authorized.",
+        "Wrapper INT64 observation can remove fractional timestamp precision."
+      ]
+    },
+    {
+      "topic": "tracks.enumerate",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/input.rst"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/player/command.c"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "track-list; current-tracks; vid/aid/sid; convenience-and-generic",
+      "unresolved": [
+        "Confirm track identity/selected updates across files and dynamic tracks."
+      ]
+    },
+    {
+      "topic": "tracks.audio-select",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/input.rst"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/options/options.c"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "aid; audio-add; convenience-and-generic",
+      "unresolved": [
+        "Confirm native selected ID and audible language, including disabled and invalid track handling."
+      ]
+    },
+    {
+      "topic": "tracks.subtitle-select",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/input.rst"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/options/options.c"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "sid; secondary-sid; sub-visibility; convenience-and-generic",
+      "unresolved": [
+        "Confirm selected subtitle and no/auto behavior for supported text and bitmap formats."
+      ]
+    },
+    {
+      "topic": "subtitles.external",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/input.rst"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/options/options.c"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "sub-add <url> select|auto|cached [title] [lang]; sub-remove; sub-reload; convenience-and-generic",
+      "unresolved": [
+        "Confirm external load/select, duplicate policy and actual subtitle rendering."
+      ]
+    },
+    {
+      "topic": "subtitles.delay",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/input.rst"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/options/options.c"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "sub-delay; secondary-sub-delay; generic",
+      "unresolved": [
+        "Confirm signed offset for selected text/bitmap subtitles."
+      ]
+    },
+    {
+      "topic": "audio.delay",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/input.rst"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/options/options.c"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "audio-delay; generic",
+      "unresolved": [
+        "Confirm measured A/V offset sign and bounds with controlled cue."
+      ]
+    },
+    {
+      "topic": "display.fit-contain",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/options/options.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/video/out/vo.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/options.rst"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "keepaspect=yes; panscan=0; video-unscaled=no; video-zoom=0; video-pan-x/y=0; generic",
+      "unresolved": [
+        "Confirm bars/aspect over portrait, landscape and non-square-pixel clips."
+      ]
+    },
+    {
+      "topic": "display.fill-crop",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/options/options.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/video/out/vo.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/options.rst"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "keepaspect=yes; panscan=1; video-unscaled=no; generic",
+      "unresolved": [
+        "Confirm viewport is filled without aspect distortion and crop is centered."
+      ]
+    },
+    {
+      "topic": "display.stretch",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/options/options.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/video/out/vo.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/options.rst"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "keepaspect=no; generic",
+      "unresolved": [
+        "Confirm actual attached XComponent surface stretches in both axes."
+      ]
+    },
+    {
+      "topic": "display.original",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/options/options.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/video/out/vo.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/options.rst"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "video-unscaled=yes; keepaspect=yes; generic",
+      "unresolved": [
+        "Native unscaled preserves anamorphic display aspect; strict coded-pixel 1:1 needs distinct semantics."
+      ]
+    },
+    {
+      "topic": "display.aspect-override",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/options.rst"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/video/csputils.c"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "video-aspect-override; video-aspect-method; generic",
+      "unresolved": [
+        "Confirm requested ratio, reset=no and metadata interaction."
+      ]
+    },
+    {
+      "topic": "display.rotation",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/options.rst"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/video/out/vo.c"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "video-rotate; generic",
+      "unresolved": [
+        "Confirm 0/90/180/270, arbitrary angle behavior and metadata addition on ohcodec."
+      ]
+    },
+    {
+      "topic": "display.zoom-pan",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/options/options.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/options.rst"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "video-zoom; video-pan-x/y; video-align-x/y; generic",
+      "unresolved": [
+        "Confirm zoom multiplier, pan direction/units and reset behavior."
+      ]
+    },
+    {
+      "topic": "timeline.frame-step",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/input.rst"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/player/command.c"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "frame-step [frames] [play|seek]; frame-back-step; generic",
+      "unresolved": [
+        "Confirm paused single forward step and backward behavior with VFR/media limits."
+      ]
+    },
+    {
+      "topic": "navigation.chapters",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/input.rst"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/player/command.c"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "chapter-list; chapter (RW); seek; convenience-and-generic",
+      "unresolved": [
+        "Confirm chapter enumeration/index seeks and files with no chapters."
+      ]
+    },
+    {
+      "topic": "repeat.loop",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/input.rst"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/options/options.c"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "loop-file; remaining-file-loops; convenience-and-generic",
+      "unresolved": [
+        "Confirm finite/infinite repeat and completion events across loop boundary."
+      ]
+    },
+    {
+      "topic": "repeat.ab",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/input.rst"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/options/options.c"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "ab-loop-a; ab-loop-b; ab-loop-count; ab-loop; generic",
+      "unresolved": [
+        "Confirm boundary repeat, ordering invalid endpoints, clear and count."
+      ]
+    },
+    {
+      "topic": "capture.screenshot",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/input.rst"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/player/command.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/video/out/vo_gpu_next.c"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "screenshot-raw subtitles|video|window bgra; screenshot/screenshot-to-file; convenience-and-generic",
+      "unresolved": [
+        "Wrapper raw BGRA conversion's stride/pixel-format assumptions are not runtime-verified; do not label them a proven pixel corruption defect."
+      ]
+    },
+    {
+      "topic": "processing.deinterlace",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/options/options.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/filters/f_output_chain.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/options.rst"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "deinterlace; deinterlace-active; deinterlace-field-parity; configuration-convenience-and-generic",
+      "unresolved": [
+        "Confirm interlaced field order, auto/no and ohcodec compatibility."
+      ]
+    },
+    {
+      "topic": "processing.video-filter",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/filters/f_lavfi.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/filters/f_output_chain.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/options.rst"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "vf property; vf add/remove/toggle/set/clr; lavfi; generic",
+      "unresolved": [
+        "Enumerate available filters on pinned target and execute representative supported graph."
+      ]
+    },
+    {
+      "topic": "processing.audio-filter",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/filters/f_lavfi.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/filters/f_output_chain.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/options.rst"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "af property; af add/remove/toggle/set/clr; lavfi; generic",
+      "unresolved": [
+        "Enumerate available filters and confirm a controlled PCM filter effect."
+      ]
+    },
+    {
+      "topic": "decode.hw-select",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/video/decode/vd_lavc.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/video/out/hwdec/hwdec_ohcodec.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/options.rst"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "hwdec; hwdec-codecs; hwdec-current; hwdec-interop; configuration-convenience-and-generic",
+      "unresolved": [
+        "Verify actual hwdec-current, hardware/software switch and codec/profile support per target."
+      ]
+    },
+    {
+      "topic": "decode.hw-fallback",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/video/decode/vd_lavc.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/options.rst"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "hwdec-software-fallback; hwdec-current; generic",
+      "unresolved": [
+        "Force controlled unsupported/failing HW path and verify actual software transition and continuity."
+      ]
+    },
+    {
+      "topic": "color.hdr",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/video/out/ohos_common.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/video/out/opengl/context_ohos.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/video/out/vulkan/context_ohos.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/video/out/vo_gpu_next.c"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "video-params/color metadata; video-target-params; target-colorspace-hint; target-trc/prim/peak; OHOS NativeWindow color/HDR metadata integration; generic",
+      "unresolved": [
+        "Matching upstream includes OHOS HDR support despite stable manual's narrower platform enumeration. Binary identity/string evidence is not a reproducible build; no Dolby Vision output claim."
+      ]
+    },
+    {
+      "topic": "color.tonemap",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/video/out/gpu/video.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/video/out/vo_gpu_next.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/options.rst"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "tone-mapping; tone-mapping-param; target-trc/prim/peak; hdr-compute-peak; generic",
+      "unresolved": [
+        "Verify HDR→SDR test pattern with configured target and algorithm effect."
+      ]
+    },
+    {
+      "topic": "color.adjust",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/video/csputils.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/video/out/vo_gpu_next.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/options.rst"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "brightness; contrast; gamma; saturation; hue; generic",
+      "unresolved": [
+        "Verify each control affects pixels predictably and reset restores baseline."
+      ]
+    },
+    {
+      "topic": "audio.passthrough",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/audio/out/ao_ohaudio.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/options.rst"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "audio-spdif; current-ao; OHAudio encoding_type; generic",
+      "unresolved": [
+        "Static generic reachability is verified; OHAudio PCM conversion makes platform passthrough support insufficiently established."
+      ]
+    },
+    {
+      "topic": "network.cache-buffer",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/demux/demux.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/options/options.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/options.rst"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "cache; cache-secs; cache-pause/cache-pause-initial/cache-pause-wait; demuxer-max-bytes/max-back-bytes/readahead-secs; generic",
+      "unresolved": [
+        "Verify memory ceilings and cache pause/read-ahead behavior without conflating proxy cache."
+      ]
+    },
+    {
+      "topic": "network.reconnect",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/stream/stream_lavf.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/FFmpeg/FFmpeg/n8.0/libavformat/http.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/options.rst"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "stream-lavf-o; FFmpeg HTTP reconnect/reconnect_delay_max/reconnect_streamed/reconnect_on_network_error/reconnect_on_http_error; generic",
+      "unresolved": [
+        "Controlled disconnect/HTTP errors: verify retry count/delay, EOF handling and Range position preservation."
+      ]
+    },
+    {
+      "topic": "timeline.start-position",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/options.rst"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/DOCS/man/input.rst"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "start option; loadfile per-file start; MediaOptions.start; watch-later resume-playback; convenience-and-generic",
+      "unresolved": [
+        "Confirm initial position without audible/visible beginning and manual resume precedence."
+      ]
+    },
+    {
+      "topic": "surface.render-options",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/options/options.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/video/out/ohos_common.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/video/out/opengl/context_ohos.c"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/include/mpv/client.h"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "attachSurface/detachSurface; ohos-surface-size; vo=gpu-next; gpu-context=ohos|ohosvk; video-params; convenience-and-generic",
+      "unresolved": [
+        "CONFIRMED_STATIC_SEMANTIC_MISMATCH: PLAYBACK_RESTART→onFirstFrame is weaker than first rendered video frame; it may also occur for audio-only/start/seek."
+      ]
+    },
+    {
+      "topic": "background.media-session",
+      "versionContext": "Actual pinned wrapper and embedded OHOS core; stable v0.41.0 plus matching commit sources",
+      "sources": [
+        {
+          "type": "resolved-package",
+          "path": "entry/oh_modules/@mpv-ohos/mpv-arkts/src/main/ets/Player.d.ets",
+          "inventory": "mpv-package-provenance.json",
+          "compiledSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+        },
+        {
+          "type": "repo",
+          "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets"
+        },
+        {
+          "type": "primary",
+          "url": "https://raw.githubusercontent.com/mpv-player/mpv/6edeee00a/include/mpv/client.h"
+        },
+        {
+          "type": "primary-stable",
+          "url": "https://mpv.io/manual/stable/"
+        }
+      ],
+      "conclusion": "No mpv-native AVSession/background-task API in pinned wrapper; absent-platform-integration",
+      "unresolved": [
+        "Separate platform owner; no mpv-native runtime claim."
+      ]
+    }
+  ],
+  "runtimeBoundary": "Simulator MPV package is unavailable stub. Static reachability is researched; no real MPV execution, rendering/audio success or codec/container matrix is claimed. Each device-required row names a concrete identified capability/output/state test.",
+  "publicSanitization": "Public-draft records contain no full copyrighted source snapshots, native binaries, bytecode disassembly, private absolute installation paths, user identifiers, endpoints, signing materials, media or HAP."
+}

@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "eventCount": 5,
+  "uniqueFixtureCount": 4,
+  "noDuplicateFixtureEvent": true,
+  "independentHilogEqualPostRecords": true,
+  "rawSummary": {
+    "caseId": "summary",
+    "status": "FAIL",
+    "total": 4,
+    "passed": 2,
+    "failed": 2
+  },
+  "allFixtureActiveSourcesZero": true,
+  "noThumbnailFrameAttempted": true,
+  "singleDiagnosticDispatch": true
+}

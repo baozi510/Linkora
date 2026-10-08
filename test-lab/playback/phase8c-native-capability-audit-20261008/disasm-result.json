@@ -1,0 +1,6 @@
+{
+  "sourceModified": false,
+  "input": "resolved package ets/modules.abc",
+  "tool": "openharmony/toolchains/ark_disasm",
+  "exitCode": 0
+}

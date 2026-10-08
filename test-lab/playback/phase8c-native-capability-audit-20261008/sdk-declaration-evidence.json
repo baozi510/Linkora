@@ -1,0 +1,365 @@
+{
+  "schemaVersion": 1,
+  "repoCompileSdk": "26.0.0",
+  "repoCompatibleApi": 20,
+  "repositorySources": [
+    {
+      "identity": "linkora_core/src/main/ets/playback/PlaybackPort.ets",
+      "sha256": "c21ec63e9ce2af9a0516b9e4048c7769f6c1836ec7e21ca4741217dd9defc62c"
+    },
+    {
+      "identity": "linkora_core/src/main/ets/playback/PlaybackBackend.ets",
+      "sha256": "116b387031d7795538bd18e24b3187c25268d19acd0ea870248859d6351d0809"
+    },
+    {
+      "identity": "entry/src/main/ets/playback/SystemPlaybackPort.ets",
+      "sha256": "972cd14657e47c42c8e65a8cb3ef738c823fc437094820647dfa9d45d3ff9e41"
+    },
+    {
+      "identity": "linkora_core/src/main/ets/playback/PlaybackEngine.ets",
+      "sha256": "cdee3eeb5cc03dea6fdcc87bf785c67798eba6ac7edd51b44155b18c42df8d2c"
+    },
+    {
+      "identity": "linkora_core/src/main/ets/features/PlayerFeatureController.ets",
+      "sha256": "8dba6b3a97fad663f65680c262f9fde62e5752c936d6c4bcfbf9bc37eae9e2e8"
+    },
+    {
+      "identity": "entry/src/main/ets/pages/PlayerPage.ets",
+      "sha256": "87aa1c5adab7b04c27f5845d302ca22555c0e58dc14d167a20c4fb020073c3dc"
+    },
+    {
+      "identity": "entry/src/main/ets/playback/WindowBrightnessController.ets",
+      "sha256": "aad0c13e857017dc500ee44f8addcb6d353399cd54b5ab5279450064d09893aa"
+    },
+    {
+      "identity": "test-lab/playback/native-capability-features.json",
+      "sha256": "5334d24ecbdc9e672bd462a678dbdecac931301dd10acda179a8163b1733d0aa"
+    },
+    {
+      "identity": "build-profile.json5",
+      "sha256": "05c4f7ce7e8b6c2783e232ae1f25ab38b1905f6d83f72a162378430c6bc5224e"
+    }
+  ],
+  "scope": "System installed declarations and repository static audit; no runtime exercised by research agent",
+  "capturedDate": "2026-10-08",
+  "repoTargetSdk": "26.0.0",
+  "sdkIdentity": {
+    "apiVersion": "26",
+    "displayName": "Ets",
+    "meta": {
+      "metaVersion": "3.0.2"
+    },
+    "path": "ets",
+    "platformVersion": "26.0.0",
+    "releaseType": "Release",
+    "version": "26.0.0.105"
+  },
+  "declarationFiles": [
+    {
+      "lineCount": 11,
+      "sha256": "250b53f383be634ada496cfb4a1cbebd1e7ad6f14f44fd136ca55d2d9a35acab",
+      "identity": "ets/oh-uni-package.json"
+    },
+    {
+      "lineCount": 9068,
+      "sha256": "8a7dca59e33b0797070ca8c8e2fb3fef51980b0887a7def350171cdb43175789",
+      "identity": "ets/api/@ohos.multimedia.media.d.ts"
+    },
+    {
+      "lineCount": 6089,
+      "sha256": "521bc17dbce61a038c4b5789059eaa6a65a7ab7e81542edc837a9429106c030c",
+      "identity": "ets/api/@ohos.multimedia.avsession.d.ts"
+    },
+    {
+      "lineCount": 8479,
+      "sha256": "bb2092981f6e191686c745dd0de7733e1164c2427afa1debc04ef6b9a3304b03",
+      "identity": "ets/api/@ohos.multimedia.audio.d.ts"
+    },
+    {
+      "lineCount": 9978,
+      "sha256": "b525ece790c45cdc78755032948f0da13fafcc218f6ffcca089c1923c9847921",
+      "identity": "ets/api/@ohos.window.d.ts"
+    },
+    {
+      "lineCount": 684,
+      "sha256": "e47439079a7818bdb19f5a0bb5383c8b12859a97662e921d0dabc10724fd511e",
+      "identity": "ets/component/xcomponent.d.ts"
+    },
+    {
+      "lineCount": 27232,
+      "sha256": "2662a40432b2fa6efcfe387c3bc4bdc79ac9a993de1e415042b37a78d6315614",
+      "identity": "ets/component/common.d.ts"
+    },
+    {
+      "lineCount": 1903,
+      "sha256": "846b061552680ebf976ecd69b3fbe716768e9c64760676f166c717ab6455b708",
+      "identity": "ets/api/@ohos.resourceschedule.backgroundTaskManager.d.ts"
+    },
+    {
+      "lineCount": 113,
+      "sha256": "3de73e5e12d8f86d9597c2950eab9bded74e9fa41e65ed3e98bc611d0deff517",
+      "identity": "ets/api/@ohos.graphics.hdrCapability.d.ts"
+    },
+    {
+      "lineCount": 1703,
+      "sha256": "dabd0bf15351878936c2bf5923a9ba80a93a8f2aa161bf2f0226c6377f310f8d",
+      "identity": "ets/api/@ohos.display.d.ts"
+    },
+    {
+      "lineCount": 625,
+      "sha256": "170f2c5099d2e332aab55e5d4176775860bf968806de398d15550a20749d808c",
+      "identity": "native/sysroot/usr/include/multimedia/player_framework/native_avcapability.h"
+    },
+    {
+      "lineCount": 599,
+      "sha256": "55081d3aee5605ec7421a4ec373d6e63522e6083df6723cfd34b07538bc68c73",
+      "identity": "native/sysroot/usr/include/multimedia/player_framework/native_avcodec_videodecoder.h"
+    },
+    {
+      "sha256": "9a88d967d26ba641ace0fe41239d455ab0e21d1cf45301a202d3ff1c465b4840",
+      "lineCount": 1025,
+      "identity": "native/sysroot/usr/include/native_window/external_window.h"
+    },
+    {
+      "sha256": "b804b2690bb158fb225a7ba9ca4733b7a9f3930fff132a0ab0cdbc4108cb62e7",
+      "lineCount": 495,
+      "identity": "native/sysroot/usr/include/native_buffer/buffer_common.h"
+    },
+    {
+      "sha256": "b3f6d2dae1ed4d3372f182a0926a4100ab06cbf78aca905bdfa5e7bf2eea03f0",
+      "lineCount": 349,
+      "identity": "native/sysroot/usr/include/multimedia/video_processing_engine/video_processing.h"
+    },
+    {
+      "sha256": "7728cf4c3e5575eb3cfd68e70cac58233e2e1c8ff0be009e509ed666f79416c4",
+      "lineCount": 311,
+      "identity": "native/sysroot/usr/include/multimedia/video_processing_engine/video_processing_types.h"
+    }
+  ],
+  "publicAvPlayerSignatureScope": {
+    "signatures": [
+      "prepare(callback: AsyncCallback<void>): void;",
+      "prepare(): Promise<void>;",
+      "play(callback: AsyncCallback<void>): void;",
+      "play(): Promise<void>;",
+      "pause(callback: AsyncCallback<void>): void;",
+      "pause(): Promise<void>;",
+      "stop(callback: AsyncCallback<void>): void;",
+      "stop(): Promise<void>;",
+      "reset(callback: AsyncCallback<void>): void;",
+      "reset(): Promise<void>;",
+      "release(callback: AsyncCallback<void>): void;",
+      "release(): Promise<void>;",
+      "seek(timeMs: number, mode?: SeekMode): void;",
+      "setVolume(volume: number): void;",
+      "getTrackDescription(callback: AsyncCallback<Array<MediaDescription>>): void;",
+      "getTrackDescription(): Promise<Array<MediaDescription>>;",
+      "getSelectedTracks(): Promise<Array<number>>;",
+      "selectTrack(index: number, mode?: SwitchMode): Promise<void>;",
+      "deselectTrack(index: number): Promise<void>;",
+      "getCurrentTrack(trackType: MediaType): Promise<number>;",
+      "setMediaSource(src: MediaSource, strategy?: PlaybackStrategy): Promise<void>;",
+      "getTrackSelectionFilter(): Promise<TrackSelectionFilter>;",
+      "setTrackSelectionFilter(filter: TrackSelectionFilter): Promise<void>;",
+      "addSubtitleFromFd(fd: number, offset?: number, length?: number): Promise<void>;",
+      "addSubtitleFromUrl(url: string): Promise<void>;",
+      "getPlaybackInfo(): Promise<PlaybackInfo>;",
+      "getPlaybackRate(): Promise<number>;",
+      "getLoadedTimeRanges(): Promise<Array<Range>>;",
+      "getSeekableTimeRanges(): Promise<Array<Range>>;",
+      "seekToDefaultPosition(): void;",
+      "getPlaybackStatisticMetrics(): Promise<PlaybackMetrics>;",
+      "setPlaybackStrategy(strategy: PlaybackStrategy): Promise<void>;",
+      "setMediaMuted(mediaType: MediaType, muted: boolean): Promise<void>;",
+      "setPlaybackRange(startTimeMs: number, endTimeMs: number, mode?: SeekMode): Promise<void>;",
+      "isSeekContinuousSupported(): boolean;",
+      "getPlaybackPosition(): number;",
+      "getCurrentPresentationTimestamp(): number;",
+      "setSuperResolution(enabled: boolean): Promise<void>;",
+      "setVideoWindowSize(width: number, height: number): Promise<void>;",
+      "advanceToNextMediaSource(): Promise<void>;",
+      "advanceToPrevMediaSource(): Promise<void>;",
+      "getCurrentMediaSource(): MediaSource | undefined;",
+      "addPlaybackMediaSource(src: MediaSource, id?: string): Promise<string>;",
+      "removePlaybackMediaSource(id: string): Promise<void>;",
+      "clearPlaybackList(): Promise<void>;",
+      "advanceToMediaSource(id: string): Promise<void>;",
+      "getMediaSources(): Array<MediaSource | undefined>;",
+      "url?: string;",
+      "fdSrc?: AVFileDescriptor;",
+      "dataSrc?: AVDataSrcDescriptor;",
+      "loop: boolean;",
+      "playlistLoopMode?: PlaylistLoopMode;",
+      "audioInterruptMode?: audio.InterruptMode;",
+      "audioRendererInfo?: audio.AudioRendererInfo;",
+      "audioEffectMode?: audio.AudioEffectMode;",
+      "readonly currentTime: number;",
+      "readonly duration: number;",
+      "readonly state: AVPlayerState;",
+      "surfaceId?: string;",
+      "readonly width: number;",
+      "readonly height: number;",
+      "videoScaleType?: VideoScaleType;",
+      "privacyType?: audio.AudioPrivacyType;",
+      "setSpeed(speed: PlaybackSpeed): void;",
+      "setPlaybackRate(rate: number): void;",
+      "setBitrate(bitrate: number): void;",
+      "setLoudnessGain(loudnessGain: number): Promise<void>;",
+      "setDecryptionConfig(mediaKeySession: drm.MediaKeySession, secureVideoPath: boolean): void;",
+      "getMediaKeySystemInfos(): Array<drm.MediaKeySystemInfo>;",
+      "on(type: 'mediaKeySystemInfoUpdate', callback: Callback<Array<drm.MediaKeySystemInfo>>): void;",
+      "off(type: 'mediaKeySystemInfoUpdate', callback?: Callback<Array<drm.MediaKeySystemInfo>>): void;",
+      "on(type: 'stateChange', callback: OnAVPlayerStateChangeHandle): void;",
+      "off(type: 'stateChange', callback?: OnAVPlayerStateChangeHandle): void;",
+      "on(type: 'volumeChange', callback: Callback<number>): void;",
+      "off(type: 'volumeChange', callback?: Callback<number>): void;",
+      "on(type: 'endOfStream', callback: Callback<void>): void;",
+      "off(type: 'endOfStream', callback?: Callback<void>): void;",
+      "on(type: 'seekDone', callback: Callback<number>): void;",
+      "off(type: 'seekDone', callback?: Callback<number>): void;",
+      "on(type: 'speedDone', callback: Callback<number>): void;",
+      "off(type: 'speedDone', callback?: Callback<number>): void;",
+      "on(type: 'playbackRateDone', callback: OnPlaybackRateDone): void;",
+      "off(type: 'playbackRateDone', callback?: OnPlaybackRateDone): void;",
+      "on(type: 'bitrateDone', callback: Callback<number>): void;",
+      "off(type: 'bitrateDone', callback?: Callback<number>): void;",
+      "on(type: 'timeUpdate', callback: Callback<number>): void;",
+      "off(type: 'timeUpdate', callback?: Callback<number>): void;",
+      "on(type: 'durationUpdate', callback: Callback<number>): void;",
+      "off(type: 'durationUpdate', callback?: Callback<number>): void;",
+      "on(type: 'bufferingUpdate', callback: OnBufferingUpdateHandler): void;",
+      "off(type: 'bufferingUpdate', callback?: OnBufferingUpdateHandler): void;",
+      "on(type: 'startRenderFrame', callback: Callback<void>): void;",
+      "off(type: 'startRenderFrame', callback?: Callback<void>): void;",
+      "on(type: 'videoSizeChange', callback: OnVideoSizeChangeHandler): void;",
+      "off(type: 'videoSizeChange', callback?: OnVideoSizeChangeHandler): void;",
+      "on(type: 'audioInterrupt', callback: Callback<audio.InterruptEvent>): void;",
+      "off(type: 'audioInterrupt', callback?: Callback<audio.InterruptEvent>): void;",
+      "on(type: 'availableBitrates', callback: Callback<Array<number>>): void;",
+      "off(type: 'availableBitrates', callback?: Callback<Array<number>>): void;",
+      "on(type: 'error', callback: ErrorCallback): void;",
+      "off(type: 'error', callback?: ErrorCallback): void;",
+      "on(type: 'audioOutputDeviceChangeWithInfo', callback: Callback<audio.AudioStreamDeviceChangeInfo>): void;",
+      "off(type: 'audioOutputDeviceChangeWithInfo', callback?: Callback<audio.AudioStreamDeviceChangeInfo>): void;",
+      "on(type: 'subtitleUpdate', callback: Callback<SubtitleInfo>): void;",
+      "off(type: 'subtitleUpdate', callback?: Callback<SubtitleInfo>): void;",
+      "on(type: 'trackChange', callback: OnTrackChangeHandler): void;",
+      "off(type: 'trackChange', callback?: OnTrackChangeHandler): void;",
+      "on(type: 'trackInfoUpdate', callback: Callback<Array<MediaDescription>>): void;",
+      "off(type: 'trackInfoUpdate', callback?: Callback<Array<MediaDescription>>): void;",
+      "on(type: 'amplitudeUpdate', callback: Callback<Array<number>>): void;",
+      "off(type: 'amplitudeUpdate', callback?: Callback<Array<number>>): void;",
+      "on(type: 'seiMessageReceived', payloadTypes: Array<number>, callback: OnSeiMessageHandle): void;",
+      "off(type: 'seiMessageReceived', payloadTypes?: Array<number>, callback?: OnSeiMessageHandle): void;",
+      "on(type: 'superResolutionChanged', callback: OnSuperResolutionChanged): void;",
+      "off(type: 'superResolutionChanged', callback?: OnSuperResolutionChanged): void;",
+      "onMetricsEvent(callback: Callback<Array<AVMetricsEvent>>): void;",
+      "offMetricsEvent(callback?: Callback<Array<AVMetricsEvent>>): void;",
+      "onPlaybackContentChanged(callback: Callback<string>): void;",
+      "offPlaybackContentChanged(callback?: Callback<string>): void;",
+      "onTimedMetaData(callback: Callback<AVTimedMetaData>): void;",
+      "offTimedMetaData(callback?: Callback<AVTimedMetaData>): void;"
+    ],
+    "lineStart": 2174,
+    "lineEnd": 3946,
+    "systemapiTags": 0,
+    "identity": "ets/api/@ohos.multimedia.media.d.ts"
+  },
+  "scopedAbsenceSearches": [
+    {
+      "scope": "installed public AVPlayer2174-3946 incl comments/signatures",
+      "topic": "colorAdjust",
+      "hits": [],
+      "pattern": "contrast|gamma|brightness|saturation|hue"
+    },
+    {
+      "scope": "installed public AVPlayer2174-3946 incl comments/signatures",
+      "topic": "tonemap",
+      "hits": [],
+      "pattern": "tonemap|tone.mapping"
+    },
+    {
+      "scope": "installed public AVPlayer2174-3946 incl comments/signatures",
+      "topic": "hardwareSelection",
+      "hits": [],
+      "pattern": "hardware|software|decoder"
+    },
+    {
+      "scope": "installed public AVPlayer2174-3946 incl comments/signatures",
+      "topic": "originalScale",
+      "hits": [],
+      "pattern": "original|unscale|1:1"
+    },
+    {
+      "scope": "installed public AVPlayer2174-3946 incl comments/signatures",
+      "topic": "subtitleDelay",
+      "hits": [
+        {
+          "text": "addSubtitleFromFd(fd: number, offset?: number, length?: number): Promise<void>;",
+          "line": 2511
+        }
+      ],
+      "pattern": "subtitle.*(delay|offset)|setSubtitle.*(Time|Offset|Delay)"
+    },
+    {
+      "scope": "installed public AVPlayer2174-3946; bounded exact terms and complete public signatures; no source/DAR aspect control",
+      "topic": "aspectOverride",
+      "hits": [],
+      "pattern": "\\baspect\\b|\\bratio\\b"
+    },
+    {
+      "scope": "installed public AVPlayer2174-3946 incl comments/signatures",
+      "topic": "reconnect",
+      "hits": [],
+      "pattern": "retry|reconnect|backoff"
+    },
+    {
+      "scope": "installed public AVPlayer2174-3946 incl comments/signatures",
+      "topic": "frameStep",
+      "hits": [],
+      "pattern": "frame.?step|step.?frame"
+    },
+    {
+      "scope": "installed public AVPlayer2174-3946 incl comments/signatures",
+      "topic": "audioDelay",
+      "hits": [],
+      "pattern": "audio.*(delay|offset)|setAudio.*(Time|Offset|Delay)"
+    },
+    {
+      "scope": "installed public AVPlayer2174-3946 incl comments/signatures",
+      "topic": "rotation",
+      "hits": [],
+      "pattern": "rotat|transform"
+    },
+    {
+      "scope": "installed public AVPlayer2174-3946 incl comments/signatures",
+      "topic": "deinterlace",
+      "hits": [],
+      "pattern": "deinterlac"
+    },
+    {
+      "scope": "installed public AVPlayer2174-3946 incl comments/signatures",
+      "topic": "zoomPan",
+      "hits": [],
+      "pattern": "zoom|pan"
+    },
+    {
+      "scope": "installed public AVPlayer2174-3946 incl comments/signatures",
+      "topic": "chapters",
+      "hits": [],
+      "pattern": "chapter"
+    },
+    {
+      "scope": "installed public AVPlayer2174-3946 incl comments/signatures",
+      "topic": "audioPassthrough",
+      "hits": [],
+      "pattern": "passthrough|bitstream|encoded.*audio"
+    }
+  ],
+  "privilegeReview": {
+    "AVPlayerAuditedSymbols": "No @systemapi/@hide annotation in scoped public AVPlayer declarations",
+    "AVSession": "Own-session create/activate/metadata/state/control events no manager privilege. Global manager access permission-bearing APIs excluded.",
+    "backgroundTasks": "KEEP_BACKGROUND_RUNNING normal-app permission plus module mode declaration and policy; not automatic grant",
+    "NativeWindowAndVPE": "Public NDK declarations; no @systemapi/@hide found in inspected relevant headers; require native integration and ownership management; not currently reachable through SystemPlaybackPort"
+  }
+}

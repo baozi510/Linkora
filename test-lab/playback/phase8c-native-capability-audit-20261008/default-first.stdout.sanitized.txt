@@ -1,0 +1,741 @@
+Architecture boundary checks passed.
+✔ generated .test platform imports are outside production roots (56.5495ms)
+✔ core production platform imports fail (59.1135ms)
+✔ core production implementation imports fail (54.8478ms)
+✔ production build directory cannot hide a platform import (53.9207ms)
+✔ module production export entry is also guarded (51.6559ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 281.1396
+Simulator product parity/isolation checks passed.
+PASS maps format video audio chapters and field origins
+PASS maps PQ conservatively as metadata HDR10
+PASS maps HLG transfer
+PASS requires explicit Dolby Vision configuration
+PASS does not infer HDR from BT2020 or ten bits alone
+PASS maps text bitmap unknown and subtitle dispositions
+PASS caps arbitrary tag values and total tag bytes
+PASS caps stream and chapter counts
+PASS rejects invalid raw frame byte count
+PASS rejects unbounded frame allocation dimensions
+PASS releases frame idempotently and rejects later reads
+PASS does not cancel unrelated request ids
+PASS isolates identical external ids between wrappers
+PASS rejects duplicate active request ids without replacing state
+PASS close cancels owned work and rejects new requests
+FFmpeg Phase1 pure tests: 15/15 PASS
+PASS review cancellation retains identity when delayed open rejects
+PASS review cancellation retains identity when delayed registration rejects
+PASS review ffmpeg cancellation retains identity when backend rejects
+PASS review ffmpeg close during release suppresses completed metadata until cleanup
+PASS review system cancellation retains identity when backend rejects
+PASS review system close during release suppresses completed metadata until cleanup
+PASS review thumbnail cancellation retains identity when native frame rejects
+PASS review thumbnail close during release suppresses completed pixels until cleanup
+PASS canResolve is pure and rejects unsafe links unresolved local and FFmpeg playlists
+PASS HTTP and remote resolution own proxy sources with idempotent release and stable identity
+PASS registration failure closes once even if registration already took ownership
+PASS late proxy registration after cancellation releases registered source once
+PASS access diagnostics distinguish observed nonsequential source reads
+PASS cancel during late source open releases source without registering
+PASS benchmark timing diagnostics use injected clock without platform dependency
+PASS FFmpeg completeness satisfies list without optional chapters/tags
+PASS FFmpeg completeness satisfies detail without optional chapters/tags
+PASS FFmpeg completeness satisfies advanced without optional chapters/tags
+PASS FFmpeg partial and unavailable reflect requested structural completeness
+PASS maps stable numeric error and releases lease for FF_INVALID_INPUT
+PASS maps stable numeric error and releases lease for FF_OPEN_FAILED
+PASS maps stable numeric error and releases lease for FF_STREAM_INFO_FAILED
+PASS maps stable numeric error and releases lease for FF_NO_VIDEO
+PASS maps stable numeric error and releases lease for FF_DECODER_UNAVAILABLE
+PASS maps stable numeric error and releases lease for FF_DECODE_FAILED
+PASS maps stable numeric error and releases lease for FF_TIMEOUT
+PASS maps stable numeric error and releases lease for FF_CANCELLED
+PASS maps stable numeric error and releases lease for FF_SIZE_REJECTED
+PASS maps stable numeric error and releases lease for FF_CLOSED
+PASS cancel rejects late native success and close waits lease cleanup
+PASS System maps only claimed basic metadata and provenance with requirement completeness
+PASS System unavailable values are not fabricated into usable metadata
+PASS System errors and timeout retain numeric failure state and clean up
+PASS System close cancels active job rejects late result and awaits cleanup
+PASS thumbnail passes requested bounds/time and owns raw output separately from source
+PASS thumbnail error releases source and reports stable cancellation
+PASS thumbnail close cancels active native work discards late pixels and releases once
+PASS comparison distinguishes unclaimed System structure from a true empty stream count
+PASS comparison classifies both missing ffmpeg missing and value differences independently
+PASS production policy keeps LIST System-first and file-like detail FFmpeg-first
+PASS production policy keeps local playlists on System functional path
+PASS LIST accepts complete System result without invoking FFmpeg
+PASS LIST falls back from partial System to complete FFmpeg without merging
+PASS DETAIL falls back to System only when FFmpeg is unusable
+PASS policy cancellation never starts the fallback engine after an active probe settles
+PASS DETAIL keeps usable partial FFmpeg result and does not merge System fields
+Analysis Phase2 pure tests: 46/46 PASS
+✔ accepts only x86 FFmpeg in simulator (0.8717ms)
+✔ rejects mislabeled arm64 ELF in simulator (0.235ms)
+✔ rejects production native libs even when ELF is x86 (0.1448ms)
+✔ default confirms the complete production native set is AArch64 (0.2676ms)
+✔ rejects missing analyzer and unrecognized ELF (0.1846ms)
+✔ rejects default HAP polluted by simulator dependency state (0.3222ms)
+✔ rejects default with only libaki_jsbind.so missing (0.1942ms)
+✔ rejects default with only libc++_shared.so missing (0.1134ms)
+✔ rejects default with only liblinkora_ffmpeg.so missing (0.1439ms)
+✔ rejects default with only liblinkora_smb.so missing (0.1629ms)
+✔ rejects default with only liblinkora_sftp.so missing (0.1334ms)
+✔ rejects default with only liblinkora_ftp.so missing (0.1111ms)
+✔ rejects default with only liblinkora_nfs.so missing (0.0877ms)
+✔ rejects default with only libmpv.so missing (0.0803ms)
+✔ rejects default with only libmpv_wrapper.so missing (0.5403ms)
+✔ rejects unknown x86 simulator native library (0.2076ms)
+✔ rejects unknown arm64 production native library (0.2206ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 76.4368
+Database schema v5 migration started.
+Database schema v5 migration started.
+Database schema v5 migration started.
+Database schema version advanced to 5.
+Database schema v6 migration started.
+Database schema version advanced to 6.
+Database schema v7 migration started.
+Database schema version advanced to 7.
+Database schema v8 migration started.
+Database schema version advanced to 8.
+Database schema v9 migration started.
+Database schema version advanced to 9.
+PASS: migration failure rolls back schema and version; retry succeeds
+Database schema v3 migration started.
+Database schema version advanced to 3.
+Database schema v4 migration started.
+Database schema version advanced to 4.
+Database schema v5 migration started.
+Database schema version advanced to 5.
+Database schema v6 migration started.
+Database schema version advanced to 6.
+Database schema v7 migration started.
+Database schema version advanced to 7.
+Database schema v8 migration started.
+Database schema version advanced to 8.
+Database schema v9 migration started.
+Database schema version advanced to 9.
+Database schema v5 migration started.
+Database schema version advanced to 5.
+Database schema v6 migration started.
+Database schema version advanced to 6.
+Database schema v7 migration started.
+Database schema version advanced to 7.
+Database schema v8 migration started.
+Database schema version advanced to 8.
+Database schema v9 migration started.
+Database schema version advanced to 9.
+Database schema v6 migration started.
+Database schema version advanced to 6.
+Database schema v7 migration started.
+Database schema version advanced to 7.
+Database schema v8 migration started.
+Database schema version advanced to 8.
+Database schema v9 migration started.
+Database schema version advanced to 9.
+Database schema v7 migration started.
+Database schema version advanced to 7.
+Database schema v8 migration started.
+Database schema version advanced to 8.
+Database schema v9 migration started.
+Database schema version advanced to 9.
+PASS: legacy half-migrated v3/v5/v6/v7 recover without losing rows
+Database schema v8 migration started.
+Database schema v8 migration started.
+Database schema version advanced to 8.
+Database schema v9 migration started.
+Database schema version advanced to 9.
+PASS: v8 reference migration rolls back completely before retry
+Database schema v9 migration started.
+Database schema v9 migration started.
+Database schema version advanced to 9.
+PASS: v9 network metadata migration rolls back and retries without losing v8 media
+Database schema v1 creation started.
+Database schema version advanced to 1.
+Database schema v2 creation started.
+Database schema version advanced to 2.
+Database schema v3 migration started.
+Database schema version advanced to 3.
+Database schema v4 migration started.
+Database schema version advanced to 4.
+Database schema v5 migration started.
+Database schema version advanced to 5.
+Database schema v6 migration started.
+Database schema version advanced to 6.
+Database schema v7 migration started.
+Database schema version advanced to 7.
+Database schema v8 migration started.
+Database schema version advanced to 8.
+Database schema v9 migration started.
+Database schema version advanced to 9.
+PASS: same-folder deduplication and cross-folder references survive removal
+PASS: reauthorization preserves alias and folder; cancellation preserves data
+PASS: batch hide/restore rolls back partial writes and remains usable
+Local persistence checks passed (desktop SQLite; Harmony bindings and authorization require device verification).
+PASS bounded authenticated HTTP ranges, wrong positions, ignored Range, reuse and close
+PASS metadata-only, thumbnail-only, early metadata and interrupted timing snapshot
+PASS separate native preparation, metadata, thumbnail and total timings
+PASS stalled cleanup watchdog returns failure evidence
+Database initialization started.
+Database opened. schemaVersion=0
+Database foreign-key enforcement enabled.
+Database schema v1 creation started.
+Database schema version advanced to 1.
+Database schema v2 creation started.
+Database schema version advanced to 2.
+Database schema v3 migration started.
+Database schema version advanced to 3.
+Database schema v4 migration started.
+Database schema version advanced to 4.
+Database schema v5 migration started.
+Database schema version advanced to 5.
+Database schema v6 migration started.
+Database schema version advanced to 6.
+Database schema v7 migration started.
+Database schema version advanced to 7.
+Database schema v8 migration started.
+Database schema version advanced to 8.
+Database schema v9 migration started.
+Database schema version advanced to 9.
+Database initialization completed. schemaVersion=9
+Network media analysis: {"metadataEngine":"system","thumbnailEngine":"system","thumbnailPlan":"2000:480:270:80:1"}
+Network media analysis: {"metadataEngine":"system","thumbnailEngine":"system","thumbnailPlan":"2000:480:270:80:1"}
+Network media analysis: {"metadataEngine":"system","thumbnailEngine":"system","thumbnailPlan":"2000:480:270:80:1"}
+Network media analysis: {"metadataEngine":"system","thumbnailEngine":"system","thumbnailPlan":"2000:480:270:80:1"}
+Network media analysis: {"metadataEngine":"system","thumbnailEngine":"system","thumbnailPlan":"2000:480:270:80:1"}
+Network media analysis: {"metadataEngine":"system","thumbnailEngine":"","thumbnailPlan":"2000:480:270:80:1"}
+Network media analysis: {"metadataEngine":"system","thumbnailEngine":"system","thumbnailPlan":"2000:480:270:80:1"}
+Network media analysis: {"metadataEngine":"system","thumbnailEngine":"","thumbnailPlan":"2000:480:270:80:1"}
+Network media analysis: {"metadataEngine":"system","thumbnailEngine":"","thumbnailPlan":"2000:480:270:80:1"}
+Network media analysis: {"metadataEngine":"system","thumbnailEngine":"system","thumbnailPlan":"2400:480:270:80:1"}
+Network media analysis: {"metadataEngine":"system","thumbnailEngine":"system","thumbnailPlan":"2400:480:270:80:1"}
+Network media analysis: {"metadataEngine":"system","thumbnailEngine":"system","thumbnailPlan":"2400:480:270:80:1"}
+Network media analysis: {"metadataEngine":"system","thumbnailEngine":"system","thumbnailPlan":"2400:480:270:80:1"}
+Network media analysis: {"metadataEngine":"system","thumbnailEngine":"system","thumbnailPlan":"1800:480:270:80:1"}
+Network media analysis: {"metadataEngine":"system","thumbnailEngine":"system","thumbnailPlan":"1800:480:270:80:1"}
+Network media analysis: {"metadataEngine":"system","thumbnailEngine":"system","thumbnailPlan":"2400:480:270:80:1"}
+PASS media cache and loader checks
+PASS permanent database metadata, WebP storage, legacy migration, refresh cache reuse, serial/coalesced load, cancellation/late results, partial metadata, independent images, UI boundary and nullable factory
+✔ error log before FILE_LOADED leaves prepare pending (148.4433ms)
+✔ FILE_LOADED after error log succeeds and clears prepare timer (54.967ms)
+✔ prepare timeout reports the latest error log (53.9427ms)
+✔ post-prepare error log neither emits fatal error nor tears down playback (44.1449ms)
+✔ explicit play and pause commands publish unified state without wrapper property callbacks (41.8262ms)
+✔ EOF completion survives trailing playing false and replay clears the terminal guard (37.7583ms)
+✔ unverified advanced capabilities are reported conservatively (32.9768ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 419.9688
+Installing dependencies...
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Packages: +1
++
+Progress: resolved 1, reused 1, downloaded 0, added 1, done
+
+dependencies:
++ @ohos/hvigor-multi-target-package-plugin 7.0.0
+
+Done in 311ms using pnpm v10.28.2
+Hvigor install success.
+> hvigor Finished :entry:clean... after 2 ms
+> hvigor Finished :linkora_ffmpeg:clean... after 1 ms
+> hvigor Finished :linkora_core:clean... after 1 ms
+> hvigor Finished :linkora_media_probe:clean... after 1 ms
+> hvigor Finished :linkora_proxy:clean... after 1 ms
+> hvigor Finished :entry:default@PreBuild... after 106 ms
+> hvigor Finished :linkora_ffmpeg:default@PreBuild... after 33 ms
+> hvigor Finished :linkora_core:default@PreBuild... after 9 ms
+> hvigor Finished :linkora_media_probe:default@PreBuild... after 7 ms
+> hvigor Finished :linkora_proxy:default@PreBuild... after 7 ms
+> hvigor Finished :entry:default@CreateModuleInfo... after 1 ms
+> hvigor Finished :entry:default@PreCheckSyscap... after 1 ms
+> hvigor Finished :entry:default@GenerateUnitTestTemplate... after 2 ms
+> hvigor Finished :linkora_ffmpeg:default@GenerateUnitTestTemplate... after 2 ms
+> hvigor Finished :linkora_core:default@CreateHarBuildProfile... after 1 ms
+> hvigor Finished :linkora_core:default@ConfigureCmake... after 1 ms
+> hvigor Finished :linkora_core:default@GenerateUnitTestTemplate... after 2 ms
+> hvigor Finished :linkora_media_probe:default@CreateHarBuildProfile... after 1 ms
+> hvigor Finished :linkora_media_probe:default@ConfigureCmake... after 1 ms
+> hvigor Finished :linkora_media_probe:default@GenerateUnitTestTemplate... after 2 ms
+> hvigor Finished :linkora_proxy:default@GenerateUnitTestTemplate... after 2 ms
+> hvigor Finished :linkora_ffmpeg:default@CreateHarBuildProfile... after 1 ms
+> hvigor Finished :linkora_proxy:default@CreateHarBuildProfile... after 1 ms
+> hvigor Finished :linkora_core:default@BuildNativeWithCmake... after 1 ms
+> hvigor Finished :linkora_core:default@MergeProfile... after 3 ms
+> hvigor Finished :linkora_media_probe:default@BuildNativeWithCmake... after 1 ms
+> hvigor Finished :linkora_media_probe:default@MergeProfile... after 2 ms
+> hvigor Finished :entry:default@CreateBuildProfile... after 2 ms
+> hvigor Finished :linkora_ffmpeg:default@ConfigureCmake... after 3 ms
+> hvigor Finished :linkora_proxy:default@ConfigureCmake... after 1 ms
+> hvigor Finished :linkora_ffmpeg:default@MergeProfile... after 2 ms
+> hvigor Finished :linkora_proxy:default@MergeProfile... after 2 ms
+> hvigor Finished :linkora_proxy:default@BuildNativeWithCmake... after 1 ms
+> hvigor Finished :entry:default@MergeProfile... after 41 ms
+> hvigor Finished :linkora_ffmpeg:default@BuildNativeWithCmake... after 3 s 620 ms
+> hvigor Finished :entry:default@ConfigureCmake... after 21 ms
+> hvigor Finished :entry:default@BuildNativeWithCmake... after 39 s 70 ms
+> hvigor Finished :entry:default@GeneratePkgContextInfo... after 33 ms
+> hvigor Finished :entry:default@ProcessProfile... after 94 ms
+> hvigor Finished :entry:default@ProcessRouterMap... after 4 ms
+> hvigor Finished :entry:default@ProcessShareConfig... after 3 ms
+> hvigor Finished :entry:default@ProcessStartupConfig... after 2 ms
+> hvigor Finished :entry:default@UnitTestProcessProfile... after 2 ms
+> hvigor Finished :entry:default@GenerateLoaderJson... after 13 ms
+> hvigor Finished :entry:default@ProcessResource... after 36 ms
+> hvigor Finished :entry:default@CompileResource... after 213 ms
+> hvigor Finished :entry:default@ReplaceUnitTestIndexFile... after 2 ms
+> hvigor Finished :entry:default@BuildUnitTestHook... after 1 ms
+> hvigor Finished :entry:default@UnitTestArkTS... after 13 s 546 ms
+> hvigor Windows_NT
+[2026-10-08T08:38:09.053] [INFO] default - Finished write html report
+> hvigor Finished :entry:default@GenerateUnitTestResult... after 2 s 682 ms
+> hvigor Finished :entry:test... after 1 ms
+> hvigor BUILD SUCCESSFUL in 1 min 3 s 311 ms
+
+51 tasks in total: 51 executed, 0 up-to-date
+[2026-10-08T08:38:09.106] [INFO] default - Finished file written successfully
+> hvigor UP-TO-DATE :linkora_core:default@PreBuild...
+> hvigor Finished :linkora_core:default@ProcessOHPackageJson... after 3 ms
+> hvigor UP-TO-DATE :linkora_core:default@CreateHarBuildProfile...
+> hvigor Finished :linkora_core:default@CreateHarModuleInfo... after 1 ms
+> hvigor Finished :linkora_core:default@ConfigureCmake... after 1 ms
+> hvigor Finished :linkora_core:default@MergeProfile... after 4 ms
+> hvigor Finished :linkora_core:default@GeneratePkgContextInfo... after 6 ms
+> hvigor Finished :linkora_core:default@ProcessIntegratedHsp... after 1 ms
+> hvigor Finished :linkora_core:default@ProcessModulePrivacyProfile... after 1 ms
+> hvigor Finished :linkora_core:default@BuildNativeWithCmake... after 1 ms
+> hvigor Finished :linkora_core:default@ProcessProfile... after 95 ms
+> hvigor Finished :linkora_core:default@ProcessRouterMap... after 1 ms
+> hvigor Finished :linkora_core:default@ProcessShareConfig... after 1 ms
+> hvigor Finished :linkora_core:default@ProcessStartupConfig... after 2 ms
+> hvigor Finished :linkora_core:default@BuildNativeWithNinja... after 1 ms
+> hvigor Finished :linkora_core:default@ProcessResource... after 2 ms
+> hvigor Finished :linkora_core:default@GenerateLoaderJson... after 10 ms
+> hvigor Finished :linkora_core:default@ProcessLibs... after 4 ms
+> hvigor Finished :linkora_core:default@CompileResource... after 3 ms
+> hvigor Finished :linkora_core:default@DoNativeStrip... after 11 ms
+> hvigor Finished :linkora_core:default@ProcessObfuscationFiles... after 1 ms
+> hvigor Finished :linkora_core:default@CacheNativeLibs... after 7 ms
+> hvigor Finished :linkora_core:default@HarCompileArkTS... after 4 s 728 ms
+> hvigor Finished :linkora_core:default@ProcessHarArtifacts... after 48 ms
+> hvigor Finished :linkora_core:default@PackageHar... after 38 ms
+> hvigor Finished :linkora_core:default@PackageSignHar... after 1 ms
+> hvigor Finished :linkora_core:default@PackingCheckHar... after 3 ms
+> hvigor Finished :linkora_core:default@CollectDebugSymbol... after 7 ms
+> hvigor Finished :linkora_core:assembleHar... after 1 ms
+> hvigor BUILD SUCCESSFUL in 7 s 776 ms
+
+29 tasks in total: 27 executed, 2 up-to-date
+> hvigor UP-TO-DATE :linkora_proxy:default@PreBuild...
+> hvigor UP-TO-DATE :linkora_core:default@PreBuild...
+> hvigor Finished :linkora_proxy:default@ProcessOHPackageJson... after 3 ms
+> hvigor Finished :linkora_proxy:default@CreateHarModuleInfo... after 2 ms
+> hvigor Finished :linkora_proxy:default@GeneratePkgContextInfo... after 7 ms
+> hvigor Finished :linkora_proxy:default@ProcessIntegratedHsp... after 1 ms
+> hvigor Finished :linkora_proxy:default@ProcessModulePrivacyProfile... after 1 ms
+> hvigor UP-TO-DATE :linkora_core:default@CreateHarBuildProfile...
+> hvigor Finished :linkora_core:default@ConfigureCmake... after 1 ms
+> hvigor UP-TO-DATE :linkora_core:default@MergeProfile...
+> hvigor Finished :linkora_proxy:default@ProcessRouterMap... after 1 ms
+> hvigor Finished :linkora_proxy:default@ProcessShareConfig... after 1 ms
+> hvigor Finished :linkora_proxy:default@ProcessStartupConfig... after 2 ms
+> hvigor UP-TO-DATE :linkora_proxy:default@CreateHarBuildProfile...
+> hvigor Finished :linkora_core:default@BuildNativeWithCmake... after 1 ms
+> hvigor Finished :linkora_proxy:default@MergeProfile... after 3 ms
+> hvigor Finished :linkora_proxy:default@GenerateLoaderJson... after 6 ms
+> hvigor Finished :linkora_core:default@BuildNativeWithNinja... after 1 ms
+> hvigor Finished :linkora_proxy:default@ConfigureCmake... after 1 ms
+> hvigor Finished :linkora_proxy:default@ProcessProfile... after 96 ms
+> hvigor UP-TO-DATE :linkora_core:default@ProcessLibs...
+> hvigor Finished :linkora_proxy:default@BuildNativeWithCmake... after 1 ms
+> hvigor Finished :linkora_proxy:default@ProcessResource... after 2 ms
+> hvigor UP-TO-DATE :linkora_core:default@DoNativeStrip...
+> hvigor Finished :linkora_proxy:default@CompileResource... after 1 ms
+> hvigor Finished :linkora_proxy:default@BuildNativeWithNinja... after 1 ms
+> hvigor Finished :linkora_proxy:default@ProcessObfuscationFiles... after 1 ms
+> hvigor Finished :linkora_proxy:default@ProcessLibs... after 4 ms
+> hvigor Finished :linkora_proxy:default@DoNativeStrip... after 12 ms
+> hvigor Finished :linkora_proxy:default@CacheNativeLibs... after 7 ms
+> hvigor Finished :linkora_proxy:default@HarCompileArkTS... after 4 s 83 ms
+> hvigor Finished :linkora_proxy:default@ProcessHarArtifacts... after 20 ms
+> hvigor Finished :linkora_proxy:default@PackageHar... after 16 ms
+> hvigor Finished :linkora_proxy:default@PackageSignHar... after 1 ms
+> hvigor Finished :linkora_proxy:default@PackingCheckHar... after 3 ms
+> hvigor Finished :linkora_proxy:default@CollectDebugSymbol... after 1 ms
+> hvigor Finished :linkora_proxy:assembleHar... after 1 ms
+> hvigor BUILD SUCCESSFUL in 7 s 72 ms
+
+37 tasks in total: 30 executed, 7 up-to-date
+> hvigor UP-TO-DATE :linkora_media_probe:default@PreBuild...
+> hvigor Finished :linkora_media_probe:default@ProcessOHPackageJson... after 3 ms
+> hvigor UP-TO-DATE :linkora_media_probe:default@CreateHarBuildProfile...
+> hvigor Finished :linkora_media_probe:default@CreateHarModuleInfo... after 1 ms
+> hvigor Finished :linkora_media_probe:default@ConfigureCmake... after 1 ms
+> hvigor Finished :linkora_media_probe:default@MergeProfile... after 4 ms
+> hvigor Finished :linkora_media_probe:default@GeneratePkgContextInfo... after 6 ms
+> hvigor Finished :linkora_media_probe:default@ProcessIntegratedHsp... after 1 ms
+> hvigor Finished :linkora_media_probe:default@ProcessModulePrivacyProfile... after 1 ms
+> hvigor Finished :linkora_media_probe:default@BuildNativeWithCmake... after 1 ms
+> hvigor Finished :linkora_media_probe:default@ProcessProfile... after 95 ms
+> hvigor Finished :linkora_media_probe:default@ProcessRouterMap... after 1 ms
+> hvigor Finished :linkora_media_probe:default@ProcessShareConfig... after 1 ms
+> hvigor Finished :linkora_media_probe:default@ProcessStartupConfig... after 2 ms
+> hvigor Finished :linkora_media_probe:default@BuildNativeWithNinja... after 1 ms
+> hvigor Finished :linkora_media_probe:default@ProcessResource... after 2 ms
+> hvigor Finished :linkora_media_probe:default@GenerateLoaderJson... after 6 ms
+> hvigor Finished :linkora_media_probe:default@ProcessLibs... after 6 ms
+> hvigor Finished :linkora_media_probe:default@CompileResource... after 2 ms
+> hvigor Finished :linkora_media_probe:default@DoNativeStrip... after 11 ms
+> hvigor Finished :linkora_media_probe:default@ProcessObfuscationFiles... after 1 ms
+> hvigor Finished :linkora_media_probe:default@CacheNativeLibs... after 8 ms
+> hvigor Finished :linkora_media_probe:default@HarCompileArkTS... after 3 s 582 ms
+> hvigor Finished :linkora_media_probe:default@ProcessHarArtifacts... after 23 ms
+> hvigor Finished :linkora_media_probe:default@PackageHar... after 15 ms
+> hvigor Finished :linkora_media_probe:default@PackageSignHar... after 1 ms
+> hvigor Finished :linkora_media_probe:default@PackingCheckHar... after 2 ms
+> hvigor Finished :linkora_media_probe:default@CollectDebugSymbol... after 1 ms
+> hvigor Finished :linkora_media_probe:assembleHar... after 1 ms
+> hvigor BUILD SUCCESSFUL in 6 s 593 ms
+
+29 tasks in total: 27 executed, 2 up-to-date
+> hvigor UP-TO-DATE :linkora_ffmpeg:default@PreBuild...
+> hvigor UP-TO-DATE :linkora_core:default@PreBuild...
+> hvigor Finished :linkora_ffmpeg:default@ProcessOHPackageJson... after 3 ms
+> hvigor Finished :linkora_ffmpeg:default@CreateHarModuleInfo... after 2 ms
+> hvigor Finished :linkora_ffmpeg:default@ProcessIntegratedHsp... after 1 ms
+> hvigor Finished :linkora_ffmpeg:default@ProcessModulePrivacyProfile... after 1 ms
+> hvigor UP-TO-DATE :linkora_core:default@CreateHarBuildProfile...
+> hvigor Finished :linkora_core:default@ConfigureCmake... after 1 ms
+> hvigor UP-TO-DATE :linkora_core:default@MergeProfile...
+> hvigor UP-TO-DATE :linkora_ffmpeg:default@CreateHarBuildProfile...
+> hvigor Finished :linkora_core:default@BuildNativeWithCmake... after 1 ms
+> hvigor Finished :linkora_ffmpeg:default@MergeProfile... after 4 ms
+> hvigor Finished :linkora_ffmpeg:default@ConfigureCmake... after 10 ms
+> hvigor Finished :linkora_core:default@BuildNativeWithNinja... after 1 ms
+> hvigor UP-TO-DATE :linkora_core:default@ProcessLibs...
+> hvigor UP-TO-DATE :linkora_core:default@DoNativeStrip...
+> hvigor Finished :linkora_ffmpeg:default@BuildNativeWithCmake... after 3 s 337 ms
+> hvigor Finished :linkora_ffmpeg:default@GeneratePkgContextInfo... after 12 ms
+> hvigor Finished :linkora_ffmpeg:default@ProcessProfile... after 97 ms
+> hvigor Finished :linkora_ffmpeg:default@ProcessRouterMap... after 1 ms
+> hvigor Finished :linkora_ffmpeg:default@ProcessShareConfig... after 1 ms
+> hvigor Finished :linkora_ffmpeg:default@ProcessStartupConfig... after 2 ms
+> hvigor Finished :linkora_ffmpeg:default@ProcessResource... after 2 ms
+> hvigor Finished :linkora_ffmpeg:default@GenerateLoaderJson... after 7 ms
+> hvigor Finished :linkora_ffmpeg:default@CompileResource... after 2 ms
+> hvigor Finished :linkora_ffmpeg:default@ProcessObfuscationFiles... after 1 ms
+> hvigor Finished :linkora_ffmpeg:default@BuildNativeWithNinja... after 1 s 681 ms
+> hvigor Finished :linkora_ffmpeg:default@ProcessLibs... after 109 ms
+> hvigor Finished :linkora_ffmpeg:default@DoNativeStrip... after 86 ms
+> hvigor Finished :linkora_ffmpeg:default@CacheNativeLibs... after 4 ms
+> hvigor Finished :linkora_ffmpeg:default@HarCompileArkTS... after 3 s 898 ms
+> hvigor Finished :linkora_ffmpeg:default@ProcessHarArtifacts... after 34 ms
+> hvigor Finished :linkora_ffmpeg:default@PackageHar... after 274 ms
+> hvigor Finished :linkora_ffmpeg:default@PackageSignHar... after 1 ms
+> hvigor Finished :linkora_ffmpeg:default@PackingCheckHar... after 2 ms
+> hvigor Finished :linkora_ffmpeg:default@CollectDebugSymbol... after 1 ms
+> hvigor Finished :linkora_ffmpeg:assembleHar... after 1 ms
+> hvigor BUILD SUCCESSFUL in 11 s 560 ms
+
+37 tasks in total: 30 executed, 7 up-to-date
+> hvigor UP-TO-DATE :entry:default@PreBuild...
+> hvigor UP-TO-DATE :linkora_ffmpeg:default@PreBuild...
+> hvigor UP-TO-DATE :linkora_core:default@PreBuild...
+> hvigor UP-TO-DATE :linkora_media_probe:default@PreBuild...
+> hvigor UP-TO-DATE :linkora_proxy:default@PreBuild...
+> hvigor Finished :entry:default@CreateModuleInfo... after 1 ms
+> hvigor Finished :entry:default@GenerateMetadata... after 3 ms
+> hvigor Finished :entry:default@PreCheckSyscap... after 1 ms
+> hvigor Finished :entry:default@GeneratePkgSdkInfo... after 3 ms
+> hvigor Finished :entry:default@ProcessIntegratedHsp... after 1 ms
+> hvigor UP-TO-DATE :linkora_core:default@CreateHarBuildProfile...
+> hvigor Finished :linkora_core:default@ConfigureCmake... after 1 ms
+> hvigor UP-TO-DATE :linkora_core:default@MergeProfile...
+> hvigor UP-TO-DATE :linkora_media_probe:default@CreateHarBuildProfile...
+> hvigor Finished :linkora_media_probe:default@ConfigureCmake... after 1 ms
+> hvigor UP-TO-DATE :linkora_media_probe:default@MergeProfile...
+> hvigor Finished :entry:default@SyscapTransform... after 1 ms
+> hvigor UP-TO-DATE :linkora_ffmpeg:default@CreateHarBuildProfile...
+> hvigor UP-TO-DATE :linkora_proxy:default@CreateHarBuildProfile...
+> hvigor Finished :linkora_core:default@BuildNativeWithCmake... after 1 ms
+> hvigor UP-TO-DATE :linkora_ffmpeg:default@MergeProfile...
+> hvigor UP-TO-DATE :linkora_proxy:default@MergeProfile...
+> hvigor Finished :linkora_media_probe:default@BuildNativeWithCmake... after 1 ms
+> hvigor Finished :entry:default@CreateBuildProfile... after 2 ms
+> hvigor Finished :linkora_ffmpeg:default@ConfigureCmake... after 9 ms
+> hvigor Finished :linkora_core:default@BuildNativeWithNinja... after 1 ms
+> hvigor Finished :linkora_proxy:default@ConfigureCmake... after 1 ms
+> hvigor Finished :entry:default@MergeProfile... after 25 ms
+> hvigor Finished :linkora_media_probe:default@BuildNativeWithNinja... after 1 ms
+> hvigor Finished :linkora_ffmpeg:default@BuildNativeWithCmake... after 12 ms
+> hvigor UP-TO-DATE :linkora_core:default@ProcessLibs...
+> hvigor Finished :linkora_proxy:default@BuildNativeWithCmake... after 1 ms
+> hvigor Finished :entry:default@MakePackInfo... after 3 ms
+> hvigor UP-TO-DATE :linkora_media_probe:default@ProcessLibs...
+> hvigor UP-TO-DATE :linkora_core:default@DoNativeStrip...
+> hvigor Finished :entry:default@ConfigureCmake... after 15 ms
+> hvigor UP-TO-DATE :linkora_media_probe:default@DoNativeStrip...
+> hvigor Finished :linkora_proxy:default@BuildNativeWithNinja... after 1 ms
+> hvigor UP-TO-DATE :linkora_proxy:default@ProcessLibs...
+> hvigor UP-TO-DATE :linkora_proxy:default@DoNativeStrip...
+> hvigor Finished :linkora_ffmpeg:default@BuildNativeWithNinja... after 80 ms
+> hvigor UP-TO-DATE :linkora_ffmpeg:default@ProcessLibs...
+> hvigor UP-TO-DATE :linkora_ffmpeg:default@DoNativeStrip...
+> hvigor Finished :entry:default@BuildNativeWithCmake... after 38 s 613 ms
+> hvigor Finished :entry:default@GeneratePkgContextInfo... after 38 ms
+> hvigor Finished :entry:default@ProcessProfile... after 130 ms
+> hvigor Finished :entry:default@ProcessRouterMap... after 6 ms
+> hvigor Finished :entry:default@ProcessShareConfig... after 3 ms
+> hvigor Finished :entry:default@ProcessStartupConfig... after 3 ms
+> hvigor Finished :entry:default@ProcessResource... after 3 ms
+> hvigor Finished :entry:default@GenerateLoaderJson... after 14 ms
+> hvigor Finished :entry:default@CompileResource... after 276 ms
+> hvigor Finished :entry:default@BuildJS... after 3 ms
+> hvigor Finished :entry:default@BuildNativeWithNinja... after 8 s 340 ms
+> hvigor Finished :entry:default@ProcessLibs... after 116 ms
+> hvigor Finished :entry:default@DoNativeStrip... after 242 ms
+> hvigor Finished :entry:default@CacheNativeLibs... after 6 ms
+> hvigor Finished :entry:default@CompileArkTS... after 13 s 238 ms
+> hvigor Finished :entry:default@GeneratePkgModuleJson... after 3 ms
+> hvigor Finished :entry:default@ProcessCompiledResources... after 1 ms
+> hvigor Finished :entry:default@PackageHap... after 599 ms
+> hvigor Finished :entry:default@PackingCheck... after 4 ms
+> hvigor Finished :entry:default@SignHap... after 1 ms
+> hvigor Finished :entry:default@CollectDebugSymbol... after 1 ms
+> hvigor Finished :entry:assembleHap... after 1 ms
+> hvigor BUILD SUCCESSFUL in 57 s 617 ms
+
+65 tasks in total: 44 executed, 21 up-to-date
+FFmpeg/native artifact ABI audit PASS: 9 libraries (arm64-v8a)
+> hvigor UP-TO-DATE :linkora_core:default@PreBuild...
+> hvigor Finished :linkora_core:default@ProcessOHPackageJson... after 1 ms
+> hvigor Finished :linkora_core:default@CreateHarBuildProfile... after 2 ms
+> hvigor UP-TO-DATE :linkora_core:default@CreateHarModuleInfo...
+> hvigor Finished :linkora_core:default@ConfigureCmake... after 1 ms
+> hvigor Finished :linkora_core:default@MergeProfile... after 4 ms
+> hvigor UP-TO-DATE :linkora_core:default@GeneratePkgContextInfo...
+> hvigor Finished :linkora_core:default@ProcessIntegratedHsp... after 1 ms
+> hvigor Finished :linkora_core:default@ProcessModulePrivacyProfile... after 1 ms
+> hvigor Finished :linkora_core:default@BuildNativeWithCmake... after 1 ms
+> hvigor Finished :linkora_core:default@ProcessProfile... after 96 ms
+> hvigor Finished :linkora_core:default@ProcessRouterMap... after 2 ms
+> hvigor Finished :linkora_core:default@ProcessShareConfig... after 1 ms
+> hvigor Finished :linkora_core:default@ProcessStartupConfig... after 2 ms
+> hvigor Finished :linkora_core:default@BuildNativeWithNinja... after 1 ms
+> hvigor UP-TO-DATE :linkora_core:default@ProcessResource...
+> hvigor UP-TO-DATE :linkora_core:default@GenerateLoaderJson...
+> hvigor UP-TO-DATE :linkora_core:default@ProcessLibs...
+> hvigor Finished :linkora_core:default@CompileResource... after 2 ms
+> hvigor UP-TO-DATE :linkora_core:default@DoNativeStrip...
+> hvigor Finished :linkora_core:default@ProcessObfuscationFiles... after 1 ms
+> hvigor UP-TO-DATE :linkora_core:default@CacheNativeLibs...
+> hvigor Finished :linkora_core:default@HarCompileArkTS... after 4 s 561 ms
+> hvigor Finished :linkora_core:default@ProcessHarArtifacts... after 50 ms
+> hvigor Finished :linkora_core:default@PackageHar... after 44 ms
+> hvigor Finished :linkora_core:default@PackageSignHar... after 1 ms
+> hvigor Finished :linkora_core:default@PackingCheckHar... after 3 ms
+> hvigor Finished :linkora_core:default@CollectDebugSymbol... after 4 ms
+> hvigor Finished :linkora_core:assembleHar... after 1 ms
+> hvigor BUILD SUCCESSFUL in 7 s 622 ms
+
+29 tasks in total: 21 executed, 8 up-to-date
+> hvigor UP-TO-DATE :linkora_proxy:default@PreBuild...
+> hvigor UP-TO-DATE :linkora_core:default@PreBuild...
+> hvigor Finished :linkora_proxy:default@ProcessOHPackageJson... after 2 ms
+> hvigor UP-TO-DATE :linkora_proxy:default@CreateHarModuleInfo...
+> hvigor UP-TO-DATE :linkora_proxy:default@GeneratePkgContextInfo...
+> hvigor Finished :linkora_proxy:default@ProcessIntegratedHsp... after 1 ms
+> hvigor Finished :linkora_proxy:default@ProcessModulePrivacyProfile... after 1 ms
+> hvigor UP-TO-DATE :linkora_core:default@CreateHarBuildProfile...
+> hvigor Finished :linkora_core:default@ConfigureCmake... after 1 ms
+> hvigor UP-TO-DATE :linkora_core:default@MergeProfile...
+> hvigor Finished :linkora_proxy:default@ProcessRouterMap... after 2 ms
+> hvigor Finished :linkora_proxy:default@ProcessShareConfig... after 1 ms
+> hvigor Finished :linkora_proxy:default@ProcessStartupConfig... after 2 ms
+> hvigor Finished :linkora_proxy:default@CreateHarBuildProfile... after 1 ms
+> hvigor Finished :linkora_core:default@BuildNativeWithCmake... after 1 ms
+> hvigor Finished :linkora_proxy:default@MergeProfile... after 4 ms
+> hvigor UP-TO-DATE :linkora_proxy:default@GenerateLoaderJson...
+> hvigor Finished :linkora_core:default@BuildNativeWithNinja... after 1 ms
+> hvigor Finished :linkora_proxy:default@ConfigureCmake... after 1 ms
+> hvigor Finished :linkora_proxy:default@ProcessProfile... after 96 ms
+> hvigor UP-TO-DATE :linkora_core:default@ProcessLibs...
+> hvigor Finished :linkora_proxy:default@BuildNativeWithCmake... after 1 ms
+> hvigor UP-TO-DATE :linkora_proxy:default@ProcessResource...
+> hvigor UP-TO-DATE :linkora_core:default@DoNativeStrip...
+> hvigor Finished :linkora_proxy:default@CompileResource... after 1 ms
+> hvigor Finished :linkora_proxy:default@BuildNativeWithNinja... after 1 ms
+> hvigor Finished :linkora_proxy:default@ProcessObfuscationFiles... after 1 ms
+> hvigor UP-TO-DATE :linkora_proxy:default@ProcessLibs...
+> hvigor UP-TO-DATE :linkora_proxy:default@DoNativeStrip...
+> hvigor UP-TO-DATE :linkora_proxy:default@CacheNativeLibs...
+> hvigor Finished :linkora_proxy:default@HarCompileArkTS... after 3 s 791 ms
+> hvigor Finished :linkora_proxy:default@ProcessHarArtifacts... after 183 ms
+> hvigor Finished :linkora_proxy:default@PackageHar... after 22 ms
+> hvigor Finished :linkora_proxy:default@PackageSignHar... after 1 ms
+> hvigor Finished :linkora_proxy:default@PackingCheckHar... after 3 ms
+> hvigor Finished :linkora_proxy:default@CollectDebugSymbol... after 3 ms
+> hvigor Finished :linkora_proxy:assembleHar... after 1 ms
+> hvigor BUILD SUCCESSFUL in 6 s 952 ms
+
+37 tasks in total: 24 executed, 13 up-to-date
+> hvigor UP-TO-DATE :linkora_media_probe:default@PreBuild...
+> hvigor Finished :linkora_media_probe:default@ProcessOHPackageJson... after 1 ms
+> hvigor Finished :linkora_media_probe:default@CreateHarBuildProfile... after 2 ms
+> hvigor UP-TO-DATE :linkora_media_probe:default@CreateHarModuleInfo...
+> hvigor Finished :linkora_media_probe:default@ConfigureCmake... after 1 ms
+> hvigor Finished :linkora_media_probe:default@MergeProfile... after 4 ms
+> hvigor UP-TO-DATE :linkora_media_probe:default@GeneratePkgContextInfo...
+> hvigor Finished :linkora_media_probe:default@ProcessIntegratedHsp... after 1 ms
+> hvigor Finished :linkora_media_probe:default@ProcessModulePrivacyProfile... after 1 ms
+> hvigor Finished :linkora_media_probe:default@BuildNativeWithCmake... after 1 ms
+> hvigor Finished :linkora_media_probe:default@ProcessProfile... after 98 ms
+> hvigor Finished :linkora_media_probe:default@ProcessRouterMap... after 2 ms
+> hvigor Finished :linkora_media_probe:default@ProcessShareConfig... after 1 ms
+> hvigor Finished :linkora_media_probe:default@ProcessStartupConfig... after 2 ms
+> hvigor Finished :linkora_media_probe:default@BuildNativeWithNinja... after 1 ms
+> hvigor UP-TO-DATE :linkora_media_probe:default@ProcessResource...
+> hvigor UP-TO-DATE :linkora_media_probe:default@GenerateLoaderJson...
+> hvigor UP-TO-DATE :linkora_media_probe:default@ProcessLibs...
+> hvigor Finished :linkora_media_probe:default@CompileResource... after 2 ms
+> hvigor UP-TO-DATE :linkora_media_probe:default@DoNativeStrip...
+> hvigor Finished :linkora_media_probe:default@ProcessObfuscationFiles... after 1 ms
+> hvigor UP-TO-DATE :linkora_media_probe:default@CacheNativeLibs...
+> hvigor Finished :linkora_media_probe:default@HarCompileArkTS... after 3 s 461 ms
+> hvigor Finished :linkora_media_probe:default@ProcessHarArtifacts... after 28 ms
+> hvigor Finished :linkora_media_probe:default@PackageHar... after 16 ms
+> hvigor Finished :linkora_media_probe:default@PackageSignHar... after 1 ms
+> hvigor Finished :linkora_media_probe:default@PackingCheckHar... after 3 ms
+> hvigor Finished :linkora_media_probe:default@CollectDebugSymbol... after 4 ms
+> hvigor Finished :linkora_media_probe:assembleHar... after 1 ms
+> hvigor BUILD SUCCESSFUL in 6 s 444 ms
+
+29 tasks in total: 21 executed, 8 up-to-date
+> hvigor UP-TO-DATE :linkora_ffmpeg:default@PreBuild...
+> hvigor UP-TO-DATE :linkora_core:default@PreBuild...
+> hvigor Finished :linkora_ffmpeg:default@ProcessOHPackageJson... after 2 ms
+> hvigor UP-TO-DATE :linkora_ffmpeg:default@CreateHarModuleInfo...
+> hvigor Finished :linkora_ffmpeg:default@ProcessIntegratedHsp... after 1 ms
+> hvigor Finished :linkora_ffmpeg:default@ProcessModulePrivacyProfile... after 1 ms
+> hvigor UP-TO-DATE :linkora_core:default@CreateHarBuildProfile...
+> hvigor Finished :linkora_core:default@ConfigureCmake... after 1 ms
+> hvigor UP-TO-DATE :linkora_core:default@MergeProfile...
+> hvigor Finished :linkora_ffmpeg:default@CreateHarBuildProfile... after 1 ms
+> hvigor Finished :linkora_core:default@BuildNativeWithCmake... after 1 ms
+> hvigor Finished :linkora_ffmpeg:default@MergeProfile... after 3 ms
+> hvigor Finished :linkora_ffmpeg:default@ConfigureCmake... after 11 ms
+> hvigor Finished :linkora_core:default@BuildNativeWithNinja... after 1 ms
+> hvigor UP-TO-DATE :linkora_core:default@ProcessLibs...
+> hvigor UP-TO-DATE :linkora_core:default@DoNativeStrip...
+> hvigor Finished :linkora_ffmpeg:default@BuildNativeWithCmake... after 3 s 350 ms
+> hvigor UP-TO-DATE :linkora_ffmpeg:default@GeneratePkgContextInfo...
+> hvigor Finished :linkora_ffmpeg:default@ProcessProfile... after 98 ms
+> hvigor Finished :linkora_ffmpeg:default@ProcessRouterMap... after 2 ms
+> hvigor Finished :linkora_ffmpeg:default@ProcessShareConfig... after 2 ms
+> hvigor Finished :linkora_ffmpeg:default@ProcessStartupConfig... after 2 ms
+> hvigor UP-TO-DATE :linkora_ffmpeg:default@ProcessResource...
+> hvigor UP-TO-DATE :linkora_ffmpeg:default@GenerateLoaderJson...
+> hvigor Finished :linkora_ffmpeg:default@CompileResource... after 1 ms
+> hvigor Finished :linkora_ffmpeg:default@ProcessObfuscationFiles... after 1 ms
+> hvigor Finished :linkora_ffmpeg:default@BuildNativeWithNinja... after 1 s 634 ms
+> hvigor Finished :linkora_ffmpeg:default@ProcessLibs... after 114 ms
+> hvigor Finished :linkora_ffmpeg:default@DoNativeStrip... after 88 ms
+> hvigor Finished :linkora_ffmpeg:default@CacheNativeLibs... after 4 ms
+> hvigor Finished :linkora_ffmpeg:default@HarCompileArkTS... after 3 s 522 ms
+> hvigor Finished :linkora_ffmpeg:default@ProcessHarArtifacts... after 41 ms
+> hvigor Finished :linkora_ffmpeg:default@PackageHar... after 289 ms
+> hvigor Finished :linkora_ffmpeg:default@PackageSignHar... after 1 ms
+> hvigor Finished :linkora_ffmpeg:default@PackingCheckHar... after 2 ms
+> hvigor Finished :linkora_ffmpeg:default@CollectDebugSymbol... after 3 ms
+> hvigor Finished :linkora_ffmpeg:assembleHar... after 1 ms
+> hvigor BUILD SUCCESSFUL in 11 s 209 ms
+
+37 tasks in total: 27 executed, 10 up-to-date
+> hvigor UP-TO-DATE :entry:default@PreBuild...
+> hvigor UP-TO-DATE :linkora_ffmpeg:default@PreBuild...
+> hvigor UP-TO-DATE :linkora_core:default@PreBuild...
+> hvigor UP-TO-DATE :linkora_media_probe:default@PreBuild...
+> hvigor UP-TO-DATE :linkora_proxy:default@PreBuild...
+> hvigor Finished :entry:default@CreateModuleInfo... after 1 ms
+> hvigor UP-TO-DATE :entry:default@GenerateMetadata...
+> hvigor Finished :entry:default@PreCheckSyscap... after 1 ms
+> hvigor Finished :entry:default@GeneratePkgSdkInfo... after 3 ms
+> hvigor Finished :entry:default@ProcessIntegratedHsp... after 1 ms
+> hvigor UP-TO-DATE :linkora_core:default@CreateHarBuildProfile...
+> hvigor Finished :linkora_core:default@ConfigureCmake... after 1 ms
+> hvigor UP-TO-DATE :linkora_core:default@MergeProfile...
+> hvigor UP-TO-DATE :linkora_media_probe:default@CreateHarBuildProfile...
+> hvigor Finished :linkora_media_probe:default@ConfigureCmake... after 1 ms
+> hvigor UP-TO-DATE :linkora_media_probe:default@MergeProfile...
+> hvigor Finished :entry:default@SyscapTransform... after 9 ms
+> hvigor UP-TO-DATE :linkora_ffmpeg:default@CreateHarBuildProfile...
+> hvigor UP-TO-DATE :linkora_proxy:default@CreateHarBuildProfile...
+> hvigor Finished :linkora_core:default@BuildNativeWithCmake... after 1 ms
+> hvigor UP-TO-DATE :linkora_ffmpeg:default@MergeProfile...
+> hvigor UP-TO-DATE :linkora_proxy:default@MergeProfile...
+> hvigor Finished :linkora_media_probe:default@BuildNativeWithCmake... after 1 ms
+> hvigor Finished :entry:default@CreateBuildProfile... after 2 ms
+> hvigor Finished :linkora_ffmpeg:default@ConfigureCmake... after 9 ms
+> hvigor Finished :linkora_core:default@BuildNativeWithNinja... after 1 ms
+> hvigor Finished :linkora_proxy:default@ConfigureCmake... after 1 ms
+> hvigor Finished :entry:default@MergeProfile... after 25 ms
+> hvigor Finished :linkora_media_probe:default@BuildNativeWithNinja... after 1 ms
+> hvigor Finished :linkora_ffmpeg:default@BuildNativeWithCmake... after 12 ms
+> hvigor UP-TO-DATE :linkora_core:default@ProcessLibs...
+> hvigor Finished :linkora_proxy:default@BuildNativeWithCmake... after 1 ms
+> hvigor UP-TO-DATE :entry:default@MakePackInfo...
+> hvigor UP-TO-DATE :linkora_media_probe:default@ProcessLibs...
+> hvigor UP-TO-DATE :linkora_core:default@DoNativeStrip...
+> hvigor Finished :entry:default@ConfigureCmake... after 15 ms
+> hvigor UP-TO-DATE :linkora_media_probe:default@DoNativeStrip...
+> hvigor Finished :linkora_proxy:default@BuildNativeWithNinja... after 1 ms
+> hvigor UP-TO-DATE :linkora_proxy:default@ProcessLibs...
+> hvigor UP-TO-DATE :linkora_proxy:default@DoNativeStrip...
+> hvigor Finished :linkora_ffmpeg:default@BuildNativeWithNinja... after 39 s 81 ms
+> hvigor Finished :entry:default@BuildNativeWithCmake... after 39 s 69 ms
+> hvigor UP-TO-DATE :entry:default@GeneratePkgContextInfo...
+> hvigor Finished :entry:default@ProcessProfile... after 97 ms
+> hvigor Finished :entry:default@ProcessRouterMap... after 3 ms
+> hvigor UP-TO-DATE :entry:default@ProcessShareConfig...
+> hvigor Finished :entry:default@ProcessStartupConfig... after 2 ms
+> hvigor UP-TO-DATE :entry:default@ProcessResource...
+> hvigor Finished :entry:default@GenerateLoaderJson... after 11 ms
+> hvigor UP-TO-DATE :linkora_ffmpeg:default@ProcessLibs...
+> hvigor UP-TO-DATE :linkora_ffmpeg:default@DoNativeStrip...
+> hvigor Finished :entry:default@CompileResource... after 273 ms
+> hvigor Finished :entry:default@BuildJS... after 2 ms
+> hvigor Finished :entry:default@BuildNativeWithNinja... after 8 s 838 ms
+> hvigor Finished :entry:default@ProcessLibs... after 89 ms
+> hvigor Finished :entry:default@DoNativeStrip... after 141 ms
+> hvigor Finished :entry:default@CacheNativeLibs... after 5 ms
+> hvigor Finished :entry:default@CompileArkTS... after 18 s 625 ms
+> hvigor Finished :entry:default@GeneratePkgModuleJson... after 2 ms
+> hvigor Finished :entry:default@ProcessCompiledResources... after 1 ms
+> hvigor Finished :entry:default@PackageHap... after 624 ms
+> hvigor Finished :entry:default@PackingCheck... after 5 ms
+> hvigor Finished :entry:default@SignHap... after 1 ms
+> hvigor Finished :entry:default@CollectDebugSymbol... after 35 ms
+> hvigor Finished :entry:assembleHap... after 1 ms
+> hvigor BUILD SUCCESSFUL in 1 min 3 s 729 ms
+
+65 tasks in total: 39 executed, 26 up-to-date
+FFmpeg/native artifact ABI audit PASS: 9 libraries (arm64-v8a)
+Verification completed: architecture boundaries, persistence checks, unit tests, HAR and HAP builds passed.

@@ -1,0 +1,19 @@
+{
+  "exact39UniqueSeedIds": true,
+  "allRequiredFieldsAndSourcesPresent": true,
+  "noAuditRequiredPlaceholder": true,
+  "allImplementationDecisionsDeferred": true,
+  "systemVerdicts": {
+    "NATIVE_VERIFIED": 14,
+    "NATIVE_PARTIAL": 10,
+    "NATIVE_ABSENT": 14,
+    "DEVICE_CONFIRMATION_REQUIRED": 1
+  },
+  "mpvVerdicts": {
+    "DEVICE_CONFIRMATION_REQUIRED": 37,
+    "NATIVE_PARTIAL": 1,
+    "NOT_APPLICABLE": 1
+  },
+  "auditDeviceDeltaFeatures": 38,
+  "ordinarySystemRuntimeScopeLimitedToActualSmoke": true
+}

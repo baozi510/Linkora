@@ -1,0 +1,73 @@
+{
+  "utc": "2026-10-08T00:43:21.426573+00:00",
+  "inputProvenanceCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+  "tlsVerificationEnabled": true,
+  "authenticatedWebdav": true,
+  "propfind207": true,
+  "records": [
+    {
+      "caseId": "audio-mp3",
+      "relativePath": "audio_mp3.mp3",
+      "size": 48813,
+      "sha256": "6DC789C4E66D31394D028CC9142F68444512F75B76D234159C4352D20FBC9231",
+      "committedTruthEqual": true,
+      "localBytesEqual": true,
+      "remoteWholeGetEqual": true,
+      "range206PrefixEqual": true,
+      "format": "mp3",
+      "durationSeconds": "3.000000",
+      "audioCodec": "mp3",
+      "channels": 1,
+      "sampleRate": 48000,
+      "videoTracks": 0
+    },
+    {
+      "caseId": "audio-flac",
+      "relativePath": "audio_flac.flac",
+      "size": 47895,
+      "sha256": "11EBD4B0E93EB3B9A96F7E2C218CF88CA95A69E8847DDC8838558083B7C21BC8",
+      "committedTruthEqual": true,
+      "localBytesEqual": true,
+      "remoteWholeGetEqual": true,
+      "range206PrefixEqual": true,
+      "format": "flac",
+      "durationSeconds": "3.000000",
+      "audioCodec": "flac",
+      "channels": 1,
+      "sampleRate": 48000,
+      "videoTracks": 0
+    },
+    {
+      "caseId": "audio-truehd",
+      "relativePath": "audio_truehd.thd",
+      "size": 103200,
+      "sha256": "0C6477E81407B642E5D593374A2ECD3705994572D77F91214BF2E04880520EC4",
+      "committedTruthEqual": true,
+      "localBytesEqual": true,
+      "remoteWholeGetEqual": true,
+      "range206PrefixEqual": true,
+      "format": "truehd",
+      "durationSeconds": null,
+      "audioCodec": "truehd",
+      "channels": 1,
+      "sampleRate": 48000,
+      "videoTracks": 0
+    },
+    {
+      "caseId": "audio-wavpack",
+      "relativePath": "audio_wavpack.wv",
+      "size": 76831,
+      "sha256": "48099A5C661597EAB9C9F40476E32E08B9E301667CB6E0EC15C6FFE174ED583D",
+      "committedTruthEqual": true,
+      "localBytesEqual": true,
+      "remoteWholeGetEqual": true,
+      "range206PrefixEqual": true,
+      "format": "wv",
+      "durationSeconds": "3.000000",
+      "audioCodec": "wavpack",
+      "channels": 1,
+      "sampleRate": 48000,
+      "videoTracks": 0
+    }
+  ]
+}

@@ -1,0 +1,391 @@
+{
+  "schemaVersion": 1,
+  "retrievedAtUtc": "2026-10-08T00:58:01Z",
+  "package": "@mpv-ohos/mpv-arkts",
+  "version": "1.0.0",
+  "resolution": "current checkout entry/oh_modules package link after its single normal ohpm install",
+  "compatibleSdkVersion": 20,
+  "distribution": {
+    "types": "Index.d.ets",
+    "byteCodeHar": true,
+    "implementationEtsSourceDistributed": false,
+    "compiledImplementation": "ets/modules.abc"
+  },
+  "files": [
+    {
+      "relativePath": "BuildProfile.d.ets",
+      "bytes": 579,
+      "sha256": "4F782BB6164011A8A05D3703C5FCAD373168403C58601B13DB6C0FF234B0313F"
+    },
+    {
+      "relativePath": "CHANGELOG.md",
+      "bytes": 35,
+      "sha256": "ACEB50F0525B670455319EEE7F6B1B91AB569D9A8F6F0E60CC184247BC11CD26"
+    },
+    {
+      "relativePath": "ets/modules.abc",
+      "bytes": 51728,
+      "sha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E"
+    },
+    {
+      "relativePath": "Index.d.ets",
+      "bytes": 991,
+      "sha256": "205327D1B7519ABAE767CDD2C3DFD8016A303297220D61CD81C59429303DD5FD"
+    },
+    {
+      "relativePath": "libs/arm64-v8a/libaki_jsbind.so",
+      "bytes": 189992,
+      "sha256": "10EF2C85CEE19EEE7FC1D123E7B4627AE3F8245D2590D1CC98817CE3B63D75A1"
+    },
+    {
+      "relativePath": "libs/arm64-v8a/libc++_shared.so",
+      "bytes": 1262504,
+      "sha256": "388E0DF23D7BFDDC2EA01B4E87F8DC359E33DF1A7A44705E0A672609EE45B2F9"
+    },
+    {
+      "relativePath": "libs/arm64-v8a/libmpv.so",
+      "bytes": 35491168,
+      "sha256": "672E98D497199A89E20893979ECEC686DEE1113BBE1B609C9A9266AA1679BD32"
+    },
+    {
+      "relativePath": "libs/arm64-v8a/libmpv_wrapper.so",
+      "bytes": 443984,
+      "sha256": "7ECD48D92861F2DAD0310C3B716D00A396DE376BE7BBC54B24A9579A1F805928"
+    },
+    {
+      "relativePath": "LICENSE",
+      "bytes": 1095,
+      "sha256": "A01D4F8A4676B3758261D44007D10ABE950431CAD6D16FF570DFD43C36521A99"
+    },
+    {
+      "relativePath": "oh-package.json5",
+      "bytes": 841,
+      "sha256": "B53F8C3BFAC5A35F97F1F2EC0BAD5C8115FD96DCA24B283E0C9B31E11BF0D707"
+    },
+    {
+      "relativePath": "README.md",
+      "bytes": 8162,
+      "sha256": "ED384552DBB6F8EFF4DE34186795D9BFA82E1D48F428A952177B0CB880612DB5"
+    },
+    {
+      "relativePath": "src/main/ets/models/AudioParams.d.ets",
+      "bytes": 448,
+      "sha256": "4CAE49E20DE79CFBB343F9ACDD469056EF0D6217DA2707EC56FC7A1ADB52DA0E"
+    },
+    {
+      "relativePath": "src/main/ets/models/Chapter.d.ets",
+      "bytes": 306,
+      "sha256": "7EA48CE34716238965B003AB049328C97126FFD29B2B6F3E01F71AD2CBAF149B"
+    },
+    {
+      "relativePath": "src/main/ets/models/Media.d.ets",
+      "bytes": 829,
+      "sha256": "65B99E14F074AB318D964F3683E9830BE9AF69C8E510619FA69D5B90A08268F8"
+    },
+    {
+      "relativePath": "src/main/ets/models/PlayerConfig.d.ets",
+      "bytes": 3161,
+      "sha256": "CF54DEA222FA12774955CB8B864EFC66400B1BD505EE8AA2111B7CC0D8F9B981"
+    },
+    {
+      "relativePath": "src/main/ets/models/PlayerLog.d.ets",
+      "bytes": 503,
+      "sha256": "E3C4D420E6618B124D23D379EDBCF2A5F52F9A4BDCAB9996AB6FE132EA2EC3CB"
+    },
+    {
+      "relativePath": "src/main/ets/models/PlayerState.d.ets",
+      "bytes": 1911,
+      "sha256": "0BA3DD3DBF182D7F25FCFF726B5B1416ACCEB3C65344FE2364D28A42F1C02601"
+    },
+    {
+      "relativePath": "src/main/ets/models/PlayerStream.d.ets",
+      "bytes": 2281,
+      "sha256": "AC408E18BFC865890B1FC3DB94C717192B6B16D6BD11CB662B418EE260882CD2"
+    },
+    {
+      "relativePath": "src/main/ets/models/Playlist.d.ets",
+      "bytes": 503,
+      "sha256": "2D1A9A72F419697CD56D98CBB3DC3593BDE63F0445EB2E127749B3E60D869621"
+    },
+    {
+      "relativePath": "src/main/ets/models/PlaylistMode.d.ets",
+      "bytes": 401,
+      "sha256": "DC66D730732C46EF9CE075CDDAE6DC0470D6AF68288B826CA41E2D31CB6BA3DA"
+    },
+    {
+      "relativePath": "src/main/ets/models/Track.d.ets",
+      "bytes": 1904,
+      "sha256": "257E58172587DF2F0A4E69F1426644C1F50F0549632A3C56D218A22C73FA76F6"
+    },
+    {
+      "relativePath": "src/main/ets/models/VideoParams.d.ets",
+      "bytes": 2313,
+      "sha256": "F6F514811430E4378963596940B825964E644E3484BAA124665619374BB5CA2E"
+    },
+    {
+      "relativePath": "src/main/ets/MpvLib.d.ets",
+      "bytes": 2512,
+      "sha256": "44C1B0838895466850069865FF63582271E2ED45C7B807C0570E23C868A26D68"
+    },
+    {
+      "relativePath": "src/main/ets/Player.d.ets",
+      "bytes": 4819,
+      "sha256": "D8F66B0C72A624642CDBD0EBC94870661F8F310FA491059BB497E56358C8C691"
+    },
+    {
+      "relativePath": "src/main/ets/PlayerSurface.d.ets",
+      "bytes": 371,
+      "sha256": "E13BFA0475931F57A0D7837F296B68A60E59A08028DCBE944ECE1ADC5F30815D"
+    },
+    {
+      "relativePath": "src/main/ets/utils/Stream.d.ets",
+      "bytes": 447,
+      "sha256": "B0FA0D669A4B2026E2FDEAF7C9BD0147C0D78573E99BE26492AFBC62C8BF78CF"
+    },
+    {
+      "relativePath": "src/main/ets/utils/Utils.d.ets",
+      "bytes": 245,
+      "sha256": "2AC506E21F2DBA9B57C56BB0E6312EAFD1DEB347B25BE5D6A685765326AEAE28"
+    },
+    {
+      "relativePath": "src/main/module.json",
+      "bytes": 710,
+      "sha256": "113789FEB57D3B577377C91AE0B5ACA44C2030AA9EF9D8325CECF9C1A8B326F1"
+    }
+  ],
+  "compiledInspection": {
+    "type": "Ark bytecode disassembly of exact installed ets/modules.abc; not plaintext implementation source",
+    "inputSha256": "EC492175BE8921AAD0293E6B07DBEA4669A49CC0F93EEA10C9BAB253E55B775E",
+    "disassemblySha256": "E4B68196F284B51E049E444DF0D23FA1336448D106279C83AD166C64C6E9CF92",
+    "tool": "installed SDK ark_disasm.exe",
+    "exitCode": 0,
+    "scope": "Player/MpvLib mappings, initialization, observations and convenience commands; no native ELF disassembly"
+  },
+  "nativeCoreIdentity": {
+    "relativePath": "entry/oh_modules/@mpv-ohos/mpv-arkts/libs/arm64-v8a/libmpv.so",
+    "sha256": "672E98D497199A89E20893979ECEC686DEE1113BBE1B609C9A9266AA1679BD32",
+    "identityEvidence": "embedded ASCII build strings",
+    "mpv": "mpv v0.41.0-dev-g6edeee00a",
+    "ffmpeg": "FFmpeg version n8.0",
+    "matchingUpstreamCommit": "6edeee00a07b9b76f197aa71eee3d029fb090de4",
+    "matchingCommitDate": "2026-07-13T05:30:42Z",
+    "matchingCommitSubject": "feat: ohos support",
+    "matchingCommitUrl": "https://github.com/mpv-player/mpv/commit/6edeee00a07b9b76f197aa71eee3d029fb090de4",
+    "limitations": "Embedded identity does not prove unmodified upstream source or reproducible library build.",
+    "enabledBuildFeatures": [
+      "egl-ohos",
+      "ffmpeg",
+      "gl",
+      "lcms2",
+      "libass",
+      "libplacebo",
+      "lua",
+      "ohos",
+      "shaderc",
+      "vulkan"
+    ],
+    "identifiedStrings": [
+      "ohos-surface-size",
+      "ohaudio",
+      "ohcodec",
+      "gpu-next",
+      "demuxer-cache-time",
+      "demuxer-cache-duration",
+      "target-colorspace-hint",
+      "audio-spdif",
+      "reconnect_on_network_error",
+      "reconnect_at_eof",
+      "bwdif",
+      "tone-mapping"
+    ]
+  },
+  "genericExposure": {
+    "publicPlayerNative": "Player.d.ets:16",
+    "declaration": "MpvLib.d.ets:58-67",
+    "command": "Array<string>→void",
+    "commandWithReturn": "Array<string>→MpvNode (including ArrayBuffer, array, Map)",
+    "setProperty": "number|boolean|string",
+    "numericDispatch": "Number.isInteger→ctx.setPropertyInt; noninteger→ctx.setPropertyDouble; boolean→ctx.setPropertyBool; otherwise→ctx.setPropertyString",
+    "compiledRefs": [
+      "MpvLib.command:1012-1022",
+      "MpvLib.commandWithReturn:1024-1034",
+      "MpvLib.getProperty/getPropertyBool/getPropertyString:1072-1106",
+      "MpvLib.observeProperty:1132-1142",
+      "MpvLib.setOptionString:1339-1349",
+      "MpvLib.setProperty:1351-1399"
+    ],
+    "noArktsNameWhitelist": true,
+    "conclusion": "Generic native APIs can reach upstream options/commands. Missing a convenience method alone does not justify WRAPPER_NOT_EXPOSED.",
+    "limitations": [
+      "No public getPropertyNode or setPropertyNode; scalar property access/string command syntax still reaches this audit's controls, and convenience observations provide structured track/chapter/video metadata.",
+      "EventObserver.onEvent(id,name) exposes no event payload/seek request ID/END_FILE error reason.",
+      "command/setProperty return void, so native binding error/exception conversion is not established solely by ArkTS disassembly."
+    ]
+  },
+  "initialization": {
+    "compiledRefs": [
+      "Player constructor:1694-1930",
+      "PlayerConfig defaults:5971-6149"
+    ],
+    "defaults": {
+      "vo": "gpu-next",
+      "gpuContext": "ohos",
+      "hwdec": true,
+      "hwdecMapped": "ohcodec",
+      "hwdecCodecs": "h264,hevc,mpeg2video,mpeg4,h263,vvc",
+      "hwdecSoftwareFallback": "yes",
+      "profile": "fast",
+      "idle": "yes",
+      "keepOpen": "yes",
+      "deinterlace": false,
+      "osc": false,
+      "osd": true
+    },
+    "lifecycle": "Player creates/initializes native in constructor; PlayerConfig is the practical preinitialize convenience configuration path. Linkora new Player() accepts those defaults."
+  },
+  "mappings": [
+    {
+      "member": "Player.play",
+      "declarationLine": 68,
+      "compiledLines": "4078-4114",
+      "mapping": "if state.eof then seek(0) and playlist-pos=0; pause=false"
+    },
+    {
+      "member": "Player.pause",
+      "declarationLine": 72,
+      "compiledLines": "4060-4075",
+      "mapping": "pause=true"
+    },
+    {
+      "member": "Player.stop",
+      "declarationLine": 60,
+      "compiledLines": "4690 onward",
+      "mapping": "stop + playlist-clear then state/stream reset"
+    },
+    {
+      "member": "Player.seek",
+      "declarationLine": 82,
+      "compiledLines": "4210-4247",
+      "mapping": "seek seconds.toFixed(3) absolute; clears wrapper EOF; no exact flag"
+    },
+    {
+      "member": "Player.setSpeed",
+      "declarationLine": 108,
+      "compiledLines": "4528-4546",
+      "mapping": "<=0 returns; otherwise speed numeric"
+    },
+    {
+      "member": "Player.setVolume",
+      "declarationLine": 102,
+      "compiledLines": "4674-4687",
+      "mapping": "volume numeric, no wrapper clamp"
+    },
+    {
+      "member": "Player.setAudioTrack",
+      "declarationLine": 133,
+      "compiledLines": "4251-4346",
+      "mapping": "aid or external audio-add; wrapper selected track updated optimistically"
+    },
+    {
+      "member": "Player.setSubtitleTrack",
+      "declarationLine": 152,
+      "compiledLines": "4549-4635",
+      "mapping": "sid or sub-add URI select title lang; wrapper selected track updated optimistically"
+    },
+    {
+      "member": "Player.loadExternalSubtitleTrack",
+      "declarationLine": 154,
+      "compiledLines": "2822-2861",
+      "mapping": "construct SubtitleTrack.uri then setSubtitleTrack"
+    },
+    {
+      "member": "Player.setPlaylistMode",
+      "declarationLine": 160,
+      "compiledLines": "4349-4525",
+      "mapping": "PlaylistMode.File=1→loop-file=inf, loop-playlist=no; none resets both; playlist=loop-playlist"
+    },
+    {
+      "member": "Player.screenshot",
+      "declarationLine": 169,
+      "compiledLines": "4153-4205",
+      "mapping": "screenshot-raw subtitles|video bgra; image.createPixelMapSync data+size; stride/pixel format not explicitly passed"
+    },
+    {
+      "member": "Player.open/Media.start",
+      "declarationLine": 56,
+      "compiledLines": "3931-4055; 4911-5026",
+      "mapping": "stops/clears playlist; pause=true; loads per-file map incl start/end.toString and headers; selects playlist index; play parameter controls unpause"
+    },
+    {
+      "member": "Player surface hooks",
+      "declarationLine": 170,
+      "compiledLines": "surface functions 3840-3919",
+      "mapping": "attach/detach; surfaceWidth/Height to ohos-surface-size"
+    }
+  ],
+  "observations": {
+    "compiledTableLines": "2336-2503",
+    "properties": [
+      "time-pos/full (DOUBLE)",
+      "duration/full (DOUBLE)",
+      "track-list (NODE→JSON)",
+      "chapter-list (NODE→JSON)",
+      "video-params (NODE→JSON)",
+      "audio-params (NODE→JSON)",
+      "pause (FLAG)",
+      "paused-for-cache (FLAG)",
+      "volume (DOUBLE)",
+      "speed (DOUBLE)",
+      "eof-reached (FLAG)",
+      "cache-buffering-state (DOUBLE)",
+      "demuxer-cache-time (INT64)"
+    ],
+    "bufferMappingLines": "3639-3653",
+    "bufferMapping": "demuxer-cache-time passed unchanged to state.buffer and stream.buffer"
+  },
+  "baselineAudit": [
+    {
+      "feature": "play/pause",
+      "portLines": "118-134; 213-232",
+      "finding": "Convenience maps native pause; adapter emits state immediately and suppresses EOF trailing pause."
+    },
+    {
+      "feature": "seek/seek-complete",
+      "portLines": "137-142; 194-202",
+      "finding": "Native absolute seconds seek, with no explicit +exact; matching native absolute-seek default is exact. One pending boolean completed at next playback restart; request correlation unavailable."
+    },
+    {
+      "feature": "speed",
+      "portLines": "144-147",
+      "finding": "Linkora lower bound 0.1 vs core 0.01..100; does not observe accepted speed to confirm requested rate."
+    },
+    {
+      "feature": "volume",
+      "portLines": "149-152",
+      "finding": "Normalized 0..1→native 0..100; no independent mute/amplification control."
+    },
+    {
+      "feature": "buffering",
+      "portLines": "233-249",
+      "engineLines": "linkora_core/src/main/ets/playback/PlaybackEngine.ets:311-313",
+      "finding": "CONFIRMED_STATIC_MISMATCH: cache-end timestamp interpreted as CACHED_DURATION; fill percentage is unpause-threshold fill, not total downloaded/buffered extent. Wrapper observes cache-end as INT64."
+    },
+    {
+      "feature": "tracks",
+      "portLines": "267-295",
+      "finding": "Read-only track metadata/selection observation; switching convenience exists in dependency but no PlaybackPort controls."
+    },
+    {
+      "feature": "first-frame/video-size",
+      "portLines": "194-198; 251-265",
+      "finding": "CONFIRMED_STATIC_MISMATCH: PLAYBACK_RESTART is discontinuity/start/seek reinit, not guaranteed first rendered video frame. Size and metadata derive video-params dw/dh fallback w/h, not viewport."
+    },
+    {
+      "feature": "surface sizing",
+      "portLines": "65-87; 165-170",
+      "finding": "Native attach/detach and rounded positive size override; must confirm physical geometry/output on target."
+    }
+  ],
+  "security": "No binaries/disassembly, source snapshots, private absolute SDK paths, media, HAP, simulator identifiers or credentials embedded in this publishable JSON. Only hashes/relative package references and primary URLs.",
+  "status": "Static dependency evidence collected; real MPV runtime not executed; no 39-feature codec matrix claimed."
+}

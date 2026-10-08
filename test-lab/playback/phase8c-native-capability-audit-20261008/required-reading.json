@@ -1,0 +1,187 @@
+[
+  {
+    "path": "docs/AI_WORKFLOW.md",
+    "sha256": "9692B25EA6A66960228B9C3869E8731AEA3D8AE29286B33E9F519F3E0B661E4A",
+    "fullyRead": true,
+    "readingMethod": "previously completely read file, current exact Git blob revalidated",
+    "gitBlob": "d4ccb0284c2c5560dc54d440a4c4d1c0363faf96",
+    "priorCompleteReadingSectionsByteIdentical": true
+  },
+  {
+    "path": "docs/MASTER_IMPLEMENTATION_PLAN.md",
+    "sha256": "69C50B6B81CEC243934BF38077E24621EF6470000118A779F66B0025A692BC84",
+    "fullyRead": true,
+    "readingMethod": "previously completely read file, current exact Git blob revalidated",
+    "gitBlob": "e3b4b4dcd179fe06210fe6dab27ea98255e05e46",
+    "priorCompleteReadingSectionsByteIdentical": true
+  },
+  {
+    "path": "docs/IMPLEMENTATION_STATUS.md",
+    "sha256": "75642E2A725024EA718E3943143CA6C14EDF5267D380C1178884B30DB22FF959",
+    "fullyRead": true,
+    "readingMethod": "full current file read",
+    "gitBlob": "d036d39a01a75ca9f3cd4a21d0b36f8e3913cd5e",
+    "priorCompleteReadingSectionsByteIdentical": false
+  },
+  {
+    "path": "docs/SESSION_HANDOFF.md",
+    "sha256": "23931C04BFC4160344342687FEDCFC6BBA4A3B2FA1DB3B41782D81334CD1E1C5",
+    "fullyRead": true,
+    "readingMethod": "full current file read",
+    "gitBlob": "dab54254e8c6d6138d800ad6baf8d9e088435494",
+    "priorCompleteReadingSectionsByteIdentical": false
+  },
+  {
+    "path": "docs/CODEX_VALIDATION_TASK.md",
+    "sha256": "6C68FA7BEA7EED89FCA8688DA50E250451A216EE3B76B82E8F4259682286D30D",
+    "fullyRead": true,
+    "readingMethod": "full current file read",
+    "gitBlob": "c01c4607e0bda48963ac322785b6588c288c2d22",
+    "priorCompleteReadingSectionsByteIdentical": false
+  },
+  {
+    "path": "docs/PLAYBACK_NATIVE_CAPABILITY_AUDIT_RUNBOOK.md",
+    "sha256": "55565B8A91BDA4994F2EE3BF3D2C1A452DF30CF1ACAF0482D80A52AF57583C1F",
+    "fullyRead": true,
+    "readingMethod": "full current file read",
+    "gitBlob": "c8cdb82972b9be7c0f9003d261fab042c86b6b93",
+    "priorCompleteReadingSectionsByteIdentical": false
+  },
+  {
+    "path": "test-lab/playback/native-capability-features.json",
+    "sha256": "5334D24ECBDC9E672BD462A678DBDECAC931301DD10ACDA179A8163B1733D0AA",
+    "fullyRead": true,
+    "readingMethod": "full current file read",
+    "gitBlob": "dc1c339f86f45507adb2d2542808df0fdaa852e1",
+    "priorCompleteReadingSectionsByteIdentical": false
+  },
+  {
+    "path": "linkora_core/src/main/ets/playback/PlaybackPort.ets",
+    "sha256": "C21EC63E9CE2AF9A0516B9E4048C7769F6C1836EC7E21CA4741217DD9DEFC62C",
+    "fullyRead": true,
+    "readingMethod": "previously completely read file, current exact Git blob revalidated",
+    "gitBlob": "231e49b84dce45b83c472fbed0b258711ce758d5",
+    "priorCompleteReadingSectionsByteIdentical": true
+  },
+  {
+    "path": "linkora_core/src/main/ets/playback/PlaybackBackend.ets",
+    "sha256": "116B387031D7795538BD18E24B3187C25268D19ACD0EA870248859D6351D0809",
+    "fullyRead": true,
+    "readingMethod": "previously completely read file, current exact Git blob revalidated",
+    "gitBlob": "9e295b64aca7c1e4da5b1b63df0d8d6730447b64",
+    "priorCompleteReadingSectionsByteIdentical": true
+  },
+  {
+    "path": "entry/src/main/ets/playback/SystemPlaybackPort.ets",
+    "sha256": "972CD14657E47C42C8E65A8CB3EF738C823FC437094820647DFA9D45D3FF9E41",
+    "fullyRead": true,
+    "readingMethod": "previously completely read file, current exact Git blob revalidated",
+    "gitBlob": "9a83c33736dec5201224db2e997cd76dc3c4f36c",
+    "priorCompleteReadingSectionsByteIdentical": true
+  },
+  {
+    "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets",
+    "sha256": "04CE48CDDC4898E2AE4189F4A2B5B7FF0C514FD92052918F1551171824D8EE96",
+    "fullyRead": true,
+    "readingMethod": "previously completely read file, current exact Git blob revalidated",
+    "gitBlob": "a81f4f967cd5a73a6bb3dcea7fa3ac6bf5f84d2f",
+    "priorCompleteReadingSectionsByteIdentical": true
+  },
+  {
+    "path": "resolved @mpv-ohos/mpv-arkts@1.0.0",
+    "fullyRead": true,
+    "readingScope": "all distributed declarations, models, README, CHANGELOG, module metadata; compiled implementation hashed, not relabeled source text",
+    "distributedDeclarationHashes": [
+      {
+        "relativePath": "BuildProfile.d.ets",
+        "bytes": 579,
+        "sha256": "4F782BB6164011A8A05D3703C5FCAD373168403C58601B13DB6C0FF234B0313F"
+      },
+      {
+        "relativePath": "Index.d.ets",
+        "bytes": 991,
+        "sha256": "205327D1B7519ABAE767CDD2C3DFD8016A303297220D61CD81C59429303DD5FD"
+      },
+      {
+        "relativePath": "src/main/ets/models/AudioParams.d.ets",
+        "bytes": 448,
+        "sha256": "4CAE49E20DE79CFBB343F9ACDD469056EF0D6217DA2707EC56FC7A1ADB52DA0E"
+      },
+      {
+        "relativePath": "src/main/ets/models/Chapter.d.ets",
+        "bytes": 306,
+        "sha256": "7EA48CE34716238965B003AB049328C97126FFD29B2B6F3E01F71AD2CBAF149B"
+      },
+      {
+        "relativePath": "src/main/ets/models/Media.d.ets",
+        "bytes": 829,
+        "sha256": "65B99E14F074AB318D964F3683E9830BE9AF69C8E510619FA69D5B90A08268F8"
+      },
+      {
+        "relativePath": "src/main/ets/models/PlayerConfig.d.ets",
+        "bytes": 3161,
+        "sha256": "CF54DEA222FA12774955CB8B864EFC66400B1BD505EE8AA2111B7CC0D8F9B981"
+      },
+      {
+        "relativePath": "src/main/ets/models/PlayerLog.d.ets",
+        "bytes": 503,
+        "sha256": "E3C4D420E6618B124D23D379EDBCF2A5F52F9A4BDCAB9996AB6FE132EA2EC3CB"
+      },
+      {
+        "relativePath": "src/main/ets/models/PlayerState.d.ets",
+        "bytes": 1911,
+        "sha256": "0BA3DD3DBF182D7F25FCFF726B5B1416ACCEB3C65344FE2364D28A42F1C02601"
+      },
+      {
+        "relativePath": "src/main/ets/models/PlayerStream.d.ets",
+        "bytes": 2281,
+        "sha256": "AC408E18BFC865890B1FC3DB94C717192B6B16D6BD11CB662B418EE260882CD2"
+      },
+      {
+        "relativePath": "src/main/ets/models/Playlist.d.ets",
+        "bytes": 503,
+        "sha256": "2D1A9A72F419697CD56D98CBB3DC3593BDE63F0445EB2E127749B3E60D869621"
+      },
+      {
+        "relativePath": "src/main/ets/models/PlaylistMode.d.ets",
+        "bytes": 401,
+        "sha256": "DC66D730732C46EF9CE075CDDAE6DC0470D6AF68288B826CA41E2D31CB6BA3DA"
+      },
+      {
+        "relativePath": "src/main/ets/models/Track.d.ets",
+        "bytes": 1904,
+        "sha256": "257E58172587DF2F0A4E69F1426644C1F50F0549632A3C56D218A22C73FA76F6"
+      },
+      {
+        "relativePath": "src/main/ets/models/VideoParams.d.ets",
+        "bytes": 2313,
+        "sha256": "F6F514811430E4378963596940B825964E644E3484BAA124665619374BB5CA2E"
+      },
+      {
+        "relativePath": "src/main/ets/MpvLib.d.ets",
+        "bytes": 2512,
+        "sha256": "44C1B0838895466850069865FF63582271E2ED45C7B807C0570E23C868A26D68"
+      },
+      {
+        "relativePath": "src/main/ets/Player.d.ets",
+        "bytes": 4819,
+        "sha256": "D8F66B0C72A624642CDBD0EBC94870661F8F310FA491059BB497E56358C8C691"
+      },
+      {
+        "relativePath": "src/main/ets/PlayerSurface.d.ets",
+        "bytes": 371,
+        "sha256": "E13BFA0475931F57A0D7837F296B68A60E59A08028DCBE944ECE1ADC5F30815D"
+      },
+      {
+        "relativePath": "src/main/ets/utils/Stream.d.ets",
+        "bytes": 447,
+        "sha256": "B0FA0D669A4B2026E2FDEAF7C9BD0147C0D78573E99BE26492AFBC62C8BF78CF"
+      },
+      {
+        "relativePath": "src/main/ets/utils/Utils.d.ets",
+        "bytes": 245,
+        "sha256": "2AC506E21F2DBA9B57C56BB0E6312EAFD1DEB347B25BE5D6A685765326AEAE28"
+      }
+    ]
+  }
+]

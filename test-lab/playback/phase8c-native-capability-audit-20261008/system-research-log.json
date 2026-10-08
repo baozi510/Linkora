@@ -1,0 +1,1983 @@
+{
+  "schemaVersion": 1,
+  "capturedDate": "2026-10-08",
+  "scope": "Read-only System capability research; only ignored artifacts written; no build/install/HDC/production/test/config edits.",
+  "evidencePriority": [
+    "installed API26 SDK declarations",
+    "current official primary documentation",
+    "parent-specific simulator observations, not generalized by research agent"
+  ],
+  "primaryDocumentCaptures": [
+    {
+      "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+      "fetchedAt": "2026-10-08T00:59:47.6374639Z",
+      "sha256Utf8Response": "1f16eeb9e6cacdd6201c62cdef95acb5977395128536ad4b5aaae2884278181e",
+      "status": "opened-primary"
+    },
+    {
+      "status": "opened-primary",
+      "sha256Utf8Response": "f0e11b0a2b30a3e22248f784f5a9f06f2b98047a2571571199a49df478383553",
+      "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-e.md",
+      "fetchedAt": "2026-10-08T00:59:47.4116612Z"
+    },
+    {
+      "fetchedAt": "2026-10-08T00:59:47.8396923Z",
+      "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-i.md",
+      "sha256Utf8Response": "00dc56f09b4145db559cb2c27cf7e0f1c868b8846ff52077cac6b0058599c443",
+      "status": "opened-primary"
+    },
+    {
+      "fetchedAt": "2026-10-08T00:59:48.1893955Z",
+      "url": "https://raw.githubusercontent.com/openharmony/docs/master/zh-cn/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+      "status": "opened-primary",
+      "sha256Utf8Response": "16fbf7493bb2f72af5516f5264c548f18e1ec4958f92eeb2d1a4a1554befc5b4"
+    },
+    {
+      "status": "opened-primary",
+      "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-arkui/arkui-ts/ts-basic-components-xcomponent.md",
+      "sha256Utf8Response": "3cc367feb620a1e21bf2f4c09d8d04079a855f91e22115df4b41ec0e03b21b60",
+      "fetchedAt": "2026-10-08T00:59:48.4025417Z"
+    },
+    {
+      "status": "opened-primary",
+      "sha256Utf8Response": "e3bf5600c18933f59f1ff2a4460825bd2d0c5575945d2428c2ffef407e95db09",
+      "fetchedAt": "2026-10-08T00:59:48.8548928Z",
+      "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-arkui/arkts-apis-window-Window.md"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-avsession-kit/arkts-apis-avsession-AVSession.md",
+      "sha256Utf8Response": "0b2be20ecfe69ef44f689545ed9d84ddee9c585ca9c401f6b048678f8e3a3a3d",
+      "fetchedAt": "2026-10-08T00:59:48.8456795Z",
+      "status": "opened-primary"
+    },
+    {
+      "fetchedAt": "2026-10-08T00:59:49.1031198Z",
+      "status": "opened-primary",
+      "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-backgroundtasks-kit/js-apis-resourceschedule-backgroundTaskManager.md",
+      "sha256Utf8Response": "ded817028985564948017176f37b9756d2ffa7ebf955c28ba92edd4237b3e443"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVImageGenerator.md",
+      "fetchedAt": "2026-10-08T00:59:49.3598741Z",
+      "sha256Utf8Response": "7474c269e62d8672711c635d23a2fe05a07dc17479cb7bc2411479e0387ac1ce",
+      "status": "opened-primary"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-avcodec-kit/capi-native-avcapability-h.md",
+      "fetchedAt": "2026-10-08T00:59:49.7162340Z",
+      "status": "opened-primary",
+      "sha256Utf8Response": "8ad99e182690b0163a6d36b288b1b41c934ac96b1f193a68b8d9c290bbdb13be"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-avcodec-kit/capi-native-avcodec-videodecoder-h.md",
+      "status": "opened-primary",
+      "sha256Utf8Response": "f0f930c9811685cf87a0b935d68da6afdfbbbb9f98233d1439b8f2b1b861d7c0",
+      "fetchedAt": "2026-10-08T00:59:49.8539795Z"
+    }
+  ],
+  "primaryPagesOpenedViaWeb": [
+    {
+      "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-arkgraphics2d/capi-external-window-h.md",
+      "status": "opened",
+      "version": "master",
+      "conclusion": "NativeWindow public transforms/scaling/surface access distinct from AVPlayer"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-arkgraphics2d/capi-buffer-common-h.md",
+      "status": "opened",
+      "version": "master",
+      "conclusion": "Native transform enum quarter rotations/flips"
+    }
+  ],
+  "sourceAccessLimitations": [
+    {
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/arkts-apis-media-avplayer",
+      "result": "Current primary page open timed out"
+    },
+    {
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/video-subtitle",
+      "result": "Current primary page open timed out"
+    },
+    {
+      "url": "https://developer.huawei.com/consumer/en/doc/harmonyos-guides-V14/video-subtitle-V14",
+      "result": "Historical primary page failed to open; search content not used for fresh capability output"
+    },
+    {
+      "url": "https://developer.huawei.com/consumer/cn/doc/best-practices/bpta-avplayer-basic-control",
+      "result": "Opened only shell page with no substantive text"
+    },
+    {
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-guides/hdr-vivid-transcoding-sdr",
+      "result": "Current primary page open timed out; no HDR conversion output claim derived from snippet"
+    },
+    {
+      "url": "https://developer.huawei.com/consumer/cn/doc/harmonyos-references/capi-video-processing-h",
+      "result": "Current primary page open timed out"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/capi-video-processing-h.md",
+      "result": "Primary fetch unavailable; standalone installed VPE header used only as related-API symbol evidence"
+    }
+  ],
+  "searchEngineRule": "Non-primary mirror/blog/Apple-AVPlayer results were rejected. No support verdict relies on search snippets. Official raw sources were opened; AVPlayer/subtitle/strategy sections directly fetched/read in full when web find omitted them.",
+  "documentationMismatches": [
+    {
+      "id": "rate-range",
+      "sdk": "API26 installed setPlaybackRate[0.125,8]; API<=24[0.125,4]",
+      "officialCurrent": "OpenHarmony master English/Chinese setPlaybackRate docs[0.125,4]",
+      "resolution": "SDK compile-time truth, runtime version limits explicit; no silent merge"
+    },
+    {
+      "id": "live-seek-version",
+      "sdk": "seek note since24",
+      "officialCurrent": "Current English/Chinese master documentation says26.0.0",
+      "resolution": "SDK note retained, doc discrepancy recorded"
+    },
+    {
+      "id": "HLS-track-switch-version",
+      "sdk": "selectTrack SwitchMode HLS since24",
+      "officialCurrent": "English/Chinese master says26.0.0",
+      "resolution": "SDK note retained; no HLS format/runtime proof inferred"
+    },
+    {
+      "id": "prepare-stopped-state",
+      "sdk": "AVPlayerState stopped comment permits prepare again; prepare method comment says initialized only",
+      "officialCurrent": "prepare section says initialized only",
+      "resolution": "Documented inconsistency; safe reset/reconfigure route described, direct stopped-prepare not claimed runtime verified"
+    },
+    {
+      "id": "buffer-threshold-description",
+      "sdk": "thresholdForAutoQuickPlay described max buffering threshold for live or changing speed; start+2 recommended",
+      "officialCurrent": "FLV live smart catching trigger>=2 seconds and>start, default5; speedDone100 and1.2x",
+      "resolution": "Different documented descriptions retained, no arbitrary universal cache-limit claim"
+    },
+    {
+      "id": "hdrBrightness-overload",
+      "sdk": "Typed HdrType optional overload since24",
+      "officialCurrent": "Inspected upstream XComponent section only brightness since20",
+      "resolution": "SDK typed overload exists; no target output inferred"
+    }
+  ],
+  "sourceParsingCorrection": "Web find reported no subtitle matches in a parsed view; direct official raw fetch confirms addSubtitleFromFd/addSubtitleFromUrl/subtitleUpdate sections. Earlier omission assumption corrected in final draft; not a SDK/doc absence mismatch.",
+  "baselineAudit": [
+    {
+      "topic": "configure/prepare",
+      "exposure": "SystemPlaybackPort:53-90 and174-191 waits initialized, then surface assignment and prepare.",
+      "finding": "First surface set state matches initialized restriction; initialization timeout wrapper is app behavior."
+    },
+    {
+      "topic": "play/pause",
+      "exposure": "SystemPlaybackPort:92-106; PlaybackEngine:90-110.",
+      "finding": "Native Promise/state lifecycle; pause allowed playing, completed can replay."
+    },
+    {
+      "topic": "seek/seek-complete",
+      "exposure": "SystemPlaybackPort:108-110/154-156; PlaybackEngine:217-227.",
+      "finding": "Callback requested target assigned to app position; not actual landing timestamp."
+    },
+    {
+      "topic": "speed",
+      "exposure": "SystemPlaybackPort:112-114/321-332; PlayerFeatureController:133-138.",
+      "finding": "0.5 admitted by feature controller maps1 in System; arbitrary fraction requests quantized; no native speed acknowledgment exported."
+    },
+    {
+      "topic": "volume",
+      "exposure": "SystemPlaybackPort:116-118; PlaybackEngine:145-155.",
+      "finding": "Clamp to native[0,1]; separate native mute available but unexposed."
+    },
+    {
+      "topic": "buffering",
+      "exposure": "SystemPlaybackPort:157-159/362-373; PlaybackEngine:293-316.",
+      "finding": "Native network-only events normalized; cached duration ms not seekable loaded ranges or disk cache."
+    },
+    {
+      "topic": "track/videoInfo observation",
+      "exposure": "PlaybackPort:111-112/120-132; SystemPlaybackPort:134-172.",
+      "finding": "Observer contract exists, System never emits tracks/videoInfo. Native description/events not adapter-exposed."
+    },
+    {
+      "topic": "first-frame/video-size",
+      "exposure": "SystemPlaybackPort:160-165; PlaybackEngine:193-203.",
+      "finding": "firstFrameRendered flag originates service-submission event; visible rendering not guaranteed. Size default once prepared plus HLS changes."
+    },
+    {
+      "topic": "surface sizing",
+      "exposure": "SystemPlaybackPort:71-73/180; PlayerPage:291-303/377-389.",
+      "finding": "ArkUI sizes actual surface; System method no-op. Native default FIT stretches, not contain; setVideoWindowSize is SR output API."
+    },
+    {
+      "topic": "interruption",
+      "exposure": "SystemPlaybackPort:166-171; PlaybackEngine:241-252.",
+      "finding": "Audio hints pause/stop forwarded; engine pause operation differs from native stop hint; no recovery/output behavior inferred."
+    },
+    {
+      "topic": "start/resume",
+      "exposure": "PlayerFeatureController:191-198; PlaybackEngine:66-70.",
+      "finding": "App bookmark+native seek before play; seekDone not awaited, order not runtime asserted."
+    },
+    {
+      "topic": "background/session",
+      "exposure": "PlayerFeatureController:147-153.",
+      "finding": "Current app pauses background; separate ordinary own-AVSession/background task APIs are unintegrated."
+    }
+  ],
+  "featureResearch": [
+    {
+      "id": "transport.play",
+      "topic": "media.AVPlayer.play(): Promise<void>",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_VERIFIED",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2207,
+          "lineEnd": 2232,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "play9",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "transport.pause",
+      "topic": "media.AVPlayer.pause(): Promise<void>",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_VERIFIED",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2233,
+          "lineEnd": 2256,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 3578,
+          "lineEnd": 3614,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "pause9",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "transport.stop-replay",
+      "topic": "media.AVPlayer.stop(); play(); reset(); prepare()",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_VERIFIED",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2257,
+          "lineEnd": 2308,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2207,
+          "lineEnd": 2232,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 4788,
+          "lineEnd": 4801,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "stop9;play9",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 1835,
+          "lineEnd": 1890,
+          "hashReference": "sdk-declaration-evidence.json"
+        }
+      ],
+      "unresolved": [
+        "No new native stop call exercised. Adapter exposes completion replay and release, not stop lifecycle.",
+        "Installed AVPlayerState stopped documentation(1866-1889) permits prepare again; prepare method comments(2176-2207) say initialized only. Reset/reconfigure route is documented; direct stopped-prepare state semantics not silently reconciled."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "timeline.seek",
+      "topic": "media.AVPlayer.seek(timeMs, media.SeekMode); on('seekDone')",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_VERIFIED",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2321,
+          "lineEnd": 2350,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 3315,
+          "lineEnd": 3336,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 7650,
+          "lineEnd": 7714,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 4788,
+          "lineEnd": 4801,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "seek9;onseekdone9",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/zh-cn/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "seek9",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "Do not treat seekDone as an actual decoded-frame timestamp. Chinese current docs live-seek introduction26.0.0 differs from SDK24."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "timeline.speed",
+      "topic": "media.AVPlayer.setSpeed(PlaybackSpeed); setPlaybackRate(number); on('speedDone'/'playbackRateDone')",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_VERIFIED",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 3099,
+          "lineEnd": 3133,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 3350,
+          "lineEnd": 3404,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 6236,
+          "lineEnd": 6333,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "setPlaybackRate20",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-e.md",
+          "section": "PlaybackSpeed8",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "Actual numeric rate range on compatible API20 target is <=4, not API26 upper8. Existing 0.5 request displays0.5 while System maps1. Arbitrary fractions are quantized."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "audio.volume-mute",
+      "topic": "media.AVPlayer.setVolume(); setMediaMuted(MediaType.MEDIA_TYPE_AUD, boolean)",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_VERIFIED",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2351,
+          "lineEnd": 2363,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2608,
+          "lineEnd": 2630,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 3260,
+          "lineEnd": 3277,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "setVolume9;setMediaMuted12",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "state.buffering",
+      "topic": "AVPlayer.on('bufferingUpdate'); media.BufferingInfoType; getLoadedTimeRanges()",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_VERIFIED",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 3497,
+          "lineEnd": 3522,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 4247,
+          "lineEnd": 4296,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2538,
+          "lineEnd": 2554,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "onbufferingupdate9",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-e.md",
+          "section": "BufferingInfoType8",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "No guaranteed event frequency for percent in declaration; simulator fixture buffering depends on network path."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "tracks.enumerate",
+      "topic": "AVPlayer.getTrackDescription(); getSelectedTracks(); on('trackInfoUpdate'/'trackChange'); MediaType.MEDIA_TYPE_SUBTITLE",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_PARTIAL",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2364,
+          "lineEnd": 2402,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 3754,
+          "lineEnd": 3804,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 6900,
+          "lineEnd": 6945,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 6988,
+          "lineEnd": 7110,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "getTrackDescription9;ontrackInfoUpdate12",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "Embedded subtitle completeness not guaranteed by searched declarations/docs. No ASS/PGS inference from MEDIA_TYPE_SUBTITLE enum."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "tracks.audio-select",
+      "topic": "AVPlayer.selectTrack(index, SwitchMode?); deselectTrack(index); getSelectedTracks()",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_VERIFIED",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2392,
+          "lineEnd": 2439,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 3754,
+          "lineEnd": 3778,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "selectTrack12",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "Native selectTrack state list not explicitly supplied; do not invent one. SDK HLS video SwitchMode since24 differs Chinese doc26.0.0."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "tracks.subtitle-select",
+      "topic": "MediaType.MEDIA_TYPE_SUBTITLE; AVPlayer.selectTrack/deselectTrack; TrackSelectionFilter.preferredSubtitleLanguages",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_PARTIAL",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 1808,
+          "lineEnd": 1822,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2403,
+          "lineEnd": 2439,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 6939,
+          "lineEnd": 6945,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 3728,
+          "lineEnd": 3739,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "selectTrack12",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-i.md",
+          "section": "TrackSelectionFilter",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "Research scope: installed AVPlayer methods/MediaType/filter and current official English/Chinese selectTrack sections. Embedded subtitle select/format guarantees remain undocumented; cannot declare absence from enum or claim output support."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "subtitles.external",
+      "topic": "AVPlayer.addSubtitleFromFd(); addSubtitleFromUrl(); on('subtitleUpdate'); SubtitleInfo",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_PARTIAL",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2493,
+          "lineEnd": 2524,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 3728,
+          "lineEnd": 3752,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 4820,
+          "lineEnd": 4854,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "addSubtitleFromFd12;addSubtitleFromUrl12;onsubtitleUpdate12; direct primary fetch confirmed",
+          "versionContext": "Opened primary page2026-10-08; installed SDK precedence"
+        }
+      ],
+      "unresolved": [
+        "Complete embedded/external format coverage and hot selection/removal are not established by the installed declarations/current primary API sections. No ASS/PGS support inferred.",
+        "Current Huawei guide fetch timed out; use installed SDK resource ordering plus directly fetched official OpenHarmony API, not search snippets."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "subtitles.delay",
+      "topic": "No public AVPlayer subtitle timing-offset/delay API found",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_ABSENT",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2174,
+          "lineEnd": 3946,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "complete public interface inspected; absent feature-specific section",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 4826,
+          "lineEnd": 4854,
+          "hashReference": "sdk-declaration-evidence.json"
+        }
+      ],
+      "unresolved": [
+        "Absence is scoped to installed public AVPlayer API and current official interface, not undocumented internal engine behavior. Searched subtitle timing-offset/delay symbols/terms and examined related APIs."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "audio.delay",
+      "topic": "No public AVPlayer audio delay/AV-sync offset API found",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_ABSENT",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2174,
+          "lineEnd": 3946,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "complete public interface inspected; absent feature-specific section",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "Absence is scoped to installed public AVPlayer API and current official interface, not undocumented internal engine behavior. Searched audio delay/AV-sync offset symbols/terms and examined related APIs."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "display.fit-contain",
+      "topic": "AVPlayer.videoScaleType = media.VideoScaleType.VIDEO_SCALE_TYPE_SCALED_ASPECT",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_VERIFIED",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 3076,
+          "lineEnd": 3088,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 6810,
+          "lineEnd": 6847,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-e.md",
+          "section": "VideoScaleType9",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "display.fill-crop",
+      "topic": "AVPlayer.videoScaleType = media.VideoScaleType.VIDEO_SCALE_TYPE_FIT_CROP",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_VERIFIED",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 3076,
+          "lineEnd": 3088,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 6810,
+          "lineEnd": 6847,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-e.md",
+          "section": "VideoScaleType9",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "display.stretch",
+      "topic": "AVPlayer.videoScaleType = media.VideoScaleType.VIDEO_SCALE_TYPE_FIT",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_VERIFIED",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 3076,
+          "lineEnd": 3088,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 6810,
+          "lineEnd": 6847,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-e.md",
+          "section": "VideoScaleType9",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "display.original",
+      "topic": "No public AVPlayer original-size/unscaled1:1 API found",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_ABSENT",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2174,
+          "lineEnd": 3946,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "complete public interface inspected; absent feature-specific section",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 6816,
+          "lineEnd": 6847,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/component/xcomponent.d.ts",
+          "lineStart": 184,
+          "lineEnd": 212,
+          "hashReference": "sdk-declaration-evidence.json"
+        }
+      ],
+      "unresolved": [
+        "Absence is scoped to installed public AVPlayer API and current official interface, not undocumented internal engine behavior. Searched original-size/unscaled1:1 symbols/terms and examined related APIs."
+      ],
+      "relatedPlatformScope": [
+        {
+          "nativeApi": "OH_NativeWindow_NativeWindowSetScalingModeV2(..., OH_SCALING_MODE_NO_SCALE_CROP_V2)",
+          "nativeOwner": "ArkGraphics2D NativeWindow, separate from AVPlayer",
+          "apiLevel": 12,
+          "acceptedValues": "NO_SCALE_CROP_V2=3; valid OHNativeWindow in calling process",
+          "semantics": "Native buffer no-scale/crop exists. It is not an AVPlayer1:1 mode and does not establish final video source-pixel to display-pixel correspondence.",
+          "exposure": "No native-window handle/integration in SystemPlaybackPort",
+          "sources": [
+            {
+              "kind": "installed-sdk",
+              "identity": "native/sysroot/usr/include/native_window/external_window.h",
+              "lineStart": 314,
+              "lineEnd": 339,
+              "hashReference": "sdk-declaration-evidence.json"
+            },
+            {
+              "kind": "installed-sdk",
+              "identity": "native/sysroot/usr/include/native_window/external_window.h",
+              "lineStart": 748,
+              "lineEnd": 777,
+              "hashReference": "sdk-declaration-evidence.json"
+            },
+            {
+              "kind": "official-documentation",
+              "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-arkgraphics2d/capi-external-window-h.md",
+              "section": "OHScalingModeV2;SetScalingModeV2",
+              "versionContext": "Opened primary page2026-10-08; installed SDK precedence"
+            }
+          ],
+          "uncertainties": [
+            "AVPlayer is the buffer producer; setting via a separately obtained window handle may be overridden. Actual route effect not tested; no claim integration is delivered."
+          ]
+        }
+      ],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "display.aspect-override",
+      "topic": "No public AVPlayer source/DAR aspect-ratio override API found",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_ABSENT",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2174,
+          "lineEnd": 3946,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "complete public interface inspected; absent feature-specific section",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 6816,
+          "lineEnd": 6847,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-arkui/arkts-apis-window-Window.md",
+          "section": "setAspectRatio10",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "Absence is scoped to installed public AVPlayer API and current official interface, not undocumented internal engine behavior. Searched source/DAR aspect-ratio override symbols/terms and examined related APIs."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "display.rotation",
+      "topic": "No public AVPlayer video content rotation/transform API found",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_ABSENT",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2174,
+          "lineEnd": 3946,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "complete public interface inspected; absent feature-specific section",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 5352,
+          "lineEnd": 5367,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 8400,
+          "lineEnd": 8414,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/component/xcomponent.d.ts",
+          "lineStart": 226,
+          "lineEnd": 238,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-arkui/arkui-ts/ts-basic-components-xcomponent.md",
+          "section": "setXComponentSurfaceRotation12",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "Absence is scoped to installed public AVPlayer API and current official interface, not undocumented internal engine behavior. Searched video content rotation/transform symbols/terms and examined related APIs."
+      ],
+      "relatedPlatformScope": [
+        {
+          "nativeApi": "OH_NativeWindow_NativeWindowHandleOpt(window,SET_TRANSFORM,OH_NativeBuffer_TransformType)",
+          "nativeOwner": "ArkGraphics2D NativeWindow",
+          "apiLevel": "HandleOpt8; referenced transform enum12",
+          "acceptedValues": "ROTATE_NONE0/90/180/270; horizontal/vertical flips and combined quarter-turn flips",
+          "semantics": "Public NDK buffer transforms exist. XComponent orientation lock is different; neither supplies an ArkTS AVPlayer rotation operation.",
+          "exposure": "No NDK native-window call or transform contract in current System adapter",
+          "sources": [
+            {
+              "kind": "installed-sdk",
+              "identity": "native/sysroot/usr/include/native_window/external_window.h",
+              "lineStart": 198,
+              "lineEnd": 211,
+              "hashReference": "sdk-declaration-evidence.json"
+            },
+            {
+              "kind": "installed-sdk",
+              "identity": "native/sysroot/usr/include/native_buffer/buffer_common.h",
+              "lineStart": 439,
+              "lineEnd": 459,
+              "hashReference": "sdk-declaration-evidence.json"
+            },
+            {
+              "kind": "official-documentation",
+              "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-arkgraphics2d/capi-external-window-h.md",
+              "section": "SET_TRANSFORM",
+              "versionContext": "Opened primary page2026-10-08; installed SDK precedence"
+            },
+            {
+              "kind": "official-documentation",
+              "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-arkgraphics2d/capi-buffer-common-h.md",
+              "section": "OH_NativeBuffer_TransformType",
+              "versionContext": "Opened primary page2026-10-08; installed SDK precedence"
+            }
+          ],
+          "uncertainties": [
+            "Not currently reachable from ArkTS System port; buffer producer transform ownership/overrides require future integration test, which may be simulator-testable. No arbitrary-angle rotation inferred."
+          ]
+        }
+      ],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "display.zoom-pan",
+      "topic": "XComponentController.setXComponentSurfaceRect(SurfaceRect) (related); no AVPlayer content zoom/pan",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_PARTIAL",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2174,
+          "lineEnd": 3946,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/component/xcomponent.d.ts",
+          "lineStart": 42,
+          "lineEnd": 92,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/component/xcomponent.d.ts",
+          "lineStart": 198,
+          "lineEnd": 224,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-arkui/arkui-ts/ts-basic-components-xcomponent.md",
+          "section": "setXComponentSurfaceRect12",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "No universal rotate/scale/translate equivalence assumed for SURFACE. Rectangle adjustment alone does not guarantee content zoom/crop semantics."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "timeline.frame-step",
+      "topic": "No public AVPlayer frame-step/frame-back-step API found",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_ABSENT",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2174,
+          "lineEnd": 3946,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "complete public interface inspected; absent feature-specific section",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 7682,
+          "lineEnd": 7712,
+          "hashReference": "sdk-declaration-evidence.json"
+        }
+      ],
+      "unresolved": [
+        "Absence is scoped to installed public AVPlayer API and current official interface, not undocumented internal engine behavior. Searched frame-step/frame-back-step symbols/terms and examined related APIs."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "navigation.chapters",
+      "topic": "No public AVPlayer chapter list/chapter navigation API found",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_ABSENT",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2174,
+          "lineEnd": 3946,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "complete public interface inspected; absent feature-specific section",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2728,
+          "lineEnd": 2830,
+          "hashReference": "sdk-declaration-evidence.json"
+        }
+      ],
+      "unresolved": [
+        "Absence is scoped to installed public AVPlayer API and current official interface, not undocumented internal engine behavior. Searched chapter list/chapter navigation symbols/terms and examined related APIs."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "repeat.loop",
+      "topic": "AVPlayer.loop: boolean; on('endOfStream')",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_VERIFIED",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2934,
+          "lineEnd": 2948,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 3284,
+          "lineEnd": 3315,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 4788,
+          "lineEnd": 4801,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "loop property;onendOfStream9",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "repeat.ab",
+      "topic": "AVPlayer.setPlaybackRange(startTimeMs,endTimeMs,SeekMode?); loop",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_PARTIAL",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2631,
+          "lineEnd": 2647,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2934,
+          "lineEnd": 2948,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "setPlaybackRange18;loop",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "Combination setPlaybackRange+loop not runtime exercised or authoritatively documented as A-B; simulator could verify with future authorized diagnostic, not physical-device-only."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "capture.screenshot",
+      "topic": "window.Window.snapshot(); media.AVImageGenerator.fetchFrameByTime(); no AVPlayer current-render-frame capture",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_PARTIAL",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.window.d.ts",
+          "lineStart": 6950,
+          "lineEnd": 6983,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 1180,
+          "lineEnd": 1219,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-arkui/arkts-apis-window-Window.md",
+          "section": "snapshot9",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVImageGenerator.md",
+          "section": "fetchFrameByTime12",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "Simulator can inspect screenshot/thumbnail behavior in principle; visible video-surface inclusion/filter parity requires testing when implemented. No hardware-only requirement invented."
+      ],
+      "relatedPlatformScope": [
+        {
+          "nativeApi": "OH_NativeWindow_GetLastFlushedBufferV2",
+          "nativeOwner": "ArkGraphics2D NativeWindow",
+          "apiLevel": 12,
+          "semantics": "Separate native-buffer acquisition API; not an AVPlayer PixelMap capture. Ref/fence/pixel conversion ownership must be implemented.",
+          "exposure": "No native-buffer capture in System port",
+          "sources": [
+            {
+              "kind": "installed-sdk",
+              "identity": "native/sysroot/usr/include/native_window/external_window.h",
+              "lineStart": 780,
+              "lineEnd": 800,
+              "hashReference": "sdk-declaration-evidence.json"
+            },
+            {
+              "kind": "official-documentation",
+              "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-arkgraphics2d/capi-external-window-h.md",
+              "section": "GetLastFlushedBufferV2",
+              "versionContext": "Opened primary page2026-10-08; installed SDK precedence"
+            }
+          ],
+          "uncertainties": [
+            "Current flushed buffer access does not prove visible frame, filtered/subtitle composition or capture format."
+          ]
+        }
+      ],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "processing.deinterlace",
+      "topic": "No public AVPlayer deinterlace switch/filter API found",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_ABSENT",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2174,
+          "lineEnd": 3946,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "complete public interface inspected; absent feature-specific section",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "Absence is scoped to installed public AVPlayer API and current official interface, not undocumented internal engine behavior. Searched deinterlace switch/filter symbols/terms and examined related APIs."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "processing.video-filter",
+      "topic": "AVPlayer.setSuperResolution(); PlaybackStrategy.enableSuperResolution; setVideoWindowSize(); on('superResolutionChanged')",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_PARTIAL",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2674,
+          "lineEnd": 2727,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 1980,
+          "lineEnd": 2000,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 4706,
+          "lineEnd": 4723,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "setSuperResolution18;setVideoWindowSize18",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "Target SR support/actual enhancement requires supported hardware; error5410003 explicitly marks unsupported capability. No rendering proof from static method."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "processing.audio-filter",
+      "topic": "AVPlayer.audioEffectMode; audio.AudioEffectMode; setLoudnessGain()",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_PARTIAL",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2990,
+          "lineEnd": 3015,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 3152,
+          "lineEnd": 3173,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.audio.d.ts",
+          "lineStart": 7852,
+          "lineEnd": 7868,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "audioEffectMode;setLoudnessGain",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "Default effect/output depends on platform route; actual audible effect on physical output requires device. Loudness API21 exceeds compatible20 and needs version-aware future implementation."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "decode.hw-select",
+      "topic": "No public AVPlayer hardware/software decoder selection API found",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_ABSENT",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2174,
+          "lineEnd": 3946,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "complete public interface inspected; absent feature-specific section",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "native/sysroot/usr/include/multimedia/player_framework/native_avcapability.h",
+          "lineStart": 68,
+          "lineEnd": 76,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "native/sysroot/usr/include/multimedia/player_framework/native_avcapability.h",
+          "lineStart": 146,
+          "lineEnd": 171,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "native/sysroot/usr/include/multimedia/player_framework/native_avcodec_videodecoder.h",
+          "lineStart": 44,
+          "lineEnd": 72,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-avcodec-kit/capi-native-avcapability-h.md",
+          "section": "OH_AVCodec_GetCapabilityByCategory",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "Absence is scoped to installed public AVPlayer API and current official interface, not undocumented internal engine behavior. Searched hardware/software decoder selection symbols/terms and examined related APIs."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "decode.hw-fallback",
+      "topic": "No public AVPlayer hardware/software fallback-policy API found",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_ABSENT",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2174,
+          "lineEnd": 3946,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "complete public interface inspected; absent feature-specific section",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2180,
+          "lineEnd": 2206,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-avcodec-kit/capi-native-avcodec-videodecoder-h.md",
+          "section": "OH_VideoDecoder_CreateByName",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "Absence is scoped to installed public AVPlayer API and current official interface, not undocumented internal engine behavior. Searched hardware/software fallback-policy symbols/terms and examined related APIs."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "color.hdr",
+      "topic": "PlaybackStrategy.preferredHdr; MediaDescriptionKey.MD_KEY_HDR_TYPE; Display.hdrFormats; XComponent.hdrBrightness; Window.setWindowColorSpace",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "DEVICE_CONFIRMATION_REQUIRED",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 4664,
+          "lineEnd": 4671,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 7103,
+          "lineEnd": 7110,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.display.d.ts",
+          "lineStart": 1368,
+          "lineEnd": 1376,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.graphics.hdrCapability.d.ts",
+          "lineStart": 31,
+          "lineEnd": 69,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/component/xcomponent.d.ts",
+          "lineStart": 634,
+          "lineEnd": 657,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.window.d.ts",
+          "lineStart": 1314,
+          "lineEnd": 1333,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-i.md",
+          "section": "PlaybackStrategy12",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-arkui/arkui-ts/ts-basic-components-xcomponent.md",
+          "section": "hdrBrightness20",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-arkui/arkts-apis-window-Window.md",
+          "section": "setWindowColorSpace9",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "SDK MediaDescriptionKey HDR comment incorrectly says codec track type although key is hdr_type; full schema/value coverage not explicit. Enum HDRFormat does not prove codec/container capability. Installed typed hdrBrightness24 is absent from inspected current upstream XComponent section."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "color.tonemap",
+      "topic": "No public AVPlayer tone-mapping algorithm/parameters API found",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_ABSENT",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2174,
+          "lineEnd": 3946,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "complete public interface inspected; absent feature-specific section",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/component/xcomponent.d.ts",
+          "lineStart": 634,
+          "lineEnd": 657,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.window.d.ts",
+          "lineStart": 1314,
+          "lineEnd": 1333,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-arkui/arkui-ts/ts-basic-components-xcomponent.md",
+          "section": "hdrBrightness20",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "Absence is scoped to installed public AVPlayer API and current official interface, not undocumented internal engine behavior. Searched tone-mapping algorithm/parameters symbols/terms and examined related APIs."
+      ],
+      "relatedPlatformScope": [
+        {
+          "nativeApi": "OH_VideoProcessing_IsColorSpaceConversionSupported; OH_VideoProcessing_Create(VIDEO_PROCESSING_TYPE_COLOR_SPACE_CONVERSION); GetSurface/SetSurface",
+          "nativeOwner": "Separate MediaKit NDK VideoProcessing engine",
+          "apiLevel": 12,
+          "acceptedValues": "Source/destination metadata/colorSpace/pixelFormat triplets; supported combinations queried; no general tonemap operator/peak controls identified",
+          "semantics": "Standalone video color-space conversion pipeline identified in installed SDK. No direct AVPlayer tonemap control, operator/target-peak controls, current integration, or specific HDR→SDR output is verified.",
+          "exposure": "No VPE pipeline/NDK hook in current SystemPlaybackPort",
+          "sources": [
+            {
+              "kind": "installed-sdk",
+              "identity": "native/sysroot/usr/include/multimedia/video_processing_engine/video_processing.h",
+              "lineStart": 83,
+              "lineEnd": 125,
+              "hashReference": "sdk-declaration-evidence.json"
+            },
+            {
+              "kind": "installed-sdk",
+              "identity": "native/sysroot/usr/include/multimedia/video_processing_engine/video_processing.h",
+              "lineStart": 161,
+              "lineEnd": 193,
+              "hashReference": "sdk-declaration-evidence.json"
+            }
+          ],
+          "uncertainties": [
+            "Current raw VPE reference failed and Huawei current guide/reference opens timed out; no support verdict derived from search snippets. Installed declarations establish standalone symbol/state semantics only.",
+            "AVPlayer surface interposition compatibility and supported source/destination formats are not inferred. This related standalone API does not overturn public AVPlayer tonemap absence."
+          ]
+        }
+      ],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "color.adjust",
+      "topic": "No public AVPlayer backend brightness/contrast/gamma/color adjustment API found",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_ABSENT",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2174,
+          "lineEnd": 3946,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "complete public interface inspected; absent feature-specific section",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.window.d.ts",
+          "lineStart": 6500,
+          "lineEnd": 6531,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/component/xcomponent.d.ts",
+          "lineStart": 634,
+          "lineEnd": 657,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-arkui/arkts-apis-window-Window.md",
+          "section": "setWindowBrightness9",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "Absence is scoped to installed public AVPlayer API and current official interface, not undocumented internal engine behavior. Searched backend brightness/contrast/gamma/color adjustment symbols/terms and examined related APIs."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "audio.passthrough",
+      "topic": "No public AVPlayer encoded audio passthrough/bitstream output API found",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_ABSENT",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2174,
+          "lineEnd": 3946,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "complete public interface inspected; absent feature-specific section",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.audio.d.ts",
+          "lineStart": 1165,
+          "lineEnd": 1187,
+          "hashReference": "sdk-declaration-evidence.json"
+        }
+      ],
+      "unresolved": [
+        "Public API absence; internal route-specific encoded output is not claimed absent or available. Neither target device requirement nor format support inferred from wrapper similarity."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "network.cache-buffer",
+      "topic": "AVPlayer.setMediaSource(src,strategy); setPlaybackStrategy(); PlaybackStrategy preferredBufferDuration/preferredBufferDurationForPlaying/thresholdForAutoQuickPlay",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_PARTIAL",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2455,
+          "lineEnd": 2469,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2595,
+          "lineEnd": 2607,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 4653,
+          "lineEnd": 4663,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 4696,
+          "lineEnd": 4733,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-i.md",
+          "section": "PlaybackStrategy12",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "setMediaSource12;setPlaybackStrategy12",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "Installed SDK calls thresholdForAutoQuickPlay max buffering threshold for live/speed change; current official table describes FLV live smart catching at1.2x and speedDone100. Distinct descriptions recorded, not silently assumed universal cache limit.",
+        "No arbitrary disk-cache size/path API. setPlaybackStrategy limits configuring to initialized, not freely mutable while playing."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "network.reconnect",
+      "topic": "No public AVPlayer network reconnect/retry policy API found",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_ABSENT",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2174,
+          "lineEnd": 3946,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "complete public interface inspected; absent feature-specific section",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 1918,
+          "lineEnd": 1928,
+          "hashReference": "sdk-declaration-evidence.json"
+        }
+      ],
+      "unresolved": [
+        "No claim that internal HTTP stack never retries. Scope is public configurable reconnect/retry in installed AVPlayer and current official interface."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "timeline.start-position",
+      "topic": "AVPlayer.seek(); setPlaybackRange(start,-1,mode)",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_VERIFIED",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2321,
+          "lineEnd": 2350,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 2631,
+          "lineEnd": 2647,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "seek9;setPlaybackRange18",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "Concurrent seek/play ordering left as existing behavior, not runtime guaranteed by audit. Unknown-size dataSrc seek restrictions apply."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "surface.render-options",
+      "topic": "AVPlayer.surfaceId/videoScaleType; XComponent surface rectangle/orientation; AVPlayer.startRenderFrame/videoSizeChange",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_PARTIAL",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 3029,
+          "lineEnd": 3046,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.media.d.ts",
+          "lineStart": 3523,
+          "lineEnd": 3563,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/component/xcomponent.d.ts",
+          "lineStart": 184,
+          "lineEnd": 238,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+          "section": "surfaceId;onstartRenderFrame9;onvideoSizeChange9",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-arkui/arkui-ts/ts-basic-components-xcomponent.md",
+          "section": "XComponentController",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "Existing firstFrameRendered label is stronger than native event proves; no visibility/output assertion. Six historical first-frame/HLS observations remain unchanged."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    },
+    {
+      "id": "background.media-session",
+      "topic": "avSession.createAVSession(); AVSession.setAVMetadata/setAVPlaybackState/activate/on('play','pause','seek'); backgroundTaskManager.startBackgroundRunning(AUDIO_PLAYBACK)",
+      "researchAction": "Inspected installed SDK declarations and current official interface sections; related public system ownership examined when relevant.",
+      "conclusion": "NATIVE_VERIFIED",
+      "scope": "static installed SDK declaration + official documentation research; no runtime assertion",
+      "sourceReferences": [
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.avsession.d.ts",
+          "lineStart": 35,
+          "lineEnd": 64,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.avsession.d.ts",
+          "lineStart": 297,
+          "lineEnd": 381,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.avsession.d.ts",
+          "lineStart": 816,
+          "lineEnd": 855,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.multimedia.avsession.d.ts",
+          "lineStart": 1663,
+          "lineEnd": 1684,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.resourceschedule.backgroundTaskManager.d.ts",
+          "lineStart": 671,
+          "lineEnd": 734,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "installed-sdk",
+          "identity": "ets/api/@ohos.resourceschedule.backgroundTaskManager.d.ts",
+          "lineStart": 1134,
+          "lineEnd": 1152,
+          "hashReference": "sdk-declaration-evidence.json"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-avsession-kit/arkts-apis-avsession-AVSession.md",
+          "section": "activate10;control events",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        },
+        {
+          "kind": "official-documentation",
+          "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-backgroundtasks-kit/js-apis-resourceschedule-backgroundTaskManager.md",
+          "section": "BackgroundMode9",
+          "versionContext": "OpenHarmony official master, opened 2026-10-08; installed SDK takes compile-time precedence"
+        }
+      ],
+      "unresolved": [
+        "Static capability verified; no current integration to exercise. Physical-only confirmation not required for ordinary session command semantics; OS policy/lifecycle still needs future runtime test."
+      ],
+      "relatedPlatformScope": [],
+      "implementationDecision": "DEFER_TO_GPT"
+    }
+  ]
+}

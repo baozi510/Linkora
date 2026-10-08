@@ -1,0 +1,11 @@
+{
+  "exact39FeaturesBothBackendsReviewed": true,
+  "sdk16RelevantSourceHashesIndependentlyRechecked": true,
+  "restoredPinnedWrapperAllFileHashesIndependentlyRechecked": true,
+  "packageDeclarationsAndActualBytecodeDistinguished": true,
+  "staticNativeAndRuntimeOutputScopesDistinguished": true,
+  "seekAbsoluteDefaultsExactRefinementApplied": true,
+  "unrelatedOldDeviceBacklogNotReplicated": true,
+  "normalizedContractImplementationDeferred": true,
+  "publicDataAndSourcesSanitizationReviewed": true
+}

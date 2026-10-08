@@ -1,0 +1,6 @@
+{
+  "systemLog": "system-research-log.json",
+  "mpvLog": "mpv-research-log.json",
+  "scope": "Current official Huawei/OpenHarmony and stable/matching-core upstream primary-source research; per-source version/retrieval/hash/conclusion/unresolved context retained in companion logs.",
+  "taskRule": "Installed declarations are System compile-time truth. Pinned resolved wrapper plus embedded core identity are separate from stable manual; no reproducible unmodified binary-source proof invented."
+}

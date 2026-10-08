@@ -1,0 +1,171 @@
+{
+  "status": "PASS",
+  "singleOpen": true,
+  "forcedBackend": "System",
+  "ordinaryColdLaunchAfterAudio": true,
+  "positions": [
+    {
+      "label": "normal-system-first",
+      "utc": "2026-10-08T00:51:06.745023+00:00",
+      "positionMs": 1614.0,
+      "playing": true,
+      "failureVisible": false
+    },
+    {
+      "label": "normal-system-progress",
+      "utc": "2026-10-08T00:51:09.835535+00:00",
+      "positionMs": 3701.0,
+      "playing": true,
+      "failureVisible": false
+    }
+  ],
+  "realFrameProof": "native XComponent multicolor ROI samples match controlled test frame; SHA digest retained, private image excluded",
+  "releaseSampledZeroSurfacePlayerAudio": true,
+  "serviceEntryCountNotIndependentInstanceCount": true,
+  "observations": [
+    {
+      "label": "normal-system-first",
+      "utc": "2026-10-08T00:51:05.683801+00:00",
+      "appAlive": true,
+      "ui": [
+        "‹",
+        "正在播放",
+        "0:00",
+        "0:20",
+        "1×",
+        "❚❚",
+        "全屏",
+        "音量",
+        "连接状态",
+        "播放中",
+        "视频尺寸",
+        "1280 × 720"
+      ],
+      "surfaceNodes": 1,
+      "layoutSha256": "d4850631b3595a915c73105097ed68a3bfcc1e76eaa1eb94f861f24a3c3dae4d",
+      "screenshotSha256": "bb590facb54345fec607fdb87388e801185d426954a3c84cc7c67950b02206f6",
+      "systemPlayerInstancesForApp": 2,
+      "appAudioRendererCount": 1,
+      "appAudioRendererStates": [
+        2
+      ],
+      "surfaceBoundsPx": [
+        0,
+        402,
+        1256,
+        1109
+      ],
+      "surfaceRowSamplesRGB": [
+        [
+          252,
+          0,
+          0
+        ],
+        [
+          0,
+          254,
+          0
+        ],
+        [
+          253,
+          254,
+          0
+        ],
+        [
+          0,
+          0,
+          253
+        ],
+        [
+          255,
+          3,
+          255
+        ],
+        [
+          0,
+          254,
+          254
+        ]
+      ]
+    },
+    {
+      "label": "normal-system-progress",
+      "utc": "2026-10-08T00:51:08.816738+00:00",
+      "appAlive": true,
+      "ui": [
+        "‹",
+        "正在播放",
+        "0:02",
+        "0:20",
+        "1×",
+        "❚❚",
+        "全屏",
+        "音量",
+        "连接状态",
+        "播放中",
+        "视频尺寸",
+        "1280 × 720"
+      ],
+      "surfaceNodes": 1,
+      "layoutSha256": "55f296f0220dc59482d9aac1c8e474c4490ecefb3fe0b3b4c4f5aa34b3cefbc6",
+      "screenshotSha256": "665e60d88b4a9e98290a75b00f89db326f46ee2881a7594d123198fccc5c43ae",
+      "systemPlayerInstancesForApp": 2,
+      "appAudioRendererCount": 1,
+      "appAudioRendererStates": [
+        2
+      ],
+      "surfaceBoundsPx": [
+        0,
+        402,
+        1256,
+        1109
+      ],
+      "surfaceRowSamplesRGB": [
+        [
+          252,
+          0,
+          0
+        ],
+        [
+          0,
+          254,
+          0
+        ],
+        [
+          253,
+          254,
+          0
+        ],
+        [
+          0,
+          0,
+          253
+        ],
+        [
+          253,
+          0,
+          252
+        ],
+        [
+          252,
+          195,
+          1
+        ]
+      ]
+    },
+    {
+      "label": "normal-system-left",
+      "utc": "2026-10-08T00:51:12.999256+00:00",
+      "appAlive": true,
+      "ui": [
+        "0:20"
+      ],
+      "surfaceNodes": 0,
+      "layoutSha256": "0efc01c03b211a261a36d0d006f3b43cd6a0ef92ce941b02e56845d54c3ab172",
+      "screenshotSha256": "1019bf43b94700a5c79cace04a951e8fa1511e84635a7c80497b02e149744323",
+      "systemPlayerInstancesForApp": 0,
+      "appAudioRendererCount": 0,
+      "appAudioRendererStates": []
+    }
+  ]
+}

@@ -1,0 +1,560 @@
+{
+  "schemaVersion": 1,
+  "scope": "Only concrete native capabilities identified/refined by this39-feature audit; excludes unrelated old codec-matrix, performance or storage backlog. Prior Phase8A foundation remains historical proof, not erased.",
+  "featureCount": 38,
+  "items": [
+    {
+      "id": "transport.play",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "pause=false; loadfile/playlist-pos; eof-reached",
+          "whySimulatorInsufficient": "Demuxer/decoder/VO/AO and usable input.",
+          "nextDeviceGate": "Confirm loaded-file start/resume, EOF replay and native error versus adapter optimistic PLAYING.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "transport.pause",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "pause=true",
+          "whySimulatorInsufficient": "AO/VO scheduling.",
+          "nextDeviceGate": "Confirm pause freezes media and resumed position is retained.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "transport.stop-replay",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "stop; playlist-clear; seek 0 absolute; playlist-pos",
+          "whySimulatorInsufficient": "Wrapper initializes idle=yes/keep-open=yes; input reopenability.",
+          "nextDeviceGate": "Confirm completion replay returns to beginning; stopped file needs reloading.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "timeline.seek",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "seek <seconds> absolute|relative|absolute-percent [exact|keyframes]; SEEK/PLAYBACK_RESTART",
+          "whySimulatorInsufficient": "Seekable demuxer/source; exact decode depends on seek flags.",
+          "nextDeviceGate": "Confirm achieved seek position/tolerance and callback order, paused and rapid seeks.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "timeline.speed",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "speed; audio-pitch-correction",
+          "whySimulatorInsufficient": "Audio filter/decoder/AO throughput; encoded passthrough has different pitch/speed constraints.",
+          "nextDeviceGate": "Confirm requested and actual speed, pitch, and acceptable extremes.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "audio.volume-mute",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "volume; volume-max; mute",
+          "whySimulatorInsufficient": "Decoded PCM mixer/AO; passthrough cannot be assumed to offer same attenuation.",
+          "nextDeviceGate": "Confirm audible gain, mute independence and volume restoration.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "state.buffering",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "paused-for-cache; cache-buffering-state; demuxer-cache-time; demuxer-cache-duration",
+          "whySimulatorInsufficient": "Demuxer timestamps/cache policy; network inputs; simulator stub cannot execute.",
+          "nextDeviceGate": "Compare cache-end and cache-duration at nonzero time; check integer quantization and stale/unavailable values.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "tracks.enumerate",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "track-list; current-tracks; vid/aid/sid",
+          "whySimulatorInsufficient": "Demuxer/container metadata, no codec rendering support guarantee.",
+          "nextDeviceGate": "Confirm track identity/selected updates across files and dynamic tracks.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "tracks.audio-select",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "aid; audio-add",
+          "whySimulatorInsufficient": "Demux/decoder/AO; selection may alter format/clock.",
+          "nextDeviceGate": "Confirm native selected ID and audible language, including disabled and invalid track handling.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "tracks.subtitle-select",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "sid; secondary-sid; sub-visibility",
+          "whySimulatorInsufficient": "libass/text renderer, bitmap subtitle decoder, VO composition.",
+          "nextDeviceGate": "Confirm selected subtitle and no/auto behavior for supported text and bitmap formats.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "subtitles.external",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "sub-add <url> select|auto|cached [title] [lang]; sub-remove; sub-reload",
+          "whySimulatorInsufficient": "Subtitle decoder/libass, I/O permissions/network, VO.",
+          "nextDeviceGate": "Confirm external load/select, duplicate policy and actual subtitle rendering.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "subtitles.delay",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "sub-delay; secondary-sub-delay",
+          "whySimulatorInsufficient": "Subtitle decoder/rendering and active subtitle.",
+          "nextDeviceGate": "Confirm signed offset for selected text/bitmap subtitles.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "audio.delay",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "audio-delay",
+          "whySimulatorInsufficient": "Active A/V streams and AO clock/buffer.",
+          "nextDeviceGate": "Confirm measured A/V offset sign and bounds with controlled cue.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "display.fit-contain",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "keepaspect=yes; panscan=0; video-unscaled=no; video-zoom=0; video-pan-x/y=0",
+          "whySimulatorInsufficient": "Active gpu-next/ohos or ohosvk VO, actual surface geometry.",
+          "nextDeviceGate": "Confirm bars/aspect over portrait, landscape and non-square-pixel clips.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "display.fill-crop",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "keepaspect=yes; panscan=1; video-unscaled=no",
+          "whySimulatorInsufficient": "VO panscan support; surface/display aspect.",
+          "nextDeviceGate": "Confirm viewport is filled without aspect distortion and crop is centered.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "display.stretch",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "keepaspect=no",
+          "whySimulatorInsufficient": "VO embedding behavior; fullscreen platform differences.",
+          "nextDeviceGate": "Confirm actual attached XComponent surface stretches in both axes.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "display.original",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "video-unscaled=yes; keepaspect=yes",
+          "whySimulatorInsufficient": "VO, physical pixels versus ArkUI dimensions, source pixel aspect.",
+          "nextDeviceGate": "Confirm pixel scale and cropping for square and non-square pixels.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "display.aspect-override",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "video-aspect-override; video-aspect-method",
+          "whySimulatorInsufficient": "Decoder/display aspect, VO.",
+          "nextDeviceGate": "Confirm requested ratio, reset=no and metadata interaction.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "display.rotation",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "video-rotate",
+          "whySimulatorInsufficient": "Decode interop/VO; metadata rotation.",
+          "nextDeviceGate": "Confirm 0/90/180/270, arbitrary angle behavior and metadata addition on ohcodec.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "display.zoom-pan",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "video-zoom; video-pan-x/y; video-align-x/y",
+          "whySimulatorInsufficient": "VO, active surface geometry.",
+          "nextDeviceGate": "Confirm zoom multiplier, pan direction/units and reset behavior.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "timeline.frame-step",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "frame-step [frames] [play|seek]; frame-back-step",
+          "whySimulatorInsufficient": "Video decoder, seekable source for backward/seek mode, frame timing.",
+          "nextDeviceGate": "Confirm paused single forward step and backward behavior with VFR/media limits.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "navigation.chapters",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "chapter-list; chapter (RW); seek",
+          "whySimulatorInsufficient": "Container chapter metadata and seekable input.",
+          "nextDeviceGate": "Confirm chapter enumeration/index seeks and files with no chapters.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "repeat.loop",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "loop-file; remaining-file-loops",
+          "whySimulatorInsufficient": "Reopen/seekable source; EOF behavior/keep-open.",
+          "nextDeviceGate": "Confirm finite/infinite repeat and completion events across loop boundary.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "repeat.ab",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "ab-loop-a; ab-loop-b; ab-loop-count; ab-loop",
+          "whySimulatorInsufficient": "Seekable source, demux/keyframe constraints.",
+          "nextDeviceGate": "Confirm boundary repeat, ordering invalid endpoints, clear and count.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "capture.screenshot",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "screenshot-raw subtitles|video|window bgra; screenshot/screenshot-to-file",
+          "whySimulatorInsufficient": "VO GPU readback; native node/ArrayBuffer conversion; image API; file commands require write permissions.",
+          "nextDeviceGate": "Confirm screenshot pixel color/row layout, dimensions, subtitles inclusion and GPU readback.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "processing.deinterlace",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "deinterlace; deinterlace-active; deinterlace-field-parity",
+          "whySimulatorInsufficient": "FFmpeg filter chain/VO; hardware frame/copy path constraints.",
+          "nextDeviceGate": "Confirm interlaced field order, auto/no and ohcodec compatibility.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "processing.video-filter",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "system",
+          "nativeApi": "AVPlayer.setSuperResolution(); PlaybackStrategy.enableSuperResolution; setVideoWindowSize(); on('superResolutionChanged')",
+          "whySimulatorInsufficient": "Target display/decoder/audio output and platform feature constraints cannot be inferred from SDK declarations or x86 simulator",
+          "nextDeviceGate": "Verify this identified native output/control on actual target hardware with version/route/decoder evidence; static-only evidence is not output acceptance.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        },
+        {
+          "backend": "mpv",
+          "nativeApi": "vf property; vf add/remove/toggle/set/clr; lavfi",
+          "whySimulatorInsufficient": "FFmpeg libavfilter, hardware download/upload/format availability.",
+          "nextDeviceGate": "Enumerate available filters on pinned target and execute representative supported graph.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "processing.audio-filter",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "system",
+          "nativeApi": "AVPlayer.audioEffectMode; audio.AudioEffectMode; setLoudnessGain()",
+          "whySimulatorInsufficient": "Target display/decoder/audio output and platform feature constraints cannot be inferred from SDK declarations or x86 simulator",
+          "nextDeviceGate": "Verify this identified native output/control on actual target hardware with version/route/decoder evidence; static-only evidence is not output acceptance.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        },
+        {
+          "backend": "mpv",
+          "nativeApi": "af property; af add/remove/toggle/set/clr; lavfi",
+          "whySimulatorInsufficient": "FFmpeg libavfilter; decoded PCM and AO format compatibility.",
+          "nextDeviceGate": "Enumerate available filters and confirm a controlled PCM filter effect.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "decode.hw-select",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "hwdec; hwdec-codecs; hwdec-current; hwdec-interop",
+          "whySimulatorInsufficient": "FFmpeg OHCodec decoder, platform HW codec profile, GPU GL/Vulkan interop.",
+          "nextDeviceGate": "Verify actual hwdec-current, hardware/software switch and codec/profile support per target.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "decode.hw-fallback",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "hwdec-software-fallback; hwdec-current",
+          "whySimulatorInsufficient": "Software decoder availability; HW failure/interop support; retained packets.",
+          "nextDeviceGate": "Force controlled unsupported/failing HW path and verify actual software transition and continuity.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "color.hdr",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "system",
+          "nativeApi": "PlaybackStrategy.preferredHdr; MediaDescriptionKey.MD_KEY_HDR_TYPE; Display.hdrFormats; XComponent.hdrBrightness; Window.setWindowColorSpace",
+          "whySimulatorInsufficient": "Target display/decoder/audio output and platform feature constraints cannot be inferred from SDK declarations or x86 simulator",
+          "nextDeviceGate": "Verify this identified native output/control on actual target hardware with version/route/decoder evidence; static-only evidence is not output acceptance.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        },
+        {
+          "backend": "mpv",
+          "nativeApi": "video-params/color metadata; video-target-params; target-colorspace-hint; target-trc/prim/peak; OHOS NativeWindow color/HDR metadata integration",
+          "whySimulatorInsufficient": "gpu-next/libplacebo, OHOS NativeWindow color/metadata API, EGL/Vulkan/display HDR path.",
+          "nextDeviceGate": "Verify signaled color/metadata and actual HDR10/HLG output; distinguish processed display metadata from native Dolby Vision output.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "color.tonemap",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "tone-mapping; tone-mapping-param; target-trc/prim/peak; hdr-compute-peak",
+          "whySimulatorInsufficient": "gpu/gpu-next, libplacebo, display target color/peak characteristics.",
+          "nextDeviceGate": "Verify HDR→SDR test pattern with configured target and algorithm effect.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "color.adjust",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "brightness; contrast; gamma; saturation; hue",
+          "whySimulatorInsufficient": "VO color-equalizer implementation and color-management pipeline.",
+          "nextDeviceGate": "Verify each control affects pixels predictably and reset restores baseline.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "audio.passthrough",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "audio-spdif; current-ao; OHAudio encoding_type",
+          "whySimulatorInsufficient": "FFmpeg spdif decoder/mux format, OHAudio/native route/receiver encoded support.",
+          "nextDeviceGate": "Determine active AO and prove receiver-decoded AC3/DTS/etc. versus PCM output before declaring passthrough.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "network.cache-buffer",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "cache; cache-secs; cache-pause/cache-pause-initial/cache-pause-wait; demuxer-max-bytes/max-back-bytes/readahead-secs",
+          "whySimulatorInsufficient": "Demuxer thread, RAM/disk budget, source timestamp/range semantics.",
+          "nextDeviceGate": "Verify memory ceilings and cache pause/read-ahead behavior without conflating proxy cache.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "network.reconnect",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "stream-lavf-o; FFmpeg HTTP reconnect/reconnect_delay_max/reconnect_streamed/reconnect_on_network_error/reconnect_on_http_error",
+          "whySimulatorInsufficient": "FFmpeg n8.0 HTTP/Range/AVIO, server behavior; no storage credential/retry policy belongs here.",
+          "nextDeviceGate": "Controlled disconnect/HTTP errors: verify retry count/delay, EOF handling and Range position preservation.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "timeline.start-position",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "start option; loadfile per-file start; MediaOptions.start; watch-later resume-playback",
+          "whySimulatorInsufficient": "Demux seeking/input; configDir/sandbox permissions for watch-later.",
+          "nextDeviceGate": "Confirm initial position without audible/visible beginning and manual resume precedence.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    },
+    {
+      "id": "surface.render-options",
+      "status": "DEVICE_CONFIRMATION_REQUIRED",
+      "auditSpecificNativeFindingsAndChecks": [
+        {
+          "backend": "mpv",
+          "nativeApi": "attachSurface/detachSurface; ohos-surface-size; vo=gpu-next; gpu-context=ohos|ohosvk; video-params",
+          "whySimulatorInsufficient": "NativeWindow, gpu-next/libplacebo/OpenGL EGL or Vulkan; platform context.",
+          "nextDeviceGate": "Verify resize/orientation, aspect modes, destroy/reattach and actual first visible frame evidence.",
+          "existingEvidence": "This audit statically identifies the native capability; Phase8A foundation and prior simulator evidence are not comprehensive per-feature/output validation."
+        }
+      ],
+      "notUnrelatedBacklogDuplication": true
+    }
+  ]
+}

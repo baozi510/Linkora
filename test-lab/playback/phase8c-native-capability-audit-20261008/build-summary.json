@@ -1,0 +1,48 @@
+{
+  "default-first": {
+    "completedMarker": true,
+    "hypium": {
+      "total": 210,
+      "pass": 210,
+      "failure": 0,
+      "error": 0,
+      "ignore": 0
+    },
+    "architectureFixtures": 5,
+    "ffmpegPure": 15,
+    "analysisPure": 46,
+    "artifactFixtures": 17,
+    "mpvMapping": 7,
+    "debugReleaseHarsForFourModules": true,
+    "debugReleaseHaps": true,
+    "exactNineAarch64Audits": 2
+  },
+  "default-final": {
+    "completedMarker": true,
+    "hypium": {
+      "total": 210,
+      "pass": 210,
+      "failure": 0,
+      "error": 0,
+      "ignore": 0
+    },
+    "architectureFixtures": 5,
+    "ffmpegPure": 15,
+    "analysisPure": 46,
+    "artifactFixtures": 17,
+    "mpvMapping": 7,
+    "debugReleaseHarsForFourModules": true,
+    "debugReleaseHaps": true,
+    "exactNineAarch64Audits": 2
+  },
+  "simulator": {
+    "parityIsolation": true,
+    "audioSchemaStaticGuard": true,
+    "nativeWhitelist": [
+      "liblinkora_ffmpeg.so"
+    ],
+    "abi": "x86_64",
+    "defaultDependencyGraphFinallyRestore": true,
+    "restoredWrapperHashesEqualInitialResolution": true
+  }
+}

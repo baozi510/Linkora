@@ -1,0 +1,92 @@
+[
+  {
+    "name": "install.stdout",
+    "privateOriginalBytes": 40,
+    "privateOriginalSha256": "FF332712FE36CBB5C7259FD68060C62944391503FDA9185779954F30D101AE74",
+    "publishedSanitizedBytes": 30,
+    "publishedSanitizedSha256": "8FB59D0E4FB125526659E37635ADCC7477A405E2A43BC62BFC2DE0BDE3A15796",
+    "sanitizedGzipDecompressionExact": true,
+    "transformations": "UTF8; newline/ANSI/trailing whitespace normalization; absolute checkout/installed Studio path replacement only. No warning/result removed. Original retained locally PRIVATE, not falsely labelled a public original."
+  },
+  {
+    "name": "install.stderr",
+    "privateOriginalBytes": 0,
+    "privateOriginalSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "publishedSanitizedBytes": 0,
+    "publishedSanitizedSha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "sanitizedGzipDecompressionExact": true,
+    "transformations": "UTF8; newline/ANSI/trailing whitespace normalization; absolute checkout/installed Studio path replacement only. No warning/result removed. Original retained locally PRIVATE, not falsely labelled a public original."
+  },
+  {
+    "name": "default-first.stdout",
+    "privateOriginalBytes": 51215,
+    "privateOriginalSha256": "048E8B18CC3768D4A8E3B5C0E2E535BFDCA1709B6750FB48DA24737451A20726",
+    "publishedSanitizedBytes": 46064,
+    "publishedSanitizedSha256": "A3C2047841FD6B45277127428CFA439BB721B7E6606153B8C0163843CDC21DEE",
+    "sanitizedGzipDecompressionExact": true,
+    "transformations": "UTF8; newline/ANSI/trailing whitespace normalization; absolute checkout/installed Studio path replacement only. No warning/result removed. Original retained locally PRIVATE, not falsely labelled a public original."
+  },
+  {
+    "name": "default-first.stderr",
+    "privateOriginalBytes": 289211,
+    "privateOriginalSha256": "B41B8B3FAB517DDA1BF596DCDC3D69177701D279DC72D58781DC1E4DF8D290C4",
+    "publishedSanitizedBytes": 249343,
+    "publishedSanitizedSha256": "B09A567A8E18416037DD4B6815CB80CC380D109EF0307F408A5937417952E2C9",
+    "sanitizedGzipDecompressionExact": true,
+    "transformations": "UTF8; newline/ANSI/trailing whitespace normalization; absolute checkout/installed Studio path replacement only. No warning/result removed. Original retained locally PRIVATE, not falsely labelled a public original."
+  },
+  {
+    "name": "simulator.stdout",
+    "privateOriginalBytes": 6970,
+    "privateOriginalSha256": "6D24A732DA81DACBAD7D971FEA05013E03022D28B45EFC78CD1E4B5287ECB418",
+    "publishedSanitizedBytes": 6066,
+    "publishedSanitizedSha256": "BDF44A12E5E30E48B908DF32EF17BEF122C059820DA2E1D640BB5B25B30C231D",
+    "sanitizedGzipDecompressionExact": true,
+    "transformations": "UTF8; newline/ANSI/trailing whitespace normalization; absolute checkout/installed Studio path replacement only. No warning/result removed. Original retained locally PRIVATE, not falsely labelled a public original."
+  },
+  {
+    "name": "simulator.stderr",
+    "privateOriginalBytes": 64431,
+    "privateOriginalSha256": "99C5C3291B2C3C5A3013374BD4BF1E5498C28FE76FAE0AF289305C4EC3928F0E",
+    "publishedSanitizedBytes": 54607,
+    "publishedSanitizedSha256": "4165E61BFD2E9FA13374FB26873FE314B36768B53CADFC06DD3F00772E787A3B",
+    "sanitizedGzipDecompressionExact": true,
+    "transformations": "UTF8; newline/ANSI/trailing whitespace normalization; absolute checkout/installed Studio path replacement only. No warning/result removed. Original retained locally PRIVATE, not falsely labelled a public original."
+  },
+  {
+    "name": "default-final.stdout",
+    "privateOriginalBytes": 50327,
+    "privateOriginalSha256": "DAAB693124F9EFE81DDB9A5E78A0EC2F918845BB5510B29A8CB685BF5D1914CD",
+    "publishedSanitizedBytes": 45200,
+    "publishedSanitizedSha256": "962E450728E80C6EE1B77DFA8DBF451E88CF363B46B0AC7C87298A0DD8601244",
+    "sanitizedGzipDecompressionExact": true,
+    "transformations": "UTF8; newline/ANSI/trailing whitespace normalization; absolute checkout/installed Studio path replacement only. No warning/result removed. Original retained locally PRIVATE, not falsely labelled a public original."
+  },
+  {
+    "name": "default-final.stderr",
+    "privateOriginalBytes": 205211,
+    "privateOriginalSha256": "921CB6FAD6C83EA1A5D903BB06BDC07048B5E0939DBA8DF9103859BCF4656DFB",
+    "publishedSanitizedBytes": 174765,
+    "publishedSanitizedSha256": "70F4095DBE7333FA6D792C9AD9E37119E096F83EFFFF0A3F15FEA42EF8B301B0",
+    "sanitizedGzipDecompressionExact": true,
+    "transformations": "UTF8; newline/ANSI/trailing whitespace normalization; absolute checkout/installed Studio path replacement only. No warning/result removed. Original retained locally PRIVATE, not falsely labelled a public original."
+  },
+  {
+    "name": "default-first-hypium",
+    "privateOriginalBytes": 14596,
+    "privateOriginalSha256": "AF333AC54C490612F5AC26AD104102F3FF081C6E8F882338392F3E4201EA7B5B",
+    "publishedSanitizedBytes": 14596,
+    "publishedSanitizedSha256": "AF333AC54C490612F5AC26AD104102F3FF081C6E8F882338392F3E4201EA7B5B",
+    "sanitizedGzipDecompressionExact": true,
+    "transformations": "UTF8; newline/ANSI/trailing whitespace normalization; absolute checkout/installed Studio path replacement only. No warning/result removed. Original retained locally PRIVATE, not falsely labelled a public original."
+  },
+  {
+    "name": "default-final-hypium",
+    "privateOriginalBytes": 14596,
+    "privateOriginalSha256": "AF333AC54C490612F5AC26AD104102F3FF081C6E8F882338392F3E4201EA7B5B",
+    "publishedSanitizedBytes": 14596,
+    "publishedSanitizedSha256": "AF333AC54C490612F5AC26AD104102F3FF081C6E8F882338392F3E4201EA7B5B",
+    "sanitizedGzipDecompressionExact": true,
+    "transformations": "UTF8; newline/ANSI/trailing whitespace normalization; absolute checkout/installed Studio path replacement only. No warning/result removed. Original retained locally PRIVATE, not falsely labelled a public original."
+  }
+]

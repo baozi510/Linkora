@@ -1,0 +1,18 @@
+{
+  "taskId": "phase8c-sim-native-first-capability-audit",
+  "state": "READY",
+  "repository": "https://github.com/baozi510/Linkora.git",
+  "branch": "feat/playback-capability-phase8",
+  "source": "99ab47020f81391b7640d44c58ccb719491b4106",
+  "head": "e835a3567132c9f496d0c79f3c1eab88f1916774",
+  "drift": [
+    "docs/CODEX_VALIDATION_TASK.md"
+  ],
+  "clean": true,
+  "submodules": {
+    "entry/src/main/cpp/third_party/libnfs": "cee4ca723e081e6a18f51b838690a4c21e14bb2c",
+    "entry/src/main/cpp/third_party/libsmb2": "b3d560c02fb1268320d2fd1c17fe841b0d93b85f",
+    "entry/src/main/cpp/third_party/mbedtls/framework": "7d726d145d678aa7f5a7df3b9e7ee3dbce6ea1bf"
+  },
+  "utc": "2026-10-08T00:34:13.716713+00:00"
+}
