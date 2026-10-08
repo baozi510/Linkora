@@ -1,6 +1,27 @@
 # Linkora Session Handoff
 
-## CURRENT STATE — 2026-10-08, Phase 8C reviewed
+## CURRENT STATE — 2026-10-08 Phase 8D-SIM environment stop reviewed
+
+**Repository:** `baozi510/Linkora`. **Branch:** `feat/playback-capability-phase8`.
+
+**Review ruling:** `BLOCKED — SIMULATOR ENVIRONMENT` (truthful Phase 8D-SIM stop accepted as blocker evidence; **no** six-case investigation acceptance). Executed prior task `phase8d-sim-system-hls-first-frame-root-cause`, source `e19123a0e110cebb479d24dbdf72d6d3c9169a5b`, dispatch `0a5e1af4be94a2528dcbc968f42f1883d9c22c3b`, evidence remote `391d56e4c0b36f19d4a52f8d77a4adab2db87b8b`. It is finished and **must not be re-executed**, regardless of old READY state.
+
+Fresh default/simulator/final-default build chain passed with two Hypium 210/210, all AArch64 artifact audits and exact signed x86 simulator HAP. Input proof for seven controlled fixtures and 13 media files passed local/WebDAV hash and ffprobe checks. These are Phase 8D first-attempt-only evidence, **not** fresh next-round PASS.
+
+Setup mistake: host fixture server owned TCP19084; mistakenly used `hdc fport tcp:19084 tcp:19084` (host→device), while planned simulator StreamPage loopback URL needs device→host via `hdc rport tcp:19084 tcp:19084`. Original HDC `[Fail]TCP Port listen failed at 19084`; forwarding list empty before/after. Read-only installed HDC3.2.0f help proves wrong direction but does not identify actual conflicting listener owner. STOP honored: no corrective rport, no official media open, no source/fixture/route bypass.
+
+**Seven fresh runtime checks NOT RUN**: one healthy System MP4 and `hls-h264-aac`, `hls-hevc-aac`, `mkv-ffv1-flac`, `mov-prores-pcm`, `ogv-theora-vorbis`, `wmv-wmv2-wma`. Historical 2 HLS init FAIL + 4 first-frame evidence FAIL remain historical FAIL, unresolved; never silently reclassify. No production patch warranted by this environmental stop.
+
+**Next action:** execute only a **new** READY dispatch in `docs/CODEX_VALIDATION_TASK.md`, with validated owned host HTTP server, **reverse** HDC port mapping, exact target-route probe and strict stop if preflight still fails; then seven fresh scoped simulator checks and honest per-case evidence. Re-run full fresh build chain for that task. Never use fport to evade host port occupancy; don't stop unrelated services or change fixtures. No quota inquiry required or authorized by the new task.
+
+**Architecture/device boundary:** Phase 3, Phase 7A, Phase 8A, Phase 8B-SIM accepted within prior scope. Phase 8C native-first 39-feature audit accepted as static/research evidence only. No physical ARM64 device now; System simulator cannot certify Mate60, simulator MPV is stub, real MPV/HDR/DV/advanced audio/hardware output unproven; x86 FFmpeg isn't ARM64 runtime. Native-first contract/adapter fixes are GPT-owned separately, not authorized for Codex here. Keep old FAIL/NOT RUN/raw summaries/old evidence unchanged and retain user-owned media.
+
+The 2026-10-08 Phase 8C CURRENT STATE below is now **historical context**; when any instruction conflicts, actual Git HEAD and newest dispatch prevail.
+
+---
+
+
+## HISTORICAL STATE — 2026-10-08, Phase 8C reviewed
 
 Repository: `baozi510/Linkora`
 

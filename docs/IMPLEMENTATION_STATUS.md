@@ -1,6 +1,26 @@
 # Linkora Player Architecture — Implementation Status
 
-## CURRENT EXECUTION SUMMARY — 2026-10-08 (Phase 8C independently accepted)
+## CURRENT EXECUTION SUMMARY — 2026-10-08 (Phase 8D-SIM stopped and independently reviewed)
+
+**Branch:** `feat/playback-capability-phase8`. **Current owner ruling:** `BLOCKED — SIMULATOR ENVIRONMENT` for completed Phase 8D-SIM attempt `phase8d-sim-system-hls-first-frame-root-cause`; **not** a functional investigation PASS, hardware claim or identified production defect.
+
+- Tested source: `e19123a0e110cebb479d24dbdf72d6d3c9169a5b`; tested dispatch: `0a5e1af4be94a2528dcbc968f42f1883d9c22c3b`; remotely published evidence: `391d56e4c0b36f19d4a52f8d77a4adab2db87b8b`.
+- Three append-only evidence commits: `d572bcfd22fb69b165ec68dd72136feadcebe965`, `78f915471a9d152832aaffaac0b0c43b20ebcf2b`, `391d56e4c0b36f19d4a52f8d77a4adab2db87b8b`. Source-dispatch drift was task-only; dispatch-evidence change set is 56 paths, all in one authorized report/new evidence directory. No old report/evidence or production code modified.
+- Fresh default → simulator → immediate default build gates PASS: both independent Hypium outputs 210/210, each default invocation two exact-nine AArch64 native artifact audits, x86 simulator contains FFmpeg only. Exact fresh signed simulator HAP built, ABI-checked, installed and launched. This gate evidence belongs **only to the stopped round** and cannot be inherited as fresh PASS in another round.
+- User-owned controlled fixture input preflight: seven planned media inputs and thirteen source/manifest/segment files, host/local and authenticated TLS WebDAV/hash/Range/ffprobe evidence matched committed corpus truth. Media retained unchanged. Target loopback HTTP path **not proven** because forwarding failed.
+- **Precise blocker:** owned host fixture server was already listening on TCP19084; orchestration mistakenly attempted `hdc fport tcp:19084 tcp:19084` for a device→host input route. Installed HDC3.2.0f help distinguishes `fport localnode remotenode` (host→device) from `rport remotenode localnode` (device→host). Actual error: `[Fail]TCP Port listen failed at 19084`. Direction mismatch is confirmed; exact listener/collision owner was not independently established. STOP was honored; no subsequent `rport` retry or official playback occurred. Forward mapping was empty before and after.
+- **Actual playback coverage:** healthy System H.264 control NOT RUN, two HLS FAIL-cause investigations NOT RUN, four legacy format first-frame investigations NOT RUN: official attempts = 0. Historical two HLS initialization FAIL and four first-frame-evidence FAIL remain immutable/UNRESOLVED, not overwritten. Build PASS ≠ investigation PASS; no decoder or player failure inferred.
+- Owned host server stopped, no new forward retained, preferences not changed; sampled surfaces/service entries/audio renderers zero. Private credentials, signing, identifiers, device media/HAP/screenshots absent from published report. The prior dirty `D:/Linkora` and 2630 old tracked blobs are reported preserved.
+- **Decision:** no production source patch, no codec/profile fallback change, no UI or performance research. Issue a **distinct new task** to normalize the simulator fixture route with `hdc rport tcp:19084 tcp:19084` only after owned host listener/port preflight and then perform the same seven scoped fresh runtime checks. No task text in chat substitutes for the new separately committed `docs/CODEX_VALIDATION_TASK.md`. Fresh builds/evidence required anew.
+
+**Existing accepted boundaries unchanged:** Phase 3 production analysis ACCEPTED; Phase 7A real ARM64 measurement baseline ACCEPTED but not global policy; Phase 8A playback foundation ACCEPTED but not full codec/output; Phase 8B-SIM functional preflight ACCEPTED; Phase 8C native-first audit ACCEPTED for audit/evidence scope only (39 static feature rows, runtime/device acceptance pending). Simulator System ≠ Mate60, MPV simulator stub ≠ real MPV, x86 FFmpeg ≠ ARM64 runtime.
+
+The previous 2026-10-08 Phase 8C execution summary below is retained as **historical**. Its next-action instruction is superseded by the separate new task dispatch.
+
+---
+
+
+## HISTORICAL EXECUTION SUMMARY — 2026-10-08 (Phase 8C independently accepted)
 
 **Active repository/branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`.
 
