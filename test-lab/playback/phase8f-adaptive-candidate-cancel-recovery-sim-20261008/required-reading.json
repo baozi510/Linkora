@@ -1,0 +1,309 @@
+[
+  {
+    "path": "docs/AI_WORKFLOW.md",
+    "sha256": "9692B25EA6A66960228B9C3869E8731AEA3D8AE29286B33E9F519F3E0B661E4A",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "docs/MASTER_IMPLEMENTATION_PLAN.md",
+    "sha256": "69C50B6B81CEC243934BF38077E24621EF6470000118A779F66B0025A692BC84",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "docs/ARCHITECTURE_TARGET.md",
+    "sha256": "11DDF02AE6E521898B792E093677D60DA82592E850B4632CC4BCD35D5A6DEF5F",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "docs/ARCHITECTURE_MIGRATION.md",
+    "sha256": "7280BC51ADB42FE0F04E1FB1892AA7B30D56DC89DD615CE1B4CDDF0DFAB4A746",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "docs/IMPLEMENTATION_STATUS.md",
+    "sha256": "DAC20B490ECEAA5505B72EC2B7C762987CA2AE2389B60BD67345982AF325E9E0",
+    "fullyRead": true,
+    "readingMethod": "Fresh full Task / two changed source files and diff / latest CURRENT sections read; historical sections distinguished",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "docs/SESSION_HANDOFF.md",
+    "sha256": "0BE962C716B7A091BA497189CF4881A223458A8BA7E0692970CFE08FF04D3E19",
+    "fullyRead": true,
+    "readingMethod": "Fresh full Task / two changed source files and diff / latest CURRENT sections read; historical sections distinguished",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "docs/CODEX_VALIDATION_TASK.md",
+    "sha256": "51549D6F7A4636893B322448C63566B8C09236D75AD48DE56CCB54427040DEDD",
+    "fullyRead": true,
+    "readingMethod": "Fresh full Task / two changed source files and diff / latest CURRENT sections read; historical sections distinguished",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "docs/PLAYBACK_PHASE8B_REPORT.md",
+    "sha256": "274B6821D59692D5FACB9431BE72E47E97095F7A563F7B0FFF31C4B68F30DC91",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "docs/PLAYBACK_PHASE8B_SIMULATOR_RUNBOOK.md",
+    "sha256": "7776CEDE7ABA657CDA2AF87138DCCD854A693B62324B55082DFA40DDD011A7D4",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "docs/PLAYBACK_NATIVE_CAPABILITY_AUDIT_REPORT.md",
+    "sha256": "F816D912C1953FC1E115D17B887D90423D56BA23012A4CF7EFEE06D7FC042CDA",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "entry/src/main/ets/playback/SystemPlaybackPort.ets",
+    "sha256": "F8F1DF882C5B47C7E807473B66706412C3C3BFFB31EC012F023CA38D6FF5380F",
+    "fullyRead": true,
+    "readingMethod": "Fresh full Task / two changed source files and diff / latest CURRENT sections read; historical sections distinguished",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "entry/src/main/ets/pages/PlayerPage.ets",
+    "sha256": "87AA1C5ADAB7B04C27F5845D302CA22555C0E58DC14D167A20C4FB020073C3DC",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "linkora_core/src/main/ets/playback/PlaybackEngine.ets",
+    "sha256": "CDEE3EEB5CC03DEA6FDCC87BF785C67798EBA6AC7EDD51B44155B18C42DF8D2C",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "linkora_core/src/main/ets/playback/PlaybackPort.ets",
+    "sha256": "C21EC63E9CE2AF9A0516B9E4048C7769F6C1836EC7E21CA4741217DD9DEFC62C",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "linkora_core/src/main/ets/playback/PlaybackBackend.ets",
+    "sha256": "116B387031D7795538BD18E24B3187C25268D19ACD0EA870248859D6351D0809",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "entry/src/main/ets/playback/AdaptivePlaybackPort.ets",
+    "sha256": "548DA65506D22C5EE90A9C14EE50653A654F459DF540ED079DFAA468D9ACB027",
+    "fullyRead": true,
+    "readingMethod": "Fresh full Task / two changed source files and diff / latest CURRENT sections read; historical sections distinguished",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "test-lab/media-compatibility/cases.json",
+    "sha256": "45DD55584A3E644F7AB2DEA138EA5091262395DC177A93A9E4D9D779998581E0",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "test-lab/media-compatibility/generate-samples.ps1",
+    "sha256": "1400258A324D479A1664A6B9C320462C71E212DACEE3118E3929DD489EE678AB",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "test-lab/media-compatibility/fetch-external-samples.ps1",
+    "sha256": "AE255608BDB42D2A676CF28CC87B5C79B71E0EC048189A9BE05B16AE63AAB533",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "docs/PLAYBACK_PHASE8D_SIMULATOR_INVESTIGATION_REPORT.md",
+    "sha256": "DDD4E231595A430C25DFC6FB3CC7C96C52F8F54A5ABF08984300154AB01EF279",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "test-lab/playback/phase8d-system-simulator-investigation-20261008/preflight-command-diagnosis.json",
+    "sha256": "8A29707A0CFAF3FF03E9D9381CF262C6517549EE59E3F40A36047F0DE005A302",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "test-lab/playback/phase8d-system-simulator-investigation-20261008/root-cause-assessment.json",
+    "sha256": "08B709CFF7EC79895C980B8780CEFC126B86CD057BC4DB4165211D4C077964CC",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "test-lab/playback/phase8d-system-simulator-investigation-20261008/six-case-observations.json",
+    "sha256": "AF261E057B82BF3FC1E16264CA6075DD85DB4BE00862E6B3E0A242D182F7B233",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "test-lab/playback/phase8d-system-simulator-investigation-20261008/source-state.json",
+    "sha256": "69FA28C2FA7BA7CA4036CC86E7F1BAA25FD8DAA586889B176756A532DBA2CE24",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "docs/PLAYBACK_PHASE8D_SIMULATOR_RERUN1_REPORT.md",
+    "sha256": "722C6D1B16735F3D96944DBB9326BB3C5F6EDFD390DCD136DE3A5AC94446D75B",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "linkora_core/src/main/ets/playback/PlaybackModels.ets",
+    "sha256": "22E56EE731AF0ED46AA5023ED371A6B17DF91C997571802B02B20FA470353B29",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "entry/src/main/ets/playback/NetworkPlaybackSourceResolver.ets",
+    "sha256": "E49F368AB11232735C7B5D282E0385BB86FFA7DD5EF1B751552A4CD5619DD663",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "test-lab/playback/phase8d-system-simulator-rport-rerun1-20261008/native-event-analysis.json",
+    "sha256": "8E88E68E32ACF251E715AEA497F7D04C3BA61DC4C49EEAC0F7708475F6C81ADC",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "test-lab/playback/phase8d-system-simulator-rport-rerun1-20261008/official-attempt-ledger.ndjson",
+    "sha256": "DA918639A0D45EF4B3ED869ECDA221D76BC3FF7E252BBD3EC4A760D3CD742448",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "test-lab/playback/phase8d-system-simulator-rport-rerun1-20261008/root-cause-assessment.json",
+    "sha256": "9A924C99ECF73389082EE7AFC05C4215145B42DB9317C02F7CF3799BEB269E6C",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "test-lab/playback/phase8d-system-simulator-rport-rerun1-20261008/target-route-proof.json",
+    "sha256": "D498477D4191B09E143293CBF9B35402391906E0F6EA79DE2710E717DEC7A09D",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "test-lab/playback/phase8d-system-simulator-rport-rerun1-20261008/six-case-observations.json",
+    "sha256": "CDE30E6F8A758FCEC5D3561F0E55D4F4F61F13E6DD05985FC45FE28A5B7649AE",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "test-lab/playback/phase8b-simulator-functional-preflight-rerun1-20261007/fixture-truth-manifest.json",
+    "sha256": "AE743969E62A8836421FC45C46D3F6A558B1386BDA0DE72E126F0BBBF6726189",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "docs/PLAYBACK_PHASE8E_SYSTEM_READINESS_VALIDATION_REPORT.md",
+    "sha256": "BF986415CF8C3DDC34ABED37B683DE1CCED89B95669CD7D8ED202D012C4A8017",
+    "fullyRead": true,
+    "readingMethod": "Fresh full Task / two changed source files and diff / latest CURRENT sections read; historical sections distinguished",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets",
+    "sha256": "04CE48CDDC4898E2AE4189F4A2B5B7FF0C514FD92052918F1551171824D8EE96",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "entry/src/test/PlaybackEngine.test.ets",
+    "sha256": "5E44A69DD67D9D64C1F7E53CB1681085AAD27CA3EEDA5EF9D1136C355D451525",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "scripts/verify.ps1",
+    "sha256": "F6103FC75C69AE1D72D46D3F941D74D062CE55045D7BF75087F547B4B22C4015",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "scripts/verify-simulator.ps1",
+    "sha256": "B416A26B5DC87C79F38AD0507067E548D8E010E07F51B4363D477A9B776C9269",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read in Phase8E or authored/reviewed failure evidence; exact current bytes and Git identity freshly revalidated; no old execution PASS inherited",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "test-lab/playback/phase8e-system-prepared-readiness-sim-20261008/leave-during-prepare.json",
+    "sha256": "1EA215D1621DD53CF65C388536F3E92F13F44DDFEA576ACD019F344AB359257B",
+    "fullyRead": true,
+    "readingMethod": "Fresh full Task / two changed source files and diff / latest CURRENT sections read; historical sections distinguished",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "test-lab/playback/phase8e-system-prepared-readiness-sim-20261008/native-readiness-timeline.json",
+    "sha256": "1742606C4A1BD1D5FEBD6A07F3D468038F5B475532B0B511F62CC0E7DB7DEC1A",
+    "fullyRead": true,
+    "readingMethod": "Fresh full Task / two changed source files and diff / latest CURRENT sections read; historical sections distinguished",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "test-lab/playback/phase8e-system-prepared-readiness-sim-20261008/source-lifecycle-assessment.json",
+    "sha256": "04647E3506BD2C1A8823D835B048770C31747C535FDC7B62C58CA0B23AAC5546",
+    "fullyRead": true,
+    "readingMethod": "Fresh full Task / two changed source files and diff / latest CURRENT sections read; historical sections distinguished",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "test-lab/playback/phase8e-system-prepared-readiness-sim-20261008/task-result.json",
+    "sha256": "CF7FFB0B553B09BF09CD1FB8A5F9FB28E9F4B8C2310672F4D5F5EFE957857E72",
+    "fullyRead": true,
+    "readingMethod": "Fresh full Task / two changed source files and diff / latest CURRENT sections read; historical sections distinguished",
+    "revision": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f"
+  },
+  {
+    "path": "installed API26 @ohos.multimedia.media.d.ts",
+    "sha256": "8A7DCA59E33B0797070CA8C8E2FB3FEF51980B0887A7DEF350171CDB43175789",
+    "fullyRead": false,
+    "relevantSectionsFullyRead": true,
+    "sections": [
+      "prepare/play",
+      "release",
+      "AVPlayerState",
+      "stateChange"
+    ],
+    "readingMethod": "Actual installed contract freshly read; current official docs secondary"
+  }
+]

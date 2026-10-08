@@ -1,0 +1,27 @@
+[
+  {
+    "caseId": "hls-h264-aac",
+    "state": "NOT RUN",
+    "reason": "Strict STOP after baseline private helper assertion >=800ms; no retry or further open"
+  },
+  {
+    "caseId": "hls-hevc-aac",
+    "state": "NOT RUN",
+    "reason": "Strict STOP after baseline private helper assertion >=800ms; no retry or further open"
+  },
+  {
+    "caseId": "mkv-ffv1-flac",
+    "state": "NOT RUN",
+    "reason": "Strict STOP after baseline private helper assertion >=800ms; no retry or further open"
+  },
+  {
+    "caseId": "cancel-hls-h264-aac",
+    "state": "NOT RUN",
+    "reason": "Strict STOP after baseline private helper assertion >=800ms; no retry or further open"
+  },
+  {
+    "caseId": "recovery-mp4-h264-aac",
+    "state": "NOT RUN",
+    "reason": "Strict STOP after baseline private helper assertion >=800ms; no retry or further open"
+  }
+]

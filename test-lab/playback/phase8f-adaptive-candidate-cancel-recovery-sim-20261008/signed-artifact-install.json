@@ -1,0 +1,30 @@
+{
+  "source": "8174e6e4f0214958fb83fef46e92170c4c10263a",
+  "dispatch": "616e0ed6ddb838edb2b7cc50dcd88fff1193f46f",
+  "signing": {
+    "operation": "SDK hap-sign-tool sign-app localSign",
+    "sdkCredentialHandling": "unchanged installed Hvigor DecipherUtil",
+    "existingProfileIncludesSimulator": true,
+    "sourceInputSha256": "EA29CB0D39D8E4DF6D5CCADCC5F83A031E8C2D4C50D24E34BE92E7A6407E99C1",
+    "exitCode": 0,
+    "trackedBuildProfileModified": false,
+    "signatureOrPermissionChecksDisabled": false,
+    "outputExists": true,
+    "signedSha256": "E5427B9796ADC1B3D59E2DD591C6461C97C8709A68DFB43E03ECF0C7581F081D",
+    "signedBytes": 25295980
+  },
+  "exactSignedInstall": {
+    "utc": "2026-10-08T15:47:32.045661+00:00",
+    "artifactSha256": "E5427B9796ADC1B3D59E2DD591C6461C97C8709A68DFB43E03ECF0C7581F081D",
+    "artifactBytes": 25295980,
+    "signed": true,
+    "transportExitCode": 0,
+    "installSuccess": true,
+    "signatureRejectionCode9568332": false,
+    "dataClearedOrUninstalled": false
+  },
+  "signedNativeWhitelistAbiPassed": true,
+  "normalColdLaunch": true,
+  "appDataRetained": true,
+  "unsignedInstallAttempted": false
+}

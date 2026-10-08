@@ -1,0 +1,38 @@
+{
+  "utc": "2026-10-08T15:51:37.516018+00:00",
+  "normalCleanup": true,
+  "forcedCleanupRequired": false,
+  "forceStopAfterFixture": false,
+  "originalAutoRestored": true,
+  "ownedTemporaryHttpRowRemoved": true,
+  "ownReverseRemovedAndListEmpty": true,
+  "ownServerStoppedAndListenerAbsent": true,
+  "mediaWebdavAndOtherServicesPreserved": true,
+  "resourceSamples": [
+    {
+      "label": "pre-fixture",
+      "utc": "2026-10-08T15:47:44.407091+00:00",
+      "surfaceNodes": 0,
+      "systemPlayerInstancesForApp": 0,
+      "appAudioRendererCount": 0,
+      "appAudioRendererStates": []
+    },
+    {
+      "label": "mp4-h264-aac-leave",
+      "utc": "2026-10-08T15:48:24.818324+00:00",
+      "surfaceNodes": 0,
+      "systemPlayerInstancesForApp": 0,
+      "appAudioRendererCount": 0,
+      "appAudioRendererStates": []
+    },
+    {
+      "label": "final-cleanup",
+      "utc": "2026-10-08T15:49:03.006450+00:00",
+      "surfaceNodes": 0,
+      "systemPlayerInstancesForApp": 0,
+      "appAudioRendererCount": 0,
+      "appAudioRendererStates": []
+    }
+  ],
+  "playerMetricMeaning": "App-matching PlayerDistributedService entries, not proven native object counts; audio entries not audibility; sampled zeros not exhaustive leak proof"
+}

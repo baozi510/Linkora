@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "<validation-checkout>\artifacts\phase8f\focus-run.PRIVATE.py", line 72, in <module>
+    run_case(case,case_id=='mp4-h264-aac')
+  File "<validation-checkout>\artifacts\phase8f\focus-run.PRIVATE.py", line 68, in run_case
+    if healthy:assert playing and progress and frame and matching,'Healthy control/target route not established; STOP before six cases'
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Healthy control/target route not established; STOP before six cases

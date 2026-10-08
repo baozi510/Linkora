@@ -1,0 +1,29 @@
+{
+  "utc": "2026-10-08T15:51:37.484870+00:00",
+  "genuineTargetNativeGetRange206": true,
+  "nativeUserAgentClass": "AVPlayerLib emulator",
+  "actualRequests": [
+    {
+      "utc": "2026-10-08T15:48:18.559147+00:00",
+      "method": "GET",
+      "path": "/mp4_h264_aac.mp4",
+      "status": "206",
+      "range": "bytes=0-8191",
+      "nativeUserAgentClass": "AVPlayerLib emulator",
+      "nativeLibraryVersion": "7.0.0.107"
+    },
+    {
+      "utc": "2026-10-08T15:48:18.625264+00:00",
+      "method": "GET",
+      "path": "/mp4_h264_aac.mp4",
+      "status": "206",
+      "range": "bytes=8192-270256",
+      "nativeUserAgentClass": "AVPlayerLib emulator",
+      "nativeLibraryVersion": "7.0.0.107"
+    }
+  ],
+  "hostOnlyProbeNotUsedAsTargetProof": true,
+  "healthyRouteControlOfficialOpens": 1,
+  "rawHelperAssertionPassed": false,
+  "proofMethod": "Derived after STOP from original same-invocation host trace and native timeline; no new request/open/retry"
+}

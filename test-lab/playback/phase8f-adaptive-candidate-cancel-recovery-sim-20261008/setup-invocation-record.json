@@ -1,0 +1,9 @@
+{
+  "invalidInvocation": "check-ffmpeg-artifact.cjs <signed-hap> --abi=x86_64",
+  "failure": "Unsupported ABI because CLI expects positional ABI; rejected before ABI validation",
+  "correctInvocation": "check-ffmpeg-artifact.cjs <same-signed-hap> x86_64",
+  "correctInvocationResult": "PASS one whitelisted library",
+  "signOrBuildOrInstallRepeated": false,
+  "officialPlaybackRetries": 0,
+  "originalRejectedInvocationLogsRetained": true
+}

@@ -1,0 +1,12 @@
+{
+  "startedUtc": "2026-10-08T15:48:01.885836+00:00",
+  "completedUtc": "2026-10-08T15:48:02.050242+00:00",
+  "createOperation": "rport tcp:19084 tcp:19084",
+  "transportExitCode": 0,
+  "explicitResultOk": true,
+  "actualReverseTaskListed": true,
+  "hostFixtureServerKeptRunning": true,
+  "createdMappingsThisRound": 1,
+  "targetRouteProven": false,
+  "nextStep": "Genuine target request required; healthy ordinary app control will count as its one official execution if shell HTTP client unavailable"
+}

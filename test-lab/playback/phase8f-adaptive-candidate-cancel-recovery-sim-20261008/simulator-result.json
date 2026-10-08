@@ -1,0 +1,7 @@
+{
+  "name": "simulator",
+  "script": "scripts/verify-simulator.ps1",
+  "completedUtc": "2026-10-08T15:41:16.2300741Z",
+  "exitCode": 0,
+  "startedUtc": "2026-10-08T15:40:45.2656715Z"
+}
