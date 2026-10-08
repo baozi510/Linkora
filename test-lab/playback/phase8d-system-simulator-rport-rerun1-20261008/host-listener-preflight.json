@@ -1,0 +1,9 @@
+{
+  "loopbackOnly": true,
+  "unrelatedListenersModified": false,
+  "ownedProcessIdentityVerified": true,
+  "listenersAfter": 1,
+  "utc": "2026-10-08T07:42:02.6858494Z",
+  "port": 19084,
+  "listenersBefore": 0
+}

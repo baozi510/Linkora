@@ -1,0 +1,15 @@
+{
+  "utc": "2026-10-08T07:41:02.424886+00:00",
+  "version": "Ver: 3.2.0f",
+  "installedHelpSha256": "990CA690C8126A2D452450FC1BF1EBAFBD721CBE0A5309A91BD65539305671BA",
+  "exactSelectedHelpLines": [
+    "fport localnode remotenode            - Forward local traffic to remote device",
+    "rport remotenode localnode            - Reserve remote traffic to local host",
+    "fport rm taskstr                      - Remove forward/reverse task by taskstring"
+  ],
+  "officialReference": "https://github.com/openharmony/docs/blob/master/zh-cn/application-dev/dfx/hdc.md",
+  "correctCreateSyntax": "hdc rport tcp:19084 tcp:19084",
+  "removeSyntax": "hdc fport rm tcp:19084 tcp:19084",
+  "routeDirection": "device-to-host",
+  "noConflictingMappingBefore": true
+}

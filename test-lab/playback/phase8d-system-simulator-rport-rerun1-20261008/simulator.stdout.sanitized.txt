@@ -1,0 +1,88 @@
+Simulator product parity/isolation checks passed.
+Audio-only metadata diagnostic guard passed.
+Using multi-target task: assembleHapSeq
+> hvigor Running command: hvigorw assembleHap --mode module -p module=entry@simulator -p seq=true -p product=simulator -p buildMode=debug --parallel --incremental --info --analyze=normal --no-daemon
+> hvigor start to execute ohpm install
+ohpm INFO: remove useless folder succeed: "<validation-checkout>\oh_modules\.ohpm\@mpv-ohos+mpv-arkts@1.0.0"
+ohpm INFO: remove project useless folder succeed: "<validation-checkout>\oh_modules\.ohpm\oh_modules\@mpv-ohos\mpv-arkts"
+ohpm INFO: delete useless empty folder succeed: "<validation-checkout>\oh_modules\.ohpm\oh_modules\@mpv-ohos"
+install completed in 0s 102ms
+> hvigor Finished :entry:simulator@PreBuild... after 187 ms
+> hvigor Finished :linkora_ffmpeg:simulator@PreBuild... after 62 ms
+> hvigor Finished :linkora_core:default@PreBuild... after 16 ms
+> hvigor Finished :linkora_media_probe:default@PreBuild... after 10 ms
+> hvigor Finished :linkora_proxy:default@PreBuild... after 13 ms
+> hvigor Finished :entry:simulator@CreateModuleInfo... after 1 ms
+> hvigor Finished :entry:simulator@GenerateMetadata... after 3 ms
+> hvigor Finished :entry:simulator@PreCheckSyscap... after 1 ms
+> hvigor Finished :entry:simulator@GeneratePkgSdkInfo... after 4 ms
+> hvigor Finished :entry:simulator@ProcessIntegratedHsp... after 1 ms
+> hvigor Finished :linkora_core:default@CreateHarBuildProfile... after 2 ms
+> hvigor Finished :linkora_core:default@ConfigureCmake... after 1 ms
+> hvigor Finished :linkora_core:default@MergeProfile... after 4 ms
+> hvigor Finished :linkora_media_probe:default@CreateHarBuildProfile... after 1 ms
+> hvigor Finished :linkora_media_probe:default@ConfigureCmake... after 1 ms
+> hvigor Finished :linkora_media_probe:default@MergeProfile... after 2 ms
+> hvigor Finished :entry:simulator@SyscapTransform... after 1 ms
+> hvigor Finished :linkora_ffmpeg:simulator@CreateHarBuildProfile... after 1 ms
+> hvigor Finished :linkora_proxy:default@CreateHarBuildProfile... after 2 ms
+> hvigor Finished :linkora_core:default@BuildNativeWithCmake... after 1 ms
+> hvigor Finished :linkora_ffmpeg:simulator@MergeProfile... after 2 ms
+> hvigor Finished :linkora_proxy:default@MergeProfile... after 2 ms
+> hvigor Finished :linkora_media_probe:default@BuildNativeWithCmake... after 1 ms
+> hvigor Finished :entry:simulator@CreateBuildProfile... after 2 ms
+> hvigor Finished :linkora_ffmpeg:simulator@ConfigureCmake... after 5 ms
+> hvigor Finished :linkora_core:default@BuildNativeWithNinja... after 1 ms
+> hvigor Finished :linkora_proxy:default@ConfigureCmake... after 1 ms
+> hvigor Finished :entry:simulator@MergeProfile... after 46 ms
+> hvigor Finished :linkora_media_probe:default@BuildNativeWithNinja... after 1 ms
+> hvigor Finished :linkora_core:default@ProcessLibs... after 12 ms
+> hvigor Finished :linkora_proxy:default@BuildNativeWithCmake... after 1 ms
+> hvigor Finished :entry:simulator@MakePackInfo... after 4 ms
+> hvigor Finished :linkora_media_probe:default@ProcessLibs... after 4 ms
+> hvigor Finished :linkora_core:default@DoNativeStrip... after 5 ms
+> hvigor Finished :linkora_media_probe:default@DoNativeStrip... after 3 ms
+> hvigor Finished :linkora_proxy:default@BuildNativeWithNinja... after 1 ms
+> hvigor Finished :linkora_proxy:default@ProcessLibs... after 4 ms
+> hvigor Finished :linkora_proxy:default@DoNativeStrip... after 2 ms
+> hvigor Finished :linkora_ffmpeg:simulator@BuildNativeWithCmake... after 3 s 440 ms
+> hvigor Finished :entry:simulator@ConfigureCmake... after 1 ms
+> hvigor Finished :entry:simulator@GeneratePkgContextInfo... after 11 ms
+> hvigor Finished :entry:simulator@BuildNativeWithCmake... after 1 ms
+> hvigor Finished :entry:simulator@ProcessProfile... after 99 ms
+> hvigor Finished :entry:simulator@ProcessRouterMap... after 4 ms
+> hvigor Finished :entry:simulator@ProcessShareConfig... after 3 ms
+> hvigor Finished :entry:simulator@ProcessStartupConfig... after 3 ms
+> hvigor Finished :entry:simulator@ProcessResource... after 4 ms
+> hvigor Finished :entry:simulator@GenerateLoaderJson... after 17 ms
+> hvigor Finished :entry:simulator@CompileResource... after 230 ms
+> hvigor Finished :entry:simulator@BuildJS... after 4 ms
+> hvigor Finished :linkora_ffmpeg:simulator@BuildNativeWithNinja... after 1 s 798 ms
+> hvigor Finished :linkora_ffmpeg:simulator@ProcessLibs... after 120 ms
+> hvigor Finished :linkora_ffmpeg:simulator@DoNativeStrip... after 85 ms
+> hvigor Finished :entry:simulator@BuildNativeWithNinja... after 1 ms
+> hvigor Finished :entry:simulator@ProcessLibs... after 6 ms
+> hvigor Finished :entry:simulator@DoNativeStrip... after 65 ms
+> hvigor Finished :entry:simulator@CacheNativeLibs... after 5 ms
+> hvigor Finished :entry:simulator@CompileArkTS... after 13 s 365 ms
+> hvigor Finished :entry:simulator@GeneratePkgModuleJson... after 3 ms
+> hvigor Finished :entry:simulator@ProcessCompiledResources... after 1 ms
+> hvigor Finished :entry:simulator@PackageHap... after 597 ms
+> hvigor Finished :entry:simulator@PackingCheck... after 5 ms
+> hvigor Finished :entry:simulator@SignHap... after 2 ms
+> hvigor Finished :entry:simulator@CollectDebugSymbol... after 1 ms
+> hvigor Finished :entry:assembleHap... after 1 ms
+> hvigor BUILD SUCCESSFUL in 23 s 435 ms
+
+65 tasks in total: 65 executed, 0 up-to-date
+> hvigor Finished ::assembleHapSeq... after 24 s 477 ms
+> hvigor BUILD SUCCESSFUL in 26 s 4 ms
+
+1 tasks in total: 1 executed, 0 up-to-date
+FFmpeg/native artifact ABI audit PASS: 1 libraries (x86_64)
+Simulator HAP verified: <validation-checkout>\entry\build\simulator\outputs\simulator\linkora-simulator-unsigned.hap
+Simulator HAP native whitelist passed (FFmpeg analyzer only).
+Restoring the default dependency graph after simulator target resolution...
+ohpm INFO: MetaDataFetcher fetching meta info of package '@mpv-ohos/mpv-arkts' from https://ohpm.openharmony.cn/ohpm/
+ohpm INFO: fetch meta info of package '@mpv-ohos/mpv-arkts' success https://ohpm.openharmony.cn/ohpm/@mpv-ohos/mpv-arkts
+install completed in 0s 749ms

@@ -1,0 +1,17 @@
+{
+  "utc": "2026-10-08T08:08:12.468500+00:00",
+  "ownedServerStopped": true,
+  "ownedReverseRemoved": true,
+  "host19084ListenerAbsentAfter": true,
+  "originalAutoRestored": true,
+  "ownedTemporaryHttpRowRemoved": true,
+  "ownedMediaAndWebdavProfilePreserved": true,
+  "finalSample": {
+    "surfaceNodes": 0,
+    "systemPlayerInstancesForApp": 0,
+    "appAudioRendererCount": 0
+  },
+  "sourceAndTestAndUnrelatedUserDataUnchanged": true,
+  "allSevenCaseLeavesSampledZero": true,
+  "exhaustiveLeakFreedomClaimed": false
+}

@@ -1,0 +1,74 @@
+{
+  "phase": "initial",
+  "allowlist": [
+    "entry/oh-package-lock.json5",
+    "linkora_ffmpeg/oh-package-lock.json5",
+    "linkora_proxy/oh-package-lock.json5",
+    "oh-package-lock.json5"
+  ],
+  "affectedPaths": [
+    "entry/oh-package-lock.json5",
+    "linkora_ffmpeg/oh-package-lock.json5",
+    "linkora_proxy/oh-package-lock.json5",
+    "oh-package-lock.json5"
+  ],
+  "proofs": [
+    {
+      "path": "entry/oh-package-lock.json5",
+      "allowlisted": true,
+      "headBlob": "68d0837470f09dc81b4d1f787f19eee84254e02a",
+      "gitNormalizedWorkBlob": "68d0837470f09dc81b4d1f787f19eee84254e02a",
+      "normalizedBytesEqual": true,
+      "lineContentEqual": true,
+      "headSha256": "4a98d59c3010e0b601450fee4042fe5ee963749c2370e8f042b8b949795ebec4",
+      "workSha256": "aa9212c10b775c2c0a1132f65af282bcd8e6ebaee2969c40c7dd8fb62a3cb0a9",
+      "workCrlfCount": 89
+    },
+    {
+      "path": "linkora_ffmpeg/oh-package-lock.json5",
+      "allowlisted": true,
+      "headBlob": "c66641fbf373f8393d7934a5707736a01e74a3b7",
+      "gitNormalizedWorkBlob": "c66641fbf373f8393d7934a5707736a01e74a3b7",
+      "normalizedBytesEqual": true,
+      "lineContentEqual": true,
+      "headSha256": "fb8d8b816d3638be90c434936e63322c5037fffc3bc7a497486743399faffb34",
+      "workSha256": "e235d9eb5301b90b62deeeeecfbc3faaba2d0497b89bc87bd10efae7d9b0a54b",
+      "workCrlfCount": 25
+    },
+    {
+      "path": "linkora_proxy/oh-package-lock.json5",
+      "allowlisted": true,
+      "headBlob": "afb5eb1cc7995e641bde032527090ed43d2a33bd",
+      "gitNormalizedWorkBlob": "afb5eb1cc7995e641bde032527090ed43d2a33bd",
+      "normalizedBytesEqual": true,
+      "lineContentEqual": true,
+      "headSha256": "c51640d60c0626e19c11302a51b76e66167d0abe4cfb28f4e43227283924d514",
+      "workSha256": "0a493df9cc4f864271aa5c06adabb1d6a2d4d306cb3f73399b3c44b882da6c6d",
+      "workCrlfCount": 18
+    },
+    {
+      "path": "oh-package-lock.json5",
+      "allowlisted": true,
+      "headBlob": "9f659f79cdaf13e186013d40e3a0ba54174de6da",
+      "gitNormalizedWorkBlob": "9f659f79cdaf13e186013d40e3a0ba54174de6da",
+      "normalizedBytesEqual": true,
+      "lineContentEqual": true,
+      "headSha256": "74f90b34ae5109819f2dc362de7342692df6b54bd1a66781c1aedac93905a28d",
+      "workSha256": "9841d31bef25c8c48f4dd437d40a2bf9a0f635e59486c526b39f8bf8b4c1b2f3",
+      "workCrlfCount": 19
+    }
+  ],
+  "noOtherTrackedPathOrBytesChanged": true,
+  "semanticChange": false,
+  "restoreAuthorizedBy": "docs/CODEX_VALIDATION_TASK.md Section 3",
+  "restorePerformed": true,
+  "utc": "2026-10-08T07:26:27.126341+00:00",
+  "restoredPaths": [
+    "entry/oh-package-lock.json5",
+    "linkora_ffmpeg/oh-package-lock.json5",
+    "linkora_proxy/oh-package-lock.json5",
+    "oh-package-lock.json5"
+  ],
+  "cleanAfterRestore": true,
+  "allTrackedWorkBytesMatchInitialBaseline": true
+}

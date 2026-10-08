@@ -1,0 +1,146 @@
+[
+  {
+    "path": "docs/AI_WORKFLOW.md",
+    "sha256": "9692B25EA6A66960228B9C3869E8731AEA3D8AE29286B33E9F519F3E0B661E4A",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read; exact current worktree bytes and pinned Git revision revalidated; no historical test result inherited"
+  },
+  {
+    "path": "docs/MASTER_IMPLEMENTATION_PLAN.md",
+    "sha256": "69C50B6B81CEC243934BF38077E24621EF6470000118A779F66B0025A692BC84",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read; exact current worktree bytes and pinned Git revision revalidated; no historical test result inherited"
+  },
+  {
+    "path": "docs/ARCHITECTURE_TARGET.md",
+    "sha256": "11DDF02AE6E521898B792E093677D60DA82592E850B4632CC4BCD35D5A6DEF5F",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read; exact current worktree bytes and pinned Git revision revalidated; no historical test result inherited"
+  },
+  {
+    "path": "docs/ARCHITECTURE_MIGRATION.md",
+    "sha256": "7280BC51ADB42FE0F04E1FB1892AA7B30D56DC89DD615CE1B4CDDF0DFAB4A746",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read; exact current worktree bytes and pinned Git revision revalidated; no historical test result inherited"
+  },
+  {
+    "path": "docs/IMPLEMENTATION_STATUS.md",
+    "sha256": "D6F0F650E10EC4C277EFF09D717D4EF53442D0C39EA66ECA684A00C0B96C2AC8",
+    "fullyRead": true,
+    "readingMethod": "Current new task/review/current-state or prior stopped report/evidence read in this run"
+  },
+  {
+    "path": "docs/SESSION_HANDOFF.md",
+    "sha256": "0EF9862B6F1FB8C1244C35EA9F5B70FF9816A95344EB93E7EAB659A7DDF879A1",
+    "fullyRead": true,
+    "readingMethod": "Current new task/review/current-state or prior stopped report/evidence read in this run"
+  },
+  {
+    "path": "docs/CODEX_VALIDATION_TASK.md",
+    "sha256": "7F2C9A70D3424446D922339C84FB96E3BC9901FCF70E2923E22538D4DFAFF1DE",
+    "fullyRead": true,
+    "readingMethod": "Current new task/review/current-state or prior stopped report/evidence read in this run"
+  },
+  {
+    "path": "docs/PLAYBACK_PHASE8B_REPORT.md",
+    "sha256": "274B6821D59692D5FACB9431BE72E47E97095F7A563F7B0FFF31C4B68F30DC91",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read; exact current worktree bytes and pinned Git revision revalidated; no historical test result inherited"
+  },
+  {
+    "path": "docs/PLAYBACK_PHASE8B_SIMULATOR_RUNBOOK.md",
+    "sha256": "7776CEDE7ABA657CDA2AF87138DCCD854A693B62324B55082DFA40DDD011A7D4",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read; exact current worktree bytes and pinned Git revision revalidated; no historical test result inherited"
+  },
+  {
+    "path": "docs/PLAYBACK_NATIVE_CAPABILITY_AUDIT_REPORT.md",
+    "sha256": "F816D912C1953FC1E115D17B887D90423D56BA23012A4CF7EFEE06D7FC042CDA",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read; exact current worktree bytes and pinned Git revision revalidated; no historical test result inherited"
+  },
+  {
+    "path": "entry/src/main/ets/playback/SystemPlaybackPort.ets",
+    "sha256": "972CD14657E47C42C8E65A8CB3EF738C823FC437094820647DFA9D45D3FF9E41",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read; exact current worktree bytes and pinned Git revision revalidated; no historical test result inherited"
+  },
+  {
+    "path": "entry/src/main/ets/pages/PlayerPage.ets",
+    "sha256": "87AA1C5ADAB7B04C27F5845D302CA22555C0E58DC14D167A20C4FB020073C3DC",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read; exact current worktree bytes and pinned Git revision revalidated; no historical test result inherited"
+  },
+  {
+    "path": "linkora_core/src/main/ets/playback/PlaybackEngine.ets",
+    "sha256": "CDEE3EEB5CC03DEA6FDCC87BF785C67798EBA6AC7EDD51B44155B18C42DF8D2C",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read; exact current worktree bytes and pinned Git revision revalidated; no historical test result inherited"
+  },
+  {
+    "path": "linkora_core/src/main/ets/playback/PlaybackPort.ets",
+    "sha256": "C21EC63E9CE2AF9A0516B9E4048C7769F6C1836EC7E21CA4741217DD9DEFC62C",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read; exact current worktree bytes and pinned Git revision revalidated; no historical test result inherited"
+  },
+  {
+    "path": "linkora_core/src/main/ets/playback/PlaybackBackend.ets",
+    "sha256": "116B387031D7795538BD18E24B3187C25268D19ACD0EA870248859D6351D0809",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read; exact current worktree bytes and pinned Git revision revalidated; no historical test result inherited"
+  },
+  {
+    "path": "entry/src/main/ets/playback/AdaptivePlaybackPort.ets",
+    "sha256": "803FD782E47DC6F20D442E23F767695FCA1239BAD488D0449DD431D20D4154C1",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read; exact current worktree bytes and pinned Git revision revalidated; no historical test result inherited"
+  },
+  {
+    "path": "test-lab/media-compatibility/cases.json",
+    "sha256": "45DD55584A3E644F7AB2DEA138EA5091262395DC177A93A9E4D9D779998581E0",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read; exact current worktree bytes and pinned Git revision revalidated; no historical test result inherited"
+  },
+  {
+    "path": "test-lab/media-compatibility/generate-samples.ps1",
+    "sha256": "1400258A324D479A1664A6B9C320462C71E212DACEE3118E3929DD489EE678AB",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read; exact current worktree bytes and pinned Git revision revalidated; no historical test result inherited"
+  },
+  {
+    "path": "test-lab/media-compatibility/fetch-external-samples.ps1",
+    "sha256": "AE255608BDB42D2A676CF28CC87B5C79B71E0EC048189A9BE05B16AE63AAB533",
+    "fullyRead": true,
+    "readingMethod": "Previously fully read; exact current worktree bytes and pinned Git revision revalidated; no historical test result inherited"
+  },
+  {
+    "path": "docs/PLAYBACK_PHASE8D_SIMULATOR_INVESTIGATION_REPORT.md",
+    "sha256": "DDD4E231595A430C25DFC6FB3CC7C96C52F8F54A5ABF08984300154AB01EF279",
+    "fullyRead": true,
+    "readingMethod": "Current new task/review/current-state or prior stopped report/evidence read in this run"
+  },
+  {
+    "path": "test-lab/playback/phase8d-system-simulator-investigation-20261008/preflight-command-diagnosis.json",
+    "sha256": "8A29707A0CFAF3FF03E9D9381CF262C6517549EE59E3F40A36047F0DE005A302",
+    "fullyRead": true,
+    "readingMethod": "Current new task/review/current-state or prior stopped report/evidence read in this run"
+  },
+  {
+    "path": "test-lab/playback/phase8d-system-simulator-investigation-20261008/root-cause-assessment.json",
+    "sha256": "08B709CFF7EC79895C980B8780CEFC126B86CD057BC4DB4165211D4C077964CC",
+    "fullyRead": true,
+    "readingMethod": "Current new task/review/current-state or prior stopped report/evidence read in this run"
+  },
+  {
+    "path": "test-lab/playback/phase8d-system-simulator-investigation-20261008/six-case-observations.json",
+    "sha256": "AF261E057B82BF3FC1E16264CA6075DD85DB4BE00862E6B3E0A242D182F7B233",
+    "fullyRead": true,
+    "readingMethod": "Current new task/review/current-state or prior stopped report/evidence read in this run"
+  },
+  {
+    "path": "test-lab/playback/phase8d-system-simulator-investigation-20261008/source-state.json",
+    "sha256": "69FA28C2FA7BA7CA4036CC86E7F1BAA25FD8DAA586889B176756A532DBA2CE24",
+    "fullyRead": true,
+    "readingMethod": "Current new task/review/current-state or prior stopped report/evidence read in this run"
+  }
+]

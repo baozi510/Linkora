@@ -1,0 +1,27 @@
+{
+  "utc": "2026-10-08T07:47:55.568608+00:00",
+  "method": "unchanged ordinary forced-System healthy MP4 official execution",
+  "healthyControlCountedExactlyOnce": true,
+  "reverseMappingEvidence": "reverse-mapping-proof.json",
+  "hostControlledByteTruthEvidence": "controlled-host-fixture-proof.json",
+  "targetAvplayerActivityCorrelated": true,
+  "exactExpectedFileGetAfterAppOpen": true,
+  "observedStatuses": [
+    "206",
+    "206"
+  ],
+  "observedRanges": [
+    "bytes=0-8191",
+    "bytes=8192-270256"
+  ],
+  "nativePlayerUserAgentObserved": true,
+  "visibleExpectedFrameAndProgress": true,
+  "positionSamplesMs": [
+    144.0,
+    977.0
+  ],
+  "releaseClean": true,
+  "hostOnlyGetNotUsedAsTargetProof": true,
+  "appDoesNotExposeIndependentWireByteDigest": true,
+  "sixHistoricalFixtureOpensNotYetExecuted": true
+}

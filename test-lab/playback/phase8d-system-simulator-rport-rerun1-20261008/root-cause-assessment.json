@@ -1,0 +1,30 @@
+{
+  "primary": "PASS \u2014 FOCUSED SYSTEM SIMULATOR INVESTIGATION COLLECTED",
+  "collectionOnly": true,
+  "healthyControl": "PASS",
+  "officialUniqueOpens": 7,
+  "exactTargetCases": 6,
+  "newTargetPlaybackPasses": 0,
+  "historicalResultsUnchanged": true,
+  "hls": {
+    "requestStatuses": "manifest and every segment GET200 in both independent opens",
+    "actualFailure": "Native play invoked while initialized after prepare wait; no prepared notification, UI LNK-PLAY-006",
+    "notAttributedToNetwork404AuthOrDecoderUnsupported": true,
+    "sourceBoundary": "SystemPlaybackPort native prepare promise -> AdaptivePlaybackPort PREPARED -> PlaybackEngine play",
+    "nativeVersusPortableSourceCause": "UNRESOLVED; native completion state diverges from promise/adapter readiness assumption; GPT owner review required"
+  },
+  "frameCases": {
+    "actualNativeSizes": "0x0 for all four via native callback",
+    "nativePreparedPlaying": true,
+    "observedMonotonicAdvance": true,
+    "realScreensCaptured": true,
+    "blackSampledPlayingRoi": true,
+    "firstFrameSubmissionCallbackObserved": false,
+    "unavailableScreenshotNotUsedAsBlackProof": true,
+    "permanentBlackOrAllDeviceUnsupportedClaimed": false,
+    "exactDecoderSelection": "NOT PROVEN"
+  },
+  "noConclusivePlatformIndependentProductionSourceDefectIsolated": true,
+  "noPatchOrHooksOrPolicyChange": true,
+  "deviceOnlyAreas": "NOT RUN / NOT PROVEN"
+}

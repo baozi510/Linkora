@@ -1,0 +1,21 @@
+{
+  "taskId": "phase8d-sim-rerun1-hdc-rport-six-case",
+  "state": "READY",
+  "repository": "https://github.com/baozi510/Linkora.git",
+  "branch": "feat/playback-capability-phase8",
+  "source": "c0d37ef9aaeba31c512743fe704e8d91ba1c0c48",
+  "head": "a8ad55081c54630e3602b71f9fe9415cc092e1ab",
+  "drift": [
+    "docs/CODEX_VALIDATION_TASK.md"
+  ],
+  "clean": true,
+  "submodules": {
+    "entry/src/main/cpp/third_party/libnfs": "cee4ca723e081e6a18f51b838690a4c21e14bb2c",
+    "entry/src/main/cpp/third_party/libsmb2": "b3d560c02fb1268320d2fd1c17fe841b0d93b85f",
+    "entry/src/main/cpp/third_party/mbedtls/framework": "7d726d145d678aa7f5a7df3b9e7ee3dbce6ea1bf"
+  },
+  "utc": "2026-10-08T07:25:04.674371+00:00",
+  "submoduleInitialization": "Explicit trusted local Git source clones at exact committed pins; absorbed as normal submodules, origin URLs synchronized to committed GitHub URLs. No old app artifact/test PASS reused.",
+  "ancillaryRecursiveFetchFailure": "An initial extra recursive fetch of unchanged framework origin reported schannel SSL/TLS handshake failure. The actual mainline ref was freshly fetched successfully; exact pinned cached submodule repositories were verified and initialized without disabling TLS or changing Git file-transport security policy.",
+  "gitSecurityPolicyChanged": false
+}

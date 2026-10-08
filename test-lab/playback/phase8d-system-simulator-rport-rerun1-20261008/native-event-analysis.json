@@ -1,0 +1,291 @@
+{
+  "utc": "2026-10-08T08:25:40.325922+00:00",
+  "records": [
+    {
+      "caseId": "mp4-h264-aac",
+      "privateBeforeLogSha256": "E4ADEA7ECBD599AEFDB5A6823E4E6FBB725104FCED840D421E6A8E704DEA6807",
+      "privateAfterLogSha256": "E984C5C746F1387F81C2A3704081459D2C567F2E4B02E2553B10A82502206E20",
+      "lineExtractionMethod": "fresh after lines absent from captured before set, unchanged app-pid hilog; exact event matches; PID/thread/object/URI redacted only",
+      "nativePreparedNotificationObserved": true,
+      "nativePlayingNotificationObserved": true,
+      "nativePrepareInvoked": false,
+      "nativePlayInvoked": true,
+      "nativeFirstFrameSubmissionCallbackObserved": true,
+      "callbackRegistrationNotCountedAsSubmission": true,
+      "nativeVideoSizeCallbacks": [
+        [
+          320,
+          180
+        ]
+      ],
+      "nativeRejectsPlayWhileInitialized": false,
+      "sanitizedEventLines": [
+        "10-08 15:45:09.233  <pid> <thread> I C02b2b/AVPlayerCallback: #1623 <native-object> OnVideoSizeChangedCb is called, width = 320, height = 180",
+        "10-08 15:45:09.234  <pid> <thread> I C02b2b/AVPlayerNapi: #4854 <native-object> notify prepared",
+        "10-08 15:45:09.235  <pid> <thread> I C02b2b/AVPlayerNapi: #407 <native-object> Prepare Task Out",
+        "10-08 15:45:09.239  <pid> <thread> I C02b2b/AVPlayerNapi: #457 Wait Prepare Task End",
+        "10-08 15:45:09.240  <pid> <thread> I C02b2b/AVPlayerNapi: #512 JsPlay In",
+        "10-08 15:45:09.258  <pid> <thread> I C02b2b/AVPlayerCallback: #1599 OnStartRenderFrameCb is called",
+        "10-08 15:45:09.308  <pid> <thread> I C02b2b/AVPlayerNapi: #4854 <native-object> notify playing"
+      ],
+      "observedPositionSamplesMs": [
+        144.0,
+        977.0
+      ],
+      "observedMonotonicPositiveAdvance": true,
+      "observedPositionDeltaMs": 833.0,
+      "rawHarnessPositionAdvanced": true,
+      "rawHarnessProgressThresholdMs": 800,
+      "thresholdAndObservedAdvanceAreSeparate": true
+    },
+    {
+      "caseId": "hls-h264-aac",
+      "privateBeforeLogSha256": "9A677920DCFC1266A81886E3DD5306DA8884FBF976F4C447277BDB33B71F11F4",
+      "privateAfterLogSha256": "8727A4B6A66331061060D4F06A721A1B5B490C077EA700F8AA12AA09E8DA2D6F",
+      "lineExtractionMethod": "fresh after lines absent from captured before set, unchanged app-pid hilog; exact event matches; PID/thread/object/URI redacted only",
+      "nativePreparedNotificationObserved": false,
+      "nativePlayingNotificationObserved": false,
+      "nativePrepareInvoked": true,
+      "nativePlayInvoked": true,
+      "nativeFirstFrameSubmissionCallbackObserved": false,
+      "callbackRegistrationNotCountedAsSubmission": true,
+      "nativeVideoSizeCallbacks": [],
+      "nativeRejectsPlayWhileInitialized": true,
+      "sanitizedEventLines": [
+        "10-08 15:48:12.528  <pid> <thread> I C02b2b/AVPlayerNapi: #4854 <native-object> notify initialized",
+        "10-08 15:48:12.531  <pid> <thread> I C02b2b/AVPlayerNapi: #420 JsPrepare In",
+        "10-08 15:48:12.531  <pid> <thread> I C02b2b/AVPlayerNapi: #453 Wait Prepare Task Start",
+        "10-08 15:48:12.535  <pid> <thread> I C02b2b/AVPlayerNapi: #380 <native-object> Prepare Task In",
+        "10-08 15:48:14.537  <pid> <thread> I C02b2b/AVPlayerNapi: #457 Wait Prepare Task End",
+        "10-08 15:48:14.538  <pid> <thread> I C02b2b/AVPlayerNapi: #512 JsPlay In",
+        "10-08 15:48:14.538  <pid> <thread> E C02b2b/CommonNapi: #1275 SignError: The current state is initialized. Play operation only supports prepared/paused/completed.",
+        "10-08 15:48:14.540  <pid> <thread> I C02b2b/AVPlayerNapi: #407 <native-object> Prepare Task Out"
+      ],
+      "observedPositionSamplesMs": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "observedMonotonicPositiveAdvance": false,
+      "observedPositionDeltaMs": 0.0,
+      "rawHarnessPositionAdvanced": false,
+      "rawHarnessProgressThresholdMs": 800,
+      "thresholdAndObservedAdvanceAreSeparate": true
+    },
+    {
+      "caseId": "hls-hevc-aac",
+      "privateBeforeLogSha256": "04B3D00627EDEF52C415513D48EF5BF718F0F3C786EEB398D1B7337B8732E650",
+      "privateAfterLogSha256": "1301A1007621CEDA8161B5BF90A564386FE101A49A31586FF18BD91E4CF0C1DA",
+      "lineExtractionMethod": "fresh after lines absent from captured before set, unchanged app-pid hilog; exact event matches; PID/thread/object/URI redacted only",
+      "nativePreparedNotificationObserved": false,
+      "nativePlayingNotificationObserved": false,
+      "nativePrepareInvoked": true,
+      "nativePlayInvoked": true,
+      "nativeFirstFrameSubmissionCallbackObserved": false,
+      "callbackRegistrationNotCountedAsSubmission": true,
+      "nativeVideoSizeCallbacks": [],
+      "nativeRejectsPlayWhileInitialized": true,
+      "sanitizedEventLines": [
+        "10-08 15:52:19.607  <pid> <thread> I C02b2b/AVPlayerNapi: #4854 <native-object> notify initialized",
+        "10-08 15:52:19.611  <pid> <thread> I C02b2b/AVPlayerNapi: #420 JsPrepare In",
+        "10-08 15:52:19.611  <pid> <thread> I C02b2b/AVPlayerNapi: #453 Wait Prepare Task Start",
+        "10-08 15:52:19.615  <pid> <thread> I C02b2b/AVPlayerNapi: #380 <native-object> Prepare Task In",
+        "10-08 15:52:21.619  <pid> <thread> I C02b2b/AVPlayerNapi: #457 Wait Prepare Task End",
+        "10-08 15:52:21.621  <pid> <thread> I C02b2b/AVPlayerNapi: #512 JsPlay In",
+        "10-08 15:52:21.621  <pid> <thread> E C02b2b/CommonNapi: #1275 SignError: The current state is initialized. Play operation only supports prepared/paused/completed.",
+        "10-08 15:52:21.624  <pid> <thread> I C02b2b/AVPlayerNapi: #407 <native-object> Prepare Task Out"
+      ],
+      "observedPositionSamplesMs": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "observedMonotonicPositiveAdvance": false,
+      "observedPositionDeltaMs": 0.0,
+      "rawHarnessPositionAdvanced": false,
+      "rawHarnessProgressThresholdMs": 800,
+      "thresholdAndObservedAdvanceAreSeparate": true
+    },
+    {
+      "caseId": "mkv-ffv1-flac",
+      "privateBeforeLogSha256": "9F32C04320FF21B8DB731591ACB57801C59D2519529ECCCF37F260946A189CD6",
+      "privateAfterLogSha256": "E57BA006F36B63FD9A292D973086EEBCCF78314C1FFC9BB40D0120986AC750D0",
+      "lineExtractionMethod": "fresh after lines absent from captured before set, unchanged app-pid hilog; exact event matches; PID/thread/object/URI redacted only",
+      "nativePreparedNotificationObserved": true,
+      "nativePlayingNotificationObserved": true,
+      "nativePrepareInvoked": true,
+      "nativePlayInvoked": true,
+      "nativeFirstFrameSubmissionCallbackObserved": false,
+      "callbackRegistrationNotCountedAsSubmission": true,
+      "nativeVideoSizeCallbacks": [
+        [
+          0,
+          0
+        ]
+      ],
+      "nativeRejectsPlayWhileInitialized": false,
+      "sanitizedEventLines": [
+        "10-08 15:54:37.847  <pid> <thread> I C02b2b/AVPlayerNapi: #4854 <native-object> notify initialized",
+        "10-08 15:54:37.847  <pid> <thread> I C02b2b/AVPlayerNapi: #420 JsPrepare In",
+        "10-08 15:54:37.847  <pid> <thread> I C02b2b/AVPlayerNapi: #453 Wait Prepare Task Start",
+        "10-08 15:54:37.852  <pid> <thread> I C02b2b/AVPlayerNapi: #380 <native-object> Prepare Task In",
+        "10-08 15:54:38.069  <pid> <thread> I C02b2b/AVPlayerCallback: #1623 <native-object> OnVideoSizeChangedCb is called, width = 0, height = 0",
+        "10-08 15:54:38.070  <pid> <thread> I C02b2b/AVPlayerNapi: #4854 <native-object> notify prepared",
+        "10-08 15:54:38.070  <pid> <thread> I C02b2b/AVPlayerNapi: #407 <native-object> Prepare Task Out",
+        "10-08 15:54:38.070  <pid> <thread> I C02b2b/AVPlayerNapi: #457 Wait Prepare Task End",
+        "10-08 15:54:38.072  <pid> <thread> I C02b2b/AVPlayerNapi: #512 JsPlay In",
+        "10-08 15:54:38.180  <pid> <thread> I C02b2b/AVPlayerNapi: #4854 <native-object> notify playing"
+      ],
+      "observedPositionSamplesMs": [
+        269.0,
+        970.0
+      ],
+      "observedMonotonicPositiveAdvance": true,
+      "observedPositionDeltaMs": 701.0,
+      "rawHarnessPositionAdvanced": false,
+      "rawHarnessProgressThresholdMs": 800,
+      "thresholdAndObservedAdvanceAreSeparate": true
+    },
+    {
+      "caseId": "mov-prores-pcm",
+      "privateBeforeLogSha256": "365595A67BB42CFDBC4020B58FE5B281D36F87B05E520C02BF4A521950CB72C0",
+      "privateAfterLogSha256": "A27C4A44E562C8FA4CDA3777AAD637F00818333AB27B1511C15EA74EDB01F930",
+      "lineExtractionMethod": "fresh after lines absent from captured before set, unchanged app-pid hilog; exact event matches; PID/thread/object/URI redacted only",
+      "nativePreparedNotificationObserved": true,
+      "nativePlayingNotificationObserved": true,
+      "nativePrepareInvoked": true,
+      "nativePlayInvoked": true,
+      "nativeFirstFrameSubmissionCallbackObserved": false,
+      "callbackRegistrationNotCountedAsSubmission": true,
+      "nativeVideoSizeCallbacks": [
+        [
+          0,
+          0
+        ]
+      ],
+      "nativeRejectsPlayWhileInitialized": false,
+      "sanitizedEventLines": [
+        "10-08 15:57:35.549  <pid> <thread> I C02b2b/AVPlayerNapi: #4854 <native-object> notify initialized",
+        "10-08 15:57:35.549  <pid> <thread> I C02b2b/AVPlayerNapi: #420 JsPrepare In",
+        "10-08 15:57:35.549  <pid> <thread> I C02b2b/AVPlayerNapi: #453 Wait Prepare Task Start",
+        "10-08 15:57:35.555  <pid> <thread> I C02b2b/AVPlayerNapi: #380 <native-object> Prepare Task In",
+        "10-08 15:57:35.740  <pid> <thread> I C02b2b/AVPlayerCallback: #1623 <native-object> OnVideoSizeChangedCb is called, width = 0, height = 0",
+        "10-08 15:57:35.740  <pid> <thread> I C02b2b/AVPlayerNapi: #4854 <native-object> notify prepared",
+        "10-08 15:57:35.740  <pid> <thread> I C02b2b/AVPlayerNapi: #407 <native-object> Prepare Task Out",
+        "10-08 15:57:35.749  <pid> <thread> I C02b2b/AVPlayerNapi: #457 Wait Prepare Task End",
+        "10-08 15:57:35.749  <pid> <thread> I C02b2b/AVPlayerNapi: #512 JsPlay In",
+        "10-08 15:57:35.845  <pid> <thread> I C02b2b/AVPlayerNapi: #4854 <native-object> notify playing"
+      ],
+      "observedPositionSamplesMs": [
+        315.0,
+        991.0
+      ],
+      "observedMonotonicPositiveAdvance": true,
+      "observedPositionDeltaMs": 676.0,
+      "rawHarnessPositionAdvanced": false,
+      "rawHarnessProgressThresholdMs": 800,
+      "thresholdAndObservedAdvanceAreSeparate": true
+    },
+    {
+      "caseId": "ogv-theora-vorbis",
+      "privateBeforeLogSha256": "2608FB8E3A6C74727452676D5DBB076B4463374A511D9A27EB7CD43B661D81EC",
+      "privateAfterLogSha256": "B22EB03302F8EF832D21E057D8544A8CEF8F2780F63CF55536449B8F4B4EF8D1",
+      "lineExtractionMethod": "fresh after lines absent from captured before set, unchanged app-pid hilog; exact event matches; PID/thread/object/URI redacted only",
+      "nativePreparedNotificationObserved": true,
+      "nativePlayingNotificationObserved": true,
+      "nativePrepareInvoked": true,
+      "nativePlayInvoked": true,
+      "nativeFirstFrameSubmissionCallbackObserved": false,
+      "callbackRegistrationNotCountedAsSubmission": true,
+      "nativeVideoSizeCallbacks": [
+        [
+          0,
+          0
+        ]
+      ],
+      "nativeRejectsPlayWhileInitialized": false,
+      "sanitizedEventLines": [
+        "10-08 15:59:16.902  <pid> <thread> I C02b2b/AVPlayerNapi: #4854 <native-object> notify initialized",
+        "10-08 15:59:16.914  <pid> <thread> I C02b2b/AVPlayerNapi: #420 JsPrepare In",
+        "10-08 15:59:16.915  <pid> <thread> I C02b2b/AVPlayerNapi: #453 Wait Prepare Task Start",
+        "10-08 15:59:16.920  <pid> <thread> I C02b2b/AVPlayerNapi: #380 <native-object> Prepare Task In",
+        "10-08 15:59:17.203  <pid> <thread> I C02b2b/AVPlayerCallback: #1623 <native-object> OnVideoSizeChangedCb is called, width = 0, height = 0",
+        "10-08 15:59:17.203  <pid> <thread> I C02b2b/AVPlayerNapi: #4854 <native-object> notify prepared",
+        "10-08 15:59:17.203  <pid> <thread> I C02b2b/AVPlayerNapi: #407 <native-object> Prepare Task Out",
+        "10-08 15:59:17.203  <pid> <thread> I C02b2b/AVPlayerNapi: #457 Wait Prepare Task End",
+        "10-08 15:59:17.204  <pid> <thread> I C02b2b/AVPlayerNapi: #512 JsPlay In",
+        "10-08 15:59:17.283  <pid> <thread> I C02b2b/AVPlayerNapi: #4854 <native-object> notify playing"
+      ],
+      "observedPositionSamplesMs": [
+        253.0,
+        1003.0
+      ],
+      "observedMonotonicPositiveAdvance": true,
+      "observedPositionDeltaMs": 750.0,
+      "rawHarnessPositionAdvanced": false,
+      "rawHarnessProgressThresholdMs": 800,
+      "thresholdAndObservedAdvanceAreSeparate": true
+    },
+    {
+      "caseId": "wmv-wmv2-wma",
+      "privateBeforeLogSha256": "A3C570CC72C771F7B11651D5D1790BA3EB9D60DC800E3EE732B1D507D017C74B",
+      "privateAfterLogSha256": "7AB67964AF841389525BF48D56C43615668D7EA4933389C91C7A4D4A39188737",
+      "lineExtractionMethod": "fresh after lines absent from captured before set, unchanged app-pid hilog; exact event matches; PID/thread/object/URI redacted only",
+      "nativePreparedNotificationObserved": true,
+      "nativePlayingNotificationObserved": true,
+      "nativePrepareInvoked": true,
+      "nativePlayInvoked": true,
+      "nativeFirstFrameSubmissionCallbackObserved": false,
+      "callbackRegistrationNotCountedAsSubmission": true,
+      "nativeVideoSizeCallbacks": [
+        [
+          0,
+          0
+        ]
+      ],
+      "nativeRejectsPlayWhileInitialized": false,
+      "sanitizedEventLines": [
+        "10-08 16:01:24.972  <pid> <thread> I C02b2b/AVPlayerNapi: #4854 <native-object> notify initialized",
+        "10-08 16:01:24.975  <pid> <thread> I C02b2b/AVPlayerNapi: #420 JsPrepare In",
+        "10-08 16:01:24.975  <pid> <thread> I C02b2b/AVPlayerNapi: #453 Wait Prepare Task Start",
+        "10-08 16:01:24.982  <pid> <thread> I C02b2b/AVPlayerNapi: #380 <native-object> Prepare Task In",
+        "10-08 16:01:25.166  <pid> <thread> I C02b2b/AVPlayerCallback: #1623 <native-object> OnVideoSizeChangedCb is called, width = 0, height = 0",
+        "10-08 16:01:25.166  <pid> <thread> I C02b2b/AVPlayerNapi: #4854 <native-object> notify prepared",
+        "10-08 16:01:25.166  <pid> <thread> I C02b2b/AVPlayerNapi: #407 <native-object> Prepare Task Out",
+        "10-08 16:01:25.166  <pid> <thread> I C02b2b/AVPlayerNapi: #457 Wait Prepare Task End",
+        "10-08 16:01:25.167  <pid> <thread> I C02b2b/AVPlayerNapi: #512 JsPlay In",
+        "10-08 16:01:25.217  <pid> <thread> I C02b2b/AVPlayerNapi: #4854 <native-object> notify playing"
+      ],
+      "observedPositionSamplesMs": [
+        414.0,
+        1138.0
+      ],
+      "observedMonotonicPositiveAdvance": true,
+      "observedPositionDeltaMs": 724.0,
+      "rawHarnessPositionAdvanced": false,
+      "rawHarnessProgressThresholdMs": 800,
+      "thresholdAndObservedAdvanceAreSeparate": true
+    }
+  ],
+  "primaryReferences": [
+    {
+      "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+      "sections": [
+        "prepare9",
+        "play9",
+        "onstartRenderFrame9",
+        "width/height"
+      ],
+      "scope": "Current official docs cross-check; installed API/native logs are actual target evidence; no remote device conclusion"
+    },
+    {
+      "url": "https://github.com/openharmony/docs/blob/master/zh-cn/application-dev/dfx/hdc.md",
+      "sections": [
+        "reverse mapping",
+        "mapping list",
+        "remove"
+      ],
+      "scope": "Supported removal applies to reverse task using fport rm; creation used rport only"
+    }
+  ]
+}
