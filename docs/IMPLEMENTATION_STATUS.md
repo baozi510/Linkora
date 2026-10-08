@@ -1,6 +1,32 @@
 # Linkora Player Architecture — Implementation Status
 
-## CURRENT EXECUTION SUMMARY — 2026-10-06
+## CURRENT EXECUTION SUMMARY — 2026-10-08 (Phase 8C independently accepted)
+
+**Active repository/branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`.
+
+**Review ruling:** **ACCEPTED — PHASE 8C NATIVE-FIRST PLAYBACK CAPABILITY AUDIT EVIDENCE.** This accepts the collection and bounded analysis, **not** the 39 features as runtime PASS, not a codec/container/output capability certification, and not a real-MPV/ARM64 device gate.
+
+- Audited implementation source: `99ab47020f81391b7640d44c58ccb719491b4106`.
+- Audited dispatch HEAD: `e835a3567132c9f496d0c79f3c1eab88f1916774`.
+- Remotely reviewed evidence commit: `9cd0db4b4719409de942892790de71f0ae015823`.
+- Task: `phase8c-sim-native-first-capability-audit`, **executed and reviewed; do not rerun it even if the historical task file still says READY**.
+- Matrix: exact 39 unique seed IDs; System 14 static NATIVE_VERIFIED / 10 NATIVE_PARTIAL / 14 public-AVPlayer-API26-scoped NATIVE_ABSENT / 1 DEVICE_CONFIRMATION_REQUIRED; MPV 37 DEVICE_CONFIRMATION_REQUIRED / 1 passthrough NATIVE_PARTIAL / 1 platform media-session NOT_APPLICABLE. All normalized contracts remain `DEFER_TO_GPT`; 38 audit-specific device follow-up groups.
+- Fresh evidence: default → simulator → final default completed; two real captured Hypium 210/210 outputs, production AArch64 artifact/ABI checks, simulator x86 package isolation; single-dispatch AudioMetadataSmoke emitted four fixture records plus one summary (five events). MP3/FLAC PASS; TrueHD/WavPack bounded 23002 FAIL; raw four-fixture summary remains FAIL (2 PASS, 2 FAIL). Normal forced-System H.264/AAC simulator smoke observed visible frame pixels and 1614→3701 ms with sampled clean leave.
+- Pinned wrapper is `@mpv-ohos/mpv-arkts@1.0.0`; its exposed generic native property/command/observer API was checked against the distributed declarations and compiled bytecode. Embedded mpv identity `v0.41.0-dev-g6edeee00a` / FFmpeg `n8.0` does not prove a reproducible, unmodified native build.
+- **Acceptance limits:** installed SDK/static semantics do not imply runtime support. Simulator System results do not transfer to Mate60. Simulator MPV is a stub. x86 FFmpeg results do not transfer to ARM64 runtime. Real-MPV rendering, HDR/HLG/DV, encoded passthrough, device-specific codec/audio routes and hardware output remain unproven/device-gated.
+- **Semantic findings for GPT implementation planning:** System speed request/effective-rate mismatch; MPV `demuxer-cache-time` cache-end versus duration mismatch and numeric precision; seekDone/restart request-correlation limits; first-frame signal versus visible-frame proof; System display default/viewport ownership; System track observers absent from adapter; MPV OHOS HDR metadata is not hardware output acceptance and audio-spdif option is not encoded OHAudio passthrough. These findings do **not** change existing production source/contract/Auto policy in Phase 8C.
+- **Historical outcomes preserved:** Phase 8B six simulator FAIL observations (two HLS initialize and four first-frame-evidence gaps), previous audio seven-event diagnostic and original 2/2 FAIL summary, other prior raw FAIL/NOT RUN remain unchanged.
+
+**Next distinct validation scope:** focused Phase 8D-SIM investigation of the six historical System simulator observations using unchanged production playback, with independent new evidence and no historical reclassification. Use only a newly published, separate READY dispatch in `docs/CODEX_VALIDATION_TASK.md`. Native-first capability contract/adapter implementation and real-device batch remain separate owner decisions.
+
+**Previously accepted boundaries:** Phase 3 production analyzer policy ACCEPTED; Phase 7A real-arm64 measurement baseline ACCEPTED only for its measured fixtures; Phase 8A playback foundation ACCEPTED (not full codec/output); Phase 8B-SIM functional preflight ACCEPTED at `dcb34487e2043ba37f763c2ee50f4e040b597fbd`.
+
+The 2026-10-06 execution summary below is retained for provenance; its prior "current branch" and "next action" are historical.
+
+---
+
+
+## HISTORICAL EXECUTION SUMMARY — 2026-10-06
 
 Project-wide technical baseline: `docs/MASTER_IMPLEMENTATION_PLAN.md`.
 

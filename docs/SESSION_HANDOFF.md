@@ -1,6 +1,29 @@
 # Linkora Session Handoff
 
-## CURRENT STATE — read this before historical sections
+## CURRENT STATE — 2026-10-08, Phase 8C reviewed
+
+Repository: `baozi510/Linkora`
+
+Active branch: `feat/playback-capability-phase8`.
+
+**Current ruling: Phase 8C native-first playback capability audit ACCEPTED for audit/evidence scope only.** Remote evidence `9cd0db4b4719409de942892790de71f0ae015823`, source `99ab47020f81391b7640d44c58ccb719491b4106`, dispatch `e835a3567132c9f496d0c79f3c1eab88f1916774`. Task `phase8c-sim-native-first-capability-audit` has already executed; never dispatch it again merely because its old task file said READY.
+
+The matrix contains exactly 39 unique features; System 14 static NATIVE_VERIFIED, 10 NATIVE_PARTIAL, 14 scoped public-AVPlayer NATIVE_ABSENT, 1 DEVICE_CONFIRMATION_REQUIRED; MPV 37 DEVICE_CONFIRMATION_REQUIRED, 1 NATIVE_PARTIAL (passthrough), 1 NOT_APPLICABLE (platform media-session ownership). All 39 normalized-contract decisions are `DEFER_TO_GPT`; 38 capability-specific real-device follow-up groups remain. `NATIVE_VERIFIED` in this audit denotes static SDK/documentation support unless separately runtime-proven.
+
+**Actual fresh validation:** default ARM64 build/artifact gates → x86 simulator → final default gates PASS, two Hypium 210/210 outputs, one signed simulator install, one audio diagnostic with exactly 5 events, normal System multicolor-frame smoke and sampled clean leave. MP3/FLAC audio metadata PASS; TrueHD/WavPack remain bounded raw FAIL/23002, so audio raw summary remains FAIL (4 total, 2 pass, 2 fail). The historical seven-event diagnostic remains immutable.
+
+**Boundaries:** no physical ARM64 device currently available. Simulator System evidence is not Mate60 evidence; simulator MPV stub cannot validate real mpv; x86 FFmpeg PASS is not ARM64 runtime PASS. MPV package 1.0.0 has generic command/property access; its embedded mpv v0.41.0-dev-g6edeee00a / FFmpeg n8.0 identity does not prove untouched or reproducible binary provenance. No HDR/DV/passthrough/device-specific output claims. Six old System simulator FAIL records (HLS H.264/AAC and HEVC/AAC initialize; FFV1/ProRes/Theora/WMV first-frame evidence) remain FAIL and require a separate focused investigation.
+
+**Next owner action:** launch the distinct focused Phase 8D-SIM investigation only through a new READY `docs/CODEX_VALIDATION_TASK.md` dispatch after the acceptance commit. It is research/simulator evidence for six historic observations, not a repeat of Phase 8C or 59-case Phase 8B matrix. GPT owns native-first contract design, production fixes, and a separate implementation/dispatch round when justified. Device-only real MPV/ARM64/hardware confirmation is batched later.
+
+**Prior accepted baselines:** Phase 3 production analysis ACCEPTED (LIST System-first; DETAIL/ADVANCED FFmpeg-first; no field merge; System-only HLS/DASH/LOCAL_DOCUMENT; FFmpeg remote via shared localhost MediaProxy); Phase 7A real-arm64 measurement baseline ACCEPTED, not global routing; Phase 8A playback foundation ACCEPTED, not codec/output; Phase 8B-SIM accepted at `dcb34487e2043ba37f763c2ee50f4e040b597fbd`.
+
+The former CURRENT STATE below is a **historical snapshot**. Its old branch and next-action instructions must not override this section, actual remote HEAD, the new dispatch or the latest evidence.
+
+---
+
+
+## HISTORICAL SNAPSHOT — previous CURRENT STATE
 
 Repository: `baozi510/Linkora`
 
