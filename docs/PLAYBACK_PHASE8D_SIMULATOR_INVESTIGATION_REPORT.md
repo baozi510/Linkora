@@ -23,6 +23,10 @@ The retained corpus's historical literal StreamPage input uses target loopback p
 
 The target's forward list was `[Empty]` before the operation and remained `[Empty]` afterward. HDC's native message establishes the failed listen operation; it does not identify the conflicting owner or prove its precise cause. No unrelated port/process/service was stopped, no alternate URL/port/route was used to force success, and the failed preflight was not retried. The owned host fixture server was stopped. This is a simulator/transport environment blocker, **not** an established player, decoder, format, media or ARM64 build defect.
 
+## Read-only setup diagnosis after stop
+
+Installed HDC3.2.0f help states `fport localnode remotenode` forwards local traffic to the device, while `rport remotenode localnode` reverses device traffic to the host. The host fixture server was already listening on port19084 before the recorded `fport` attempt. **The orchestration chose the wrong forwarding direction for device-to-host fixture access**, explaining the host listen collision. This is a local validation setup error, not a newly identified production defect. `preflight-command-diagnosis.json` preserves the exact installed-help lines and hash. No corrective reverse mapping or media execution was attempted after STOP; the original stopped observations remain immutable.
+
 ## Fresh source, dependencies and builds
 
 A new isolated clone matched repository/branch/READY/task/source/dispatch. Accepted evidence is an ancestor of validation source, source is an ancestor of dispatch, and source-to-dispatch drift is exactly `docs/CODEX_VALIDATION_TASK.md`. All three committed submodules were initialized and matched their pins. The source/reading/protected audit records cover the current task and required documentation, affected playback source, retained corpus truth and historical failure attribution.

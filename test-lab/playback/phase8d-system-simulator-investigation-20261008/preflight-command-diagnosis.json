@@ -1,0 +1,18 @@
+{
+  "utc": "2026-10-08T07:05:01.188027+00:00",
+  "method": "read-only installed SDK HDC help after stop; no forwarding retry or fixture execution",
+  "toolIdentity": "installed HDC 3.2.0f",
+  "helpSha256": "990CA690C8126A2D452450FC1BF1EBAFBD721CBE0A5309A91BD65539305671BA",
+  "exactHelpLines": [
+    "fport localnode remotenode            - Forward local traffic to remote device",
+    "rport remotenode localnode            - Reserve remote traffic to local host"
+  ],
+  "attemptedCommandDirection": "fport: host-to-device",
+  "requiredDirectionForPlannedFixtureAccess": "rport: device-to-host",
+  "ownedHostFixtureListenerAlreadyStartedOnPort": 19084,
+  "failure": "TCP Port listen failed at 19084",
+  "assessment": "Local orchestration selected forward instead of reverse. The host listener on the same port explains the listen collision; this is not evidence of a native-player or simulator-codec defect.",
+  "causalScope": "Direction mismatch established by installed help and recorded command; no repair/rport operation or media attempt performed",
+  "officialRuntimeAttempts": 0,
+  "nextOwnerAction": "Review this concrete setup diagnosis and issue a distinct READY continuation/recovery task if warranted; no production-source fix indicated."
+}
