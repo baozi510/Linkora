@@ -1,105 +1,55 @@
 # Codex Validation Task
 
 > State: READY
-> Task ID: phase8c-sim-native-first-capability-audit
+> Task ID: phase8d-sim-system-hls-first-frame-root-cause
 > Repository: `baozi510/Linkora`
 > Branch: `feat/playback-capability-phase8`
-> Validation source: `99ab47020f81391b7640d44c58ccb719491b4106`
-> Phase 8B-SIM accepted evidence: `dcb34487e2043ba37f763c2ee50f4e040b597fbd`
-> Role: BUILD / RESEARCH / SIMULATOR VERIFICATION / EVIDENCE / REPORT ONLY
+> Validation source SHA (reviewed tree, exact): `e19123a0e110cebb479d24dbdf72d6d3c9169a5b`
+> Unchanged production playback source baseline: `99ab47020f81391b7640d44c58ccb719491b4106`
+> Accepted Phase 8C evidence: `9cd0db4b4719409de942892790de71f0ae015823`
+> Role: BUILD / FOCUSED SIMULATOR INVESTIGATION / RESEARCH / EVIDENCE / REPORT ONLY
 
-## 1. Operating rule
+## 0. Do not re-execute an old task
 
-No physical ARM64 device is available.
+Phase 8C task `phase8c-sim-native-first-capability-audit` is **already executed and GPT-accepted for audit/evidence scope**; its historical READY marker is not an instruction to rerun it.
 
-Do not wait for one.
+This is a **new distinct Phase 8D-SIM root-cause investigation of the six outstanding Phase 8B System simulator FAIL observations**. It is not another 39-feature capability audit and is not a rerun of the whole 59-case matrix. The original Phase 8B records MUST remain unchanged.
 
-Continue all work that can be completed honestly with:
+No physical ARM64 target is available. Do not wait for one. Real MPV simulator is a stub; do not claim real MPV tests. No feature/policy/display/UI implementation is authorized.
 
-- repository source;
-- installed DevEco/HarmonyOS SDK;
-- current official documentation;
-- pinned dependency source;
-- upstream MPV documentation/source;
-- x86_64 simulator.
+## 1. Source and checkout safety — do this first
 
-Anything that truly requires real ARM64 / real MPV / target hardware must be marked:
+1. Fetch remote `feat/playback-capability-phase8` fresh, including submodules. Work in a clean **isolated clone/worktree**, not the user's dirty `D:/Linkora`.
+2. Verify repository, branch, task ID, READY, the exact validation source SHA above, pinned submodule revisions and clean tracked checkout.
+3. Verify `9cd0db4b4719409de942892790de71f0ae015823` is an ancestor of `e19123a0e110cebb479d24dbdf72d6d3c9169a5b`, and `e19123a0e110cebb479d24dbdf72d6d3c9169a5b` is an ancestor of the freshly fetched validation HEAD.
+4. Run `git diff --name-only e19123a0e110cebb479d24dbdf72d6d3c9169a5b..HEAD`. The **only** permitted path drift is `docs/CODEX_VALIDATION_TASK.md`. Any other path => STOP, even a report/evidence update.
+5. Record both immutable source SHA and actual dispatched checkout HEAD. Do not infer either from this chat.
 
-`DEVICE_CONFIRMATION_REQUIRED`
+## 2. Read completely before execution
 
-and must not block this audit.
+- `docs/AI_WORKFLOW.md`
+- `docs/MASTER_IMPLEMENTATION_PLAN.md`
+- `docs/ARCHITECTURE_TARGET.md` and `docs/ARCHITECTURE_MIGRATION.md`
+- `docs/IMPLEMENTATION_STATUS.md` current summary
+- `docs/SESSION_HANDOFF.md` latest CURRENT STATE, distinguishing old snapshots
+- `docs/CODEX_VALIDATION_TASK.md`
+- `docs/PLAYBACK_PHASE8B_REPORT.md` (including the historical six observations and their 59-case attribution)
+- `docs/PLAYBACK_PHASE8B_SIMULATOR_RUNBOOK.md`
+- `docs/PLAYBACK_NATIVE_CAPABILITY_AUDIT_REPORT.md` and Phase 8C matrix (for evidence boundary only)
+- original 59-case simulator evidence: `test-lab/playback/phase8b-simulator-functional-preflight-rerun1-20261007/` and its 59-case records
+- `test-lab/media-compatibility/` manifest / generator / fixture provenance relevant to the six cases
+- `entry/src/main/ets/playback/SystemPlaybackPort.ets`
+- `entry/src/main/ets/pages/PlayerPage.ets`
+- `linkora_core/src/main/ets/playback/PlaybackEngine.ets`
+- `linkora_core/src/main/ets/playback/PlaybackPort.ets`, `PlaybackBackend.ets`, `AdaptivePlaybackPort.ets` where present.
 
-When uncertain, search current authoritative sources. Do not infer capability from memory, method names, old docs, or backend similarity.
+If a referenced historical evidence filename is not obvious, inspect the repository directory and record the actual path; do not invent historical evidence.
 
-## 2. Purpose
+## 3. Installation and authorized Windows EOL-only recovery
 
-Complete Linkora's native-first playback capability audit before any new playback feature is implemented.
+Run **one normal** `ohpm install`. Do not reinstall to repair semantic failure.
 
-Audit all 39 features in:
-
-`test-lab/playback/native-capability-features.json`
-
-for:
-
-- System AVPlayer;
-- MPV / the pinned `@mpv-ohos/mpv-arkts` wrapper;
-- current Linkora exposure;
-- possible normalized Linkora contract semantics.
-
-This is an audit only.
-
-Do not implement production playback features.
-
-## 3. Source safety
-
-Use a fresh isolated checkout.
-
-Before execution:
-
-1. fetch `feat/playback-capability-phase8`;
-2. checkout current remote HEAD;
-3. initialize/verify pinned submodules;
-4. prove tracked checkout clean;
-5. prove accepted evidence `dcb34487e2043ba37f763c2ee50f4e040b597fbd` is an ancestor of validation source;
-6. prove validation source `99ab47020f81391b7640d44c58ccb719491b4106` is an ancestor of HEAD;
-7. run `git diff --name-only 99ab47020f81391b7640d44c58ccb719491b4106..HEAD`.
-
-Only:
-
-```text
-docs/CODEX_VALIDATION_TASK.md
-```
-
-is permitted.
-
-Anything else => STOP.
-
-## 4. Required reading
-
-Read completely:
-
-1. `docs/AI_WORKFLOW.md`
-2. `docs/MASTER_IMPLEMENTATION_PLAN.md`
-3. `docs/IMPLEMENTATION_STATUS.md`
-4. `docs/SESSION_HANDOFF.md`
-5. `docs/CODEX_VALIDATION_TASK.md`
-6. `docs/PLAYBACK_NATIVE_CAPABILITY_AUDIT_RUNBOOK.md`
-7. `test-lab/playback/native-capability-features.json`
-8. `linkora_core/src/main/ets/playback/PlaybackPort.ets`
-9. `linkora_core/src/main/ets/playback/PlaybackBackend.ets`
-10. `entry/src/main/ets/playback/SystemPlaybackPort.ets`
-11. `entry/src/main/ets/playback/MpvPlaybackPort.ets`
-12. pinned `@mpv-ohos/mpv-arkts` package source actually resolved by this checkout.
-
-## 5. EOL-only recovery authorization
-
-Run exactly one normal:
-
-```powershell
-ohpm install
-```
-
-Only these paths are allowlisted for proven Windows EOL normalization recovery:
+Only these paths may be restored from HEAD in the isolated checkout for **proven EOL-only drift**:
 
 ```text
 entry/oh-package-lock.json5
@@ -108,343 +58,120 @@ linkora_proxy/oh-package-lock.json5
 oh-package-lock.json5
 ```
 
-For every affected path freshly prove:
+For each affected file freshly prove allowlisting, Git-normalized worktree blob equals the HEAD blob, exact CRLF-to-LF byte equality, unchanged dependency/version/checksum/graph/comment semantics, and no other tracked changes. Restore only these files in the isolated checkout; prove clean again. Apply the **same fresh proof** after simulator verifier's normal dependency-restoration step.
 
-1. allowlisted path;
-2. Git-normalized worktree blob == HEAD blob;
-3. CRLF->LF bytes == exact HEAD bytes;
-4. dependency/version/checksum/graph/comment semantics unchanged;
-5. no other tracked path changed.
+Any extra changed path, changed semantic byte, unmatched blob or failed restoration => `BLOCKED — VALIDATION ENVIRONMENT`. Never touch the user's original dirty checkout.
 
-Only then restore affected allowlisted paths from HEAD in the isolated checkout.
+## 4. Fresh build/isolation gates (mandatory before runtime)
 
-Any deviation =>
-
-`BLOCKED — VALIDATION ENVIRONMENT`
-
-The same rule applies to EOL drift produced by simulator dependency restoration.
-
-## 6. Fresh build gates
-
-Run fresh:
+Execute in order:
 
 ```powershell
 ./scripts/verify.ps1
 ./scripts/verify-simulator.ps1
+./scripts/verify.ps1
 ```
 
-Then prove default dependency restoration and run the established final default gate; if no narrower exact proof exists, run another fresh `./scripts/verify.ps1`.
+Keep separate actual raw outputs and test results for both default runs (do not allow the second Hypium result to overwrite the first without preserving it). Require two clean Hypium suites, architecture/pure checks, Debug/Release HAR/HAP, exact ARM64 native library/ABI audits; simulator parity, audio metadata static guard, x86 FFmpeg-only artifact whitelist, and default dependency restoration.
 
-Require:
+No production package, source, build profile, lockfile, test expectation, signing settings or simulator stub may be edited. If a compile/artifact/test gate fails, STOP with its precise result and evidence. Do not continue simulator runtime on a failed gate.
 
-- production ARM64 compile/link/artifact gates green;
-- simulator build/isolation green;
-- x86 FFmpeg artifact audit green;
-- audio metadata static guard green;
-- no production MPV/native-storage libraries in simulator HAP.
+The signed simulator HAP must derive from the freshly built exact artifact using the previously authorized unchanged SDK signing procedure/profile, if signature enforcement requires it. Check installed ABI and explicit install status (HDC exit0 alone is not proof). Do not bypass permissions/signing or publish HAP/signing inputs.
 
-Do not postpone compile/link defects.
+## 5. Exact fresh focused functional investigation
 
-## 7. Audio diagnostic schema regression
+Use the already controlled and user-owned corpus; preserve fixture media. Verify actual fixture hashes/manifests and served HTTP bytes against committed truth. Reject changed/unavailable fixtures; never fake codec metadata, re-encode to make a failing file pass, or alter player configuration/route to force success.
 
-Because validation source changed `AudioMetadataSmoke`, verify the schema fix before starting the capability audit.
+One **healthy control**: ordinary forced-System H.264/AAC MP4 with actual visible video pixels, progress and sampled leave cleanup. This validates the observation and capture method; it is not a seventh previously failed case.
 
-Using the same four controlled audio fixtures from accepted Phase 8B-SIM:
+Then investigate the **six historical failures**, each through unchanged product System playback:
 
-- MP3;
-- FLAC;
-- TrueHD;
-- WavPack;
+| Case ID | Original Phase 8B observation | Investigation goal |
+| --- | --- | --- |
+| `hls-h264-aac` | `LNK-PLAY-006` before prepare/play | distinguish input/URI/manifest/segment request error, actual AVPlayer prepare error, SDK simulator limitation, and policy/adapter route |
+| `hls-hevc-aac` | `LNK-PLAY-006` before prepare/play | same, separately; avoid inference from H.264 HLS |
+| `mkv-ffv1-flac` | PLAYING + progress; visible frame not proven | event versus actual output/pixel, surface geometry and expected frame |
+| `mov-prores-pcm` | PLAYING + progress; visible frame not proven | same, independently |
+| `ogv-theora-vorbis` | PLAYING + progress; visible frame not proven | same, independently |
+| `wmv-wmv2-wma` | PLAYING + progress; visible frame not proven | same, independently |
 
-dispatch `AudioMetadataSmoke` once.
+For HLS: record exact nonsecret source type, literal URL/routing, content type as available, controlled server GET/Range/manifest+segment evidence, timing/state/error and native hilog evidence. Do not automatically treat `LNK-PLAY-006` as a decoder/format verdict, and do not change HLS/DASH System-only production policy. Inability to exercise an identical owned fixture is NOT RUN/BLOCKED, not success.
 
-Expected event structure:
+For the four frame-evidence cases: separately record `startRenderFrame` signal if observable via unchanged product, PLAYING, monotonic position, videoSizeChange, native XComponent surface bounds, capture ROI coordinates and real RGB/frame-image digest where permitted, frame-visibility verdict, black/unchanged/misaligned versus genuine colored image, and error/resource cleanup. Native frame-submission callback alone is **not** visible-frame proof. Do not attribute an unavailable screenshot to proof of black video or codec failure. Keep user-private screenshots and raw device identifiers local.
+
+**Exactly one planned new execution per fixture after input and UI instrumentation preflight**. A procedural invalid input/setup attempt may be separately documented and corrected before the official valid attempt; never silently repeat a completed FAIL to replace its result. Every case must have explicit attempted/not attempted and independent evidence.
+
+## 6. Causality, limits and disposition
+
+For each original FAIL, distinguish where evidence permits:
+
+- reproducible product/adapter or UI source defect (return to GPT with exact source/stack);
+- simulator System native/API limitation;
+- media input / route / manifest / controlled fixture defect;
+- observation/instrumentation gap (position alone not frame proof);
+- unresolved, with missing proof named.
+
+Produce a fresh scoped diagnosis, not a global codec/output support ranking. Historical two HLS + four first-frame Phase 8B **FAIL stay untouched**; any new observed PASS is a separate Phase 8D result with its own source and timestamp, not a retrospective overwrite.
+
+No device conclusion for Mate60, real MPV, HDR/DV, advanced audio/passthrough, ARM64 FFmpeg runtime or power/performance. No Auto/backend routing tuning, Direct I/O, display-mode UI, standalone feature implementation or thumbnail research / Issue #17.
+
+## 7. Stop conditions / work ownership
+
+Codex is **test-only**. If solving an issue requires modifying `SystemPlaybackPort`, `PlaybackEngine`, `PlayerPage`, test scripts, fixtures, build profiles or native package: STOP and return a concrete report; GPT performs the source/test-infrastructure change and dispatches a different future task.
+
+STOP immediately on source/branch drift, failed required gate, semantic lockfile drift, unauthorized signing/workspace mutation, missing controlled input required for the scoped functional verdict, leaked secret or evidence contamination.
+
+If Codex 5-hour quota remaining drops below 10%, preserve a truthful `PENDING` handoff without claiming completion; resume after reset, and never synthesize omitted checks.
+
+## 8. Security, cleanup and provenance
+
+- Preserve old failures, reports, old evidence, owned test media and unrelated user data.
+- Preserve original `D:/Linkora` dirty state unchanged; isolated checkout only.
+- Restore original Auto selection and modified app preferences; clean only resources created by this round.
+- Never push credentials, signing data, private SDK/checkout absolute paths, device identifiers, real endpoints/tokens, generated media, HAPs, screenshots or unsanitized logs.
+- Sanitized logs must remain accurately labeled; preserve original log hashes and avoid claiming sanitized copies are byte-identical originals.
+- Record precise execution timestamps, source/dispatch SHA, package/SDK/ABI, fresh fixture provenance, tests attempted, controlled observations and limits.
+
+## 9. Authorized report/evidence output ONLY
+
+Codex may create/update **only**:
 
 ```text
-4 fixture records
-+ 1 summary
-= 5 events total
+docs/PLAYBACK_PHASE8D_SIMULATOR_INVESTIGATION_REPORT.md
+test-lab/playback/phase8d-system-simulator-investigation-20261008/
 ```
 
-There must be:
+This is one new evidence directory. Suggested files:
 
-- no duplicate code-only post-assertion record for TrueHD;
-- no duplicate code-only post-assertion record for WavPack;
-- MP3/FLAC still PASS;
-- TrueHD/WavPack may remain bounded FAIL/23002;
-- cleanup remains bounded.
+- `source-state.json`, `required-reading.json`, `protected-audit.json`, `security-review.json`;
+- `install-eol-proof.json`, `post-simulator-eol-proof.json`, `build-results.json`, sanitized build/Hypium logs;
+- `signed-simulator-provenance.json`, `fixture-input-proof.json`;
+- `healthy-system-control.json`, `six-case-observations.json` (exact six IDs), sanitized event/network timelines, frame-capture evidence metadata;
+- `root-cause-assessment.json`, `cleanup.json`.
 
-If duplicate fixture events still occur:
+Never edit Phase 8B/8C evidence or `docs/CODEX_VALIDATION_TASK.md` itself.
 
-`FAIL — AUDIO DIAGNOSTIC SCHEMA`
+## 10. Publication & final classification
 
-Do not patch.
+Before handoff:
 
-## 8. System capability evidence — authoritative order
+1. prove only the report and new directory differ from the fetched branch;
+2. fresh fetch, stop if protected remote drift;
+3. commit only authorized new report/evidence;
+4. normal push to the exact task branch, no force, no merge;
+5. fetch remote again, prove pushed evidence commit reachable/contained, and report its full 40-character SHA;
+6. if push unavailable, say `BLOCKED — EVIDENCE NOT PUSHED` with local SHA; never claim GPT handoff.
 
-For every audit feature, use evidence in this order:
+Use one primary classification:
 
-1. **installed SDK declarations actually used by this checkout**;
-2. current official Huawei/OpenHarmony documentation;
-3. simulator runtime only where it can honestly verify semantics.
-
-Record sanitized SDK identity:
-
-- SDK/API version;
-- declaration file relative identity;
-- SHA-256 of relevant declaration source where practical.
-
-Do not publish user-private absolute installation paths.
-
-For each System feature record:
-
-- exact class/property/method/event/enum name;
-- minimum API level when supported by authoritative evidence;
-- accepted values/range;
-- valid player states / state restrictions;
-- callback/event behavior;
-- whether it is truly AVPlayer-native or belongs to another system API such as AVSession/window/audio routing;
-- whether current Linkora `SystemPlaybackPort` exposes it;
-- whether simulator runtime can verify the semantics;
-- whether target-device confirmation is still required.
-
-If official docs and installed SDK disagree, record both and treat installed build declarations as the compile-time truth for this repo; do not silently reconcile the mismatch.
-
-## 9. MPV capability evidence — authoritative order
-
-For every audit feature inspect:
-
-1. pinned `@mpv-ohos/mpv-arkts` package source actually resolved by Linkora;
-2. exact wrapper surface available to Linkora, including generic property/command access if exposed;
-3. current upstream mpv stable manual/source;
-4. master documentation only when needed to distinguish newer behavior from the stable version.
-
-For each MPV feature record:
-
-- native mpv property/option/command/event;
-- exact semantics/range;
-- whether runtime modification is supported;
-- wrapper-native convenience API vs generic setProperty/command access;
-- whether the pinned wrapper exposes the capability directly, indirectly, or not at all;
-- dependency on VO/AO/libplacebo/FFmpeg/platform integration when relevant;
-- current Linkora `MpvPlaybackPort` exposure;
-- whether real-device confirmation is required.
-
-Do not classify an upstream mpv feature as immediately usable if the pinned HarmonyOS wrapper cannot reach it.
-
-Use:
-
-`WRAPPER_NOT_EXPOSED`
-
-when core mpv has a feature but Linkora's pinned wrapper/API surface cannot currently access it.
-
-## 10. Search / uncertainty rule
-
-For any field that is uncertain:
-
-- search current official docs/upstream docs;
-- inspect the actual installed declaration or dependency source;
-- record the source and what remains uncertain.
-
-Create a research log containing:
-
-- query/topic;
-- source;
-- publication/version context where available;
-- conclusion;
-- unresolved point.
-
-Do not write “probably”, “should”, or “likely supported” as a capability verdict.
-
-Use `DEVICE_CONFIRMATION_REQUIRED` or `NATIVE_PARTIAL` instead.
-
-## 11. Matrix output
-
-Produce:
-
-`native-capability-matrix.json`
-
-with exactly 39 feature rows.
-
-Each row must contain at least:
-
-```json
-{
-  "id": "display.fit-contain",
-  "system": {
-    "verdict": "NATIVE_VERIFIED",
-    "nativeApi": "...",
-    "apiLevel": "...",
-    "semantics": "...",
-    "linkoraExposure": "...",
-    "simulatorTestable": true,
-    "deviceConfirmationRequired": false,
-    "sources": []
-  },
-  "mpv": {
-    "verdict": "DEVICE_CONFIRMATION_REQUIRED",
-    "nativeApi": "...",
-    "wrapperExposure": "...",
-    "semantics": "...",
-    "linkoraExposure": "...",
-    "deviceConfirmationRequired": true,
-    "sources": []
-  },
-  "normalizedContract": {
-    "recommendation": "...",
-    "commonSemantics": "...",
-    "backendDifference": "...",
-    "implementationDecision": "DEFER_TO_GPT"
-  }
-}
-```
-
-Allowed backend verdicts:
-
-- `NATIVE_VERIFIED`
-- `NATIVE_PARTIAL`
-- `NATIVE_ABSENT`
-- `WRAPPER_NOT_EXPOSED`
-- `DEVICE_CONFIRMATION_REQUIRED`
-- `NOT_APPLICABLE`
-
-No `AUDIT_REQUIRED` may remain in the final matrix.
-
-## 12. Important distinction: capability vs product implementation
-
-A native capability being found does **not** authorize implementation.
-
-The audit report may recommend a normalized contract, but:
-
-- do not edit `PlaybackPort`;
-- do not edit `SystemPlaybackPort`;
-- do not edit `MpvPlaybackPort`;
-- do not add UI controls;
-- do not change Auto;
-- do not change backend selection;
-- do not add display-mode implementation.
-
-GPT owns later contract/adapter implementation after reviewing this audit.
-
-## 13. Existing Linkora baseline audit
-
-Explicitly audit existing baseline features too:
-
-- play;
-- pause;
-- seek;
-- speed;
-- volume;
-- buffering;
-- track observation;
-- first-frame/video-size;
-- seek-complete;
-- surface sizing.
-
-If current Linkora implements a behavior differently from native semantics, report the mismatch.
-
-Do not “grandfather” existing code without review.
-
-## 14. Device backlog delta
-
-Produce:
-
-`device-confirmation-delta.json`
-
-containing only audit items whose native capability is statically identified but whose actual semantics/output need a physical target.
-
-Do not duplicate unrelated old device backlog entries unless the capability audit adds or refines them.
-
-No real-device test is started.
-
-## 15. Simulator runtime spot checks
-
-Runtime spot checks are allowed only for System capabilities that are already reachable through unchanged production code or existing diagnostics.
-
-Do not add temporary production hooks.
-
-At minimum preserve one normal System playback smoke after the audio diagnostic.
-
-If a capability is native in the SDK but not currently exposed by Linkora, static evidence is sufficient for this audit; mark implementation as deferred.
-
-## 16. Six historical System observations
-
-Do not reclassify the six prior System simulator FAIL observations in this task.
-
-They remain pending simulator investigation:
-
-- two HLS initialization observations;
-- four first-frame-evidence observations.
-
-A later focused simulator task will investigate them.
-
-This audit must not conflate native API capability with codec/container support.
-
-## 17. Security
-
-Do not publish:
-
-- private endpoints/paths/credentials;
-- user-private SDK absolute paths;
-- signing material;
-- simulator identifiers;
-- generated media/HAP.
-
-Web/SDK source references may be published.
-
-## 18. Authorized output
-
-Codex may create/update only:
-
-- `docs/PLAYBACK_NATIVE_CAPABILITY_AUDIT_REPORT.md`
-- one new evidence directory:
-  `test-lab/playback/phase8c-native-capability-audit-20261008/`
-
-Suggested evidence:
-
-- source-state.json;
-- required-reading.json;
-- EOL/build evidence;
-- audio-schema-regression.ndjson;
-- sdk-declaration-evidence.json;
-- mpv-wrapper-evidence.json;
-- upstream-research-log.json;
-- native-capability-matrix.json;
-- device-confirmation-delta.json;
-- normal-system-smoke.json;
-- security-review.json;
-- protected-audit.json.
-
-## 19. Publication
-
-After completion:
-
-1. prove only authorized report/new evidence changed;
-2. fetch remote;
-3. stop on protected drift;
-4. commit report + evidence only;
-5. push without force;
-6. fetch again;
-7. prove remote containment;
-8. return full 40-character remote evidence SHA.
-
-## 20. Final classification
-
-Use exactly one primary classification:
-
-- `PASS — NATIVE PLAYBACK CAPABILITY AUDIT COLLECTED`;
+- `PASS — FOCUSED SYSTEM SIMULATOR INVESTIGATION COLLECTED` (all six independently attempted and fully characterized, even if one remains native FAIL/UNRESOLVED);
+- `FAIL — PLAYBACK FUNCTIONAL DEFECT IDENTIFIED` (reproducible source defect; no patch);
 - `FAIL — ARM64 BUILD GATE`;
 - `FAIL — SIMULATOR BUILD`;
-- `FAIL — AUDIO DIAGNOSTIC SCHEMA`;
-- `FAIL — AUDIT EVIDENCE INCOMPLETE`;
+- `FAIL — INVESTIGATION EVIDENCE INCOMPLETE`;
 - `BLOCKED — VALIDATION ENVIRONMENT`;
 - `BLOCKED — SIMULATOR ENVIRONMENT`;
 - `BLOCKED — EVIDENCE NOT PUSHED`;
-- another precise infrastructure classification if necessary.
+- `PENDING — CODEX QUOTA` (truthful incomplete checkpoint).
 
-Do not wait for a real device.
-Do not patch production playback.
-Do not implement UI.
-Do not tune Auto.
-Do not implement Direct I/O.
-Do not touch thumbnail research / Issue #17.
+No retroactive Phase 8B PASS. Do not repeat Phase 8C native audit. Do not begin device testing.
