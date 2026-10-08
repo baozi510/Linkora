@@ -1,0 +1,20 @@
+{
+  "utc": "2026-10-08T14:58:40.590247+00:00",
+  "normalCancellationReleasePassed": false,
+  "postLeaveServiceAndAudioRecordsPersistedBeyond20s": true,
+  "forcedCleanupRequired": true,
+  "operation": "force-stop only owned com.linkora.player debug test process, then ordinary cold launch with no fixture",
+  "appDataWipedOrUninstalled": false,
+  "noFurtherOfficialMediaOpened": true,
+  "ownedHttpRowRemoved": true,
+  "originalAutoRestored": true,
+  "ownedReverseRemoved": true,
+  "ownedServerStopped": true,
+  "host19084ListenerAbsentAfter": true,
+  "finalSampleAfterForcedCleanup": {
+    "surfaceNodes": 0,
+    "systemPlayerInstancesForApp": 0,
+    "appAudioRendererCount": 0
+  },
+  "forcedCleanupDoesNotRetroactivelyPassCancellation": true
+}

@@ -1,0 +1,6 @@
+10-08 22:54:17.462 <pid> <thread> I C02b2b/AVPlayerCallback: #1623 <native-object> OnVideoSizeChangedCb is called, width = 320, height = 180
+10-08 22:54:17.462 <pid> <thread> I C02b2b/AVPlayerNapi: #4854 <native-object> notify prepared
+10-08 22:54:17.463 <pid> <thread> I C02b2b/AVPlayerNapi: #407 <native-object> Prepare Task Out
+10-08 22:54:17.463 <pid> <thread> I C02b2b/AVPlayerNapi: #512 JsPlay In
+10-08 22:54:17.489 <pid> <thread> I C02b2b/AVPlayerCallback: #1599 OnStartRenderFrameCb is called
+10-08 22:54:17.526 <pid> <thread> I C02b2b/AVPlayerNapi: #4854 <native-object> notify playing

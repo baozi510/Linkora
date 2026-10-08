@@ -1,0 +1,1303 @@
+[
+  {
+    "caseId": "hls-h264-aac",
+    "healthyControl": false,
+    "startedUtc": "2026-10-08T14:54:01.585576+00:00",
+    "completedUtc": "2026-10-08T14:54:19.329188+00:00",
+    "officialOpenCount": 1,
+    "attempted": true,
+    "sourceKind": "NETWORK_LINK",
+    "sourceType": "unchanged StreamPage controlled literal loopback HTTP",
+    "prepareAndPlayingObserved": true,
+    "positionAdvanced": false,
+    "positionSamplesMs": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      335.0
+    ],
+    "uiTimeline": [
+      {
+        "utc": "2026-10-08T14:54:03.841678+00:00",
+        "elapsedSeconds": 2.266,
+        "state": "OTHER",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": true,
+        "readyTextVisible": false,
+        "errorDetails": []
+      },
+      {
+        "utc": "2026-10-08T14:54:04.958136+00:00",
+        "elapsedSeconds": 3.375,
+        "state": "OTHER",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": true,
+        "readyTextVisible": false,
+        "errorDetails": []
+      },
+      {
+        "utc": "2026-10-08T14:54:06.158919+00:00",
+        "elapsedSeconds": 4.579,
+        "state": "OTHER",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": true,
+        "readyTextVisible": false,
+        "errorDetails": []
+      },
+      {
+        "utc": "2026-10-08T14:54:07.239702+00:00",
+        "elapsedSeconds": 5.657,
+        "state": "OTHER",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": true,
+        "readyTextVisible": false,
+        "errorDetails": []
+      },
+      {
+        "utc": "2026-10-08T14:54:08.346722+00:00",
+        "elapsedSeconds": 6.766,
+        "state": "OTHER",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": true,
+        "readyTextVisible": false,
+        "errorDetails": []
+      },
+      {
+        "utc": "2026-10-08T14:54:09.397894+00:00",
+        "elapsedSeconds": 7.813,
+        "state": "OTHER",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": true,
+        "readyTextVisible": false,
+        "errorDetails": []
+      },
+      {
+        "utc": "2026-10-08T14:54:10.461441+00:00",
+        "elapsedSeconds": 8.875,
+        "state": "OTHER",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": true,
+        "readyTextVisible": false,
+        "errorDetails": []
+      },
+      {
+        "utc": "2026-10-08T14:54:11.569262+00:00",
+        "elapsedSeconds": 9.985,
+        "state": "OTHER",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": true,
+        "readyTextVisible": false,
+        "errorDetails": []
+      },
+      {
+        "utc": "2026-10-08T14:54:12.675028+00:00",
+        "elapsedSeconds": 11.094,
+        "state": "OTHER",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": true,
+        "readyTextVisible": false,
+        "errorDetails": []
+      },
+      {
+        "utc": "2026-10-08T14:54:13.737348+00:00",
+        "elapsedSeconds": 12.157,
+        "state": "OTHER",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": true,
+        "readyTextVisible": false,
+        "errorDetails": []
+      },
+      {
+        "utc": "2026-10-08T14:54:14.825347+00:00",
+        "elapsedSeconds": 13.25,
+        "state": "PLAYING",
+        "positionMs": 335.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [
+          "320 \u00d7 180"
+        ],
+        "loadingTextVisible": false,
+        "readyTextVisible": false,
+        "errorDetails": []
+      }
+    ],
+    "nativeStartRenderFrame": "NOT INDEPENDENTLY EXPOSED by unchanged UI; native hilog retained for analysis; registration is not a callback event",
+    "frameVisibility": "NOT PROVEN / inspect actual captures and native logs",
+    "captureMetadata": [
+      {
+        "startedUtc": "2026-10-08T14:54:02.801881+00:00",
+        "completedUtc": "2026-10-08T14:54:03.290337+00:00",
+        "file": "hls-h264-aac-screen-0-145402801881.PRIVATE.png",
+        "sha256": "2f635f102b2786dcc3203c52be56df04bd3e2c6ac8a724ab3bb78917ff83db59",
+        "surfaceBoundsPx": [
+          0,
+          402,
+          1256,
+          1109
+        ],
+        "screenDimensionsPx": [
+          1256,
+          2760
+        ],
+        "sampleCoordinatesPx": [
+          [
+            100,
+            529
+          ],
+          [
+            301,
+            529
+          ],
+          [
+            502,
+            529
+          ],
+          [
+            703,
+            529
+          ],
+          [
+            904,
+            529
+          ],
+          [
+            1130,
+            529
+          ]
+        ],
+        "rgbSamples": [
+          [
+            221,
+            224,
+            226
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "coloredBuckets": 0,
+        "expectedMulticolorPatternObserved": false,
+        "roiRgbSha256": "768adeb402e86dfbf78cea230bd1aae1f1488c9b2521f4ca81d77bff891e6a9e"
+      },
+      {
+        "startedUtc": "2026-10-08T14:54:03.290337+00:00",
+        "completedUtc": "2026-10-08T14:54:03.871859+00:00",
+        "file": "hls-h264-aac-screen-1-145403290337.PRIVATE.png",
+        "sha256": "e0a4f46b62d331a22fcff110cd6099ef08c437c98360a3029fe8f3d1dcd4d704",
+        "surfaceBoundsPx": [
+          0,
+          402,
+          1256,
+          1109
+        ],
+        "screenDimensionsPx": [
+          1256,
+          2760
+        ],
+        "sampleCoordinatesPx": [
+          [
+            100,
+            529
+          ],
+          [
+            301,
+            529
+          ],
+          [
+            502,
+            529
+          ],
+          [
+            703,
+            529
+          ],
+          [
+            904,
+            529
+          ],
+          [
+            1130,
+            529
+          ]
+        ],
+        "rgbSamples": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "coloredBuckets": 0,
+        "expectedMulticolorPatternObserved": false,
+        "roiRgbSha256": "3fcff5bf295a5f5dc01d5b03f17270c18e39615f70f55d37a2572a4ca9814b76"
+      },
+      {
+        "startedUtc": "2026-10-08T14:54:03.871859+00:00",
+        "completedUtc": "2026-10-08T14:54:04.339203+00:00",
+        "file": "hls-h264-aac-screen-2-145403871859.PRIVATE.png",
+        "sha256": "29ab231f2d78628746984f9e1708a0b6e8769dbfb7f3ac7ccd13955f0c8d5f84",
+        "surfaceBoundsPx": [
+          0,
+          402,
+          1256,
+          1109
+        ],
+        "screenDimensionsPx": [
+          1256,
+          2760
+        ],
+        "sampleCoordinatesPx": [
+          [
+            100,
+            529
+          ],
+          [
+            301,
+            529
+          ],
+          [
+            502,
+            529
+          ],
+          [
+            703,
+            529
+          ],
+          [
+            904,
+            529
+          ],
+          [
+            1130,
+            529
+          ]
+        ],
+        "rgbSamples": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "coloredBuckets": 0,
+        "expectedMulticolorPatternObserved": false,
+        "roiRgbSha256": "340c6329999eea38af42a3a30b748fc0bb2cfc8119c5433a863c3dc0fda05659"
+      },
+      {
+        "startedUtc": "2026-10-08T14:54:04.339724+00:00",
+        "completedUtc": "2026-10-08T14:54:04.789923+00:00",
+        "file": "hls-h264-aac-screen-3-145404339724.PRIVATE.png",
+        "sha256": "e3919648605b62734380913d6acb977efdcad916f358f2b232420c2aef789423",
+        "surfaceBoundsPx": [
+          0,
+          402,
+          1256,
+          1109
+        ],
+        "screenDimensionsPx": [
+          1256,
+          2760
+        ],
+        "sampleCoordinatesPx": [
+          [
+            100,
+            529
+          ],
+          [
+            301,
+            529
+          ],
+          [
+            502,
+            529
+          ],
+          [
+            703,
+            529
+          ],
+          [
+            904,
+            529
+          ],
+          [
+            1130,
+            529
+          ]
+        ],
+        "rgbSamples": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "coloredBuckets": 0,
+        "expectedMulticolorPatternObserved": false,
+        "roiRgbSha256": "b4d4b72ede840e60a13c341f555362d833bbd04eea32fa87555d962316329a19"
+      }
+    ],
+    "captureErrors": [],
+    "uiErrorCode": null,
+    "nativeFailureObserved": false,
+    "hostRequestTrace": [
+      {
+        "utc": "2026-10-08T14:54:02.885146+00:00",
+        "method": "GET",
+        "path": "/hls_h264/index.m3u8",
+        "status": "200",
+        "range": null,
+        "nativeUserAgentClass": "AVPlayerLib emulator",
+        "nativeLibraryVersion": "7.0.0.107"
+      },
+      {
+        "utc": "2026-10-08T14:54:02.950350+00:00",
+        "method": "GET",
+        "path": "/hls_h264/segment_000.ts",
+        "status": "200",
+        "range": null,
+        "nativeUserAgentClass": "AVPlayerLib emulator",
+        "nativeLibraryVersion": "7.0.0.107"
+      },
+      {
+        "utc": "2026-10-08T14:54:03.017108+00:00",
+        "method": "GET",
+        "path": "/hls_h264/segment_001.ts",
+        "status": "200",
+        "range": null,
+        "nativeUserAgentClass": "AVPlayerLib emulator",
+        "nativeLibraryVersion": "7.0.0.107"
+      },
+      {
+        "utc": "2026-10-08T14:54:03.083819+00:00",
+        "method": "GET",
+        "path": "/hls_h264/segment_002.ts",
+        "status": "200",
+        "range": null,
+        "nativeUserAgentClass": "AVPlayerLib emulator",
+        "nativeLibraryVersion": "7.0.0.107"
+      }
+    ],
+    "correlatedExpectedFileGetObserved": true,
+    "releaseClean": true,
+    "cleanup": {
+      "surfaceNodes": 0,
+      "appAudioRendererCount": 0,
+      "systemPlayerInstancesForApp": 0
+    },
+    "newScopedResult": "BOUNDED FAIL / UNRESOLVED",
+    "historicalPhase8BResultUnchanged": true,
+    "frameAndEventAreSeparateEvidence": true,
+    "nativeEventEvidence": {
+      "caseId": "hls-h264-aac",
+      "privateBeforeLogSha256": "C7D808598F25D65854EF0687EAABE6D64B4F40E80473F454FE33A91D0118BB16",
+      "privateAfterLogSha256": "D6FEF29EAD27B97884259D2193ED24A8D1CB1EC2642F2E030D4B3AC033BE0153",
+      "selectionMethod": "after-minus-before line set; exact native event filters, PID/thread/native-object/URI redaction; explicit subset, full raw PRIVATE",
+      "nativeInitialized": false,
+      "nativePreparedNotification": true,
+      "nativePlayingNotification": true,
+      "nativePrepareInvocation": false,
+      "nativePrepareWaitEnd": false,
+      "nativePlayInvocation": true,
+      "nativeReleaseInvocation": false,
+      "nativeReleasedNotification": false,
+      "nativeFirstFrameSubmissionCallback": true,
+      "nativeVideoSizes": [
+        [
+          320,
+          180
+        ]
+      ],
+      "nativePlayBeforePreparedNotification": false,
+      "positionSamplesMs": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        335.0
+      ],
+      "positivePositionDeltaMs": 335.0,
+      "rawHelperPositionAdvanced": false,
+      "rawHelperThresholdMs": 800,
+      "appSyntheticPreparedDirectTelemetry": "NOT PROVEN: no unchanged app event log for CandidateObserver.commit/Adaptive PREPARED; discrete UI samples do not establish complete event absence or ordering",
+      "nativeJsPromiseFulfillmentDirectTelemetry": "NOT PROVEN: native Wait Prepare Task End is recorded separately, not relabeled JavaScript .then fulfillment"
+    },
+    "appSyntheticPreparedSafety": "NOT PROVEN directly; unchanged app telemetry absent, UI snapshot absence is insufficient",
+    "nativeNoPrematurePlayInCapturedTimeline": true,
+    "notFormatCertification": true
+  },
+  {
+    "caseId": "hls-hevc-aac",
+    "healthyControl": false,
+    "startedUtc": "2026-10-08T14:54:32.228111+00:00",
+    "completedUtc": "2026-10-08T14:54:51.341758+00:00",
+    "officialOpenCount": 1,
+    "attempted": true,
+    "sourceKind": "NETWORK_LINK",
+    "sourceType": "unchanged StreamPage controlled literal loopback HTTP",
+    "prepareAndPlayingObserved": false,
+    "positionAdvanced": false,
+    "positionSamplesMs": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "uiTimeline": [
+      {
+        "utc": "2026-10-08T14:54:34.430014+00:00",
+        "elapsedSeconds": 2.203,
+        "state": "OTHER",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": true,
+        "readyTextVisible": false,
+        "errorDetails": []
+      },
+      {
+        "utc": "2026-10-08T14:54:35.540370+00:00",
+        "elapsedSeconds": 3.313,
+        "state": "OTHER",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": true,
+        "readyTextVisible": false,
+        "errorDetails": []
+      },
+      {
+        "utc": "2026-10-08T14:54:36.626500+00:00",
+        "elapsedSeconds": 4.406,
+        "state": "OTHER",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": true,
+        "readyTextVisible": false,
+        "errorDetails": []
+      },
+      {
+        "utc": "2026-10-08T14:54:37.673324+00:00",
+        "elapsedSeconds": 5.453,
+        "state": "OTHER",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": true,
+        "readyTextVisible": false,
+        "errorDetails": []
+      },
+      {
+        "utc": "2026-10-08T14:54:38.713250+00:00",
+        "elapsedSeconds": 6.484,
+        "state": "OTHER",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": true,
+        "readyTextVisible": false,
+        "errorDetails": []
+      },
+      {
+        "utc": "2026-10-08T14:54:39.753581+00:00",
+        "elapsedSeconds": 7.531,
+        "state": "OTHER",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": true,
+        "readyTextVisible": false,
+        "errorDetails": []
+      },
+      {
+        "utc": "2026-10-08T14:54:40.802960+00:00",
+        "elapsedSeconds": 8.578,
+        "state": "OTHER",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": true,
+        "readyTextVisible": false,
+        "errorDetails": []
+      },
+      {
+        "utc": "2026-10-08T14:54:41.859706+00:00",
+        "elapsedSeconds": 9.641,
+        "state": "OTHER",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": true,
+        "readyTextVisible": false,
+        "errorDetails": []
+      },
+      {
+        "utc": "2026-10-08T14:54:42.919507+00:00",
+        "elapsedSeconds": 10.703,
+        "state": "OTHER",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": true,
+        "readyTextVisible": false,
+        "errorDetails": []
+      },
+      {
+        "utc": "2026-10-08T14:54:43.965484+00:00",
+        "elapsedSeconds": 11.75,
+        "state": "OTHER",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": true,
+        "readyTextVisible": false,
+        "errorDetails": []
+      },
+      {
+        "utc": "2026-10-08T14:54:44.998468+00:00",
+        "elapsedSeconds": 12.781,
+        "state": "OTHER",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": true,
+        "readyTextVisible": false,
+        "errorDetails": []
+      },
+      {
+        "utc": "2026-10-08T14:54:46.075393+00:00",
+        "elapsedSeconds": 13.859,
+        "state": "OTHER",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": true,
+        "readyTextVisible": false,
+        "errorDetails": []
+      },
+      {
+        "utc": "2026-10-08T14:54:47.116611+00:00",
+        "elapsedSeconds": 14.891,
+        "state": "ERROR",
+        "positionMs": 0.0,
+        "surfaceBoundsPx": [
+          [
+            0,
+            402,
+            1256,
+            1109
+          ]
+        ],
+        "videoSizeUi": [],
+        "loadingTextVisible": false,
+        "readyTextVisible": false,
+        "errorDetails": [
+          "LNK-PLAY-003/5400104"
+        ]
+      }
+    ],
+    "nativeStartRenderFrame": "NOT INDEPENDENTLY EXPOSED by unchanged UI; native hilog retained for analysis; registration is not a callback event",
+    "frameVisibility": "NOT PROVEN / inspect actual captures and native logs",
+    "captureMetadata": [
+      {
+        "startedUtc": "2026-10-08T14:54:33.415066+00:00",
+        "completedUtc": "2026-10-08T14:54:33.962152+00:00",
+        "file": "hls-hevc-aac-screen-0-145433414066.PRIVATE.png",
+        "sha256": "65c20e220e79f3472ce27e60e78f82719ba7eef24583bf2612b7fce2a8f7f462",
+        "surfaceBoundsPx": [
+          0,
+          402,
+          1256,
+          1109
+        ],
+        "screenDimensionsPx": [
+          1256,
+          2760
+        ],
+        "sampleCoordinatesPx": [
+          [
+            100,
+            529
+          ],
+          [
+            301,
+            529
+          ],
+          [
+            502,
+            529
+          ],
+          [
+            703,
+            529
+          ],
+          [
+            904,
+            529
+          ],
+          [
+            1130,
+            529
+          ]
+        ],
+        "rgbSamples": [
+          [
+            221,
+            224,
+            226
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "coloredBuckets": 0,
+        "expectedMulticolorPatternObserved": false,
+        "roiRgbSha256": "7283d00adaf7e38eae05ef68fcca98a37918510e2a9ec6aadd68e7606fb4bf18"
+      },
+      {
+        "startedUtc": "2026-10-08T14:54:33.963150+00:00",
+        "completedUtc": "2026-10-08T14:54:34.481720+00:00",
+        "file": "hls-hevc-aac-screen-1-145433963150.PRIVATE.png",
+        "sha256": "bf5535a5d19b44ea6c8aa7af89cc423f6db6942760963dcec7277bf6b0391d4c",
+        "surfaceBoundsPx": [
+          0,
+          402,
+          1256,
+          1109
+        ],
+        "screenDimensionsPx": [
+          1256,
+          2760
+        ],
+        "sampleCoordinatesPx": [
+          [
+            100,
+            529
+          ],
+          [
+            301,
+            529
+          ],
+          [
+            502,
+            529
+          ],
+          [
+            703,
+            529
+          ],
+          [
+            904,
+            529
+          ],
+          [
+            1130,
+            529
+          ]
+        ],
+        "rgbSamples": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "coloredBuckets": 0,
+        "expectedMulticolorPatternObserved": false,
+        "roiRgbSha256": "9309c789d3700f870d78f965788566f0319f320b7323ae675e87f6716ea16f70"
+      },
+      {
+        "startedUtc": "2026-10-08T14:54:34.482720+00:00",
+        "completedUtc": "2026-10-08T14:54:34.974425+00:00",
+        "file": "hls-hevc-aac-screen-2-145434482720.PRIVATE.png",
+        "sha256": "56571fe849897aa230dd1d8a126a29357d662e4987521bf6719d2976cdb05e0c",
+        "surfaceBoundsPx": [
+          0,
+          402,
+          1256,
+          1109
+        ],
+        "screenDimensionsPx": [
+          1256,
+          2760
+        ],
+        "sampleCoordinatesPx": [
+          [
+            100,
+            529
+          ],
+          [
+            301,
+            529
+          ],
+          [
+            502,
+            529
+          ],
+          [
+            703,
+            529
+          ],
+          [
+            904,
+            529
+          ],
+          [
+            1130,
+            529
+          ]
+        ],
+        "rgbSamples": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "coloredBuckets": 0,
+        "expectedMulticolorPatternObserved": false,
+        "roiRgbSha256": "2c0e8a6ffc0542bbd0f4c8e99c0913f1d9a2d405dfc7e657e6a0ce3d6dd94888"
+      },
+      {
+        "startedUtc": "2026-10-08T14:54:34.974948+00:00",
+        "completedUtc": "2026-10-08T14:54:35.444485+00:00",
+        "file": "hls-hevc-aac-screen-3-145434974948.PRIVATE.png",
+        "sha256": "7bcc32366d57f9a064b2808ee3dcd68be8496bda75d230bfb0621164f3751ec4",
+        "surfaceBoundsPx": [
+          0,
+          402,
+          1256,
+          1109
+        ],
+        "screenDimensionsPx": [
+          1256,
+          2760
+        ],
+        "sampleCoordinatesPx": [
+          [
+            100,
+            529
+          ],
+          [
+            301,
+            529
+          ],
+          [
+            502,
+            529
+          ],
+          [
+            703,
+            529
+          ],
+          [
+            904,
+            529
+          ],
+          [
+            1130,
+            529
+          ]
+        ],
+        "rgbSamples": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "coloredBuckets": 0,
+        "expectedMulticolorPatternObserved": false,
+        "roiRgbSha256": "c3b641c0033d3456289fc4a25980f56adaf6275a33c786e2dc53d7ab9dda59f8"
+      }
+    ],
+    "captureErrors": [],
+    "uiErrorCode": "LNK-PLAY-003",
+    "nativeFailureObserved": true,
+    "hostRequestTrace": [
+      {
+        "utc": "2026-10-08T14:54:33.493340+00:00",
+        "method": "GET",
+        "path": "/hls_hevc/index.m3u8",
+        "status": "200",
+        "range": null,
+        "nativeUserAgentClass": "AVPlayerLib emulator",
+        "nativeLibraryVersion": "7.0.0.107"
+      },
+      {
+        "utc": "2026-10-08T14:54:33.561361+00:00",
+        "method": "GET",
+        "path": "/hls_hevc/segment_000.ts",
+        "status": "200",
+        "range": null,
+        "nativeUserAgentClass": "AVPlayerLib emulator",
+        "nativeLibraryVersion": "7.0.0.107"
+      },
+      {
+        "utc": "2026-10-08T14:54:33.602730+00:00",
+        "method": "GET",
+        "path": "/hls_hevc/segment_001.ts",
+        "status": "200",
+        "range": null,
+        "nativeUserAgentClass": "AVPlayerLib emulator",
+        "nativeLibraryVersion": "7.0.0.107"
+      },
+      {
+        "utc": "2026-10-08T14:54:33.680021+00:00",
+        "method": "GET",
+        "path": "/hls_hevc/segment_002.ts",
+        "status": "200",
+        "range": null,
+        "nativeUserAgentClass": "AVPlayerLib emulator",
+        "nativeLibraryVersion": "7.0.0.107"
+      }
+    ],
+    "correlatedExpectedFileGetObserved": true,
+    "releaseClean": true,
+    "cleanup": {
+      "surfaceNodes": 0,
+      "appAudioRendererCount": 0,
+      "systemPlayerInstancesForApp": 0
+    },
+    "newScopedResult": "BOUNDED FAIL / UNRESOLVED",
+    "historicalPhase8BResultUnchanged": true,
+    "frameAndEventAreSeparateEvidence": true,
+    "nativeEventEvidence": {
+      "caseId": "hls-hevc-aac",
+      "privateBeforeLogSha256": "B89E143EF88BA81027743CDD2D9DDE24C1C6DF81DAD167607507AA63C8F4C378",
+      "privateAfterLogSha256": "EED12BA926F7599D3ADC99FBE56E6B7A5AAD996C985C08EBCDA9EF073B13ABF2",
+      "selectionMethod": "after-minus-before line set; exact native event filters, PID/thread/native-object/URI redaction; explicit subset, full raw PRIVATE",
+      "nativeInitialized": false,
+      "nativePreparedNotification": false,
+      "nativePlayingNotification": false,
+      "nativePrepareInvocation": false,
+      "nativePrepareWaitEnd": false,
+      "nativePlayInvocation": false,
+      "nativeReleaseInvocation": true,
+      "nativeReleasedNotification": true,
+      "nativeFirstFrameSubmissionCallback": false,
+      "nativeVideoSizes": [],
+      "nativePlayBeforePreparedNotification": false,
+      "positionSamplesMs": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "positivePositionDeltaMs": 0.0,
+      "rawHelperPositionAdvanced": false,
+      "rawHelperThresholdMs": 800,
+      "appSyntheticPreparedDirectTelemetry": "NOT PROVEN: no unchanged app event log for CandidateObserver.commit/Adaptive PREPARED; discrete UI samples do not establish complete event absence or ordering",
+      "nativeJsPromiseFulfillmentDirectTelemetry": "NOT PROVEN: native Wait Prepare Task End is recorded separately, not relabeled JavaScript .then fulfillment"
+    },
+    "appSyntheticPreparedSafety": "NOT PROVEN directly; unchanged app telemetry absent, UI snapshot absence is insufficient",
+    "nativeNoPrematurePlayInCapturedTimeline": true,
+    "notFormatCertification": true
+  }
+]

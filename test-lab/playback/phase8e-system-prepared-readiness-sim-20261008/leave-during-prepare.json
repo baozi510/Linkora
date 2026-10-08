@@ -1,0 +1,119 @@
+{
+  "caseId": "cancel-hls-h264-aac",
+  "fixtureId": "hls-h264-aac",
+  "scenario": "CANCELLATION, no second format verdict",
+  "startedUtc": "2026-10-08T14:56:34.438502+00:00",
+  "leaveRequestedUtc": "2026-10-08T14:56:36.777048+00:00",
+  "completedUtc": "2026-10-08T14:56:40.185018+00:00",
+  "secondsBeforeLeave": 2.344000000040978,
+  "releaseObservationSecondsAfterRequest": 3.405999999959022,
+  "nativeInitializedAndPrepareInvocationBeforeLeave": true,
+  "nativePreparedBeforeLeave": false,
+  "preparingGuardHeld": true,
+  "officialOpenCount": 1,
+  "hostRequestTrace": [
+    {
+      "utc": "2026-10-08T14:56:35.761289+00:00",
+      "method": "GET",
+      "path": "/hls_h264/index.m3u8",
+      "status": "200",
+      "range": null,
+      "nativeUserAgentClass": "AVPlayerLib emulator",
+      "nativeLibraryVersion": "7.0.0.107"
+    },
+    {
+      "utc": "2026-10-08T14:56:35.825632+00:00",
+      "method": "GET",
+      "path": "/hls_h264/segment_000.ts",
+      "status": "200",
+      "range": null,
+      "nativeUserAgentClass": "AVPlayerLib emulator",
+      "nativeLibraryVersion": "7.0.0.107"
+    },
+    {
+      "utc": "2026-10-08T14:56:35.897766+00:00",
+      "method": "GET",
+      "path": "/hls_h264/segment_001.ts",
+      "status": "200",
+      "range": null,
+      "nativeUserAgentClass": "AVPlayerLib emulator",
+      "nativeLibraryVersion": "7.0.0.107"
+    },
+    {
+      "utc": "2026-10-08T14:56:35.976625+00:00",
+      "method": "GET",
+      "path": "/hls_h264/segment_002.ts",
+      "status": "200",
+      "range": null,
+      "nativeUserAgentClass": "AVPlayerLib emulator",
+      "nativeLibraryVersion": "7.0.0.107"
+    }
+  ],
+  "cleanup": {
+    "surfaceNodes": 0,
+    "appAudioRendererCount": 0,
+    "systemPlayerInstancesForApp": 2
+  },
+  "releaseClean": false,
+  "pendingPromiseRejectAndTimerClearDirectTelemetry": "NOT PROVEN: unchanged app exposes no direct reject/clear event",
+  "nativeEventEvidence": {
+    "caseId": "cancel-hls-h264-aac",
+    "privateBeforeLogSha256": "773A5A6F3D3A84B3EFD90938181EB916B0D0D3E6CBB632BF55FF81C5BD9FC79F",
+    "privateAfterLogSha256": "35B0A66E37B993B035494A4B0F74FD41EC1921EB260F8ED9209DCBE6FA635E96",
+    "selectionMethod": "after-minus-before line set; exact native event filters, PID/thread/native-object/URI redaction; explicit subset, full raw PRIVATE",
+    "nativeInitialized": true,
+    "nativePreparedNotification": false,
+    "nativePlayingNotification": false,
+    "nativePrepareInvocation": true,
+    "nativePrepareWaitEnd": true,
+    "nativePlayInvocation": false,
+    "nativeReleaseInvocation": false,
+    "nativeReleasedNotification": false,
+    "nativeFirstFrameSubmissionCallback": false,
+    "nativeVideoSizes": [],
+    "nativePlayBeforePreparedNotification": false,
+    "positionSamplesMs": [],
+    "positivePositionDeltaMs": null,
+    "rawHelperPositionAdvanced": null,
+    "rawHelperThresholdMs": 800,
+    "appSyntheticPreparedDirectTelemetry": "NOT PROVEN: no unchanged app event log for CandidateObserver.commit/Adaptive PREPARED; discrete UI samples do not establish complete event absence or ordering",
+    "nativeJsPromiseFulfillmentDirectTelemetry": "NOT PROVEN: native Wait Prepare Task End is recorded separately, not relabeled JavaScript .then fulfillment",
+    "atLeaveLogSha256": "8F72BA605C4A808EE2A1DAC7C7A3C3F82FAA7AD9B62FE94EB398207852DF2A3D",
+    "nativeInitializedAndPrepareInvocationAtLeave": true,
+    "nativePreparedBeforeLeave": false,
+    "captureWindowsNotMergedToInventMissingEvents": true
+  },
+  "postStopResourceSamples": [
+    {
+      "label": "cancel-post-stop-observation",
+      "utc": "2026-10-08T14:57:47.375874+00:00",
+      "surfaceNodes": 0,
+      "systemPlayerInstancesForApp": 2,
+      "appAudioRendererCount": 1,
+      "appAudioRendererStates": [
+        1
+      ]
+    },
+    {
+      "label": "pre-final-cleanup",
+      "utc": "2026-10-08T14:58:03.386478+00:00",
+      "surfaceNodes": 0,
+      "systemPlayerInstancesForApp": 2,
+      "appAudioRendererCount": 1,
+      "appAudioRendererStates": [
+        1
+      ]
+    },
+    {
+      "label": "final-cleanup",
+      "utc": "2026-10-08T14:58:40.574258+00:00",
+      "surfaceNodes": 0,
+      "systemPlayerInstancesForApp": 0,
+      "appAudioRendererCount": 0,
+      "appAudioRendererStates": []
+    }
+  ],
+  "playerMetricMeaning": "PlayerDistributedService entries matching app process, not a proven count of native player instances",
+  "recoveryHealthy": "NOT RUN: strict STOP after failed cancellation release",
+  "forcedCleanupDoesNotPassGuard": true
+}

@@ -1,0 +1,5 @@
+{"caseId": "mp4-h264-aac", "healthyControl": true, "sourceKind": "NETWORK_LINK", "officialOpenCount": 1, "utc": "2026-10-08T14:53:17.907450+00:00", "literalInputValidated": true}
+{"caseId": "hls-h264-aac", "healthyControl": false, "sourceKind": "NETWORK_LINK", "officialOpenCount": 1, "utc": "2026-10-08T14:54:01.585576+00:00", "literalInputValidated": true}
+{"caseId": "hls-hevc-aac", "healthyControl": false, "sourceKind": "NETWORK_LINK", "officialOpenCount": 1, "utc": "2026-10-08T14:54:32.228111+00:00", "literalInputValidated": true}
+{"caseId": "mkv-ffv1-flac", "healthyControl": false, "sourceKind": "NETWORK_LINK", "officialOpenCount": 1, "utc": "2026-10-08T14:55:03.753897+00:00", "literalInputValidated": true}
+{"caseId": "cancel-hls-h264-aac", "fixtureId": "hls-h264-aac", "scenario": "leave-during-prepare, separate from official format verdict", "officialOpenCount": 1, "utc": "2026-10-08T14:56:34.438502+00:00", "literalInputValidated": true}

@@ -1,0 +1,4 @@
+10-08 22:56:39.170 <pid> <thread> I C02b2b/AVPlayerNapi: #4854 <native-object> notify initialized
+10-08 22:56:39.170 <pid> <thread> I C02b2b/AVPlayerNapi: #420 JsPrepare In
+10-08 22:56:39.170 <pid> <thread> I C02b2b/AVPlayerNapi: #453 Wait Prepare Task Start
+10-08 22:56:39.173 <pid> <thread> I C02b2b/AVPlayerNapi: #380 <native-object> Prepare Task In

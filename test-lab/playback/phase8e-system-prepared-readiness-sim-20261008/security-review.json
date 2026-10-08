@@ -1,0 +1,9 @@
+{
+  "publicFilesReviewedBeforeAuditMetadata": 97,
+  "knownCredentialAndTargetIdentifierScanPass": true,
+  "privatePathEndpointAuthMaterialScanPass": true,
+  "noScreenshotsMediaHapsSigningFilesPublished": true,
+  "nativeSelectedLogsExplicitlySubsetAndRedacted": true,
+  "buildLogsRetainWarningsResultsWithDeclaredSanitization": true,
+  "all28GzipHashAndDecompressionChecksPass": true
+}

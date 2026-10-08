@@ -1,0 +1,86 @@
+{
+  "utc": "2026-10-08T14:52:33.669948+00:00",
+  "files": [
+    {
+      "caseId": "hls-h264-aac",
+      "relativePath": "hls_h264/index.m3u8",
+      "status": 200,
+      "contentType": "application/vnd.apple.mpegurl",
+      "sha256": "531A32E12F07C6C82E2D08F0DDD581F79E3F19B998E08576E3CA221597AAD4C7",
+      "wholeResponseEqualCommittedTruth": true
+    },
+    {
+      "caseId": "hls-h264-aac",
+      "relativePath": "hls_h264/segment_000.ts",
+      "status": 200,
+      "contentType": "video/vnd.dlna.mpeg-tts",
+      "sha256": "E8178021313B1783EFAA77269D877E61093A26C521037FB4931BCA72B6822E78",
+      "wholeResponseEqualCommittedTruth": true
+    },
+    {
+      "caseId": "hls-h264-aac",
+      "relativePath": "hls_h264/segment_001.ts",
+      "status": 200,
+      "contentType": "video/vnd.dlna.mpeg-tts",
+      "sha256": "ADB34655C00CDCDB61A1C9D435449A0E95496E3627D169C9EB93F8110BA8EAD6",
+      "wholeResponseEqualCommittedTruth": true
+    },
+    {
+      "caseId": "hls-h264-aac",
+      "relativePath": "hls_h264/segment_002.ts",
+      "status": 200,
+      "contentType": "video/vnd.dlna.mpeg-tts",
+      "sha256": "3389D35E37F289D5FD6BFCE4E72BAFA4760E0D580AC0752AB2EABCE22C1196A3",
+      "wholeResponseEqualCommittedTruth": true
+    },
+    {
+      "caseId": "hls-hevc-aac",
+      "relativePath": "hls_hevc/index.m3u8",
+      "status": 200,
+      "contentType": "application/vnd.apple.mpegurl",
+      "sha256": "AC6BC3D9133FB270A8FE6785FD27FA4F2694D44A9EE64C1AAAAD7B7028BDB555",
+      "wholeResponseEqualCommittedTruth": true
+    },
+    {
+      "caseId": "hls-hevc-aac",
+      "relativePath": "hls_hevc/segment_000.ts",
+      "status": 200,
+      "contentType": "video/vnd.dlna.mpeg-tts",
+      "sha256": "F0F9A62154ACA9452CA089F76EDA94AF23D37EAB06242ABD010479F8234733F2",
+      "wholeResponseEqualCommittedTruth": true
+    },
+    {
+      "caseId": "hls-hevc-aac",
+      "relativePath": "hls_hevc/segment_001.ts",
+      "status": 200,
+      "contentType": "video/vnd.dlna.mpeg-tts",
+      "sha256": "DF34BDAC61A7FD44BD891D9C149F0F7AEF29705612A7962A4DE18EF2B240560B",
+      "wholeResponseEqualCommittedTruth": true
+    },
+    {
+      "caseId": "hls-hevc-aac",
+      "relativePath": "hls_hevc/segment_002.ts",
+      "status": 200,
+      "contentType": "video/vnd.dlna.mpeg-tts",
+      "sha256": "6591178796DFEA986ECBBCE6FB46A233BC9DAF6F163FEC3BC0F83A6EB5BF880E",
+      "wholeResponseEqualCommittedTruth": true
+    },
+    {
+      "caseId": "mkv-ffv1-flac",
+      "relativePath": "mkv_ffv1_flac.mkv",
+      "status": 200,
+      "contentType": "video/x-matroska",
+      "sha256": "7EF6A847FA66C6C3A47BCCAFFCA08BED3DCEA499A90E693915C231C3142F5B78",
+      "wholeResponseEqualCommittedTruth": true
+    },
+    {
+      "caseId": "mp4-h264-aac",
+      "relativePath": "mp4_h264_aac.mp4",
+      "status": 200,
+      "contentType": "video/mp4",
+      "sha256": "BD8933E5A54B1054350D49DE32C1E664E0EC9BAB60255010B0BDCEF2D6B4531A",
+      "wholeResponseEqualCommittedTruth": true
+    }
+  ],
+  "hostOnlyCheckNotTargetRouteProof": true
+}

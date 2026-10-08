@@ -1,0 +1,11 @@
+{
+  "observed": "Preparing hold confirmed at leave; native resource records remained after leaving, then vanished only after owned-app force-stop. Later native transition/callback identity is NOT PROVEN from available post-stop logs.",
+  "staticOwnershipBoundary": "AdaptivePlaybackPort.prepare sets this.backend only after await this.prepareBackend. release reads only this.backend, null while candidate is pending. prepareBackend owns local backend and commits after prepare without a released check.",
+  "ownerAction": "GPT review pending candidate ownership, cancellation and stale commit protection with a new source/dispatch; Codex did not patch",
+  "notClaimed": "Specific native object identity/count, portable platform-wide failure, leaked audio audibility, direct timer/reject callback telemetry",
+  "references": [
+    "entry/src/main/ets/playback/AdaptivePlaybackPort.ets",
+    "entry/src/main/ets/playback/SystemPlaybackPort.ets",
+    "linkora_core/src/main/ets/playback/PlaybackEngine.ets"
+  ]
+}

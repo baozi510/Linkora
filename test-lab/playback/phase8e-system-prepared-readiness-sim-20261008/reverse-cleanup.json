@@ -1,0 +1,9 @@
+{
+  "utc": "2026-10-08T14:57:59.757553+00:00",
+  "onlyOwnedReverseMappingRemoved": true,
+  "removeOperation": "fport rm tcp:19084 tcp:19084",
+  "explicitRemovalSuccess": true,
+  "ownMappingAbsentAfter": true,
+  "forwardAndReverseListAfterEmpty": true,
+  "unrelatedMappingsModified": false
+}

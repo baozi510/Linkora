@@ -1,0 +1,18 @@
+{
+  "primary": "FAIL \u2014 SYSTEM PREPARED-STATE GUARD REGRESSION",
+  "failedStage": "leave while preparing / pending candidate release",
+  "taskId": "phase8e-sim-system-prepared-state-gate",
+  "source": "68452df5486cf568da66a5c52352841cb7e64c5f",
+  "dispatch": "ff5917e912c310d52fda747b2a8089109a170954",
+  "freshBuilds": "PASS",
+  "healthyControl": "PASS",
+  "officialFormatControlOpens": 4,
+  "separateCancellationOpens": 1,
+  "totalOpens": 5,
+  "retries": 0,
+  "cancelRelease": "FAIL: app service entries2 after3.406s and >20s later; audio renderer1 later; forced process cleanup required",
+  "postCancelHealthy": "NOT RUN after STOP",
+  "directJsPrepareFulfillmentSyntheticPreparedRejectTimerClear": "NOT PROVEN; no code hooks added",
+  "historicalFailEvidenceUnchanged": true,
+  "deviceRealMpvArm64Runtime": "NOT RUN / NOT PROVEN"
+}

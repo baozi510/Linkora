@@ -1,0 +1,7 @@
+{
+  "port": 19084,
+  "ownedListenerVerified": true,
+  "beforeListenerCount": 0,
+  "loopback": "127.0.0.1",
+  "unrelatedServiceStopped": false
+}

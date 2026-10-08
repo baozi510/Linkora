@@ -1,0 +1,7 @@
+10-08 22:54:49.255 <pid> <thread> I C02b2b/AVPlayerNapi: #849 JsRelease In
+10-08 22:54:49.255 <pid> <thread> I C02b2b/AVPlayerNapi: #874 Wait Release Task Start
+10-08 22:54:49.255 <pid> <thread> I C02b2b/AVPlayerNapi: #814 <native-object> Release Task In
+10-08 22:54:49.256 <pid> <thread> E A03d00/JSAPP: [SystemPlaybackPort] AVPlayer error code=5400106, message=Unsupported Format: VID_DEC_ERR-unsupport interface, unsupport video decoder type, video/hevc-
+10-08 22:54:49.289 <pid> <thread> I C02b2b/AVPlayerNapi: #4854 <native-object> notify released
+10-08 22:54:49.289 <pid> <thread> I C02b2b/AVPlayerNapi: #829 <native-object> Release Task Out
+10-08 22:54:49.289 <pid> <thread> I C02b2b/AVPlayerNapi: #876 Wait Release Task Stop

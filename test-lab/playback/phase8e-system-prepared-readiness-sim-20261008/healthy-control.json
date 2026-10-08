@@ -1,0 +1,434 @@
+{
+  "caseId": "mp4-h264-aac",
+  "healthyControl": true,
+  "startedUtc": "2026-10-08T14:53:17.907450+00:00",
+  "completedUtc": "2026-10-08T14:53:25.708676+00:00",
+  "officialOpenCount": 1,
+  "attempted": true,
+  "sourceKind": "NETWORK_LINK",
+  "sourceType": "unchanged StreamPage controlled literal loopback HTTP",
+  "prepareAndPlayingObserved": true,
+  "positionAdvanced": true,
+  "positionSamplesMs": [
+    185.0,
+    985.0
+  ],
+  "uiTimeline": [
+    {
+      "utc": "2026-10-08T14:53:20.143679+00:00",
+      "elapsedSeconds": 2.234,
+      "state": "PLAYING",
+      "positionMs": 185.0,
+      "surfaceBoundsPx": [
+        [
+          0,
+          402,
+          1256,
+          1109
+        ]
+      ],
+      "videoSizeUi": [
+        "320 \u00d7 180"
+      ],
+      "loadingTextVisible": false,
+      "readyTextVisible": false,
+      "errorDetails": []
+    },
+    {
+      "utc": "2026-10-08T14:53:21.263226+00:00",
+      "elapsedSeconds": 3.359,
+      "state": "PLAYING",
+      "positionMs": 985.0,
+      "surfaceBoundsPx": [
+        [
+          0,
+          402,
+          1256,
+          1109
+        ]
+      ],
+      "videoSizeUi": [
+        "320 \u00d7 180"
+      ],
+      "loadingTextVisible": false,
+      "readyTextVisible": false,
+      "errorDetails": []
+    }
+  ],
+  "nativeStartRenderFrame": "NOT INDEPENDENTLY EXPOSED by unchanged UI; native hilog retained for analysis; registration is not a callback event",
+  "frameVisibility": "VISIBLE EXPECTED MULTICOLOR PATTERN",
+  "captureMetadata": [
+    {
+      "startedUtc": "2026-10-08T14:53:19.140879+00:00",
+      "completedUtc": "2026-10-08T14:53:19.736228+00:00",
+      "file": "mp4-h264-aac-screen-0-145319140879.PRIVATE.png",
+      "sha256": "03a30cf787751598bb8f1c8d3d3998bcc369b534ab74c77980b836e1b48eb982",
+      "surfaceBoundsPx": [
+        0,
+        402,
+        1256,
+        1109
+      ],
+      "screenDimensionsPx": [
+        1256,
+        2760
+      ],
+      "sampleCoordinatesPx": [
+        [
+          100,
+          529
+        ],
+        [
+          301,
+          529
+        ],
+        [
+          502,
+          529
+        ],
+        [
+          703,
+          529
+        ],
+        [
+          904,
+          529
+        ],
+        [
+          1130,
+          529
+        ]
+      ],
+      "rgbSamples": [
+        [
+          224,
+          227,
+          229
+        ],
+        [
+          224,
+          227,
+          229
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "coloredBuckets": 0,
+      "expectedMulticolorPatternObserved": false,
+      "roiRgbSha256": "68448c6d79f1a27c0dda408df6a89a4770564ec9bde027ce872082d17346ae7c"
+    },
+    {
+      "startedUtc": "2026-10-08T14:53:19.737233+00:00",
+      "completedUtc": "2026-10-08T14:53:20.304582+00:00",
+      "file": "mp4-h264-aac-screen-1-145319737233.PRIVATE.png",
+      "sha256": "c7bbd9bea7ebb7bf5013e2cfc1b3001e4351270ec92c425093cc73a744c413a7",
+      "surfaceBoundsPx": [
+        0,
+        402,
+        1256,
+        1109
+      ],
+      "screenDimensionsPx": [
+        1256,
+        2760
+      ],
+      "sampleCoordinatesPx": [
+        [
+          100,
+          529
+        ],
+        [
+          301,
+          529
+        ],
+        [
+          502,
+          529
+        ],
+        [
+          703,
+          529
+        ],
+        [
+          904,
+          529
+        ],
+        [
+          1130,
+          529
+        ]
+      ],
+      "rgbSamples": [
+        [
+          62,
+          40,
+          0
+        ],
+        [
+          0,
+          63,
+          6
+        ],
+        [
+          253,
+          254,
+          0
+        ],
+        [
+          0,
+          0,
+          253
+        ],
+        [
+          67,
+          183,
+          180
+        ],
+        [
+          0,
+          254,
+          254
+        ]
+      ],
+      "coloredBuckets": 4,
+      "expectedMulticolorPatternObserved": true,
+      "roiRgbSha256": "861b419217adb02f7668094bf4b3c209c7cc8031488501e435d0873fd5fd87da"
+    },
+    {
+      "startedUtc": "2026-10-08T14:53:20.305635+00:00",
+      "completedUtc": "2026-10-08T14:53:20.768795+00:00",
+      "file": "mp4-h264-aac-screen-2-145320305635.PRIVATE.png",
+      "sha256": "8d8566d6f534ac816228c31a5421fafc59106ffadc89e9d5fb356579b953586e",
+      "surfaceBoundsPx": [
+        0,
+        402,
+        1256,
+        1109
+      ],
+      "screenDimensionsPx": [
+        1256,
+        2760
+      ],
+      "sampleCoordinatesPx": [
+        [
+          100,
+          529
+        ],
+        [
+          301,
+          529
+        ],
+        [
+          502,
+          529
+        ],
+        [
+          703,
+          529
+        ],
+        [
+          904,
+          529
+        ],
+        [
+          1130,
+          529
+        ]
+      ],
+      "rgbSamples": [
+        [
+          63,
+          0,
+          0
+        ],
+        [
+          0,
+          61,
+          0
+        ],
+        [
+          253,
+          254,
+          0
+        ],
+        [
+          0,
+          0,
+          253
+        ],
+        [
+          187,
+          70,
+          187
+        ],
+        [
+          0,
+          254,
+          254
+        ]
+      ],
+      "coloredBuckets": 4,
+      "expectedMulticolorPatternObserved": true,
+      "roiRgbSha256": "fb2c2cbe95de3ce4164ec9c27a89d059f27d1dce49d7b967dbe0e671b9d83326"
+    },
+    {
+      "startedUtc": "2026-10-08T14:53:20.768795+00:00",
+      "completedUtc": "2026-10-08T14:53:21.270632+00:00",
+      "file": "mp4-h264-aac-screen-3-145320768795.PRIVATE.png",
+      "sha256": "e60f4731d5b51d86b40c8be792757cb38ea7e4cff99cb7d76eb32f3a9ce581e1",
+      "surfaceBoundsPx": [
+        0,
+        402,
+        1256,
+        1109
+      ],
+      "screenDimensionsPx": [
+        1256,
+        2760
+      ],
+      "sampleCoordinatesPx": [
+        [
+          100,
+          529
+        ],
+        [
+          301,
+          529
+        ],
+        [
+          502,
+          529
+        ],
+        [
+          703,
+          529
+        ],
+        [
+          904,
+          529
+        ],
+        [
+          1130,
+          529
+        ]
+      ],
+      "rgbSamples": [
+        [
+          63,
+          0,
+          0
+        ],
+        [
+          0,
+          61,
+          0
+        ],
+        [
+          253,
+          254,
+          0
+        ],
+        [
+          0,
+          0,
+          253
+        ],
+        [
+          183,
+          69,
+          174
+        ],
+        [
+          0,
+          254,
+          254
+        ]
+      ],
+      "coloredBuckets": 4,
+      "expectedMulticolorPatternObserved": true,
+      "roiRgbSha256": "35332239127a3517cfe4ec95280996016d2fb83c43348e60cf3a6eb6ed2dfbe3"
+    }
+  ],
+  "captureErrors": [],
+  "uiErrorCode": null,
+  "nativeFailureObserved": false,
+  "hostRequestTrace": [
+    {
+      "utc": "2026-10-08T14:53:19.301291+00:00",
+      "method": "GET",
+      "path": "/mp4_h264_aac.mp4",
+      "status": "206",
+      "range": "bytes=0-8191",
+      "nativeUserAgentClass": "AVPlayerLib emulator",
+      "nativeLibraryVersion": "7.0.0.107"
+    },
+    {
+      "utc": "2026-10-08T14:53:19.393066+00:00",
+      "method": "GET",
+      "path": "/mp4_h264_aac.mp4",
+      "status": "206",
+      "range": "bytes=8192-270256",
+      "nativeUserAgentClass": "AVPlayerLib emulator",
+      "nativeLibraryVersion": "7.0.0.107"
+    }
+  ],
+  "correlatedExpectedFileGetObserved": true,
+  "releaseClean": true,
+  "cleanup": {
+    "surfaceNodes": 0,
+    "appAudioRendererCount": 0,
+    "systemPlayerInstancesForApp": 0
+  },
+  "newScopedResult": "PASS",
+  "historicalPhase8BResultUnchanged": true,
+  "frameAndEventAreSeparateEvidence": true,
+  "nativeEventEvidence": {
+    "caseId": "mp4-h264-aac",
+    "privateBeforeLogSha256": "B5E74F832C18C22F81D5DA7D1B7E7DD93621036A830C5BFB26302C3DD79606D7",
+    "privateAfterLogSha256": "26B05188A23340CB55E867DA995DCE86E1278A9546C91BC46D06EB12A56D1F84",
+    "selectionMethod": "after-minus-before line set; exact native event filters, PID/thread/native-object/URI redaction; explicit subset, full raw PRIVATE",
+    "nativeInitialized": true,
+    "nativePreparedNotification": true,
+    "nativePlayingNotification": true,
+    "nativePrepareInvocation": true,
+    "nativePrepareWaitEnd": true,
+    "nativePlayInvocation": true,
+    "nativeReleaseInvocation": false,
+    "nativeReleasedNotification": false,
+    "nativeFirstFrameSubmissionCallback": true,
+    "nativeVideoSizes": [
+      [
+        320,
+        180
+      ]
+    ],
+    "nativePlayBeforePreparedNotification": false,
+    "positionSamplesMs": [
+      185.0,
+      985.0
+    ],
+    "positivePositionDeltaMs": 800.0,
+    "rawHelperPositionAdvanced": true,
+    "rawHelperThresholdMs": 800,
+    "appSyntheticPreparedDirectTelemetry": "NOT PROVEN: no unchanged app event log for CandidateObserver.commit/Adaptive PREPARED; discrete UI samples do not establish complete event absence or ordering",
+    "nativeJsPromiseFulfillmentDirectTelemetry": "NOT PROVEN: native Wait Prepare Task End is recorded separately, not relabeled JavaScript .then fulfillment"
+  }
+}

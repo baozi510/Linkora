@@ -1,0 +1,6 @@
+{
+  "invalidSetupOnly": true,
+  "event": "Proof invocation ran before asynchronous baseline writer finished, FileNotFoundError; install had completed once. No build/test/runtime had started in that failed invocation.",
+  "correction": "Baseline process completed successfully with pre-install clean assertion and snapshots. Fresh proof verified all four locks and all2773 protected work bytes; allowlisted restore only. No reinstall, test or media retry, no source modification.",
+  "initialInstallCount": 1
+}

@@ -1,0 +1,629 @@
+{
+  "utc": "2026-10-08T09:42:35.820714+00:00",
+  "truthCommit": "4e3ff969b3d1bc785d8c3e20c245ba2408e5b6e6",
+  "retainedOwnedMediaNotRegenerated": true,
+  "tlsVerified": true,
+  "records": [
+    {
+      "caseId": "hls-h264-aac",
+      "files": [
+        {
+          "relativePath": "hls_h264/index.m3u8",
+          "size": 187,
+          "sha256": "531A32E12F07C6C82E2D08F0DDD581F79E3F19B998E08576E3CA221597AAD4C7",
+          "localAndRemoteEqualCommittedTruth": true,
+          "webdavStatus": 200,
+          "webdavContentType": "application/vnd.apple.mpegurl",
+          "range206Equal": true
+        },
+        {
+          "relativePath": "hls_h264/segment_000.ts",
+          "size": 93248,
+          "sha256": "E8178021313B1783EFAA77269D877E61093A26C521037FB4931BCA72B6822E78",
+          "localAndRemoteEqualCommittedTruth": true,
+          "webdavStatus": 200,
+          "webdavContentType": "video/mp2t",
+          "range206Equal": true
+        },
+        {
+          "relativePath": "hls_h264/segment_001.ts",
+          "size": 93812,
+          "sha256": "ADB34655C00CDCDB61A1C9D435449A0E95496E3627D169C9EB93F8110BA8EAD6",
+          "localAndRemoteEqualCommittedTruth": true,
+          "webdavStatus": 200,
+          "webdavContentType": "video/mp2t",
+          "range206Equal": true
+        },
+        {
+          "relativePath": "hls_h264/segment_002.ts",
+          "size": 98888,
+          "sha256": "3389D35E37F289D5FD6BFCE4E72BAFA4760E0D580AC0752AB2EABCE22C1196A3",
+          "localAndRemoteEqualCommittedTruth": true,
+          "webdavStatus": 200,
+          "webdavContentType": "video/mp2t",
+          "range206Equal": true
+        }
+      ],
+      "ffprobe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "Constrained Baseline",
+            "codec_type": "video",
+            "codec_tag_string": "[27][0][0][0]",
+            "codec_tag": "0x001b",
+            "mime_codec_string": "avc1.42c00c",
+            "width": 320,
+            "height": 180,
+            "coded_width": 320,
+            "coded_height": 180,
+            "has_b_frames": 0,
+            "sample_aspect_ratio": "1:1",
+            "display_aspect_ratio": "16:9",
+            "pix_fmt": "yuv420p",
+            "level": 12,
+            "chroma_location": "left",
+            "refs": 1,
+            "is_avc": "false",
+            "nal_length_size": "0",
+            "id": "0x0",
+            "r_frame_rate": "24/1",
+            "avg_frame_rate": "24/1",
+            "time_base": "1/90000",
+            "start_pts": 127920,
+            "start_time": "1.421333",
+            "bits_per_raw_sample": "8",
+            "extradata_size": 34,
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "variant_bitrate": "0"
+            }
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "codec_tag_string": "[15][0][0][0]",
+            "codec_tag": "0x000f",
+            "mime_codec_string": "mp4a.40.2",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "bits_per_sample": 0,
+            "initial_padding": 0,
+            "id": "0x0",
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/90000",
+            "start_pts": 126000,
+            "start_time": "1.400000",
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "variant_bitrate": "0"
+            }
+          }
+        ],
+        "format": {
+          "filename": "<retained-owned-corpus>\\hls_h264\\index.m3u8",
+          "nb_streams": 2,
+          "nb_programs": 1,
+          "nb_stream_groups": 0,
+          "format_name": "hls",
+          "format_long_name": "Apple HTTP Live Streaming",
+          "start_time": "1.400000",
+          "duration": "3.000000",
+          "size": "187",
+          "bit_rate": "498",
+          "probe_score": 100
+        }
+      },
+      "expectedVideo": [
+        320,
+        180
+      ],
+      "freshInputVerified": true
+    },
+    {
+      "caseId": "hls-hevc-aac",
+      "files": [
+        {
+          "relativePath": "hls_hevc/index.m3u8",
+          "size": 187,
+          "sha256": "AC6BC3D9133FB270A8FE6785FD27FA4F2694D44A9EE64C1AAAAD7B7028BDB555",
+          "localAndRemoteEqualCommittedTruth": true,
+          "webdavStatus": 200,
+          "webdavContentType": "application/vnd.apple.mpegurl",
+          "range206Equal": true
+        },
+        {
+          "relativePath": "hls_hevc/segment_000.ts",
+          "size": 40232,
+          "sha256": "F0F9A62154ACA9452CA089F76EDA94AF23D37EAB06242ABD010479F8234733F2",
+          "localAndRemoteEqualCommittedTruth": true,
+          "webdavStatus": 200,
+          "webdavContentType": "video/mp2t",
+          "range206Equal": true
+        },
+        {
+          "relativePath": "hls_hevc/segment_001.ts",
+          "size": 43616,
+          "sha256": "DF34BDAC61A7FD44BD891D9C149F0F7AEF29705612A7962A4DE18EF2B240560B",
+          "localAndRemoteEqualCommittedTruth": true,
+          "webdavStatus": 200,
+          "webdavContentType": "video/mp2t",
+          "range206Equal": true
+        },
+        {
+          "relativePath": "hls_hevc/segment_002.ts",
+          "size": 54520,
+          "sha256": "6591178796DFEA986ECBBCE6FB46A233BC9DAF6F163FEC3BC0F83A6EB5BF880E",
+          "localAndRemoteEqualCommittedTruth": true,
+          "webdavStatus": 200,
+          "webdavContentType": "video/mp2t",
+          "range206Equal": true
+        }
+      ],
+      "ffprobe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "hevc",
+            "codec_long_name": "H.265 / HEVC (High Efficiency Video Coding)",
+            "profile": "Main",
+            "codec_type": "video",
+            "codec_tag_string": "HEVC",
+            "codec_tag": "0x43564548",
+            "width": 320,
+            "height": 180,
+            "coded_width": 320,
+            "coded_height": 192,
+            "has_b_frames": 2,
+            "sample_aspect_ratio": "1:1",
+            "display_aspect_ratio": "16:9",
+            "pix_fmt": "yuv420p",
+            "level": 60,
+            "color_range": "tv",
+            "chroma_location": "left",
+            "refs": 1,
+            "view_ids_available": "",
+            "view_pos_available": "",
+            "id": "0x0",
+            "r_frame_rate": "24/1",
+            "avg_frame_rate": "24/1",
+            "time_base": "1/90000",
+            "start_pts": 133500,
+            "start_time": "1.483333",
+            "extradata_size": 84,
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "variant_bitrate": "0"
+            }
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "codec_tag_string": "[15][0][0][0]",
+            "codec_tag": "0x000f",
+            "mime_codec_string": "mp4a.40.2",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "bits_per_sample": 0,
+            "initial_padding": 0,
+            "id": "0x0",
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/90000",
+            "start_pts": 131580,
+            "start_time": "1.462000",
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "variant_bitrate": "0"
+            }
+          }
+        ],
+        "format": {
+          "filename": "<retained-owned-corpus>\\hls_hevc\\index.m3u8",
+          "nb_streams": 2,
+          "nb_programs": 1,
+          "nb_stream_groups": 0,
+          "format_name": "hls",
+          "format_long_name": "Apple HTTP Live Streaming",
+          "start_time": "1.462000",
+          "duration": "3.125000",
+          "size": "187",
+          "bit_rate": "478",
+          "probe_score": 100
+        }
+      },
+      "expectedVideo": [
+        320,
+        180
+      ],
+      "freshInputVerified": true
+    },
+    {
+      "caseId": "mkv-ffv1-flac",
+      "files": [
+        {
+          "relativePath": "mkv_ffv1_flac.mkv",
+          "size": 520358,
+          "sha256": "7EF6A847FA66C6C3A47BCCAFFCA08BED3DCEA499A90E693915C231C3142F5B78",
+          "localAndRemoteEqualCommittedTruth": true,
+          "webdavStatus": 200,
+          "webdavContentType": "application/octet-stream",
+          "range206Equal": true
+        }
+      ],
+      "ffprobe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "ffv1",
+            "codec_long_name": "FFmpeg video codec #1",
+            "codec_type": "video",
+            "codec_tag_string": "[0][0][0][0]",
+            "codec_tag": "0x0000",
+            "width": 320,
+            "height": 180,
+            "coded_width": 320,
+            "coded_height": 180,
+            "has_b_frames": 0,
+            "sample_aspect_ratio": "1:1",
+            "display_aspect_ratio": "16:9",
+            "pix_fmt": "yuv420p",
+            "level": -99,
+            "color_range": "tv",
+            "field_order": "progressive",
+            "refs": 1,
+            "r_frame_rate": "24/1",
+            "avg_frame_rate": "24/1",
+            "time_base": "1/1000",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "bits_per_raw_sample": "8",
+            "extradata_size": 42,
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "ENCODER": "Lavc62.24.100 ffv1",
+              "DURATION": "00:00:03.000000000"
+            }
+          },
+          {
+            "index": 1,
+            "codec_name": "flac",
+            "codec_long_name": "FLAC (Free Lossless Audio Codec)",
+            "codec_type": "audio",
+            "codec_tag_string": "[0][0][0][0]",
+            "codec_tag": "0x0000",
+            "mime_codec_string": "flac",
+            "sample_fmt": "s16",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "bits_per_sample": 0,
+            "initial_padding": 0,
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/1000",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "bits_per_raw_sample": "16",
+            "extradata_size": 34,
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "ENCODER": "Lavc62.24.100 flac",
+              "DURATION": "00:00:03.000000000"
+            }
+          }
+        ],
+        "format": {
+          "filename": "<retained-owned-corpus>\\mkv_ffv1_flac.mkv",
+          "nb_streams": 2,
+          "nb_programs": 0,
+          "nb_stream_groups": 0,
+          "format_name": "matroska,webm",
+          "format_long_name": "Matroska / WebM",
+          "start_time": "0.000000",
+          "duration": "3.000000",
+          "size": "520358",
+          "bit_rate": "1387621",
+          "probe_score": 100,
+          "tags": {
+            "ENCODER": "Lavf62.10.101"
+          }
+        }
+      },
+      "expectedVideo": [
+        320,
+        180
+      ],
+      "freshInputVerified": true
+    },
+    {
+      "caseId": "mp4-h264-aac",
+      "files": [
+        {
+          "relativePath": "mp4_h264_aac.mp4",
+          "size": 270257,
+          "sha256": "BD8933E5A54B1054350D49DE32C1E664E0EC9BAB60255010B0BDCEF2D6B4531A",
+          "localAndRemoteEqualCommittedTruth": true,
+          "webdavStatus": 200,
+          "webdavContentType": "video/mp4",
+          "range206Equal": true
+        }
+      ],
+      "ffprobe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "Constrained Baseline",
+            "codec_type": "video",
+            "codec_tag_string": "avc1",
+            "codec_tag": "0x31637661",
+            "mime_codec_string": "avc1.42c00c",
+            "width": 320,
+            "height": 180,
+            "coded_width": 320,
+            "coded_height": 180,
+            "has_b_frames": 0,
+            "sample_aspect_ratio": "1:1",
+            "display_aspect_ratio": "16:9",
+            "pix_fmt": "yuv420p",
+            "level": 12,
+            "chroma_location": "left",
+            "field_order": "progressive",
+            "refs": 1,
+            "is_avc": "true",
+            "nal_length_size": "4",
+            "id": "0x1",
+            "r_frame_rate": "24/1",
+            "avg_frame_rate": "24/1",
+            "time_base": "1/12288",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "duration_ts": 36864,
+            "duration": "3.000000",
+            "bit_rate": "615482",
+            "bits_per_raw_sample": "8",
+            "nb_frames": "72",
+            "extradata_size": 38,
+            "disposition": {
+              "default": 1,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "language": "und",
+              "handler_name": "VideoHandler",
+              "encoder": "Lavc62.24.100 libx264"
+            }
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "codec_tag_string": "mp4a",
+            "codec_tag": "0x6134706d",
+            "mime_codec_string": "mp4a.40.2",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "bits_per_sample": 0,
+            "initial_padding": 0,
+            "id": "0x2",
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/48000",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "duration_ts": 144000,
+            "duration": "3.000000",
+            "bit_rate": "96675",
+            "nb_frames": "142",
+            "extradata_size": 5,
+            "disposition": {
+              "default": 1,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "language": "und",
+              "handler_name": "SoundHandler"
+            }
+          }
+        ],
+        "format": {
+          "filename": "<retained-owned-corpus>\\mp4_h264_aac.mp4",
+          "nb_streams": 2,
+          "nb_programs": 0,
+          "nb_stream_groups": 0,
+          "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+          "format_long_name": "QuickTime / MOV",
+          "start_time": "0.000000",
+          "duration": "3.000000",
+          "size": "270257",
+          "bit_rate": "720685",
+          "probe_score": 100,
+          "tags": {
+            "major_brand": "isom",
+            "minor_version": "512",
+            "compatible_brands": "isomiso2avc1mp41",
+            "encoder": "Lavf62.10.101"
+          }
+        }
+      },
+      "expectedVideo": [
+        320,
+        180
+      ],
+      "freshInputVerified": true
+    }
+  ]
+}
