@@ -8,6 +8,7 @@ import { ProgressiveDownloadRegistry, ProgressiveDownloadTask } from './Progress
 
 const INITIALIZATION_TIMEOUT: number = 12000;
 const ERROR_EVENT_GRACE_PERIOD: number = 80;
+const PREPARATION_TIMEOUT: number = 20000;
 
 export class SystemPlaybackPort implements PlaybackBackend {
   private player: media.AVPlayer;
@@ -21,6 +22,12 @@ export class SystemPlaybackPort implements PlaybackBackend {
   private rejectInitialization: ((error: PlaybackPortError) => void) | null = null;
   private initializationTimer: number = -1;
   private lastError: PlaybackPortError | null = null;
+  private resolvePreparation: (() => void) | null = null;
+  private rejectPreparation: ((error: PlaybackPortError) => void) | null = null;
+  private preparationTimer: number = -1;
+  private nativePrepareCompleted: boolean = false;
+  private nativePreparedNotified: boolean = false;
+  private released: boolean = false;
 
   private constructor(player: media.AVPlayer, observer: PlaybackPortObserver) {
     this.player = player;
@@ -79,7 +86,35 @@ export class SystemPlaybackPort implements PlaybackBackend {
   async prepare(): Promise<void> {
     try {
       await this.initializationPromise;
-      await this.player.prepare();
+      if (this.released) {
+        throw new PlaybackPortError(5400104, 'AVPlayer released before preparation');
+      }
+      // A resolved native prepare Promise is not necessarily a prepared state.
+      // The API26 simulator HLS case observed play rejected while initialized.
+      // Require both the native call and the native state notification before
+      // AdaptivePlaybackPort can commit/emit PREPARED.
+      const preparation: Promise<void> = new Promise<void>((resolve: () => void,
+        reject: (error: PlaybackPortError) => void) => {
+        this.resolvePreparation = resolve;
+        this.rejectPreparation = reject;
+      });
+      this.startPreparationTimeout();
+      try {
+        this.player.prepare().then(
+          () => {
+            this.nativePrepareCompleted = true;
+            this.completePreparation();
+          },
+          (error: Object) => {
+            this.waitForErrorEvent().then(() => {
+              this.failPreparation(this.lastError ?? SystemPlaybackPort.platformError(error));
+            });
+          }
+        );
+      } catch (error) {
+        this.failPreparation(SystemPlaybackPort.platformError(error));
+      }
+      await preparation;
     } catch (error) {
       if (error instanceof PlaybackPortError) {
         throw error;
@@ -118,6 +153,8 @@ export class SystemPlaybackPort implements PlaybackBackend {
   }
 
   async release(): Promise<void> {
+    this.released = true;
+    this.failPreparation(new PlaybackPortError(5400104, 'AVPlayer released during preparation'));
     try {
       if (this.player.state !== 'released') {
         await this.player.release();
@@ -125,6 +162,7 @@ export class SystemPlaybackPort implements PlaybackBackend {
     } catch (_error) {
     } finally {
       this.clearInitializationTimeout();
+      this.clearPreparationTimeout();
       this.closeSourceFile();
       this.progressiveTask = null;
       this.progressiveCursor = 0;
@@ -135,6 +173,12 @@ export class SystemPlaybackPort implements PlaybackBackend {
     this.player.on('stateChange', (state: media.AVPlayerState, _reason: media.StateChangeReason) => {
       if (state === 'initialized') {
         this.completeInitialization();
+      } else if (state === 'prepared') {
+        this.nativePreparedNotified = true;
+        this.completePreparation();
+      } else if (state === 'error' || state === 'released') {
+        this.failPreparation(this.lastError ?? new PlaybackPortError(5400104,
+          'AVPlayer left preparation without becoming prepared'));
       }
       this.observer.onStateChange(this.portState(state));
     });
@@ -143,6 +187,7 @@ export class SystemPlaybackPort implements PlaybackBackend {
       const portError: PlaybackPortError = new PlaybackPortError(error.code, error.message);
       this.lastError = portError;
       this.failInitialization(portError);
+      this.failPreparation(portError);
       this.observer.onError(portError);
     });
     this.player.on('durationUpdate', (duration: number) => {
@@ -188,6 +233,48 @@ export class SystemPlaybackPort implements PlaybackBackend {
       this.failInitialization(portError);
       this.observer.onError(portError);
     }
+  }
+
+  private completePreparation(): void {
+    if (this.released || !this.nativePrepareCompleted || !this.nativePreparedNotified ||
+      this.player.state !== 'prepared') {
+      return;
+    }
+    const resolve: (() => void) | null = this.resolvePreparation;
+    if (resolve === null) {
+      return;
+    }
+    this.clearPreparationTimeout();
+    this.resolvePreparation = null;
+    this.rejectPreparation = null;
+    resolve();
+  }
+
+  private failPreparation(error: PlaybackPortError): void {
+    const reject: ((error: PlaybackPortError) => void) | null = this.rejectPreparation;
+    if (reject === null) {
+      return;
+    }
+    this.clearPreparationTimeout();
+    this.resolvePreparation = null;
+    this.rejectPreparation = null;
+    reject(error);
+  }
+
+  private startPreparationTimeout(): void {
+    this.clearPreparationTimeout();
+    this.preparationTimer = setTimeout(() => {
+      this.failPreparation(new PlaybackPortError(5400104,
+        'AVPlayer prepared state not confirmed before timeout'));
+    }, PREPARATION_TIMEOUT);
+  }
+
+  private clearPreparationTimeout(): void {
+    if (this.preparationTimer < 0) {
+      return;
+    }
+    clearTimeout(this.preparationTimer);
+    this.preparationTimer = -1;
   }
 
   private failInitialization(error: PlaybackPortError): void {

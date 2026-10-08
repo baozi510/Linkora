@@ -1,6 +1,23 @@
 # Linkora Session Handoff
 
-## CURRENT STATE — 2026-10-08 Phase 8D-SIM environment stop reviewed
+## CURRENT STATE — 2026-10-08 Phase 8D-SIM collection accepted, readiness fix unvalidated
+
+**Repo/branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`.
+
+**Accepted collection-only evidence:** Phase 8D-SIM Rerun 1 `9c4f6ded7cc86afad1052eb448ce3172b3232db6`, task `phase8d-sim-rerun1-hdc-rport-six-case`, source `c0d37ef9aaeba31c512743fe704e8d91ba1c0c48`, dispatch `a8ad55081c54630e3602b71f9fe9415cc092e1ab`. Completed; never re-execute that task ID. Remote commit includes only one report + new evidence (87 paths).
+
+Healthy System H.264 control new PASS with exact reverse route, actual native frame callback and independent colored pixels; two HLS failed with native play while initialized despite successful manifest/segment GET200; four legacy native System videos were prepared/playing, size0x0, absent frame callback, sampled black video despite positive +701/+676/+750/+724 ms positions; the raw >=800ms helper Boolean `false` remains immutable. This is scoped simulator evidence, **not** six format playback PASS, device capability, permanent decoder diagnosis or verified audio output. Phase 8B old six FAIL, Phase 8D earlier environment BLOCKED/NOT RUN and all historical metadata FAIL stay intact.
+
+**GPT implementation decision in this review commit:** System `prepare()` may not imply prepared native state from Promise-only completion; gate app-level ready on actual native prepared notification, native state and completion, bound the wait to 20 seconds, abort on error/timeout/release, never call `play()` while initialized. Production source changed in `entry/src/main/ets/playback/SystemPlaybackPort.ets` only; **not yet validated**. This guard may replace invalid-state play with a bounded prepare timeout if the simulator never transitions; it does **not** prove that HLS decodes.
+
+**Next action:** new independently committed READY `docs/CODEX_VALIDATION_TASK.md` task, from this implementation source SHA. Codex test-only; run fresh default/simulator/default, verify exact ABI/signing, controlled reverse host route, actual healthy MP4 and two HLS prepares, validate no early play or fabricated PREPARED, and verify a legacy case (no black→PASS reclassification), cleanup, timeout and leave-cancellation. Stop on build failure, unbounded hang, leaked resources, or regression. Do not query quota. No physical device now; MPV simulator stub, ARM64 FFmpeg runtime/HDR/advanced audio/device-specific capability NOT PROVEN.
+
+The older CURRENT STATE below is historical; newest task and actual remote HEAD win any conflicts.
+
+---
+
+
+## HISTORICAL STATE — 2026-10-08 Phase 8D-SIM environment stop reviewed
 
 **Repository:** `baozi510/Linkora`. **Branch:** `feat/playback-capability-phase8`.
 

@@ -1,6 +1,27 @@
 # Linkora Player Architecture — Implementation Status
 
-## CURRENT EXECUTION SUMMARY — 2026-10-08 (Phase 8D-SIM stopped and independently reviewed)
+## CURRENT EXECUTION SUMMARY — 2026-10-08 (Phase 8D-SIM Rerun 1 independently reviewed; System ready gate pending validation)
+
+**Active branch:** `feat/playback-capability-phase8`.
+
+**Review decision:** **ACCEPTED — FOCUSED SYSTEM SIMULATOR INVESTIGATION COLLECTED** at evidence `9c4f6ded7cc86afad1052eb448ce3172b3232db6`. This is **collection-only** and is not a playback PASS for six historical formats, not a platform-wide codec diagnosis, and not ARM64/Mate60 acceptance.
+
+- Task `phase8d-sim-rerun1-hdc-rport-six-case`; tested source `c0d37ef9aaeba31c512743fe704e8d91ba1c0c48`, dispatch `a8ad55081c54630e3602b71f9fe9415cc092e1ab`. The evidence commit is one ahead of dispatch with 87 authorized files, no protected edits. Task is already executed; **never rerun it under the old ID**.
+- Fresh default → simulator → default build suite PASS. Actual two Hypium outputs 210/210; each default run two exact-nine ARM64 artifact/ABI audits, x86 simulator FFmpeg-only library whitelist, valid signed simulator HAP installed. Four Windows locks had two fresh EOL-only proofs. Submodule pins were verified; extra recursive fetch TLS problem did not alter pins/policies.
+- Fresh reverse HDC 19084 mapping had actual `[Reverse]` proof and device→host requests. One healthy native System H.264/AAC MP4 official open: Range206, prepared/playing, 320×180 callback, actual first-frame callback **and separate colored pixel proof**, progress 144→977 ms; clean leave. Six targets each independently opened **once**, all six scoped **BOUNDED FAIL/UNRESOLVED**, not format PASS.
+- HLS H.264/AAC and HLS HEVC/AAC: each manifest+three segments GET200; native initialized → prepare invocation → about 2s wait → play called while **still initialized**, without prior prepared notification; native invalid-state rejection and UI LNK-PLAY-006. Not a proven 404/auth/route failure; decoder unsupported or whether SDK/native prepare incorrectly resolves is **not proven**.
+- Four simulator legacy video samples (FFV1/ProRes/Theora/WMV): native prepared+playing and exact `videoSizeChange(0,0)`, no actual first-frame callback; correct XComponent geometry, independently captured black ROI after overlay, no capture errors. Position increased by **701/676/750/724ms** respectively but old host helper's **>=800ms** Boolean remains `false`. Monotonic progress is not pixel proof, black in sampled windows is not permanent/all-device unsupported, and audio playback/output is not proved.
+- Cleanup: original Auto restored, only owned reverse and temporary row removed, owned server stopped, seven sampled leave checks zero; protected history untouched. 25 sanitized gzip integrity reports present; selected hilog excerpts are **after-minus-before subsets/redacted**, not full native logs. Neither full private screenshots nor full raw hilog are published; publicly readable metadata supports the bounded verdicts.
+- **Architecture decision and production correction (this review commit, not yet tested):** `SystemPlaybackPort.prepare()` must not resolve the app-level PREPARED contract from `AVPlayer.prepare()` Promise alone. Add a **bounded, state-confirmed readiness gate**: require both Promise fulfillment **and** native `stateChange('prepared')` and current native `player.state === 'prepared'`; otherwise fail with timeout/error/release, without calling play while initialized. This is a correctness guard, **not** an HLS codec fix or promise of eventual prepared. Existing System/MPV selection, Auto fallback, SDK config, media, UI and other contracts remain unchanged. New production change **VALIDATION NOT RUN**; Codex must perform fresh compile/simulator and regression evidence.
+- Preserve Phase 8B six historical FAIL, Phase 8D first-round BLOCKED and seven NOT RUN, and this round six bounded FAIL. Phase 8C 39-feature native-first static audit accepted within scope; future feature implementation/real MPV/ARM64 runtime/display/audio/HDR still separate.
+- **Next:** publish a **distinct** READY Codex validation dispatch from this source/review commit, focused on state-confirmed System readiness, HLS two cases, healthy control, timeout/cancellation and a legacy video representative as non-playback-PASS guard. Do not reuse old PASS as new PASS. No device available; do not change Auto/Direct I/O/UI/media.
+
+The previous 2026-10-08 Phase 8D environment summary below is historical, not the current new source state.
+
+---
+
+
+## HISTORICAL EXECUTION SUMMARY — 2026-10-08 (Phase 8D-SIM stopped and independently reviewed)
 
 **Branch:** `feat/playback-capability-phase8`. **Current owner ruling:** `BLOCKED — SIMULATOR ENVIRONMENT` for completed Phase 8D-SIM attempt `phase8d-sim-system-hls-first-frame-root-cause`; **not** a functional investigation PASS, hardware claim or identified production defect.
 
