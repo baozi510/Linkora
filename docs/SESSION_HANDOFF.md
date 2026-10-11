@@ -1,3 +1,17 @@
+## CURRENT STATE — 2026-10-12 Level1 source-bound x86 build locally PASS; SDK signing keystore access blocked
+
+**Remote verified evidence commit:** `d4905fe4b00f74681e9ff44e0a3102b9679e7ad6`, exact parent prior dispatch `9fc247a5c89173a91e07d1695ae404e70fae82c1`, only the authorized report `docs/PLAYBACK_PHASE8F_LEVEL1_SCOPED_SMOKE_REPORT.md` and `test-lab/playback/phase8f-level1-scoped-smoke-20261012/result.json` were added. GPT independently fetched both and compared them. Private raw build/sign streams NOT available for full independent replay; publicly recorded result is `DEPENDENCY_BLOCKED — SIGNED ARTIFACT`, `COMPLETED WITH FAILURES / PARTIAL`, NOT playable PASS.
+
+**Reported local outcomes:** running API26 x86_64 emulator connected and valid existing fixture/profile membership; optional absent README exit1 `RECORD_ONLY` and did not halt independent stages; exactly ONE scoped simulator Debug build real subprocess0 with FFmpeg-only one-library whitelist, no ARM64/default full build. Sign-app SDK Java/outer exit1 `11014003 / Init keystore failed: keystore password was incorrect`. No signed HAP, no installation/foreground, NO media opens, pending HLS native release-cleanup and recovery NOT RUN / NOT PROVEN. No evidence of product/SDK code defect. Keystore storage opening cannot be inferred from file presence and valid profile membership. Private original logs and signing material kept private; original user workspace reportedly not written, final exhaustive bytewise comparison NOT RUN.
+
+**Next READY separate task to dispatch:** no recompile, no old stopped signing retry. Inspect private existing credential availability using authorized user-owned local facilities, no secret disclosure, guesses, brute-force, profile or keystore regeneration or SDK preference changes. Reuse ONLY if the existing unsigned HAP matches PRIVATE hash `DBF39571A1FD594FC8522F5759C678E9A97FA5EF3E3F34EA4615A6707CF9C11E` AND original dispatch/source/build x86 artifact provenance. One legal successful-credential-dependent sign attempt max; if credential unavailable or opens fail then `DEPENDENCY_BLOCKED — KEYSTORE ACCESS` with all media NOT RUN. If signed source-compatible HAP produced, install and run scoped healthy MP4 + HLS H264 PREPARING cancel independently when app safe; recovered MP4 only after normal native release and early/>20s resource cleanup. Small redacted public report/JSON, exact paths/privacy/remote SHA, no redundant gzip/inventory. Full ARM64/Release/ABI only at Level2 milestone; real hardware Level3. No direct secrets in public logs/chat.
+
+No previous STOP or unsupported product PASS rewritten. Sole execution authority is newest committed `docs/CODEX_VALIDATION_TASK.md`, not this handoff.
+
+Older sections below are historical.
+
+---
+
 ## CURRENT STATE — 2026-10-12 Error classification and dependency-scoped continuation
 
 **Repo:** `baozi510/Linkora`, branch `feat/playback-capability-phase8`. Prior dispatch `4e08263fe572ad3caf419c0be741985a2c6f262c` was READY; no new remote evidence from it had been reported when GPT reviewed the current STOP policy. The prior ID must not be executed concurrently with the new dispatch.
