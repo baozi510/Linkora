@@ -1,3 +1,17 @@
+## CURRENT STATE — 2026-10-12 Phase8F Level1 first attempt stopped on helper hardcoded source path
+
+**GitHub remote check:** HEAD at the reported STOP remained `e605bccf1652f30b9b572e3259ec3f5b0d2c5fe9` on `baozi510/Linkora` / `feat/playback-capability-phase8`, an earlier dispatch and not an evidence SHA. `phase8f-feature-first-targeted-simulator-cancel-smoke` is locally reported STOPPED, unpublished, no local/remote evidence commit. It cannot be silently continued or rerun under the same ID.
+
+**OWNER-INDEPENDENT source tree verification:** `entry/src/main/ets/playback/PlaybackPort.ets` does **not** exist; actual source is `linkora_core/src/main/ets/playback/PlaybackPort.ets`, Git blob `231e49b84dce45b83c472fbed0b258711ce758d5`. PlaybackEngine.ets imports its local PlaybackPort. The private preparation helper hardcoded the nonexistent entry path, reportedly `FileNotFoundError` Python1/outer1; not a product/SDK/HarmonyOS bug. It was neither fixed nor retried under the stopped task.
+
+**Reported separate publication STOP:** only two authorized NEW local output files (report, result.json), `git add` numeric0, but PowerShell extra staged-path validator threw `Unauthorized staged paths` with outer1. The expected/actual pathname arrays and original wrapper full streams/times are NOT independently retained: do not claim unauthorized file staging as fact. The final STOP amendments were not staged, no commit/push. No simulator, legal signing, UI, fixture, builds or official media opens attempted; three functional scenarios NOT RUN and cancellation/recovery NOT PROVEN. Full ARM64/ABI/Release remains DEFERRED to milestone. No full final protected-workspace bytewise comparison was run; historical failed reports and private bytes remain untouched per local handoff, not remotely verified.
+
+**NEXT:** New distinct READY `LEVEL_1_FUNCTIONAL` task may use exact source-verified paths and direct Git inventory instead of invented prep helper; **first** cheap actual emulator/HDC/fixture/signing check, **then at most one scoped simulator Debug build only if needed**, **then** actual MP4 healthy / pending HLS H264 cancellation+normal native release / independent MP4 recovery. Exact one report+one result.json sanitized evidence if possible; stage with explicit `git add --`, check raw staged Git names directly, no new array-comparison PowerShell helper. If an actual necessary Git/security gate fails, STOP honest; never run expensive verification merely because auxiliary publication failed. No old STOP/helper/controller replay, no user workspace mutations, no quota checks. GPT reviews only actual remote SHA.
+
+Earlier CURRENT sections below are historical.
+
+---
+
 ## CURRENT STATE — 2026-10-12 Feature-first/test-path change; focused Phase 8F smoke pending
 
 **Repository / branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`.
