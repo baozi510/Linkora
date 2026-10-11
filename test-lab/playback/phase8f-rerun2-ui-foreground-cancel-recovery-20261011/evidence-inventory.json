@@ -1,0 +1,341 @@
+{
+  "utc": "2026-10-11T08:14:35.454926+00:00",
+  "scope": "Every evidence file existing before this inventory; inventory itself and report intentionally not self-hashed. Full remote Git blob inventory checked after push.",
+  "files": [
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/aa-help-supported.stdout.sanitized.txt",
+      "bytes": 804,
+      "sha256": "8e2428e4f0c6958e8d7b0338ff89f97263469aea597839e250967bf0fc4a3b23"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/aa-help-supported.stdout.sanitized.txt.gz",
+      "bytes": 317,
+      "sha256": "f2aa5f9eb6580e94bfc6b8a938b0f3d6577ba691af909be1d2769ffcc4bbe741"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/ability-help.stdout.sanitized.txt",
+      "bytes": 833,
+      "sha256": "8fbcf2e8b057ce67373a96a093f9f4c30d3ad1ea18018ce89c88c5cf48905a5b"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/ability-help.stdout.sanitized.txt.gz",
+      "bytes": 283,
+      "sha256": "7294b2f18817ac27ed1f053f16258d443f74d4992591cf5fe184e1f046890a60"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/attempt-ledger.ndjson",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/bm-dump-help.stdout.sanitized.txt",
+      "bytes": 592,
+      "sha256": "5b62f7f943414a02b26c35195f3ac0fdd1eafcc47452a4784db10f941de22c46"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/bm-dump-help.stdout.sanitized.txt.gz",
+      "bytes": 257,
+      "sha256": "572eda084e0c2a742a0e956636177a2146c5d49016615814bab9840f7f80dea4"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/bm-get-help.stdout.sanitized.txt",
+      "bytes": 178,
+      "sha256": "cc8e9e8218c56c9234cfce6de33f975a92a0167361dc51445775274e4a7a15dc"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/bm-get-help.stdout.sanitized.txt.gz",
+      "bytes": 119,
+      "sha256": "a8cee8217f36189dd2276d0efd8a40d18b5a15aca134c0089b4929d59ba9f1e8"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/build-results.json",
+      "bytes": 1265,
+      "sha256": "3cc0d32a6159657e3e3bb8cd1d4364632f32393fcb1833db2fcee33d3d0716d8"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/cleanup-audio-help.stdout.sanitized.txt",
+      "bytes": 607,
+      "sha256": "15b84e47be529eb1f3ff4c5eb5be2e48fbcb2c31178865e5915c7ce3a921ef3c"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/cleanup-audio-help.stdout.sanitized.txt.gz",
+      "bytes": 247,
+      "sha256": "86c0aa034e1b2acd346da944ab5cd497e600ec1544985a5c881f09540db8909d"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/cleanup.json",
+      "bytes": 1095,
+      "sha256": "a83b1ce5fc085d65844b92fffae2c7df943db0470a00d01231a8925c68cb44d5"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/committed-corpus-reading.json",
+      "bytes": 3921,
+      "sha256": "d62b3e39a7f4139dc5046e09576f6c809efb4d0abd8d785874e2cad81ba00940"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/default-first-hypium.sanitized.txt",
+      "bytes": 14596,
+      "sha256": "af333ac54c490612f5ac26ad104102f3ff081c6e8f882338392f3e4201ea7b5b"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/default-first-hypium.sanitized.txt.gz",
+      "bytes": 4399,
+      "sha256": "20538c5a6aae797c3726c41b2666cd8249ca63109a028a797fee520417bb0dcc"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/default-first-result.json",
+      "bytes": 298,
+      "sha256": "39496a38639b79d6303ba0ff9f37cb26505403a030e4e5dba1489503e1b756d2"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/default-first.stderr.sanitized.txt",
+      "bytes": 282029,
+      "sha256": "3cbba51ffd4113d12dc6d2c99614401df82ce9d4cea7442650c1d6b934855f9d"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/default-first.stderr.sanitized.txt.gz",
+      "bytes": 9405,
+      "sha256": "2b7bd7aea31be625aa63288527576fc57c4365284a4b7bd5325e070fc84f045a"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/default-first.stdout.sanitized.txt",
+      "bytes": 51213,
+      "sha256": "64fed68d839d3d00497e3d183ef001d5d7761eb3f14e90400f07db8a9dfa5ecb"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/default-first.stdout.sanitized.txt.gz",
+      "bytes": 5838,
+      "sha256": "12e367fd5c90f4044972e9bcdf8999e4941ab725de54fab432397f0104ca61ae"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/dependency-inputs.json",
+      "bytes": 2844,
+      "sha256": "736aae04d0387b4d11442d4fb9243c30464a1ca35ef37f6319b4a390772fc2a8"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/device-source.sanitized.txt",
+      "bytes": 1674,
+      "sha256": "58b27d4a44501d77fa0d242e41534f2e91d02dd2701b43918bc636d895d07bab"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/device-source.sanitized.txt.gz",
+      "bytes": 775,
+      "sha256": "5500532d37836392887464b6dbe76f67442dc05af051626c1d0469f387bb5d63"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/failed-helper-console.sanitized.txt",
+      "bytes": 816,
+      "sha256": "a72b0e010bb360f1e0e654d97d83c4261b9e21e4b62e2ad5aca4a51feedb65eb"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/failed-helper-console.sanitized.txt.gz",
+      "bytes": 404,
+      "sha256": "135cafd0f396c7b56d456c98329e01f4ad7c1945063569d8861f0970a8a5904d"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/foreground-predeclaration.json",
+      "bytes": 2146,
+      "sha256": "c293d10e6b7bc42912a307b2b251ccfbac00961148c266132e20e0168e15e876"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/hdc-version.sanitized.txt",
+      "bytes": 12,
+      "sha256": "baa9ba964655552c91af6af899d137d1472fe6adad853cd05602f968b0b00f93"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/hdc-version.sanitized.txt.gz",
+      "bytes": 32,
+      "sha256": "6968487e668c1669dc127e9e506d2c7e58e659d16de3d4a25aa973c2e3235275"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/help-aa---help.sanitized.txt",
+      "bytes": 859,
+      "sha256": "fb328c12ce619f15ac9f34006fe015e4a03202e0d03a5227a6435aa4cacb9abf"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/help-aa---help.sanitized.txt.gz",
+      "bytes": 345,
+      "sha256": "43f8ce94b2ad0dcd0593ce40210683507471617684b8b2ac718907b5f6df24fd"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/help-aa-start--h.sanitized.txt",
+      "bytes": 621,
+      "sha256": "8529f5061600db7dfaa324246d0c2c99582b22ea1b0f64bd7452d1315292c21d"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/help-aa-start--h.sanitized.txt.gz",
+      "bytes": 323,
+      "sha256": "d034526feb009efb51d705a62e6bed896c65f1270843b68e5a4834a9fa53c840"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/help-hidumper--h.sanitized.txt",
+      "bytes": 2777,
+      "sha256": "09c06cf2098c491af46bc5caf1af581250fc3135e9fc2dc133550d7fe2435721"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/help-hidumper--h.sanitized.txt.gz",
+      "bytes": 969,
+      "sha256": "507f69dd6a85edc25efc27c5385a2b31cc3fdc4672254d54209d58c7133109a0"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/help-uitest-dumpLayout--h.sanitized.txt",
+      "bytes": 3833,
+      "sha256": "78d411aaeb0c8a22bd1489d87134bf778532afe86173274635fb7e542c0706ec"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/help-uitest-dumpLayout--h.sanitized.txt.gz",
+      "bytes": 890,
+      "sha256": "54fec7756d56f0c1dec206e6c068b08192ff067ae77b18eaa6e25cd40eb11622"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/help-uitest-help.sanitized.txt",
+      "bytes": 3802,
+      "sha256": "34ea4f1eeaa6af7842d54cc9eacae4be39b10ad8bc5be55e59aa7dcafc95e5c7"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/help-uitest-help.sanitized.txt.gz",
+      "bytes": 869,
+      "sha256": "5a1d3b52d713bf62da7d0625fc5609eda3aa3580e5228098717755bc5ba571ba"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/initial-eol-proof.json",
+      "bytes": 3182,
+      "sha256": "ffc55155bc68e0da830b8d38c4f686f7395a51fb8068aa901d59a6d8f7385423"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/initial-install-result.json",
+      "bytes": 298,
+      "sha256": "259d59a7b6ece23e3be77c680b00cca76e8076c05419f799f094c580598ce2b4"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/initial-install.stderr.sanitized.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/initial-install.stderr.sanitized.txt.gz",
+      "bytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/initial-install.stdout.sanitized.txt",
+      "bytes": 40,
+      "sha256": "71bc2cb288602453c658b91ca43a99d56d4f07acbf32a5f9c34d1e77157eeab8"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/initial-install.stdout.sanitized.txt.gz",
+      "bytes": 60,
+      "sha256": "ebc1880c34c5cdd9eb9c45b4558cf3e4796eb160bd2c06ca176c4c3fc7ed892e"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/log-integrity.json",
+      "bytes": 25538,
+      "sha256": "a3e10892b5c1ef75d712712c9a25edb10800016e1c1fa12480cacefe969ef442"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/predeclare-source.sanitized.txt",
+      "bytes": 2138,
+      "sha256": "c749d7c46670fa71e1ff94bde51f99238611e1ad1ff40b5b3d802d4e213a513b"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/predeclare-source.sanitized.txt.gz",
+      "bytes": 1213,
+      "sha256": "e9cd41e26c5c0c64a49906bb406524308ed8ad149ac6bb4c3816d482035ca0e0"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/protection-audit.json",
+      "bytes": 1114,
+      "sha256": "e9c07e20c3892e5f0308a78a2ef7c9708f9551b3da06ba598404b15aeba33962"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/required-reading.json",
+      "bytes": 18478,
+      "sha256": "14e21774d126e3d27612f493f67c02cf48125f32663405301b3da4171cfb5764"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/security-review.json",
+      "bytes": 497,
+      "sha256": "d659f2a06dbc975200e93baec175afb9dfbe5147ff390d771511ced1da32e0e1"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/sign-preflight-source.sanitized.txt",
+      "bytes": 1307,
+      "sha256": "10494c4b09571108a6e2ac6ee70d23ba8c11b7d5e1fae83b9b04d7e7a280524b"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/sign-preflight-source.sanitized.txt.gz",
+      "bytes": 708,
+      "sha256": "f481d6338725ba59a69a64f878d15ae865da3c33776c2e9baff7957c0445bd7b"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/sign-preflight.json",
+      "bytes": 339,
+      "sha256": "bf66b35a19ed9577e8dac4ad439f9cb43046c149bf5ea851f9345c7c3c88f8dd"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/source-state.json",
+      "bytes": 2066,
+      "sha256": "de42aaff44f5cba8b5f8446d09fdc689df99d25b441216f727c305f27f6f1e68"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/stop-diagnosis.json",
+      "bytes": 1059,
+      "sha256": "80c5ba1deb94ffe413b881f5187d93654b644b2fa36fe98f97a691983322e5a7"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/target-abi.stdout.sanitized.txt",
+      "bytes": 7,
+      "sha256": "aaf631698ae5160ceb04a97681a14887fdcab47cd6e0f163c87485b3b1340b62"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/target-abi.stdout.sanitized.txt.gz",
+      "bytes": 27,
+      "sha256": "bda0a438832988bf5629b90114f34985f90fdc9ba8bd55f168c1ea15b308d3ff"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/target-api.stdout.sanitized.txt",
+      "bytes": 3,
+      "sha256": "20d2add851bf39edcc6b5e830930f962db7e19dffa2cab8610eed551eda6c302"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/target-api.stdout.sanitized.txt.gz",
+      "bytes": 23,
+      "sha256": "afba472a014d1a859c12cc3091be6ae6cab10f2d49b76ae20dd848d7a9c9f139"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/target-firmware.stdout.sanitized.txt",
+      "bytes": 22,
+      "sha256": "f59f3656d1aa1525ceb63918a1294cf7f79d938d87057009defb680539d6beb0"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/target-firmware.stdout.sanitized.txt.gz",
+      "bytes": 40,
+      "sha256": "43fd43c66165af0075b5a356bc1441e56f7133d07540c32fd399a0366495b224"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/target-udid.stdout.sanitized.txt",
+      "bytes": 49,
+      "sha256": "6007b1d9d9567f4be2749f3c9f638cc1421ca63d37f509f3fc5e5eb57ce4da78"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/target-udid.stdout.sanitized.txt.gz",
+      "bytes": 69,
+      "sha256": "8582bc4fbc94081f6d58730804b3bf9aa76a9d5db1c3c924c73d7137e6a34a0b"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/task-result.json",
+      "bytes": 2330,
+      "sha256": "9a0c67fb3cfb9a80fae7c0f598a3745a3ab4bc509a3dbb24c60c4d282971d1a2"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/window-help.stdout.sanitized.txt",
+      "bytes": 457,
+      "sha256": "d3cdf6fbe09aac8b99e12f6d1ff711e5d4994d6424354dc391c477af3ab98e83"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/window-help.stdout.sanitized.txt.gz",
+      "bytes": 174,
+      "sha256": "f802b9ddafbaa078a60ae79012791138d4fce0cbbffce7b4ed2365c4479e2cfc"
+    }
+  ]
+}

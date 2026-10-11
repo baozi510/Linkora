@@ -1,0 +1,18 @@
+
+-------------------------------[ability]-------------------------------
+
+
+----------------------------------AudioPolicyService----------------------------------
+usage:
+  -h			|help text for hidumper audio policy
+  -d			|dump devices info
+  -m			|dump ringer mode and call status
+  -v			|dump stream volume info
+  -az			|dump audio in interrupt zone info
+  -apc			|dump audio policy config xml parser info
+  -s			|dump stream info
+  -xp			|dump xml data map
+  -e			|dump audio effect manager info
+  -as			|dump audio session info
+  -ap			|dump audio pipe manager info
+  -boot			|dump audio policy boot info

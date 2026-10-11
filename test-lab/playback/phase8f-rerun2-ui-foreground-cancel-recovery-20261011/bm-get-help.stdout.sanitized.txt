@@ -1,0 +1,4 @@
+usage: bm get <options>
+options list:
+  -h, --help                             list available commands
+  -u, --udid                             obtain udid of the current device

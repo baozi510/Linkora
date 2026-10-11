@@ -1,0 +1,2 @@
+udid of current device is :
+<PRIVATE_IDENTIFIER>

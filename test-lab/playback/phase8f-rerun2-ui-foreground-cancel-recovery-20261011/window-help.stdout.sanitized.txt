@@ -1,0 +1,10 @@
+
+-------------------------------[ability]-------------------------------
+
+
+----------------------------------WindowManagerService----------------------------------
+Usage:
+ -h                             |help text for the tool
+ -a                             |dump all window information in the system
+ -w {window id} [ArkUI Option]  |dump specified window information
+ ------------------------------------[ArkUI Option]------------------------------------

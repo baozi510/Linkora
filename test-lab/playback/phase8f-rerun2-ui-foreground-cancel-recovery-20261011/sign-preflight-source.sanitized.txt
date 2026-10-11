@@ -1,0 +1,18 @@
+from device import *
+material=json.loads(Path('<PRIVATE_HOST_PATH>').read_text(encoding='utf-8-sig'))['material']
+data=Path(material['profile']).read_bytes(); decoder=json.JSONDecoder(); profile=None
+for offset,value in enumerate(data):
+    if value!=123: continue
+    try:
+        candidate,_=decoder.raw_decode(data[offset:].decode('utf-8',errors='ignore'))
+        if isinstance(candidate,dict) and 'bundle-info' in candidate: profile=candidate; break
+    except (ValueError,TypeError): pass
+assert profile is not None,'STOP: legal existing profile cannot be read'
+device('bm-get-help','shell','bm','get','-h')
+udid=device('target-udid','shell','bm','get','-u').strip()
+facts={'utc':utc(),'profileSha256':sha(data),'bundleMatches':profile['bundle-info']['bundle-name']=='com.linkora.player',
+ 'existingMaterialFilesPresent':all(Path(material[k]).is_file() for k in ['profile','storeFile','certpath']),
+ 'simulatorListedInExistingProfile':udid in profile.get('debug-info',{}).get('device-ids',[]),
+ 'existingProfileAndSigningMaterialUnchanged':True,'signatureOrPermissionBypass':False}
+save('sign-preflight',facts); print(json.dumps(facts))
+assert facts['bundleMatches'] and facts['existingMaterialFilesPresent'] and facts['simulatorListedInExistingProfile'],'STOP: signing profile invalid for simulator'

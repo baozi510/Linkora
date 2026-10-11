@@ -1,0 +1,23 @@
+{
+  "utc": "2026-10-11T08:12:15.331275+00:00",
+  "officialOpens": 0,
+  "ownedServerCreated": false,
+  "ownedReverseCreated": false,
+  "ownedHttpRowCreated": false,
+  "ownedServerReverseHttpRowRemoval": "NOT APPLICABLE: never created",
+  "mappingListEmpty": true,
+  "host19084ListenerCount": 0,
+  "backendPreferenceChanged": false,
+  "originalAutoPreference": "NOT PROVEN: UI preflight not run; no preference action",
+  "ownedAppStartOrForceStop": false,
+  "newHapInstalled": false,
+  "appDataWipeUninstallEmulatorReset": false,
+  "existingSimulatorLeftUntouched": true,
+  "existingAppPidPresent": true,
+  "appAssociatedPlayerServiceEntries": 0,
+  "appAssociatedAudioRendererEntries": 0,
+  "surfaceCount": "NOT PROVEN: no app layout or UI observation in this stopped task",
+  "scope": "Read-only cleanup observations of pre-existing installed app, not task cancellation/normal-release proof; service records are not native instance counts or audibility",
+  "noUnrelatedProcessOrMappingRemoved": true,
+  "inFlightDefaultBuild": "Already completed exit0 by containment check; no process stopped"
+}

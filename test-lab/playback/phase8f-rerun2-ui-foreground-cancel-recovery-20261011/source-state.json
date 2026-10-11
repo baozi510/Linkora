@@ -1,0 +1,47 @@
+{
+  "utc": "2026-10-11T08:14:33.240975+00:00",
+  "repository": "baozi510/Linkora",
+  "branch": "feat/playback-capability-phase8",
+  "taskId": "phase8f-sim-rerun2-ui-foreground-gated-cancellation",
+  "taskFileState": "READY",
+  "source": "867907df5ab768c5127a707d2076fd8d619a3fbf",
+  "testedDispatch": "148de8f4cfd7c382aa403fb4e1b17d3a4171f850",
+  "freshFetchedRemoteHead": "148de8f4cfd7c382aa403fb4e1b17d3a4171f850",
+  "sourceToDispatchDrift": [
+    "docs/CODEX_VALIDATION_TASK.md"
+  ],
+  "initialCleanIsolatedCheckout": true,
+  "priorEvidenceAncestorOfSource": true,
+  "sourceAncestorOfDispatch": true,
+  "protectedPlaybackBlobs": {
+    "entry/src/main/ets/playback/AdaptivePlaybackPort.ets": {
+      "dispatch": "1050012dbef214efba5ebccb5571cc9174345c08",
+      "productionFix8174": "1050012dbef214efba5ebccb5571cc9174345c08"
+    },
+    "entry/src/main/ets/playback/SystemPlaybackPort.ets": {
+      "dispatch": "cc78c2611e8582633f2a67cb323f3072f5d8a31f",
+      "productionFix8174": "cc78c2611e8582633f2a67cb323f3072f5d8a31f"
+    }
+  },
+  "submodules": {
+    "entry/src/main/cpp/third_party/libnfs": {
+      "pin": "cee4ca723e081e6a18f51b838690a4c21e14bb2c",
+      "actualHead": "cee4ca723e081e6a18f51b838690a4c21e14bb2c",
+      "origin": "https://github.com/sahlberg/libnfs.git",
+      "method": "Fresh normal GitHub submodule update --init --recursive, exit0"
+    },
+    "entry/src/main/cpp/third_party/libsmb2": {
+      "pin": "b3d560c02fb1268320d2fd1c17fe841b0d93b85f",
+      "actualHead": "b3d560c02fb1268320d2fd1c17fe841b0d93b85f",
+      "origin": "https://github.com/sahlberg/libsmb2.git",
+      "method": "Fresh normal GitHub submodule update --init --recursive, exit0"
+    },
+    "entry/src/main/cpp/third_party/mbedtls/framework": {
+      "pin": "7d726d145d678aa7f5a7df3b9e7ee3dbce6ea1bf",
+      "actualHead": "7d726d145d678aa7f5a7df3b9e7ee3dbce6ea1bf",
+      "origin": "https://github.com/Mbed-TLS/mbedtls-framework.git",
+      "method": "Fresh normal GitHub submodule update --init --recursive, exit0"
+    }
+  },
+  "noOriginalWorkspaceMutation": true
+}

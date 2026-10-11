@@ -1,0 +1,37 @@
+{
+  "utc": "2026-10-11T08:08:21.927723+00:00",
+  "taskId": "phase8f-sim-rerun2-ui-foreground-gated-cancellation",
+  "definedBeforeOwnedAppStart": true,
+  "scope": "Non-invasive private foreground/UI collector; no app hooks, configuration changes or inputs",
+  "start": "At most one normal aa start -a EntryAbility -b com.linkora.player -m entry; omit if already genuinely foreground",
+  "deadlineSeconds": 30,
+  "maximumSamples": 6,
+  "nominalSampleOffsetsSeconds": [
+    0,
+    5,
+    10,
+    15,
+    20,
+    25
+  ],
+  "perSampleSequence": [
+    "HDC target list presence",
+    "API26 read",
+    "AbilityManagerService -a and -r",
+    "WindowManagerService -a",
+    "only if actual matching foreground visible nonstarting window: uitest dumpLayout -b com.linkora.player -d displayId -p uniquePath then file recv, then screenCap on same display and file recv"
+  ],
+  "diagnosticAlternative": "Only after visible target owner established, one predeclared -w verifiedWindowId dump and one unscoped same-display comparison if bundle layout empty. Diagnose selector; never override missing actual Linkora app nodes.",
+  "minimumStableSamples": 2,
+  "requiredUiGrounding": "Visible non-root component nodes and real Index/Library/AdaptiveAppShell controls; sequential matching screenshots reviewed visually",
+  "startupDiagnostic": "Read-only hilog -x selected ability/window/main-page errors as part of last bounded observation; full originals private",
+  "stopRules": [
+    "Any required command transport nonzero, error response, timeout or collector assert: immediately STOP, no retry",
+    "No actual target foreground visible window by deadline: BLOCKED — SIMULATOR APP FOREGROUND/STARTUP",
+    "Target window exists but app nodes/screenshot not proven: FAIL — UI READINESS PREFLIGHT",
+    "No fixture server, rport, HTTP row, preference changes or media opens until complete UI PASS"
+  ],
+  "zeroOfficialOpensAtDeclaration": true,
+  "noArbitraryHomeBackOrForceStop": true,
+  "scriptProvenance": "Exact private collector source/hash retained before runtime invocation; selectors and parsing grounded in installed help and pre-start state"
+}

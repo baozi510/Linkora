@@ -1,0 +1,14 @@
+
+-------------------------------[ability]-------------------------------
+
+
+----------------------------------AbilityManagerService----------------------------------
+Usage:
+-h                          help text for the tool
+-a [-c | -u {UserId}]       dump all ability information in the system or all ability information of client/UserId
+-l                          dump all mission list information in the system
+-i {AbilityRecordId}        dump an ability information by ability record id
+-e                          dump all extension information in the system(FA: ServiceAbilityRecords, Stage: ExtensionRecords)
+-p [PendingWantRecordId]    dump all pendingwant record information in the system
+-r                          dump all process in the system
+-d                          dump all data ability information in the system

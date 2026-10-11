@@ -1,0 +1,6 @@
+{"utc": "2026-10-11T08:08:59.486132+00:00", "profileSha256": "fa61f938ee6fa626eb77f761e0faf233956b57975751e232b9a82d3f9b695e18", "bundleMatches": true, "existingMaterialFilesPresent": true, "simulatorListedInExistingProfile": false, "existingProfileAndSigningMaterialUnchanged": true, "signatureOrPermissionBypass": false}
+Traceback (most recent call last):
+  File "<private-evidence>\sign-preflight.py", line 18, in <module>
+    assert facts['bundleMatches'] and facts['existingMaterialFilesPresent'] and facts['simulatorListedInExistingProfile'],'STOP: signing profile invalid for simulator'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: STOP: signing profile invalid for simulator

@@ -1,0 +1,9 @@
+{
+  "utc": "2026-10-11T08:08:59.486132+00:00",
+  "profileSha256": "fa61f938ee6fa626eb77f761e0faf233956b57975751e232b9a82d3f9b695e18",
+  "bundleMatches": true,
+  "existingMaterialFilesPresent": true,
+  "simulatorListedInExistingProfile": false,
+  "existingProfileAndSigningMaterialUnchanged": true,
+  "signatureOrPermissionBypass": false
+}

@@ -1,0 +1,19 @@
+{
+  "utc": "2026-10-11T08:11:13.201057+00:00",
+  "failedHelper": "sign-preflight.py",
+  "failedHelperSha256": "902b0fc7a31eca7d0b09be4d5e912a86935df83d8e5b1cfd39b1d420cb3030c5",
+  "originalAssertionFailed": true,
+  "reason": "Helper compared entire labeled bm get -u stdout to profile device-id strings",
+  "capturedStdoutHasLabel": true,
+  "rawComparisonWasFalse": true,
+  "readOnlyPostStopTokenMembershipDiagnostic": true,
+  "diagnosticDoesNotReplaceOriginalFail": true,
+  "helperChangedOrRetried": false,
+  "profileChanged": false,
+  "productionOrSimulatorStartupDefectEstablished": false,
+  "officialOpens": 0,
+  "failedPythonChildExitCode": "1 inferred from unhandled AssertionError; not independently retained as numeric child exit in the original wrapper",
+  "outerPowerShellExecExitCode": 0,
+  "wrapperLimitation": "A subsequent Get-Content in the same original command made outer PowerShell exit0; no claim that this was helper success",
+  "failureConsoleProvenance": "Exact console transcript from tool result, not byte-identical original stderr"
+}

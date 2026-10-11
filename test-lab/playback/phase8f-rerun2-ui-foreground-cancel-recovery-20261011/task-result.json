@@ -1,0 +1,54 @@
+{
+  "utc": "2026-10-11T08:14:35.397907+00:00",
+  "primary": "FAIL — REQUIRED TEST GATE",
+  "state": "STOPPED",
+  "taskId": "phase8f-sim-rerun2-ui-foreground-gated-cancellation",
+  "source": "867907df5ab768c5127a707d2076fd8d619a3fbf",
+  "testedDispatch": "148de8f4cfd7c382aa403fb4e1b17d3a4171f850",
+  "failedStage": "Private signing-material membership preflight, before simulator build/install and before UI preflight",
+  "failure": "Unhandled AssertionError in new helper; entire labeled bm get -u stdout compared to profile identifier list",
+  "pythonChildExit": "1 inferred from unhandled AssertionError; original numeric child exit not independently captured",
+  "outerWrapperExit": 0,
+  "notEnvironmentOrProductionDefect": true,
+  "oldTaskReexecuted": false,
+  "helperRetried": false,
+  "officialOpens": 0,
+  "scenarios": [
+    {
+      "caseId": "mp4-h264-aac",
+      "state": "NOT RUN",
+      "reason": "Strict STOP at new helper assertion before any official open"
+    },
+    {
+      "caseId": "hls-h264-aac",
+      "state": "NOT RUN",
+      "reason": "Strict STOP at new helper assertion before any official open"
+    },
+    {
+      "caseId": "hls-hevc-aac",
+      "state": "NOT RUN",
+      "reason": "Strict STOP at new helper assertion before any official open"
+    },
+    {
+      "caseId": "mkv-ffv1-flac",
+      "state": "NOT RUN",
+      "reason": "Strict STOP at new helper assertion before any official open"
+    },
+    {
+      "caseId": "cancel-hls-h264-aac",
+      "state": "NOT RUN",
+      "reason": "Strict STOP at new helper assertion before any official open"
+    },
+    {
+      "caseId": "recovery-mp4-h264-aac",
+      "state": "NOT RUN",
+      "reason": "Strict STOP at new helper assertion before any official open"
+    }
+  ],
+  "signedInstall": "NOT RUN",
+  "uiForegroundWindowLayoutScreenshot": "NOT RUN / NOT PROVEN",
+  "positiveProgressRuntimeCollector": "NOT RUN; old >=800 helper never invoked; no runtime/selfcheck PASS invented",
+  "nativeCancellationReleaseAndIndependentRecovery": "NOT RUN / NOT PROVEN",
+  "noProductionTestPolicyTaskOrHistoricalEvidenceChange": true,
+  "nextAction": "GPT independently review helper parsing and missing child-exit capture, then dispatch a new distinct READY task before fresh build/install/UI/playback validation; no production patch warranted by this stop"
+}

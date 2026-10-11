@@ -1,0 +1,24 @@
+{
+  "utc": "2026-10-11T08:14:35.397375+00:00",
+  "initialInstall": "PASS, one normal invocation",
+  "initialEolProof": "PASS, four explicitly allowlisted exact-normalized locks restored; no other tracked bytes changed",
+  "firstDefault": {
+    "state": "PASS",
+    "startedUtc": "2026-10-11T08:05:01.910654+00:00",
+    "completedUtc": "2026-10-11T08:09:33.230243+00:00",
+    "exitCode": 0,
+    "hypiumCounterLine": "Tests run: 210, Failure: 0, Error: 0, Pass: 210, Ignore: 0",
+    "architectureFixtureCount": 5,
+    "ffmpegPure": 15,
+    "analysisPure": 46,
+    "artifactFixtureCount": 17,
+    "mpvMappingFixtureCount": 7,
+    "debugReleaseHarHap": "PASS",
+    "exactNineArm64AuditCount": 2,
+    "provenance": "All from fresh current command and independent saved original Hypium; no old PASS reused"
+  },
+  "simulator": "NOT RUN: STOP at new signature membership helper",
+  "postSimulatorEolProof": "NOT APPLICABLE: simulator/finally install never invoked",
+  "finalDefault": "NOT RUN: STOP",
+  "schedulerCaveat": "New signing-material membership helper ran while first default verifier was in flight; first default finished after helper STOP. No later verifier was launched and no containment process was stopped because runner had already completed by check."
+}

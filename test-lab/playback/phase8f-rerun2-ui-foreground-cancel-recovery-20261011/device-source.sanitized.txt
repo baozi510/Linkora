@@ -1,0 +1,23 @@
+from proof import *
+HDC=STUDIO/'sdk/default/openharmony/toolchains/hdc.exe'
+target=(PRIVATE/'targets.PRIVATE.txt').read_text(encoding='utf-8-sig').strip()
+assert target and '[Empty]' not in target and '\n' not in target
+def device(label,*args):
+    began=utc(); result=subprocess.run([str(HDC),'-t',target,*args],capture_output=True,timeout=15)
+    (PRIVATE/(label+'.stdout.PRIVATE.txt')).write_bytes(result.stdout)
+    (PRIVATE/(label+'.stderr.PRIVATE.txt')).write_bytes(result.stderr)
+    save(label+'-result',{'startedUtc':began,'completedUtc':utc(),'transportExitCode':result.returncode,'stdoutSha256':sha(result.stdout),'stderrSha256':sha(result.stderr),'scope':'Original HDC process outputs; remote diagnostic text separately checked, transport exit is not operation success'})
+    assert result.returncode==0, 'STOP: required HDC command nonzero '+label
+    return result.stdout.decode(errors='replace')+result.stderr.decode(errors='replace')
+if __name__=='__main__':
+    if sys.argv[1]=='help':
+        for label,args in [
+            ('aa-help-supported',['shell','aa','help']),
+            ('ability-help',['shell','hidumper','-s','AbilityManagerService','-a',"'-h'"]),
+            ('window-help',['shell','hidumper','-s','WindowManagerService','-a',"'-h'"]),
+            ('bm-dump-help',['shell','bm','dump','-h']),
+            ('target-api',['shell','param','get','const.ohos.apiversion']),
+            ('target-abi',['shell','param','get','const.product.cpu.abilist']),
+            ('target-firmware',['shell','param','get','const.ohos.fullname'])]:
+            device(label,*args)
+        print('Supported command help and target identity captured privately')

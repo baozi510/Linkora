@@ -1,0 +1,12 @@
+{
+  "utc": "2026-10-11T08:14:35.397907+00:00",
+  "onlyAuthorizedNewReportAndEvidencePaths": true,
+  "noMediaHapPrivateKeysProfilesCredentialsRawScreenshotsFullHilogOrPrivateIdentifiersPublished": true,
+  "noTlsOrGitSafetyDisabled": true,
+  "noQuotaQueried": true,
+  "noAppOrEmulatorResetOrForceStop": true,
+  "noProductionTestScriptAssertionOrConfigurationEdited": true,
+  "historicalEvidenceUnchanged": true,
+  "simulatorNotHardwareAcceptance": true,
+  "privateOriginalsRemainOutsideGit": true
+}
