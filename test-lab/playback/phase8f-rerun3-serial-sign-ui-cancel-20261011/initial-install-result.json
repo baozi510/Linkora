@@ -1,0 +1,11 @@
+{
+  "label": "initial-install",
+  "startedUtc": "2026-10-11T14:42:30.990364+00:00",
+  "completedUtc": "2026-10-11T14:42:42.002952+00:00",
+  "returncode": 0,
+  "stdoutSha256": "7917730f43ed143bebc79ab1cc8269d9511a7c3105a3188e6ccc9e625db8062f",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutBytes": 40,
+  "stderrBytes": 0,
+  "elapsedSeconds": 11.012588
+}

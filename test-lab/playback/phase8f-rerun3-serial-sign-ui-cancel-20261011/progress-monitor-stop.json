@@ -1,0 +1,15 @@
+{
+  "recordedUtc": "2026-10-11T14:52:20.2521084Z",
+  "process": "PowerShell progress-observation command",
+  "actualToolProcessExitCode": 1,
+  "provenance": "Observed exec_command result chunk cd63e4, not an inferred exit",
+  "commands": "Read simulator stdout tail and post-simulator EOL proof, then Get-Content default-final-result.json -ErrorAction SilentlyContinue while final verifier was in flight",
+  "cause": "Final result file did not exist yet; optional-read error suppression did not change the actual nonzero process exit",
+  "capturedOriginalStdoutStderrBytes": false,
+  "rawConsoleTranscriptAvailable": true,
+  "exactCommandStartFinishUtc": "NOT INDEPENDENTLY CAPTURED",
+  "laterSigningInstallUiPlaybackStarted": false,
+  "helperRetriedOrChanged": false,
+  "primary": "FAIL — REQUIRED TEST GATE",
+  "stop": "No subsequent validation gates; in-flight final default completion recorded separately"
+}

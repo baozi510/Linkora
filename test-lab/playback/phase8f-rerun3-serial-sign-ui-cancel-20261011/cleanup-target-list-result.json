@@ -1,0 +1,11 @@
+{
+  "label": "cleanup-target-list",
+  "startedUtc": "2026-10-11T14:53:57.602631+00:00",
+  "completedUtc": "2026-10-11T14:53:59.029234+00:00",
+  "returncode": 0,
+  "stdoutSha256": "464af7000a09a91e3e07a3ca940ea0273eeb9ce35b4eae73b5f2641110c7e58f",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutBytes": 10,
+  "stderrBytes": 0,
+  "elapsedSeconds": 1.426603
+}

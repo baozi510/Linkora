@@ -1,0 +1,11 @@
+{
+  "label": "default-first",
+  "startedUtc": "2026-10-11T14:42:44.596499+00:00",
+  "completedUtc": "2026-10-11T14:47:33.562137+00:00",
+  "returncode": 0,
+  "stdoutSha256": "3514ed7bd4f06250ec352fa513889c6be31107dc9e80a8595259c0e3bd7a7d21",
+  "stderrSha256": "16524842731bfb8b130454fc333baadac62717233119549b559c678b33f2d034",
+  "stdoutBytes": 51217,
+  "stderrBytes": 320876,
+  "elapsedSeconds": 288.965638
+}

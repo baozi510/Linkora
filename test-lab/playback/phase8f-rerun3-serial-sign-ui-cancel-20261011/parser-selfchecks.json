@@ -1,0 +1,59 @@
+{
+  "utc": "2026-10-11T14:39:25.362211+00:00",
+  "sourceSha256": "d9b9fe9d0f33ccec1b6accf28c889dfc194e7ddabbe1eb156c77ccafe332c376",
+  "observedSupportedShape": "Exact separate label +64 hex chars; actual installed prior captured shape read only, no live query used for selfchecks",
+  "sameLineAndBarePositiveCases": "NOT APPLICABLE: not demonstrated by installed output; both rejected rather than guessed",
+  "syntheticIdentifiersOnly": true,
+  "checks": [
+    {
+      "name": "observed_separate_label",
+      "passed": true,
+      "expected": "one exact bare synthetic ID"
+    },
+    {
+      "name": "same_line_not_supported",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "bare_not_observed_not_supported",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "empty_rejected",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "two_identifiers_rejected",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "missing_label_rejected",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "extra_text_rejected",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "old_whole_stdout_isolated",
+      "passed": true,
+      "expected": "one exact bare synthetic ID"
+    },
+    {
+      "name": "malformed_rejected",
+      "passed": true,
+      "expected": "reject"
+    },
+    {
+      "name": "printed_failure_rejected",
+      "passed": true,
+      "expected": "reject"
+    }
+  ]
+}

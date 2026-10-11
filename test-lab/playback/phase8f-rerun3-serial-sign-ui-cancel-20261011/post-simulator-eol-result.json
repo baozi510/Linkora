@@ -1,0 +1,11 @@
+{
+  "label": "post-simulator-eol",
+  "startedUtc": "2026-10-11T14:48:56.063040+00:00",
+  "completedUtc": "2026-10-11T14:48:58.560936+00:00",
+  "returncode": 0,
+  "stdoutSha256": "ab11bc0ed639e34d721aa407a46a179635258f04c0ac3c303a10bb9140f3e4f3",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutBytes": 211,
+  "stderrBytes": 0,
+  "elapsedSeconds": 2.497896
+}

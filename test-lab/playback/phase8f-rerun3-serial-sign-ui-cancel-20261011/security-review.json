@@ -1,0 +1,10 @@
+{
+  "noProductionTestsScriptsConfigMediaTaskOrOldEvidenceEdited": true,
+  "noQuotaQueried": true,
+  "noUserOriginalWorkspaceMutation": true,
+  "noSigningProfileCredentialsPrivateDeviceIdsScreenshotsHapMediaOrFullHilogPublished": true,
+  "noSignatureTlsGitSafetyBypass": true,
+  "noAppOrEmulatorResetWipeUninstallForceStop": true,
+  "originalPrivateBuildOutputsRetained": true,
+  "physicalArm64RealMpvHardwareCodecAcceptance": "NOT RUN / NOT PROVEN"
+}

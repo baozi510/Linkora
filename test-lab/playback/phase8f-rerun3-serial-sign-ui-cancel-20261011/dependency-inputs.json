@@ -1,0 +1,82 @@
+[
+  {
+    "abi": "arm64-v8a",
+    "name": "libavcodec.a",
+    "sha256": "74f8e78b1c6fcef48d21ab19e7278f89dfef9b501cf14a8f8ae78af9e56ccd80",
+    "members": 865,
+    "machine": "AArch64",
+    "sourceCommit": "1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7",
+    "actualChildReturncode": 0,
+    "scope": "Pinned dependency inputs only, no previous application/test binary"
+  },
+  {
+    "abi": "arm64-v8a",
+    "name": "libavformat.a",
+    "sha256": "a22a9867605252219990d7883ab26eca976c5e65e48e4507ba5b279c9e43cbdb",
+    "members": 396,
+    "machine": "AArch64",
+    "sourceCommit": "1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7",
+    "actualChildReturncode": 0,
+    "scope": "Pinned dependency inputs only, no previous application/test binary"
+  },
+  {
+    "abi": "arm64-v8a",
+    "name": "libavutil.a",
+    "sha256": "67e198e0d21efc54d769b1f6f1b1f5186e838ac17e3705593c89da54042fe860",
+    "members": 102,
+    "machine": "AArch64",
+    "sourceCommit": "1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7",
+    "actualChildReturncode": 0,
+    "scope": "Pinned dependency inputs only, no previous application/test binary"
+  },
+  {
+    "abi": "arm64-v8a",
+    "name": "libswscale.a",
+    "sha256": "27fbaf1614c2d4d53db7ef996973d6ae0daf8a8ab55987a52509bb4a014b7718",
+    "members": 38,
+    "machine": "AArch64",
+    "sourceCommit": "1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7",
+    "actualChildReturncode": 0,
+    "scope": "Pinned dependency inputs only, no previous application/test binary"
+  },
+  {
+    "abi": "x86_64",
+    "name": "libavcodec.a",
+    "sha256": "9ddd5ce0292e4e372263029de6aacb00bf8be5bced86af1d989b52d927dd4170",
+    "members": 809,
+    "machine": "Advanced Micro Devices X86-64",
+    "sourceCommit": "1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7",
+    "actualChildReturncode": 0,
+    "scope": "Pinned dependency inputs only, no previous application/test binary"
+  },
+  {
+    "abi": "x86_64",
+    "name": "libavformat.a",
+    "sha256": "697cd7d4861418a1091421337b48d6e1de255f8ee9341005a44da7ad7ea1aed1",
+    "members": 396,
+    "machine": "Advanced Micro Devices X86-64",
+    "sourceCommit": "1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7",
+    "actualChildReturncode": 0,
+    "scope": "Pinned dependency inputs only, no previous application/test binary"
+  },
+  {
+    "abi": "x86_64",
+    "name": "libavutil.a",
+    "sha256": "074ae78e9d6c1bfd9fdae7a161409f48eaba39d1d979b973c3ca233ba24dbb2a",
+    "members": 95,
+    "machine": "Advanced Micro Devices X86-64",
+    "sourceCommit": "1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7",
+    "actualChildReturncode": 0,
+    "scope": "Pinned dependency inputs only, no previous application/test binary"
+  },
+  {
+    "abi": "x86_64",
+    "name": "libswscale.a",
+    "sha256": "452f0bb617eec5c8a9ce0872ae28b478ae74828a04725971823eb283328d74c9",
+    "members": 31,
+    "machine": "Advanced Micro Devices X86-64",
+    "sourceCommit": "1041abdc962f4cc4f394aa8de9dc5236c0c3b9e7",
+    "actualChildReturncode": 0,
+    "scope": "Pinned dependency inputs only, no previous application/test binary"
+  }
+]

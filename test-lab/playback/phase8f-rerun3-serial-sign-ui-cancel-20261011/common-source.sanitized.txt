@@ -1,0 +1,33 @@
+from pathlib import Path
+import subprocess,json,datetime,hashlib,sys,os
+ROOT=Path('<validation-checkout>')
+PRIVATE=Path(__file__).parent
+STUDIO=Path('<installed-studio>')
+TASK='phase8f-sim-rerun3-serial-sign-ui-cancel'
+SOURCE='bfd34a33a36772077538c7c57527e30f23689a95'
+DISPATCH='026559e1975b44d00096d0fdccef7d164d0df049'
+def utc():return datetime.datetime.now(datetime.timezone.utc).isoformat()
+def sha(data):return hashlib.sha256(data).hexdigest()
+def save(name,obj): (PRIVATE/(name+'.json')).write_bytes((json.dumps(obj,indent=2,ensure_ascii=False)+'\n').encode('utf-8'))
+def run(label,args,cwd=ROOT,timeout=1800,required=True):
+    start=utc();t0=datetime.datetime.now(datetime.timezone.utc)
+    try:
+        p=subprocess.run(args,cwd=cwd,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=timeout)
+        code=p.returncode;out=p.stdout;err=p.stderr
+    except subprocess.TimeoutExpired as error:
+        out=error.stdout or b'';err=error.stderr or b''
+        (PRIVATE/(label+'.stdout.PRIVATE.txt')).write_bytes(out);(PRIVATE/(label+'.stderr.PRIVATE.txt')).write_bytes(err)
+        save(label+'-result',{'startedUtc':start,'completedUtc':utc(),'returncode':None,'timeout':True,'numericExitNotAvailable':'Process killed after bounded timeout; no invented exit','stdoutSha256':sha(out),'stderrSha256':sha(err)})
+        raise
+    (PRIVATE/(label+'.stdout.PRIVATE.txt')).write_bytes(out);(PRIVATE/(label+'.stderr.PRIVATE.txt')).write_bytes(err)
+    row={'label':label,'startedUtc':start,'completedUtc':utc(),'returncode':code,'stdoutSha256':sha(out),'stderrSha256':sha(err),'stdoutBytes':len(out),'stderrBytes':len(err),'elapsedSeconds':(datetime.datetime.now(datetime.timezone.utc)-t0).total_seconds()}
+    save(label+'-result',row)
+    with (PRIVATE/'child-exits.PRIVATE.ndjson').open('ab') as f:f.write((json.dumps(row)+'\n').encode())
+    if required and code!=0:raise RuntimeError('STOP: child nonzero '+label+' returncode='+str(code))
+    return p
+def git(label,*args,cwd=ROOT):return run(label,['git',*args],cwd=cwd,timeout=90).stdout
+def snapshot(root):
+    output=subprocess.run(['git','ls-files','-z'],cwd=root,capture_output=True);code=output.returncode
+    with (PRIVATE/'child-exits.PRIVATE.ndjson').open('ab') as f:f.write((json.dumps({'label':'snapshot-git-ls-files','utc':utc(),'returncode':code})+'\n').encode())
+    if code!=0:raise RuntimeError('snapshot git failed')
+    return {p:sha((root/p).read_bytes()) for p in output.stdout.decode().split('\0') if p and (root/p).is_file()}

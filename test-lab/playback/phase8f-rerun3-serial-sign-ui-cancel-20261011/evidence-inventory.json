@@ -1,0 +1,485 @@
+{
+  "files": [
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/attempt-ledger.ndjson",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/baseline-result.json",
+      "bytes": 395,
+      "sha256": "2e5758074dccd82ceda56bbf96407c93fd11da934b923290a8f37825e5714b39"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/baseline.stderr.sanitized.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/baseline.stderr.sanitized.txt.gz",
+      "bytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/baseline.stdout.sanitized.txt",
+      "bytes": 73,
+      "sha256": "6d29db45eae45e4c7616420741cd73587da021886a3c871a6838d6d9ed21dfa5"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/baseline.stdout.sanitized.txt.gz",
+      "bytes": 83,
+      "sha256": "225e65e6f9afa36f54d8b2a40a35c09331a570b554fb797d57f51491d99edce7"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/build-results.json",
+      "bytes": 1357,
+      "sha256": "a1bbcdf59c177530b57d6f5bbbd2f680e416ebc6c89db0a1c5053acf0cbc3c3c"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/cleanup-facts.json",
+      "bytes": 642,
+      "sha256": "986b543dd0a40070d482d510bfec31756d5cccb3276851b4507d0b7799e1c757"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/cleanup-host-listener-result.json",
+      "bytes": 406,
+      "sha256": "0a402062f023795185c967917585d632e7edf5d6d75b3a1c9e9939ad089bd69d"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/cleanup-host-listener.stderr.sanitized.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/cleanup-host-listener.stderr.sanitized.txt.gz",
+      "bytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/cleanup-host-listener.stdout.sanitized.txt",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/cleanup-host-listener.stdout.sanitized.txt.gz",
+      "bytes": 22,
+      "sha256": "8afc61325213625995e1de8b0d2df70f01b1d5304993484a41cc9df249f00fad"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/cleanup-result.json",
+      "bytes": 394,
+      "sha256": "b2ad8515c377237fcacd3c5cf471bd19227f5a0d26204e1d052679b928f676aa"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/cleanup-target-list-result.json",
+      "bytes": 405,
+      "sha256": "700f812cf87ba235c3ee3220b0e9657534b1be86ce19055ad52e436ca8f950cf"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/cleanup-target-list.stderr.sanitized.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/cleanup-target-list.stderr.sanitized.txt.gz",
+      "bytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/cleanup-target-list.stdout.sanitized.txt",
+      "bytes": 8,
+      "sha256": "465c6ea0be785220b2d054ab72c80dc4e33e546475e18d1b788545f4ab4b279b"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/cleanup-target-list.stdout.sanitized.txt.gz",
+      "bytes": 28,
+      "sha256": "c7452de28417b92de4dc32bfc98e237e8af429ad119ec31d1c925fcf53c15827"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/cleanup.stderr.sanitized.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/cleanup.stderr.sanitized.txt.gz",
+      "bytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/cleanup.stdout.sanitized.txt",
+      "bytes": 610,
+      "sha256": "5c6b516529fe8dbcbe960ea70097f62dd92d256abe5d4bc06e23c27a612e2a3a"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/cleanup.stdout.sanitized.txt.gz",
+      "bytes": 376,
+      "sha256": "bb96a7b0173e19d0b04bb824d010cb77a78c0b20244d8e00edae6db53a82a4d8"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/common-source.sanitized.txt",
+      "bytes": 2506,
+      "sha256": "d6822eaae3b4f6bc0380866c632512675f90bacf8bfdd718ea131b89694fc381"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/common-source.sanitized.txt.gz",
+      "bytes": 1086,
+      "sha256": "af6a19f9de2b4ea05cf8a811369a957ecaacd11c141b3a0cdd1d36043a7e47c0"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/default-final-hypium.sanitized.txt",
+      "bytes": 14596,
+      "sha256": "af333ac54c490612f5ac26ad104102f3ff081c6e8f882338392f3e4201ea7b5b"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/default-final-hypium.sanitized.txt.gz",
+      "bytes": 4399,
+      "sha256": "20538c5a6aae797c3726c41b2666cd8249ca63109a028a797fee520417bb0dcc"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/default-final-result.json",
+      "bytes": 409,
+      "sha256": "ec76e3fd107b5b7621d86bcb40805de1e1a3aaab5476ea11a023821ecbf77a05"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/default-final.stderr.sanitized.txt",
+      "bytes": 199838,
+      "sha256": "7f9ac3b26decee2f534c623713cc26322915492878e36055730008432f90096c"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/default-final.stderr.sanitized.txt.gz",
+      "bytes": 7773,
+      "sha256": "c8eb4ffa4f2e9cca0395f9e397988fc0f91deef601917b5e9c84d57fcf58b337"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/default-final.stdout.sanitized.txt",
+      "bytes": 50319,
+      "sha256": "82345c6e42c4508ba973754a7cdd66af0f00a6f31f27de2859b95c14a2d4396a"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/default-final.stdout.sanitized.txt.gz",
+      "bytes": 5540,
+      "sha256": "28d7d17b7fe8bb07f62c5f2bf745d98d8137f6adc5ede6631ff99d70a0e798d2"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/default-first-hypium.sanitized.txt",
+      "bytes": 14596,
+      "sha256": "af333ac54c490612f5ac26ad104102f3ff081c6e8f882338392f3e4201ea7b5b"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/default-first-hypium.sanitized.txt.gz",
+      "bytes": 4399,
+      "sha256": "20538c5a6aae797c3726c41b2666cd8249ca63109a028a797fee520417bb0dcc"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/default-first-result.json",
+      "bytes": 409,
+      "sha256": "b12e9d638dd7ab17fc3ea8f05c854f032fab776ba0206620a177c208d875a68a"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/default-first.stderr.sanitized.txt",
+      "bytes": 282029,
+      "sha256": "e1a24a84c82b068e1c9c5de934244228ed2764e9ffa7f4e0ce32b533b5492cbd"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/default-first.stderr.sanitized.txt.gz",
+      "bytes": 9399,
+      "sha256": "07556b2378b38cfdb0572802f20509972202a169793cd80366d4e7d1b2ad8388"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/default-first.stdout.sanitized.txt",
+      "bytes": 51217,
+      "sha256": "3514ed7bd4f06250ec352fa513889c6be31107dc9e80a8595259c0e3bd7a7d21"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/default-first.stdout.sanitized.txt.gz",
+      "bytes": 5838,
+      "sha256": "d0b9755cb7a8ec75362b7a921d02eea620db7102d8f2321d2fc99aa85f9dbe51"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/dependencies-result.json",
+      "bytes": 398,
+      "sha256": "2ff0fb5d4e8b6ed145e0ab5163ca7146e9fc2f0c9677b3255cb0d58fdbad6967"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/dependencies.stderr.sanitized.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/dependencies.stderr.sanitized.txt.gz",
+      "bytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/dependencies.stdout.sanitized.txt",
+      "bytes": 95,
+      "sha256": "8423b5f35c784707be94c76ae02e3692f66a371625fe29ec13d73ad010d802da"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/dependencies.stdout.sanitized.txt.gz",
+      "bytes": 106,
+      "sha256": "b8ab4ca74a323ebb7af948f392e608743d773457fc19c57b00d26408a809a9d9"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/dependency-inputs.json",
+      "bytes": 3012,
+      "sha256": "ce88f0e35cc23bb3ff15afc27cf835951e03381a8c4c16708ad5ed8a61dcb202"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/eol-source.sanitized.txt",
+      "bytes": 1945,
+      "sha256": "698d9c5412adb6793a7b9e367884bddc7944525094e38ad38db43f86685c0f1d"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/eol-source.sanitized.txt.gz",
+      "bytes": 864,
+      "sha256": "ae0f46b719898407dd4e22f82fcc519a0eec988e9d8ced403492fa8419d818d1"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/fresh-unsigned-simulator-artifact.json",
+      "bytes": 218,
+      "sha256": "ad12e0751421c56dcc36c66d7cdeabc7252d066413229c6bee374925fd2aa263"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/id_parser-source.sanitized.txt",
+      "bytes": 1971,
+      "sha256": "d9b9fe9d0f33ccec1b6accf28c889dfc194e7ddabbe1eb156c77ccafe332c376"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/id_parser-source.sanitized.txt.gz",
+      "bytes": 1005,
+      "sha256": "e2471dfa62da00e6535fa888b1bbe2847c7582526c6560fc38c404fbe44acd36"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/initial-eol-proof.json",
+      "bytes": 3166,
+      "sha256": "1a5ce69a6621568d796cb487555404d8319856422616640a761646e5905a254b"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/initial-eol-result.json",
+      "bytes": 398,
+      "sha256": "4d70d73a1ae718ebf0d31ea525b6e40144c63c9b4a25357377edb4e2fce20a17"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/initial-eol.stderr.sanitized.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/initial-eol.stderr.sanitized.txt.gz",
+      "bytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/initial-eol.stdout.sanitized.txt",
+      "bytes": 203,
+      "sha256": "578cec7f7fdbe4affbc9ac7406486b1e6de1e541f32991df8651f60310b6c95b"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/initial-eol.stdout.sanitized.txt.gz",
+      "bytes": 136,
+      "sha256": "eec44fbf12400e85d8102b19acd120e135b89000a60c6346e698ed7fb7f2138f"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/initial-install-result.json",
+      "bytes": 402,
+      "sha256": "33ab639f0ae7d733bb6a058d3137d2d789ce7996ed79f9e8c21e37f18f624275"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/initial-install.stderr.sanitized.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/initial-install.stderr.sanitized.txt.gz",
+      "bytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/initial-install.stdout.sanitized.txt",
+      "bytes": 40,
+      "sha256": "7917730f43ed143bebc79ab1cc8269d9511a7c3105a3188e6ccc9e625db8062f"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/initial-install.stdout.sanitized.txt.gz",
+      "bytes": 60,
+      "sha256": "93d70783a86ba5c52c870e9790bc4f7464c68ced8286b6f054ad19adbc265187"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/log-integrity.json",
+      "bytes": 30815,
+      "sha256": "667d4585b8f602bc4cba9c00b9cfe1f8a15f5983db159597fceb7273d533956e"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/parser-selfcheck-result.json",
+      "bytes": 402,
+      "sha256": "a14b4da5b9b1bf6cbff7970d363a70a2cdc0b539aecd807d00df9c666b4ca904"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/parser-selfcheck.stderr.sanitized.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/parser-selfcheck.stderr.sanitized.txt.gz",
+      "bytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/parser-selfcheck.stdout.sanitized.txt",
+      "bytes": 66,
+      "sha256": "ad72d68cfa37b0fc4503a7e37d5a60fcee33c7032454dc357939f9ccd5c6c0a4"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/parser-selfcheck.stdout.sanitized.txt.gz",
+      "bytes": 80,
+      "sha256": "3f45fed482b4004a429d7b8b1fd99504a65f33b9863e2378a2cbbd489afe4f5f"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/parser-selfchecks.json",
+      "bytes": 1528,
+      "sha256": "b1bd3ccc2b2321f8b72393a356eeb2ef8dcb5368d2f943a6d00e856fa7b7cbfa"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/post-simulator-eol-proof.json",
+      "bytes": 3166,
+      "sha256": "c503c213290dc58ee92774766fd1b428ea52667379f99e9d14df01258f3a2e10"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/post-simulator-eol-result.json",
+      "bytes": 405,
+      "sha256": "59e60c09202c7d4fa16e162e77bb3620047903c5cdf037c88a52603694f73595"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/post-simulator-eol.stderr.sanitized.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/post-simulator-eol.stderr.sanitized.txt.gz",
+      "bytes": 20,
+      "sha256": "46b50c321b39e89a491b6727a01628c34245605a30beb3e7414c5e01cff90e6e"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/post-simulator-eol.stdout.sanitized.txt",
+      "bytes": 210,
+      "sha256": "49eee9625c66c448e6b37fefbae768cb9cc2918421b35796dccbd48428bf3a23"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/post-simulator-eol.stdout.sanitized.txt.gz",
+      "bytes": 141,
+      "sha256": "834498ea7f40809b33b8ea19adc33cc6fb3b1de2506e8f2b8a95ff9dcec91d36"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/progress-monitor-console.sanitized.txt",
+      "bytes": 659,
+      "sha256": "42f7b73959342ca0e31b41d659a7816e10680b92d18510f6f2d455d3032d7b03"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/progress-monitor-console.sanitized.txt.gz",
+      "bytes": 408,
+      "sha256": "e6736e597596c950e230def7d4b8ba41abb627c815c7a96f306ffc1951714a18"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/progress-monitor-stop.json",
+      "bytes": 914,
+      "sha256": "25a0d258b3664974cdb2d37fe80c30194dde85463e4b4baa3893ccf65ce1ec0b"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/protection-audit.json",
+      "bytes": 484,
+      "sha256": "e345b47b8f23c3fc90523296d05a6727aa184a0e11532ba64e3eb137a1e7addb"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/recorded-child-exits.json",
+      "bytes": 36003,
+      "sha256": "7d1c48f6e59ec58d1e3baba79d36354825bfd4e3275de92b8a517dbfec9592bc"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/required-reading.json",
+      "bytes": 29401,
+      "sha256": "0e1fc8eaa1ce1db61bfa8e756d9c8af2c0b7a1c2a7cd39b84467b22e014f6107"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/security-review.json",
+      "bytes": 451,
+      "sha256": "197f4468b9fc8caf55d2cda653638c41885d3da0c24b50e3bd25751215d4ddfc"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/simulator-result.json",
+      "bytes": 402,
+      "sha256": "8d4fb367a230254099a221c7fb2c1ce0a6b0aca587502b23f682e5d768f884ac"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/simulator.stderr.sanitized.txt",
+      "bytes": 62623,
+      "sha256": "af429949cffada8aa903c6eec709b386f2643e6f6a62780246dbe57cbff61726"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/simulator.stderr.sanitized.txt.gz",
+      "bytes": 2618,
+      "sha256": "c4a4a73ad0f3d754056e01b9cb7b09a0d914bf54ac22056f4139d1eb2518a368"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/simulator.stdout.sanitized.txt",
+      "bytes": 6855,
+      "sha256": "b3ba0c1c49577e9cfcdefa3af8f5fd68f9850b4459c478e31d863360dfad6b22"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/simulator.stdout.sanitized.txt.gz",
+      "bytes": 1323,
+      "sha256": "2f3107022aead92eab8f02ac93aac5feb3b74a32f9b3fe22264d4e2c0418facf"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/source-state.json",
+      "bytes": 770,
+      "sha256": "761417fd29cfb044981af2e4019d37861e70521e8224003f35a31cacb5b4149c"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/stage-order.json",
+      "bytes": 6045,
+      "sha256": "9a2cc57c3e8775253ebf954b52f4ad48740061440f0955772f7860d6e3b3dcb3"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/stage-source.sanitized.txt",
+      "bytes": 1785,
+      "sha256": "abb454ea138d93c67221e3929a18a85b42943deea0fd2c66467e3c9178659ad9"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/stage-source.sanitized.txt.gz",
+      "bytes": 876,
+      "sha256": "3a18231d5796ce1b355385d5c68d104c033e83e2ac43eaf25351d031c555e285"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/submodules-result.json",
+      "bytes": 400,
+      "sha256": "ad53fdc66856259913274b8f1c8b3e9473387f91e3d6cdfe3d4cb3460976297e"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/submodules.stderr.sanitized.txt",
+      "bytes": 735,
+      "sha256": "f2be13a90afaa2dbd615884786d0102064bf86cd54a4e0ef2f789750312eefe9"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/submodules.stderr.sanitized.txt.gz",
+      "bytes": 217,
+      "sha256": "4b81c9aa5b8dfaf60caa73648ab00860c5f4320c97bcc6705e84dfa4bb4af336"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/submodules.stdout.sanitized.txt",
+      "bytes": 345,
+      "sha256": "c6b2e805e429e3c9fd8c64b64677a5b8cb08cd85a5b97c366947132e7073556d"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/submodules.stdout.sanitized.txt.gz",
+      "bytes": 196,
+      "sha256": "0d4bde57a9d0217349dc3cc2309124ed1a4f59aac3e0a41ce92c755628dad8f6"
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun3-serial-sign-ui-cancel-20261011/task-result.json",
+      "bytes": 1847,
+      "sha256": "b9ed32c8b0ca2271e77b241d0b8c6f6510945c7551621f17a37b675c5cd037d9"
+    }
+  ],
+  "selfAndReportNotSelfHashed": "Remote complete Git inventory will be independently checked after push"
+}

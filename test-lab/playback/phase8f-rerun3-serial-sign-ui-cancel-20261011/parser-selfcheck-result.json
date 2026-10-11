@@ -1,0 +1,11 @@
+{
+  "label": "parser-selfcheck",
+  "startedUtc": "2026-10-11T14:39:25.257309+00:00",
+  "completedUtc": "2026-10-11T14:39:25.371154+00:00",
+  "returncode": 0,
+  "stdoutSha256": "45c6857de7e4bd9f564868f42ccad849d498f2931dd0f784cb5360a1a7019332",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutBytes": 67,
+  "stderrBytes": 0,
+  "elapsedSeconds": 0.113845
+}

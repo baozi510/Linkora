@@ -1,0 +1,11 @@
+{
+  "label": "submodules",
+  "startedUtc": "2026-10-11T14:40:36.100291+00:00",
+  "completedUtc": "2026-10-11T14:40:56.132046+00:00",
+  "returncode": 0,
+  "stdoutSha256": "c6b2e805e429e3c9fd8c64b64677a5b8cb08cd85a5b97c366947132e7073556d",
+  "stderrSha256": "3b8905244e13e51707bd3083db9735be78a9fd01c3377123318852e3ded148a2",
+  "stdoutBytes": 345,
+  "stderrBytes": 822,
+  "elapsedSeconds": 20.031755
+}

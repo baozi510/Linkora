@@ -1,0 +1,50 @@
+{
+  "primary": "FAIL — REQUIRED TEST GATE",
+  "state": "STOPPED",
+  "taskId": "phase8f-sim-rerun3-serial-sign-ui-cancel",
+  "source": "bfd34a33a36772077538c7c57527e30f23689a95",
+  "testedDispatch": "026559e1975b44d00096d0fdccef7d164d0df049",
+  "failure": "PowerShell progress observation exited1 reading not-yet-existing final result file while final verifier was in flight",
+  "actualObservedProcessExitCode": 1,
+  "sourceDefectEstablished": false,
+  "parserSelfchecks": "PASS, ten new pure checks; live query/membership NOT RUN",
+  "firstDefault": "PASS",
+  "simulator": "PASS",
+  "postSimulatorEol": "PASS",
+  "finalDefault": "PASS, natural completion after STOP; not an override",
+  "signedInstallUiReadiness": "NOT RUN",
+  "officialOpens": 0,
+  "scenarios": [
+    {
+      "caseId": "mp4-h264-aac",
+      "state": "NOT RUN",
+      "reason": "STOP before signing/install/UI or any official open"
+    },
+    {
+      "caseId": "hls-h264-aac",
+      "state": "NOT RUN",
+      "reason": "STOP before signing/install/UI or any official open"
+    },
+    {
+      "caseId": "hls-hevc-aac",
+      "state": "NOT RUN",
+      "reason": "STOP before signing/install/UI or any official open"
+    },
+    {
+      "caseId": "mkv-ffv1-flac",
+      "state": "NOT RUN",
+      "reason": "STOP before signing/install/UI or any official open"
+    },
+    {
+      "caseId": "cancel-hls-h264-aac",
+      "state": "NOT RUN",
+      "reason": "STOP before signing/install/UI or any official open"
+    },
+    {
+      "caseId": "recovery-mp4-h264-aac",
+      "state": "NOT RUN",
+      "reason": "STOP before signing/install/UI or any official open"
+    }
+  ],
+  "nextAction": "GPT review progress observer bypassing immediate child-exit capture and querying a result file before completion; no production fix warranted; any future run requires a new distinct READY task"
+}

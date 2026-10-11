@@ -1,0 +1,142 @@
+{
+  "stages": [
+    {
+      "label": "parser-selfcheck",
+      "startedUtc": "2026-10-11T14:39:25.257309+00:00",
+      "completedUtc": "2026-10-11T14:39:25.371154+00:00",
+      "returncode": 0,
+      "stdoutSha256": "45c6857de7e4bd9f564868f42ccad849d498f2931dd0f784cb5360a1a7019332",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutBytes": 67,
+      "stderrBytes": 0,
+      "elapsedSeconds": 0.113845
+    },
+    {
+      "label": "source-protection",
+      "startedUtc": "2026-10-11T14:40:35.422747+00:00",
+      "completedUtc": "2026-10-11T14:40:35.982333+00:00",
+      "returncode": 0,
+      "stdoutSha256": "bf7263d644cb52996e82c0b84f3d9b660732c7b3099ed376697d27fe41562b56",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutBytes": 90,
+      "stderrBytes": 0,
+      "elapsedSeconds": 0.559054
+    },
+    {
+      "label": "submodules",
+      "startedUtc": "2026-10-11T14:40:36.100291+00:00",
+      "completedUtc": "2026-10-11T14:40:56.132046+00:00",
+      "returncode": 0,
+      "stdoutSha256": "c6b2e805e429e3c9fd8c64b64677a5b8cb08cd85a5b97c366947132e7073556d",
+      "stderrSha256": "3b8905244e13e51707bd3083db9735be78a9fd01c3377123318852e3ded148a2",
+      "stdoutBytes": 345,
+      "stderrBytes": 822,
+      "elapsedSeconds": 20.031755
+    },
+    {
+      "label": "dependencies",
+      "startedUtc": "2026-10-11T14:41:54.809154+00:00",
+      "completedUtc": "2026-10-11T14:41:58.451228+00:00",
+      "returncode": 0,
+      "stdoutSha256": "3a6836f00b1936f1fcebf91eb4e16309ea604936b4ad7edcaae7389da5a74564",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutBytes": 96,
+      "stderrBytes": 0,
+      "elapsedSeconds": 3.642074
+    },
+    {
+      "label": "baseline",
+      "startedUtc": "2026-10-11T14:41:58.566169+00:00",
+      "completedUtc": "2026-10-11T14:42:14.052268+00:00",
+      "returncode": 0,
+      "stdoutSha256": "0ece27a07bdae6e04ac3091072cb8aadfd1b4a2a2c67436c5c37571de6ad0ec6",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutBytes": 74,
+      "stderrBytes": 0,
+      "elapsedSeconds": 15.486099
+    },
+    {
+      "label": "initial-install",
+      "startedUtc": "2026-10-11T14:42:30.990364+00:00",
+      "completedUtc": "2026-10-11T14:42:42.002952+00:00",
+      "returncode": 0,
+      "stdoutSha256": "7917730f43ed143bebc79ab1cc8269d9511a7c3105a3188e6ccc9e625db8062f",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutBytes": 40,
+      "stderrBytes": 0,
+      "elapsedSeconds": 11.012588
+    },
+    {
+      "label": "initial-eol",
+      "startedUtc": "2026-10-11T14:42:42.118043+00:00",
+      "completedUtc": "2026-10-11T14:42:44.476849+00:00",
+      "returncode": 0,
+      "stdoutSha256": "16898664acf1d337dc23f157fb8eb94df91bafb98a45c3e1c913d68f19b21875",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutBytes": 204,
+      "stderrBytes": 0,
+      "elapsedSeconds": 2.358806
+    },
+    {
+      "label": "default-first",
+      "startedUtc": "2026-10-11T14:42:44.596499+00:00",
+      "completedUtc": "2026-10-11T14:47:33.562137+00:00",
+      "returncode": 0,
+      "stdoutSha256": "3514ed7bd4f06250ec352fa513889c6be31107dc9e80a8595259c0e3bd7a7d21",
+      "stderrSha256": "16524842731bfb8b130454fc333baadac62717233119549b559c678b33f2d034",
+      "stdoutBytes": 51217,
+      "stderrBytes": 320876,
+      "elapsedSeconds": 288.965638
+    },
+    {
+      "label": "simulator",
+      "startedUtc": "2026-10-11T14:48:29.278030+00:00",
+      "completedUtc": "2026-10-11T14:48:55.948823+00:00",
+      "returncode": 0,
+      "stdoutSha256": "5c4816c6a97193310fce1ec91636f47bf04455c5968a8161bcf5e651a80feb73",
+      "stderrSha256": "8e8fd943481338292e76aff9c6309b0436c94b6d8d837dfc9290357f436331d5",
+      "stdoutBytes": 6971,
+      "stderrBytes": 72114,
+      "elapsedSeconds": 26.670793
+    },
+    {
+      "label": "post-simulator-eol",
+      "startedUtc": "2026-10-11T14:48:56.063040+00:00",
+      "completedUtc": "2026-10-11T14:48:58.560936+00:00",
+      "returncode": 0,
+      "stdoutSha256": "ab11bc0ed639e34d721aa407a46a179635258f04c0ac3c303a10bb9140f3e4f3",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutBytes": 211,
+      "stderrBytes": 0,
+      "elapsedSeconds": 2.497896
+    },
+    {
+      "label": "default-final",
+      "startedUtc": "2026-10-11T14:48:58.678106+00:00",
+      "completedUtc": "2026-10-11T14:51:58.184915+00:00",
+      "returncode": 0,
+      "stdoutSha256": "82345c6e42c4508ba973754a7cdd66af0f00a6f31f27de2859b95c14a2d4396a",
+      "stderrSha256": "2a87853aa9f7e9ae2f6158badb83a36308310a3d60c1ec902896952557d9dbbf",
+      "stdoutBytes": 50319,
+      "stderrBytes": 229230,
+      "elapsedSeconds": 179.506809
+    }
+  ],
+  "allRequiredStageStartsAfterPriorWholeStageCompletion": true,
+  "otherProgressProcessFailureDuringFinalVerifier": {
+    "recordedUtc": "2026-10-11T14:52:20.2521084Z",
+    "process": "PowerShell progress-observation command",
+    "actualToolProcessExitCode": 1,
+    "provenance": "Observed exec_command result chunk cd63e4, not an inferred exit",
+    "commands": "Read simulator stdout tail and post-simulator EOL proof, then Get-Content default-final-result.json -ErrorAction SilentlyContinue while final verifier was in flight",
+    "cause": "Final result file did not exist yet; optional-read error suppression did not change the actual nonzero process exit",
+    "capturedOriginalStdoutStderrBytes": false,
+    "rawConsoleTranscriptAvailable": true,
+    "exactCommandStartFinishUtc": "NOT INDEPENDENTLY CAPTURED",
+    "laterSigningInstallUiPlaybackStarted": false,
+    "helperRetriedOrChanged": false,
+    "primary": "FAIL — REQUIRED TEST GATE",
+    "stop": "No subsequent validation gates; in-flight final default completion recorded separately"
+  },
+  "noLaterSigningInstallUiPlaybackGate": true
+}

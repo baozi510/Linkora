@@ -1,0 +1,515 @@
+{
+  "utc": "2026-10-11T14:56:17.532121+00:00",
+  "entries": [
+    {
+      "path": "docs/AI_WORKFLOW.md",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "d4ccb0284c2c5560dc54d440a4c4d1c0363faf96",
+      "sha256": "9692b25ea6a66960228b9c3869e8731aea3d8ae29286b33e9f519f3e0b661e4a",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "docs/MASTER_IMPLEMENTATION_PLAN.md",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "e3b4b4dcd179fe06210fe6dab27ea98255e05e46",
+      "sha256": "69c50b6b81cec243934bf38077e24621ef6470000118a779f66b0025a692bc84",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "docs/ARCHITECTURE_TARGET.md",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "289c6b836f7dff19cfab1128a3f70862120c8cfa",
+      "sha256": "11ddf02ae6e521898b792e093677d60da82592e850b4632cc4bcd35d5a6def5f",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "docs/ARCHITECTURE_MIGRATION.md",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "cdfd859d30c7b8a5b95e82ee913ea3410554e518",
+      "sha256": "7280bc51adb42fe0f04e1fb1892aa7b30d56dc89dd615ce1b4cddf0dfab4a746",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "docs/IMPLEMENTATION_STATUS.md",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "466141bbfc3e5380106de592956bc02d34bd900f",
+      "sha256": "f3a4f1a65a1b692e983dcb03ba3f2cb598de1a2164b8eb46e9e84e685246fc96",
+      "provenance": "Latest CURRENT EXECUTION SUMMARY fully read, prior sections historical",
+      "priorReadBlobIdentical": false
+    },
+    {
+      "path": "docs/SESSION_HANDOFF.md",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "e728d8786b2fc0d24423e7f1188229891284e89e",
+      "sha256": "cfe628d98c3ba7c4d4f8ee533bbae50fe41ed1d2dd405f656c3a177ad3ca0fb6",
+      "provenance": "Latest CURRENT STATE fully read, prior sections historical",
+      "priorReadBlobIdentical": false
+    },
+    {
+      "path": "docs/CODEX_VALIDATION_TASK.md",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "6c0539734666ed1704653c4188f780f67c94321e",
+      "sha256": "ba0b5dd3f445c6655da9f73ebe9bd23ac6199ebe648cb405a1dadbc9f9bee387",
+      "provenance": "Read exact current content in this session",
+      "priorReadBlobIdentical": false
+    },
+    {
+      "path": "docs/PLAYBACK_PHASE8F_RERUN1_POSITIVE_PROGRESS_CANCELLATION_REPORT.md",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "dabb13b303e24e0dac1a55da036c6ab3a67e0575",
+      "sha256": "5ac56652f8c4b23d8685a49a03d58c1172147e8cdb783f0833a1d0bdf2438b97",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "docs/PLAYBACK_PHASE8F_PENDING_CANDIDATE_CANCELLATION_REPORT.md",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "b86b1781bf962ec54f9703bba8a8ab9f27df3a42",
+      "sha256": "4f2407f1b9ec69daf595716805675b311d522ff98e5c4fc8c2e879f0c6882d56",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "docs/PLAYBACK_PHASE8E_SYSTEM_READINESS_VALIDATION_REPORT.md",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "0705bf387f58fdfb216505b4f04e89b8cce54671",
+      "sha256": "bf986415cf8c3ddc34abed37b683de1cced89b95669cd7d8ed202d012c4a8017",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "docs/PLAYBACK_PHASE8D_SIMULATOR_RERUN1_REPORT.md",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "b8935022108eab59fb018dd1fa3944a4d13a7bd8",
+      "sha256": "722c6d1b16735f3d96944dbb9326bb3c5f6edfd390dcd136de3a5ac94446d75b",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "docs/PLAYBACK_PHASE8D_SIMULATOR_INVESTIGATION_REPORT.md",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "1e6cf16a3d2b5bdc75618292daf3925890a9e5cb",
+      "sha256": "ddd4e231595a430c25dfc6fb3cc7c96c52f8f54a5abf08984300154ab01ef279",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "docs/PLAYBACK_PHASE8B_REPORT.md",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "552daada07da21ccce709383d1b8b142a923e3ca",
+      "sha256": "274b6821d59692d5facb9431be72e47e97095f7a563f7b0fff31c4b68f30dc91",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "docs/PLAYBACK_PHASE8B_SIMULATOR_RUNBOOK.md",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "76961a63e2f95e933fb9f0ba1e21bfc8ff5d83d2",
+      "sha256": "7776cede7aba657cda2af87138dccd854a693b62324b55082dfa40ddd011a7d4",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "docs/PLAYBACK_NATIVE_CAPABILITY_AUDIT_REPORT.md",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "860607a4fae8c11aea29296f98029ea10700b8b9",
+      "sha256": "f816d912c1953fc1e115d17b887d90423d56ba23012a4cf7efee06d7fc042cda",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "entry/src/main/module.json5",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "57ca22502d3bbd4e0df2c34c675e99edc2efe0f9",
+      "sha256": "6a618e4b27b74d0e9669f1fd23505bec4ff69ed4fbf80a016a8206b109406935",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "AppScope/app.json5",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "89c04cb90ec269ebed845c92a2a885ce84f59a16",
+      "sha256": "e7b18cf3b58f7c11597d707451c59d14f77d014fd6be322d076e6b19df861dce",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "entry/src/main/ets/entryability/EntryAbility.ets",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "337ccaaef0b366ca40b7c0f8b3c0ec2426c96d12",
+      "sha256": "2270a111b8b542c2ce5f8588e344820ebec424e9fbd17cd7ec711645aa0c063f",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "entry/src/main/ets/pages/Index.ets",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "f56195294f985b2e31db71c03944c073f4ea6310",
+      "sha256": "91a6e6ca60cfd09ed305d1af85be942a0433898e3cf9afef9d4de7dc4fe37388",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "entry/src/main/ets/pages/PlayerPage.ets",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "ca4a64107edbdacc0b680949b00d748fc7be19c7",
+      "sha256": "87aa1c5adab7b04c27f5845d302ca22555c0e58dc14d167a20c4fb020073c3dc",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "entry/src/main/ets/playback/AdaptivePlaybackPort.ets",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "1050012dbef214efba5ebccb5571cc9174345c08",
+      "sha256": "548da65506d22c5ee90a9c14ee50653a654f459df540ed079dfaa468d9acb027",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "entry/src/main/ets/playback/SystemPlaybackPort.ets",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "cc78c2611e8582633f2a67cb323f3072f5d8a31f",
+      "sha256": "f8f1df882c5b47c7e807473b66706412c3c3bffb31ec012f023ca38d6ff5380f",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "entry/src/main/ets/playback/MpvPlaybackPort.ets",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "a81f4f967cd5a73a6bb3dcea7fa3ac6bf5f84d2f",
+      "sha256": "04ce48cddc4898e2ae4189f4a2b5b7ff0c514fd92052918f1551171824d8ee96",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "entry/src/main/ets/playback/NetworkPlaybackSourceResolver.ets",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "e462b24a79475a76be739ecb58cd0e3e46798018",
+      "sha256": "e49f368ab11232735c7b5d282e0385bb86ffa7dd5ef1b751552a4cd5619dd663",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "linkora_core/src/main/ets/playback/PlaybackEngine.ets",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "d21cc86ce1036694d5e259c5aea2608ce9741e4a",
+      "sha256": "cdee3eeb5cc03dea6fdcc87bf785c67798eba6ac7edd51b44155b18c42df8d2c",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "linkora_core/src/main/ets/playback/PlaybackPort.ets",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "231e49b84dce45b83c472fbed0b258711ce758d5",
+      "sha256": "c21ec63e9ce2af9a0516b9e4048c7769f6c1836ec7e21ca4741217dd9defc62c",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "linkora_core/src/main/ets/playback/PlaybackModels.ets",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "d0a86cd3d34033823494fc492148d1e710ba72a7",
+      "sha256": "22e56ee731af0ed46aa5023ed371a6b17df91c997571802b02b20fa470353b29",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "linkora_core/src/main/ets/playback/PlaybackBackend.ets",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "9e295b64aca7c1e4da5b1b63df0d8d6730447b64",
+      "sha256": "116b387031d7795538bd18e24b3187c25268d19acd0ea870248859d6351d0809",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun1-positive-progress-cancel-recovery-20261008/preflight-stop-diagnosis.json",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "af34040623674fbec775812c3ee18724895b5ea8",
+      "sha256": "1837654e398d2fc9fab1b514bf3e77f39578880a694f8c401bd17979346d33b3",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun1-positive-progress-cancel-recovery-20261008/runtime-preflight-result.json",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "d78223dd293c345e6c7d3acce45eaed30856d6bb",
+      "sha256": "f58403abd73d4bf08eb3913d7432caec39e5262cbb5263d2d56fe6c7ddbcb91f",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun1-positive-progress-cancel-recovery-20261008/instrumentation-helper-source.sanitized.txt",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "501e5057b985aab9178228f82b96797d3ff2d83d",
+      "sha256": "8eacf8cb471e2b30a698a9f713d2535dde44a3c0400ec9214c97b6f7948545c3",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun1-positive-progress-cancel-recovery-20261008/instrument-preflight-console.sanitized.txt",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "d60961a601ee2857f5ec7510a954ea3fc3341d91",
+      "sha256": "6cbf40b632e9cd192558b02335335e454df22aba494138accb3e457322c58e0f",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun1-positive-progress-cancel-recovery-20261008/task-result.json",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "fbb0e140df2de07eaab8a3394750404dcf796a25",
+      "sha256": "31121dd6e4436969e0c9d393c2eaf4913fcf29f6c469325b1fb506281d6ccb5b",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun1-positive-progress-cancel-recovery-20261008/emulator-start.json",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "aaaf46c37fa62fc9675f467011d88d362d75e719",
+      "sha256": "b7b31edc8da72b4aea428de18b4cb105718e533d246f8bd367ea4f2a19580c53",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun1-positive-progress-cancel-recovery-20261008/source-state.json",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "4ee3fea1b9645f250b8c0baf73155e3ce8a658fc",
+      "sha256": "e34266a1d42604af46ec299775393733a20043306b7862091911c9a975c68d59",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun1-positive-progress-cancel-recovery-20261008/independent-collector-provenance.json",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "946094460a66b8ad589bfcf2faa04d4932b0b823",
+      "sha256": "8d7207aa34163b3781ab05de29bc9b0674b14b404b6a2d942414f17da3a21b81",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun1-positive-progress-cancel-recovery-20261008/independent-collector-source.sanitized.txt",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "c8bd19d7a9a42b1f48327f44563d78aadd9df867",
+      "sha256": "85921d21a53d2986847409f94eea5c28ac621ec62eba03110653601fd527bc50",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun1-positive-progress-cancel-recovery-20261008/cleanup.json",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "c59f0cdbe7020b4ed0faa01285b898a0fb089b8a",
+      "sha256": "6c7d9b709185dfc805519a1854fbdc4afe59a9400efe371d8baae8de74c9db93",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "test-lab/playback/phase8f-adaptive-candidate-cancel-recovery-sim-20261008/healthy-control.json",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "d7bc75a548372fa702a96d5e11f47757097acb45",
+      "sha256": "f871dc0d9b0dbf31c87bedf8246edcc879f5e6cb8e43c9ecc3dd519a0f589a27",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "test-lab/playback/phase8f-adaptive-candidate-cancel-recovery-sim-20261008/healthy-run.stderr.sanitized.txt",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "1890c570b13d80882dd449a1ad6917e0441e60e3",
+      "sha256": "74dad16451e7a1ec0b7875d91e34cbdcc89a9d42711135c86a772ea706513465",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "test-lab/playback/phase8f-adaptive-candidate-cancel-recovery-sim-20261008/native-readiness-timeline.json",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "1c3bca1a3476eb80f79cf500a4d948393b08c6ac",
+      "sha256": "78c6641dd6d76fda5578282155ab609385833b04426495bc95f6466ded6d1933",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "test-lab/playback/phase8e-system-prepared-readiness-sim-20261008/leave-during-prepare.json",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "c7f06a1588e80c1d3e306e2230dd5868786cea08",
+      "sha256": "1ea215d1621dd53cf65c388536f3e92f13f44ddfea576acd019f344ab359257b",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "test-lab/playback/phase8e-system-prepared-readiness-sim-20261008/source-lifecycle-assessment.json",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "a558547ca0d5774918a3c5c318e01e82f0d95c81",
+      "sha256": "04647e3506bd2c1a8823d835b048770c31747c535fdc7b62c58ca0b23aac5546",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "test-lab/playback/phase8b-simulator-functional-preflight-rerun1-20261007/fixture-truth-manifest.json",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "d20d1c678631689e941bef0e87ab1979b34e8cf2",
+      "sha256": "ae743969e62a8836421fc45c46d3f6a558b1386bda0de72e126f0bbbf6726189",
+      "provenance": "Historical committed four-class/ten-file truth inspected; fresh local/WebDAV/ffprobe gate NOT RUN after STOP",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "scripts/verify.ps1",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "4512ff88f229c2a4ec452d274cd94e171f29cc1a",
+      "sha256": "f6103fc75c69ae1d72d46d3f941d74d062ce55045d7bf75087f547b4b22c4015",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "scripts/verify-simulator.ps1",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "b930e6eb3e8121b9470f3efd88f2efcc72bf0806",
+      "sha256": "b416a26b5dc87c79f38ad0507067e548d8e010e07f51b4363d477a9b776c9269",
+      "provenance": "Previously completely read in this same session; exact unchanged current-dispatch Git blob and worktree bytes revalidated",
+      "priorReadBlobIdentical": true
+    },
+    {
+      "path": "docs/PLAYBACK_PHASE8F_RERUN2_UI_FOREGROUND_CANCELLATION_REPORT.md",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "eadf1ad8cef589dca7959a62f77fc97edfe26c61",
+      "sha256": "9c58184c8248fabec9c5ea015a395e0c0ed6b210bee8c81ebd584b7aad821a85",
+      "provenance": "Read exact current content in this session",
+      "priorReadBlobIdentical": false
+    },
+    {
+      "path": "entry/src/test/PlaybackEngine.test.ets",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "fcf020d8ef2c4d6f983e464948f6fb3304733bc4",
+      "sha256": "5e44a69dd67d9d64c1f7e53cb1681085aad27ca3eeda5ef9d1136c355d451525",
+      "provenance": "Read exact current content in this session",
+      "priorReadBlobIdentical": false
+    },
+    {
+      "path": "scripts/check-mpv-playback-port.cjs",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "bd72258f929be1abeab9872f831675b1379bebad",
+      "sha256": "32235f5b072bab3a2a71bda2e1ce585762571e0cf674001e56e233df6aa2be8d",
+      "provenance": "Read exact current content in this session",
+      "priorReadBlobIdentical": false
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/sign-preflight-source.sanitized.txt",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "ba7b97a18a66a5dc42d4e356b8fa17286ff2240a",
+      "sha256": "10494c4b09571108a6e2ac6ee70d23ba8c11b7d5e1fae83b9b04d7e7a280524b",
+      "provenance": "Read exact current content in this session",
+      "priorReadBlobIdentical": false
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/device-source.sanitized.txt",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "e7c984ec684967c52ac01300111ca03f466f0e7b",
+      "sha256": "58b27d4a44501d77fa0d242e41534f2e91d02dd2701b43918bc636d895d07bab",
+      "provenance": "Read exact current content in this session",
+      "priorReadBlobIdentical": false
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/target-udid.stdout.sanitized.txt",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "c9e0e721b00fcaca87e0459ca30077291581b65b",
+      "sha256": "6007b1d9d9567f4be2749f3c9f638cc1421ca63d37f509f3fc5e5eb57ce4da78",
+      "provenance": "Read exact current content in this session",
+      "priorReadBlobIdentical": false
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/failed-helper-console.sanitized.txt",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "8632199b82e4e72bec83082006b40dd255dda536",
+      "sha256": "a72b0e010bb360f1e0e654d97d83c4261b9e21e4b62e2ad5aca4a51feedb65eb",
+      "provenance": "Read exact current content in this session",
+      "priorReadBlobIdentical": false
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/stop-diagnosis.json",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "a894b5bf82de50c9acb2209249c3ecdc48984feb",
+      "sha256": "80c5ba1deb94ffe413b881f5187d93654b644b2fa36fe98f97a691983322e5a7",
+      "provenance": "Read exact current content in this session",
+      "priorReadBlobIdentical": false
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/sign-preflight.json",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "0cc120f93b27e89bd7d05522c7d3e8061e7bdc26",
+      "sha256": "bf66b35a19ed9577e8dac4ad439f9cb43046c149bf5ea851f9345c7c3c88f8dd",
+      "provenance": "Read exact current content in this session",
+      "priorReadBlobIdentical": false
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/build-results.json",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "c7c38ac7fe0aebfe50a666c8384feacb8ddc84ee",
+      "sha256": "3cc0d32a6159657e3e3bb8cd1d4364632f32393fcb1833db2fcee33d3d0716d8",
+      "provenance": "Read exact current content in this session",
+      "priorReadBlobIdentical": false
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/task-result.json",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "85e3944c11ac95cf18af82d0d09db6e690dd0871",
+      "sha256": "9a0c67fb3cfb9a80fae7c0f598a3745a3ab4bc509a3dbb24c60c4d282971d1a2",
+      "provenance": "Read exact current content in this session",
+      "priorReadBlobIdentical": false
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/source-state.json",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "ae705376f34af7adadab8142fb9658abbf0e4a6e",
+      "sha256": "de42aaff44f5cba8b5f8446d09fdc689df99d25b441216f727c305f27f6f1e68",
+      "provenance": "Read exact current content in this session",
+      "priorReadBlobIdentical": false
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/foreground-predeclaration.json",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "aef31f8fb43e727ff246fd7f77046f7155e4b4c0",
+      "sha256": "c293d10e6b7bc42912a307b2b251ccfbac00961148c266132e20e0168e15e876",
+      "provenance": "Read exact current content in this session",
+      "priorReadBlobIdentical": false
+    },
+    {
+      "path": "test-lab/playback/phase8f-rerun2-ui-foreground-cancel-recovery-20261011/log-integrity.json",
+      "revision": "026559e1975b44d00096d0fdccef7d164d0df049",
+      "blob": "5840fd6d1b763728bc9edc44a0128b30c0edc2dd",
+      "sha256": "a3e10892b5c1ef75d712712c9a25edb10800016e1c1fa12480cacefe969ef442",
+      "provenance": "Read exact current content in this session",
+      "priorReadBlobIdentical": false
+    }
+  ],
+  "entireCurrentTaskRead": true,
+  "newRequiredHistoricalRerun2EvidenceReadOnly": true,
+  "previousFailedScriptsExecuted": false,
+  "sourceDiffReviewed": "68452df5486cf568da66a5c52352841cb7e64c5f..8174e6e4f0214958fb83fef46e92170c4c10263a",
+  "installedApi26DeclarationProvenance": {
+    "relativePath": "sdk/default/openharmony/ets/api/@ohos.multimedia.media.d.ts",
+    "api": 26,
+    "version": "26.0.0.105",
+    "sha256": "8a7dca59e33b0797070ca8c8e2fb3fef51980b0887a7def350171cdb43175789",
+    "rangesRead": [
+      "AVPlayer.prepare lines2172–2208",
+      "AVPlayer.release lines2301–2328",
+      "AVPlayerState lifecycle declarations and state/stateChange searches"
+    ]
+  },
+  "officialPrimaryReferences": [
+    {
+      "url": "https://raw.githubusercontent.com/openharmony/docs/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+      "inspection": "Web tool opened and prepare/release/stateChange sections inspected on2026-10-11; no claimed local byte hash"
+    },
+    {
+      "url": "https://github.com/openharmony/docs/blob/master/zh-cn/application-dev/dfx/hdc.md",
+      "inspection": "Web tool opened; forward/reverse/removal directions inspected"
+    },
+    {
+      "url": "https://github.com/openharmony/docs/blob/master/en/application-dev/reference/apis-test-kit/js-apis-uitest.md",
+      "inspection": "Web tool opened; installed CLI help authoritative for dumpLayout selectors"
+    }
+  ],
+  "privateTestEnvironment": "Only read locally; no contents/secrets/identifier hashes published"
+}

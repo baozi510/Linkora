@@ -1,0 +1,24 @@
+{
+  "utc": "2026-10-11T14:40:35.975909+00:00",
+  "taskId": "phase8f-sim-rerun3-serial-sign-ui-cancel",
+  "state": "READY",
+  "source": "bfd34a33a36772077538c7c57527e30f23689a95",
+  "dispatch": "026559e1975b44d00096d0fdccef7d164d0df049",
+  "remote": "026559e1975b44d00096d0fdccef7d164d0df049",
+  "drift": [
+    "docs/CODEX_VALIDATION_TASK.md"
+  ],
+  "clean": true,
+  "priorEvidenceAncestor": true,
+  "sourceAncestor": true,
+  "protectedProductionBlobs": {
+    "entry/src/main/ets/playback/AdaptivePlaybackPort.ets": "1050012dbef214efba5ebccb5571cc9174345c08",
+    "entry/src/main/ets/playback/SystemPlaybackPort.ets": "cc78c2611e8582633f2a67cb323f3072f5d8a31f"
+  },
+  "newIndependentGitHubClone": true,
+  "initialCloneFetchCheckoutExitCodes": [
+    0,
+    0,
+    0
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "label": "dependencies",
+  "startedUtc": "2026-10-11T14:41:54.809154+00:00",
+  "completedUtc": "2026-10-11T14:41:58.451228+00:00",
+  "returncode": 0,
+  "stdoutSha256": "3a6836f00b1936f1fcebf91eb4e16309ea604936b4ad7edcaae7389da5a74564",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutBytes": 96,
+  "stderrBytes": 0,
+  "elapsedSeconds": 3.642074
+}

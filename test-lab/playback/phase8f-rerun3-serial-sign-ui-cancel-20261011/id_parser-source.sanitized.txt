@@ -1,0 +1,27 @@
+from common import *
+import re
+LABEL='udid of current device is :'
+ID_PATTERN=re.compile(r'[0-9A-Fa-f]{64}')
+def parse(stdout):
+    text=stdout.decode('utf-8',errors='strict')
+    lines=[line.strip() for line in text.splitlines() if line.strip()]
+    if len(lines)!=2 or lines[0]!=LABEL or not ID_PATTERN.fullmatch(lines[1]):
+        raise ValueError('Expected exact observed two-line labeled 64-hex identifier output')
+    return lines[1]
+def selfchecks():
+    identifier='A1'*32
+    cases=[('observed_separate_label',f'{LABEL}\r\n{identifier}\r\n',identifier),
+      ('same_line_not_supported',LABEL+' '+identifier,None),('bare_not_observed_not_supported',identifier,None),
+      ('empty_rejected','',None),('two_identifiers_rejected',LABEL+'\n'+identifier+'\n'+'B2'*32,None),
+      ('missing_label_rejected','unknown\n'+identifier,None),('extra_text_rejected',LABEL+'\n'+identifier+'\nextra',None),
+      ('old_whole_stdout_isolated',LABEL+'\n'+identifier,identifier),('malformed_rejected',LABEL+'\nabc',None),
+      ('printed_failure_rejected','[Fail] device unavailable\n'+identifier,None)]
+    rows=[]
+    for name,value,expected in cases:
+        try:actual=parse(value.encode())
+        except ValueError:actual=None
+        row={'name':name,'passed':actual==expected,'expected':'reject' if expected is None else 'one exact bare synthetic ID'}
+        rows.append(row);save('parser-selfchecks',{'utc':utc(),'sourceSha256':sha(Path(__file__).read_bytes()),'observedSupportedShape':'Exact separate label +64 hex chars; actual installed prior captured shape read only, no live query used for selfchecks','sameLineAndBarePositiveCases':'NOT APPLICABLE: not demonstrated by installed output; both rejected rather than guessed','syntheticIdentifiersOnly':True,'checks':rows})
+        assert row['passed'],'STOP: pure parser selfcheck '+name
+    print(json.dumps({'checks':len(rows),'allPassed':True,'liveMembershipInvoked':False}))
+if __name__=='__main__':selfchecks()

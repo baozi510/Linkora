@@ -1,0 +1,35 @@
+{
+  "freshDefaultInvocations": [
+    {
+      "stage": "default-first",
+      "actualReturncode": 0,
+      "hypiumCounterLine": "Tests run: 210, Failure: 0, Error: 0, Pass: 210, Ignore: 0",
+      "exactNineArm64AuditCount": 2,
+      "architectureFixtures": 5,
+      "ffmpegPure": 15,
+      "analysisPure": 46,
+      "artifactFixtures": 17,
+      "mpvMappingFixtures": 7,
+      "debugReleaseHarHap": "PASS, complete fresh verifier log retained",
+      "finalCompletedAfterStop": false
+    },
+    {
+      "stage": "default-final",
+      "actualReturncode": 0,
+      "hypiumCounterLine": "Tests run: 210, Failure: 0, Error: 0, Pass: 210, Ignore: 0",
+      "exactNineArm64AuditCount": 2,
+      "architectureFixtures": 5,
+      "ffmpegPure": 15,
+      "analysisPure": 46,
+      "artifactFixtures": 17,
+      "mpvMappingFixtures": 7,
+      "debugReleaseHarHap": "PASS, complete fresh verifier log retained",
+      "finalCompletedAfterStop": true
+    }
+  ],
+  "simulatorReturncode": 0,
+  "simulatorWhitelist": "Only real x86_64 liblinkora_ffmpeg.so; parity/isolation/audio static guard and complete normal finally install PASS",
+  "independentBothEolProofs": "PASS",
+  "wholeTaskGateChainVerdict": "FAIL: a separate progress-observation process exited1 during final verifier; three individual verifier successes do not override STOP",
+  "noPriorPassReused": true
+}

@@ -1,0 +1,5 @@
+[exec_command result chunk cd63e4]
+Process exit code: 1
+This is a copied tool console transcript, not byte-identical original stdout/stderr.
+The command read the simulator stdout tail, post-simulator-eol-proof.json first14 lines, and then Get-Content default-final-result.json -ErrorAction SilentlyContinue before that result file existed.
+The console showed simulator native x86_64 one-library whitelist PASS, dependency restoration install completed, and the first14 lines of the EOL proof. The missing-file error text was suppressed by the original command; the tool still recorded process exit1. No second invocation of that failed command was performed.

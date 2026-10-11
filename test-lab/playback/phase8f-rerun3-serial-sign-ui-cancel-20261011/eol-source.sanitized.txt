@@ -1,0 +1,16 @@
+from common import *
+def prove(name):
+    baseline=json.loads((PRIVATE/'baseline.json').read_text());now=snapshot(ROOT)
+    allow=['entry/oh-package-lock.json5','linkora_ffmpeg/oh-package-lock.json5','linkora_proxy/oh-package-lock.json5','oh-package-lock.json5']
+    changed=[p for p,h in baseline['isolated'].items() if now.get(p)!=h];rows=[]
+    for p in changed:
+        raw=(ROOT/p).read_bytes();head=git(name+'-head-'+Path(p).parent.name,'show','HEAD:'+p);normalized=raw.replace(b'\r\n',b'\n')
+        blob=git(name+'-blob-'+Path(p).parent.name,'rev-parse','HEAD:'+p).decode().strip()
+        normalblob=git(name+'-normalblob-'+Path(p).parent.name,'hash-object','--path='+p,str(ROOT/p)).decode().strip()
+        rows.append({'path':p,'authorized':p in allow,'originalRawSha256':baseline['isolated'][p],'rawSha256':sha(raw),'headSha256':sha(head),'normalizedSha256':sha(normalized),'headGitBlob':blob,'normalizedGitBlob':normalblob,'exactCrLfToLfBytesEqualHead':normalized==head,'versionsChecksumsCommentsGraphUnchanged':normalized==head})
+    facts={'utc':utc(),'changedRawPaths':changed,'files':rows,'protectedRegularFiles':len(baseline['isolated']),'allOtherTrackedBytesUnchanged':all(p in allow for p in changed),'preRestoreAllConditionsPassed':all(r['authorized'] and r['exactCrLfToLfBytesEqualHead'] and r['headGitBlob']==r['normalizedGitBlob'] for r in rows)}
+    save(name+'-proof',facts);assert facts['preRestoreAllConditionsPassed'],'STOP: unauthorized/semantic drift'
+    if changed:git(name+'-restore','restore','--source=HEAD','--worktree','--',*changed)
+    facts['afterRestoreSnapshotEqualBaseline']=snapshot(ROOT)==baseline['isolated'];facts['afterRestoreStatus']=git(name+'-after-status','status','--porcelain=v1').decode()
+    save(name+'-proof',facts);assert facts['afterRestoreSnapshotEqualBaseline'] and not facts['afterRestoreStatus']
+    print(json.dumps({'stage':name,'authorizedChangedPaths':changed,'clean':True}))

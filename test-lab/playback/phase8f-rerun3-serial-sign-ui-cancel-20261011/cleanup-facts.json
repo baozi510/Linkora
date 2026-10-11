@@ -1,0 +1,17 @@
+{
+  "utc": "2026-10-11T14:53:59.030237+00:00",
+  "officialOpens": 0,
+  "appStartIssued": false,
+  "signedInstallIssued": false,
+  "fixtureServerCreated": false,
+  "reverseCreated": false,
+  "httpRowCreated": false,
+  "backendPreferenceChanged": false,
+  "ownedCleanup": "NOT APPLICABLE: no task runtime resources created",
+  "surfaceCount": "NOT PROVEN: no app-scoped layout collected",
+  "originalAuto": "NOT PROVEN: no UI settings read or modified",
+  "forceStopResetUninstallWipe": false,
+  "simulatorDataPreserved": true,
+  "targetPresent": "NOT PROVEN: absent or ambiguous after STOP; no target guessed",
+  "host19084ListenerCount": 0
+}

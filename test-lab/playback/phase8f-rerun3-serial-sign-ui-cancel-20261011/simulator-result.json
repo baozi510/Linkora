@@ -1,0 +1,11 @@
+{
+  "label": "simulator",
+  "startedUtc": "2026-10-11T14:48:29.278030+00:00",
+  "completedUtc": "2026-10-11T14:48:55.948823+00:00",
+  "returncode": 0,
+  "stdoutSha256": "5c4816c6a97193310fce1ec91636f47bf04455c5968a8161bcf5e651a80feb73",
+  "stderrSha256": "8e8fd943481338292e76aff9c6309b0436c94b6d8d837dfc9290357f436331d5",
+  "stdoutBytes": 6971,
+  "stderrBytes": 72114,
+  "elapsedSeconds": 26.670793
+}

@@ -1,0 +1,24 @@
+from common import *
+import shutil
+name=sys.argv[1]
+result=PRIVATE/(name+'-result.json')
+if result.exists():raise RuntimeError('STOP: stage already invoked; no retry '+name)
+if name=='parser-selfcheck':args=[sys.executable,'-X','utf8',str(PRIVATE/'id_parser.py')]
+elif name in ['baseline','source-protection','dependencies','initial-eol','post-simulator-eol','live-sign-profile','device-help','foreground-prestart','foreground-poll','cleanup','publish']:
+    args=[sys.executable,'-X','utf8',str(PRIVATE/(name+'.py'))]
+elif name=='submodules':args=['git','submodule','update','--init','--recursive']
+elif name=='initial-install':args=['powershell.exe','-NoProfile','-Command',"& '<installed-studio>/tools/ohpm/bin/ohpm.bat' install; $childExit=$LASTEXITCODE; exit $childExit"]
+elif name in ['default-first','simulator','default-final']:
+    script='verify-simulator.ps1' if name=='simulator' else 'verify.ps1'
+    args=['powershell.exe','-NoProfile','-ExecutionPolicy','Bypass','-File',str(ROOT/'scripts'/script)]
+elif name=='sign':args=[str(STUDIO/'tools/node/node.exe'),str(PRIVATE/'sign.cjs')]
+elif name=='signed-abi':args=[str(STUDIO/'tools/node/node.exe'),str(ROOT/'scripts/check-ffmpeg-artifact.cjs'),str(PRIVATE/'fresh-simulator-signed.PRIVATE.hap'),'x86_64']
+elif name=='signed-install':args=[sys.executable,'-X','utf8',str(PRIVATE/'signed-install.py')]
+else:raise RuntimeError('Unknown stage')
+p=run(name,args,timeout=3600,required=False)
+code=p.returncode
+if name in ['default-first','default-final']:
+    hyp=ROOT/'entry/.test/default/intermediates/test/coverage_data/test_result.txt'
+    if hyp.is_file():shutil.copyfile(hyp,PRIVATE/(name+'-hypium.PRIVATE.txt'))
+print(json.dumps({'stage':name,'actualChildReturncode':code,'completedUtc':utc()}),flush=True)
+sys.exit(code)

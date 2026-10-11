@@ -1,0 +1,11 @@
+{
+  "label": "cleanup",
+  "startedUtc": "2026-10-11T14:53:57.499143+00:00",
+  "completedUtc": "2026-10-11T14:54:01.531349+00:00",
+  "returncode": 0,
+  "stdoutSha256": "81fb1282776535c7e1f738b323cd0752f7c1d404b6ba1c18aedad593135f748a",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutBytes": 611,
+  "stderrBytes": 0,
+  "elapsedSeconds": 4.032206
+}

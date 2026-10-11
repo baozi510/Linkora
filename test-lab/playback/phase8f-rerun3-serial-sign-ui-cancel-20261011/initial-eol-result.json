@@ -1,0 +1,11 @@
+{
+  "label": "initial-eol",
+  "startedUtc": "2026-10-11T14:42:42.118043+00:00",
+  "completedUtc": "2026-10-11T14:42:44.476849+00:00",
+  "returncode": 0,
+  "stdoutSha256": "16898664acf1d337dc23f157fb8eb94df91bafb98a45c3e1c913d68f19b21875",
+  "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutBytes": 204,
+  "stderrBytes": 0,
+  "elapsedSeconds": 2.358806
+}
