@@ -1,3 +1,15 @@
+## CURRENT STATE — 2026-10-12 New approved no-retest tooling rule; new publication-only task pending dispatch
+
+**Repo:** `baozi510/Linkora`, branch `feat/playback-capability-phase8`.
+
+**User-approved and now written in docs/AI_WORKFLOW.md:** When an **explicitly predeclared OPTIONAL, noncritical** helper fails, and evidence supports that its failure cannot invalidate any required check or safety/publication gate, record `RECORDED — NONCRITICAL TOOLING ISSUE / NO RETEST`; no old-helper retry, full build cycle, media replay or fresh validation solely for optional helper green status. If effects not established harmless or the stage is required for test validity, preserve FAIL/BLOCKED/NOT PROVEN and do not waive. Cheap prerequisites first; critical privacy, evidence integrity and verified remote push mandatory for independent review. Existing STOPs remain final and immutable.
+
+**Current historical STOP:** Rerun4 original task `phase8f-sim-rerun4-single-controller-ui-cancel` reported local FAIL from metadata inspector JSON list/dict error after independently reported fresh green build stages; evidence publication separately failed on PRIVATE controller-state atomic write WinError5, leaving no evidence SHA. Underlying error cause and read-only effects of emulator -config NOT PROVEN. Signing, installed HAP, app foreground and all six official media opens NOT RUN; cancellation/recovery NOT PROVEN. No new player bug established. Do not re-execute this old task or its failed tools.
+
+**New authority:** Previous publication task `phase8f-rerun4-evidence-publication-recovery-only` (dispatch `135b3b0e6819548ed449a719289b2281b3f07c1a`) is SUPERSEDED. The NEW future distinct READY task in `docs/CODEX_VALIDATION_TASK.md` alone may read/recover, carefully sanitize/audit and publish EXISTING original Rerun4 report plus evidence with a separate clean clone. No new simulator/device/build/playback tests, no touching user original workspace; preserve original stopped checkout and historical failures, and do not fabricate results. Treat unrelated auxiliary publication diagnostics as record-only where preclassified; true privacy/hash/path/commit/push faults remain blockers. GPT reviews only verified new GitHub evidence commit, never this chat narrative alone.
+
+---
+
 ## CURRENT STATE — 2026-10-12 Phase 8F Rerun 4 stopped locally; evidence not pushed
 
 **Repo / branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`.

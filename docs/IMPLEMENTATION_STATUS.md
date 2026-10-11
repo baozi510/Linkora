@@ -1,3 +1,13 @@
+## CURRENT EXECUTION SUMMARY — 2026-10-12 (Noncritical tooling no-retest policy; evidence-only task supersession)
+
+**User-approved rule, now recorded in docs/AI_WORKFLOW.md:** A **preclassified OPTIONAL DIAGNOSTIC** tooling failure with independently proven harmless impact is recorded as `RECORDED — NONCRITICAL TOOLING ISSUE / NO RETEST`. Do not re-run full ARM64, simulator builds or playback solely to make optional helpers green. Critical safety/source, build results when claimed, essential runtime acceptance, secret/privacy and evidence-push integrity remain binding; missing/failed essential checks are FAIL/BLOCKED/NOT RUN/NOT PROVEN. Do not retrospectively turn an old STOP into PASS. Plan cheap environment checks ahead of costly validation; simulator-first/ARM64-build-always/device-batched remains intact.
+
+**Remote review boundary:** Original Rerun4 `phase8f-sim-rerun4-single-controller-ui-cancel` is STOPPED; its local-only reported emulator inspector child1 and publication WinError5 are not yet independently accepted because no evidence SHA was pushed. All 6 official media opens NOT RUN; pending native release and normal cancellation/recovery remain UNVALIDATED. The publication-only READY task `phase8f-rerun4-evidence-publication-recovery-only` (dispatch `135b3b0e6819548ed449a719289b2281b3f07c1a`) is superseded by the next **distinct** dispatch. Do not run both. Current new task focuses exclusively on recovering/publishing already obtained Rerun4 sanitized evidence, not rebuilding, fixing/retrying the old failed audit/helper, or testing media. Protected historical evidence remains immutable. Publishing requires privacy/content/path/integrity controls; noncritical extra diagnostics do not trigger replay.
+
+**Next action:** follow the latest committed `docs/CODEX_VALIDATION_TASK.md` only, publish and remote-verify already collected evidence if core gates pass; GPT independently reviews the evidence before deciding any later runtime task.
+
+---
+
 ## CURRENT EXECUTION SUMMARY — 2026-10-12 (Phase 8F Rerun 4 local STOP; evidence publication blocked)
 
 **Remote fact:** at dispatch `f98ca3b5d61ec1cd18ee8e42d72e4718c352c5ce` no Rerun4 evidence commit is visible. Codex's local-only handoff reports `VALIDATION_RESULT: FAIL — REQUIRED TEST GATE` but `REVIEW_RESULT: BLOCKED — EVIDENCE NOT PUSHED`; GPT cannot independently accept unpushed tests or inventories. Historical task `phase8f-sim-rerun4-single-controller-ui-cancel`, tested SOURCE `a9312a86a5104e46847f1087af52e7de8b1c2fab`, tested dispatch `f98ca3b5d61ec1cd18ee8e42d72e4718c352c5ce`, production fix `8174e6e4f0214958fb83fef46e92170c4c10263a` is STOPPED and must not be retried.
