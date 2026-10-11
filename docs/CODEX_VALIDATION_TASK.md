@@ -1,91 +1,88 @@
-# Codex Validation Task — Phase 8F Feature-first Targeted Simulator Smoke
+# Codex Validation Task — Phase 8F Direct Level-1 Functional Preflight and Three-Open Smoke
 
 > STATE: READY
-> TASK_ID: phase8f-feature-first-targeted-simulator-cancel-smoke
+> TASK_ID: phase8f-level1-direct-readiness-three-open-smoke-v2
 > REPOSITORY: baozi510/Linkora
 > BRANCH: feat/playback-capability-phase8
 > LEVEL: LEVEL_1_FUNCTIONAL
-> SOURCE_SHA: f9fd23c66e5fc9f70a3ccfd4c4b3ba0d0d443e03
+> SOURCE_SHA: 9a7c6a3bcdd52595bf3b7fe686db028729aaaf41
 > ALLOWED_DRIFT: docs/CODEX_VALIDATION_TASK.md ONLY
-> UNCHANGED_PRODUCTION_FIX: 8174e6e4f0214958fb83fef46e92170c4c10263a
-> SUPERSEDED_READY_TASK_ID: phase8f-rerun4-evidence-privacy-semantic-publish-v3
-> SUPERSEDED_READY_DISPATCH_SHA: eee759ffe99c52dd139b20d4261275f22c23a6f0
-> ORIGINAL_STOPPED_VALIDATION_TASK_ID: phase8f-sim-rerun4-single-controller-ui-cancel
-> ORIGINAL_TESTED_DISPATCH_SHA: f98ca3b5d61ec1cd18ee8e42d72e4718c352c5ce
-> ORIGINAL_RERUN4_REMOTE_EVIDENCE_SHA: NONE
-> ROLE: TARGETED FUNCTIONAL SIMULATOR RUNTIME; MAX ONE NECESSARY DEBUG SIMULATOR BUILD; MINIMAL SAFE REPORT
-> FULL_ARM64_RELEASE_ABI_GATE: DEFERRED TO LEVEL_2_MILESTONE
+> UNCHANGED_PRODUCTION_FIX_SHA: 8174e6e4f0214958fb83fef46e92170c4c10263a
+> STOPPED_PREDECESSOR_ID: phase8f-feature-first-targeted-simulator-cancel-smoke
+> STOPPED_PREDECESSOR_DISPATCH_SHA: e605bccf1652f30b9b572e3259ec3f5b0d2c5fe9
+> PRIOR_STOPPED_RERUN4_DISPATCH_SHA: f98ca3b5d61ec1cd18ee8e42d72e4718c352c5ce
+> RERUN4_REMOTE_EVIDENCE_SHA: NONE
+> ROLE: DIRECT SOURCE READS; CHEAP ACTUAL SIMULATOR READINESS FIRST; ONE OPTIONAL DEBUG BUILD; THREE FOCUSED FUNCTIONAL OPENS
+> MILESTONE_ARM64_RELEASE_ABI: DEFERRED LEVEL_2
+> REAL_DEVICE_ACCEPTANCE: DEFERRED LEVEL_3
 
-## 0. New user-approved execution strategy (read first)
+## 0. Narrow new authorization — no tooling-test cycle
 
-This is a **new distinct authorized task** after a separately committed GPT review. Its sole priority is to establish actual Phase 8F functionality with the cheapest valid simulator path, following the 2026-10-12 feature-first execution rule in `docs/MASTER_IMPLEMENTATION_PLAN.md` and `docs/AI_WORKFLOW.md`.
+This is a NEW task, not an in-place continuation or retry of the STOPPED predecessor. The previous local-only handoff reported Python child1/outer1 while reading a nonexistent hardcoded contract path, followed later by a PowerShell staged-path helper exit1 after an apparently successful two-path git add. **Neither previous helper is to be edited or rerun.** No local or remote evidence commit was created, and the old STOP remains final. No production bug or SDK/build/signing defect was established: predecessor performed 0 builds, 0 emulator/target/UI tests, 0 official media opens. The local-only failure narrative is not independently audited remote raw evidence.
 
-The earlier publication-only task `phase8f-rerun4-evidence-privacy-semantic-publish-v3` was READY but has no remotely published result at dispatch time. It is **SUPERSEDED**, not falsely marked executed, PASS or FAIL. Do **NOT** run it alongside this task. Original Rerun4, Rerun3 and publication-v2 historical failed tasks remain CLOSED/STOPPED; never rerun their specific failed helper, original controller, PowerShell observer, original privacy classifier or old build gates. Their local-only Rerun4 report +109 evidence files are preserved privately, NOT magically certified or safe to publish. This task NEVER copies or publishes those old 110 files, never ignores unresolved historical privacy concerns, and does NOT claim prior Rerun4 evidence was reviewed.
+GitHub OWNER has independently verified the actual source contract **`linkora_core/src/main/ets/playback/PlaybackPort.ets`** (at old dispatch Git blob `231e49b84dce45b83c472fbed0b258711ce758d5`); **`entry/src/main/ets/playback/PlaybackPort.ets` DOES NOT EXIST.** The `linkora_core/src/main/ets/playback/PlaybackEngine.ets` imports the same-directory PlaybackPort. `entry/src/main/ets/playback/AdaptivePlaybackPort.ets` and `SystemPlaybackPort.ets` are entry adapters, not the contract location. There is no need to rediscover this with a private orchestration helper.
 
-Core rule: daily modifications need NO compulsory compilation; only one source-compatible minimal **simulator Debug** build at most if required for a real smoke test, after cheap prerequisites are ready. Full default ARM64/Release/native ABI/build suite is **NOT RUN, intentionally deferred** to a coherent milestone. Do not run `scripts/verify.ps1`, the old full default→simulator→default triple cycle, or full six-case media matrix. Do not use a passing old build to assert a new runtime PASS.
+Under the APPROVED feature-first rules, prioritize actual functionality, not new source-read wrappers, optional progress observation, archive/gzip mirrors or extensive evidence inventory checks. Do not attempt to repair/publish the old stopped predecessor report or any Rerun4 private evidence. Prior local failures remain unreviewed and unchanged. The task may carry out the three NEW functional opens only if actual environment prerequisites pass; none of these three opens were executed by the stopped predecessor, so this is not replay of completed tests.
 
-## 1. Required reading, exact remote source and protected workspace
+## 1. Required source/read-only review and workspace safety
 
-Fresh-fetch repository and branch; verify actual full HEAD dispatch SHA, `STATE: READY`, this TASK_ID, SOURCE_SHA immediate parent of dispatch and diff SOURCE_SHA..dispatch EXACTLY `docs/CODEX_VALIDATION_TASK.md`. Verify previous policy review `eee759ffe99c52dd139b20d4261275f22c23a6f0`→SOURCE_SHA touched ONLY `docs/MASTER_IMPLEMENTATION_PLAN.md`, `docs/AI_WORKFLOW.md`, `docs/IMPLEMENTATION_STATUS.md` and `docs/SESSION_HANDOFF.md`. Stop on source/branch drift.
+1. Fresh-fetch `baozi510/Linkora` branch, read this entire latest Task, `docs/AI_WORKFLOW.md`, current `docs/MASTER_IMPLEMENTATION_PLAN.md`, `docs/ARCHITECTURE_TARGET.md`, `docs/ARCHITECTURE_MIGRATION.md`, CURRENT `docs/IMPLEMENTATION_STATUS.md` and `docs/SESSION_HANDOFF.md`. Read original preceding STOP as historic, not task authority. Confirm READY/latest ID; SOURCE_SHA `9a7c6a3bcdd52595bf3b7fe686db028729aaaf41` is direct parent of current dispatch; SOURCE_SHA..dispatch changes **only** `docs/CODEX_VALIDATION_TASK.md`. Previous dispatch `e605bccf1652f30b9b572e3259ec3f5b0d2c5fe9`→SOURCE_SHA changes exactly `docs/IMPLEMENTATION_STATUS.md` and `docs/SESSION_HANDOFF.md`. All SHAs in results full 40 hex.
+2. Use a new clean isolated validation checkout, never the user's original potentially dirty workspace or any stopped historical isolated worktree. Do NOT reset/stash/clean/checkout/modify those protected originals. Verify `AdaptivePlaybackPort.ets` and `SystemPlaybackPort.ets` current blobs equal production fix `8174e6e4f0214958fb83fef46e92170c4c10263a`. No changes to source/test/scripts/build profile/SDK/signing/fixtures, no pin/TLS bypass.
+3. **Use direct Git tree/list and actual existing source files, not a new private hardcoded-path verifier**. Required production contract paths:
+   - `linkora_core/src/main/ets/playback/PlaybackPort.ets`
+   - `linkora_core/src/main/ets/playback/PlaybackEngine.ets`
+   - `linkora_core/src/main/ets/playback/PlaybackModels.ets`
+   - `entry/src/main/ets/playback/AdaptivePlaybackPort.ets`
+   - `entry/src/main/ets/playback/SystemPlaybackPort.ets`
+   - `entry/src/main/ets/pages/PlayerPage.ets`, `entry/src/main/ets/entryability/EntryAbility.ets`.
+   If an OPTIONAL additional file name is uncertain, use a single native Git file inventory to locate it or omit the optional read; do NOT fabricate paths or run a new failing standalone path-check script. STOP only on a real mandatory source/identity mismatch, not an exploratory path assumption.
 
-Read FULL latest task, current `docs/AI_WORKFLOW.md`, `docs/MASTER_IMPLEMENTATION_PLAN.md`, `docs/ARCHITECTURE_TARGET.md`, `docs/ARCHITECTURE_MIGRATION.md`, latest CURRENT `docs/IMPLEMENTATION_STATUS.md` and `docs/SESSION_HANDOFF.md`. Read recent historical Phase8F Rerun4 STOP handoff, Rerun3 remote failure report, and original relevant `AdaptivePlaybackPort.ets` / `SystemPlaybackPort.ets` and actual production UI/playback port contracts. Verify these two production files' Git blobs still equal `8174e6e4f0214958fb83fef46e92170c4c10263a`; no source/test/profile/fixture/build config changes.
+## 2. Cheap READY checks BEFORE building anything
 
-Use a separate clean isolated source checkout, not the user's original potentially dirty `D:/Linkora` workspace and not the old stopped Rerun4 evidence checkout. Do not reset/stash/clean/checkout/modify either protected workspace or another task's index. Authentic dependency pins only; do not alter checksums or TLS/security/SDK configuration.
+**CRITICAL for attempting runtime:**
+- First query actual HDC connected targets using installed documented safe read-only syntax and capture semantic output + exit. A configured or installed API26 emulator is not a running target. If target is empty, you may perform at most ONE normal supported, non-destructive start of the preexisting user-authorized compatible simulator instance using **documented** installed CLI syntax; do not run `-config`, parse SDK `emulator.json`, change settings/profile/instance/image, reset or wipe. If target remains absent: `BLOCKED — SIMULATOR ENVIRONMENT`, build/signing/media `NOT RUN`; do not run optional discovery helpers, compile or attempt repeated starts.
+- Only with an actual compatible running target, check existing valid legal signing/profile membership with correctly parsed live `bm get -u` output and installed signing profile, no credentials/IDs published and no edits. If membership cannot be proved: `BLOCKED — SIGNING PREFLIGHT`, no build/media.
+- Check that the existing healthy MP4 + separate HLS H264 PREPARING-cancel fixture already exists and one owned host/target route can be used without any extra fixture generation. If missing: `BLOCKED — FIXTURE ENVIRONMENT`, no build/media. Respect user secrets and unrelated services.
+- Decide whether a source-compatible, x86 simulator-native-audited, *legally signed* existing HAP can actually be proved for the current source; if yes, use it and explicitly record `BUILD NOT RUN`. Otherwise ONLY after prerequisites pass, allow one scoped simulator Debug build in Section 3. An arbitrary old HAP or ARM64 build is not simulator runtime proof.
 
-## 2. CRITICAL CHEAP readiness BEFORE ANY BUILD
+These small readiness commands should be direct native invocations; no new multi-layer PowerShell/Python controller, separate process watcher, status-tail, hidden retries or extra JSON metadata helpers. Capture real native return code and meaningful result, do not equate transport0 with semantic success. Cheap STOP is an authorized honest result, not an instruction to loop.
 
-1. Record original authorized emulator/SDK availability with **documented read-only commands** only; first query actual running HDC target list and confirm a simulator target is really running. `[Empty]` means **no target**, regardless of a configured API26 x86_64 instance. Do NOT inspect SDK emulator.json or run `-config` without arguments or invent undocumented emulator command switches. If a compatible user-authorized installed API26 emulator is not running, ONE normal supported non-destructive start of that existing instance is allowed **only** when the installed tool's documented start syntax is verified and no profile/image/settings changes occur. No reset, wipe, reinstall or force-stop. If no legally usable documented start is available, STOP `BLOCKED — SIMULATOR ENVIRONMENT`, with build/sign/install/media `NOT RUN`; do not start a full build.
-2. Only after the target really appears: establish legal existing simulator signing/profile membership by correct separately checked interpretation of the installed HDC/`bm get -u` output (no guessing labeled output). No modifying profile, keys, credentials, SDK preference or device IDs. If signing cannot be proved, STOP `BLOCKED — SIGNING PREFLIGHT`; build and media NOT RUN.
-3. Check that the minimal healthy MP4 and separate HLS H264 cancellation fixture specified by previous authoritative Phase8F corpus exist as lawful **already prepared** local/media assets and that a safe, ownable host/target route is possible. No remote secrets/private paths published. If not ready, STOP `BLOCKED — FIXTURE ENVIRONMENT` before building. No broad media corpus recreation or six-format sweep.
-4. Before building, check if an existing already installed/signed x86 simulator artifact can be independently tied to EXACT current production blobs/source, simulator product, legal profile and x86 native isolation. If and only if all match, record proven provenance and **BUILD NOT RUN**; otherwise it is not reusable, proceed to one minimal build only. HAP presence alone is not proof. Do not reuse an old unsigned HAP, old PASS label or ARM64 artifact as x86 runtime proof.
+## 3. At most ONE simulator Debug build; no full build cycle
 
-No helper/extra PowerShell progress observations, polling while a child is running, gratuitous meta-inspection, or mid-stage reads of completion-only files. A blocking invocation captures direct numeric exit and original private stdout/stderr; actual faults remain honest, not repaired and secretly rerun.
+If no valid existing signed x86 artifact and Section 2 passed, perform **ONCE** the current scoped simulator Debug build using existing `scripts/verify-simulator.ps1 -BuildMode debug` and only necessary normal dependency setup. No `scripts/verify.ps1`, no default ARM64 Debug/Release, no triple `default→simulator→default` cycle, no unnecessary unit/format matrix rerun. If required, normalize ONLY existing allowlisted four lockfile EOL drifts with byte/Git-blob identical proof inside new isolated clone; never change semantics. Confirm actual x86 FFmpeg-only native whitelist, code/child exit and source-matched signed installed artifact. A real build error is `FAIL — MINIMAL DEBUG BUILD` and runtime `NOT RUN`; do not patch and rerun tests. Full ARM64 compiler/linker/native artifact validation is `DEFERRED — LEVEL_2 MILESTONE`, not silently PASS.
 
-## 3. At most ONE necessary minimal simulator Debug build
+## 4. Actual foreground and precisely THREE feature opens
 
-Only if all Section 2 prerequisites pass and no valid source-matched signed artifact exists:
+Before any media, require actual app Ability foreground, a Linkora-owned nonempty layout/window and matching private screenshot metadata; no launcher-only state. Signed HAP must be genuinely installed (not merely `hdc` exit0). If UI fails, STOP `BLOCKED — APP FOREGROUND`; all media NOT RUN.
 
-- Run ONCE the existing scoped simulator `debug` build path (e.g., `scripts/verify-simulator.ps1 -BuildMode debug`, which includes its own scoped checks and built-in dependency restore). Do NOT run `scripts/verify.ps1`, full ARM64 default Debug/Release build or any second simulator build as ritual. No new release HAP, no copy-forward of old test PASS. Any initial dependency setup strictly required for this build may be done ONCE; allow only the previously authorized exact EOL-equivalent four-lock normalization in isolated checkout if actually necessary and proven identical to Git blobs. No script edits, retry installation loops or changes to dependency versions.
-- One explicit child returncode plus meaningful semantic build result, emulator x86 native library isolation/ABI guard and signed-installable artifact identity must be reported before attempting runtime. A real build failure is `FAIL — MINIMAL DEBUG BUILD`; do not assert compilation PASS or bypass critical ABI/security checks. Runtime NOT RUN.
-- `DEFAULT_ARM64_DEBUG`, `DEFAULT_ARM64_RELEASE`, full `HAR/HAP` ARM64 native audit, cross-product triple cycle and physical-device tests remain deliberately `DEFERRED — LEVEL_2/LEVEL_3`. This is not a product release acceptance.
+Use already approved owned HTTP/WebDAV fixture route only if essential, verify target-side GET where needed. Never modify other user services/ports/account/preference or publish credentials/host address. Execute in order; STOP at first required functional failure, no trial repetition:
 
-## 4. Targeted FUNCTIONAL runtime only; three media opens maximum
+1. **Healthy MP4 control:** actual System AVPlayer prepared/play, submitted video frame with observable nonblack meaningful colored pixels, strictly >0ms position delta and actual source fetch if networked. Position movement without pixels is not PASS.
+2. **Separate HLS H264 native PREPARING cancellation:** leave while the same candidate is initialized/preparing but BEFORE prepared, correlate normal System AVPlayer candidate release with no stale play/prepared/fallback. Sample app-associated surfaces/service records/audio renderers at ~3–5s and >20s after normal leave (all observed zero, no force-stop); failures and sample limitations honest. If candidate already prepared or correlation unavailable, FAIL/NOT PROVEN and #3 NOT RUN.
+3. **Distinct recovered healthy MP4:** only after #2 true normal native release+resource cleanup; new prepared/playing/real frame+colored pixel/positive progress and clean leave. No app reset/wipe/force-stop to fake recovery.
 
-After valid x86 product, original legal signed profile and installed HAP verified (actual installation success, not transport exit0), require actual Linkora UIAbility foreground, an app-owned visible window, nonempty Linkora UI hierarchy and one matching private screenshot **metadata** check. Reject launcher-only/empty UI. If UI fails, STOP `BLOCKED — APP FOREGROUND` and do no media tests. Do not publish raw screenshots.
+Ordinary HLS, HLS HEVC, FFV1, HDR/DV, advanced audio, real ARM64 MPV/native loading/device hardware all DEFERRED/NOT RUN. Simulator System play is not physical device PASS. No production/test code changes by Codex.
 
-Use the previously approved controlled host fixture WebDAV/target reverse only when needed, with actual target HTTP GET evidence; create only OWN route/service and clean it after, never touch unrelated mapping, user account, profile, application preferences or state. Do not fake WebDAV success from host-only fetch. Use existing healthy official MP4 and HLS H264 fixtures from the documented corpus.
+## 5. Minimal TWO-file publication only; no PowerShell staging helper
 
-Exactly these THREE opens in this order; STOP on first essential failure. Never replay a failed scenario within this task:
-
-1. **Healthy System MP4 (control):** actual native prepared→playing state, genuinely submitted first frame, observed app screenshot/pixel ROI with >1 meaningful color, real actual HTTP target fetch if using a network source, and a positive strictly >0ms playback position delta. Position advancement alone is NOT a visible frame. If absent, `FAIL — HEALTHY CONTROL`; later two NOT RUN.
-2. **Independent System HLS H264 PREPARING cancellation:** one new fixture open; leave while the same native candidate is still preparing (actual native prepare-in and before prepared), require evidence of pending candidate ownership to its normal native AVPlayer release, no stale prepared/late play/fallback, bounded release without force-stop. Inspect early about 3–5 seconds and again after >20 seconds: app-associated surfaces, services and audio renderer samples must be zero during normal cleanup, with semantic limitations honestly recorded. Never force-stop to claim PASS; if cannot capture true PREPARING or correlate release, or resource state is nonzero/unknown, `FAIL/NOT PROVEN — PENDING CANCELLATION`; third NOT RUN.
-3. **Distinct recovered healthy MP4:** only if #2 normal native cleanup is independently supported; new open and real prepared/play, submitted colored frame, positive position, target GET and normal leave. No app wipe/restart/force-stop to manufacture recovery. Otherwise NOT RUN.
-
-No fresh HLS HEVC, ordinary HLS playback, FFV1, advanced codec or six-format suite here; classify `DEFERRED/NOT RUN`, not PASS. Simulator System backend only; MPV stub is not ARM64 libmpv or hardware/codec/HDR/advanced-audio acceptance.
-
-## 5. Lean evidence, optional archive packaging, real security gates
-
-Permitted NEW outputs ONLY:
+ONLY NEW authorized public outputs:
 ```text
-docs/PLAYBACK_PHASE8F_FEATURE_FIRST_TARGETED_SIMULATOR_SMOKE_REPORT.md
-test-lab/playback/phase8f-feature-first-targeted-smoke-20261012/
+docs/PLAYBACK_PHASE8F_LEVEL1_DIRECT_SMOKE_REPORT.md
+test-lab/playback/phase8f-level1-direct-smoke-20261012/result.json
 ```
+A small report and one JSON with honest actual observed status/exit/NOT RUN for unattempted cases are sufficient. If STOP occurs before runtime, this same two-file summary is sufficient; no log bundles needed. Preserve private details and exact raw streams privately when captured; public text must be sanitized. Do not copy unreviewed old Rerun4/predecessor report and evidence files; no new .gz, inventory, progress scripts, timeout observers or helper source required.
 
-Keep a concise sanitized result report and the **minimum small** decisive text/JSON evidence that actually exists: exact source/dispatch identity, cheap readiness statuses, zero-or-one build command and real numeric result, actual app foreground proof if attempted, three-scenario attempt ledger with original observed behavior/times, cancellation/release correlation and cleanup bounds, private original output hashes where available, cause/limits/next action. If failure occurs before build, an honest short `BLOCKED — ENVIRONMENT` report is sufficient. No invented output files, no copy of unreviewed Rerun4 110 files.
+**CRITICAL: privacy and Git containment** must be checked on the actual candidate two small files, excluding credentials, signing profiles, emulator/device/instance IDs, PIDs, local private machine paths, native HAP, private network URLs, screenshots/media/full hilog. Do not use broad unproven regex as an automatic PASS/FAIL; inspect actual content semantics. If unsafe/unknown, STOP `BLOCKED — PRIVACY REVIEW` and do not push. Filename and result JSON must truly exist before staging.
 
-**CRITICAL publication checks:** inspect EVERY actual proposed public text/JSON file for secrets, signing material, credentials, personal/device/instance identifiers, private host paths/URLs, full private stdout/stderr/hilog, screenshots/HAP/media; strip prohibited sensitive content from **new** sanitized report/evidence before publishing without altering native observed facts. Verify only authorized Git paths, source and actual remote evidence commit SHA after one normal push. Privacy cannot be optional or inferred from a broad regex false positive; suspect matches need semantic inspection and STOP if genuinely sensitive or unresolved. Exact commit parent and remote HEAD must match new dispatch; no force/merge, no unrelated edits.
+Stage the two paths **explicitly** using `git add -- <the-exact-report-path> <the-exact-result-json-path>`, then directly inspect `git diff --cached --name-only` (and modes) before commit. It must contain **exactly two lines matching the two authorized full paths**, with no preexisting tracked staged mutations or other paths. No new PowerShell array-comparison validator, no interpretive regex/pipeline wrapper, no second shell progress observer. If the actual Git output disagrees, STOP `BLOCKED — PATH CONTAINMENT` and retain the REAL output privately; do not assume a wrapper's `Unauthorized staged paths` assertion establishes a Git violation. Do not silently bypass actual unauthorized staged changes. Preserve the final report/result content versions: if updated after staging, re-stage only these SAME two authorized files BEFORE final commit (this is not a rerun of a failed test/helper). Check staged blobs match reviewed worktree public files.
 
-**OPTIONAL and NOT REQUIRED:** duplicate `.gz` files, exact 33 compressed text pairs, exhaustive evidence-inventory lists, elaborate controller-state files, supplementary progress-shell observers, cosmetic dashboard scripts. Do not create them merely for accounting. If a redundant optional package/diagnostic fails and all critical facts remain independently supported, record `RECORDED — NONCRITICAL TOOLING ISSUE / NO RETEST`; do NOT retry, rebuild or loop through another complete test. If the **sole** required source is an archive and unreadable, that essential evidence stays NOT PROVEN. Private original raw evidence/hashes unavailable are NOT INDEPENDENTLY VERIFIED, not guessed.
+Before one normal commit/push, fresh-fetch remote HEAD EXACT new dispatch and confirm no drift. One ordinary commit of exactly the two paths, one normal push to `feat/playback-capability-phase8`, no force/merge/rebase. Fresh-fetch GitHub and confirm remote HEAD is new evidence full40 SHA, parent exact dispatch, diff exactly two paths and remote text safely readable. If necessary publication operation fails, record actual exit and STOP `BLOCKED — EVIDENCE NOT PUSHED`, without rerunning any build, playback or failed helper. A publication FAIL does not convert already locally observed player result into PASS or alter historical tasks; no new infinite evidence-only loop is authorized automatically.
 
-The historical original Rerun4 publication and v2 privacy gate failures remain unchanged; this new sanitized report must never suggest that historical private material was cleared or pushed.
+## 6. Final truth, clean owned resources and exact status
 
-## 6. STOP rules, cleanup and completion
+Cleanup only routes/resources created by this task; no process force-stop used to claim normal cancel PASS, no unapproved app/wipe/profile changes. Do not claim original workspace bytewise preserved unless final snapshot was genuinely run; otherwise report observed nonmutation limited to known activity.
 
-Critical STOP includes source drift, no usable emulator after safe preflight, illegal/unknown signing, incompatible required fixture route, actual minimal build failure, no real Linkora foreground/UI, unhealthy MP4, unproven pending native release/normal cleanup, or any public evidence privacy failure. A nonessential optional metadata/archive operation must NOT launch an expensive retest. No force-stop of application to claim normal cancellation; if needed only for safety after recorded failure, mark the scenario FAIL first and do NOT run recovery. Restore only resources created by this task; do not touch user original workspace, existing old evidence checkout, unrelated processes or profiles.
+Final report/chat fields, SHA full 40 hex:
+`REVIEW_RESULT; STATE; TASK_ID; LEVEL; REPOSITORY; BRANCH; SOURCE_SHA; TESTED_DISPATCH_SHA; PRODUCTION_BLOBS; SIMULATOR_TARGET; SIGNING_AND_FIXTURES; BUILD_STATUS (NOT RUN or ONE MINIMAL DEBUG); ARM64_MILESTONE (DEFERRED); FOREGROUND_UI; HEALTHY_MP4; PENDING_HLS_CANCEL_RELEASE_AND_CLEANUP; RECOVERED_MP4; DEFERRED_FORMATS; AUTHORISED_PUBLIC_PATHS; EVIDENCE_COMMIT_SHA or NONE; PRIVACY_AND_GIT_PATH_AUDIT; ORIGINAL_WORKSPACE_UNCHANGED/NOT FULLY RECHECKED; FIRST_FAILURE; NEXT_ACTION`.
 
-After a bounded attempt, publish ONLY safe authorized short report/evidence via one ordinary commit/push to exact branch if required publication checks pass; fresh-fetch exact remote HEAD, parent, changed paths and inspect report contents. If push fails, report `BLOCKED — EVIDENCE NOT PUSHED`, local SHA if it exists, NO automatic further rebuild or new helper to force publication. Codex does not modify production code, tests, build profiles, thresholds, requirements, source, old evidence or task file.
-
-Final chat response must include:
-`REVIEW_RESULT / STATE / TASK_ID / LEVEL / REPOSITORY / BRANCH / SOURCE_SHA / TESTED_DISPATCH_SHA / BUILD_STATUS (RUN_ONCE PASS/FAIL or NOT RUN with reason) / ARM64_MILESTONE_STATUS (DEFERRED) / SIMULATOR_TARGET / SIGNING_AND_UI / HEALTHY_MP4 / HLS_PREPARING_CANCEL_AND_RELEASE / RECOVERED_MP4 / DEFERRED_FORMATS / MINIMAL_PUBLIC_EVIDENCE_PATHS / REMOTE_EVIDENCE_SHA (40-digit or NONE) / PRIVACY_AND_WORKSPACE_SAFETY / NEXT_ACTION`.
-
-Only claim `PASS — TARGETED SIMULATOR PENDING CANCELLATION AND RECOVERY` if every required runtime assertion is actually evidenced; otherwise accurate FAIL/BLOCKED/NOT RUN/NOT PROVEN, and full milestone/device release claims still deferred. GPT independently reviews any remotely published report, prioritizes feature implementation and schedules the next milestone compile only at the stage boundary. No quota queries, no chat polling, no background task scheduling.
+Only claim `PASS — TARGETED SIMULATOR PENDING CANCELLATION AND RECOVERY` if all three critical runtime opens actually pass. No old local build claim is independently accepted absent published evidence. Do not ask about quotas, poll chat or schedule future activity. GPT alone reviews actual remote evidence and decides the next feature/phase milestone plan.
