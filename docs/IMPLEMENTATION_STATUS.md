@@ -1,3 +1,15 @@
+## CURRENT EXECUTION SUMMARY — 2026-10-12 (Scoped-error continuation replaces blanket STOP)
+
+**Remote review baseline:** `baozi510/Linkora` / `feat/playback-capability-phase8` at prior dispatch `4e08263fe572ad3caf419c0be741985a2c6f262c`. No new runtime evidence was pushed at this policy review. The earlier `phase8f-level1-direct-readiness-three-open-smoke-v2` READY dispatch is SUPERSEDED by one NEW task-only dispatch. It was not reported executed; preserve all prior STOP/failures and local-unreviewed Rerun4 evidence.
+
+**Rule correction:** docs/AI_WORKFLOW.md and docs/MASTER_IMPLEMENTATION_PLAN.md now distinguish `RECORD_ONLY` auxiliary errors, `CASE_FAIL` isolated product test failures, `DEPENDENCY_BLOCKED` prerequisites only for dependent paths, `PUBLICATION_BLOCKED` local results not remotely certified, and rare `GLOBAL_SAFETY_STOP` for genuine source/privacy/user-data safety risk. Command exit1 is never ignored, but does not automatically terminate unrelated safe tests. No failed step becomes PASS and no retries to green the same helper.
+
+**Phase8F dependency map:** shared actual emulator/signing/foreground and source identity precede runtime; independent healthy MP4 and preparing HLS H264 cancel can each be attempted once despite a failure of the other IF current native/app state is safe. Distinct recovery MP4 still requires positive normal native release and early/>20s cleanup from cancellation. Full targeted PASS needs all three. No simulator/no signing => runtime-dependent tests NOT RUN while source review/reporting may finish. Build max ONE necessary scoped simulator Debug; ARM64/Release/ABI DEFERRED to milestone and real hardware to device batch. Publication safety failure prevents pushing, not further unrelated product work; no automatic whole-chain recompilation, archive/manifest loops or task re-dispatch over incidental helpers.
+
+**Historic evidence truth:** Rerun4 local-only build claims not independently accepted; original Rerun4 six official opens NOT RUN and native release/recovery NOT PROVEN. Previous failed path preparation and staging helper remain historical and unrerun; their lack of produced evidence SHA is not proof of a production defect. New dispatch task is sole authority.
+
+---
+
 ## CURRENT EXECUTION SUMMARY — 2026-10-12 (Phase 8F Level 1 STOP: wrong source path and local publication wrapper)
 
 **Independent GitHub state:** `baozi510/Linkora` / `feat/playback-capability-phase8` still pointed to dispatch `e605bccf1652f30b9b572e3259ec3f5b0d2c5fe9`, with no newer evidence commit, at owner review. The completed task `phase8f-feature-first-targeted-simulator-cancel-smoke` is now **STOPPED**; its local-only failure notice is **NOT remotely accepted raw evidence**. The source is `f9fd23c66e5fc9f70a3ccfd4c4b3ba0d0d443e03`, dispatch `e605bccf1652f30b9b572e3259ec3f5b0d2c5fe9`; no new product/test/build changes or Rerun4 evidence push are established.

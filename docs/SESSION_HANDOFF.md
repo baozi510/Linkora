@@ -1,3 +1,15 @@
+## CURRENT STATE — 2026-10-12 Error classification and dependency-scoped continuation
+
+**Repo:** `baozi510/Linkora`, branch `feat/playback-capability-phase8`. Prior dispatch `4e08263fe572ad3caf419c0be741985a2c6f262c` was READY; no new remote evidence from it had been reported when GPT reviewed the current STOP policy. The prior ID must not be executed concurrently with the new dispatch.
+
+**Critical correction:** earlier task text often used unconditional STOP after a helper, prerequisite, actual functional FAIL or evidence push problem. Under newly documented `docs/AI_WORKFLOW.md` rule: nonessential errors are `RECORD_ONLY`; a genuine test failure is `CASE_FAIL`; a missing prerequisite is `DEPENDENCY_BLOCKED` to dependent work; unsafe Git/privacy delivery is `PUBLICATION_BLOCKED` but earlier local observations remain `LOCAL UNREVIEWED`; only genuine source/privacy/user-data or unsafe runtime state is `GLOBAL_SAFETY_STOP`. Each failure retains its true numeric exit and cannot become PASS; no helper/test retries to manufacture success, no full-build rerun triggered by optional tooling.
+
+**Next NEW distinct `LEVEL_1_FUNCTIONAL` task** should establish target/signing/UI cheaply, allow MAX ONE necessary simulator Debug build, then collect healthy MP4 and HLS PREPARING native-cancel evidence as *independent* once-only cases if safe. If cancellation fails or does not prove normal native release and early/>20s resource cleanup, recovery MP4 is `NOT RUN` but other independent results remain. App crash/native state contamination blocks further unsafe opens. A missing emulator blocks only simulator runtime, not independent source reading/report. Brief sanitized result file and report are sufficient; privacy/Git path/remote SHA remain real publication requirements, without a new brittle staging helper. No full default ARM64 cycles or physical-device claims; those are milestone/device gates.
+
+**No historical relabeling:** original Rerun4 STOP and separate publication failures remain immutable and local-only; no Rerun4 remote evidence SHA or simulator cancellation PASS. The developer original workspace and stopped checkout must be protected. Current Codex authority is solely the latest `docs/CODEX_VALIDATION_TASK.md` created after this policy review commit.
+
+---
+
 ## CURRENT STATE — 2026-10-12 Phase8F Level1 first attempt stopped on helper hardcoded source path
 
 **GitHub remote check:** HEAD at the reported STOP remained `e605bccf1652f30b9b572e3259ec3f5b0d2c5fe9` on `baozi510/Linkora` / `feat/playback-capability-phase8`, an earlier dispatch and not an evidence SHA. `phase8f-feature-first-targeted-simulator-cancel-smoke` is locally reported STOPPED, unpublished, no local/remote evidence commit. It cannot be silently continued or rerun under the same ID.

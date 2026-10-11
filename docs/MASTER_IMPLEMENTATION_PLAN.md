@@ -2101,6 +2101,15 @@ Real hardware batch gate
   -> verify real ARM64 MPV/native loading, codec/output/audio, HDR/DV and performance
 ```
 
+## Error containment within a functional checkpoint (2026-10-12)
+
+The overall workflow is **not** “any error => stop every task”. Each helper/test has a declared dependency scope:
+`RECORD_ONLY` optional helper failure; `CASE_FAIL` targeted feature failure; `DEPENDENCY_BLOCKED` missing prerequisite; `PUBLICATION_BLOCKED` unsafe or impossible remote delivery; `GLOBAL_SAFETY_STOP` actual security/source/data risk. All errors retain exact observed result and their dependent claims must not be called PASS. Independent safe operations may continue once. Do not rerun previous failed commands to manufacture PASS.
+
+In Phase 8F, emulator+legal signing+valid foreground are shared prerequisites, and an absent target prevents only simulator-dependent operations (not unrelated product work). The healthy MP4 and HLS preparing-cancel scenarios are separately recordable if the app is safe; a failed healthy MP4 does not automatically suppress useful HLS cancellation evidence. Recovery MP4 remains dependent on clean native cancellation and resource release. Any app crash/resource contamination that makes further opens unsafe blocks them. A remote evidence push failure means `LOCAL UNREVIEWED`, not a reason to recompile/retest.
+
+Only genuine source drift, privacy exposure, protected user data mutation or other uncontrolled unsafe state warrants immediate global safety STOP. See docs/AI_WORKFLOW.md scoped failure rule.
+
 ## Level 0 — Daily source / feature-first (no compulsory compile)
 
 - GPT owns production implementation and architectural review. Codex tests only the current separately dispatched task.
