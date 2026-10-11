@@ -1,0 +1,72 @@
+{
+  "taskId": "phase8f-level1-scoped-failure-three-open-smoke-v3",
+  "level": "LEVEL_1_FUNCTIONAL",
+  "repository": "baozi510/Linkora",
+  "branch": "feat/playback-capability-phase8",
+  "source": "602cb10c0c346b59b6c879def7669cbaed2f2665",
+  "testedDispatch": "9fc247a5c89173a91e07d1695ae404e70fae82c1",
+  "reviewResult": "DEPENDENCY_BLOCKED — SIGNED ARTIFACT",
+  "state": "COMPLETED WITH FAILURES / PARTIAL",
+  "sourceIdentity": "PASS: direct Git identity, task-only drift, initial clean and production blob equality",
+  "productionBlobs": {
+    "adaptive": "1050012dbef214efba5ebccb5571cc9174345c08",
+    "system": "cc78c2611e8582633f2a67cb323f3072f5d8a31f"
+  },
+  "simulator": {"connectedTargets": 1, "listExit": 0, "architecture": "x86_64", "architectureExit": 0, "api": 26, "apiExit": 0, "bootAttempted": false},
+  "profilePreflight": {"processExit": 0, "materialFilesPresent": true, "liveIdentifierShapeValid": true, "bundleMatches": true, "deviceMembership": true, "timeWindowValid": true, "materialChanged": false, "keystoreOpenNotEstablishedByTheseChecks": true},
+  "fixtures": {"requiredFiles": 5, "allPresentAndCommittedBytesMatched": true, "regenerated": false, "hostPortAvailable": true, "existingFixtureMapping": false, "targetMediaFetch": "NOT RUN"},
+  "artifactReuse": "NOT PROVEN; no old signed artifact reused",
+  "build": {
+    "count": 1,
+    "mode": "simulator Debug",
+    "result": "PASS",
+    "processExit": 0,
+    "startedUtc": "2026-10-11T18:22:48.2855859Z",
+    "completedUtc": "2026-10-11T18:23:19.5152251Z",
+    "ffmpegOnlyNativeWhitelist": true,
+    "exactX86NativeLibraryCount": 1,
+    "unsignedHapSha256": "DBF39571A1FD594FC8522F5759C678E9A97FA5EF3E3F34EA4615A6707CF9C11E",
+    "initialInstallExit": 0,
+    "submodulePreparationExit": 0,
+    "x86PinnedArchiveHashesMatched": 4,
+    "bothAuthorizedEolProofsAndRestores": true
+  },
+  "signing": {
+    "result": "FAIL",
+    "classification": "DEPENDENCY_BLOCKED",
+    "nativeProcessExit": 1,
+    "outerProcessExit": 1,
+    "startedUtc": "2026-10-11T18:25:16.0001670Z",
+    "completedUtc": "2026-10-11T18:25:16.8274521Z",
+    "sdkErrorCode": 11014003,
+    "sdkError": "Init keystore failed: keystore password was incorrect",
+    "signedHapProduced": false,
+    "retried": false,
+    "credentialsKeysProfilesChanged": false
+  },
+  "firstRecordedNonzero": {"stage": "optional context search of absent repository README", "observedOuterExit": 1, "nativeChildExit": "NOT SEPARATELY SAVED", "classification": "RECORD_ONLY", "retried": false},
+  "firstRuntimeBlockingFailure": "SDK sign-app native1/outer1; no signed artifact",
+  "installAndForegroundUi": "NOT RUN",
+  "officialOpens": 0,
+  "scenarios": [
+    {"case": "healthy-mp4", "attempts": 0, "result": "NOT RUN", "dependency": "signed installed foreground artifact"},
+    {"case": "hls-h264-preparing-cancel", "attempts": 0, "result": "NOT RUN / NOT PROVEN", "dependency": "signed installed foreground artifact"},
+    {"case": "recovered-mp4", "attempts": 0, "result": "NOT RUN / NOT PROVEN", "dependency": "observed normal pending release and cleanup"}
+  ],
+  "arm64Milestone": "DEFERRED — LEVEL_2",
+  "physicalDevice": "DEFERRED — LEVEL_3",
+  "otherFormats": "DEFERRED / NOT RUN",
+  "privateOriginalOutputSha256": {
+    "buildStdout": "A3487F22F42694FD3B61255D7163AFD500299CEB3C866C45956B03794197DB9B",
+    "buildStderr": "8BAD7701CEAE3AE2B9A7F1F6C91591023DB8AE38D5C79CC73E5BE559EAFD6380",
+    "signStdout": "1FCD65885404A4BD4247288A226821277344E2C8928CCE10B477AD11C0DC8681",
+    "signStderr": "05561720738B8136C1F4CBFDA93C6D6AAE7963E8888F55D69AAF30BB0E20DFBE"
+  },
+  "privateOriginalsIndependentlyReadableFromGitHub": false,
+  "cleanup": "NOT APPLICABLE for app/server/mapping/preferences; existing simulator left intact",
+  "runtimeResourceZeros": "NOT PROVEN",
+  "protectedWorkspaceWrites": false,
+  "protectedWorkspaceFinalBytewiseSnapshot": "NOT RUN / NOT FULLY RECHECKED",
+  "oldUnreviewedEvidenceCopiedOrCleared": false,
+  "nextAction": "GPT review; smallest separately authorized legal keystore credential prerequisite, no current signing/build retry or fabricated runtime PASS"
+}
