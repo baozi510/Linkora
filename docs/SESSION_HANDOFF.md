@@ -1,6 +1,25 @@
 # Linkora Session Handoff
 
-## CURRENT STATE — 2026-10-11 Phase 8F Rerun 2 signing preflight STOP reviewed
+## CURRENT STATE — 2026-10-11 Phase 8F Rerun 3 controller observation STOP reviewed
+
+**Repo / branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`.
+
+**Owner ruling:** **ACCEPTED — FAIL — REQUIRED TEST GATE** for completed `phase8f-sim-rerun3-serial-sign-ui-cancel`. Tested SOURCE_SHA `bfd34a33a36772077538c7c57527e30f23689a95`, DISPATCH_SHA `026559e1975b44d00096d0fdccef7d164d0df049`, independently reviewed remote evidence `4ef43b09a4e8a05e7021b7734fdfd2ab767bb138`. Evidence-only 98 authorized new report/files. This ID is closed, do not repeat.
+
+Three fresh verifiers independently recorded process0 and proper order: default-first, simulator+finally EOL-only four locks, default-final. Distinct fresh Hypium210/210 and exact-nine AArch64 audits x2 in each default, simulator FFmpeg x86 whitelist PASS. New strict parser 10/10 synthetic tests and own numeric child0 PASS. **Overall task FAIL**: separate PowerShell progress observer ran `Get-Content default-final-result.json -ErrorAction SilentlyContinue` before completion artifact existed, actual exec process **exit1**. Original tool result evidence is not proof its stderr contained text; missing-file errors suppressed. Final verifier independently completed process0 as in-flight stage, cannot override failed observer. `progress-monitor-stop.json` later-recorded timestamp is **not observation start**; exact observation UTC and original bytes missing, so reported overlap not independently timestamp-confirmed. Unwrapped auxiliary command bypassed predeclared controller and violated strict no-extra-process gate.
+
+No live device ID query/profile, signature, signed/installed HAP, UIAbility foreground/window/layout screenshot, corpus route, official MP4/HLS/FFV1/cancellation/recovery. All 6 opens **NOT RUN**. No production/player bug established; pending-candidate release correction from `8174e6e4f0214958fb83fef46e92170c4c10263a` still runtime **UNVALIDATED**. HDC lists `[Empty]`; host listener absent; resource counts/Auto NOT PROVEN. User workspace untouched and prior results immutable, no quota queries.
+
+**Next new READY task:** only a different ID from newest repo `docs/CODEX_VALIDATION_TASK.md`. Add one blocking PRIVATE stage controller handling all process invocation and exit/semantic checks; **no independent monitoring process** or reads of completion-only results while stage RUNNING. The stage controller must wait for actual process completion, then capture child returncode, then atomically write result file and allow subsequent stage. If no progress received, wait within the existing foreground invocation; do not poll through new commands. Evidence must preserve exact UTC and PRIVATE original stdout/stderr for every new command. All gates fresh; only after completed three verifier gates do live legal UDID/profile/sign/install, finite app UI validation, owned media route, healthy real positive progress, HLS/FFV1, actual pending HLS normal native release + early and >20s zero resource, then distinct recovery. A STOP prevents later media and permits no old-task replay/production patch. No quota checks, hardware codec/hdr/audio claims, no touching `D:/Linkora`.
+
+All previous Phase8B–8F reports and STOP evidence immutable. The repo Task, not this conversation, grants test permissions.
+
+Earlier CURRENT sections below are historical.
+
+---
+
+
+## HISTORICAL STATE — 2026-10-11 Phase 8F Rerun 2 signing preflight STOP reviewed
 
 **Repository / branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`.
 
