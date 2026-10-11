@@ -1,6 +1,23 @@
 # Linkora Session Handoff
 
-## CURRENT STATE — 2026-10-11 Phase 8F Rerun 1 startup/UI preflight failure reviewed
+## CURRENT STATE — 2026-10-11 Phase 8F Rerun 2 signing preflight STOP reviewed
+
+**Repository / branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`.
+
+**Accepted STOP:** `FAIL — REQUIRED TEST GATE` for `phase8f-sim-rerun2-ui-foreground-gated-cancellation`; tested source `867907df5ab768c5127a707d2076fd8d619a3fbf`, dispatch `148de8f4cfd7c382aa403fb4e1b17d3a4171f850`, remote evidence `1999b761563902a19a163f7123524190ba9be95b`. Exactly 69 new authorized evidence/report files, no old evidence/source/test changes. Previous task complete; never rerun under same ID.
+
+Fresh isolated clone with upstream pinned submodules, original install/four-lock EOL normalization PASS, **first default verifier only** PASS with Hypium210/210 and two exact-nine ARM64 ABI audits. `sign-preflight.py` erroneously compared whole **labeled** `bm get -u` stdout to a profile device-id list and asserted on `simulatorListedInExistingProfile=false`; immutable saved original result and exception. Post-stop read-only token membership diagnostic true shows parser mismatch is plausible; profile was not changed. Original Python child numeric exit **NOT independently captured**; outer PowerShell exit0 came after `Get-Content`, so not helper PASS. Signing helper failed while initial verifier still running; verifier independently completed afterward; no simulator/final default/actual HAP/foreground/UI/media tests. **Zero official opens**; candidate lifecycle correction `8174e6e4f0214958fb83fef46e92170c4c10263a` still runtime **NOT PROVEN**. No product defect established.
+
+**Next READY task is distinct**, a serial validation-environment correction, **NOT a production patch**: parse exactly one safe ID from HDC labeled output, pure parser selfchecks and immediate child numeric exit capture, no concurrent verifier/preflight/command wrapper masking. Strict chain: initial install/EOL → first default finish/result → simulator finish/EOL → final default finish/result → new signed HAP/profile/native whitelist/replace-install → app visible foreground, valid window + nonempty Linkora layout + screenshot → controlled route → one healthy native/pixel/positive (>0ms) case → two HLS + one FFV1 → pending HLS cancellation actual release and early/>20s normal zeros without force-stop → separate recovery only after cancel clean. If UI/signing still fails, STOP before all playback; failed helper never retried/bypassed. Old positive766/threshold800false/AssertionError remain immutable. No user workspace modification, device codec/MPV certification or quota query.
+
+History Phase8B/D/E failures and Phase8F original/Rerun1/Rerun2 STOP remain unchanged. Await only newest remote `docs/CODEX_VALIDATION_TASK.md` source+dispatch; Codex test/evidence only, GPT owns independent review.
+
+Previous 2026-10-11 CURRENT state below is historical.
+
+---
+
+
+## HISTORICAL STATE — 2026-10-11 Phase 8F Rerun 1 startup/UI preflight failure reviewed
 
 **Repo:** `baozi510/Linkora` — **branch:** `feat/playback-capability-phase8`.
 
