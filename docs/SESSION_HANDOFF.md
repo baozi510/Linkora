@@ -1,6 +1,23 @@
 # Linkora Session Handoff
 
-## CURRENT STATE — 2026-10-08 Phase 8F helper criterion stopped; lifecycle repair still awaiting cancellation validation
+## CURRENT STATE — 2026-10-11 Phase 8F Rerun 1 startup/UI preflight failure reviewed
+
+**Repo:** `baozi510/Linkora` — **branch:** `feat/playback-capability-phase8`.
+
+**Result:** `ACCEPTED — FAIL — REQUIRED TEST GATE` for *completed* `phase8f-sim-rerun1-positive-progress-cancel-recovery`. Validation source `50eaf6da48f6d0e445676050bde362adfd0b36b6`, dispatch `682e45fa8f222dfb93b2f7d0d596c5db952dd61d`, remote evidence `4d59195f6fa3502b60f5f53ed60d5407be700510`; one append-only 79-file evidence/report commit, no protected changes. Do not execute old ID again.
+
+All fresh ARM64-build/simulator/ABI/Hypium210x2/install gates PASS, ten controlled fixture files match truth, but **zero official fixture opens**. Emulator target initially absent; existing API26 x86 simulator was ordinary data-retaining booted; newly signed HAP installed; app start command accepted. Read-only `instrument-preflight.PRIVATE.py` then failed its assertion/exit1: valid screenshot shows *launcher*, app-scoped UI dump only empty root, no visible Linkora nodes. Later PID exists, but no verified foreground/visible app window or loaded `pages/Index`. The filtered startup log returning zero matches is not proof no startup error. The exact root cause remains **UNRESOLVED** (foreground/startup/window versus dumpLayout capture). No retry/relaunch after failed preflight; no media/route started. All healthy/HLS/FFV1/cancel/recovery NOT RUN. The new independent positive-progress collector's 6 pure selfchecks PASS, runtime collector NOT RUN. Phase8F prior `>=800ms` helper and +766ms/historical assertion unchanged and not called.
+
+No production fix is warranted from these preflight results. Published metadata shows mapping empty/host listener absent, service/audio records0, **surface count NOT PROVEN**, Auto preference was not observed but not changed, no force-stop after STOP or wipe, original user workspace preserved.
+
+**Next:** execute only the NEW separate READY task from newest `docs/CODEX_VALIDATION_TASK.md` based on this docs-only review commit. It must predeclare and use a **finite read-only foreground/UI readiness sequence**: verify installed bundle/EntryAbility, read actual installed HDC/aa/hidumper/uitest help, make one normal explicit target app start in a clean simulator session, poll actual foreground/visible WindowManager/Ability status for bounded time (not PID alone), then collect and cross-check non-empty bundle/window-scoped layout and actual Linkora screenshot **sequentially**. If launcher or blank root remains, STOP truthfully and do not open fixtures, change emulator image, tweak app source or repeat old failed preflight. If valid UI becomes proven, run full fresh route/six-case protocol: positive delta >0 independent native frame/pixels, two HLS, FFV1, one pending candidate leave/native release with early and >20s sampled zeros **without force-stop**, and only then new healthy recovery. Preservation, separate evidence-only push/fetch, source/dispatch SHA discipline and no quota inquiry remain mandatory.
+
+Older state snapshots and Phase8B–8F STOP/results remain immutable. No device/MPV/codec/HDR/audio certification from simulator.
+
+---
+
+
+## HISTORICAL STATE — 2026-10-08 Phase 8F helper criterion stopped; lifecycle repair still awaiting cancellation validation
 
 **Repository:** `baozi510/Linkora`. **Branch:** `feat/playback-capability-phase8`.
 
