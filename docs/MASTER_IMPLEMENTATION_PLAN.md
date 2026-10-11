@@ -2083,79 +2083,62 @@ Linkora Media Capability Matrix
 ---
 
 
-# Development Execution Rule — Simulator-first / ARM64-build-always / Device-batched
+# Development Execution Rule (approved 2026-10-12) — Feature-first / Targeted-build / Milestone-verified / Device-batched
 
-从 Phase 8B 开始，Linkora 默认开发与验证节奏调整为：
+**This replaces the prior “Simulator-first / ARM64-build-always / Device-batched” rule for build FREQUENCY.** It does not waive ARM64 compatibility, essential product behavior, security, final acceptance or device-specific validation. The original build-always-per-source cadence is no longer required. Core development prioritizes shipping functional improvements rather than repeating three complete verification rounds and archival packaging with each source change.
 
 ```text
-Simulator first
--> 功能、状态机、网络、数据库、runner、x86 native 功能先稳定
-
-ARM64 build always
--> 每个主线 source 仍保持 default/arm64 build、link、artifact/ABI audit 全绿
-
-Real device batched
--> 原生后端、硬件 codec/output、性能与最终设备能力在阶段节点集中验收
+Feature work / isolated change
+  -> static review + focused pure tests when useful; BUILD NOT RUN is legitimate
+Functional integration checkpoint
+  -> first check whether simulator, legal signing/target and fixtures are available
+  -> ONE minimal Debug build of the relevant target, only if needed for actual runtime
+  -> targeted simulator functional smoke for the changed feature
+Milestone / integration gate
+  -> run full default ARM64 build, link, Debug/Release, native ABI/artifact checks
+  -> simulator build/integration and regression tests; run once per meaningful batch
+Real hardware batch gate
+  -> verify real ARM64 MPV/native loading, codec/output/audio, HDR/DV and performance
 ```
 
-这不是用模拟器替代真机，而是减少日常主线在真机/UI 操作上的往返成本。
+## Level 0 — Daily source / feature-first (no compulsory compile)
 
-## 模拟器优先解决
+- GPT owns production implementation and architectural review. Codex tests only the current separately dispatched task.
+- For ordinary ArkTS/UI/state/database/service changes, require change review, source-boundary protection, and at most relevant fast pure tests as needed. Do **not** run `scripts/verify.ps1`, `scripts/verify-simulator.ps1`, release assembly, full Hypium, repeated lockfile inventories or ABI matrices after every edit.
+- Source changes may be committed without any build; label honestly `BUILD NOT RUN`, `UNIT TEST NOT RUN`, and `RUNTIME NOT PROVEN`. No implicit green claims.
+- An unrelated optional diagnostic failure is `RECORDED — NONCRITICAL TOOLING ISSUE / NO RETEST` under docs/AI_WORKFLOW.md; no repeated heavy builds to make the helper green.
 
-优先在 x86_64 simulator 完成：
+## Level 1 — Functional checkpoint (minimal targeted compile, simulator-first)
 
-- ArkUI / navigation / settings / persistence；
-- PlaybackEngine / AdaptivePlaybackPort / session isolation / error recovery；
-- System AVPlayer 基础功能（结果仅代表 simulator platform）；
-- WebDAV / HTTP / RandomAccessSource / MediaProxy；
-- capability corpus generation / truth / orchestration / result schema / summarizer；
-- real x86_64 `linkora_ffmpeg` Analyzer/thumbnail 功能；
-- cancellation / retry / stale state；
-- database/cache/catalog functional behavior；
-- MPV unavailable stub boundary 和 Auto fallback 控制逻辑；
-- native-storage unavailable boundary 的上层业务逻辑。
+- Before spending build time, check the cheap prerequisites needed for THAT experiment: clean isolated checkout, authorized simulator target actually RUNNING/visible through HDC (not merely a configured instance), supported commands, legal existing profile/signing where installation is planned, reachable owned test fixture, privacy-safe evidence route. If these are unavailable, STOP with `BLOCKED — ENVIRONMENT` and leave build/media `NOT RUN`.
+- If a source-matched, lawful, installable artifact already exists and can be verified without changing user state, reuse it; otherwise build **once** the smallest relevant Debug target (simulator for simulator runtime; default/ARM64 when an ARM64-only integration actually needs it). Do not treat previous build PASS as proof of a new source's runtime. A real run needs a compatible executable artifact.
+- Test *the changed behavior*, not the entire format catalog: for Phase 8F, healthy MP4 actual visual first frame + positive progress, one separate HLS H264 PREPARING cancellation with observable native release and normal resource cleanup, then distinct recovery MP4 **only after cancellation success**. Unexecuted HLS HEVC, FFV1, HDR, MPV device capability remain NOT RUN / deferred.
+- An actual product regression on the targeted critical path is a genuine FAIL; optional log/observer/metadata/duplicate archive tooling cannot trigger full rebuild reruns. Do not infer colored pixels from timestamps or zero native resources from HDC transport0.
 
-## 持续 ARM64 构建门禁
+## Level 2 — Milestone gate (complete ARM64 and product regression)
 
-不得把 ARM64 编译问题累计到项目末尾。
+Run after a coherent feature batch/phase milestone, before merging release-bound changes, or when technical risk requires an earlier integration boundary (e.g. changed C++ ABI, FFmpeg/MPV/native dependency pins, linker flags, build profiles, signing semantics). Run suitable required parts at that boundary, rather than the full suite after every source commit.
 
-每个影响生产代码/依赖/native boundary 的主线 source 仍必须保持：
+At Phase acceptance, require fresh `default` ARM64 compile/link + Debug/Release HAR/HAP, native artifact/ABI audit and production dependency resolution; simulator x86 native isolation and its relevant regressions; tests necessary to support claimed product PASS. Sequential `default → simulator → default` **three full fresh cycles are not automatic**: require a concrete unresolved cross-target dependency-contamination risk to authorize a second ARM64 cycle. A clean commit and source-hash-bound provenance remain mandatory.
 
-- default arm64 build PASS；
-- native link PASS；
-- exact ABI/artifact audit PASS；
-- real MPV dependency 能被 production target 正确解析；
-- ARM64 FFmpeg/native storage 依赖不被 simulator dependency graph 污染。
+A compile/ABI failure cannot be claimed PASS. Record a blocked milestone if critical checks remain undone. Do not defer all compilation until the literal end of the whole project; the **phase/integration boundary** is the controlled catch-up point.
 
-可以批量延后的，是**真机 runtime/capability 验收**，不是编译/链接是否成立。
+## Level 3 — Real device batched, never simulator-inferred
 
-## 真机集中验证
+Concentrate genuine ARM64 libmpv runtime, MPV native codec/container, hardware decode, ARM64 FFmpeg load, device-specific System AVPlayer codec, HDR10/HLG/Dolby Vision, DTS/TrueHD/Atmos/passthrough, surfaces/GPU, thermal/power/long playback, and real SMB/SFTP/FTP/NFS native I/O at designated hardware acceptance points. Simulator MPV stub/FFmpeg-only x86 library and a passing ARM64 build are NOT real-device PASS.
 
-以下不能由 simulator 最终证明，集中到 real-device gate：
+## Evidence and publication proportionality
 
-- real `libmpv` runtime；
-- MPV codec/container capability；
-- ARM64 FFmpeg runtime/ABI/load behavior；
-- device-specific System codec capability；
-- hardware decode；
-- HDR10/HLG/Dolby Vision output；
-- advanced audio decode/passthrough/output；
-- power/thermal/performance；
-- real native SMB/SFTP/FTP/NFS I/O where simulator uses unavailable boundaries；
-- device-only surface/GPU/runtime integration issues。
+- Keep a **single small sanitized human-readable summary plus minimal decisive evidence** for a functional checkpoint. Include tested commit, observed exit/status, changed behavior and precise PASS/FAIL/NOT RUN boundaries. No raw signing material, private paths, instance/device IDs, HAP, screenshots or full hilog in the public Git repository.
+- Publishing must never expose private information; source identity, authorized Git paths, meaningful required evidence and verified remote evidence commit remain essential to an independently reviewable PASS.
+- If readable sanitized text already provides all required facts, parallel `.gz` copies, 33-pair duplication and exhaustive optional inventory recalculations are **not mandatory**. They are CRITICAL only when they are the **sole** source of a required claim or necessary to establish safety/integrity. An optional corrupted duplicate is record-only, not a rerun trigger.
+- A prior stopped task's local-only evidence stays **LOCAL UNREVIEWED** until safely published; preserve but do not create an endless chain of full-build and archive-repair tasks. A new functional test is always new ID/new evidence, never re-label a historical failure.
+- Perform safe/necessary privacy checks on all files that WOULD be published. Unpublished local/private material is not retroactively certified as safe for GitHub.
 
-模拟器的 codec `UNSUPPORTED` 不能外推为 Mate60 `UNSUPPORTED`；真机 PASS 也不能反推 simulator 应 PASS。
+**Decision rule:** `function → targeted smoke → milestone complete compile → device batch`. Preserve hard gates at the right checkpoint; do not claim unexecuted gates passed.
 
-## 阶段原则
-
-除非某功能本身只有 real device 才存在，否则：
-
-1. 先在 simulator 完成功能；
-2. 同时保持 default ARM64 build 绿；
-3. 不因为 simulator 的硬件/codec 限制修改 production policy；
-4. 功能阶段累计到明确 native/device boundary 后，再执行一轮集中 real-device acceptance。
-
-
+---
+ 
 # 52. Security
 
 网络凭据：

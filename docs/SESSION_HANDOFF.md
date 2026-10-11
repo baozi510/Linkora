@@ -1,3 +1,19 @@
+## CURRENT STATE — 2026-10-12 Feature-first/test-path change; focused Phase 8F smoke pending
+
+**Repository / branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`.
+
+**Approved new rule** in docs/MASTER_IMPLEMENTATION_PLAN.md and docs/AI_WORKFLOW.md replaces per-source ARM64 full-build-always: `LEVEL_0_FEATURE` development without mandatory compilation; `LEVEL_1_FUNCTIONAL` check emulator/target/signing cheap readiness FIRST, then at most one necessary source-aligned simulator Debug build and targeted functional smoke; `LEVEL_2_MILESTONE` full ARM64 Debug/Release/native ABI/link and simulator regressions at cohesive phase/integration gate; `LEVEL_3_DEVICE_BATCH` physical hardware tests. Three full builds are not default. Preserve explicit BUILD NOT RUN, NOT RUN, NOT PROVEN labels. Optional redundant gzip/inventory packaging is not a required gate if essential readable sanitized evidence is complete; any would-be-published material still needs actual privacy/path/safety checks.
+
+**Immediate source boundary:** last confirmed remote HEAD before new review was `eee759ffe99c52dd139b20d4261275f22c23a6f0`, an old publication v3 READY dispatch, not an evidence commit. That unreported READY task will be SUPERSEDED by a new task-only dispatch after this review/policy commit. Do not execute both. Original Rerun4 task `phase8f-sim-rerun4-single-controller-ui-cancel` stopped with local failed emulator JSON inspector, and its local report +109 evidence files were never pushed; v2 publication privacy scanner also stopped. All claims remain local/unreviewed. Previous old task STOP/FAIL records, v2 critical privacy findings, original user workspace and private stopped checkout are immutable; no assumption v3 ever ran. Do NOT try to recover/push prior 110 evidence files without separately proving privacy safe. Do not rerun old controllers/helpers/tests or patch production from tool-failure reports.
+
+**New single READY authority to dispatch:** a different task ID `LEVEL_1_FUNCTIONAL` Phase 8F *three-scenario essential runtime smoke*, preflight actual emulator target and legal signed-install capability before any build; maximum ONE simulator Debug build if required, NO default ARM64/Release/triple build; only healthy MP4 → native pending HLS H264 prepare-cancel/normal early+>20s resource cleanup → independent MP4 recovery after cancel clean. Not HLS HEVC/FFV1/six-case complete gate, and not physical ARM64/MPV HDR/advanced audio validation. If emulator target unavailable, STOP `BLOCKED — ENVIRONMENT` without building. Bounded small sanitized report and decisive evidence, with critical privacy and remote verification but no mandatory 33 gzip pairs/exhaustive packaging scripts. Product runtime errors remain real FAIL and source fixes are GPT-only. Do not replay finished prior IDs. No quotas or chat polling.
+
+**Owner next after remote evidence:** GPT review smallest real functional outcome; continue production feature work or schedule milestone compile when appropriate. If no simulator, continue other nondependent features and resolve target availability as a separate cheap environmental precondition, not endless triple-build reruns.
+
+Older sections below are historical.
+
+---
+
 ## CURRENT STATE — 2026-10-12 (publication v2 failed required privacy classifier, remote evidence NONE)
 
 **Repo / branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`. GitHub independently shows HEAD `5d66330f5939480e9ae60988742dd300f60003be` (v2 publication dispatch) with no newer evidence commit.
