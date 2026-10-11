@@ -1,3 +1,15 @@
+## CURRENT STATE — 2026-10-12 (publication v2 failed required privacy classifier, remote evidence NONE)
+
+**Repo / branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`. GitHub independently shows HEAD `5d66330f5939480e9ae60988742dd300f60003be` (v2 publication dispatch) with no newer evidence commit.
+
+**Local STOP handoff (NOT independently reviewed remote evidence):** `phase8f-rerun4-evidence-publish-no-retest-v2` failed REQUIRED privacy gate C, actual Python child1 and outer PowerShell1. New broad regex `(?i)[a-z]:[\\/]` can interpret `s:/` in `https://` as a Windows drive path. Nine locally recorded matches span controller-source, fresh-fetch stderr, fresh-submodules stderr, simulator stdout (plain and gz each), and submodules.json. **All exact contexts are UNKNOWN to GPT**, so do not declare no sensitive data. The observed record UTC is not exact subprocess start/end. Earlier source/ancestry and 110 staged public paths are Codex-reported, not remotely replayed. No candidate copy, gzip verification, commit/push, final original-workspace byte comparison, emulator or new media test was performed. Local/remote evidence SHA NONE.
+
+**Rerun4 historical:** separate stopped `phase8f-sim-rerun4-single-controller-ui-cancel`, local claimed three fresh green verifiers but actual PRIVATE inspector list/dict child1, then private controller-state write WinError5 during evidence preparation. Original six official media opens NOT RUN; candidate normal release and recovery NOT PROVEN. No new product issue established; no original STOP is superseded or reclassified as PASS.
+
+**Owner judgment:** Privacy is a CRITICAL publication prerequisite under docs/AI_WORKFLOW.md, not an optional diagnostic. The new regex defect may produce false positives but cannot establish safe publication; preserve failed v2 audit untouched. The next distinct READY task must verify exact nine contexts using a fresh properly delimited drive-path detector and semantic checks; independently review all 110 candidate files and decompressed gz, complete SHA/inventory privacy gates, commit/push only if safe, and fresh-fetch the real evidence SHA. No rerun of old helper/controller/scanner, no builds/SDK/emulator/device/media, no modifying old isolated origin or original user workspace. If genuine secret or unresolved ambiguous hit, STOP BLOCKED — PRIVACY REVIEW without publication. Older tasks and handoff sections are historical.
+
+---
+
 ## CURRENT STATE — 2026-10-12 New approved no-retest tooling rule; new publication-only task pending dispatch
 
 **Repo:** `baozi510/Linkora`, branch `feat/playback-capability-phase8`.
