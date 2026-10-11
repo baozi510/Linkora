@@ -1,0 +1,12 @@
+import pathlib,subprocess,json,datetime,threading,sys
+sys.path.insert(0,'artifacts/phase8f-rerun1');import ui
+from PIL import Image
+cap=ui.cap;hdc='<installed-studio>/sdk/default/openharmony/toolchains/hdc.exe';target=(cap/'simulator-target.PRIVATE.txt').read_text(encoding='utf-8-sig').strip();client=subprocess.run([hdc,'-t',target,'shell','command','-v','curl','wget'],capture_output=True);(cap/'target-http-client.PRIVATE.txt').write_bytes(client.stdout+client.stderr)
+clients=[name for name in ['curl','wget'] if any(line.rstrip().endswith('/'+name) for line in client.stdout.decode(errors='replace').splitlines())];facts={'utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'targetShellHttpClientsFound':clients,'targetRouteProofMethod':'one unchanged app healthy System MP4 official open with correlated exact host GET; not host-only probe','officialMediaOpens':0};(cap/'target-client-preflight.json').write_text(json.dumps(facts,indent=2)+'\n')
+assert not clients,'Target HTTP client available; use dedicated route probe before official media opens'
+errors=[];remote='/data/local/tmp/p8fr1-instrument-preflight.png';local=cap/'instrument-preflight.PRIVATE.png'
+def capture():
+ try:ui.run(['shell','uitest','screenCap','-p',remote]);ui.run(['file','recv',remote,str(local.resolve())]);Image.open(local).verify()
+ except Exception as e:errors.append(type(e).__name__+':'+str(e))
+t=threading.Thread(target=capture);t.start();nodes=ui.layout('instrument-preflight');t.join(timeout=30);assert not t.is_alive() and not errors and nodes,'Read-only capture/layout preflight failed before official opens'
+(cap/'instrumentation-preflight.json').write_text(json.dumps({'utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'nativeScreenshotCaptureSucceeded':True,'concurrentLayoutCollectionSucceeded':True,'imageReadable':True,'appNotOpenedForAnyFixture':True,'runtimeHooksOrProductSourceChanged':False},indent=2)+'\n');ui.click('设置');ui.click('播放器');print(json.dumps({'httpClientsAvailable':False,'readOnlyCaptureLayoutPreflight':'PASS','officialOpens':0}))

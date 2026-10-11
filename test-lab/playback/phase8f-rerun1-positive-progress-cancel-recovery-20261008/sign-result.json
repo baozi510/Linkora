@@ -1,0 +1,12 @@
+{
+  "operation": "SDK hap-sign-tool sign-app localSign",
+  "sdkCredentialHandling": "unchanged installed Hvigor DecipherUtil",
+  "existingProfileIncludesSimulator": true,
+  "sourceInputSha256": "4782C753A645A2E7D87A2E8D2DFFA6A4E247385AABF6B857AD3981FAF135C5C4",
+  "exitCode": 0,
+  "trackedBuildProfileModified": false,
+  "signatureOrPermissionChecksDisabled": false,
+  "outputExists": true,
+  "signedSha256": "307F6EAF6EEB05BAADAE6924E732B20805FFF4A166C0A00786D232BC3B4590F2",
+  "signedBytes": 25295976
+}

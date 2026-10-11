@@ -1,0 +1,10 @@
+{
+  "headless": true,
+  "bootMode": "coldboot (retains data)",
+  "purpose": "Ordinary setup boot of existing permitted API26 simulator; no fixture invocation",
+  "existingAgreementsObservedAccepted": true,
+  "existingNamedInstance": true,
+  "startedUtc": "2026-10-11T07:03:16.5217715Z",
+  "fixtureOpens": 0,
+  "resetOrNewImage": false
+}

@@ -1,0 +1,19 @@
+{
+  "utc": "2026-10-11T07:16:02.301791+00:00",
+  "officialOpens": 0,
+  "ownedServerNeverStarted": true,
+  "host19084ListenerAbsent": true,
+  "reverseNeverCreated": true,
+  "mapListEmptyAfterStop": true,
+  "ownedHttpRowNeverCreated": true,
+  "backendPreferenceUiNeverTouched": true,
+  "originalBackendObservationThisRun": "NOT PROVEN: preflight failed before preference screen was opened; no setting mutation executed",
+  "forceStopAfterFailure": false,
+  "appWipeUninstallEmulatorReset": false,
+  "existingSimulatorLeftRunning": true,
+  "ownedMediaWebdavAndUnrelatedServicesUnchanged": true,
+  "postStopAppPlayerServiceEntryCount": 0,
+  "postStopAppAudioRendererCount": 0,
+  "surfaceCount": "NOT PROVEN: failed app-scoped layout has no visible nodes; do not convert empty failed layout into zero-surface proof",
+  "resourceMeaning": "App-associated service/renderer entries, not native object count or audibility; empty failed UI layout not zero-surface proof"
+}

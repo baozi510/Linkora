@@ -1,0 +1,7 @@
+{
+  "targetRoute": "NOT PROVEN / NOT RUN",
+  "hostBodyCheck": "NOT RUN (fixture server never started)",
+  "rportCreated": false,
+  "actualTargetMediaGetOrRange": "NOT RUN",
+  "localWebdavCommittedTruth": "PASS fresh four fixtures/ten files; not a host or target route proof"
+}

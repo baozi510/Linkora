@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "<validation-checkout>\artifacts\phase8f-rerun1\instrument-preflight.PRIVATE.py", line 11, in <module>
+    t=threading.Thread(target=capture);t.start();nodes=ui.layout('instrument-preflight');t.join(timeout=30);assert not t.is_alive() and not errors and nodes,'Read-only capture/layout preflight failed before official opens'
+                                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Read-only capture/layout preflight failed before official opens

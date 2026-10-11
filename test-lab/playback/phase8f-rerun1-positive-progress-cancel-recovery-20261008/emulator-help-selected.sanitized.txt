@@ -1,0 +1,4 @@
+Emulator [-start <name> [-instancePath <path> -imageRoot <path> -bootMode <mode> -noWindow]]
+-noWindow:             Start the emulator without GUI window
+-list:                 List all emulator instances
+-bootMode:             Boot mode:coldboot(boot with data) reset(boot with data reset) snapshot(quick boot)

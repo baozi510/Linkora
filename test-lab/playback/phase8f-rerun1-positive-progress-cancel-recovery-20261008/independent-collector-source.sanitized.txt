@@ -1,0 +1,107 @@
+from pathlib import Path
+import json,sys,subprocess,time,datetime,re,hashlib,threading
+from PIL import Image
+import ui
+cap=ui.cap;alias='Phase8F-R1-owned';attempts=cap/'official-open-attempts.PRIVATE.ndjson';results=cap/'focused-results.PRIVATE.ndjson'
+def utc():return datetime.datetime.now(datetime.timezone.utc).isoformat()
+def read_rows(p):return [json.loads(s) for s in p.read_text(encoding='utf-8-sig').splitlines()] if p.exists() else []
+def emit(p,row):
+ with p.open('a',encoding='utf-8') as f:f.write(json.dumps(row,ensure_ascii=True)+'\n')
+def field(id,value):
+ p=subprocess.run([sys.executable,str(cap/'ui-driver.py'),'input',id,value],capture_output=True);assert p.returncode==0,'Input helper failed; STOP before open'
+ ns=ui.layout('validated-'+id);found=[n for n in ns if n.get('id')==id];assert len(found)==1 and found[0].get('text')==value,'Literal input not established'
+ if not any(n.get('text')=='保存' for n in ns):ui.run(['shell','uitest','uiInput','keyEvent','Back'])
+def owned_menu():
+ ns=ui.layout('owned-menu');matches=[n for n in ns if n.get('text')==alias];assert len(matches)==1;b=ui.bounds(matches[0]);cy=(b[1]+b[3])/2
+ menus=[n for n in ns if n.get('text')=='\ue5d4' and abs((ui.bounds(n)[1]+ui.bounds(n)[3])/2-cy)<130];assert len(menus)==1
+ b=ui.bounds(menus[0]);ui.run(['shell','uitest','uiInput','click',str((b[0]+b[2])//2),str((b[1]+b[3])//2)])
+def prepare(c):
+ ns=ui.layout('before-route')
+ if not any(n.get('text')=='串流' and ui.bounds(n)[1]<350 for n in ns):ui.click('串流')
+ ns=ui.layout('stream');owned=any(n.get('text')==alias for n in ns)
+ if owned:owned_menu();ui.click('编辑')
+ else:ui.click('添加串流链接');field('stream-name',alias)
+ uri='<controlled-loopback-prefix>'+c['path'];field('stream-address',uri);ui.click('保存');assert sum(n.get('text')==alias for n in ui.layout('literal-ready'))==1
+ return uri
+def position(ns):
+ sliders=sorted([n for n in ns if n.get('type')=='Slider'],key=lambda n:ui.bounds(n)[1]);v=sliders[0].get('text','') if sliders else ''
+ return float(v) if re.fullmatch(r'\d+(?:\.\d+)?',v) else None
+def progress_pair(pair):
+ if len(pair)!=2:return None,False
+ delta=pair[1]['positionMs']-pair[0]['positionMs']
+ return delta,delta>0 and pair[1]['utc']>pair[0]['utc'] and pair[1]['secondsSinceFirstPlaying']>pair[0]['secondsSinceFirstPlaying'] and all(0<=p['secondsSinceFirstPlaying']<=5 and p['positionMs']>=0 and p['state']=='PLAYING' for p in pair)
+def take_screen(cid,index,bounds):
+ stamp=datetime.datetime.now(datetime.timezone.utc).strftime('%H%M%S%f');remote='/data/local/tmp/p8fr1-'+stamp+'.png';p=cap/(cid+'-screen-'+str(index)+'-'+stamp+'.PRIVATE.png');begin=utc();ui.run(['shell','uitest','screenCap','-p',remote]);ui.run(['file','recv',remote,str(p.resolve())]);im=Image.open(p).convert('RGB');x0,y0,x1,y1=bounds;assert 0<=x0<x1<=im.width and 0<=y0<y1<=im.height
+ points=[(round(x0+(x1-x0)*v),round(y0+(y1-y0)*.18)) for v in [.08,.24,.40,.56,.72,.90]];rgb=[list(im.getpixel(q)) for q in points];colored=[q for q in rgb if max(q)-min(q)>=64 and max(q)>=80];buckets={tuple(v//32 for v in q) for q in colored};roi=im.crop((x0+max(1,(x1-x0)//20),y0+max(1,(y1-y0)//20),x1-max(1,(x1-x0)//20),y1-max(1,(y1-y0)//20)))
+ return {'startedUtc':begin,'completedUtc':utc(),'privateFile':p.name,'sha256':hashlib.sha256(p.read_bytes()).hexdigest().upper(),'surfaceBoundsPx':bounds,'screenDimensionsPx':list(im.size),'sampleCoordinatesPx':points,'rgbSamples':rgb,'coloredBuckets':len(buckets),'expectedMulticolorPatternObserved':len(buckets)>=3,'roiRgbSha256':hashlib.sha256(roi.tobytes()).hexdigest().upper()}
+def observation(label):
+ p=subprocess.run([sys.executable,str(cap/'observe.py'),label],capture_output=True);assert p.returncode==0,'Resource sampling helper failed; STOP'
+ return read_rows(cap/'observations.PRIVATE.ndjson')[-1]
+def native_lines(cid,suffix='after'):
+ before=(cap/(cid+'-before.hilog.PRIVATE.txt')).read_bytes();after=(cap/(cid+'-'+suffix+'.hilog.PRIVATE.txt')).read_bytes();old=set(before.decode(errors='replace').splitlines());return [s for s in after.decode(errors='replace').splitlines() if s not in old]
+def native_summary(lines):
+ prepared=False;early=False
+ for s in lines:
+  if 'notify prepared' in s:prepared=True
+  if 'JsPlay In' in s and not prepared:early=True
+ initialized_refs={p for s in lines if 'AVPlayerNapi:' in s and 'notify initialized' in s for p in re.findall(r'0x[0-9a-fA-F]{8,16}\b',s) if int(p,16)!=0}
+ released_refs={p for s in lines if 'AVPlayerNapi:' in s and 'notify released' in s for p in re.findall(r'0x[0-9a-fA-F]{8,16}\b',s) if int(p,16)!=0}
+ return {'nativeInitialized':any('notify initialized' in s for s in lines),'nativePreparedNotification':prepared,'nativePlayInvocation':any('JsPlay In' in s for s in lines),'nativePlayingNotification':any('notify playing' in s for s in lines),'nativePlayBeforePreparedNotification':early,'nativeFirstFrameSubmissionCallback':any('OnStartRenderFrameCb is called' in s for s in lines),'nativeVideoSizes':[list(map(int,p)) for s in lines for p in re.findall(r'OnVideoSizeChangedCb is called, width = (\d+), height = (\d+)',s)],'nativeReleaseInvocation':any('JsRelease In' in s for s in lines),'nativeReleasedNotification':any('notify released' in s for s in lines),'nativeInitializedObjectReferenceCount':len(initialized_refs),'nativeInitializedReleasedSharedObjectReferenceCount':len(initialized_refs & released_refs),'nativeReferenceScope':'AVPlayerNapi emitted object reference equality within isolated invocation; not direct JS backend/candidate identity; addresses kept PRIVATE'}
+def start(c,scenario):
+ cid=c['id'];assert cid not in {r['caseId'] for r in read_rows(attempts)},'Already attempted; no retry'
+ uri=prepare(c);pid=ui.run(['shell','pidof','com.linkora.player']).decode().strip();assert pid.isdigit();before=ui.run(['shell','hilog','-x','-P',pid]);(cap/(cid+'-before.hilog.PRIVATE.txt')).write_bytes(before);netbefore=len(read_rows(cap/'controlled-http-network.PRIVATE.ndjson'));began=utc()
+ emit(attempts,{'caseId':cid,'fixtureId':c.get('fixtureId',cid),'scenario':scenario,'sourceKind':'NETWORK_LINK','literalUri':uri,'officialOpenCount':1,'utc':began,'literalInputValidated':True});ui.click(alias)
+ return pid,began,time.monotonic(),netbefore
+def run_case(c,healthy=False):
+ cid=c['id'];pid,began,startclock,netbefore=start(c,'healthy recovery' if cid.startswith('recovery-') else 'official scoped playback')
+ timeline=[];captures=[];capture_errors=[];worker=None;firstplaying=None;firstplayingutc=None;pair=[];failure=False;error=None;capture_done=threading.Event()
+ def capture_pair(bounds):
+  try:
+   captures.append(take_screen(cid,0,bounds));time.sleep(.55);captures.append(take_screen(cid,1,bounds))
+  except Exception as e:capture_errors.append(type(e).__name__+':'+str(e))
+  finally:capture_done.set()
+ while time.monotonic()-startclock<35:
+  if firstplaying is not None and time.monotonic()-firstplaying>=5:break
+  ns=ui.layout(cid+'-sample');stamp=utc();clock=time.monotonic();texts={n.get('text','') for n in ns};state='PLAYING' if ('播放中' in texts or '正在播放' in texts or '❚❚' in texts) and '正在打开媒体' not in texts else 'COMPLETED' if '已完成' in texts or '播放完成' in texts else 'ERROR' if '重试' in texts or any('LNK-PLAY-' in t for t in texts) else 'OTHER'
+  pos=position(ns);bounds=[ui.bounds(n) for n in ns if n.get('type')=='XComponent'];sizes=[t for t in texts if re.fullmatch(r'\d+ × \d+',t)];r={'utc':stamp,'elapsedSeconds':clock-startclock,'state':state,'positionMs':pos,'surfaceBoundsPx':bounds,'videoSizeUi':sizes,'loadingTextVisible':'正在打开媒体' in texts,'errorDetails':[t for t in texts if 'LNK-PLAY-' in t or 'AVPlayer' in t]};timeline.append(r)
+  if state=='ERROR':failure=True;m=re.search(r'LNK-PLAY-\d+',','.join(texts));error=m.group(0) if m else None;break
+  if state=='COMPLETED':break
+  if state=='PLAYING':
+   if firstplaying is None:
+    firstplaying=clock;firstplayingutc=stamp
+    if bounds:worker=threading.Thread(target=capture_pair,args=(bounds[0],));worker.start()
+   if pos is not None and len(pair)<2:pair.append({'utc':stamp,'positionMs':pos,'secondsSinceFirstPlaying':clock-firstplaying,'state':state})
+   if len(pair)>=2 and capture_done.is_set() and clock-firstplaying>=1.3:break
+  time.sleep(.30)
+ if worker is not None:worker.join(timeout=30);assert not worker.is_alive(),'Screenshot collection did not complete; STOP'
+ (cap/(cid+'-before-leave.hilog.PRIVATE.txt')).write_bytes(ui.run(['shell','hilog','-x','-P',pid]));leave_requested=utc();ui.run(['shell','uitest','uiInput','keyEvent','Back']);leave=observation(cid+'-leave');(cap/(cid+'-after.hilog.PRIVATE.txt')).write_bytes(ui.run(['shell','hilog','-x','-P',pid]));native=native_summary(native_lines(cid));clean=all(leave[k]==0 for k in ['surfaceNodes','appAudioRendererCount','systemPlayerInstancesForApp']);net=read_rows(cap/'controlled-http-network.PRIVATE.ndjson')[netbefore:]
+ matching=[q for q in net if q['path']=='/'+c['path'] and q['method']=='GET' and q['status'] in ['200','206'] and (q.get('userAgent') or '').startswith('AVPlayerLib emulator')]
+ delta,positive=progress_pair(pair);pixels=any(p['expectedMulticolorPatternObserved'] for p in captures)
+ ready=native['nativeInitialized'] and native['nativePreparedNotification'] and native['nativePlayInvocation'] and native['nativePlayingNotification'] and not native['nativePlayBeforePreparedNotification']
+ passed=ready and native['nativeFirstFrameSubmissionCallback'] and [320,180] in native['nativeVideoSizes'] and pixels and positive and bool(matching) and clean and not failure and not capture_errors
+ row={'caseId':cid,'fixtureId':c.get('fixtureId',cid),'healthyControl':healthy,'startedUtc':began,'completedUtc':utc(),'officialOpenCount':1,'attempted':True,'sourceKind':'NETWORK_LINK','firstPlayingUtc':firstplayingutc,'uiTimeline':timeline,'positionPair':pair,'positionSamplesMs':[p['positionMs'] for p in pair],'positivePositionDeltaMs':delta,'positiveProgressObserved':positive,'diagnosticAtLeast800ms':delta is not None and delta>=800,'diagnosticIsNotHealthyGateOrOldRaw':True,'captureMetadata':captures,'captureErrors':capture_errors,'frameVisibility':'VISIBLE EXPECTED MULTICOLOR PATTERN' if pixels else 'NOT PROVEN / sampled ROI metadata retained','hostRequestTrace':net,'correlatedNativeTargetGet':bool(matching),'uiErrorCode':error,'nativeFailureObserved':failure,'nativeEventEvidence':native,'leaveRequestedUtc':leave_requested,'releaseClean':clean,'cleanup':{k:leave[k] for k in ['surfaceNodes','appAudioRendererCount','systemPlayerInstancesForApp']},'newScopedResult':'PASS' if passed else 'BOUNDED FAIL / NOT PROVEN','independentCollectorMethod':'First two valid PLAYING position samples, >0ms acceptance, <=5s valid window or natural completion; two actual ROI captures; no old focus runner invoked'}
+ emit(results,row);print(json.dumps({'caseId':cid,'result':row['newScopedResult'],'positiveDeltaMs':delta,'pixels':pixels,'nativeFrame':native['nativeFirstFrameSubmissionCallback'],'releaseClean':clean,'nativeEarlyPlay':native['nativePlayBeforePreparedNotification'],'error':error}),flush=True)
+ assert clean,'Normal resource cleanup failed; STOP'
+ assert not native['nativePlayBeforePreparedNotification'],'Native play before prepared; STOP source safety regression'
+ if cid.startswith('hls-'):assert native['nativePreparedNotification'] or failure,'No bounded HLS ready/error observed; STOP'
+ if healthy:assert passed,'Independent healthy invariants not established; STOP'
+ return row
+def cancel():
+ cases=json.loads(Path('test-lab/media-compatibility/cases.json').read_text(encoding='utf-8-sig'))['cases'];c=dict(next(c for c in cases if c['id']=='hls-h264-aac'));c['fixtureId']=c['id'];c['id']='cancel-hls-h264-aac';cid=c['id'];pid,began,startclock,netbefore=start(c,'pending prepare cancellation, separate from HLS format verdict');before=set((cap/(cid+'-before.hilog.PRIVATE.txt')).read_text(encoding='utf-8',errors='replace').splitlines());preparing=False;prepared=False
+ while time.monotonic()-startclock<10:
+  raw=ui.run(['shell','hilog','-x','-P',pid]);new=[s for s in raw.decode(errors='replace').splitlines() if s not in before];preparing=any('notify initialized' in s for s in new) and any('JsPrepare In' in s for s in new);prepared=any('notify prepared' in s for s in new)
+  if preparing or prepared:break
+  time.sleep(.15)
+ ns=ui.layout('cancel-at-leave');raw=ui.run(['shell','hilog','-x','-P',pid]);(cap/(cid+'-at-leave.hilog.PRIVATE.txt')).write_bytes(raw);new=native_lines(cid,'at-leave');preparing=any('notify initialized' in s for s in new) and any('JsPrepare In' in s for s in new);prepared=any('notify prepared' in s for s in new);leaveutc=utc();leaveclock=time.monotonic();ui.run(['shell','uitest','uiInput','keyEvent','Back']);early=observation(cid+'-leave');(cap/(cid+'-after.hilog.PRIVATE.txt')).write_bytes(ui.run(['shell','hilog','-x','-P',pid]));earlyseconds=time.monotonic()-leaveclock
+ time.sleep(max(0,21-(time.monotonic()-leaveclock)));follow=observation(cid+'-followup-over20s');(cap/(cid+'-followup.hilog.PRIVATE.txt')).write_bytes(ui.run(['shell','hilog','-x','-P',pid]));late=native_summary(native_lines(cid,'followup'));early_native=native_summary(native_lines(cid));held=preparing and not prepared and leaveclock-startclock<20;clean=all(o[k]==0 for o in [early,follow] for k in ['surfaceNodes','appAudioRendererCount','systemPlayerInstancesForApp']);release=early_native['nativeReleaseInvocation'] and early_native['nativeReleasedNotification'];lateplay=late['nativePlayInvocation']
+ identity=early_native['nativeInitializedReleasedSharedObjectReferenceCount']==1 and early_native['nativeInitializedObjectReferenceCount']==1
+ row={'caseId':cid,'fixtureId':c['fixtureId'],'scenario':'PENDING CANCELLATION, no second format verdict','startedUtc':began,'leaveRequestedUtc':leaveutc,'secondsBeforeLeave':leaveclock-startclock,'releaseObservationSecondsAfterRequest':earlyseconds,'followupSecondsAfterLeave':time.monotonic()-leaveclock,'completedUtc':utc(),'officialOpenCount':1,'preparingGuardHeld':held,'nativeInitializedAndPrepareInvocationBeforeLeave':preparing,'nativePreparedBeforeLeave':prepared,'earlyCheckpoint':{k:early[k] for k in ['utc','surfaceNodes','appAudioRendererCount','systemPlayerInstancesForApp']},'normalFollowup':{k:follow[k] for k in ['utc','surfaceNodes','appAudioRendererCount','systemPlayerInstancesForApp']},'releaseClean':clean,'normalNativeReleaseReached':release,'nativeCandidateObjectCorrelationSupported':identity,'nativeEarlyEvidence':early_native,'nativeFollowupEvidence':late,'lateNativePlayObserved':lateplay,'hostRequestTrace':read_rows(cap/'controlled-http-network.PRIVATE.ndjson')[netbefore:],'nativeReleaseCorrelation':'One exclusively owned pending candidate invocation; native AVPlayerNapi initialized/released emitted-object-reference equality separately counted. Direct JS backend object identity/commit/reject/timer telemetry NOT PROVEN. No address published.','forceStopUsed':False,'newScopedResult':'PASS WITH TELEMETRY BOUNDARIES' if held and clean and release and identity and not lateplay else 'FAIL / NOT PROVEN'}
+ emit(results,row);(cap/'leave-during-prepare.raw.json').write_text(json.dumps(row,indent=2)+'\n',encoding='utf-8');print(json.dumps({'cancellationHeld':held,'earlyNativeRelease':release,'normalClean':clean,'latePlay':lateplay}),flush=True)
+ assert held,'At-leave preparing state not proven; STOP'
+ assert clean,'Cancellation normal resources persisted; STOP'
+ assert release and identity and not lateplay,'Candidate normal native release/identity/no late play not established; STOP; do not claim cancellation fully validated'
+ recovery=dict(next(c for c in cases if c['id']=='mp4-h264-aac'));recovery['fixtureId']=recovery['id'];recovery['id']='recovery-mp4-h264-aac';run_case(recovery,True)
+if __name__=='__main__':
+ if sys.argv[1]=='cancel':cancel()
+ else:
+  cases=json.loads(Path('test-lab/media-compatibility/cases.json').read_text(encoding='utf-8-sig'))['cases'];case=next(c for c in cases if c['id']==sys.argv[1]);run_case(case,case['id']=='mp4-h264-aac')

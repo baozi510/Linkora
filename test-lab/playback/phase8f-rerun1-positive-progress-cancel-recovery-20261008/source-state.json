@@ -1,0 +1,41 @@
+{
+  "taskId": "phase8f-sim-rerun1-positive-progress-cancel-recovery",
+  "state": "READY",
+  "repository": "https://github.com/baozi510/Linkora.git",
+  "branch": "feat/playback-capability-phase8",
+  "source": "50eaf6da48f6d0e445676050bde362adfd0b36b6",
+  "head": "682e45fa8f222dfb93b2f7d0d596c5db952dd61d",
+  "drift": [
+    "docs/CODEX_VALIDATION_TASK.md"
+  ],
+  "clean": true,
+  "submodules": {
+    "entry/src/main/cpp/third_party/libnfs": "cee4ca723e081e6a18f51b838690a4c21e14bb2c",
+    "entry/src/main/cpp/third_party/libsmb2": "b3d560c02fb1268320d2fd1c17fe841b0d93b85f",
+    "entry/src/main/cpp/third_party/mbedtls/framework": "7d726d145d678aa7f5a7df3b9e7ee3dbce6ea1bf"
+  },
+  "utc": "2026-10-11T06:56:05.872708+00:00",
+  "submoduleProvenance": [
+    {
+      "path": "entry/src/main/cpp/third_party/libnfs",
+      "pin": "cee4ca723e081e6a18f51b838690a4c21e14bb2c",
+      "actualHead": "cee4ca723e081e6a18f51b838690a4c21e14bb2c",
+      "origin": "https://github.com/sahlberg/libnfs.git",
+      "method": "Fresh ordinary GitHub submodule update --init --recursive, exit0; exact committed pins and upstream origins verified"
+    },
+    {
+      "path": "entry/src/main/cpp/third_party/libsmb2",
+      "pin": "b3d560c02fb1268320d2fd1c17fe841b0d93b85f",
+      "actualHead": "b3d560c02fb1268320d2fd1c17fe841b0d93b85f",
+      "origin": "https://github.com/sahlberg/libsmb2.git",
+      "method": "Fresh ordinary GitHub submodule update --init --recursive, exit0; exact committed pins and upstream origins verified"
+    },
+    {
+      "path": "entry/src/main/cpp/third_party/mbedtls/framework",
+      "pin": "7d726d145d678aa7f5a7df3b9e7ee3dbce6ea1bf",
+      "actualHead": "7d726d145d678aa7f5a7df3b9e7ee3dbce6ea1bf",
+      "origin": "https://github.com/Mbed-TLS/mbedtls-framework.git",
+      "method": "Fresh ordinary GitHub submodule update --init --recursive, exit0; exact committed pins and upstream origins verified"
+    }
+  ]
+}

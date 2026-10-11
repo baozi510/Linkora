@@ -1,0 +1,13 @@
+{
+  "exitCode": 1,
+  "actualOperation": "instrument-preflight.PRIVATE.py after successful signed replace-install and ordinary coldlaunch command; before any fixture open",
+  "command": "python -X utf8 <PRIVATE instrumentation-preflight script>",
+  "scriptSha256": "6E006460760B8316A9F7F73CD4B4903E4BCD9500D81758E8AA38E4D5017CFC9D",
+  "failedAssertion": "read-only capture/layout preflight conjunction; app visible nodes empty",
+  "failureEvidenceSource": "actual exec tool returned exit1 and traceback; copied console transcript provenance declared",
+  "expectedScreenshotCaptureAndAppLayoutSucceeded": false,
+  "screenshotReadable": true,
+  "screenshotFinding": "System launcher rather than target app",
+  "targetAppUiReady": "NOT PROVEN",
+  "retryOrRelaunchAfterFail": false
+}

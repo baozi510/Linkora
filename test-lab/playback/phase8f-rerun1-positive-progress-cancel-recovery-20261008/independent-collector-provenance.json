@@ -1,0 +1,49 @@
+{
+  "definedBeforeFirstOfficialOpen": true,
+  "utc": "2026-10-11T07:06:13.460732+00:00",
+  "collector": "independent-collector.PRIVATE.py",
+  "privateSourceSha256": "7C0E6A0D78A2667A43C70260684BA7A36C5115218828D43FFECC180C0BB83C05",
+  "authorization": "docs/CODEX_VALIDATION_TASK.md Section5",
+  "method": "New task-specific independent PRIVATE runner, reuses established literal UI primitives but no old focus runner import/invocation; acceptance implemented separately",
+  "positionRule": "First two valid same-window timestamped PLAYING samples, later>earlier (>0ms), at most5s or natural completion; no >=800 gate, seek, retry or extended waiting",
+  "imageRule": "Two actual XComponent ROI captures, first on valid PLAYING then after0.55s; native actual callback separately",
+  "fixedCollectionWindowSecondsAfterFirstPlaying": 5,
+  "capturePairDelaySeconds": 0.55,
+  "sampleCadenceSleepSeconds": 0.3,
+  "selfChecks": [
+    {
+      "name": "positive766_not800",
+      "passed": true
+    },
+    {
+      "name": "zero_rejected",
+      "passed": true
+    },
+    {
+      "name": "backward_rejected",
+      "passed": true
+    },
+    {
+      "name": "beyond5s_rejected",
+      "passed": true
+    },
+    {
+      "name": "unordered_timestamp_rejected",
+      "passed": true
+    },
+    {
+      "name": "single_sample_rejected",
+      "passed": true
+    }
+  ],
+  "oldHelperSha256": "451C361752935858FD7944066327BEDD23C1942E8625A2D4784E554A2638FF27",
+  "oldHelperUnchangedAndNotInvoked": true,
+  "plannedPlaybackCommands": [
+    "python -X utf8 <private-collector> mp4-h264-aac",
+    "python -X utf8 <private-collector> hls-h264-aac",
+    "python -X utf8 <private-collector> hls-hevc-aac",
+    "python -X utf8 <private-collector> mkv-ffv1-flac",
+    "python -X utf8 <private-collector> cancel (one separate cancellation and recovery only after normal release)"
+  ],
+  "sourceTestsHapOrRuntimeHooksChanged": false
+}

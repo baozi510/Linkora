@@ -1,0 +1,9 @@
+{
+  "existingSignedProfile": true,
+  "bundleMatches": true,
+  "profileType": "debug",
+  "declaredDeviceCount": 3,
+  "simulatorListedInExistingProfile": true,
+  "existingMaterialFilesPresent": true,
+  "passwordValuesLookIdeEncrypted": true
+}

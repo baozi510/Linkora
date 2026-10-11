@@ -1,0 +1,9 @@
+{
+  "publicFilesReviewedBeforeAuditMetadata": 79,
+  "knownCredentialTargetAndPrivatePathScanPass": true,
+  "noScreenshotsMediaHapSigningFilesPublished": true,
+  "nativeSelectedLogsExplicitSubsetAndRedacted": true,
+  "warningsAndActualFailedAssertionRetained": true,
+  "gzipHashDecompressionChecks": 23,
+  "allChecksPass": true
+}

@@ -1,0 +1,52 @@
+{
+  "primary": "FAIL \u2014 REQUIRED TEST GATE",
+  "taskId": "phase8f-sim-rerun1-positive-progress-cancel-recovery",
+  "source": "50eaf6da48f6d0e445676050bde362adfd0b36b6",
+  "dispatch": "682e45fa8f222dfb93b2f7d0d596c5db952dd61d",
+  "unchangedProductionFix": "8174e6e4f0214958fb83fef46e92170c4c10263a",
+  "failedStage": "Read-only app screenshot/layout instrumentation preflight before any official fixture",
+  "actualHelperExit": 1,
+  "freshBuilds": "PASS",
+  "signedArtifactAbiAndReplaceInstall": "PASS",
+  "appUiReady": "NOT PROVEN; empty app tree and system launcher screenshot",
+  "productionPlaybackOrCancellationRegressionEstablished": false,
+  "independentCollector": "Predeclared source/hash and six pure boundary selfchecks PASS; actual collector NOT RUN",
+  "officialOpens": 0,
+  "retries": 0,
+  "remainingScenarios": [
+    {
+      "caseId": "mp4-h264-aac",
+      "state": "NOT RUN",
+      "reason": "Strict STOP at read-only instrumentation preflight helper AssertionError/exit1, before official opens"
+    },
+    {
+      "caseId": "hls-h264-aac",
+      "state": "NOT RUN",
+      "reason": "Strict STOP at read-only instrumentation preflight helper AssertionError/exit1, before official opens"
+    },
+    {
+      "caseId": "hls-hevc-aac",
+      "state": "NOT RUN",
+      "reason": "Strict STOP at read-only instrumentation preflight helper AssertionError/exit1, before official opens"
+    },
+    {
+      "caseId": "mkv-ffv1-flac",
+      "state": "NOT RUN",
+      "reason": "Strict STOP at read-only instrumentation preflight helper AssertionError/exit1, before official opens"
+    },
+    {
+      "caseId": "cancel-hls-h264-aac",
+      "state": "NOT RUN",
+      "reason": "Strict STOP at read-only instrumentation preflight helper AssertionError/exit1, before official opens"
+    },
+    {
+      "caseId": "recovery-mp4-h264-aac",
+      "state": "NOT RUN",
+      "reason": "Strict STOP at read-only instrumentation preflight helper AssertionError/exit1, before official opens"
+    }
+  ],
+  "cancellationRecovery": "NOT RUN / NOT PROVEN",
+  "physicalArm64RealMpvCodecOutput": "NOT RUN / NOT PROVEN",
+  "historicalEvidenceUnchanged": true,
+  "noProductTestPolicyTaskOrMediaPatch": true
+}

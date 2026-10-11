@@ -1,0 +1,32 @@
+[
+  {
+    "caseId": "mp4-h264-aac",
+    "state": "NOT RUN",
+    "reason": "Strict STOP at read-only instrumentation preflight helper AssertionError/exit1, before official opens"
+  },
+  {
+    "caseId": "hls-h264-aac",
+    "state": "NOT RUN",
+    "reason": "Strict STOP at read-only instrumentation preflight helper AssertionError/exit1, before official opens"
+  },
+  {
+    "caseId": "hls-hevc-aac",
+    "state": "NOT RUN",
+    "reason": "Strict STOP at read-only instrumentation preflight helper AssertionError/exit1, before official opens"
+  },
+  {
+    "caseId": "mkv-ffv1-flac",
+    "state": "NOT RUN",
+    "reason": "Strict STOP at read-only instrumentation preflight helper AssertionError/exit1, before official opens"
+  },
+  {
+    "caseId": "cancel-hls-h264-aac",
+    "state": "NOT RUN",
+    "reason": "Strict STOP at read-only instrumentation preflight helper AssertionError/exit1, before official opens"
+  },
+  {
+    "caseId": "recovery-mp4-h264-aac",
+    "state": "NOT RUN",
+    "reason": "Strict STOP at read-only instrumentation preflight helper AssertionError/exit1, before official opens"
+  }
+]

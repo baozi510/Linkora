@@ -1,0 +1,46 @@
+{
+  "default-first": {
+    "exitCode": 0,
+    "architectureFixtures": 5,
+    "artifactFixtures": 17,
+    "mpvMapping": 7,
+    "ffmpegPure": 15,
+    "analysisPure": 46,
+    "hypium": {
+      "total": 210,
+      "pass": 210,
+      "failure": 0,
+      "error": 0,
+      "ignore": 0
+    },
+    "hypiumPrivateOriginalSha256": "52AD324B5EB95861CB735710C28C71307C137E0223BB9064779BF80542D75EB4",
+    "exactNineAarch64Audits": 2,
+    "debugReleaseHarsHaps": true
+  },
+  "default-final": {
+    "exitCode": 0,
+    "architectureFixtures": 5,
+    "artifactFixtures": 17,
+    "mpvMapping": 7,
+    "ffmpegPure": 15,
+    "analysisPure": 46,
+    "hypium": {
+      "total": 210,
+      "pass": 210,
+      "failure": 0,
+      "error": 0,
+      "ignore": 0
+    },
+    "hypiumPrivateOriginalSha256": "AF333AC54C490612F5AC26AD104102F3FF081C6E8F882338392F3E4201EA7B5B",
+    "exactNineAarch64Audits": 2,
+    "debugReleaseHarsHaps": true
+  },
+  "simulator": {
+    "exitCode": 0,
+    "parityIsolationAudioStatic": true,
+    "nativeWhitelist": [
+      "liblinkora_ffmpeg.so"
+    ],
+    "finallyDefaultDependenciesRestored": true
+  }
+}

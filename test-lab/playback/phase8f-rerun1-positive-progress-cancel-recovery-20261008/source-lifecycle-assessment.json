@@ -1,0 +1,30 @@
+{
+  "source": "50eaf6da48f6d0e445676050bde362adfd0b36b6",
+  "sourceDiffBaseline": "68452df5486cf568da66a5c52352841cb7e64c5f",
+  "staticChecklist": {
+    "candidateOwnedBeforePrepareAwait": "pendingCandidate set after factory returns, before configure/prepare; late factory checks released and disposes candidate",
+    "cancellationClaimsOwnership": "release clears both slots and disposes pending then committed backend then resolved source lease",
+    "noCancelledAutoFallback": "first-error handler checks released before selector fallback; late factory/prepare check released",
+    "noLateCommit": "after prepare await and outer candidate await released checks; commit after synchronous ownership transfer",
+    "doubleReleaseGuard": "release clears pending slot first; catch only releases if still owns same slot",
+    "lateResolverLease": "late resolver result released before retaining it",
+    "systemPendingInitializationAndPreparation": "release rejects both waits and clears both timers; late completeInitialization returns on released",
+    "surfaceBinding": "late initialized handler cannot assign surface when released; surface assignment still only in initialization handler"
+  },
+  "scope": "Static exact source review, not execution or native object identity proof",
+  "runtimeCancellationRelease": "NOT RUN after instrumentation preflight STOP",
+  "lateFactoryResolverConcurrentErrorPaths": "NOT PROVEN in runtime; no unchanged-app hooks",
+  "directCommitPromiseRejectTimerTelemetry": "NOT PROVEN; no source/test hooks",
+  "officialCrossCheck": [
+    {
+      "url": "https://github.com/openharmony/docs/blob/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-t.md",
+      "observed": "AVPlayerState prepared distinct from initialized, play requires prepared/paused/completed, released final destroys playback engine"
+    },
+    {
+      "url": "https://github.com/openharmony/docs/blob/master/en/application-dev/reference/apis-media-kit/arkts-apis-media-AVPlayer.md",
+      "access": "GitHub metadata readable; raw web click internal error; installed API26 exact prepare/play/release/state/stateChange declarations used as primary actual SDK evidence"
+    }
+  ],
+  "utc": "2026-10-11T06:56:06.751731+00:00",
+  "ownerAction": "Review observed app-UI availability after boot/install/start before requiring screenshot/layout; diagnose root cause with a new authorized task, no source defect inferred from this preflight"
+}
