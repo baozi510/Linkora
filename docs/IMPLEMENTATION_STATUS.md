@@ -1,3 +1,15 @@
+## CURRENT EXECUTION SUMMARY — 2026-10-12 (Phase 8F Rerun 4 local STOP; evidence publication blocked)
+
+**Remote fact:** at dispatch `f98ca3b5d61ec1cd18ee8e42d72e4718c352c5ce` no Rerun4 evidence commit is visible. Codex's local-only handoff reports `VALIDATION_RESULT: FAIL — REQUIRED TEST GATE` but `REVIEW_RESULT: BLOCKED — EVIDENCE NOT PUSHED`; GPT cannot independently accept unpushed tests or inventories. Historical task `phase8f-sim-rerun4-single-controller-ui-cancel`, tested SOURCE `a9312a86a5104e46847f1087af52e7de8b1c2fab`, tested dispatch `f98ca3b5d61ec1cd18ee8e42d72e4718c352c5ce`, production fix `8174e6e4f0214958fb83fef46e92170c4c10263a` is STOPPED and must not be retried.
+
+Local claims pending evidence: single blocking controller synthetic checks PASS; initial install, two independent EOL proofs, default→simulator→default verifiers numeric0, two fresh Hypium210/210 and ABI checks. Target list `[Empty]`; an emulator installation/config was listed but not booted. New PRIVATE metadata inspector child1 raised `AttributeError` by assuming JSON object instead of actual list. Outer original stdout/stderr bytes and exact helper timing NOT independently captured; a no-argument emulator setting CLI read-only effect NOT PROVEN. Live UDID/profile, signed install, app foreground, native media network path and all six official opens NOT RUN; candidate release and recovery NOT PROVEN. This STOP does not establish player/codec/signing defects.
+
+Local publication blockage: one report and109 evidence files (33 sanitized gzip pairs) are reported prepared; a new staging audit raised `PermissionError [WinError 5]` on a private state-file replace, followed by failing commit helper. Specific OS cause UNKNOWN. No local evidence commit, no remote push, and a report revision remained unstaged. Private capture gaps must be reported, not invented. Do not assert that reported material or protection checks are independently verified yet.
+
+**NEXT_ACTION:** a new distinct, publication-only task in `docs/CODEX_VALIDATION_TASK.md` will allow transfer, independent read-only audit, privacy proof and ordinary commit/push of **existing** authorized Rerun4 report/evidence from a separate checkout. Never rerun Rerun4's builds, failed helper, failed audit/controller, device startup or any media; never change production/tests/profiles/scripts or original user workspace. Review remote evidence SHA before authorizing later runtime validation. The earlier CURRENT sections below are HISTORICAL.
+
+---
+
 # Linkora Player Architecture — Implementation Status
 
 ## CURRENT EXECUTION SUMMARY — 2026-10-11 (Phase 8F Rerun 3 failed progress observation reviewed, new no-midstage-observation task pending)

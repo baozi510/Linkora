@@ -1,3 +1,15 @@
+## CURRENT STATE — 2026-10-12 Phase 8F Rerun 4 stopped locally; evidence not pushed
+
+**Repo / branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`.
+
+**Owner review boundary:** The branch remains at Rerun4 dispatch `f98ca3b5d61ec1cd18ee8e42d72e4718c352c5ce`, **not** an Rerun4 evidence SHA. Codex reports `BLOCKED — EVIDENCE NOT PUSHED` and local `FAIL — REQUIRED TEST GATE`. The local report and109 evidence files have not been independently read from GitHub; there is no local evidence commit or remote evidence commit. Do not turn local assertions into GPT-accepted results or treat dispatch SHA as evidence. Completed Rerun4 ID `phase8f-sim-rerun4-single-controller-ui-cancel` is STOPPED and must not run again.
+
+Reported local positives: one PRIVATE blocking controller's synthetic checks; fresh serial default→simulator→default and independent Hypium210/210. Reported test STOP: device list empty, emulator config listed but not running; extra PRIVATE inspector child1 on JSON list/dictionary `AttributeError`; no signing, installed HAP, app UI or any of six official opens. Native cancellation cleanup/recovery NOT RUN/NOT PROVEN; no demonstrated production defect. Actual outer helper full byte-identical stdout/stderr/times not independently retained; `-config` with no args cannot be certified read-only. Reported publication STOP: new audit hit `PermissionError [WinError 5]` writing a PRIVATE controller state file, commit helper exited1; cause not determined, no push, report amended after staging. Private/source/secret protection assertions are awaiting remote evidence.
+
+**Owner decision:** Dispatch a distinct new task to **publish ONLY original authorized local report/evidence** after new independent nonmutating audit/privacy checks in a clean isolated checkout. Do not reuse/retry failed Rerun4 inspector, controller or audit, change original staged workspace, rebuild or test, query quotas, touch production/tests/media/profiles/signature, or boot/reset emulator. Codex must push and verify a new remote evidence SHA before GPT independent review. Rerun3 and older STOP remain historical. New task file is the sole authority; this handoff is not itself executable authorization.
+
+---
+
 # Linkora Session Handoff
 
 ## CURRENT STATE — 2026-10-11 Phase 8F Rerun 3 controller observation STOP reviewed
