@@ -1,6 +1,9 @@
 # Codex Validation Task — Phase 8F Keystore Access and Existing Simulator Artifact
 
-> STATE: READY
+> STATE: CLOSED — COMPLETED WITH DEPENDENCY BLOCK (NO READY EXECUTION)
+> CLOSED_EVIDENCE_SHA: 2763174a67da32332754d745a0de174328c7128f
+> NEXT_PREREQUISITE: USER-OWNED PRIVATE KEYSTORE ACCESS STATUS, NOT YET CONFIRMED
+> RETEST: NOT AUTHORIZED
 > TASK_ID: phase8f-level1-keystore-access-reuse-unsigned-smoke-v4
 > REPOSITORY: baozi510/Linkora
 > BRANCH: feat/playback-capability-phase8
@@ -16,6 +19,12 @@
 > ROLE: PRIVATE LEGAL KEYSTORE ACCESS PREFLIGHT; OPTIONAL ONE SIGN OF PROVEN EXISTING HAP; CONDITIONAL FOCUSED SIMULATOR PLAYBACK
 > ARM64_RELEASE_ABI: DEFERRED LEVEL_2
 > REAL_DEVICE: DEFERRED LEVEL_3
+
+## Completed V4 — immutable execution closure
+
+This file is retained as the historical task record. **DO NOT execute this task again.** Its only authorized run is complete; remotely published report and result JSON have been independently reviewed at evidence SHA `2763174a67da32332754d745a0de174328c7128f`. Conclusion `DEPENDENCY_BLOCKED — KEYSTORE ACCESS`: authorized private access not proven, build0/probe0/sign0/open0; retained unsigned HAP locally corroborated, no playback or signing PASS. Prior SDK error `11014003` occurred in an earlier run and is not a new V4 failure.
+
+There is currently **NO new READY Codex task**. Do not automatically rerun credential probes or create a new test loop. Wait for the authorized user to confirm an existing secure signing-facility access status, without disclosing secrets. Any future work requires a new distinct owner-authorized task and a new task-only dispatch commit. The original task instructions below are archived reference, not active permissions.
 
 ## 0. Authoritative review and non-negotiable boundaries
 
