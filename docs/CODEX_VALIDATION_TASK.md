@@ -1,77 +1,74 @@
-# Codex Validation Task — Phase 8F Keystore Access and Existing Simulator Artifact
+# Codex Validation Task — Level 0 PlaybackEngine Stale Async Session Review
 
-> STATE: CLOSED — COMPLETED WITH DEPENDENCY BLOCK (NO READY EXECUTION)
-> CLOSED_EVIDENCE_SHA: 2763174a67da32332754d745a0de174328c7128f
-> NEXT_PREREQUISITE: USER-OWNED PRIVATE KEYSTORE ACCESS STATUS, NOT YET CONFIRMED
-> RETEST: NOT AUTHORIZED
-> TASK_ID: phase8f-level1-keystore-access-reuse-unsigned-smoke-v4
+> STATE: READY
+> TASK_ID: phase8f-level0-playback-engine-stale-async-review
 > REPOSITORY: baozi510/Linkora
 > BRANCH: feat/playback-capability-phase8
-> LEVEL: LEVEL_1_FUNCTIONAL — SIGNING DEPENDENCY FIRST
-> SOURCE_SHA: 0ba59ee1297c70306aa5d0c38da71da15aea12d1
+> LEVEL: LEVEL_0_FEATURE — READ-ONLY STATIC REVIEW
+> SOURCE_SHA: 96a6b802a4a2796f9ffefca74f80541a0ce9fcb9
 > ALLOWED_DRIFT: docs/CODEX_VALIDATION_TASK.md ONLY
-> PRIOR_PUBLISHED_PARTIAL_EVIDENCE_SHA: d4905fe4b00f74681e9ff44e0a3102b9679e7ad6
-> PRIOR_TESTED_DISPATCH_SHA: 9fc247a5c89173a91e07d1695ae404e70fae82c1
-> PRODUCTION_FIX_SHA: 8174e6e4f0214958fb83fef46e92170c4c10263a
-> EXISTING_UNSIGNED_SIMULATOR_DEBUG_HAP_SHA256: DBF39571A1FD594FC8522F5759C678E9A97FA5EF3E3F34EA4615A6707CF9C11E
-> MAX_NEW_COMPILES: ZERO
-> MAX_NEW_SIGNING_ATTEMPTS: ONE (only after lawful credential and unsigned artifact gate)
-> ROLE: PRIVATE LEGAL KEYSTORE ACCESS PREFLIGHT; OPTIONAL ONE SIGN OF PROVEN EXISTING HAP; CONDITIONAL FOCUSED SIMULATOR PLAYBACK
-> ARM64_RELEASE_ABI: DEFERRED LEVEL_2
-> REAL_DEVICE: DEFERRED LEVEL_3
+> BASE_SHA: 61494cda50fae092647db5133e781d2105063d52
+> PREVIOUS_KEYSTORE_TASK: phase8f-level1-keystore-access-reuse-unsigned-smoke-v4 (CLOSED)
+> PRIOR_VALIDATION_EVIDENCE_SHA: 2763174a67da32332754d745a0de174328c7128f
+> KEYSTORE_STATUS: USER-REPORTED UNAVAILABLE — DEFERRED
+> BUILD_COUNT_ALLOWED: 0
+> SIGNING_AND_KEYSTORE_PROBE_ALLOWED: 0
+> SIMULATOR_AND_MEDIA_OPENS_ALLOWED: 0
+> ROLE: INDEPENDENT SOURCE-LEVEL CORRECTNESS REVIEW OF NEW SESSION-RACE FIX AND AUTHORED REGRESSION CASES
 
-## Completed V4 — immutable execution closure
+## 0. Purpose, priority and hard scope
 
-This file is retained as the historical task record. **DO NOT execute this task again.** Its only authorized run is complete; remotely published report and result JSON have been independently reviewed at evidence SHA `2763174a67da32332754d745a0de174328c7128f`. Conclusion `DEPENDENCY_BLOCKED — KEYSTORE ACCESS`: authorized private access not proven, build0/probe0/sign0/open0; retained unsigned HAP locally corroborated, no playback or signing PASS. Prior SDK error `11014003` occurred in an earlier run and is not a new V4 failure.
+This is a new, meaningful **Level 0 feature review task**, not a retry of stopped V4 signing or Phase8F runtime. GPT owns production code and created SOURCE_SHA with a narrow change to `PlaybackEngine` and its four deferred-async regression tests. Keystore is unavailable, so all installation, signed simulator runtime and actual picture/position/native release acceptance are still blocked. No new build is required after every source edit.
 
-There is currently **NO new READY Codex task**. Do not automatically rerun credential probes or create a new test loop. Wait for the authorized user to confirm an existing secure signing-facility access status, without disclosing secrets. Any future work requires a new distinct owner-authorized task and a new task-only dispatch commit. The original task instructions below are archived reference, not active permissions.
+**Prohibited entirely:** `ohpm install`, Hvigor/Hypium execution requiring SDK build, `verify.ps1`, `verify-simulator.ps1`, ARM64/Release/HAP/native rebuild, keystore/password/profile/keytool/sign-app inspection or probing, DevEco/SDK settings, HDC/emulator/device commands, signed/unsigned HAP, fixtures, media/HTTP/rport, UI tests, original STOP helper, private historical logs or old 110-file evidence. No password question, credential guesses, private environment changes, timers/chat polling or repeated diagnostic shell wrappers. Do not modify production source, tests, dependencies, scripts, configs, CURRENT state docs or old task evidence. Do not touch the user's original potentially dirty workspace or a stopped checkout; use a fresh isolated read-only clone.
 
-## 0. Authoritative review and non-negotiable boundaries
+Read latest `docs/AI_WORKFLOW.md` (scoped errors and feature-first), `docs/MASTER_IMPLEMENTATION_PLAN.md`, `docs/ARCHITECTURE_TARGET.md`, `docs/ARCHITECTURE_MIGRATION.md`, current `docs/IMPLEMENTATION_STATUS.md`, `docs/SESSION_HANDOFF.md`, and this entire task. Any optional unavailable read that is not needed to establish source or review case must be RECORD_ONLY, not a global STOP.
 
-This is a NEW distinct task, NOT continuation or replay of any previous stopped task. Owner independently fetched both complete published `phase8f-level1-scoped-failure-three-open-smoke-v3` files at `d4905fe4b00f74681e9ff44e0a3102b9679e7ad6`: only the authorized report (Git blob `75f6fb92c4e6c2ac0647d262b2b6a8f2368f394f`) and result.json (blob `44eff75c8aaff58c6491cb4aaec32b098d780639`) were added in a single commit with parent `9fc247a5c89173a91e07d1695ae404e70fae82c1`. Review ruling: `COMPLETED WITH FAILURES / PARTIAL — DEPENDENCY_BLOCKED SIGNED ARTIFACT`. Published records report ONE simulator Debug build process0, valid x86 FFmpeg-only artifact audit and one running API26 x86_64 target; original private stdout/stderr are not remotely independently replayable. Sign-app Java process1 and outer process1 reported `11014003 / Init keystore failed: keystore password was incorrect`, no signed HAP. A harmless OPTIONAL missing-README lookup was RECORD_ONLY and did not stop unrelated steps; the user's scoped-failure rule worked.
+## 1. Git provenance — CRITICAL if claiming THIS source was reviewed
 
-**No new build** is permitted in this task, including `ohpm install`, `scripts/verify.ps1`, `scripts/verify-simulator.ps1`, Hvigor, ARM64 and simulator/debug builds or dependency artifact rebuilds. Never re-run the prior failed sign command/old helper, retrieve or brute-force an unknown password, regenerate a keystore, change key/profile/cert/signing policy, import insecure debug credentials, or bypass SDK signing. Use a NEW, user-authorized local credential-access route only. If unavailable, stop only signing-dependent operations, record `DEPENDENCY_BLOCKED — KEYSTORE ACCESS` and finish a safe minimal report. No password, private key, certificate profile, HAP, local path, instance/device ID, credential source contents, private output or command containing a password in GitHub/chat/logs.
-
-**All three official runtime opens remain NOT RUN and must never be described as prior PASS.** This is not ARM64/native hardware/HDR/libmpv certification. Preserve historical unreviewed Rerun4 local-only report, all STOPs and source blobs unchanged.
-
-## 1. Source identity and protected workspaces
-
-1. Fresh-fetch `baozi510/Linkora`, branch `feat/playback-capability-phase8`, read this entire latest task, `docs/AI_WORKFLOW.md`, `docs/MASTER_IMPLEMENTATION_PLAN.md`, `docs/ARCHITECTURE_TARGET.md`, `docs/ARCHITECTURE_MIGRATION.md`, latest CURRENT `docs/IMPLEMENTATION_STATUS.md` and `docs/SESSION_HANDOFF.md`, original latest published report and result JSON. Require `SOURCE_SHA 0ba59ee1297c70306aa5d0c38da71da15aea12d1` direct parent of dispatch and SOURCE_SHA..dispatch changed file EXACTLY `docs/CODEX_VALIDATION_TASK.md`. Require prior evidence `d4905fe4b00f74681e9ff44e0a3102b9679e7ad6` direct parent of SOURCE_SHA, whose diff only touches `docs/IMPLEMENTATION_STATUS.md`, `docs/SESSION_HANDOFF.md`. Production AdaptivePlaybackPort.ets and SystemPlaybackPort.ets Git blobs must remain equal to those at fix `8174e6e4f0214958fb83fef46e92170c4c10263a`. Source drift genuinely affecting identity is GLOBAL_SAFETY_STOP.
-2. Use a clean isolated checkout or read-only reuse of already isolated proven source; NEVER reset/clean/stash/checkout/build in the developer's original dirty workspace, old stopped evidence checkout or any unrelated repo. Do not alter original emulator config, keystore files, signing profiles, SDK global state or user credentials. User workspace final bytewise preservation is NOT PROVEN unless actually checked; record observed actual reads/writes.
-3. Read real `linkora_core/src/main/ets/playback/PlaybackPort.ets`, `PlaybackEngine.ets`, `PlaybackModels.ets` and entry Adaptive/System ports directly, no bespoke hardcoded-file helper. Existing private unsigned HAP was NOT made remotely accessible: independently confirm its **actual file existence and complete SHA256** exactly `DBF39571A1FD594FC8522F5759C678E9A97FA5EF3E3F34EA4615A6707CF9C11E` AND trustworthy prior local build provenance tying it to tested dispatch `9fc247a5c89173a91e07d1695ae404e70fae82c1`, same production source, simulator/debug product, x86 native whitelist and unmodified HAP. Compare the actual archived/locally retained provenance; public SHA claim alone is NOT enough. If provenance or bytes are missing/mismatch, `DEPENDENCY_BLOCKED — UNSIGNED ARTIFACT PROVENANCE`, do **not** rebuild or sign; finish report.
-
-## 2. One legal private signing credential gate, before signing
-
-**CRITICAL prerequisite for signing, not an invitation to test passwords repeatedly.**
-
-- Check the existing keystore/profile and certificate/key alias metadata only as strictly necessary for the already authorized simulator app. Prior bundle, profile device membership and time-window checks are recorded PASS but **do not prove the keystore opens**. Confirm the credential is available to the **authorized user through an existing supported secure local mechanism**, e.g., official DevEco signing UI, trusted credential manager or a verified non-echo interactive prompt. Do not echo, print, copy, store in a command line/process argument, raw PowerShell history, task stdout/stderr, repo, report, chat, public environment variable or script source. Do NOT search files for passwords, guess/reset/rotate/export credentials, change alias/password/profile/keystore, or prompt the user to paste any secret into this chat. If an installed SDK tool requires unsafe exposure, do not run it; `DEPENDENCY_BLOCKED — SECURE SIGNING METHOD`.
-- A user may privately supply/confirm their **own valid credential through their existing trusted local UI/manager**; Codex may only observe an authorized non-secret success/failure status. If no valid private credential is available, `DEPENDENCY_BLOCKED — KEYSTORE ACCESS`: signed/install/UI/three media NOT RUN. If a **single user-authorized secure keystore-open probe** is needed, allow ONE only, using supported tools that do not disclose the secret. If probe fails (even with 11014003), preserve real code/semantic result and STOP the signing-dependent branch: no second guess/probe/sign attempt. Existing files/profile cannot substitute for an opened keystore. Do not invent authentication correctness from path/file metadata.
-- Only after affirmative, separately established secure keystore access AND unchanged profile/member validity, the exact unsigned HAP/source gate and actual connected API26 x86_64 target, allow **at most ONE** normal SDK signing operation on the preexisting unsigned HAP using the supported secure credential mechanism. This is a NEW authorized action, not replay of the earlier failed sign invocation; do not run the prior command unchanged with an unverified credential. Capture true process exit and semantic SDK response without leaking any credential. If signing fails, record `FAIL — SIGNING` plus `DEPENDENCY_BLOCKED — SIGNED ARTIFACT`; no retry, no compiler. Signed HAP identity, source/architecture/signature/profile legitimacy must be independently verified locally before any install, and the HAP itself remains private.
-
-## 3. Independent scoped runtime only after valid signed install
-
-1. Query actual already-running simulator through documented read-only HDC; if target absent, classify `DEPENDENCY_BLOCKED — SIMULATOR ENVIRONMENT`; no sign/install/media, no reset/wipe/restart loop. No emulator -config / SDK emulator.json. Verify user-approved fixture MP4/HLS H264 bytes, existing network/server route readiness, existing legal signing device/bundle membership. Do not regenerate corpus or overwrite unrelated mapping. Check prerequisite cheaply **before** the signing attempt.
-2. If and only if exact source-bound x86 signed HAP exists, run one normal legal install/replace supported by installed platform. Observe native install success, actual app Ability foreground, nonempty Linkora-owned UI, valid window and private screenshot metadata before media; never accept HDC transport0 alone.
-3. Under `docs/AI_WORKFLOW.md` scoped failures and **one attempt per case**, the healthy System MP4 and separate HLS H264 native PREPARING-cancel case may proceed independently if prerequisite app/native state is safe. Healthy MP4: actual prepared/play, submitted colored first frame/pixel ROI, positive position and target GET if networked. HLS: cancel during observed preparing before prepared; correlate same pending native System AVPlayer normal release, no stale play/fallback, and app-associated service/audio/surface samples at early ~3–5 seconds and >20s returning observed zero WITHOUT force-stop. If healthy MP4 fails, preserve FAIL but cancellation may run only on safe independent session. App crash/uncontrolled resource contamination prevents unsafe further attempts. Distinct recovered MP4 is allowed **only after HLS normal native release and early/>20s cleanup is positively proven**; verify actual new playback and frame/color/progress. Full three-case target PASS only if all three individually PASS.
-4. Other formats HLS HEVC, ordinary HLS, FFV1, advanced audio/HDR/DV, real ARM64 MPV and performance all DEFERRED/NOT RUN. ARM64 Debug/Release/ABI complete gates are LEVEL_2, physical device LEVEL_3, not performed here. No product code edits, no force-stop/reset/wipe to make native cleanup appear PASS.
-5. Resource cleanup only for resources THIS task created (owned server/reverse/HTTP row/preference where legal); preserve unrelated user services. Preserve previous Auto preference if read/changed, don't infer cleanup from a system-wide force-stop.
-
-## 4. Lean authorized evidence and independent remote publication
-
-ONLY these two NEW public paths are permitted:
+Fresh-fetch exact remote branch. Verify READY/current ID, dispatch full40 SHA, SOURCE_SHA `96a6b802a4a2796f9ffefca74f80541a0ce9fcb9` is its **direct parent**, and SOURCE..dispatch changed path is EXACTLY `docs/CODEX_VALIDATION_TASK.md`. The previous head BASE_SHA `61494cda50fae092647db5133e781d2105063d52`→SOURCE diff MUST be EXACTLY:
 ```text
-docs/PLAYBACK_PHASE8F_LEVEL1_KEYSTORE_ACCESS_AND_REUSE_REPORT.md
-test-lab/playback/phase8f-level1-keystore-access-reuse-20261012/result.json
+linkora_core/src/main/ets/playback/PlaybackEngine.ets
+entry/src/test/PlaybackEngine.test.ets
+docs/IMPLEMENTATION_STATUS.md
+docs/SESSION_HANDOFF.md
 ```
+Confirm the prior fixed entry native adapters' Git blobs remain `1050012dbef214efba5ebccb5571cc9174345c08` (Adaptive) and `cc78c2611e8582633f2a67cb323f3072f5d8a31f` (System), equal to historical production fix SHA `8174e6e4f0214958fb83fef46e92170c4c10263a`. Source mismatch is GLOBAL_SAFETY_STOP for source-specific approval, not permission to test a different SHA. No guesswork about `PlaybackPort.ets`: actual contract is `linkora_core/src/main/ets/playback/PlaybackPort.ets`.
 
-Create a concise faithful report and one result JSON recording source/tested-dispatch, original evidence SHA, HAP SHA256 match/provenance decision, keystore access preflight **status only**, whether a single non-echo probe occurred, valid user-authorized credential availability YES/NO/NOT PROVEN, sign attempts (0 or1), actual child+wrapper result, actual connected target/install/foreground, three once-only case outcomes, original private raw-output hashes when safely available and proper uncertainty. Never print the secret/password/alias identifying private user, actual local paths/credential manager names if private, device IDs, network credentials/host target addresses, PID, private full logs, media, HAP, screenshots. Local private logs are not automatically independent remote evidence. No new gzip mirrors, inventory audit script or progress observer required; an optional extra failure is RECORD_ONLY if it does not undermine required facts.
+## 2. Independent static functional review (no execution claims)
 
-Required only for **public publication**: genuinely inspect BOTH new files for sensitive disclosure, Git exact path containment and correct blob modes, fresh remote branch HEAD equal current new dispatch, one ordinary evidence commit/push and fresh remote HEAD/parent/two-path integrity confirmation. If privacy/path/push fails, label `PUBLICATION_BLOCKED` and preserve locally observed results; do not repeat sign/build/runtime tests. Stage precisely via explicit `git add -- <report> <json>` (if ignored, `git add -f --` for those exact two files only); directly read real `git diff --cached --name-only`, no custom PowerShell array helper or hidden extra observer. If result/report amended after staging, re-stage ONLY those same files before commit. Never publish unreviewed old Rerun4 110 files.
+Read complete old/new `linkora_core/src/main/ets/playback/PlaybackEngine.ets`, `linkora_core/src/main/ets/playback/PlaybackPort.ets`, complete old/new `entry/src/test/PlaybackEngine.test.ets`. Review actual code and reason through these scenarios as distinct cases:
 
-**Failure locality:** optional discovery errors RECORD_ONLY, unsigned HAP/source absence DEPENDENCY_BLOCKED to signing/runtime, missing credential DEPENDENCY_BLOCKED to sign/runtime, signing process failure CASE_FAIL and dependent runtime NOT RUN; independent safe status/report can continue. An actual privacy/source/user-workspace danger is GLOBAL_SAFETY_STOP for unsafe actions. No retry of a failed command to make it green. One sign attempt max, zero builds. No quota checking, chat polling, background waiting.
+1. Old active port's `togglePlayback()` has in-flight `pause()` or `play()`; after a newer `open()` or `release()`, old Promise rejects. Verify old failure cannot mark new session ERROR, increment the NEW session ID or release a new active port. A failure for the *same* currently active port must still yield a genuine ERROR and release.
+2. Old active port raises `onInterruptionPause`; its Promise rejects after new playback has been selected. Verify the old async catch is gated by BOTH old session identity and same port. No swallowed error for the still-active port.
+3. A replacement `open()` awaits slow previous-port `release()`; a later `release()` wins meanwhile. Verify stale open cannot reset snapshot, show PREPARING, create new native port or autoplay after the newer release.
+4. An earlier `release()` awaits slow port disposal; a newer `open()` successfully enters PLAYING. Verify old completion cannot turn current snapshot to RELEASED.
+5. Inspect existing asynchronous observer/session ID handling, `failActivePort`, double-release and late callback implications for correct unrelated behavior. Flag any **specific** remaining race or missing owner check (with exact paths/functions and a safe reasoned trace), but don't claim that a behavior has been reproduced experimentally.
+6. Review four newly authored Fake/DeferredPause/DeferredRelease Hypium cases: whether they deterministically stage the intended race and assert the **right observable state and port identity**, whether they would fail before the fix, whether ArkTS typing/library idioms are plausible, and whether they cause unresolved Promises or cleanup hangs. Do not run Hypium or compiler; if static uncertainty remains, `REVIEW UNKNOWN — COMPILATION NOT RUN`, not PASS.
 
-## 5. Final result fields and handoff
+**Sufficient review evidence:** exact SHA, diff path list, risk matrix and concise code-level reasoning for each case. No need for screenshot, native logs, simulator, gzip archives, 33-pair inventories, hash chains or custom Python/PowerShell helper. Optional metadata read failure is RECORD_ONLY; continue independent checks. An actual source/test semantic gap is `SOURCE REVIEW FINDING`, not an automatic global task abort. Do not make any production fix (GPT owns implementation).
 
-`REVIEW_RESULT / STATE / TASK_ID / LEVEL / SOURCE_SHA / TESTED_DISPATCH_SHA / PREVIOUS_EVIDENCE_SHA / UNSIGNED_HAP_PROVENANCE / AUTHORIZED_KEYSTORE_ACCESS / SECURE_CREDENTIAL_CHANNEL / SIGNING_ATTEMPT_COUNT / SIGNING_VERDICT / CONNECTED_SIMULATOR / BUILD_COUNT=0 / ARM64_LEVEL2_DEFERRED / INSTALL_FOREGROUND / HEALTHY_MP4 / HLS_PREPARING_CANCEL_NORMAL_RELEASE_AND_RESOURCES / RECOVERED_MP4 / OTHER_FORMATS_DEFERRED / REQUIRED_PRIVACY_PATH_CHECKS / EVIDENCE_COMMIT_SHA (full40 or NONE) / WORKSPACE_PRESERVATION_LIMITS / NEXT_ACTION`.
+## 3. Report and remote review handoff
 
-Possible normal result even without credentials: `COMPLETED WITH DEPENDENCY BLOCK`, build0, sign0, opens0, with remotely published sanitized explanation if safe. On credential/sign failure, do not self-dispatch another full build or password-guess task. If user controls the keystore, the only legitimate next step is for that authorized user to verify/correct access **privately via their approved signing facility**. Only verified remote evidence is independently reviewable; no forged runtime acceptance or real MPV claims.
+Allowed ONE new public file ONLY, if ordinary publication remains safe:
+```text
+docs/PLAYBACK_PHASE8F_LEVEL0_STALE_ASYNC_STATIC_REVIEW.md
+```
+Brief Markdown report:
+- exact task/source/dispatch full40 SHAs and audited paths;
+- each of four race scenarios `STATIC OK / STATIC FINDING / UNKNOWN`;
+- test source inspection verdict (authored, not executed);
+- any concrete issue with file/function/causal trace;
+- `BUILD NOT RUN / TESTS NOT RUN / SIGN NOT RUN / RUNTIME NOT PROVEN`;
+- privacy/path/write-protection status, final `READY FOR NEXT LEVEL0 FEATURE WORK` or `NEEDS GPT SOURCE FIX`;
+- no inherited historical playback/native release PASS.
+
+Before publication inspect actual candidate whole text for secrets/private machine or device IDs/paths/host URLs/credential/profile material. Stage explicitly this ONE path, inspect raw `git diff --cached --name-only` and mode/blob, ensure EXACTLY this file is staged. Confirm remote head still dispatch, one normal no-force commit/push, fresh remote fetch and report readback; return true 40-digit remote evidence SHA. If Git publication fails, `PUBLICATION_BLOCKED`; retain local review status, do not redo source review, compile or retry failed wrappers. No new result JSON needed.
+
+This is a **source review only**; even `STATIC OK` is not a successful build or actual simulator/native test. If the task is blocked by genuinely unsafe source identity or privacy, protect the repository and report honestly. No repeated autonomous dispatch to turn optional helper errors green.
+
+## 4. Final response requirements
+
+`REVIEW_RESULT / STATE / TASK_ID / LEVEL / REPOSITORY / BRANCH / SOURCE_SHA / DISPATCH_SHA / PRODUCTION_DIFF / ADAPTER_BLOBS_UNCHANGED / FOUR_STATIC_RACE_VERDICTS / REGRESSION_TESTS_AUTHORED_NOT_RUN / BUILD_STATUS=NOT RUN / SIGNING_STATUS=NOT RUN / SIMULATOR_MEDIA_STATUS=NOT RUN / KEYSTORE=DEFERRED / SOURCE_FINDINGS / REPORT_PATH / REMOTE_EVIDENCE_SHA_OR_NONE / ORIGINAL_WORKSPACE_NONMUTATION_LIMITS / NEXT_ACTION`.
+
+If all source checks pass, conclude `STATIC REVIEW COMPLETE — NOT RUNTIME VALIDATION`. Do not invoke SDK, install HAP or claim cancellation/recovery native PASS. After receipt GPT independently reviews GitHub source/evidence and decides the next meaningful source feature or (later) milestone testing step.
