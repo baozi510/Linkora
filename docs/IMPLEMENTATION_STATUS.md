@@ -1,3 +1,17 @@
+## CURRENT EXECUTION SUMMARY — 2026-10-12 (Simulator-first normal Run supersedes old manual-keystore gate)
+
+**User correction and official guidance:** The objective is to get Linkora running on the API26 x86_64 emulator by the **ordinary DevEco Studio Run** path. The earlier GPT-authored tasks wrongly required a source-aligned manually `sign-app`-signed HAP and an old keystore access check BEFORE simulator run. Huawei's official developer guide says simulator/previewer debug requires no configured signing information; true hardware/debug distribution has a distinct signature gate: https://developer.huawei.com/consumer/cn/develop-novice-guide/ . This is a correction of our extra test protocol, not a claim that a previously failed signer was actually successful. The old V3 `11014003` and V4 `KEYSTORE ACCESS NOT PROVEN` reports remain historical and immutable, no new keystore secret accesses.
+
+**Verified repository context:** `build-profile.json5` exposes `simulator` product, `entry/build-profile.json5` exposes `entry@simulator`; `signingConfigs: []` is already present. Previous one x86_64 simulator Debug build was reported child0, but old unsigned HAP hash `DBF39571A1FD594FC8522F5759C678E9A97FA5EF3E3F34EA4615A6707CF9C11E` corresponds to earlier code, **not** current post-Level0 `PlaybackEngine` source; cannot claim source-matched runtime on that old artifact.
+
+**New authorized Level1 checkpoint:** fresh isolated branch/source, cheap actual emulator target and source preflight, one actual normal IDE Run of selected `simulator` + `entry@simulator` product/target (at most ONE actual necessary scoped Debug compilation), no manual SDK `sign-app`, zero old keystore probes, zero default ARM64/release/full verify cycles. Determine observable native install/Ability foreground/window/Linkora pixels before testing media. On real installer denial record exact installer error and block dependent opens **only**; do not automatically translate it to wrong keystore or wipe installed apps. Three targeted media cases remain dependent on real UI and release proof; full hardware MPV/native acceptance deferred. No invented PASS; if not run, NOT RUN.
+
+**Owner phase decision:** STOP perpetual signing credential tasks and stale-static review loops. A separate new `docs/CODEX_VALIDATION_TASK.md` dispatch after THIS review commit is the sole authority for one normal simulator Run checkpoint. Preserve all original user workspaces/stopped evidence; public evidence should be minimal sanitized report/status. No source changes in this policy-review commit.
+
+Older CURRENT sections below are historical.
+
+---
+
 ## CURRENT EXECUTION SUMMARY — 2026-10-12 (Level0 stale-open/catch static findings closed, proceed to new feature work)
 
 **Independent owner review:** GitHub evidence commit `95ce0319aaa8dbe96e8ee271c3f03c8e806538fe` has parent `a0f6dfb0b07333222ba9826acf56d0dad6854c8b`, and adds ONLY `docs/PLAYBACK_PHASE8F_LEVEL0_STALE_OPEN_CATCH_CLOSURE_REVIEW.md` (Git blob `848cfb1ad638acb3d4107048d6de93c0ed5f93e4`). GPT independently read report and complete current `PlaybackEngine.ets` / `PlaybackEngine.test.ets`, rechecked source/dispatch ancestry and exact allowed diffs, and agrees **three scoped STATIC OK** findings: post-await session guard in open error path, deferred failing-open race test barrier, and interruption-pause deferred rejection completion ordering. No remaining finding **within those specific previously reported two problems**; no broader compiler/runtime certification.

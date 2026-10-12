@@ -2,6 +2,17 @@
 
 ## 0. 文档定位
 
+## 2026-10-12 — Simulator first: normal DevEco Run, NO prerequisite manual keystore
+
+**Owner correction superseding earlier signed-HAP preconditions for simulator-only work:** The actual goal is a runnable Linkora **phone/tablet simulator**. Huawei official developer guidance states emulator/previewer debugging does **not require the developer to configure signing information**, whereas actual hardware requires app signing (https://developer.huawei.com/consumer/cn/develop-novice-guide/). Current Linkora `build-profile.json5` already defines `simulator` product with `signingConfigs: []`; `entry/build-profile.json5` defines `entry@simulator`; `scripts/verify-simulator.ps1` produces/audits an x86_64 simulator Debug HAP but is not an installation, Run/Debug or manual signing contract. The previous bespoke SDK `sign-app` keystore error `11014003` was a historic **extra manually imposed test step**, not evidence that the ordinary simulator Run requires that old keystore. Do not seek, reset, rotate, guess or handle original private signing credentials for emulator verification.
+
+**New Level1 normal path:** in an isolated source-compatible project, with a running user-authorized x86_64/API26 emulator, select the `simulator` product and `entry@simulator` target, then invoke the installed DevEco Studio's normal `Run` once, allowing its documented normal build/install/start workflow. Do not run independent `sign-app`, inspect historical keystores, alter global signing configs or invoke the old V4 credential probe. Keep at most one necessary scoped simulator Debug compilation in this checkpoint and zero ARM64/default builds; do not run an additional separate `verify-simulator.ps1` build after IDE Run. If IDE/native build fails, mark build FAIL and other gates NOT RUN, without rerunning. If installation fails on this specific emulator, preserve exact returned error and classify `DEPENDENCY_BLOCKED — ACTUAL INSTALL`; investigate that distinct simulator-specific error later, never assume keystore in advance or bypass signature validation. Do not force-remove an existing user app or wipe/emulator-reset to force a successful install.
+
+**Runtime acceptance after genuine installed foreground window:** actual Linkora UI/layout and visible pixels first; healthy MP4 first frame/positive position; independent HLS H264 System PREPARING cancellation with same pending candidate normally released and early/>20s zero associated resources; distinct recovered MP4 only if release and cleanup proven. One attempt each, scope failures to their dependencies. A screenshot of the launcher or only process/transport exit0 is not a UI PASS. Installed simulator System playback is not real ARM64 MPV or hardware codec PASS. No unexecuted test becomes PASS. Keep privacy/original workspace protections and tiny sanitized evidence.
+
+**Clarification:** older signed-artifact and local-keystore blocks remain immutable *historical task results*, but they must not block the new normal simulator run. Current post-Level0 source modifications invalidate naïve use of older HAP built before those changes. A new IDE Run build is permitted solely because the user explicitly prioritizes reaching a running simulator checkpoint; it is not a return to compulsory per-edit builds.
+
+
 本计划用于指导 Codex 在**现有 HarmonyOS 项目骨架**上渐进实现完整网络播放器。
 
 核心产品方向：

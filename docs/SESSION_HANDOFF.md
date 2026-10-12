@@ -1,3 +1,15 @@
+## CURRENT STATE — 2026-10-12 (Critical correction: normal simulator Run does not require old keystore gate)
+
+**User goal:** run current Linkora in the connected x86_64/API26 simulator through the standard DevEco Studio Run/Debug workflow. Our earlier manual `sign-app` and old keystore precondition was an unnecessary added test-gate for **simulator development**. Huawei official getting-started statement: using emulator/previewer debugging does not need configured signing information; real hardware has its own signed deployment requirements (https://developer.huawei.com/consumer/cn/develop-novice-guide/). Prior V3 native `11014003` reflects failure of extra SDK `sign-app` attempt, not proof DevEco Run cannot work. Old V4 no credential test and old user-reported inaccessible keystore remain true **historical** details; no new password work required.
+
+**Current code:** Level0 PlaybackEngine stale-async fixes static-reviewed and CLOSED; regression tests AUTHORED/NOT RUN. `build-profile.json5` products default+simulator, signingConfigs empty; `entry/build-profile.json5` entry simulator target; SDK x86 native expected FFmpeg analyzer only, no real mpv on simulator. Prior private unsigned x86 HAP built from earlier source must NOT be reused for current source runtime. Explicit user goal now justifies one new scoped simulator Debug build as part of normal IDE Run, if the live source cannot be proven compatible with a previously built artifact.
+
+**NEXT:** one distinct new task-only `LEVEL_1_FUNCTIONAL` dispatch (not rerun previous closed IDs). In an isolated clone, cheap fresh target check, select product `simulator` and target `entry@simulator` in DevEco Studio, invoke normal Run ONCE, no `sign-app`, no old keystore probe, no independent duplicate build. Capture actual install result, foreground Linkora UI/window/pixels, then healthy MP4 and independent HLS H264 PREPARING native cancellation/early+>20s cleanup, distinct recovered MP4 conditional on clean cancellation. If any install fails, record actual native error and no dependent media attempts; never start password guessing or wipe/uninstall user data. Source protections and public privacy still mandatory. Historical STOPs/FAILs unchanged, no new functional PASS claimed by this handoff update. No ARM64 default full build or device hardware.
+
+No production code edits in THIS owner policy change; task dispatch will be separate after review commit. Earlier CURRENT sections below are historical.
+
+---
+
 ## CURRENT STATE — 2026-10-12 Level0 stale-async closure accepted; next move is product implementation
 
 **Branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`. Remote static evidence SHA `95ce0319aaa8dbe96e8ee271c3f03c8e806538fe`, one parent `a0f6dfb0b07333222ba9826acf56d0dad6854c8b`, exactly one new `docs/PLAYBACK_PHASE8F_LEVEL0_STALE_OPEN_CATCH_CLOSURE_REVIEW.md`. GPT independently read the published report/source/test and accepts three bounded STATIC OK verdicts closing the two earlier known issues. No new source findings **within that limited scope**; no compiled/tested/runtime PASS.
