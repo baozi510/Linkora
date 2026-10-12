@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "mpv": "./entry/simulator-stubs/mpv-arkts"
+  }
+}

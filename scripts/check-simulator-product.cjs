@@ -50,12 +50,15 @@ check(entryPackage.dependencies.linkora_ffmpeg === 'file:../linkora_ffmpeg', 'en
 const hvigor = json5('hvigor/hvigor-config.json5');
 
 const simulatorProduct = project.app.products.find(item => item.name === 'simulator');
+const defaultProduct = project.app.products.find(item => item.name === 'default');
 check(!!simulatorProduct, 'simulator product is missing');
-check(simulatorProduct && simulatorProduct.bundleName === undefined,
-  'simulator product must not override the production bundleName');
+check(defaultProduct && defaultProduct.bundleName === undefined,
+  'default product must preserve AppScope bundle identity');
+check(simulatorProduct && simulatorProduct.bundleName === 'com.linkora.player.simulator',
+  'simulator must use a distinct non-destructive bundle identity');
 const appScope = json5('AppScope/app.json5');
 check(appScope.app.bundleName === 'com.linkora.player',
-  'simulator and default must share the production app identity');
+  'production AppScope bundle identity must remain unchanged');
 
 const entryModule = project.modules.find(item => item.name === 'entry');
 const projectDefaultTarget = entryModule && entryModule.targets.find(item => item.name === 'default');
@@ -85,9 +88,57 @@ check(simulatorTarget && !(simulatorTarget.buildOption && simulatorTarget.buildO
 
 check(hvigor.dependencies['@ohos/hvigor-multi-target-package-plugin'] === '7.0.0',
   'multi-target package plugin 7.0.0 is required');
-check(entryPackage.simulatorTargetDependencies &&
-  entryPackage.simulatorTargetDependencies['@mpv-ohos/mpv-arkts'] === 'file:./simulator-stubs/mpv-arkts',
-  'simulator target must replace only the MPV native package with the compile-only stub');
+// Only the documented ohpm parameterFile route can select the stub.
+const rootPackage = json5('oh-package.json5');
+const mpvDefaultParams = json5('oh-package-default-params.json5');
+const mpvSimulatorParams = json5('oh-package-simulator-params.json5');
+check(rootPackage.parameterFile === './oh-package-default-params.json5',
+  'default ohpm parameterFile must preserve the production dependency');
+check(entryPackage.dependencies['@mpv-ohos/mpv-arkts'] === '@param:dependencies.mpv',
+  'entry MPV dependency must resolve via documented @param reference');
+check(!Object.prototype.hasOwnProperty.call(entryPackage, 'simulatorTargetDependencies'),
+  'remove unsupported unconsumed simulatorTargetDependencies declaration');
+check(mpvDefaultParams.dependencies && mpvDefaultParams.dependencies.mpv === '1.0.0',
+  'default MPV param must resolve real production 1.0.0');
+check(mpvSimulatorParams.dependencies &&
+  mpvSimulatorParams.dependencies.mpv === './entry/simulator-stubs/mpv-arkts',
+  'simulator MPV param must resolve the local compile-only stub from project root');
+const stubManifest = json5('entry/simulator-stubs/mpv-arkts/oh-package.json5');
+check(stubManifest.name === '@mpv-ohos/mpv-arkts' && stubManifest.main === 'Index.ets',
+  'simulator MPV stub package name/entry must match the imported dependency');
+
+// A source declaration is never proof of installed target dependency resolution.
+// Caller may supply the REAL generated simulator ohpm lock after an authorized
+// ohpm --pf install; failing it blocks subsequent simulator artifact acceptance.
+const lockAt = process.argv.indexOf('--simulator-lock');
+if (lockAt >= 0) {
+  const supplied = process.argv[lockAt + 1];
+  if (!supplied || supplied.startsWith('--')) {
+    failures.push('--simulator-lock requires a generated lockfile path');
+  } else {
+    const lockPath = path.resolve(root, supplied);
+    if (!lockPath.startsWith(root + path.sep)) {
+      failures.push('--simulator-lock must stay inside the isolated project');
+    } else {
+      try {
+        const lock = JSON.parse(fs.readFileSync(lockPath, 'utf8'));
+        const records = Object.values(lock.packages || {}).filter(item =>
+          item && item.name === '@mpv-ohos/mpv-arkts');
+        check(records.length === 1, 'simulator resolved lock must contain exactly one MPV dependency');
+        const pkg = records[0];
+        if (pkg) {
+          const resolved = String(pkg.resolved || '').replace(/\\/g, '/');
+          check(pkg.registryType === 'local' &&
+            resolved.includes('simulator-stubs/mpv-arkts') &&
+            !resolved.includes('https://'),
+            'simulator lock must resolve local MPV stub, never remote production native HAR');
+        }
+      } catch (_error) {
+        failures.push('cannot read/parse actual generated simulator dependency lock');
+      }
+    }
+  }
+}
 
 const required = [
   'entry/src/default/PlaybackComposition.ets',
@@ -184,4 +235,6 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log('Simulator product parity/isolation checks passed.');
+console.log(lockAt >= 0 ?
+  'Simulator source and supplied resolved lock checks passed (HAP ABI audit still required).' :
+  'Simulator source checks passed; effective MPV dependency NOT VERIFIED (use --simulator-lock after ohpm --pf).');

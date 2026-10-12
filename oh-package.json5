@@ -1,5 +1,6 @@
 {
   "modelVersion": "5.0.0",
+  "parameterFile": "./oh-package-default-params.json5",
   "name": "linkora",
   "version": "0.1.0",
   "description": "A native HarmonyOS network media player.",
