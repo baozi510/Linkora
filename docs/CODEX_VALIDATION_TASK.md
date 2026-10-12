@@ -1,6 +1,7 @@
 # Codex Task — CLI Simulator Media Features with Bounded Autonomous Repair
 
-> STATE: READY
+> STATE: SUPERSEDED — USER EXPANDED ALL-ERROR AUTONOMY; NEVER EXECUTED AS THIS ID
+> SUPERSEDED_REASON: max task-scoped permission for ALL media/runtime/build/test errors; distinct successor task required
 > TASK_ID: phase8f-level1-cli-media-function-bounded-autorepair-v1
 > REPOSITORY: baozi510/Linkora
 > BRANCH: feat/playback-capability-phase8
@@ -21,6 +22,12 @@
 > NO_MANUAL_SIGN_APP/OLD_KEYSTORE/GUI/APP_UNINSTALL/WIPE/RESET/USER_WORKSPACE_WRITE: ZERO
 > NO_DEFAULT_ARM64/RELEASE_BUILD; NO FULL 59-CASE MATRIX
 > STOP_ON_UNSOLVABLE: NEEDS GPT DECISION — STOPPED WITH GROUNDED ERROR AND NEXT SMALLEST ACTION
+
+## Supersession notice — no reported execution under this ID
+
+**This task ID is SUPERSEDED (not executed, not failed, and not runtime PASS).** The user granted Codex broader autonomy to change **all task-relevant code/tests/runtime/media**, not only build/installation or two narrow media fixes. The successor is a DIFFERENT source-bound READY task issued after the policy update. Do not replay this ID or claim its lack of report is evidence that media passed/failed.
+
+Latest official owner authority: top of `docs/AI_WORKFLOW.md` ("Maximum task-scoped Codex autonomy across ALL errors"), bounded to isolated scratch, real media evidence, a non-destructive CLI-only simulator, a separate candidate branch for tracked source modifications, and explicit STOP.
 
 ## 0. Follow the NEW canonical six-step workflow, not repeated one-off audit loops
 

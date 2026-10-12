@@ -1,3 +1,15 @@
+## CURRENT STATE — 2026-10-13 Full Codex autonomous media/runtime repair authority; bounded STOP
+
+**New owner authorization:** Codex is no longer restricted to fixing build/install. It can independently diagnose/test/change ALL parts required for current media acceptance — ArkTS playback logic and state races, FFmpeg/C++ decoding, WebP encoding, System AVPlayer operations, HLS native pending cancellation/resource release/recovery, controlled local fixture/test tooling, analyzer diagnostics, and compilation/packaging — in a NEW isolated checkout. User's original worktree remains strictly unchanged (except already authorized read-only pinned x86 FFmpeg input inspection/copy outward). Production tracked fixes belong in separate `codex/*` candidate branch, never directly into `feat/playback-capability-phase8`; GPT owner reviews.
+
+**Task caps increased but finite:** 40 minutes actual work; max five specifically justified repairs across ANY error type, five scoped x86 Debug compiles, three conditional parameterized OHPM installs, two only-if-needed audited nondestructive simulator bundle installs, two per media-case attempts only if a real fix changes behavior, one transient read retry. No identical unchanged retry, unsupported SDK guesswork, uncontrolled loops or repetitive report packaging. Stop dependent case if fixture/harness/toolchain unavailable without grounded fix; report exact issue and partial results under `NEEDS GPT DECISION — STOPPED` when no safe fix remains, or `GLOBAL_SAFETY_STOP` for true damage. CLI only; no DevEco GUI, passwords, keystore, original edits, uninstall/wipe. Strict actual decoder/encoder/playback PASS evidence.
+
+**Latest proven milestone:** earlier remote basic CLI x86 Debug source-matched install and EntryAbility foreground PASS (`4eeeb8de4ee6c18794bd8145b1ab1ba051cdfb88`). Codecs/playback still NOT RUN. Earlier `phase8f-level1-cli-media-function-bounded-autorepair-v1` dispatched at `8ceb7d6505f23f84605379188d88fb3db950ec4c` and has no newer remote result as of update: supersede instead of silently redefining ID. New READY task distinct ID and direct new policy-parent checks; no restart of completed build/open.
+
+Earlier CURRENT sections below historical.
+
+---
+
 ## CURRENT STATE — 2026-10-13 normal CLI simulator Ability open complete; six-step bounded Codex autonomy
 
 **Latest accepted completed task:** `phase8f-level1-cli-har-stub-prebuild-and-app-open-v1` / report HEAD `4eeeb8de4ee6c18794bd8145b1ab1ba051cdfb88`, parent dispatch `b46e115b5712df32a92f0afdd95ce738d096e8ac`, report-only addition `docs/PLAYBACK_PHASE8F_CLI_HAR_STUB_PREBUILD_APP_OPEN_REPORT.md`. Actual x86 simulator Debug CLI build PASS and one clean `libs/x86_64/liblinkora_ffmpeg.so` audit PASS, distinct simulator bundle embedded, nondestructive CLI install PASS, EntryAbility started and app-specific FOREGROUND PASS. No production code changes required. This does NOT validate FFmpeg frame decode, WebP encoding, System MP4 playback or HLS cleanup; those were intentionally NOT RUN. No new raw HAP/log remote reproduction.

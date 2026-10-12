@@ -2,6 +2,13 @@
 
 ## 0. 文档定位
 
+## 2026-10-13 — Codex maximum scope: ANY task-relevant error, not just build/install
+
+**Latest owner authority:** Codex may modify and test actual media-function implementation (FFmpeg decoding, WebP encoding, System playback, async concurrency, native cleanup/recovery), test harness, approved fixture infrastructure, and any necessary ArkTS/C++/CMake/ohpm/Hvigor/dependency issue in **isolated scratch**. Not limited to build/install or a small diagnostic edit. Any necessary tracked production fix goes only to a `codex/*` candidate for GPT review. No direct protected branch merge/write, original dirty workspace edits, GUI, keystore/password accesses, app uninstall/wipe, or fake PASS. Simulator x86 native dependency set and actual device ARM64 native MPV remain separate.
+
+**New default task ceilings:** 40 minutes active, max five evidence-backed changes across all failure types, max five necessary x86 Debug builds, max three parameterized OHPM installs (only after a real dependency need), max two properly audited nondestructive simulator installs (only to validate truly changed code), max two attempts per independent functional media case (second requires actual causal code/input change), one safe transient transport retry. **Not targets to exhaust.** If root cause unknown/unresolvable in scope, matching error repeats without new evidence, or any budget/unsafe boundary is reached, stop immediately and return partial results + `NEEDS GPT DECISION — STOPPED`. No repeated old task IDs, no looping across equivalent reports. Follow canonical docs/AI_WORKFLOW.md newer current authority. Normal CLI simulator Ability-open was already reported PASS; actual codec/encoding/player functions remain to be proven.
+
+
 ## 2026-10-13 — Six-stage autonomous Codex execution with bounded retries
 
 **Current policy from docs/AI_WORKFLOW.md takes precedence over older fixed one-build-per-edit and signing-first requirements.** The owner assigns outcome and budgets; Codex may inspect authorized local directories, copy validated x86 FFmpeg input into an isolated scratch clone, test and patch relevant code/config only in that clone, and use up to three *materially distinct* build attempts when needed. A successful source-matched installed simulator artifact should be used without rebuilding merely to produce new evidence. Maintain `default` ARM64 real MPV separately from `simulator` x86 FFmpeg and MPV stub.
