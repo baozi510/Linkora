@@ -43,6 +43,10 @@ export class PlaybackEngine {
   async open(source: MediaSource, surfaceId: string, startPosition: number = 0): Promise<void> {
     const sessionId: number = ++this.sessionId;
     await this.releaseCurrentPort();
+    // A later open() or release() can win while the previous port is closing.
+    if (!this.isCurrent(sessionId)) {
+      return;
+    }
     this.resetSnapshot();
     this.status = PlaybackStatus.PREPARING;
     this.notify();
@@ -92,6 +96,7 @@ export class PlaybackEngine {
     if (port === null) {
       return;
     }
+    const sessionId: number = this.sessionId;
 
     try {
       if (this.status === PlaybackStatus.PLAYING ||
@@ -106,7 +111,10 @@ export class PlaybackEngine {
         await port.play();
       }
     } catch (error) {
-      this.failActivePort(this.portError(error));
+      // An old pause/play may reject after a different session has started.
+      if (this.isCurrent(sessionId) && this.port === port) {
+        this.failActivePort(this.portError(error));
+      }
     }
   }
 
@@ -155,10 +163,13 @@ export class PlaybackEngine {
   }
 
   async release(): Promise<void> {
-    ++this.sessionId;
+    const sessionId: number = ++this.sessionId;
     await this.releaseCurrentPort();
-    this.status = PlaybackStatus.RELEASED;
-    this.notify();
+    // Do not replace a newer playback snapshot with an old release result.
+    if (this.isCurrent(sessionId)) {
+      this.status = PlaybackStatus.RELEASED;
+      this.notify();
+    }
   }
 
   private createPortObserver(sessionId: number): PlaybackPortObserver {
@@ -244,10 +255,14 @@ export class PlaybackEngine {
       !(this.status === PlaybackStatus.BUFFERING && this.statusBeforeBuffering === PlaybackStatus.PLAYING))) {
       return;
     }
+    const sessionId: number = this.sessionId;
     this.status = PlaybackStatus.PAUSED;
     this.notify();
     port.pause().catch((error: PlaybackPortError) => {
-      this.failActivePort(error);
+      // The interrupted port may have been replaced while pause was pending.
+      if (this.isCurrent(sessionId) && this.port === port) {
+        this.failActivePort(error);
+      }
     });
   }
 

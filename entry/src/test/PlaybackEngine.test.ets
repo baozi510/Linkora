@@ -86,6 +86,42 @@ class FailingPreparePort extends FakePlaybackPort {
   }
 }
 
+// The old session's asynchronous operation can complete after the next open.
+class DeferredPausePort extends FakePlaybackPort {
+  private rejectPause: ((error: PlaybackPortError) => void) | null = null;
+
+  async pause(): Promise<void> {
+    return new Promise<void>((_resolve: () => void,
+      reject: (error: PlaybackPortError) => void) => {
+      this.rejectPause = reject;
+    });
+  }
+
+  failPendingPause(): void {
+    const reject: ((error: PlaybackPortError) => void) | null = this.rejectPause;
+    this.rejectPause = null;
+    reject?.(new PlaybackPortError(5400104, 'previous session pause cancelled'));
+  }
+}
+
+class DeferredReleasePort extends FakePlaybackPort {
+  private finish: (() => void) | null = null;
+
+  async release(): Promise<void> {
+    this.released = true;
+    await new Promise<void>((resolve: () => void) => {
+      this.finish = resolve;
+    });
+    this.observer.onStateChange(PortPlaybackState.RELEASED);
+  }
+
+  finishRelease(): void {
+    const finish: (() => void) | null = this.finish;
+    this.finish = null;
+    finish?.();
+  }
+}
+
 function latest(snapshots: PlaybackSnapshot[]): PlaybackSnapshot {
   return snapshots[snapshots.length - 1];
 }
@@ -301,6 +337,92 @@ export default function playbackEngineTest(): void {
 
       expect(ports[0].released).assertTrue();
       expect(latest(snapshots).status).assertEqual(PlaybackStatus.PLAYING);
+    });
+
+    it('ignoresLateTogglePauseFailureFromReplacedPort', 0, async () => {
+      const snapshots: PlaybackSnapshot[] = [];
+      const ports: FakePlaybackPort[] = [];
+      const engine = new PlaybackEngine((snapshot: PlaybackSnapshot) => snapshots.push(snapshot),
+        async (observer: PlaybackPortObserver) => {
+          const port: FakePlaybackPort = ports.length === 0 ?
+            new DeferredPausePort(observer) : new FakePlaybackPort(observer);
+          ports.push(port);
+          return port;
+        });
+      await engine.open(MediaSource.fromLocalDocument('file://first.mp4'), 'surface');
+      const stalePause: Promise<void> = engine.togglePlayback();
+      await engine.open(MediaSource.fromLocalDocument('file://second.mp4'), 'surface');
+      (ports[0] as DeferredPausePort).failPendingPause();
+      await stalePause;
+
+      expect(ports[0].released).assertTrue();
+      expect(ports[1].released).assertFalse();
+      expect(latest(snapshots).status).assertEqual(PlaybackStatus.PLAYING);
+      await engine.release();
+    });
+
+    it('ignoresLateInterruptionPauseFailureFromReplacedPort', 0, async () => {
+      const snapshots: PlaybackSnapshot[] = [];
+      const ports: FakePlaybackPort[] = [];
+      const engine = new PlaybackEngine((snapshot: PlaybackSnapshot) => snapshots.push(snapshot),
+        async (observer: PlaybackPortObserver) => {
+          const port: FakePlaybackPort = ports.length === 0 ?
+            new DeferredPausePort(observer) : new FakePlaybackPort(observer);
+          ports.push(port);
+          return port;
+        });
+      await engine.open(MediaSource.fromLocalDocument('file://first.mp4'), 'surface');
+      ports[0].observer.onInterruptionPause();
+      await engine.open(MediaSource.fromLocalDocument('file://second.mp4'), 'surface');
+      (ports[0] as DeferredPausePort).failPendingPause();
+      await Promise.resolve();
+
+      expect(ports[1].released).assertFalse();
+      expect(latest(snapshots).status).assertEqual(PlaybackStatus.PLAYING);
+      await engine.release();
+    });
+
+    it('doesNotStartStaleOpenAfterConcurrentRelease', 0, async () => {
+      const snapshots: PlaybackSnapshot[] = [];
+      const ports: FakePlaybackPort[] = [];
+      const engine = new PlaybackEngine((snapshot: PlaybackSnapshot) => snapshots.push(snapshot),
+        async (observer: PlaybackPortObserver) => {
+          const port: FakePlaybackPort = ports.length === 0 ?
+            new DeferredReleasePort(observer) : new FakePlaybackPort(observer);
+          ports.push(port);
+          return port;
+        });
+      await engine.open(MediaSource.fromLocalDocument('file://first.mp4'), 'surface');
+      const staleOpen: Promise<void> =
+        engine.open(MediaSource.fromLocalDocument('file://second.mp4'), 'surface');
+      await engine.release();
+      (ports[0] as DeferredReleasePort).finishRelease();
+      await staleOpen;
+
+      expect(ports.length).assertEqual(1);
+      expect(latest(snapshots).status).assertEqual(PlaybackStatus.RELEASED);
+    });
+
+    it('doesNotLetLateReleaseOverwriteNewPlayback', 0, async () => {
+      const snapshots: PlaybackSnapshot[] = [];
+      const ports: FakePlaybackPort[] = [];
+      const engine = new PlaybackEngine((snapshot: PlaybackSnapshot) => snapshots.push(snapshot),
+        async (observer: PlaybackPortObserver) => {
+          const port: FakePlaybackPort = ports.length === 0 ?
+            new DeferredReleasePort(observer) : new FakePlaybackPort(observer);
+          ports.push(port);
+          return port;
+        });
+      await engine.open(MediaSource.fromLocalDocument('file://first.mp4'), 'surface');
+      const staleRelease: Promise<void> = engine.release();
+      await engine.open(MediaSource.fromLocalDocument('file://second.mp4'), 'surface');
+      (ports[0] as DeferredReleasePort).finishRelease();
+      await staleRelease;
+
+      expect(ports.length).assertEqual(2);
+      expect(ports[1].released).assertFalse();
+      expect(latest(snapshots).status).assertEqual(PlaybackStatus.PLAYING);
+      await engine.release();
     });
 
     it('mapsPlatformErrorAndReleasesPort', 0, async () => {

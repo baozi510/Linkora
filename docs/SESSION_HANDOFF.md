@@ -1,3 +1,15 @@
+## CURRENT STATE — 2026-10-12 Level-0 source fix authored for PlaybackEngine stale operations
+
+**Branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`; previous remote HEAD before this source change `61494cda50fae092647db5133e781d2105063d52`. Keystore is UNAVAILABLE by user report; V4 remains CLOSED, latest independently reviewed V4 evidence `2763174a67da32332754d745a0de174328c7128f`. No keystore checking/retry/new signed HAP or simulator runtime permitted here.
+
+**GPT source work:** only `linkora_core/src/main/ets/playback/PlaybackEngine.ets` and `entry/src/test/PlaybackEngine.test.ets` are production/test diff in the new review commit. Session/port equality now protects old pause/play and interruption async rejections; session identity recheck protects `open()` and `release()` after awaited old-port disposal. Four fake deferred-operation regression cases authored. Existing Adaptive/System production blobs remain `1050012dbef214efba5ebccb5571cc9174345c08` / `cc78c2611e8582633f2a67cb323f3072f5d8a31f`. No actual compile, test or emulator operation was done; don't infer PASS or proven native release. The previously locally verified unsigned HAP belongs to an older source and is NOT source-bound to this new code.
+
+**Immediately follow with new distinct task-only dispatch:** `LEVEL_0_FEATURE`, READ-ONLY Codex static review of stale session/callback isolation and four regression cases with actual source SHA and task-only drift; no build, signing, SDK, simulator, HAP, native artifact, user workspace or historical private logs. If optional tests cannot execute without build, mark NOT RUN. Review should seek concurrent `open`/`release`, async toggle pause rejection, interruption pause rejection, stale callbacks and resource ownership; distinguish source reasoning from runtime evidence. Preserve user workspace untouched. No new test pass claims without execution.
+
+**Later path:** if offline review is clean, return to other feature implementations and defer Level1 installed playback until a legitimate signing route exists. Full ARM64/Release/ABI and real MPV/hardware remain Level2/3; any eventual usable artifact must match current source, not the old unsigned HAP. Older headings are historical.
+
+---
+
 ## CURRENT STATE — 2026-10-12 (Keystore unavailable by owner report; runtime deferred; Level-0 development unblocked)
 
 **Repo / branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`. Latest independently reviewed published Phase8F V4 evidence commit: `2763174a67da32332754d745a0de174328c7128f`. Previous current remote closure `3c49bde00a79b099f1d4a2ecd9652cf6a2ef7fc8`, `docs/CODEX_VALIDATION_TASK.md` `CLOSED` and **NO READY execution authorization**.
