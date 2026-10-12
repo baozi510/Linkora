@@ -2,6 +2,15 @@
 
 ## 0. 文档定位
 
+## 2026-10-13 — Six-stage autonomous Codex execution with bounded retries
+
+**Current policy from docs/AI_WORKFLOW.md takes precedence over older fixed one-build-per-edit and signing-first requirements.** The owner assigns outcome and budgets; Codex may inspect authorized local directories, copy validated x86 FFmpeg input into an isolated scratch clone, test and patch relevant code/config only in that clone, and use up to three *materially distinct* build attempts when needed. A successful source-matched installed simulator artifact should be used without rebuilding merely to produce new evidence. Maintain `default` ARM64 real MPV separately from `simulator` x86 FFmpeg and MPV stub.
+
+The flow is **(1) explicit goal/source and budgets → (2) low-cost provenance/dependency preflight → (3) bounded scratch debugging and changes → (4) real staged acceptance tests → (5) stop on exhausted budget/unfixable/safety condition → (6) one sanitized handoff for GPT review**. Default ceiling 20 minutes active effort, initial plus two diagnosis-backed builds maximum, two parameterized ohpm installs, one ABI-gated app install and one attempt per media test unless stricter individual task. Same error + same input cannot be retried. On unsupported toolchain/ABI/signature/can't reproduce fixture, classify factual blocking and STOP dependent path; on two distinct failed repairs or no grounded remedy, `NEEDS GPT DECISION — STOPPED`. Don't pad the task with another redundant static review. Candidate production patch may be published only to isolated `codex/*` branch, never to feature branch without GPT review.
+
+**Known completed 2026-10-12 native app-open:** GitHub report at `4eeeb8de4ee6c18794bd8145b1ab1ba051cdfb88` records direct x86 CLI Hvigor build PASS, generated HAP x86 audit PASS and `com.linkora.player.simulator` embedded, CLI install PASS, EntryAbility foreground PASS with bounded no-fatal log. This is a **normal app-open** milestone, not media decode/encode/playback PASS. Current next work is targeted native simulator FFmpeg actual frame decode, WebP output where existing harness is callable, and System AVPlayer MP4/HLS behaviors. No visual UI acceptance, desktop GUI, old key, app wipe/uninstall or ARM64 media extrapolation.
+
+
 ## 2026-10-12 — Simulator acceptance is media-function-first, NOT UI appearance
 
 **Owner's updated priority supersedes the immediately preceding UI-pixel/foreground-layout checklist.** The x86_64/API26 simulator is a *functional test target*: test actual decoder/media analysis, supported encoding, media playback controls, cancellation and resource recovery. There is **no UI design, layout, screenshot, visual pixel ROI or player-polish acceptance gate** for this functional checkpoint. A real installed/running Linkora app, callable feature/diagnostics route and its own functional/native observations may be necessary to execute tests; process existence or launcher state alone does not prove media correctness. First-frame events and **actual decoded frame buffers** remain valid decoder/playback functional evidence, not a screenshot or UI-design gate.

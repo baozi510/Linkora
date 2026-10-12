@@ -1,6 +1,8 @@
 # Codex Task — CLI-Only Build and Normal App Open on x86 Simulator (HAR Stub Repair)
 
-> STATE: READY
+> STATE: CLOSED — NORMAL SIMULATOR ABILITY OPEN PASS, MEDIA NOT RUN
+> COMPLETED_EVIDENCE_SHA: 4eeeb8de4ee6c18794bd8145b1ab1ba051cdfb88
+> RETEST_SAME_ID: NOT AUTHORIZED
 > TASK_ID: phase8f-level1-cli-har-stub-prebuild-and-app-open-v1
 > REPOSITORY: baozi510/Linkora
 > BRANCH: feat/playback-capability-phase8
@@ -19,6 +21,12 @@
 > MANUAL_SIGN_APP / KEYSTORE PROBE / OLD PROFILE / DEVICE WIPE / EXISTING APP UNINSTALL: 0
 > DEFAULT_ARM64/RELEASE BUILD: 0
 > MEDIA / FFMPEG PROBE / VIDEO FRAME / WEBP / MP4 / HLS TESTS: 0 (NEXT CHECKPOINT)
+
+## Closure notice — completed; next task follows six-step bounded-autonomy workflow
+
+**This exact prior ID is CLOSED, not executable again.** Independently reviewed evidence at `4eeeb8de4ee6c18794bd8145b1ab1ba051cdfb88` (only new report `docs/PLAYBACK_PHASE8F_CLI_HAR_STUB_PREBUILD_APP_OPEN_REPORT.md`) records source-bound x86 simulator build/HAP ABI/CLI install/EntryAbility foreground **PASS**. It deliberately did not execute FFmpeg/WebP/MP4/HLS media functions. GPT accepts only that narrow Ability-open milestone.
+
+The latest owner direction authorizes Codex to autonomously test, troubleshoot and fix bounded build/media failures in a NEW isolated scratch clone. The canonical six-step policy and **stop-after-two-concrete-repairs / no identical retry / stop if unsolvable** gates are in `docs/AI_WORKFLOW.md`. New source-bound media task has a DIFFERENT ID and budget. Do not use this historical dispatch to restart work or infer media PASS.
 
 ## 0. Separate execution provenance and actual newly observed failure
 
