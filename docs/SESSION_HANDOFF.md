@@ -1,3 +1,15 @@
+## CURRENT STATE — 2026-10-12 Level0 stale-async closure accepted; next move is product implementation
+
+**Branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`. Remote static evidence SHA `95ce0319aaa8dbe96e8ee271c3f03c8e806538fe`, one parent `a0f6dfb0b07333222ba9826acf56d0dad6854c8b`, exactly one new `docs/PLAYBACK_PHASE8F_LEVEL0_STALE_OPEN_CATCH_CLOSURE_REVIEW.md`. GPT independently read the published report/source/test and accepts three bounded STATIC OK verdicts closing the two earlier known issues. No new source findings **within that limited scope**; no compiled/tested/runtime PASS.
+
+**Code baseline:** `linkora_core/src/main/ets/playback/PlaybackEngine.ets` source blob `3cb96b50d3d4a10465a2fa11c03a652773c852cc`; `entry/src/test/PlaybackEngine.test.ets` blob `df3857f8b3c388b36638cbc42be5f9f7fc7e3ad6`. Adaptive/System production blobs `1050012dbef214efba5ebccb5571cc9174345c08` / `cc78c2611e8582633f2a67cb323f3072f5d8a31f` unchanged. Static tests authored, **NOT RUN**. Keystore remains UNAVAILABLE, installation/foreground/MP4/HLS native pending cancellation cleanup and recovery all NOT RUN/NOT PROVEN. ARM64/Release/ABI at Level2; genuine device at Level3.
+
+**Dispatch policy:** the completed `phase8f-level0-stale-open-catch-barrier-review-v2` task has been CLOSED in the latest `docs/CODEX_VALIDATION_TASK.md` and is not reusable. Do not run continuous audit/check loops; **no new READY Codex validation task yet**. Next owner action is an actual useful self-contained Level0 product feature implementation, based on current source and plan, without mandatory build after every edit. When needed, GPT creates new source commit then separate task-only dispatch with honest NOT RUN gates. Do not prompt for passwords, touch original dirty workspace/old stopped evidence, rebuild retained unsigned HAP or infer current source runtime from past HAP.
+
+Older sections below historical.
+
+---
+
 ## CURRENT STATE — 2026-10-12 reviewed Level0 findings and authored minimal PlaybackEngine correction
 
 **Branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`. Previous remote evidence HEAD before source fix `279fb2216de0e97abec684d82476840826efd05d`, added one remotely inspected static-review report. Old `phase8f-level0-playback-engine-stale-async-review` completed with two source-level findings; historic READY header is superseded by next distinct task-only dispatch, not permission to replay that completed task.

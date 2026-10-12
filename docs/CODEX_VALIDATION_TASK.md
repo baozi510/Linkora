@@ -1,6 +1,8 @@
 # Codex Task — Phase 8F Level-0 Narrow Stale-Open Error Closure Review
 
-> STATE: READY
+> STATE: CLOSED — COMPLETED STATIC REVIEW (NOT RUNTIME PASS)
+> CLOSED_EVIDENCE_SHA: 95ce0319aaa8dbe96e8ee271c3f03c8e806538fe
+> RETEST: NOT AUTHORIZED
 > TASK_ID: phase8f-level0-stale-open-catch-barrier-review-v2
 > REPOSITORY: baozi510/Linkora
 > BRANCH: feat/playback-capability-phase8
@@ -16,6 +18,12 @@
 > MAX_HYPIUM_EXECUTIONS: 0
 > MAX_SIGNING_PROBES_OR_ATTEMPTS: 0
 > MAX_SIMULATOR_DEVICE_MEDIA_OPENS: 0
+
+## Completed static source review — closed, not executable
+
+This specific task is FINISHED and must not be run again. GPT independently reviewed the remotely published report `docs/PLAYBACK_PHASE8F_LEVEL0_STALE_OPEN_CATCH_CLOSURE_REVIEW.md` at evidence SHA `95ce0319aaa8dbe96e8ee271c3f03c8e806538fe`. All three specified source-only judgments are `STATIC OK`; the prior two narrowly scoped findings have been addressed, **not** compiler/Hypium/runtime validated. Keystore unavailable, no signing, builds or playback testing. Do not rerun this task merely because earlier READY text remains in its historical instructions.
+
+**NO CURRENT READY DISPATCH.** Next work is actual independent Level0 product feature implementation under GPT ownership, followed by a new separate task when validation provides concrete value. No repeated static-closure evidence cycles.
 
 ## 0. Why this new task exists
 
