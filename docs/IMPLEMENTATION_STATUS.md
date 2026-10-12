@@ -1,3 +1,19 @@
+## CURRENT EXECUTION SUMMARY — 2026-10-12 (Level0 static findings reviewed; smallest stale-open catch/test barrier fix authored)
+
+**Independently verified GitHub report:** `279fb2216de0e97abec684d82476840826efd05d` is a one-parent evidence commit after task dispatch `78ba2a3d9017d0c32198437a52d192c3aafeb58a`, adding ONLY `docs/PLAYBACK_PHASE8F_LEVEL0_STALE_ASYNC_STATIC_REVIEW.md` (blob `e1c8acb7605810ca7039647c7cf90124400d8529`). GPT read the complete report and current engine + test source. Verdict `STATIC REVIEW COMPLETE — NOT RUNTIME VALIDATION; SOURCE REVIEW FINDINGS`, not a build/test PASS. This completed task must not be rerun under its ID even though the historical dispatch file previously said READY.
+
+**Accepted review findings:** (1) older `PlaybackEngine.open` catch checked session before awaiting disposal, then unconditionally published failure on completion, allowing a stale A prepare/play rejection to overwrite a newer B PLAYING/RELEASED snapshot without releasing B's port. (2) the authored interruption pause test used an unnecessary async deferred Promise wrapper and a single await Promise.resolve that was not a definitive completion barrier for the old handler, potentially admitting false positives. These are source-reasoned findings, **not** simulated/native reproduce claims.
+
+**New minimal GPT code correction:** `linkora_core/src/main/ets/playback/PlaybackEngine.ets` now rechecks captured session ID *after* `await this.releaseCurrentPort()` in the caught open failure branch. Same-current real failures still call `fail`, old-session failures cannot overwrite newer state. `entry/src/test/PlaybackEngine.test.ets` now returns an actual deferred pause Promise directly and its rejection drain awaits a later attached handler on that identical Promise, making prior engine rejection handler run first; both affected test uses await the deterministic barrier. A new test `ignoresLateFailedOpenAfterDisposalWhenNewSessionIsPlaying` explicitly waits for old disposal to start, runs new healthy playback, completes old release, and asserts new port/status/failure unchanged. No Adapter/System native/config/dependency/security changes.
+
+**Truthful validation:** CODE UPDATED and TEST CASES AUTHORED, but `BUILD NOT RUN`, `HYPium/TESTS NOT RUN`, `RUNTIME NOT PROVEN`; compiler/runtime acceptance unknown. Keystore user-reported unavailable and deferred. No SDK/sign/probe/HDC/emulator/HAP/ARM64/official media opens. Previously privately retained unsigned HAP is bound to earlier source and cannot certify this new source. Historical stopped tests, native pending cancel cleanup and recovery remain NOT PROVEN.
+
+**NEXT:** Separate new LEVEL0 read-only targeted static check may verify precisely the post-await session guard, deferred handler-order barrier and new regression setup, with **no compiles or simulator**, then resume other feature development. Do not create indefinite repeated audit tasks; substantive product source work and meaningful milestone batch builds remain priority. Any future runtime verification requires legitimate signing availability; full ARM64 Debug/Release/native ABI Level2 and physical device Level3.
+
+Earlier CURRENT summaries below are historical.
+
+---
+
 ## CURRENT EXECUTION SUMMARY — 2026-10-12 (Level-0 PlaybackEngine stale-async isolation implementation; no keystore/build)
 
 **Owner authorization:** user asked to continue dispatching meaningful work while the current keystore remains inaccessible. GPT independently reviewed current GitHub `linkora_core/src/main/ets/playback/PlaybackEngine.ets` and found a specific source-level stale-session isolation risk: an old `togglePlayback()` or interruption `pause()` async rejection can invoke unguarded `failActivePort()` after a new port/session was selected, releasing the new port; old `open()` and `release()` completions after an awaited previous-port release can overwrite a more recent session snapshot.

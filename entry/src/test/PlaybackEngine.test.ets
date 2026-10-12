@@ -89,26 +89,45 @@ class FailingPreparePort extends FakePlaybackPort {
 // The old session's asynchronous operation can complete after the next open.
 class DeferredPausePort extends FakePlaybackPort {
   private rejectPause: ((error: PlaybackPortError) => void) | null = null;
+  private pendingPause: Promise<void> | null = null;
 
-  async pause(): Promise<void> {
-    return new Promise<void>((_resolve: () => void,
+  // Return the actual deferred promise: no extra async Promise adoption job.
+  pause(): Promise<void> {
+    this.pendingPause = new Promise<void>((_resolve: () => void,
       reject: (error: PlaybackPortError) => void) => {
       this.rejectPause = reject;
     });
+    return this.pendingPause;
   }
 
-  failPendingPause(): void {
+  failPendingPause(): Promise<void> {
+    const pending: Promise<void> | null = this.pendingPause;
     const reject: ((error: PlaybackPortError) => void) | null = this.rejectPause;
     this.rejectPause = null;
     reject?.(new PlaybackPortError(5400104, 'previous session pause cancelled'));
+    // Engine's rejection handler is already attached to this same promise.
+    // Await our later subscriber so the engine handler executes first.
+    return pending === null ? Promise.resolve() :
+      pending.catch((_error: PlaybackPortError) => {});
   }
 }
 
 class DeferredReleasePort extends FakePlaybackPort {
   private finish: (() => void) | null = null;
+  private signalReleaseStarted: (() => void) | null = null;
+  readonly releaseStarted: Promise<void>;
+
+  constructor(observer: PlaybackPortObserver) {
+    super(observer);
+    this.releaseStarted = new Promise<void>((resolve: () => void) => {
+      this.signalReleaseStarted = resolve;
+    });
+  }
 
   async release(): Promise<void> {
     this.released = true;
+    this.signalReleaseStarted?.();
+    this.signalReleaseStarted = null;
     await new Promise<void>((resolve: () => void) => {
       this.finish = resolve;
     });
@@ -119,6 +138,12 @@ class DeferredReleasePort extends FakePlaybackPort {
     const finish: (() => void) | null = this.finish;
     this.finish = null;
     finish?.();
+  }
+}
+
+class DeferredReleaseFailingPreparePort extends DeferredReleasePort {
+  async prepare(): Promise<void> {
+    throw new PlaybackPortError(5400106, 'old session prepare failed');
   }
 }
 
@@ -352,7 +377,7 @@ export default function playbackEngineTest(): void {
       await engine.open(MediaSource.fromLocalDocument('file://first.mp4'), 'surface');
       const stalePause: Promise<void> = engine.togglePlayback();
       await engine.open(MediaSource.fromLocalDocument('file://second.mp4'), 'surface');
-      (ports[0] as DeferredPausePort).failPendingPause();
+      await (ports[0] as DeferredPausePort).failPendingPause();
       await stalePause;
 
       expect(ports[0].released).assertTrue();
@@ -374,8 +399,7 @@ export default function playbackEngineTest(): void {
       await engine.open(MediaSource.fromLocalDocument('file://first.mp4'), 'surface');
       ports[0].observer.onInterruptionPause();
       await engine.open(MediaSource.fromLocalDocument('file://second.mp4'), 'surface');
-      (ports[0] as DeferredPausePort).failPendingPause();
-      await Promise.resolve();
+      await (ports[0] as DeferredPausePort).failPendingPause();
 
       expect(ports[1].released).assertFalse();
       expect(latest(snapshots).status).assertEqual(PlaybackStatus.PLAYING);
@@ -422,6 +446,47 @@ export default function playbackEngineTest(): void {
       expect(ports.length).assertEqual(2);
       expect(ports[1].released).assertFalse();
       expect(latest(snapshots).status).assertEqual(PlaybackStatus.PLAYING);
+      await engine.release();
+    });
+
+    it('ignoresLateFailedOpenAfterDisposalWhenNewSessionIsPlaying', 0, async () => {
+      const snapshots: PlaybackSnapshot[] = [];
+      const ports: FakePlaybackPort[] = [];
+      let firstPortReady: ((port: DeferredReleaseFailingPreparePort) => void) | null = null;
+      const firstPortCreated: Promise<DeferredReleaseFailingPreparePort> =
+        new Promise<DeferredReleaseFailingPreparePort>(
+          (resolve: (port: DeferredReleaseFailingPreparePort) => void) => {
+            firstPortReady = resolve;
+          });
+      const engine = new PlaybackEngine((snapshot: PlaybackSnapshot) => snapshots.push(snapshot),
+        async (observer: PlaybackPortObserver) => {
+          if (ports.length === 0) {
+            const port = new DeferredReleaseFailingPreparePort(observer);
+            ports.push(port);
+            firstPortReady?.(port);
+            return port;
+          }
+          const port = new FakePlaybackPort(observer);
+          ports.push(port);
+          return port;
+        });
+
+      const failedOpen: Promise<void> =
+        engine.open(MediaSource.fromLocalDocument('file://old-failure.mp4'), 'surface');
+      const oldPort: DeferredReleaseFailingPreparePort = await firstPortCreated;
+      // The rejected prepare has entered open() catch and its disposal is pending.
+      await oldPort.releaseStarted;
+      await engine.open(MediaSource.fromLocalDocument('file://new-healthy.mp4'), 'surface');
+      expect(latest(snapshots).status).assertEqual(PlaybackStatus.PLAYING);
+
+      oldPort.finishRelease();
+      await failedOpen;
+
+      expect(ports.length).assertEqual(2);
+      expect(oldPort.released).assertTrue();
+      expect(ports[1].released).assertFalse();
+      expect(latest(snapshots).status).assertEqual(PlaybackStatus.PLAYING);
+      expect(latest(snapshots).failure === null).assertTrue();
       await engine.release();
     });
 

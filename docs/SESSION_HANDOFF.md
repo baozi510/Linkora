@@ -1,3 +1,17 @@
+## CURRENT STATE — 2026-10-12 reviewed Level0 findings and authored minimal PlaybackEngine correction
+
+**Branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`. Previous remote evidence HEAD before source fix `279fb2216de0e97abec684d82476840826efd05d`, added one remotely inspected static-review report. Old `phase8f-level0-playback-engine-stale-async-review` completed with two source-level findings; historic READY header is superseded by next distinct task-only dispatch, not permission to replay that completed task.
+
+**Fix applied by GPT:** post-await `this.isCurrent(sessionId)` check inside `PlaybackEngine.open` catch before `this.fail`, so old rejected prepare/play after slow release cannot overwrite new playback snapshots. New deferred-prepare-failure/slow-disposal/new-open regression added; deterministic old pending interruption pause rejection test now returns exact deferred Promise and waits for later registered rejection drain. Previous four original race tests preserved. Production source file `linkora_core/src/main/ets/playback/PlaybackEngine.ets`; one test file `entry/src/test/PlaybackEngine.test.ets`. No change to Adaptive/System PlaybackPort source or Native backend.
+
+**No executed result:** build0, tests0, signer0, keystore0, emulator/media0. Static reasoning alone is not PASS for test runtime, native release, actual pixel or recovery. User keystore UNAVAILABLE and deferred; do not return to signing tasks. Old private unsigned HAP hash `DBF39571A1FD594FC8522F5759C678E9A97FA5EF3E3F34EA4615A6707CF9C11E` corresponds to earlier build/source, not new production code. Full ARM64/Release/ABI Level2, hardware Level3.
+
+**Next authority:** after this fix commit, publish one separate `LEVEL_0_FEATURE` Codex narrowly scoped READ-ONLY static verification task for new catch + Promise barrier regression (and source identity). No repeated build, Hypium execution, signing or private credential probes; report independent findings without changing source. Then progress meaningful features; do not infinitely rerun optional helpers or evidence packaging. Preserve user original dirty workspace and all historical stopped data.
+
+Prior sections below historical.
+
+---
+
 ## CURRENT STATE — 2026-10-12 Level-0 source fix authored for PlaybackEngine stale operations
 
 **Branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`; previous remote HEAD before this source change `61494cda50fae092647db5133e781d2105063d52`. Keystore is UNAVAILABLE by user report; V4 remains CLOSED, latest independently reviewed V4 evidence `2763174a67da32332754d745a0de174328c7128f`. No keystore checking/retry/new signed HAP or simulator runtime permitted here.

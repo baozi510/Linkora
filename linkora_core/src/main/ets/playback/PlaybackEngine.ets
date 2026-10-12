@@ -75,7 +75,11 @@ export class PlaybackEngine {
     } catch (error) {
       if (this.isCurrent(sessionId)) {
         await this.releaseCurrentPort();
-        this.fail(this.portError(error));
+        // Disposal may yield to a newer open() or release(): the old failure
+        // must not overwrite its playback state after that newer session wins.
+        if (this.isCurrent(sessionId)) {
+          this.fail(this.portError(error));
+        }
       }
     }
   }
