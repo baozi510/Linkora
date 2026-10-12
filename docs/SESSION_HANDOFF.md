@@ -1,3 +1,19 @@
+## CURRENT STATE — 2026-10-12 Codec/encoding/playback functional checkpoint replaces UI test
+
+**Owner intent:** use simulator for **media-function acceptance**, not visual appearance/UX. Remove screenshot, pixels ROI/color UI/layout and foreground cosmetic gating. A real installed/callable Linkora functional entry remains necessary to run media tests; do not call launcher/process exit a playback PASS.
+
+**Verified source boundary:** x86 `linkora_ffmpeg` probes input/container/encoded stream codec and actually decodes FFmpeg frame buffers to RGBA; existing `FfmpegRuntimeSmoke` under entry simulator diagnostics can test it. Playback uses native System AVPlayer; MPV simulator runtime is unavailable stub. Existing encoding is WebP thumbnail encoding via `SystemWebPEncoder`; no known video/audio FFmpeg transcoding encoder in current source. Do not confuse an input codec named H264/AAC with an actual encoding API. Tests should record probe/real decode/WebP encode/System play separately with accurate `PASS/FAIL/BLOCKED/NOT RUN` and resource cleanup; no 59-case matrix, UI appearance review, video snapshot requirements or raw media disclosure.
+
+**Supersede older READY dispatch:** previous `phase8f-level1-normal-deveco-simulator-run-v1` at `c7668da343d9252031dbf9bfb27e5115f21df29f` is not reported executed. Next dispatch has a new ID and source parent consisting only of four policy/status doc changes. New run uses default DevEco Studio GUI Run in isolated clone, `simulator` product/`entry@simulator`, at most one necessary Debug compile (current source differs from older unsigned HAP), **no old keystore**, no manual `sign-app`, no ARM64/default compile. If GUI/installer unavailable, stop dependent runtime only, record factual failure and continue safe reporting.
+
+**Priority functional probes:** real FFmpeg x86 probe and decode extracted frame with RGBA dimensions/bytes/time, cancellation/timeout, zero active sources where observed; WebP encoded output through existing path if accessible; System H264/AAC MP4 actual play/pause/seek/position; native HLS H264 pending cancellation no leaked candidate/stale fallback, sampled app-associated resources early and >20s; MP4 recovery conditional on successful cleanup. No guessed first-frame pixels, no screenshot, no MPV claim. Keystore remains deferred for device, earlier V3/V4 evidence unchanged, current static fixes only STATIC OK and unbuilt.
+
+**Codex limits:** no production source edits, no extra test runners/harness generation, no repeated compiled builds/fixture regeneration. Exactly one small sanitized remotely reviewed public report if safe. Preserve original possibly dirty workspace and all stopped private evidence. Actual production code and app have NOT been run by this doc change.
+
+Older sections below historical.
+
+---
+
 ## CURRENT STATE — 2026-10-12 (Critical correction: normal simulator Run does not require old keystore gate)
 
 **User goal:** run current Linkora in the connected x86_64/API26 simulator through the standard DevEco Studio Run/Debug workflow. Our earlier manual `sign-app` and old keystore precondition was an unnecessary added test-gate for **simulator development**. Huawei official getting-started statement: using emulator/previewer debugging does not need configured signing information; real hardware has its own signed deployment requirements (https://developer.huawei.com/consumer/cn/develop-novice-guide/). Prior V3 native `11014003` reflects failure of extra SDK `sign-app` attempt, not proof DevEco Run cannot work. Old V4 no credential test and old user-reported inaccessible keystore remain true **historical** details; no new password work required.
