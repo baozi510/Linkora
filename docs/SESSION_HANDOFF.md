@@ -1,3 +1,17 @@
+## CURRENT STATE — 2026-10-12 (V2 CLI x86 HAP invalid; install identity and packaging mechanisms need distinct diagnosis)
+
+**Independently verified GitHub:** evidence HEAD `5cd9166f725be3418545a0ef2ea2277390d4bd83`, parent V2 task dispatch `eb079eb70892fa3f166db3e75309fd4d3f6a9a95`, exactly one new `docs/PLAYBACK_PHASE8F_SIMULATOR_MEDIA_FUNCTION_REPORT.md` (blob `ef4779d61651090b58d5495fc4ab909139cbfa00`). Completed task `phase8f-level1-simulator-codec-encode-playback-v2`: **PARTIAL/DEPENDENCY BLOCK** with real package audit FAIL and installer FAIL; do not replay completed ID. Source review did not reproduce private HAP/log byte findings from GitHub.
+
+**Observed locally reported outcomes:** user-authorized devecocli simulator start1 connected x86_64/API26; one DevEco CLI run wrapper child1 install 9568332, build pipeline verbally reported BUILD SUCCESSFUL but nested build exit not separately captured; manual sign0/password probe0. New HAP reported x86 `liblinkora_ffmpeg.so` plus four ARM64 MPV/AKI/C++ libraries, so x86 ABI checker child1. This is **not** an executable x86 package even though compilation completed. Private unsigned HAP from earlier source and the new ABI-invalid HAP MUST NOT be reused. User separate default ARM64 HAP `9568347` is a different build/profile and error; no UI/media/FFmpeg decoder/WebP encode/MP4/HLS/cleanup recovery executed.
+
+**Diagnosis anchored in GitHub:** `entry/oh-package.json5` has real `@mpv-ohos/mpv-arkts` in unconditional production `dependencies`; `simulatorTargetDependencies` is a separate unsatisfied claim and `entry/oh-package-lock.json5` locks published real MPV HAR; `scripts/check-simulator-product.cjs` checks only presence of that unsupported-by-evidence field and NOT effective resolved MPV. Official ohpm documents Hvigor-generated target dependency maps and `--target_path`; validate CLI outputs before choosing supported fix. `9568332` official description concerns existing app/signature identity conflict or multi-module signature inconsistency, not necessarily an inaccessible keystore. Current AppScope bundleName shared across simulator/default. Never force-uninstall user app, wipe emulator, clear data or alter keys. Consider separate simulator product bundle identity after specific no-mutation read-only diagnosis, with unchanged default identity and only supported product-level config.
+
+**Current direction:** user wants decode, encoding actually implemented (WebP), playback, not UI appearance. Codex next task should do one bounded CLI-only source/installed metadata check; **ZERO builds, IDE GUI, signer, manual profile/key/password probe, installs and media opens**. No repeated failed helpers. GPT owns source/config correction after diagnosis. After verified safe x86-only output and legitimate install, prioritize FFmpeg actual frame buffer decode and System AVPlayer playback/controls/cancellation. Real mpv ARM64 device and hardware codecs remain separately deferred; no false runtime PASS. Preserve all old private STOPPED worktrees and possibly dirty original D:/Linkora; final bytewise snapshot NOT RUN.
+
+Older sections below are historical.
+
+---
+
 ## CURRENT STATE — 2026-10-12 Codec/encoding/playback functional checkpoint replaces UI test
 
 **Owner intent:** use simulator for **media-function acceptance**, not visual appearance/UX. Remove screenshot, pixels ROI/color UI/layout and foreground cosmetic gating. A real installed/callable Linkora functional entry remains necessary to run media tests; do not call launcher/process exit a playback PASS.
