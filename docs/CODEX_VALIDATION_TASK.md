@@ -1,74 +1,61 @@
-# Codex Validation Task — Level 0 PlaybackEngine Stale Async Session Review
+# Codex Task — Phase 8F Level-0 Narrow Stale-Open Error Closure Review
 
 > STATE: READY
-> TASK_ID: phase8f-level0-playback-engine-stale-async-review
+> TASK_ID: phase8f-level0-stale-open-catch-barrier-review-v2
 > REPOSITORY: baozi510/Linkora
 > BRANCH: feat/playback-capability-phase8
-> LEVEL: LEVEL_0_FEATURE — READ-ONLY STATIC REVIEW
-> SOURCE_SHA: 96a6b802a4a2796f9ffefca74f80541a0ce9fcb9
+> LEVEL: LEVEL_0_FEATURE — SOURCE/TEST STATIC REVIEW ONLY
+> SOURCE_SHA: b5fb32b5aaacfa46f092a02238790832b2c31273
 > ALLOWED_DRIFT: docs/CODEX_VALIDATION_TASK.md ONLY
-> BASE_SHA: 61494cda50fae092647db5133e781d2105063d52
-> PREVIOUS_KEYSTORE_TASK: phase8f-level1-keystore-access-reuse-unsigned-smoke-v4 (CLOSED)
-> PRIOR_VALIDATION_EVIDENCE_SHA: 2763174a67da32332754d745a0de174328c7128f
-> KEYSTORE_STATUS: USER-REPORTED UNAVAILABLE — DEFERRED
-> BUILD_COUNT_ALLOWED: 0
-> SIGNING_AND_KEYSTORE_PROBE_ALLOWED: 0
-> SIMULATOR_AND_MEDIA_OPENS_ALLOWED: 0
-> ROLE: INDEPENDENT SOURCE-LEVEL CORRECTNESS REVIEW OF NEW SESSION-RACE FIX AND AUTHORED REGRESSION CASES
+> FIX_BASE_SHA: 279fb2216de0e97abec684d82476840826efd05d
+> PRIOR_COMPLETED_TASK_ID: phase8f-level0-playback-engine-stale-async-review
+> PRIOR_COMPLETED_REPORT_SHA: 279fb2216de0e97abec684d82476840826efd05d
+> PREVIOUS_KEYSTORE_TASK: phase8f-level1-keystore-access-reuse-unsigned-smoke-v4 — CLOSED
+> KEYSTORE: USER-REPORTED UNAVAILABLE; SIGNING/RUNTIME DEFERRED
+> MAX_BUILDS: 0
+> MAX_HYPIUM_EXECUTIONS: 0
+> MAX_SIGNING_PROBES_OR_ATTEMPTS: 0
+> MAX_SIMULATOR_DEVICE_MEDIA_OPENS: 0
 
-## 0. Purpose, priority and hard scope
+## 0. Why this new task exists
 
-This is a new, meaningful **Level 0 feature review task**, not a retry of stopped V4 signing or Phase8F runtime. GPT owns production code and created SOURCE_SHA with a narrow change to `PlaybackEngine` and its four deferred-async regression tests. Keystore is unavailable, so all installation, signed simulator runtime and actual picture/position/native release acceptance are still blocked. No new build is required after every source edit.
+The prior `phase8f-level0-playback-engine-stale-async-review` was COMPLETED WITH FINDINGS, not runtime PASS. It produced one independently reviewed GitHub report at `279fb2216de0e97abec684d82476840826efd05d`. **Do not execute or amend the completed prior ID, and do not rerun earlier sign/build/SDK helper failures.** GPT independently reviewed its two findings and authored the smallest source/test correction in SOURCE_SHA.
 
-**Prohibited entirely:** `ohpm install`, Hvigor/Hypium execution requiring SDK build, `verify.ps1`, `verify-simulator.ps1`, ARM64/Release/HAP/native rebuild, keystore/password/profile/keytool/sign-app inspection or probing, DevEco/SDK settings, HDC/emulator/device commands, signed/unsigned HAP, fixtures, media/HTTP/rport, UI tests, original STOP helper, private historical logs or old 110-file evidence. No password question, credential guesses, private environment changes, timers/chat polling or repeated diagnostic shell wrappers. Do not modify production source, tests, dependencies, scripts, configs, CURRENT state docs or old task evidence. Do not touch the user's original potentially dirty workspace or a stopped checkout; use a fresh isolated read-only clone.
+This is a **single narrow follow-up static review**, not a restart of the earlier four-case survey and not another gratuitous compilation. No new code changes are permitted to Codex; report concrete remaining findings to GPT. If these exact concerns are statically addressed, record source review closure and return to meaningful Level0 product development, **not an endless repeat review cycle**.
 
-Read latest `docs/AI_WORKFLOW.md` (scoped errors and feature-first), `docs/MASTER_IMPLEMENTATION_PLAN.md`, `docs/ARCHITECTURE_TARGET.md`, `docs/ARCHITECTURE_MIGRATION.md`, current `docs/IMPLEMENTATION_STATUS.md`, `docs/SESSION_HANDOFF.md`, and this entire task. Any optional unavailable read that is not needed to establish source or review case must be RECORD_ONLY, not a global STOP.
+## 1. Bound actual source (critical)
 
-## 1. Git provenance — CRITICAL if claiming THIS source was reviewed
-
-Fresh-fetch exact remote branch. Verify READY/current ID, dispatch full40 SHA, SOURCE_SHA `96a6b802a4a2796f9ffefca74f80541a0ce9fcb9` is its **direct parent**, and SOURCE..dispatch changed path is EXACTLY `docs/CODEX_VALIDATION_TASK.md`. The previous head BASE_SHA `61494cda50fae092647db5133e781d2105063d52`→SOURCE diff MUST be EXACTLY:
+Fetch the exact remote branch, verify current task READY and its actual full40 dispatch SHA. SOURCE_SHA `b5fb32b5aaacfa46f092a02238790832b2c31273` must be the dispatch's immediate parent, and SOURCE..dispatch must change **only** `docs/CODEX_VALIDATION_TASK.md`. FIX_BASE_SHA `279fb2216de0e97abec684d82476840826efd05d`→SOURCE must change **exactly**:
 ```text
 linkora_core/src/main/ets/playback/PlaybackEngine.ets
 entry/src/test/PlaybackEngine.test.ets
 docs/IMPLEMENTATION_STATUS.md
 docs/SESSION_HANDOFF.md
 ```
-Confirm the prior fixed entry native adapters' Git blobs remain `1050012dbef214efba5ebccb5571cc9174345c08` (Adaptive) and `cc78c2611e8582633f2a67cb323f3072f5d8a31f` (System), equal to historical production fix SHA `8174e6e4f0214958fb83fef46e92170c4c10263a`. Source mismatch is GLOBAL_SAFETY_STOP for source-specific approval, not permission to test a different SHA. No guesswork about `PlaybackPort.ets`: actual contract is `linkora_core/src/main/ets/playback/PlaybackPort.ets`.
+Check entry native Adapter blobs remain Adaptive `1050012dbef214efba5ebccb5571cc9174345c08`, System `cc78c2611e8582633f2a67cb323f3072f5d8a31f`, unchanged since production fix `8174e6e4f0214958fb83fef46e92170c4c10263a`. Read the current workflow/feature-first/scoped-error policy and latest current status/handoff. Use clean NEW isolated read-only checkout and actual Git file tree; original possibly dirty user workspace, stopped worktrees and private unsigned HAP must not be touched.
 
-## 2. Independent static functional review (no execution claims)
+## 2. Review exactly the two prior findings and their regression protection
 
-Read complete old/new `linkora_core/src/main/ets/playback/PlaybackEngine.ets`, `linkora_core/src/main/ets/playback/PlaybackPort.ets`, complete old/new `entry/src/test/PlaybackEngine.test.ets`. Review actual code and reason through these scenarios as distinct cases:
+Read entire SOURCE `linkora_core/src/main/ets/playback/PlaybackEngine.ets`, `entry/src/test/PlaybackEngine.test.ets` and corresponding FIX_BASE old versions, plus `linkora_core/src/main/ets/playback/PlaybackPort.ets`. Then judge with actual path/function and causal trace:
 
-1. Old active port's `togglePlayback()` has in-flight `pause()` or `play()`; after a newer `open()` or `release()`, old Promise rejects. Verify old failure cannot mark new session ERROR, increment the NEW session ID or release a new active port. A failure for the *same* currently active port must still yield a genuine ERROR and release.
-2. Old active port raises `onInterruptionPause`; its Promise rejects after new playback has been selected. Verify the old async catch is gated by BOTH old session identity and same port. No swallowed error for the still-active port.
-3. A replacement `open()` awaits slow previous-port `release()`; a later `release()` wins meanwhile. Verify stale open cannot reset snapshot, show PREPARING, create new native port or autoplay after the newer release.
-4. An earlier `release()` awaits slow port disposal; a newer `open()` successfully enters PLAYING. Verify old completion cannot turn current snapshot to RELEASED.
-5. Inspect existing asynchronous observer/session ID handling, `failActivePort`, double-release and late callback implications for correct unrelated behavior. Flag any **specific** remaining race or missing owner check (with exact paths/functions and a safe reasoned trace), but don't claim that a behavior has been reproduced experimentally.
-6. Review four newly authored Fake/DeferredPause/DeferredRelease Hypium cases: whether they deterministically stage the intended race and assert the **right observable state and port identity**, whether they would fail before the fix, whether ArkTS typing/library idioms are plausible, and whether they cause unresolved Promises or cleanup hangs. Do not run Hypium or compiler; if static uncertainty remains, `REVIEW UNKNOWN — COMPILATION NOT RUN`, not PASS.
+1. **Must-fix stale open catch:** Original `open()` catches prepare/play error, checks session once, awaits `releaseCurrentPort()` and then publishes `fail`. New source must check captured session **again after await and before fail**. Reason through A rejected prepare without observer error → A disposal begins and clears slot → B `open()` succeeds to PLAYING → A finishes disposal; B port and snapshot must survive. Also consider newer release's RELEASED snapshot; and same-current genuine prepare failure must still report ERROR.
+2. **New deferred failed-open regression:** `ignoresLateFailedOpenAfterDisposalWhenNewSessionIsPlaying` must deterministically observe A release is already entered (do not rely on an arbitrary microtask tick), get B into PLAYING, finish A release, await A open, then assert B active/PLAYING and no old failure. Check Promise settlement, no fake deadlock and expected test would FAIL on FIX_BASE source. Also inspect existing `preservesSpecificPrepareFailure` as same-current error protection.
+3. **Should-fix audio interruption test ordering:** fake `DeferredPausePort.pause()` must return the **actual original deferred promise** (no async adoption), and test must await a handler-completion barrier where the engine's existing rejection handler was attached BEFORE the barrier subscriber. Evaluate `failPendingPause()` return/await and the engine interruption .catch job order to ensure assertions cannot run before old unguarded engine failure would mutate current state. Check old toggle pause test remains properly awaited.
+4. State any concrete source/test flaw with exact file/function and conditions. Report `STATIC OK / STATIC FINDING / UNKNOWN` for each. No compiler execution: ArkTS/Hypium compatibility remains UNKNOWN until milestone/authorized checkpoint. Don't invent native AVPlayer lifecycle/physical resource proof.
 
-**Sufficient review evidence:** exact SHA, diff path list, risk matrix and concise code-level reasoning for each case. No need for screenshot, native logs, simulator, gzip archives, 33-pair inventories, hash chains or custom Python/PowerShell helper. Optional metadata read failure is RECORD_ONLY; continue independent checks. An actual source/test semantic gap is `SOURCE REVIEW FINDING`, not an automatic global task abort. Do not make any production fix (GPT owns implementation).
+**No tests, compilation or expensive environment activity**: prohibit `ohpm install`, dependency restore, `verify.ps1`, `verify-simulator.ps1`, Hvigor/Hypium, signing/keystore tooling, HDC/emulator/devices, HAP, host media, HTTP/network fixtures, native rebuild, archival compression, old controller, user workspace updates. Read-only Git/file/semantic inspection suffices. Optional missing file lookup is RECORD_ONLY; required source identity mismatch is genuine safety STOP for source approval only. A review finding does not erase independent static checks or trigger a build.
 
-## 3. Report and remote review handoff
+## 3. One short report if safe; no evidence-archiving loop
 
-Allowed ONE new public file ONLY, if ordinary publication remains safe:
+Only allowed NEW public output:
 ```text
-docs/PLAYBACK_PHASE8F_LEVEL0_STALE_ASYNC_STATIC_REVIEW.md
+docs/PLAYBACK_PHASE8F_LEVEL0_STALE_OPEN_CATCH_CLOSURE_REVIEW.md
 ```
-Brief Markdown report:
-- exact task/source/dispatch full40 SHAs and audited paths;
-- each of four race scenarios `STATIC OK / STATIC FINDING / UNKNOWN`;
-- test source inspection verdict (authored, not executed);
-- any concrete issue with file/function/causal trace;
-- `BUILD NOT RUN / TESTS NOT RUN / SIGN NOT RUN / RUNTIME NOT PROVEN`;
-- privacy/path/write-protection status, final `READY FOR NEXT LEVEL0 FEATURE WORK` or `NEEDS GPT SOURCE FIX`;
-- no inherited historical playback/native release PASS.
 
-Before publication inspect actual candidate whole text for secrets/private machine or device IDs/paths/host URLs/credential/profile material. Stage explicitly this ONE path, inspect raw `git diff --cached --name-only` and mode/blob, ensure EXACTLY this file is staged. Confirm remote head still dispatch, one normal no-force commit/push, fresh remote fetch and report readback; return true 40-digit remote evidence SHA. If Git publication fails, `PUBLICATION_BLOCKED`; retain local review status, do not redo source review, compile or retry failed wrappers. No new result JSON needed.
+Produce concise source+dispatch IDs, old/new specific code traces, verdict for each of 3 narrow checks, any source finding, `CODE AUTHORED / TESTS AUTHORED BUT NOT RUN`, `BUILD NOT RUN`, `KEYSTORE DEFERRED`, `SIMULATOR/RUNTIME NOT PROVEN`, and a crisp next action. No screenshots, raw logs, local machine/credential/device identifiers or copies of old evidence. Optional tools/extra JSON/gzip/manifest inventories are not required.
 
-This is a **source review only**; even `STATIC OK` is not a successful build or actual simulator/native test. If the task is blocked by genuinely unsafe source identity or privacy, protect the repository and report honestly. No repeated autonomous dispatch to turn optional helper errors green.
+If publishing: inspect all candidate public text for secrets/privacy; stage ONLY this one exact file, inspect actual Git staged name/mode/blob, fresh-fetch remote head equal task dispatch before one normal nonforce commit/push, and independently fresh-fetch same evidence full40 SHA, one-parent dispatch ancestry, one changed path and remote readback. If unavailable, `PUBLICATION_BLOCKED` with local static result preserved; no repetitive helpers, no retest.
 
-## 4. Final response requirements
+Final reply: `STATE; TASK_ID; SOURCE_SHA; DISPATCH_SHA; PREVIOUS_EVIDENCE_SHA; THREE_STATIC_VERDICTS; TESTS_RUN=NO; BUILDS=0; SIGNING=0; RUNTIME=NOT PROVEN; GITHUB_REPORT_SHA_OR_NONE; ACTUAL_SOURCE_FINDINGS; NEXT_ACTION`.
 
-`REVIEW_RESULT / STATE / TASK_ID / LEVEL / REPOSITORY / BRANCH / SOURCE_SHA / DISPATCH_SHA / PRODUCTION_DIFF / ADAPTER_BLOBS_UNCHANGED / FOUR_STATIC_RACE_VERDICTS / REGRESSION_TESTS_AUTHORED_NOT_RUN / BUILD_STATUS=NOT RUN / SIGNING_STATUS=NOT RUN / SIMULATOR_MEDIA_STATUS=NOT RUN / KEYSTORE=DEFERRED / SOURCE_FINDINGS / REPORT_PATH / REMOTE_EVIDENCE_SHA_OR_NONE / ORIGINAL_WORKSPACE_NONMUTATION_LIMITS / NEXT_ACTION`.
-
-If all source checks pass, conclude `STATIC REVIEW COMPLETE — NOT RUNTIME VALIDATION`. Do not invoke SDK, install HAP or claim cancellation/recovery native PASS. After receipt GPT independently reviews GitHub source/evidence and decides the next meaningful source feature or (later) milestone testing step.
+A clean review concludes `STATIC REVIEW COMPLETE — PRIOR TWO FINDINGS ADDRESSED (NOT RUNTIME PASS)`. If a specific issue remains, `NEEDS GPT MINIMAL SOURCE FIX`; Codex must not modify source/tests. Do not autonomously issue another validation dispatch or recheck the deferred keystore.
