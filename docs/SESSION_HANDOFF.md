@@ -1,3 +1,19 @@
+## CURRENT STATE — 2026-10-12 (Keystore unavailable by owner report; runtime deferred; Level-0 development unblocked)
+
+**Repo / branch:** `baozi510/Linkora` / `feat/playback-capability-phase8`. Latest independently reviewed published Phase8F V4 evidence commit: `2763174a67da32332754d745a0de174328c7128f`. Previous current remote closure `3c49bde00a79b099f1d4a2ecd9652cf6a2ef7fc8`, `docs/CODEX_VALIDATION_TASK.md` `CLOSED` and **NO READY execution authorization**.
+
+**User decision:** The existing keystore is **UNAVAILABLE**; defer keystore access/signing until a lawful supported secure method exists. User's statement is a planning/availability status, not evidence of a new failed password test. V4 itself probed0, signed0, built0, opened0. Earlier 11014003 belongs to V3 only. No attempt should be made to obtain passwords, inspect credential stores, export/recreate keys, rerun SDK signing or dispatch credential-check tasks without an actual changed prerequisite. Do not publish secret material or expose credentials in argv/env/shell/log/chat.
+
+**Immediate next meaningful work:** **LEVEL_0_FEATURE** source implementation and architecture review can continue independently. Prioritize actual backend state-machine and PREPARING pending cancellation/ownership/resource-release correctness, UI wiring and error/recovery/fallback contract, or independent browsing/network/cache features after checking real code; targeted pure/unit checks permitted. GPT owns source changes; Codex owns explicitly dispatched validation, not implementation. Do not require every source edit to compile. Unbuilt changes must say `BUILD NOT RUN`, `RUNTIME NOT PROVEN`; no full old three-build verification loop. If a future milestone or native-risk boundary is reached, Level-2 compile/link/ABI must be completed then, not retroactively claimed. Signing-dependent simulator runtime and real-device acceptance are blocked/deferred. **No code edit/test is claimed by this handoff update.**
+
+**Retained private artifact:** previously locally corroborated unsigned x86 Debug HAP SHA256 `DBF39571A1FD594FC8522F5759C678E9A97FA5EF3E3F34EA4615A6707CF9C11E`, not uploaded and not a signed installable artifact. Reconfirm actual bytes and tested production source if future signing becomes authorized; newer production edits invalidate naïve reuse. MP4 actual picture/progress, HLS H264 pending native release and early/>20s cleanup, independent MP4 recovery ALL `NOT RUN / NOT PROVEN`. Old Rerun4 STOPs/privacy findings not rewritten.
+
+**Task policy:** V4 remains CLOSED; DO NOT auto-dispatch V5 to probe the same unavailable keystore. Start a fresh standalone source-level feature change when directed. Any later Codex task is a separate reviewed SHA and task-only dispatch. Documentation-only deferral decision may be committed without changing old CLOSED task or source. GitHub is canonical handoff.
+
+Earlier CURRENT sections below are historical.
+
+---
+
 ## CURRENT STATE — 2026-10-12 V4 evidence accepted, secure keystore access NOT PROVEN; no READY retry
 
 **Remote and validation:** GitHub evidence HEAD `2763174a67da32332754d745a0de174328c7128f` contains exactly two new V4 sanitized report/result files and has single parent original V4 dispatch `d719ec7fab3af399f6a3ed6df60a273496d53792`. GPT independently read both complete files. Result `ACCEPTED — DEPENDENCY_BLOCKED — KEYSTORE ACCESS`, task `phase8f-level1-keystore-access-reuse-unsigned-smoke-v4`, `STATE: COMPLETED WITH DEPENDENCY BLOCK`. Public claims of prior unsigned HAP byte integrity and x86 native ABI verification are **locally corroborated**, not independent GPT binary replay; original private file/log bytes were never published.
