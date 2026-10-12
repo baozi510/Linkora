@@ -34,6 +34,13 @@
       ]
     },
     {
+      "name": "mpv_simulator_stub",
+      "srcPath": "./entry/simulator-stubs/mpv-arkts",
+      "targets": [
+        { "name": "default", "applyToProducts": ["simulator"] }
+      ]
+    },
+    {
       "name": "linkora_media_probe",
       "srcPath": "./linkora_media_probe",
       "targets": [

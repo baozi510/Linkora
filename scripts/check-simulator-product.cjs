@@ -104,8 +104,25 @@ check(mpvSimulatorParams.dependencies &&
   mpvSimulatorParams.dependencies.mpv === './entry/simulator-stubs/mpv-arkts',
   'simulator MPV param must resolve the local compile-only stub from project root');
 const stubManifest = json5('entry/simulator-stubs/mpv-arkts/oh-package.json5');
-check(stubManifest.name === '@mpv-ohos/mpv-arkts' && stubManifest.main === 'Index.ets',
-  'simulator MPV stub package name/entry must match the imported dependency');
+check(stubManifest.name === '@mpv-ohos/mpv-arkts' && stubManifest.version === '1.0.0' &&
+  stubManifest.modelVersion === '5.0.0' && stubManifest.main === 'Index.ets',
+  'simulator MPV stub must provide a parseable named versioned HAR package');
+const stubModule = project.modules.find(item => item.name === 'mpv_simulator_stub');
+check(stubModule && stubModule.srcPath === './entry/simulator-stubs/mpv-arkts' &&
+  stubModule.targets.length === 1 &&
+  stubModule.targets[0].name === 'default' &&
+  JSON.stringify(stubModule.targets[0].applyToProducts) === JSON.stringify(['simulator']),
+  'simulator MPV HAR module must be registered only for simulator product');
+const stubProfile = json5('entry/simulator-stubs/mpv-arkts/build-profile.json5');
+const stubDescriptor = json5('entry/simulator-stubs/mpv-arkts/src/main/module.json5');
+check(stubProfile.apiType === 'stageMode' &&
+  stubProfile.targets.some(item => item.name === 'default'),
+  'simulator MPV HAR module must have a source target');
+check(stubDescriptor.module.name === 'mpv_simulator_stub' &&
+  stubDescriptor.module.type === 'har',
+  'simulator MPV HAR module descriptor must match registered module name');
+check(read('entry/simulator-stubs/mpv-arkts/hvigorfile.ts').includes('harTasks'),
+  'simulator MPV HAR module must use harTasks');
 
 // A source declaration is never proof of installed target dependency resolution.
 // Caller may supply the REAL generated simulator ohpm lock after an authorized
@@ -147,7 +164,10 @@ const required = [
   'entry/src/simulator/RuntimeProfile.ets',
   'entry/src/simulator/ets/services/DefaultNetworkStorageProviders.ets',
   'entry/src/simulator/ets/adapters/NetworkProtocolTestRegistry.ets',
-  'entry/simulator-stubs/mpv-arkts/Index.ets'
+  'entry/simulator-stubs/mpv-arkts/Index.ets',
+  'entry/simulator-stubs/mpv-arkts/hvigorfile.ts',
+  'entry/simulator-stubs/mpv-arkts/build-profile.json5',
+  'entry/simulator-stubs/mpv-arkts/src/main/module.json5'
 ];
 for (const relative of required) {
   check(fs.existsSync(path.join(root, relative)), relative + ' is missing');

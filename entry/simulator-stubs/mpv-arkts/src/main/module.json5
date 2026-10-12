@@ -1,0 +1,7 @@
+{
+  "module": {
+    "name": "mpv_simulator_stub",
+    "type": "har",
+    "deviceTypes": ["phone", "tablet"]
+  }
+}

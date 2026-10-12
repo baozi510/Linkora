@@ -1,6 +1,7 @@
 # Codex Task — CLI-Only Autonomous Simulator Build Repair and Media Function Checkpoint
 
-> STATE: READY
+> STATE: SUPERSEDED — NEVER EXECUTED AS THIS TASK; REPLACED BY SOURCE-BOUND HAR-FIX TASK
+> SUPERSEDE_REASON: independent user-directed CLI smoke reported Hvigor PreBuild 00306060; GPT authored HAR source candidate
 > TASK_ID: phase8f-cli-autonomous-simulator-build-repair-and-media-v1
 > REPOSITORY: baozi510/Linkora
 > BRANCH: feat/playback-capability-phase8

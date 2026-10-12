@@ -1,7 +1,9 @@
 {
+  "modelVersion": "5.0.0",
   "name": "@mpv-ohos/mpv-arkts",
   "version": "1.0.0",
   "description": "Compile-only simulator stub for Linkora validation.",
   "main": "Index.ets",
-  "license": "Proprietary"
+  "license": "Proprietary",
+  "dependencies": {}
 }
