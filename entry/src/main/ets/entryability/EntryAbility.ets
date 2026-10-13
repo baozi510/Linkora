@@ -28,6 +28,10 @@ export default class EntryAbility extends UIAbility {
       this.analysisBenchmarkConfig = want.parameters.linkoraAnalysisBenchmarkConfig as string;
     }
   }
+  onNewWant(want: Want): void {
+    RuntimeDiagnostics.configure(want);
+    RuntimeDiagnostics.run(this.context as common.UIAbilityContext).catch(() => {});
+  }
   private registerIconFonts(windowStage: window.WindowStage): void {
     try {
       const iconFont = windowStage.getMainWindowSync().getUIContext().getFont();

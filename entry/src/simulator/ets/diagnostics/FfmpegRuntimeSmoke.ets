@@ -25,7 +25,7 @@ interface Evidence {
 interface NativeError { code?: string; detail?: string; }
 
 /** Only the test source stalls; all sockets, leases and FFmpeg work are real. */
-class StallingSource implements RandomAccessSource {
+export class StallingSource implements RandomAccessSource {
   reads: number = 0; closes: number = 0;
   private rejectRead: ((error: Error) => void) | null = null;
   private ended: boolean = false;

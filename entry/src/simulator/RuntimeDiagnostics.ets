@@ -2,12 +2,18 @@ import { common, Want } from '@kit.AbilityKit';
 import { FfmpegRuntimeSmoke } from './ets/diagnostics/FfmpegRuntimeSmoke';
 import { AnalyzerIntegrationSmoke } from './ets/diagnostics/AnalyzerIntegrationSmoke';
 import { AudioMetadataSmoke } from './ets/diagnostics/AudioMetadataSmoke';
+import { MediaFunctionSmoke } from './ets/diagnostics/MediaFunctionSmoke';
 
 export class RuntimeDiagnostics {
   private static endpoint: string = '';
   private static analysisEndpoint: string = '';
   private static audioMetadataEndpoint: string = '';
+  private static mediaEndpoint: string = '';
   static configure(want: Want): void {
+    const mediaEndpoint = want.parameters?.linkoraMediaFunctionSmoke;
+    if (typeof mediaEndpoint === 'string' && /^http:\/\/10\.0\.2\.2:19333\/[a-f0-9-]{36}$/.test(mediaEndpoint)) {
+      RuntimeDiagnostics.mediaEndpoint = mediaEndpoint;
+    }
     const audioMetadata = want.parameters?.linkoraAudioMetadataSmoke;
     if (typeof audioMetadata === 'string' && /^http:\/\/10\.0\.2\.2:19333\/[a-f0-9-]{36}$/.test(audioMetadata)) {
       RuntimeDiagnostics.audioMetadataEndpoint = audioMetadata;
@@ -22,6 +28,10 @@ export class RuntimeDiagnostics {
     }
   }
   static async run(context: common.UIAbilityContext): Promise<void> {
+    if (RuntimeDiagnostics.mediaEndpoint.length > 0) {
+      const endpoint = RuntimeDiagnostics.mediaEndpoint; RuntimeDiagnostics.mediaEndpoint = '';
+      await MediaFunctionSmoke.run(context, endpoint); return;
+    }
     if (RuntimeDiagnostics.audioMetadataEndpoint.length > 0) {
       const endpoint = RuntimeDiagnostics.audioMetadataEndpoint; RuntimeDiagnostics.audioMetadataEndpoint = '';
       await AudioMetadataSmoke.run(context, endpoint); return;
