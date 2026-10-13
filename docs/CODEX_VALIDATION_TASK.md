@@ -1,6 +1,9 @@
 # Codex Task — Full Autonomous Media Runtime Repair on CLI Simulator, with Hard Stop
 
-> STATE: READY
+> STATE: CLOSED — COMPLETED PARTIAL, REVIEWED AND MERGED
+> EVIDENCE_SHA: 61e18de5e7f80a6f8f94469ef530b30d8eac5d92
+> MERGED_CODE_SHA: abe78f52c3340e56d5f34814072178b516c3fd0d
+> SAME_TASK_RETEST: NOT AUTHORIZED
 > TASK_ID: phase8f-level1-cli-media-all-error-autonomous-repair-v2
 > REPOSITORY: baozi510/Linkora
 > BRANCH: feat/playback-capability-phase8
@@ -24,6 +27,10 @@
 > NO_GUI / NO_MANUAL_SIGN_APP / NO_OLD_KEYSTORE_PROBES / NO_UNINSTALL_WIPE_RESET_OR_SIGNATURE_BYPASS: ZERO
 > DEFAULT_ARM64_RELEASE_DEVICE_TESTS: OUT OF SCOPE
 > TRACKED_CODE_CHANGES: SEPARATE codex/* CANDIDATE BRANCH ONLY; GPT REVIEWS BEFORE MERGE
+
+## Task closure note — no repeat of this completed ID
+
+The source-bound Codex execution is complete with genuine native FFmpeg decoded frames, WebP roundtrip, System MP4 controls at first candidate `928fe777869a8fefbdacad26c52d1d2f91835452`, and native FFmpeg cancellation/HLS pending normal release at final candidate `fd8bae5ab1e52c45c8a2e0848156879c66278b40`. The final candidate did NOT rerun the first candidate core cases. All audio/surface/service resource-zero claims remain NOT PROVEN, distinct post-HLS MP4 recovery NOT RUN. GPT independently reviewed and merged the six-file candidate under merge SHA above; original report-only evidence is immutable. Do NOT rerun this ID. A separate new task targets only HLS app-owned resource attribution and conditional recovery. CLI-only and safety/finite-stop rules still apply.
 
 ## 0. The user's newest grant expands ALL fixes, not just compile and install
 
