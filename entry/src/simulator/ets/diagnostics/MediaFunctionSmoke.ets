@@ -9,14 +9,17 @@ import { MediaSource, MediaSourceKind, MediaFormat, PlaybackBackend, PlaybackPor
   PlaybackPortError, PortPlaybackState } from 'linkora_core';
 import { SystemWebPEncoder } from '../../../main/ets/services/SystemWebPEncoder';
 import { SystemPlaybackPort } from '../../../main/ets/playback/SystemPlaybackPort';
+import { NetworkFileProxy } from 'linkora_proxy';
+import { StallingSource } from './FfmpegRuntimeSmoke';
 
-interface Config { systemOnly: boolean; }
+interface Config { extraOnly: boolean; }
 interface ErrorCode { code?: string | number; }
 interface Evidence {
   case: string; status: string; code?: string; width?: number; height?: number;
   bytes?: number; timeMs?: number; pixelHash?: string; video?: string; audio?: string;
   durationMs?: number; frames?: number; position?: number; seekPosition?: number;
-  firstFrame?: boolean; states?: string[];
+  firstFrame?: boolean; states?: string[]; reads?: number; closes?: number;
+  activeSources?: number; activeClients?: number; pending?: boolean; released?: boolean;
 }
 
 /** Simulator-only native acceptance, never substitutes mocks for media results. */
@@ -88,6 +91,48 @@ export class MediaFunctionSmoke {
     MediaFunctionSmoke.check(states.includes(PortPlaybackState.RELEASED));
     await MediaFunctionSmoke.emit(endpoint, { case: 'system-release-data', status: 'DATA', states });
   }
+  private static async cancel(endpoint: string): Promise<void> {
+    const proxy = new NetworkFileProxy(); const source = new StallingSource();
+    const lease = await proxy.buildSourceUrl(source, 'video/mp4');
+    const analysis = createFfmpegAnalysis(); let code: string = ''; let settled: boolean = false;
+    const pending = analysis.probe('owned-cancel', lease.url, 8000).then(() => { settled = true; },
+      (error: Object) => { settled = true; code = String((error as ErrorCode).code); });
+    try {
+      const start = Date.now();
+      while (source.reads === 0 && !settled && Date.now() - start < 3000) await MediaFunctionSmoke.delay(10);
+      MediaFunctionSmoke.check(source.reads > 0 && !settled);
+      analysis.cancel('owned-cancel'); await pending;
+      MediaFunctionSmoke.check(code === 'FF_CANCELLED');
+    } finally { analysis.close(); await lease.release(); await proxy.close(); }
+    const final = proxy.diagnostics();
+    MediaFunctionSmoke.check(source.closes === 1 && final.activeSources === 0 && final.activeClients === 0);
+    await MediaFunctionSmoke.emit(endpoint, { case: 'ffmpeg-cancel-data', status: 'DATA', code,
+      reads: source.reads, closes: source.closes, activeSources: final.activeSources, activeClients: final.activeClients });
+  }
+  private static async hls(endpoint: string): Promise<void> {
+    const states: string[] = []; let settled: boolean = false; let released: boolean = false;
+    const observer = new PlaybackPortObserver((state: PortPlaybackState) => { states.push(state); },
+      () => {}, () => {}, () => {}, () => {}, () => {}, () => {}, () => {});
+    const receiver = image.createImageReceiver({ width: 320, height: 180 }, image.ImageFormat.JPEG, 4);
+    const backend = await SystemPlaybackPort.create(observer);
+    try {
+      backend.configure(new MediaSource(MediaSourceKind.NETWORK_LINK, endpoint + '/pending.m3u8', 'owned-pending.m3u8', '', MediaFormat.HLS),
+        await receiver.getReceivingSurfaceId());
+      const pending = backend.prepare().then(() => { settled = true; }, () => { settled = true; });
+      await MediaFunctionSmoke.delay(1500);
+      MediaFunctionSmoke.check(states.includes(PortPlaybackState.INITIALIZED) && !states.includes(PortPlaybackState.PREPARED) && !settled);
+      await MediaFunctionSmoke.emit(endpoint, { case: 'hls-before-cancel', status: 'DATA', pending: !settled, states });
+      await backend.release(); released = true; await pending;
+      MediaFunctionSmoke.check(states.includes(PortPlaybackState.RELEASED) && !states.includes(PortPlaybackState.PREPARED));
+      await MediaFunctionSmoke.delay(3500);
+      await MediaFunctionSmoke.emit(endpoint, { case: 'hls-early', status: 'DATA', released: true, states });
+      await MediaFunctionSmoke.delay(21000);
+      MediaFunctionSmoke.check(!states.includes(PortPlaybackState.PREPARED));
+      await MediaFunctionSmoke.emit(endpoint, { case: 'hls-later', status: 'DATA', released: true, states });
+      // Native release alone is not proof of all audio/surface/service resource zeros.
+      await MediaFunctionSmoke.emit(endpoint, { case: 'hls-resource-recovery', status: 'NOT_PROVEN' });
+    } finally { if (!released) await backend.release(); await receiver.release(); }
+  }
   static async run(context: common.UIAbilityContext, endpoint: string): Promise<void> {
     if (MediaFunctionSmoke.running) return;
     MediaFunctionSmoke.running = true;
@@ -98,7 +143,12 @@ export class MediaFunctionSmoke {
       const bytes = (await MediaFunctionSmoke.request(endpoint + '/mp4', true)).result as ArrayBuffer;
       const file = fileIo.openSync(path, fileIo.OpenMode.CREATE | fileIo.OpenMode.READ_WRITE | fileIo.OpenMode.TRUNC);
       try { MediaFunctionSmoke.check(fileIo.writeSync(file.fd, bytes) === bytes.byteLength); } finally { fileIo.closeSync(file.fd); }
-      if (!config.systemOnly) {
+      if (config.extraOnly) {
+        await MediaFunctionSmoke.caseRun(endpoint, 'ffmpeg-active-cancel', () => MediaFunctionSmoke.cancel(endpoint));
+        await MediaFunctionSmoke.caseRun(endpoint, 'hls-pending-native-release', () => MediaFunctionSmoke.hls(endpoint));
+        await MediaFunctionSmoke.emit(endpoint, { case: 'extra-complete', status: 'DONE' }); return;
+      }
+      {
         const analysis = createFfmpegAnalysis();
         try {
           await MediaFunctionSmoke.caseRun(endpoint, 'ffmpeg-probe', async () => {

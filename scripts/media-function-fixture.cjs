@@ -14,14 +14,23 @@ const server = http.createServer((req, res) => {
     req.on('end', () => {
       try {
         const record = JSON.parse(body);
-        const allowed = ['case','status','code','width','height','bytes','timeMs','pixelHash','video','audio','durationMs','frames','position','seekPosition','firstFrame','states'];
+        const allowed = ['case','status','code','width','height','bytes','timeMs','pixelHash','video','audio','durationMs','frames','position','seekPosition','firstFrame','states','reads','closes','activeSources','activeClients','pending','released'];
         if (Object.keys(record).some(key => !allowed.includes(key))) throw Error('unapproved field');
         fs.appendFileSync(path.join(root, 'evidence.PRIVATE.jsonl'), JSON.stringify(record) + '\n'); res.end('ok');
       } catch (_) { res.statusCode = 400; res.end(); }
     }); return;
   }
   if (!['GET','HEAD'].includes(req.method)) { res.statusCode = 405; res.end(); return; }
-  if (req.url === prefix) { res.setHeader('Content-Type', 'application/json'); res.end(JSON.stringify({systemOnly:fs.existsSync(path.join(root,'system-only.PRIVATE.flag'))})); return; }
+  if (req.url === prefix) { res.setHeader('Content-Type', 'application/json'); res.end(JSON.stringify({extraOnly:fs.existsSync(path.join(root,'extra-only.PRIVATE.flag'))})); return; }
+  if (req.url === prefix + '/pending.m3u8') {
+    res.setHeader('Content-Type','application/vnd.apple.mpegurl');
+    res.end('#EXTM3U\n#EXT-X-VERSION:3\n#EXT-X-TARGETDURATION:8\n#EXT-X-MEDIA-SEQUENCE:0\n#EXTINF:8.0,\n' + endpoint + '/pending.ts\n#EXT-X-ENDLIST\n'); return;
+  }
+  if (req.url === prefix + '/pending.ts') {
+    fs.appendFileSync(path.join(root,'hls-ledger.PRIVATE.jsonl'),JSON.stringify({event:'segment-request',time:Date.now()})+'\n');
+    const timer=setTimeout(()=>{res.setHeader('Content-Type','video/mp2t');fs.createReadStream(path.join(root,'owned-h264.ts')).pipe(res);},15000);
+    res.on('close',()=>{clearTimeout(timer);fs.appendFileSync(path.join(root,'hls-ledger.PRIVATE.jsonl'),JSON.stringify({event:'segment-close',time:Date.now()})+'\n');}); return;
+  }
   if (req.url !== prefix + '/mp4') { res.statusCode = 404; res.end(); return; }
   const match = /^bytes=(\d+)-(\d*)$/.exec(req.headers.range || '');
   const start = match ? Number(match[1]) : 0, end = match && match[2] ? Math.min(Number(match[2]), size - 1) : size - 1;
