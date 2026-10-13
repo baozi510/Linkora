@@ -1,6 +1,7 @@
 # Codex Task — CLI HLS Resource Ownership and Conditional Recovery
 
-> STATE: READY
+> STATE: SUPERSEDED — CONSOLIDATED INTO ONE-SHOT T00–T09 BATCH; NO EVIDENCE OF THIS ID EXECUTION
+> SUCCESSOR: single Codex batch READY following this policy commit
 > TASK_ID: phase8f-level1-cli-hls-resource-attribution-recovery-v1
 > REPOSITORY: baozi510/Linkora
 > BRANCH: feat/playback-capability-phase8
@@ -18,6 +19,10 @@
 > GUI/SIGN_APP/OLD_KEYSTORE/USER_ORIGINAL_WORKSPACE_WRITES/APP_UNINSTALL/WIPE/RESET: ZERO
 > TRACKED_CHANGES: SEPARATE codex/phase8f-hls-resource-recovery-v1 CANDIDATE BRANCH ONLY
 > NO_IDENTICAL_RETRIES; STOP_UNSUPPORTED: NEEDS GPT DECISION — STOPPED WITH HONEST PARTIAL EVIDENCE
+
+## One-shot batch supersession — preserving the unexecuted-as-reported HLS checkpoint
+
+The user requests ALL 10 wrapper/contract tasks to be dispatched together with NO intermediate GPT reviews. This HLS-only dispatch was still READY with no published successor result when source was checked. Mark it SUPERSEDED — NOT EXECUTED UNDER THIS ID, not FAILED or PASS. T00 in the new source-bound batch retains the same HLS resource attribution and conditional distinct recovery requirements. The canonical master is `docs/CONTRACT_TEST_BATCH_T00_T09.md`; Codex should run ONLY its successor batch READY task, not this historical ID.
 
 ## 0. Distinct narrow objective, not redoing completed media tests
 

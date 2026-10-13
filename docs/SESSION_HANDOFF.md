@@ -1,3 +1,13 @@
+## CURRENT STATE — 2026-10-13 one-shot T00–T09 contracts batch; single final review
+
+User authorized all planned wrapper contracts tests upfront, and explicitly does **not want intermediate GPT/Codex review turns**. Prepare **one READY Codex batch** replacing the still READY unexecuted-as-reported HLS-only task; do not keep parallel READY authority. Specs are `docs/CONTRACT_TEST_BATCH_T00_T09.md`, issue #20 unified player plus #21–#29 HLS/selector/storage/proxy/probe/thumbnail/lifecycle/persistence/policy. T00 HLS begins, then T01–T09. Reports may be PARTIAL if truly unsupported native API/device; Codex must continue all independent safe tasks and submit one final evidence + code candidate for GPT final merge decision, rather than loop or ask for reviews between checkpoints.
+
+Codex permissions: FULL task-relevant source/native/test repairs in isolated scratch, source SHA per checkpoint, no code pushes to feature branch, one candidate `codex/linkora-contract-batch-t00-t09-v1`, one public report `docs/PLAYBACK_CONTRACT_BATCH_T00_T09_FINAL_REPORT.md`. Limit 40 active minutes/5 causal changes per checkpoint; global 360 minutes/25 changes/12 x86 builds/8 dependent ohpm installs/6 legal ABI-gated simulator-owned installs; don't exhaust gratuitously, no identical retry. CLI-only x86_64 simulator, default ARM64 real MPV untouched. Original user worktree read-only approved FFmpeg inputs only, no GUI/password/signers/other-user-app uninstall/reset. Existing native FFmpeg decode, WebP, System MP4 evidence is from first candidate 928fe777..., additional cancel HLS from fd8bae..., not complete final regression and not actual MPV proof.
+
+Prior sections below historical.
+
+---
+
 ## CURRENT STATE — 2026-10-13 Candidate media diagnostics merged; native HLS resource attribution remains open
 
 **Branch HEAD merge source** `abe78f52c3340e56d5f34814072178b516c3fd0d`, parents `61e18de5e7f80a6f8f94469ef530b30d8eac5d92` (sanitized one-report evidence) and `fd8bae5ab1e52c45c8a2e0848156879c66278b40` (two-commit reviewed code candidate). Only 6 reviewed runtime-test files were merged; core System AVPlayer, FFmpeg native decoder, WebP encoder and PlaybackEngine unaffected. `EntryAbility.onNewWant` now dispatches simulator-only runtime diagnostic Wants; default-target `RuntimeDiagnostics` remains no-op. Full report `docs/PLAYBACK_PHASE8F_CLI_MEDIA_ALL_ERROR_AUTONOMOUS_REPORT.md` and candidate source read independently; no new GPT-side build or native reproduction.

@@ -2,6 +2,13 @@
 
 ## 0. 文档定位
 
+## 2026-10-13 — One-shot T00–T09 core interface/adapter contract-test batch
+
+User approved all 10 checks at once with one final owner review. See `docs/CONTRACT_TEST_BATCH_T00_T09.md` and GitHub issues #20–#29. Ordered tests: T00 HLS owned resources, T01 unified PlaybackPort/System/MPV event/control, T02 Adaptive selection/fallback, T03 StorageProvider/RandomAccessSource, T04 NetworkFileProxy HTTP Range, T05 System/FFmpeg IMediaProbe, T06 thumbnail/processor/WebP, T07 errors/cancellation/lifecycle, T08 media index/bookmark/cache identity, T09 source-backed policy/benchmark. Execute safely sequentially without per-task source-bound re-dispatch or interim merge. Independent BLOCKED/UNSUPPORTED cases do NOT block the rest; final report records them as incomplete rather than green. True MPV on x86 remains stub-only; ARM64 device tests remain separate Level3.
+
+One source-bound batch READY, one isolation-protected Codex candidate branch, one final sanitized evidence report, one final GPT code/report review. Default per checkpoint 40 minutes/5 justified fixes; overall 360 minutes/25 fixes/12 necessary x86 builds/8 param ohpm/6 audited nondestructive installs; real per-case retry only with a meaningful change. No GUI/old keystore/original-worktree writes/uninstall/wipe or direct feature code pushes.
+
+
 ## 2026-10-13 — Codex maximum scope: ANY task-relevant error, not just build/install
 
 **Latest owner authority:** Codex may modify and test actual media-function implementation (FFmpeg decoding, WebP encoding, System playback, async concurrency, native cleanup/recovery), test harness, approved fixture infrastructure, and any necessary ArkTS/C++/CMake/ohpm/Hvigor/dependency issue in **isolated scratch**. Not limited to build/install or a small diagnostic edit. Any necessary tracked production fix goes only to a `codex/*` candidate for GPT review. No direct protected branch merge/write, original dirty workspace edits, GUI, keystore/password accesses, app uninstall/wipe, or fake PASS. Simulator x86 native dependency set and actual device ARM64 native MPV remain separate.
