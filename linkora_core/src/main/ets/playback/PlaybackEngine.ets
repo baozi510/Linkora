@@ -68,8 +68,10 @@ export class PlaybackEngine {
         return;
       }
       this.duration = Math.max(this.duration, port.getDuration());
-      if (startPosition > 0 && this.duration > 0) {
-        port.seek(Math.min(Math.round(startPosition), this.duration));
+      if (Number.isFinite(startPosition) && startPosition > 0) {
+        // Prepared backends can seek before duration metadata arrives.
+        const position: number = Math.round(startPosition);
+        port.seek(this.duration > 0 ? Math.min(position, this.duration) : position);
       }
       await port.play();
     } catch (error) {

@@ -86,6 +86,21 @@ class FailingPreparePort extends FakePlaybackPort {
   }
 }
 
+class DurationAfterPlayPort extends FakePlaybackPort {
+  getDuration(): number {
+    return 0;
+  }
+
+  async prepare(): Promise<void> {
+    this.observer.onStateChange(PortPlaybackState.PREPARED);
+  }
+
+  async play(): Promise<void> {
+    this.observer.onDurationChange(120000);
+    await super.play();
+  }
+}
+
 // The old session's asynchronous operation can complete after the next open.
 class DeferredPausePort extends FakePlaybackPort {
   private rejectPause: ((error: PlaybackPortError) => void) | null = null;
@@ -287,6 +302,22 @@ export default function playbackEngineTest(): void {
       await engine.open(MediaSource.fromLocalDocument('file://media/video.mp4'), 'surface-resume', 33000);
 
       expect(ports[0].seekPosition).assertEqual(33000);
+      expect(latest(snapshots).status).assertEqual(PlaybackStatus.PLAYING);
+    });
+
+    it('resumesPreparedMediaBeforeDelayedDurationMetadata', 0, async () => {
+      const snapshots: PlaybackSnapshot[] = [];
+      let port: DurationAfterPlayPort | null = null;
+      const engine = new PlaybackEngine((snapshot: PlaybackSnapshot) => snapshots.push(snapshot),
+        async (observer: PlaybackPortObserver): Promise<PlaybackPort> => {
+          port = new DurationAfterPlayPort(observer);
+          return port;
+        });
+
+      await engine.open(MediaSource.fromLocalDocument('file://media/video.mkv'), 'surface-resume', 33000);
+
+      expect(port!.seekPosition).assertEqual(33000);
+      expect(latest(snapshots).position).assertEqual(33000);
       expect(latest(snapshots).status).assertEqual(PlaybackStatus.PLAYING);
     });
 
