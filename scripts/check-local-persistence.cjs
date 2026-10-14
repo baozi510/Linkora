@@ -5,7 +5,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const { DatabaseSync } = require('node:sqlite');
-const { randomUUID } = require('node:crypto');
+const { randomUUID, createHash } = require('node:crypto');
 const studio = process.argv[2] || 'C:/Program Files/Huawei/DevEco Studio';
 const ts = require(path.join(studio, 'sdk/default/openharmony/ets/build-tools/ets-loader/node_modules/typescript'));
 const root = path.resolve(__dirname, '..');
@@ -14,7 +14,14 @@ const revoked = [];
 const kits = {
   '@kit.AbilityKit': {}, '@kit.BasicServicesKit': {},
   '@kit.ArkData': { relationalStore: {} },
-  '@kit.ArkTS': { util: { generateRandomUUID: () => randomUUID() } },
+  '@kit.ArkTS': { util: { generateRandomUUID: () => randomUUID(),
+    TextEncoder: class { encodeInto(value) { return new TextEncoder().encode(value); } } } },
+  '@kit.CryptoArchitectureKit': { cryptoFramework: { createMd: algorithm => {
+    assert.equal(algorithm, 'SHA256');
+    const digest = createHash('sha256');
+    return { update: async input => { digest.update(input.data); },
+      digest: async () => ({ data: new Uint8Array(digest.digest()) }) };
+  } } },
   '@kit.CoreFileKit': { fileShare: { OperationMode: { READ_MODE: 1 },
     revokePermission: async policies => revoked.push(...policies.map(policy => policy.uri)) } },
   '@kit.MediaKit': {}
@@ -140,6 +147,32 @@ async function check(name, test) { await test(); console.log(`PASS: ${name}`); }
   LinkoraDatabase.shared({}).activeStore = store;
   const manual = new ManualMediaStore({});
   const hidden = new HiddenLocalItemStore({});
+  await check('remote bookmarks isolate servers and preserve local identity', async () => {
+    const { SourceIdentity } = service('SourceIdentity');
+    const { PlaybackBookmarkStore } = service('PlaybackBookmarkStore');
+    const { PlaybackBookmark } = load('linkora_core');
+    const first = MediaSource.fromRemoteFile('/movie/video.mkv', 'video.mkv', 'Server A', 100,
+      'network-server:A');
+    const second = MediaSource.fromRemoteFile('/movie/video.mkv', 'video.mkv', 'Server B', 100,
+      'network-server:B');
+    assert.notEqual(await SourceIdentity.key(first), await SourceIdentity.key(second));
+    const local = MediaSource.fromLocalDocument('file://video.mp4');
+    assert.equal(await SourceIdentity.key(local), await SourceIdentity.value(`${local.kind}:${local.locator}`));
+    const bookmarks = new PlaybackBookmarkStore({});
+    await bookmarks.save(first, new PlaybackBookmark(33000, 120000, 10));
+    assert.equal(await bookmarks.load(second), null);
+    await bookmarks.save(second, new PlaybackBookmark(60000, 120000, 20));
+    await bookmarks.save(first, new PlaybackBookmark(10000, 120000, 5));
+    assert.equal((await bookmarks.load(first)).position, 33000);
+    assert.equal((await bookmarks.load(second)).position, 60000);
+    store.fail = sql => sql.includes('INSERT INTO playback_state');
+    await assert.rejects(bookmarks.save(first, new PlaybackBookmark(44000, 120000, 30)));
+    store.fail = null;
+    assert.equal((await bookmarks.load(first)).position, 33000);
+    await bookmarks.clear(second);
+    assert.equal(await bookmarks.load(second), null);
+    assert.equal((await bookmarks.load(first)).position, 33000);
+  });
   await check('same-folder deduplication and cross-folder references survive removal', async () => {
     const folder = (await manual.createFolder('', 'Test'))[0];
     const source = MediaSource.fromLocalDocument('file://old.mp4');

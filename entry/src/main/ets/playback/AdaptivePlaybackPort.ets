@@ -90,12 +90,12 @@ class CandidateObserver {
   commit(backend: string): void {
     this.committed = true;
     this.target.onBackendChange(backend);
-    if (this.duration > 0) this.target.onDurationChange(this.duration);
-    if (this.videoWidth > 0 && this.videoHeight > 0) {
+    if (this.committed && this.duration > 0) this.target.onDurationChange(this.duration);
+    if (this.committed && this.videoWidth > 0 && this.videoHeight > 0) {
       this.target.onVideoSizeChange(this.videoWidth, this.videoHeight);
     }
-    if (this.tracks.length > 0) this.target.onTracksChange(this.tracks);
-    this.target.onVideoInfoChange(this.videoInfo);
+    if (this.committed && this.tracks.length > 0) this.target.onTracksChange(this.tracks);
+    if (this.committed) this.target.onVideoInfoChange(this.videoInfo);
   }
 }
 
@@ -110,6 +110,7 @@ export class AdaptivePlaybackPort implements PlaybackPort {
   private surfaceId: string = '';
   private resolved: ResolvedPlaybackSource | null = null;
   private backend: PlaybackBackend | null = null;
+  private committedGate: CandidateObserver | null = null;
   // Own the candidate until its preparation has finished and it is committed.
   private pendingCandidate: PlaybackBackend | null = null;
   private released: boolean = false;
@@ -189,6 +190,7 @@ export class AdaptivePlaybackPort implements PlaybackPort {
     }
     this.pendingCandidate = null;
     this.backend = candidate.backend;
+    this.committedGate = candidate.gate;
     candidate.gate.commit(candidate.backend.backendKind());
     if (!this.released) {
       this.observer.onStateChange(PortPlaybackState.PREPARED);
@@ -220,19 +222,27 @@ export class AdaptivePlaybackPort implements PlaybackPort {
       return;
     }
     this.released = true;
+    if (this.committedGate !== null) {
+      this.committedGate.committed = false;
+      this.committedGate = null;
+    }
     const backend: PlaybackBackend | null = this.backend;
     const pending: PlaybackBackend | null = this.pendingCandidate;
     this.backend = null;
     this.pendingCandidate = null;
     // Stop an in-flight native prepare before releasing its source lease.
-    if (pending !== null && pending !== backend) {
-      await pending.release().catch(() => {});
+    try {
+      try {
+        if (pending !== null && pending !== backend) {
+          await pending.release();
+        }
+      } finally {
+        await backend?.release();
+      }
+    } finally {
+      await this.releaseResolved();
     }
-    await backend?.release().catch(() => {});
-    await this.releaseResolved();
-    if (backend === null) {
-      this.observer.onStateChange(PortPlaybackState.RELEASED);
-    }
+    this.observer.onStateChange(PortPlaybackState.RELEASED);
   }
 
   private async prepareBackend(kind: PlayerBackendKind, source: MediaSource): Promise<PreparedCandidate> {
@@ -280,7 +290,7 @@ export class AdaptivePlaybackPort implements PlaybackPort {
   private async releaseResolved(): Promise<void> {
     const resolved: ResolvedPlaybackSource | null = this.resolved;
     this.resolved = null;
-    await resolved?.release().catch(() => {});
+    await resolved?.release();
   }
 
   private cancelledError(): PlaybackPortError {

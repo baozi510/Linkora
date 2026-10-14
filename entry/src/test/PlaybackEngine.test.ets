@@ -86,6 +86,12 @@ class FailingPreparePort extends FakePlaybackPort {
   }
 }
 
+class FailingReleasePort extends FakePlaybackPort {
+  async release(): Promise<void> {
+    throw new PlaybackPortError(5400104, 'native release failed');
+  }
+}
+
 class DurationAfterPlayPort extends FakePlaybackPort {
   getDuration(): number {
     return 0;
@@ -168,6 +174,35 @@ function latest(snapshots: PlaybackSnapshot[]): PlaybackSnapshot {
 
 export default function playbackEngineTest(): void {
   describe('PlaybackEngine', () => {
+    it('doesNotReportReleasedWhenNativeReleaseFails', 0, async () => {
+      const snapshots: PlaybackSnapshot[] = [];
+      const engine = new PlaybackEngine((snapshot: PlaybackSnapshot) => snapshots.push(snapshot),
+        async (observer: PlaybackPortObserver) => new FailingReleasePort(observer));
+      await engine.open(MediaSource.fromLocalDocument('file://release.mp4'), 'surface');
+      let rejected: boolean = false;
+      try { await engine.release(); } catch (_error) { rejected = true; }
+      expect(rejected).assertTrue();
+      expect(latest(snapshots).status).assertEqual(PlaybackStatus.ERROR);
+      expect(latest(snapshots).failure!.diagnosticCode).assertEqual('LNK-PLAY-003/5400104');
+      rejected = false;
+      try { await engine.release(); } catch (_error) { rejected = true; }
+      expect(rejected).assertTrue();
+      expect(latest(snapshots).status).assertEqual(PlaybackStatus.ERROR);
+    });
+
+    it('doesNotOpenReplacementWhenPreviousNativeReleaseFails', 0, async () => {
+      const snapshots: PlaybackSnapshot[] = [];
+      let factoryCalls: number = 0;
+      const engine = new PlaybackEngine((snapshot: PlaybackSnapshot) => snapshots.push(snapshot),
+        async (observer: PlaybackPortObserver) => {
+          factoryCalls++;
+          return new FailingReleasePort(observer);
+        });
+      await engine.open(MediaSource.fromLocalDocument('file://first.mp4'), 'surface');
+      await engine.open(MediaSource.fromLocalDocument('file://second.mp4'), 'surface');
+      expect(factoryCalls).assertEqual(1);
+      expect(latest(snapshots).status).assertEqual(PlaybackStatus.ERROR);
+    });
     for (const paused of [true, false]) {
       for (const endBeforeSeekDone of [true, false]) {
         it(`restoresSeekIntentPaused${paused}EndFirst${endBeforeSeekDone}`, 0, async () => {

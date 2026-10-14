@@ -1,10 +1,13 @@
 import { util } from '@kit.ArkTS';
 import { cryptoFramework } from '@kit.CryptoArchitectureKit';
-import { MediaSource } from 'linkora_core';
+import { MediaSource, MediaSourceKind } from 'linkora_core';
 
 export class SourceIdentity {
   static async key(source: MediaSource): Promise<string> {
-    return SourceIdentity.value(`${source.kind}:${source.locator}`);
+    // A remote path is only unique within its server; keep existing local keys.
+    const identity: string = source.kind === MediaSourceKind.REMOTE_FILE && source.sourceId.length > 0 ?
+      JSON.stringify([source.kind, source.sourceId, source.locator]) : `${source.kind}:${source.locator}`;
+    return SourceIdentity.value(identity);
   }
 
   static async value(inputValue: string): Promise<string> {

@@ -5,9 +5,31 @@ import {
   resolveHttpByteRange
 } from 'linkora_proxy';
 import { NativeRemoteFile, NativeRemoteReadSession } from '../main/ets/services/NativeRemoteReadSession';
+import { RemoteReadSessionAdapter } from 'linkora_core';
 
 export default function networkFileProxyTest(): void {
   describe('NetworkFileProxy', () => {
+    it('preserves byte-exact random reads short EOF and closed-source isolation', 0, async () => {
+      const bytes: Uint8Array = new Uint8Array([7, 19, 31, 43, 59, 67]);
+      let reads: number = 0;
+      const reader = new NativeRemoteReadSession(new NativeRemoteFile(1, bytes.length),
+        async (_handle: number, offset: number, length: number): Promise<ArrayBuffer> => {
+          reads++;
+          return bytes.slice(offset, offset + length).buffer as ArrayBuffer;
+        }, () => {}, async () => {});
+      const source = new RemoteReadSessionAdapter('owned-fixture', reader);
+      const values: ArrayBuffer[] = await Promise.all([source.readAt(3, 2), source.readAt(0, 3),
+        source.readAt(5, 4), source.readAt(6, 4)]);
+      expect(new Uint8Array(values[0]).toString()).assertEqual('43,59');
+      expect(new Uint8Array(values[1]).toString()).assertEqual('7,19,31');
+      expect(new Uint8Array(values[2]).toString()).assertEqual('67');
+      expect(values[3].byteLength).assertEqual(0);
+      await source.close();
+      let rejected: boolean = false;
+      try { await source.readAt(0, 1); } catch (_error) { rejected = true; }
+      expect(rejected).assertTrue();
+      expect(reads).assertEqual(4);
+    });
     it('startsWithEmptyDiagnosticsAndClampsConfiguration', 0, async () => {
       const proxy = new NetworkFileProxy(new NetworkFileProxyConfig(1024 * 1024, 1, 0, 0));
       const diagnostics = proxy.diagnostics();

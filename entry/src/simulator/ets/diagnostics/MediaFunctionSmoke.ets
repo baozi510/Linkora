@@ -111,11 +111,13 @@ export class MediaFunctionSmoke {
   }
   private static async hls(endpoint: string): Promise<void> {
     const states: string[] = []; let settled: boolean = false; let released: boolean = false;
+    let receiverReleaseStarted: boolean = false;
     const observer = new PlaybackPortObserver((state: PortPlaybackState) => { states.push(state); },
       () => {}, () => {}, () => {}, () => {}, () => {}, () => {}, () => {});
     const receiver = image.createImageReceiver({ width: 320, height: 180 }, image.ImageFormat.JPEG, 4);
-    const backend = await SystemPlaybackPort.create(observer);
+    let backend: PlaybackBackend | null = null;
     try {
+      backend = await SystemPlaybackPort.create(observer);
       backend.configure(new MediaSource(MediaSourceKind.NETWORK_LINK, endpoint + '/pending.m3u8', 'owned-pending.m3u8', '', MediaFormat.HLS),
         await receiver.getReceivingSurfaceId());
       const pending = backend.prepare().then(() => { settled = true; }, () => { settled = true; });
@@ -123,6 +125,8 @@ export class MediaFunctionSmoke {
       MediaFunctionSmoke.check(states.includes(PortPlaybackState.INITIALIZED) && !states.includes(PortPlaybackState.PREPARED) && !settled);
       await MediaFunctionSmoke.emit(endpoint, { case: 'hls-before-cancel', status: 'DATA', pending: !settled, states });
       await backend.release(); released = true; await pending;
+      receiverReleaseStarted = true;
+      await receiver.release();
       MediaFunctionSmoke.check(states.includes(PortPlaybackState.RELEASED) && !states.includes(PortPlaybackState.PREPARED));
       await MediaFunctionSmoke.delay(3500);
       await MediaFunctionSmoke.emit(endpoint, { case: 'hls-early', status: 'DATA', released: true, states });
@@ -131,7 +135,10 @@ export class MediaFunctionSmoke {
       await MediaFunctionSmoke.emit(endpoint, { case: 'hls-later', status: 'DATA', released: true, states });
       // Native release alone is not proof of all audio/surface/service resource zeros.
       await MediaFunctionSmoke.emit(endpoint, { case: 'hls-resource-recovery', status: 'NOT_PROVEN' });
-    } finally { if (!released) await backend.release(); await receiver.release(); }
+    } finally {
+      try { if (!released && backend !== null) await backend.release(); }
+      finally { if (!receiverReleaseStarted) await receiver.release(); }
+    }
   }
   static async run(context: common.UIAbilityContext, endpoint: string): Promise<void> {
     if (MediaFunctionSmoke.running) return;

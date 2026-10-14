@@ -28,6 +28,7 @@ export class SystemPlaybackPort implements PlaybackBackend {
   private nativePrepareCompleted: boolean = false;
   private nativePreparedNotified: boolean = false;
   private released: boolean = false;
+  private releasePromise: Promise<void> | null = null;
 
   private constructor(player: media.AVPlayer, observer: PlaybackPortObserver) {
     this.player = player;
@@ -155,7 +156,13 @@ export class SystemPlaybackPort implements PlaybackBackend {
     this.player.setVolume(volume);
   }
 
-  async release(): Promise<void> {
+  release(): Promise<void> {
+    if (this.releasePromise !== null) return this.releasePromise;
+    this.releasePromise = this.releasePlayer();
+    return this.releasePromise;
+  }
+
+  private async releasePlayer(): Promise<void> {
     this.released = true;
     const cancelled: PlaybackPortError = new PlaybackPortError(5400104,
       'AVPlayer released during preparation');
@@ -165,7 +172,8 @@ export class SystemPlaybackPort implements PlaybackBackend {
       if (this.player.state !== 'released') {
         await this.player.release();
       }
-    } catch (_error) {
+    } catch (error) {
+      throw SystemPlaybackPort.platformError(error);
     } finally {
       this.clearInitializationTimeout();
       this.clearPreparationTimeout();
@@ -177,6 +185,7 @@ export class SystemPlaybackPort implements PlaybackBackend {
 
   private registerEvents(): void {
     this.player.on('stateChange', (state: media.AVPlayerState, _reason: media.StateChangeReason) => {
+      if (this.released && state !== 'released') return;
       if (state === 'initialized') {
         this.completeInitialization();
       } else if (state === 'prepared') {
@@ -189,6 +198,7 @@ export class SystemPlaybackPort implements PlaybackBackend {
       this.observer.onStateChange(this.portState(state));
     });
     this.player.on('error', (error) => {
+      if (this.released) return;
       console.error(`[SystemPlaybackPort] AVPlayer error code=${error.code}, message=${error.message}`);
       const portError: PlaybackPortError = new PlaybackPortError(error.code, error.message);
       this.lastError = portError;
@@ -197,24 +207,31 @@ export class SystemPlaybackPort implements PlaybackBackend {
       this.observer.onError(portError);
     });
     this.player.on('durationUpdate', (duration: number) => {
+      if (this.released) return;
       this.observer.onDurationChange(duration);
     });
     this.player.on('timeUpdate', (position: number) => {
+      if (this.released) return;
       this.observer.onPositionChange(position);
     });
     this.player.on('seekDone', (position: number) => {
+      if (this.released) return;
       this.observer.onSeekComplete(position);
     });
     this.player.on('bufferingUpdate', (type: media.BufferingInfoType, value: number) => {
+      if (this.released) return;
       this.observer.onBufferingChange(this.bufferingEvent(type), value);
     });
     this.player.on('startRenderFrame', () => {
+      if (this.released) return;
       this.observer.onFirstFrame();
     });
     this.player.on('videoSizeChange', (width: number, height: number) => {
+      if (this.released) return;
       this.observer.onVideoSizeChange(width, height);
     });
     this.player.on('audioInterrupt', (event: audio.InterruptEvent) => {
+      if (this.released) return;
       if (event.hintType === audio.InterruptHint.INTERRUPT_HINT_PAUSE ||
         event.hintType === audio.InterruptHint.INTERRUPT_HINT_STOP) {
         this.observer.onInterruptionPause();

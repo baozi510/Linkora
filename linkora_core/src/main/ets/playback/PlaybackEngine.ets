@@ -15,6 +15,7 @@ import { PlaybackObserver, PlaybackSnapshot, PlaybackStatus } from './PlaybackMo
 
 export class PlaybackEngine {
   private port: PlaybackPort | null = null;
+  private releaseFailure: PlaybackPortError | null = null;
   private observer: PlaybackObserver;
   private portFactory: PlaybackPortFactory;
   private sessionId: number = 0;
@@ -42,16 +43,16 @@ export class PlaybackEngine {
 
   async open(source: MediaSource, surfaceId: string, startPosition: number = 0): Promise<void> {
     const sessionId: number = ++this.sessionId;
-    await this.releaseCurrentPort();
-    // A later open() or release() can win while the previous port is closing.
-    if (!this.isCurrent(sessionId)) {
-      return;
-    }
-    this.resetSnapshot();
-    this.status = PlaybackStatus.PREPARING;
-    this.notify();
-
     try {
+      await this.releaseCurrentPort();
+      // A later open() or release() can win while the previous port is closing.
+      if (!this.isCurrent(sessionId)) {
+        return;
+      }
+      this.resetSnapshot();
+      this.status = PlaybackStatus.PREPARING;
+      this.notify();
+
       const port: PlaybackPort = await this.portFactory(this.createPortObserver(sessionId));
       if (!this.isCurrent(sessionId)) {
         await port.release();
@@ -76,11 +77,16 @@ export class PlaybackEngine {
       await port.play();
     } catch (error) {
       if (this.isCurrent(sessionId)) {
-        await this.releaseCurrentPort();
+        let failure: PlaybackPortError = this.portError(error);
+        try {
+          await this.releaseCurrentPort();
+        } catch (releaseError) {
+          failure = this.portError(releaseError);
+        }
         // Disposal may yield to a newer open() or release(): the old failure
         // must not overwrite its playback state after that newer session wins.
         if (this.isCurrent(sessionId)) {
-          this.fail(this.portError(error));
+          this.fail(failure);
         }
       }
     }
@@ -170,7 +176,12 @@ export class PlaybackEngine {
 
   async release(): Promise<void> {
     const sessionId: number = ++this.sessionId;
-    await this.releaseCurrentPort();
+    try {
+      await this.releaseCurrentPort();
+    } catch (error) {
+      if (this.isCurrent(sessionId)) this.fail(this.portError(error));
+      throw error as Error;
+    }
     // Do not replace a newer playback snapshot with an old release result.
     if (this.isCurrent(sessionId)) {
       this.status = PlaybackStatus.RELEASED;
@@ -346,7 +357,9 @@ export class PlaybackEngine {
     this.port = null;
     this.failWith(error);
     if (port !== null) {
-      port.release().catch(() => {});
+      port.release().catch((releaseError: PlaybackPortError) => {
+        this.releaseFailure = this.portError(releaseError);
+      });
     }
   }
 
@@ -371,12 +384,17 @@ export class PlaybackEngine {
     const port: PlaybackPort | null = this.port;
     this.port = null;
     if (port === null) {
+      if (this.releaseFailure !== null) throw this.releaseFailure;
       return;
     }
     try {
       await port.release();
-    } catch (_error) {
+    } catch (error) {
+      // Failed disposal cannot become a later successful release or replacement.
+      this.releaseFailure = this.portError(error);
+      throw this.releaseFailure;
     }
+    if (this.releaseFailure !== null) throw this.releaseFailure;
   }
 
   private resetSnapshot(): void {

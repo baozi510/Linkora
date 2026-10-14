@@ -79,6 +79,12 @@ try {
   & $node (Join-Path $PSScriptRoot 'check-mpv-playback-port.cjs') $StudioRoot
   if ($LASTEXITCODE -ne 0) { throw 'MPV adapter event-mapping regression checks failed.' }
 
+  & $node (Join-Path $PSScriptRoot 'check-adaptive-playback-port.cjs') $StudioRoot
+  if ($LASTEXITCODE -ne 0) { throw 'Adaptive playback contract checks failed.' }
+
+  & $node (Join-Path $PSScriptRoot 'check-system-playback-port.cjs') $StudioRoot
+  if ($LASTEXITCODE -ne 0) { throw 'System playback contract checks failed.' }
+
   & $hvigor test --mode module -p module=entry@default -p product=default --no-daemon
   if ($LASTEXITCODE -ne 0) {
     throw 'Unit-test compilation failed.'
