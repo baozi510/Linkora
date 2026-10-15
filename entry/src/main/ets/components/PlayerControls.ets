@@ -1,4 +1,4 @@
-import { PlaybackSnapshot, PlaybackStatus, PortTrack, PortTrackKind } from 'linkora_core';
+import { PlaybackSnapshot, PlaybackStatus, PortTrack, PortTrackKind, VideoDisplayMode } from 'linkora_core';
 import { AppTypography, PlayerColors, PlayerRadius } from '../ui/AppTheme';
 
 @ComponentV2
@@ -19,6 +19,14 @@ export struct PlayerControls {
   @Event onStopPlayback: () => void = () => {};
   @Event onToggleLoop: () => void = () => {};
   @Event onSelectAudioTrack: (id: string) => void = () => {};
+  @Event onChangeDisplayMode: () => void = () => {};
+
+  private displayModeText(): ResourceStr {
+    if (this.snapshot.displayMode === VideoDisplayMode.FIT) return $r('app.string.player_display_fit');
+    if (this.snapshot.displayMode === VideoDisplayMode.CROP) return $r('app.string.player_display_crop');
+    if (this.snapshot.displayMode === VideoDisplayMode.STRETCH) return $r('app.string.player_display_stretch');
+    return $r('app.string.player_display_mode');
+  }
 
   private audioTracks(): PortTrack[] {
     return this.snapshot.tracks.filter((track: PortTrack) => track.kind === PortTrackKind.AUDIO);
@@ -95,6 +103,16 @@ export struct PlayerControls {
           .onClick(() => {
             this.onChangePlaybackRate();
           })
+
+        Button(this.displayModeText())
+          .type(ButtonType.Normal)
+          .height(38)
+          .fontSize(13)
+          .fontColor(PlayerColors.TEXT_CONTROL)
+          .backgroundColor(PlayerColors.CONTROL_SURFACE)
+          .borderRadius(PlayerRadius.CONTROL)
+          .enabled(this.canControl())
+          .onClick(() => this.onChangeDisplayMode())
 
         Blank()
         Button(this.isPlaying() ? '❚❚' : '▶')

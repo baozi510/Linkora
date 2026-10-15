@@ -10,7 +10,7 @@ import {
   PortPlaybackState,
   PortTrack,
   PortVideoInfo,
-  PortTrackKind, PortStreamEnd, PortAudioInterruption, PortAudioOutputChange
+  PortTrackKind, PortStreamEnd, PortAudioInterruption, PortAudioOutputChange, VideoDisplayMode
 } from './PlaybackPort';
 import { PlaybackObserver, PlaybackSnapshot, PlaybackStatus } from './PlaybackModels';
 
@@ -44,6 +44,8 @@ export class PlaybackEngine {
   private requestedRate: number = 1;
   private requestedVolume: number = 1;
   private requestedLoop: boolean = false;
+  private displayMode: VideoDisplayMode | null = null;
+  private requestedDisplayMode: VideoDisplayMode = VideoDisplayMode.FIT;
   private streamEnd: PortStreamEnd | null = null;
   private audioInterruption: PortAudioInterruption | null = null;
   private audioOutput: PortAudioOutputChange | null = null;
@@ -86,6 +88,8 @@ export class PlaybackEngine {
         return;
       }
       this.duration = Math.max(this.duration, port.getDuration());
+      this.setDisplayMode(this.requestedDisplayMode);
+      if (!this.isCurrent(sessionId) || this.port !== port) return;
       if (this.requestedLoop) this.setLoop(true);
       if (!this.isCurrent(sessionId) || this.port !== port) return;
       if (this.requestedRate !== 1) this.setPlaybackRate(this.requestedRate);
@@ -225,6 +229,18 @@ export class PlaybackEngine {
     }
   }
 
+  setDisplayMode(mode: VideoDisplayMode): void {
+    const port: PlaybackPort | null = this.port;
+    if (port === null) return;
+    try {
+      port.setDisplayMode(mode);
+      this.requestedDisplayMode = mode;
+    } catch (error) {
+      this.displayMode = null;
+      this.warn('display-mode', this.portError(error));
+    }
+  }
+
   async selectAudioTrack(id: string): Promise<void> {
     const port: PlaybackPort | null = this.port;
     if (port === null) return;
@@ -354,6 +370,16 @@ export class PlaybackEngine {
       },
       (operation: string, error: PlaybackPortError) => {
         if (this.isCurrent(sessionId)) this.warn(operation, error);
+      },
+      (mode: VideoDisplayMode) => {
+        if (this.isCurrent(sessionId)) {
+          this.displayMode = mode;
+          if (this.warningOperation === 'display-mode') {
+            this.warning = null;
+            this.warningOperation = '';
+          }
+          this.notify();
+        }
       }
     );
   }
@@ -512,6 +538,7 @@ export class PlaybackEngine {
     this.audioOutput = null;
     this.warning = null;
     this.warningOperation = '';
+    this.displayMode = null;
   }
 
   private notify(): void {
@@ -529,7 +556,7 @@ export class PlaybackEngine {
       this.tracks,
       this.videoInfo,
       this.playbackRate, this.volume, this.loop, this.streamEnd,
-      this.audioInterruption, this.audioOutput, this.warning, this.warningOperation
+      this.audioInterruption, this.audioOutput, this.warning, this.warningOperation, this.displayMode
     ));
   }
 }

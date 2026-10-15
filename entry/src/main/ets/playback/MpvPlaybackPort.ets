@@ -21,7 +21,8 @@ import {
   PortStreamEndReason,
   PortTrack,
   PortTrackKind,
-  PortVideoInfo
+  PortVideoInfo,
+  VideoDisplayMode
 } from 'linkora_core';
 
 const MPV_PREPARE_TIMEOUT_MS: number = 12000;
@@ -172,6 +173,24 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
   setLoop(loop: boolean): void {
     this.ensureReady();
     this.player.setLoopMode(loop ? PlaylistMode.File : PlaylistMode.None);
+  }
+
+  setDisplayMode(mode: VideoDisplayMode): void {
+    this.ensureReady();
+    if (mode !== VideoDisplayMode.FIT && mode !== VideoDisplayMode.CROP && mode !== VideoDisplayMode.STRETCH) {
+      throw new PlaybackPortError(401, 'Invalid display mode');
+    }
+    const keepAspect: boolean = mode !== VideoDisplayMode.STRETCH;
+    const pan: number = mode === VideoDisplayMode.CROP ? 1 : 0;
+    this.player.native.setProperty('keepaspect', keepAspect);
+    this.player.native.setProperty('panscan', pan);
+    this.player.native.setProperty('video-unscaled', 'no');
+    if (this.player.native.getPropertyBool('keepaspect') !== keepAspect ||
+      this.player.native.getProperty('panscan') !== pan ||
+      this.player.native.getPropertyString('video-unscaled') !== 'no') {
+      throw new PlaybackPortError(5400102, 'Display mode not applied');
+    }
+    this.observer.onDisplayModeChange(mode);
   }
 
   async selectAudioTrack(id: string): Promise<void> {

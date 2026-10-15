@@ -1,6 +1,6 @@
 import { AppFailure } from '../errors/AppFailure';
 import { PlaybackPortError, PortAudioInterruption, PortAudioOutputChange, PortStreamEnd,
-  PortTrack, PortVideoInfo } from './PlaybackPort';
+  PortTrack, PortVideoInfo, VideoDisplayMode } from './PlaybackPort';
 
 export enum PlaybackStatus {
   IDLE = 'idle',
@@ -37,6 +37,7 @@ export class PlaybackSnapshot {
   readonly audioOutput: PortAudioOutputChange | null;
   readonly warning: PlaybackPortError | null;
   readonly warningOperation: string;
+  readonly displayMode: VideoDisplayMode | null;
 
   constructor(status: PlaybackStatus, position: number, duration: number, bufferedPercent: number,
     videoWidth: number, videoHeight: number, failure: AppFailure | null, firstFrameRendered: boolean,
@@ -45,7 +46,7 @@ export class PlaybackSnapshot {
     playbackRate: number = 1, volume: number = 1, loop: boolean = false,
     streamEnd: PortStreamEnd | null = null, audioInterruption: PortAudioInterruption | null = null,
     audioOutput: PortAudioOutputChange | null = null, warning: PlaybackPortError | null = null,
-    warningOperation: string = '') {
+    warningOperation: string = '', displayMode: VideoDisplayMode | null = null) {
     this.status = status;
     this.position = position;
     this.duration = duration;
@@ -66,6 +67,7 @@ export class PlaybackSnapshot {
     this.audioOutput = audioOutput;
     this.warning = warning;
     this.warningOperation = warningOperation;
+    this.displayMode = displayMode;
   }
 }
 

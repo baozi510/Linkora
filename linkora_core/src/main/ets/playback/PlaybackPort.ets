@@ -25,6 +25,12 @@ export enum PortTrackKind {
   SUBTITLE = 'subtitle'
 }
 
+export enum VideoDisplayMode {
+  FIT = 'fit',
+  CROP = 'crop',
+  STRETCH = 'stretch'
+}
+
 export class PortTrack {
   readonly id: string;
   readonly kind: PortTrackKind;
@@ -148,6 +154,7 @@ export type PortStreamEndObserver = (event: PortStreamEnd) => void;
 export type PortInterruptionObserver = (event: PortAudioInterruption) => void;
 export type PortAudioOutputObserver = (event: PortAudioOutputChange) => void;
 export type PortWarningObserver = (operation: string, error: PlaybackPortError) => void;
+export type PortDisplayModeObserver = (mode: VideoDisplayMode) => void;
 
 export class PlaybackPortObserver {
   readonly onStateChange: PortStateObserver;
@@ -169,6 +176,7 @@ export class PlaybackPortObserver {
   readonly onAudioInterruption: PortInterruptionObserver;
   readonly onAudioOutputChange: PortAudioOutputObserver;
   readonly onWarning: PortWarningObserver;
+  readonly onDisplayModeChange: PortDisplayModeObserver;
 
   constructor(onStateChange: PortStateObserver, onError: PortErrorObserver,
     onDurationChange: PortNumberObserver, onPositionChange: PortNumberObserver,
@@ -184,7 +192,8 @@ export class PlaybackPortObserver {
     onStreamEnd: PortStreamEndObserver = () => {},
     onAudioInterruption: PortInterruptionObserver = () => {},
     onAudioOutputChange: PortAudioOutputObserver = () => {},
-    onWarning: PortWarningObserver = () => {}) {
+    onWarning: PortWarningObserver = () => {},
+    onDisplayModeChange: PortDisplayModeObserver = () => {}) {
     this.onStateChange = onStateChange;
     this.onError = onError;
     this.onDurationChange = onDurationChange;
@@ -204,6 +213,7 @@ export class PlaybackPortObserver {
     this.onAudioInterruption = onAudioInterruption;
     this.onAudioOutputChange = onAudioOutputChange;
     this.onWarning = onWarning;
+    this.onDisplayModeChange = onDisplayModeChange;
   }
 }
 
@@ -219,6 +229,7 @@ export interface PlaybackPort {
   setPlaybackRate(rate: number): void;
   setVolume(volume: number): void;
   setLoop(loop: boolean): void;
+  setDisplayMode(mode: VideoDisplayMode): void;
   selectAudioTrack(id: string): Promise<void>;
   release(): Promise<void>;
 }

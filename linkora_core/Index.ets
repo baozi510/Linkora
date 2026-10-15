@@ -53,7 +53,7 @@ export { PlaybackObserver, PlaybackSnapshot, PlaybackStatus } from './src/main/e
 export { PlaybackPort, PlaybackPortError, PlaybackPortFactory, PlaybackPortObserver,
   PortBufferingEvent, PortPlaybackState, PortTrack, PortTrackKind,
   PortVideoInfo, PortStreamEnd, PortStreamEndReason, PortAudioInterruption, PortInterruptionHint,
-  PortAudioOutputChange } from './src/main/ets/playback/PlaybackPort';
+  PortAudioOutputChange, VideoDisplayMode } from './src/main/ets/playback/PlaybackPort';
 export { MediaFormatDetector } from './src/main/ets/models/MediaFormatDetector';
 export { NetworkLinkParser } from './src/main/ets/services/NetworkLinkParser';
 export { DiscoveredService, DiscoveryObserver, DiscoveryPlugin, DiscoveryRequest,

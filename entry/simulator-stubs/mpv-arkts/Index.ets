@@ -91,6 +91,9 @@ export class StubNativePlayer {
   attachSurface(_surfaceId: string): void {}
   detachSurface(): void {}
   setProperty(_name: string, _value: string | number | boolean): void {}
+  getProperty(_name: string): number { return 0; }
+  getPropertyBool(_name: string): boolean { return false; }
+  getPropertyString(_name: string): string { return ''; }
 }
 export class Player {
   native: StubNativePlayer = new StubNativePlayer();

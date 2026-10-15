@@ -34,6 +34,7 @@ import {
   PlaybackBookmarkRepository,
   PlaybackEngine,
   PlaybackObserver,
+  VideoDisplayMode,
   PlaybackPort,
   PlaybackPortObserver,
   PlaybackStatus,
@@ -341,6 +342,10 @@ class FakePlaybackPort implements PlaybackPort {
 
   setLoop(loop: boolean): void {
     this.observer.onLoopChange(loop);
+  }
+
+  setDisplayMode(mode: VideoDisplayMode): void {
+    this.observer.onDisplayModeChange(mode);
   }
 
   async selectAudioTrack(_id: string): Promise<void> {
@@ -1200,6 +1205,28 @@ export default function featureModulesTest(): void {
       controller.togglePlayback(); await settle();
       expect(port!.seekPosition).assertEqual(-1);
       expect(controller.currentState().playback.status).assertEqual(PlaybackStatus.PLAYING);
+      controller.stop();
+    });
+
+    it('cyclesThreeNativeDisplayModesAndRetainsTheModeAfterStopReplay', 0, async () => {
+      const controller = new PlayerFeatureController(
+        MediaSource.fromLocalDocument('file://display.mp4'),
+        (observer: PlaybackObserver) => new PlaybackEngine(observer,
+          async (events: PlaybackPortObserver): Promise<PlaybackPort> => new FakePlaybackPort(events)),
+        new FakeBookmarkRepository(), new AppSettings(), () => {}
+      );
+      expect(controller.currentState().playback.displayMode).assertNull();
+      controller.attachSurface('surface'); await settle();
+      expect(controller.currentState().playback.displayMode).assertEqual(VideoDisplayMode.FIT);
+      controller.cycleDisplayMode();
+      expect(controller.currentState().playback.displayMode).assertEqual(VideoDisplayMode.CROP);
+      controller.cycleDisplayMode();
+      expect(controller.currentState().playback.displayMode).assertEqual(VideoDisplayMode.STRETCH);
+      controller.stopPlayback(); await settle();
+      controller.togglePlayback(); await settle();
+      expect(controller.currentState().playback.displayMode).assertEqual(VideoDisplayMode.STRETCH);
+      controller.cycleDisplayMode();
+      expect(controller.currentState().playback.displayMode).assertEqual(VideoDisplayMode.FIT);
       controller.stop();
     });
 

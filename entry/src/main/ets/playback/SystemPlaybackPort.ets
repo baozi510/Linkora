@@ -5,7 +5,7 @@ import { audio } from '@kit.AudioKit';
 import { MediaSource, MediaSourceKind, PlaybackBackend, PlaybackPortError, PlaybackPortObserver,
   PlayerBackendCapabilities, PlayerBackendKind, PortAudioInterruption, PortAudioOutputChange,
   PortBufferingEvent, PortInterruptionHint, PortPlaybackState, PortStreamEnd, PortStreamEndReason,
-  PortTrack, PortTrackKind } from 'linkora_core';
+  PortTrack, PortTrackKind, VideoDisplayMode } from 'linkora_core';
 import { ProgressiveDownloadRegistry, ProgressiveDownloadTask } from './ProgressiveDownloadRegistry';
 
 const INITIALIZATION_TIMEOUT: number = 12000;
@@ -180,6 +180,24 @@ export class SystemPlaybackPort implements PlaybackBackend {
     if (this.released) throw new PlaybackPortError(5400104, 'Player released');
     this.player.loop = loop;
     this.observer.onLoopChange(this.player.loop);
+  }
+
+  setDisplayMode(mode: VideoDisplayMode): void {
+    if (this.released) throw new PlaybackPortError(5400104, 'Player released');
+    if (mode !== VideoDisplayMode.FIT && mode !== VideoDisplayMode.CROP && mode !== VideoDisplayMode.STRETCH) {
+      throw new PlaybackPortError(401, 'Invalid display mode');
+    }
+    // SDK FIT means stretch; SCALED_ASPECT is the proportional letterbox mode.
+    const scale: media.VideoScaleType = mode === VideoDisplayMode.FIT ?
+      media.VideoScaleType.VIDEO_SCALE_TYPE_SCALED_ASPECT : (mode === VideoDisplayMode.CROP ?
+        media.VideoScaleType.VIDEO_SCALE_TYPE_FIT_CROP : media.VideoScaleType.VIDEO_SCALE_TYPE_FIT);
+    try {
+      this.player.videoScaleType = scale;
+      if (this.player.videoScaleType !== scale) throw new PlaybackPortError(5400102, 'Display mode not applied');
+      this.observer.onDisplayModeChange(mode);
+    } catch (error) {
+      throw SystemPlaybackPort.platformError(error);
+    }
   }
 
   async selectAudioTrack(id: string): Promise<void> {

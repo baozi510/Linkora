@@ -1,6 +1,7 @@
 import { describe, expect, it } from '@ohos/hypium';
 import { MediaSource, PlaybackEngine, PlaybackSnapshot, PlaybackStatus } from 'linkora_core';
 import {
+  VideoDisplayMode,
   PlaybackPort,
   PlaybackPortError,
   PlaybackPortFactory,
@@ -59,6 +60,10 @@ class FakePlaybackPort implements PlaybackPort {
 
   setLoop(loop: boolean): void {
     this.observer.onLoopChange(loop);
+  }
+
+  setDisplayMode(mode: VideoDisplayMode): void {
+    this.observer.onDisplayModeChange(mode);
   }
 
   async selectAudioTrack(_id: string): Promise<void> {

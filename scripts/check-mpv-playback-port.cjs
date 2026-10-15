@@ -31,8 +31,12 @@ function fixture() {
         let listener;
         return [name, { listen(callback) { listener = callback; }, add(value) { listener(value); } }];
       }));
-      this.native = { addEventObserver: observer => { this.events = observer; },
-        removeEventObserver() {}, attachSurface() {}, detachSurface() {}, setProperty() {} };
+      this.properties = new Map();
+      this.native = { getProperty: name => this.properties.get(name),
+        getPropertyBool: name => this.properties.get(name),
+        getPropertyString: name => this.properties.get(name),
+        addEventObserver: observer => { this.events = observer; },
+        removeEventObserver() {}, attachSurface() {}, detachSurface() {}, setProperty: (name, value) => this.properties.set(name, value) };
     }
     open() {}
     play() { this.playCalls++; }
@@ -271,4 +275,30 @@ test('MPV EOF arriving after an unknown unload cannot make an unprepared port re
   f.player.stream.eof.add(true);
   assert.equal(f.states.at(-1), 'stopped');
   await port.release();
+});
+
+
+test('MPV switches the three native display modes and resets prior crop/stretch state', async () => {
+  const f = fixture(), port = await f.create(), modes = [];
+  f.observer.onDisplayModeChange = value => modes.push(value);
+  const preparing = port.prepare(); f.loaded(); await preparing;
+  for (const [mode, aspect, pan] of [['fit', true, 0], ['crop', true, 1], ['stretch', false, 0], ['fit', true, 0]]) {
+    port.setDisplayMode(mode);
+    assert.equal(f.player.properties.get('keepaspect'), aspect);
+    assert.equal(f.player.properties.get('panscan'), pan);
+    assert.equal(f.player.properties.get('video-unscaled'), 'no');
+    assert.equal(modes.at(-1), mode);
+  }
+  assert.throws(() => port.setDisplayMode('invalid'), error => error.code === 401);
+  await port.release(); assert.throws(() => port.setDisplayMode('fit'));
+  assert.equal(modes.length, 4);
+});
+
+test('MPV does not acknowledge a display mode when native readback disagrees', async () => {
+  const f = fixture(), port = await f.create(), modes = [];
+  f.observer.onDisplayModeChange = value => modes.push(value);
+  const preparing = port.prepare(); f.loaded(); await preparing;
+  f.player.native.getProperty = () => 0;
+  assert.throws(() => port.setDisplayMode('crop'), error => error.code === 5400102);
+  assert.deepEqual(modes, []); await port.release();
 });

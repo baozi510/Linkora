@@ -42,7 +42,7 @@ function fixture() {
       clearTimeout: id => timers.delete(id)
     }, { filename: file })(name => {
       if (name === 'linkora_core') return core;
-      if (name === '@kit.MediaKit') return { media: { createAVPlayer: async () => player, SeekMode: { SEEK_CLOSEST: 0 } } };
+      if (name === '@kit.MediaKit') return { media: { createAVPlayer: async () => player, SeekMode: { SEEK_CLOSEST: 0 }, VideoScaleType: { VIDEO_SCALE_TYPE_FIT: 0, VIDEO_SCALE_TYPE_FIT_CROP: 1, VIDEO_SCALE_TYPE_SCALED_ASPECT: 2 } } };
       if (name === '@kit.CoreFileKit') return { fileIo: {} };
       if (name === '@kit.AudioKit') return { audio: { InterruptHint: {
         INTERRUPT_HINT_PAUSE: 2, INTERRUPT_HINT_STOP: 3, INTERRUPT_HINT_RESUME: 1,
@@ -205,4 +205,37 @@ test('System metadata failure is nonfatal and an old refresh cannot publish afte
   await port.release(); finish([{ track_index: 2, track_type: 0 }]);
   await new Promise(setImmediate);
   assert.deepEqual(tracks, []);
+});
+
+
+test('System display modes use native enums, not the misleading FIT name', async () => {
+  const f = fixture(), port = await f.create(), modes = [];
+  f.observer.onDisplayModeChange = value => modes.push(value);
+  await port.prepare();
+  for (const [mode, expected] of [['fit', 2], ['crop', 1], ['stretch', 0], ['fit', 2]]) {
+    port.setDisplayMode(mode);
+    assert.equal(f.player.videoScaleType, expected);
+    assert.equal(modes.at(-1), mode);
+  }
+  assert.throws(() => port.setDisplayMode('invalid'), error => error.code === 401);
+  await port.release(); assert.throws(() => port.setDisplayMode('fit'));
+  assert.equal(modes.length, 4);
+});
+
+test('System cannot acknowledge a display mode the backend did not accept', async () => {
+  const f = fixture(), port = await f.create(), modes = [];
+  f.observer.onDisplayModeChange = value => modes.push(value);
+  await port.prepare();
+  Object.defineProperty(f.player, 'videoScaleType', { get: () => 0, set() {} });
+  assert.throws(() => port.setDisplayMode('crop'), error => error.code === 5400102);
+  assert.deepEqual(modes, []);
+  await port.release();
+});
+
+
+test('System display-mode failure keeps the platform diagnostic code and detail', async () => {
+  const f = fixture(), port = await f.create(); await port.prepare();
+  Object.defineProperty(f.player, 'videoScaleType', { set() { throw { code: 5400102, message: 'native scale rejected' }; } });
+  assert.throws(() => port.setDisplayMode('crop'), error => error.code === 5400102 && error.detail === 'native scale rejected');
+  await port.release();
 });

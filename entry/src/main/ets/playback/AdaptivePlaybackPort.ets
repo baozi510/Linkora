@@ -12,7 +12,7 @@ import {
   PortPlaybackState,
   PortTrack,
   PortVideoInfo,
-  PortStreamEnd, PortAudioInterruption, PortAudioOutputChange
+  PortStreamEnd, PortAudioInterruption, PortAudioOutputChange, VideoDisplayMode
 } from 'linkora_core';
 import { NetworkFileProxy } from 'linkora_proxy';
 import { MpvPlaybackPort } from './MpvPlaybackPort';
@@ -93,6 +93,9 @@ class CandidateObserver {
       (event: PortAudioOutputChange) => { if (this.committed) target.onAudioOutputChange(event); },
       (operation: string, error: PlaybackPortError) => {
         if (this.committed) target.onWarning(operation, error);
+      },
+      (mode: VideoDisplayMode) => {
+        if (this.committed) target.onDisplayModeChange(mode);
       }
     );
   }
@@ -231,6 +234,10 @@ export class AdaptivePlaybackPort implements PlaybackPort {
 
   setLoop(loop: boolean): void {
     this.requireBackend().setLoop(loop);
+  }
+
+  setDisplayMode(mode: VideoDisplayMode): void {
+    this.requireBackend().setDisplayMode(mode);
   }
 
   async selectAudioTrack(id: string): Promise<void> {

@@ -189,6 +189,10 @@
     {"name": "player_loop_off", "value": "单曲循环：关"},
     {"name": "player_audio_track", "value": "音轨"},
     {"name": "status_stopped", "value": "已停止"},
-    {"name": "player_control_warning", "value": "操作未成功，播放可继续"}
+    {"name": "player_control_warning", "value": "操作未成功，播放可继续"},
+    {"name": "player_display_fit", "value": "适应"},
+    {"name": "player_display_crop", "value": "裁切"},
+    {"name": "player_display_stretch", "value": "拉伸"},
+    {"name": "player_display_mode", "value": "画面模式"}
   ]
 }

@@ -357,6 +357,7 @@ export struct PlayerPage {
             onTogglePlayback: () => {
               this.togglePlayback();
             },
+            onChangeDisplayMode: () => { this.controller?.cycleDisplayMode(); },
             onStopPlayback: () => { this.controller?.stopPlayback(); },
             onToggleLoop: () => { this.controller?.toggleLoop(); },
             onSelectAudioTrack: (id: string) => { this.controller?.selectAudioTrack(id); },
@@ -376,7 +377,8 @@ export struct PlayerPage {
       }
     }
     .width('100%')
-    .aspectRatio(16 / 9)
+    .height(this.fullScreen ? '100%' : 'auto')
+    .aspectRatio(this.fullScreen ? 0 : 16 / 9)
     .backgroundColor('#000000')
     .onAreaChange((_oldArea: Area, newArea: Area) => {
       // ArkUI Area dimensions are vp; mpv-ohos ohos-surface-size expects
@@ -455,6 +457,7 @@ export struct PlayerPage {
           onTogglePlayback: () => {
             this.togglePlayback();
           },
+          onChangeDisplayMode: () => { this.controller?.cycleDisplayMode(); },
           onStopPlayback: () => { this.controller?.stopPlayback(); },
           onToggleLoop: () => { this.controller?.toggleLoop(); },
           onSelectAudioTrack: (id: string) => { this.controller?.selectAudioTrack(id); },

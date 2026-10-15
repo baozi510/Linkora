@@ -55,7 +55,8 @@ function fixture(preference = 'auto') {
         prepare: () => prepare(events), play: async () => events.onStateChange('playing'),
         pause: async () => events.onStateChange('paused'), seek: value => events.onSeekComplete(value),
         stop: async () => events.onStateChange('stopped'),
-        setLoop: value => events.onLoopChange(value), selectAudioTrack: async () => {},
+        setLoop: value => events.onLoopChange(value),
+        setDisplayMode: value => events.onDisplayModeChange(value), selectAudioTrack: async () => {},
         setPlaybackRate() {}, setVolume() {},
         release: async () => { backend.closes++; events.onStateChange('released'); }
       };
@@ -321,5 +322,53 @@ test('live playback does not require optional loop support', async () => {
   assert.equal(snapshots.at(-1).status, 'playing');
   assert.equal(snapshots.at(-1).warningOperation, 'loop');
   assert.equal(f.backends[0].closes, 0);
+  await engine.release();
+});
+
+
+test('display mode defaults to fit, survives reopening, and fences old callbacks', async () => {
+  const f = fixture(), snapshots = [];
+  const engine = new f.core.PlaybackEngine(value => snapshots.push(value), f.factory('system'));
+  const source = f.core.MediaSource.fromLocalDocument('file://one.mp4');
+  await engine.open(source, 'surface');
+  assert.equal(snapshots.at(-1).displayMode, 'fit');
+  engine.setDisplayMode('crop'); assert.equal(snapshots.at(-1).displayMode, 'crop');
+  await engine.open(source, 'surface'); assert.equal(snapshots.at(-1).displayMode, 'crop');
+  const before = snapshots.length;
+  f.backends[0].events.onDisplayModeChange('stretch'); assert.equal(snapshots.length, before);
+  const port = f.backends[1];
+  port.setDisplayMode = () => { throw new f.core.PlaybackPortError(5400102); };
+  engine.setDisplayMode('stretch');
+  assert.equal(snapshots.at(-1).displayMode, null);
+  assert.equal(snapshots.at(-1).warningOperation, 'display-mode');
+  assert.equal(snapshots.at(-1).status, 'playing'); assert.equal(port.closes, 0);
+  await engine.release();
+});
+
+test('Adaptive display-mode feedback comes only from its committed candidate', async () => {
+  const f = fixture(), modes = [];
+  f.observer.onDisplayModeChange = value => modes.push(value);
+  const port = f.port(f.factory('system', async events => {
+    events.onDisplayModeChange('stretch');
+    throw new f.core.PlaybackPortError(5400106);
+  }), f.factory('mpv'));
+  await port.prepare(); port.setDisplayMode('crop');
+  assert.deepEqual(modes, ['crop']);
+  await port.release(); f.backends[1].events.onDisplayModeChange('fit');
+  assert.deepEqual(modes, ['crop']);
+});
+
+
+test('a rejected initial display mode does not prevent playback or claim an applied mode', async () => {
+  const f = fixture(), snapshots = [], make = f.factory('system');
+  const engine = new f.core.PlaybackEngine(value => snapshots.push(value), async observer => {
+    const port = await make(observer);
+    port.setDisplayMode = () => { throw new f.core.PlaybackPortError(5400102); };
+    return port;
+  });
+  await engine.open(f.core.MediaSource.fromLocalDocument('file://video.mp4'), 'surface');
+  assert.equal(snapshots.at(-1).displayMode, null);
+  assert.equal(snapshots.at(-1).warningOperation, 'display-mode');
+  assert.equal(snapshots.at(-1).status, 'playing'); assert.equal(f.backends[0].closes, 0);
   await engine.release();
 });
