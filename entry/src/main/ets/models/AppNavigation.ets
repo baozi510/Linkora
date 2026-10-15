@@ -1,4 +1,4 @@
-import { MediaSource } from 'linkora_core';
+import { MediaSource, PlaybackPlaylist } from 'linkora_core';
 
 export enum AppDestination {
   SETTINGS_DETAIL = 'settings_detail',
@@ -34,9 +34,12 @@ export class NetworkDirectoryDestinationParams {
 
 export class PlayerDestinationParams {
   readonly source: MediaSource;
+  readonly playlist: PlaybackPlaylist | null;
 
-  constructor(source: MediaSource) {
-    this.source = source;
+  constructor(source: MediaSource, playlist: PlaybackPlaylist | null = null) {
+    const current = playlist?.currentItem() ?? null;
+    this.source = current?.source ?? source;
+    this.playlist = current === null ? null : playlist;
   }
 }
 

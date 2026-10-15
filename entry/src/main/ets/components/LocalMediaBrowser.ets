@@ -1,5 +1,6 @@
 import { image } from '@kit.ImageKit';
-import { LocalMediaAsset, LocalMediaFolder, LocalMediaPlaybackProgress, MediaSource } from 'linkora_core';
+import { LocalMediaAsset, LocalMediaFolder, LocalMediaPlaybackProgress, LocalPlaybackPlaylist,
+  MediaSource, PlaybackPlaylist } from 'linkora_core';
 import { AppColors, AppRadius, AppSpacing, AppTypography, MediaLayout } from '../ui/AppTheme';
 import { AppActionListItem } from './AppActionListItem';
 import { AppIcon, AppIconName } from './AppIcon';
@@ -63,6 +64,7 @@ export struct LocalMediaBrowser {
   @Param scroller: Scroller = new Scroller();
   @Param folders: LocalMediaFolder[] = [];
   @Param items: LocalMediaAsset[] = [];
+  @Param playlistComplete: boolean = false;
   @Param playbackProgress: LocalMediaPlaybackProgress[] = [];
   @Param showFolders: boolean = true;
   @Param currentDirectoryUri: string = '';
@@ -87,7 +89,7 @@ export struct LocalMediaBrowser {
   @Param selectedEntryKeys: string[] = [];
   @Event onFolderChange: (folderUri: string) => void = () => {};
   @Event onScrollIndexChange: (index: number) => void = () => {};
-  @Event onPlay: (source: MediaSource) => void = () => {};
+  @Event onPlay: (playlist: PlaybackPlaylist) => void = () => {};
   @Event onAddFavorite: (source: MediaSource) => void = () => {};
   @Event onAddToPlaylist: (source: MediaSource) => void = () => {};
   @Event onHideFolder: (folder: LocalMediaFolder) => void = () => {};
@@ -376,7 +378,7 @@ export struct LocalMediaBrowser {
 
           if (this.menuItem.isVideo() && this.menuItem.isAvailable()) {
             this.mediaMenuAction(AppIconName.PLAY_ARROW, '打开播放', () => {
-              this.onPlay(this.menuItem?.toMediaSource() ?? MediaSource.empty());
+              if (this.menuItem !== null) this.playItem(this.menuItem);
             })
           }
           if (this.hiddenRecord(HiddenLocalItemType.FILE, this.menuItem.uri) !== null) {
@@ -443,6 +445,11 @@ export struct LocalMediaBrowser {
     return LocalMediaOrdering.items(this.items, this.playbackProgress, this.searchText,
       this.sortField, this.sortAscending, this.typeFilter, this.sourceFilter,
       this.availabilityFilter);
+  }
+
+  private playItem(item: LocalMediaAsset): void {
+    const playlist = LocalPlaybackPlaylist.build(this.visibleItems(), item.uri, this.playlistComplete);
+    if (playlist !== null) this.onPlay(playlist);
   }
 
   private visibleEntries(): LocalBrowserEntry[] {
@@ -661,7 +668,7 @@ export struct LocalMediaBrowser {
       if (this.selectionMode) {
         this.onToggleSelection(this.mediaSelectionKey(item));
       } else if (item.isVideo() && item.isAvailable()) {
-        this.onPlay(item.toMediaSource());
+        this.playItem(item);
       }
     })
     .priorityGesture(
@@ -704,7 +711,9 @@ export struct LocalMediaBrowser {
                   selected: this.isHighlighted(this.mediaSelectionKey(repeatItem.item.media)),
                   accentColor: this.accentColor,
                   loadThumbnail: this.loadThumbnail,
-                  onPlay: this.onPlay,
+                  onPlay: (_source: MediaSource) => {
+                    this.playItem(repeatItem.item.media as LocalMediaAsset);
+                  },
                   onOpenMenu: () => {
                     this.openMediaMenu(repeatItem.item.media as LocalMediaAsset);
                   },

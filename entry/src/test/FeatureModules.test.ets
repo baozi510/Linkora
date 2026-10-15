@@ -153,12 +153,15 @@ class FakeManualMediaRepository implements ManualMediaRepository {
   verifyCalls: number = 0;
   removeCalls: number = 0;
   removeUnavailableCalls: number = 0;
+  failVerify: boolean = false;
+  failFolders: boolean = false;
 
   async load(): Promise<LocalMediaAsset[]> {
     return this.items;
   }
 
   async loadFolders(): Promise<LocalMediaFolder[]> {
+    if (this.failFolders) throw new Error('Injected folder read failure');
     return this.folders.map((folder: LocalMediaFolder): LocalMediaFolder => {
       const children: number = this.folders.filter((child: LocalMediaFolder): boolean =>
         child.parentUri === folder.uri).length;
@@ -238,6 +241,7 @@ class FakeManualMediaRepository implements ManualMediaRepository {
 
   async verify(): Promise<LocalMediaAsset[]> {
     ++this.verifyCalls;
+    if (this.failVerify) throw new Error('Injected verification failure');
     return this.items;
   }
 
@@ -670,6 +674,9 @@ export default function featureModulesTest(): void {
       expect(controller.currentState().scanState).assertEqual(LocalMediaScanState.READY);
       expect(controller.currentState().scanFailure).not().assertNull();
       expect(controller.currentState().refreshing).assertFalse();
+      await controller.setBrowseMode(LocalBrowseMode.VIDEO);
+      expect(controller.currentState().localItems[0].displayName).assertEqual('cached.mp4');
+      expect(controller.currentState().scanFailure).not().assertNull();
     });
 
     it('tracksCompletedSnapshotMetadata', 0, async () => {
@@ -683,6 +690,44 @@ export default function featureModulesTest(): void {
 
       expect(controller.currentState().snapshotGeneration).assertEqual(8);
       expect(controller.currentState().lastSyncedAt).assertEqual(2000);
+      expect(controller.currentState().snapshotComplete).assertTrue();
+    });
+
+    it('keepsPartialLibraryIncompleteAcrossViewChangesUntilAFreshCompleteScan', 0, async () => {
+      const gateway = new FakeLocalMediaGateway();
+      const item = new LocalMediaAsset('file://partial.mp4', 'partial.mp4', 1000, 640, 360, 10, 1);
+      gateway.scanResult = new LocalMediaScanResult([item], [], '', 0, false);
+      const controller = new LibraryFeatureController(gateway, gateway,
+        new FakeRecentMediaRepository(), () => {});
+      await controller.setBrowseMode(LocalBrowseMode.VIDEO);
+      await controller.initialize();
+      expect(controller.currentState().localItems.length).assertEqual(1);
+      expect(controller.currentState().snapshotComplete).assertFalse();
+      await controller.setFolderFilter(LocalMediaFolderFilter.ALL);
+      expect(controller.currentState().snapshotComplete).assertFalse();
+      gateway.scanResult = new LocalMediaScanResult([item], [], '', 0, true);
+      await controller.scanLocal();
+      expect(controller.currentState().snapshotComplete).assertTrue();
+    });
+
+    it('keepsPartialDirectoryIncompleteWhenReprojectingItsCachedItems', 0, async () => {
+      const gateway = new FakeLocalMediaGateway();
+      const folder = new LocalMediaFolder('folder-partial', 'Partial', 1, 1, 0);
+      const item = new LocalMediaAsset('file://partial.mp4', 'partial.mp4',
+        1000, 640, 360, 10, 1, LocalFileCategory.VIDEO, folder.uri);
+      gateway.scanResult = new LocalMediaScanResult([], [folder]);
+      gateway.albumScanResult = new LocalMediaScanResult([item], [], folder.uri, 0, false);
+      const controller = new LibraryFeatureController(gateway, gateway,
+        new FakeRecentMediaRepository(), () => {});
+      await controller.initialize();
+      await controller.selectFolder(folder.uri);
+      expect(controller.currentState().localItems.length).assertEqual(1);
+      expect(controller.currentState().snapshotComplete).assertFalse();
+      await controller.setFolderFilter(LocalMediaFolderFilter.ALL);
+      expect(controller.currentState().snapshotComplete).assertFalse();
+      gateway.albumScanResult = new LocalMediaScanResult([item], [], folder.uri, 0, true);
+      await controller.scanLocal();
+      expect(controller.currentState().snapshotComplete).assertTrue();
     });
 
     it('keepsStableListReferencesWhenSnapshotIsUnchanged', 0, async () => {
@@ -914,6 +959,34 @@ export default function featureModulesTest(): void {
       expect(controller.currentState().selectedFolderUri).assertEqual(folder.uri);
       expect(controller.currentState().localItems.length).assertEqual(1);
       expect(controller.currentState().scanState).assertEqual(LocalMediaScanState.READY);
+    });
+
+    it('keepsVirtualFolderRefreshFailuresUntilASuccessfulReload', 0, async () => {
+      const gateway = new FakeLocalMediaGateway();
+      gateway.authorized = false;
+      const manual = new FakeManualMediaRepository();
+      const folder = (await manual.createFolder('', 'Cached'))[0];
+      await manual.add([MediaSource.fromLocalDocument('file://cached-virtual.mp4')], folder.uri);
+      const controller = new LibraryFeatureController(gateway, gateway,
+        new FakeRecentMediaRepository(), () => {}, manual);
+      await controller.initialize();
+      await controller.selectFolder(folder.uri);
+      manual.failVerify = true;
+      await controller.scanLocal();
+      expect(controller.currentState().localItems.length).assertEqual(1);
+      expect(controller.currentState().scanFailure).not().assertNull();
+      expect(controller.currentState().refreshing).assertFalse();
+      await controller.setFolderFilter(LocalMediaFolderFilter.ALL);
+      expect(controller.currentState().scanFailure).not().assertNull();
+      manual.failVerify = false;
+      manual.failFolders = true;
+      await controller.scanLocal();
+      expect(controller.currentState().scanFailure).not().assertNull();
+      expect(controller.currentState().localItems.length).assertEqual(1);
+      manual.failFolders = false;
+      await controller.scanLocal();
+      expect(controller.currentState().scanFailure).assertNull();
+      expect(controller.currentState().snapshotComplete).assertTrue();
     });
 
     it('refreshesVirtualFolderCountsAfterRemovingAnAlias', 0, async () => {

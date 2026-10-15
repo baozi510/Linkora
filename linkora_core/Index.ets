@@ -41,6 +41,8 @@ export { LocalMediaFolder, LocalMediaFolderFilter,
 export { LocalMediaScanState } from './src/main/ets/models/LocalMediaScanState';
 export { LocalMediaPlaybackProgress } from './src/main/ets/models/LocalMediaPlaybackProgress';
 export { MediaSource, MediaSourceKind } from './src/main/ets/models/MediaSource';
+export { PlaybackPlaylist, PlaybackPlaylistItem } from './src/main/ets/models/PlaybackPlaylist';
+export { LocalPlaybackPlaylist } from './src/main/ets/models/LocalPlaybackPlaylist';
 export { PlaybackBookmark } from './src/main/ets/models/PlaybackBookmark';
 export { RecentMediaItem } from './src/main/ets/models/RecentMediaItem';
 export { AdapterRuntime, DiscoveryMethod, NETWORK_PROTOCOL_CAPABILITIES, ProtocolCapability,

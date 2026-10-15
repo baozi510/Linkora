@@ -145,6 +145,26 @@ async function check(name, test) { await test(); console.log(`PASS: ${name}`); }
   const store = new Store();
   await LinkoraDatabase.shared({}).ensureSchema(store);
   LinkoraDatabase.shared({}).activeStore = store;
+  await check('partial library and directory scans keep completeness through SQLite reload', async () => {
+    const { LocalMediaIndexStore } = service('LocalMediaIndexStore');
+    const { LocalMediaAsset, LocalMediaFolder, LocalMediaScanResult, LocalFileCategory } = load('linkora_core');
+    const index = new LocalMediaIndexStore({});
+    const folder = new LocalMediaFolder('test://playlist-folder', 'Playlist', 1, 1, 0);
+    const item = new LocalMediaAsset('test://playlist-video', 'video.mp4', 1000, 640, 360,
+      100, 1, LocalFileCategory.VIDEO, folder.uri);
+    const partial = await index.replaceLibrary(new LocalMediaScanResult([item], [folder], '', 0, false));
+    assert.equal(partial.cachePersisted, true);
+    assert.equal(partial.items.some(entry => entry.uri === item.uri), true);
+    assert.equal(partial.snapshotComplete, false);
+    const directory = await index.replaceDirectory(new LocalMediaScanResult([item], [], folder.uri, 0, false));
+    assert.equal(directory.cachePersisted, true);
+    assert.equal(directory.items.some(entry => entry.uri === item.uri), true);
+    assert.equal(directory.snapshotComplete, false);
+    const complete = await index.replaceLibrary(new LocalMediaScanResult([item], [folder], '', 0, true));
+    assert.equal(complete.snapshotComplete, true);
+    assert.equal((await index.loadCachedLibrary()).snapshotComplete, false);
+    assert.equal((await index.loadCachedDirectory(folder.uri)).snapshotComplete, false);
+  });
   const manual = new ManualMediaStore({});
   const hidden = new HiddenLocalItemStore({});
   await check('remote bookmarks isolate servers and preserve local identity', async () => {

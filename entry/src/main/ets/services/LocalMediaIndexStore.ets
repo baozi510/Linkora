@@ -36,7 +36,10 @@ export class LocalMediaIndexStore {
       await this.enqueue(async (): Promise<void> => {
         await this.persistLibrary(result);
       });
-      return await this.loadLibrary();
+      const loaded = await this.loadLibrary();
+      return new LocalMediaScanResult(loaded.items, loaded.folders, loaded.selectedFolderUri,
+        loaded.errorCode, result.snapshotComplete, loaded.generation, loaded.completedAt,
+        loaded.fingerprint, loaded.cachePersisted);
     } catch (error) {
       this.logFailure('Local media index refresh', error);
       return new LocalMediaScanResult(result.items, result.folders, result.selectedFolderUri,
@@ -53,7 +56,10 @@ export class LocalMediaIndexStore {
       await this.enqueue(async (): Promise<void> => {
         await this.persistDirectory(result);
       });
-      return await this.loadDirectory(result.selectedFolderUri);
+      const loaded = await this.loadDirectory(result.selectedFolderUri);
+      return new LocalMediaScanResult(loaded.items, loaded.folders, loaded.selectedFolderUri,
+        loaded.errorCode, result.snapshotComplete, loaded.generation, loaded.completedAt,
+        loaded.fingerprint, loaded.cachePersisted);
     } catch (error) {
       this.logFailure('Local album index refresh', error);
       return new LocalMediaScanResult(result.items, result.folders, result.selectedFolderUri,
@@ -72,7 +78,8 @@ export class LocalMediaIndexStore {
     const items: LocalMediaAsset[] = await this.loadItems(store, '', false);
     const folders: LocalMediaFolder[] = await this.loadFolders(store);
     console.info(`Local media cache loaded. items=${items.length}, folders=${folders.length}`);
-    return new LocalMediaScanResult(items, folders, '', 0, true,
+    // The index stores no durable per-scope completeness flag: cache is unverified.
+    return new LocalMediaScanResult(items, folders, '', 0, false,
       checkpoint.generation, checkpoint.completedAt, checkpoint.fingerprint);
   }
 
@@ -88,7 +95,7 @@ export class LocalMediaIndexStore {
     }
     const items: LocalMediaAsset[] = await this.loadItems(store, directoryUri, true);
     console.info(`Local directory cache loaded. items=${items.length}`);
-    return new LocalMediaScanResult(items, [], directoryUri, 0, true,
+    return new LocalMediaScanResult(items, [], directoryUri, 0, false,
       checkpoint.generation, checkpoint.completedAt, checkpoint.fingerprint);
   }
 
@@ -98,7 +105,7 @@ export class LocalMediaIndexStore {
     const items: LocalMediaAsset[] = await this.loadItems(store, '', false);
     const folders: LocalMediaFolder[] = await this.loadFolders(store);
     const checkpoint: ScanCheckpoint | null = await this.completedCheckpoint(store);
-    return new LocalMediaScanResult(items, folders, '', 0, true,
+    return new LocalMediaScanResult(items, folders, '', 0, false,
       checkpoint?.generation ?? 0, checkpoint?.completedAt ?? 0,
       checkpoint?.fingerprint ?? '');
   }
@@ -108,7 +115,7 @@ export class LocalMediaIndexStore {
     const store: relationalStore.RdbStore = await this.database.store();
     const items: LocalMediaAsset[] = await this.loadItems(store, directoryUri, true);
     const checkpoint: ScanCheckpoint | null = await this.completedCheckpoint(store);
-    return new LocalMediaScanResult(items, [], directoryUri, 0, true,
+    return new LocalMediaScanResult(items, [], directoryUri, 0, false,
       checkpoint?.generation ?? 0, checkpoint?.completedAt ?? 0,
       checkpoint?.fingerprint ?? '');
   }

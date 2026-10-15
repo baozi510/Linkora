@@ -1,6 +1,6 @@
 import { common } from '@kit.AbilityKit';
 import { window } from '@kit.ArkUI';
-import { AppSettings, MediaSource, PlaybackSnapshot, PlaybackStatus, PlayerFeatureController,
+import { AppSettings, MediaSource, PlaybackPlaylist, PlaybackSnapshot, PlaybackStatus, PlayerFeatureController,
   PlayerBrightnessPort, PlayerFeatureState, PlayerGestureCallbacks, PlayerGestureController,
   PlayerGestureState } from 'linkora_core';
 import { PlayerControls } from '../components/PlayerControls';
@@ -15,6 +15,7 @@ import { PlayerColors } from '../ui/AppTheme';
 @ComponentV2
 export struct PlayerPage {
   @Param source: MediaSource = MediaSource.empty();
+  @Param playlist: PlaybackPlaylist | null = null;
   @Param settings: AppSettings = new AppSettings();
   @Param previewMode: boolean = false;
   @Event onBack: () => void = () => {};
@@ -270,7 +271,10 @@ export struct PlayerPage {
   }
 
   private sourceLabel(): string {
-    return this.source.originLabel.length > 0 ? this.source.originLabel : this.source.displayName;
+    const label: string = this.source.originLabel.length > 0 ? this.source.originLabel : this.source.displayName;
+    if (this.playlist === null) return label;
+    return `${label} · ${this.playlist.startIndex + 1}/${this.playlist.items.length}` +
+      (this.playlist.complete ? '' : ' · 清单未确认完整');
   }
 
   @Builder

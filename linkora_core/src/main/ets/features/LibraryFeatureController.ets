@@ -28,6 +28,7 @@ export class LibraryFeatureState {
   readonly snapshotGeneration: number;
   readonly lastSyncedAt: number;
   readonly playbackProgress: LocalMediaPlaybackProgress[];
+  readonly snapshotComplete: boolean;
 
   constructor(recentItems: RecentMediaItem[] = [], localItems: LocalMediaAsset[] = [],
     scanState: LocalMediaScanState = LocalMediaScanState.IDLE,
@@ -37,7 +38,7 @@ export class LibraryFeatureState {
     browseMode: LocalBrowseMode = LocalBrowseMode.DIRECTORY,
     fileFilter: LocalFileFilter = new LocalFileFilter(), refreshing: boolean = false,
     snapshotGeneration: number = 0, lastSyncedAt: number = 0,
-    playbackProgress: LocalMediaPlaybackProgress[] = []) {
+    playbackProgress: LocalMediaPlaybackProgress[] = [], snapshotComplete: boolean = false) {
     this.recentItems = recentItems;
     this.localItems = localItems;
     this.localFolders = localFolders;
@@ -52,6 +53,7 @@ export class LibraryFeatureState {
     this.snapshotGeneration = Math.max(0, snapshotGeneration);
     this.lastSyncedAt = Math.max(0, lastSyncedAt);
     this.playbackProgress = playbackProgress;
+    this.snapshotComplete = snapshotComplete;
   }
 }
 
@@ -69,10 +71,12 @@ export class LibraryFeatureController {
   private state: LibraryFeatureState = new LibraryFeatureState();
   private catalogItems: LocalMediaAsset[] = [];
   private catalogFolders: LocalMediaFolder[] = [];
+  private catalogComplete: boolean = false;
   private manualItems: LocalMediaAsset[] = [];
   private manualFolders: LocalMediaFolder[] = [];
   private cachedDirectoryUris: string[] = [];
   private cachedDirectoryItems: LocalMediaAsset[][] = [];
+  private cachedDirectoryComplete: boolean[] = [];
   private requestId: number = 0;
   private active: boolean = true;
   private observingChanges: boolean = false;
@@ -500,11 +504,13 @@ export class LibraryFeatureController {
     }
     const requestId: number = ++this.requestId;
     let persistentItems: LocalMediaAsset[] | null = null;
+    let persistentComplete: boolean = false;
     try {
       const cachedResult: LocalMediaScanResult | null =
         await this.mediaLibrary.loadCachedDirectory(folderUri);
       if (cachedResult !== null && cachedResult.succeeded()) {
         persistentItems = LibraryFeatureController.uniqueItems(cachedResult.items);
+        persistentComplete = cachedResult.snapshotComplete;
       }
     } catch (_error) {
     }
@@ -512,7 +518,7 @@ export class LibraryFeatureController {
       return;
     }
     if (persistentItems !== null) {
-      this.cacheDirectory(folderUri, persistentItems);
+      this.cacheDirectory(folderUri, persistentItems, persistentComplete);
       this.projectLocal(folderUri, this.state.folderFilter, this.state.browseMode,
         this.state.fileFilter, true);
     } else {
@@ -539,7 +545,7 @@ export class LibraryFeatureController {
     const nextItems: LocalMediaAsset[] = LibraryFeatureController.uniqueItems(result.items);
     const stableItems: LocalMediaAsset[] = persistentItems !== null &&
       LibraryFeatureController.sameItems(persistentItems, nextItems) ? persistentItems : nextItems;
-    this.cacheDirectory(folderUri, stableItems);
+    this.cacheDirectory(folderUri, stableItems, result.snapshotComplete);
     const generation: number = result.generation > 0 ?
       result.generation : this.state.snapshotGeneration;
     const completedAt: number = result.completedAt > 0 ? result.completedAt : this.state.lastSyncedAt;
@@ -585,11 +591,12 @@ export class LibraryFeatureController {
     }
     this.catalogItems = LibraryFeatureController.uniqueItems(result.items);
     this.catalogFolders = result.folders;
+    this.catalogComplete = result.snapshotComplete;
     this.cachedFingerprint = result.fingerprint;
     this.clearDirectoryCache();
     this.projectLocal(this.state.selectedFolderUri, this.state.folderFilter,
       this.state.browseMode, this.state.fileFilter, false,
-      result.generation, result.completedAt);
+      result.generation, result.completedAt, null);
     return true;
   }
 
@@ -620,6 +627,7 @@ export class LibraryFeatureController {
       }
       this.catalogItems = [];
       this.catalogFolders = [];
+      this.catalogComplete = false;
       this.clearDirectoryCache();
       this.projectLocal(this.state.selectedFolderUri, this.state.folderFilter, this.state.browseMode,
         this.state.fileFilter, false, this.state.snapshotGeneration, this.state.lastSyncedAt,
@@ -640,6 +648,7 @@ export class LibraryFeatureController {
       result.generation : this.state.snapshotGeneration;
     const completedAt: number = result.completedAt > 0 ? result.completedAt : this.state.lastSyncedAt;
     this.cachedFingerprint = result.fingerprint;
+    this.catalogComplete = result.snapshotComplete;
     this.projectLocal(this.state.selectedFolderUri, this.state.folderFilter,
       this.state.browseMode, this.state.fileFilter, false,
       generation, completedAt, result.cachePersisted ? null : FailureCatalog.localCacheWriteFailed());
@@ -765,7 +774,7 @@ export class LibraryFeatureController {
     const cachedItems: LocalMediaAsset[] | null = this.directoryItems(folderUri);
     const stableItems: LocalMediaAsset[] = cachedItems !== null &&
       LibraryFeatureController.sameItems(cachedItems, nextItems) ? cachedItems : nextItems;
-    this.cacheDirectory(folderUri, stableItems);
+    this.cacheDirectory(folderUri, stableItems, result.snapshotComplete);
     const generation: number = result.generation > 0 ?
       result.generation : this.state.snapshotGeneration;
     const completedAt: number = result.completedAt > 0 ? result.completedAt : this.state.lastSyncedAt;
@@ -780,17 +789,21 @@ export class LibraryFeatureController {
     refreshing: boolean = this.state.refreshing,
     snapshotGeneration: number = this.state.snapshotGeneration,
     lastSyncedAt: number = this.state.lastSyncedAt,
-    scanFailure: AppFailure | null = null): void {
+    scanFailure: AppFailure | null = this.state.scanFailure): void {
     const options: LocalMediaScanOptions = new LocalMediaScanOptions(folderFilter,
       selectedDirectoryUri, 500, browseMode, fileFilter);
     const catalogView: LocalMediaCatalogView = LocalMediaCatalog.createLibraryView(
       this.catalogItems.concat(this.manualItems), options,
       this.catalogFolders.concat(this.manualFolders));
     let items: LocalMediaAsset[] = catalogView.items;
+    let snapshotComplete: boolean = this.isVirtualFolder(catalogView.selectedDirectoryUri) ||
+      this.catalogComplete;
     if (catalogView.selectedDirectoryUri.length > 0 &&
       !this.isVirtualFolder(catalogView.selectedDirectoryUri)) {
       const cachedItems: LocalMediaAsset[] | null = this.directoryItems(catalogView.selectedDirectoryUri);
       if (cachedItems !== null) {
+        snapshotComplete = this.cachedDirectoryComplete[
+          this.cachedDirectoryUris.indexOf(catalogView.selectedDirectoryUri)];
         items = LocalMediaCatalog.createView(cachedItems, options,
           this.catalogFolders.concat(this.manualFolders)).items;
       }
@@ -806,7 +819,7 @@ export class LibraryFeatureController {
       this.state.localFolders, catalogView.folders) ? this.state.localFolders : catalogView.folders;
     this.update(this.state.recentItems, stableItems, scanState, this.state.localFailure, scanFailure,
       stableFolders, catalogView.selectedDirectoryUri, folderFilter, browseMode, fileFilter,
-      refreshing, snapshotGeneration, lastSyncedAt);
+      refreshing, snapshotGeneration, lastSyncedAt, this.state.playbackProgress, snapshotComplete);
   }
 
   private async cachedSnapshotNeedsRefresh(requestId: number): Promise<boolean> {
@@ -831,19 +844,22 @@ export class LibraryFeatureController {
     return index < 0 ? null : this.cachedDirectoryItems[index];
   }
 
-  private cacheDirectory(directoryUri: string, items: LocalMediaAsset[]): void {
+  private cacheDirectory(directoryUri: string, items: LocalMediaAsset[], complete: boolean): void {
     const index: number = this.cachedDirectoryUris.indexOf(directoryUri);
     if (index >= 0) {
       this.cachedDirectoryItems[index] = items;
+      this.cachedDirectoryComplete[index] = complete;
       return;
     }
     this.cachedDirectoryUris.push(directoryUri);
     this.cachedDirectoryItems.push(items);
+    this.cachedDirectoryComplete.push(complete);
   }
 
   private clearDirectoryCache(): void {
     this.cachedDirectoryUris = [];
     this.cachedDirectoryItems = [];
+    this.cachedDirectoryComplete = [];
   }
 
   private update(recentItems: RecentMediaItem[], localItems: LocalMediaAsset[],
@@ -856,10 +872,11 @@ export class LibraryFeatureController {
     refreshing: boolean = this.state.refreshing,
     snapshotGeneration: number = this.state.snapshotGeneration,
     lastSyncedAt: number = this.state.lastSyncedAt,
-    playbackProgress: LocalMediaPlaybackProgress[] = this.state.playbackProgress): void {
+    playbackProgress: LocalMediaPlaybackProgress[] = this.state.playbackProgress,
+    snapshotComplete: boolean = this.state.snapshotComplete): void {
     this.state = new LibraryFeatureState(recentItems, localItems, scanState, localFailure, scanFailure,
       localFolders, selectedFolderUri, folderFilter, browseMode, fileFilter, refreshing,
-      snapshotGeneration, lastSyncedAt, playbackProgress);
+      snapshotGeneration, lastSyncedAt, playbackProgress, snapshotComplete);
     this.observer(this.state);
   }
 
@@ -988,19 +1005,27 @@ export class LibraryFeatureController {
 
   private async reloadManualProjection(requestId: number): Promise<void> {
     const repository: ManualMediaRepository | null = this.manualRepository;
+    let items: LocalMediaAsset[] = this.manualItems;
+    let folders: LocalMediaFolder[] = this.manualFolders;
+    let failure: AppFailure | null = null;
     if (repository !== null) {
       try {
-        this.manualItems = await repository.verify();
-        this.manualFolders = await repository.loadFolders();
+        items = await repository.verify();
+        folders = await repository.loadFolders();
       } catch (_error) {
+        failure = FailureCatalog.fromLocalScanError();
       }
     }
     if (!this.isCurrent(requestId)) {
       return;
     }
+    if (failure === null) {
+      this.manualItems = items;
+      this.manualFolders = folders;
+    }
     const selectedUri: string = this.isVirtualFolder(this.state.selectedFolderUri) ?
       this.state.selectedFolderUri : '';
     this.projectLocal(selectedUri, this.state.folderFilter, this.state.browseMode,
-      this.state.fileFilter, false);
+      this.state.fileFilter, false, this.state.snapshotGeneration, this.state.lastSyncedAt, failure);
   }
 }

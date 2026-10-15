@@ -4,7 +4,7 @@ import { deviceInfo } from '@kit.BasicServicesKit';
 import { image } from '@kit.ImageKit';
 import { AppFailure, LocalBrowseMode, LocalFileCategory, LocalMediaAsset, LocalMediaAvailability,
   LocalMediaFolder, LocalMediaFolderFilter, LocalMediaOrigin, LocalMediaPlaybackProgress,
-  LocalMediaScanState, MediaSource } from 'linkora_core';
+  LocalMediaScanState, MediaSource, PlaybackPlaylist } from 'linkora_core';
 import { AppIcon, AppIconName } from '../components/AppIcon';
 import { AppIconButton } from '../components/AppIconButton';
 import { AppToolbar } from '../components/AppToolbar';
@@ -82,7 +82,7 @@ export struct LibraryPage {
   @Event onBack: () => void = () => {};
   @Event onBrowseModeChange: (mode: LocalBrowseMode) => void = () => {};
   @Event onOpenNetwork: () => void = () => {};
-  @Event onPlay: (source: MediaSource) => void = () => {};
+  @Event onPlay: (playlist: PlaybackPlaylist) => void = () => {};
   @Event onAddFavorite: (source: MediaSource) => void = () => {};
   @Event onAddToPlaylist: (source: MediaSource) => void = () => {};
   @Event onHideFolder: (folder: LocalMediaFolder) => void = () => {};
@@ -1103,6 +1103,7 @@ export struct LibraryPage {
                 scroller: this.mediaScroller,
                 folders: this.displayedFolders(),
                 items: this.displayedItems(),
+                playlistComplete: this.pageData.isComplete(),
                 playbackProgress: this.playbackProgress,
                 showFolders: this.browseMode === LocalBrowseMode.DIRECTORY,
                 currentDirectoryUri: this.selectedFolderUri,

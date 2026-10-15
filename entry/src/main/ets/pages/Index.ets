@@ -3,7 +3,7 @@ import { window } from '@kit.ArkUI';
 import { AppAccentColor, AppFailure, AppSettings, AppThemeMode, LibraryFeatureController,
   LibraryFeatureState, LocalBrowseMode, LocalFileFilter, LocalMediaAsset,
   LocalMediaFolder, LocalMediaFolderFilter, LocalMediaPlaybackProgress, LocalMediaScanState,
-  MediaSource, PlayerBackendPreference, RecentMediaItem,
+  MediaSource, PlaybackPlaylist, PlayerBackendPreference, RecentMediaItem,
   SettingsFeatureController, SettingsFeatureState } from 'linkora_core';
 import { AdaptiveAppShell } from '../components/AdaptiveAppShell';
 import { AppSection } from '../models/AppRoute';
@@ -145,7 +145,7 @@ struct Index {
     this.recentItems = state.recentItems;
     this.localFolders = state.localFolders;
     this.localFolderPageData = new LocalFolderPageData(state.selectedFolderUri, state.localItems,
-      state.scanState, state.scanFailure, state.refreshing);
+      state.scanState, state.scanFailure, state.refreshing, state.snapshotComplete);
     this.playbackProgress = state.playbackProgress;
     this.folderFilter = state.folderFilter;
     this.browseMode = state.browseMode;
@@ -158,8 +158,8 @@ struct Index {
     }
   }
 
-  private openSource(source: MediaSource): void {
-    this.navigationStack.pushPath(new NavPathInfo(AppDestination.PLAYER, new PlayerDestinationParams(source)));
+  private openSource(source: MediaSource, playlist: PlaybackPlaylist | null = null): void {
+    this.navigationStack.pushPath(new NavPathInfo(AppDestination.PLAYER, new PlayerDestinationParams(source, playlist)));
     this.libraryController?.recordOpened(source).catch(() => {});
   }
 
@@ -426,8 +426,9 @@ struct Index {
       onOpenNetwork: () => {
         this.activeSection = AppSection.NETWORK;
       },
-      onPlay: (source: MediaSource) => {
-        this.openSource(source);
+      onPlay: (playlist: PlaybackPlaylist) => {
+        const current = playlist.currentItem();
+        if (current !== null) this.openSource(current.source, playlist);
       },
       onHideFolder: (folder: LocalMediaFolder) => {
         this.hideLocalItem(HiddenLocalItem.fromFolder(folder)).catch(() => {});
@@ -541,6 +542,7 @@ struct Index {
       NavDestination() {
         PlayerPage({
           source: (AppNavigationParams.player(param) as PlayerDestinationParams).source,
+          playlist: (AppNavigationParams.player(param) as PlayerDestinationParams).playlist,
           settings: this.settings,
           onBack: () => {
             this.navigationStack.pop();
