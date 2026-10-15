@@ -114,6 +114,10 @@ export class AdaptivePlaybackPort implements PlaybackPort {
   // Own the candidate until its preparation has finished and it is committed.
   private pendingCandidate: PlaybackBackend | null = null;
   private released: boolean = false;
+  private releasePromise: Promise<void> | null = null;
+  private releaseFailure: PlaybackPortError | null = null;
+  private candidateRelease: Promise<void> | null = null;
+  private resolvedRelease: Promise<void> | null = null;
   private surfaceWidth: number = 0;
   private surfaceHeight: number = 0;
 
@@ -161,7 +165,12 @@ export class AdaptivePlaybackPort implements PlaybackPort {
     // source lease returned after release().
     const resolved: ResolvedPlaybackSource = await this.resolver.resolve(source);
     if (this.released) {
-      await resolved.release().catch(() => {});
+      try {
+        await resolved.release();
+      } catch (error) {
+        this.releaseFailure = this.asPortError(error);
+        throw this.releaseFailure;
+      }
       throw this.cancelledError();
     }
     this.resolved = resolved;
@@ -170,9 +179,10 @@ export class AdaptivePlaybackPort implements PlaybackPort {
     try {
       candidate = await this.prepareBackend(selected, resolved.source);
     } catch (firstError) {
-      if (this.released || this.preference !== PlayerBackendPreference.AUTO) {
-        await this.releaseResolved();
-        throw this.asPortError(firstError);
+      if (this.released || this.releaseFailure !== null || this.preference !== PlayerBackendPreference.AUTO) {
+        if (this.released) await this.release();
+        else await this.releaseResolved();
+        throw this.releaseFailure ?? this.asPortError(firstError);
       }
       const fallback: PlayerBackendKind = this.selector.fallback(selected);
       try {
@@ -217,10 +227,20 @@ export class AdaptivePlaybackPort implements PlaybackPort {
     this.requireBackend().setVolume(volume);
   }
 
-  async release(): Promise<void> {
-    if (this.released) {
-      return;
+  release(): Promise<void> {
+    if (this.releasePromise !== null) {
+      return this.releasePromise.then(() => {
+        if (this.releaseFailure !== null) throw this.releaseFailure;
+      });
     }
+    this.releasePromise = this.releaseResources().catch((error: PlaybackPortError) => {
+      this.releaseFailure = this.asPortError(error);
+      throw this.releaseFailure;
+    });
+    return this.releasePromise;
+  }
+
+  private async releaseResources(): Promise<void> {
     this.released = true;
     if (this.committedGate !== null) {
       this.committedGate.committed = false;
@@ -233,6 +253,7 @@ export class AdaptivePlaybackPort implements PlaybackPort {
     // Stop an in-flight native prepare before releasing its source lease.
     try {
       try {
+        await this.candidateRelease;
         if (pending !== null && pending !== backend) {
           await pending.release();
         }
@@ -242,6 +263,7 @@ export class AdaptivePlaybackPort implements PlaybackPort {
     } finally {
       await this.releaseResolved();
     }
+    if (this.releaseFailure !== null) throw this.releaseFailure;
     this.observer.onStateChange(PortPlaybackState.RELEASED);
   }
 
@@ -274,7 +296,12 @@ export class AdaptivePlaybackPort implements PlaybackPort {
       // Never concurrently call native release() twice for the same candidate.
       if (this.pendingCandidate === backend) {
         this.pendingCandidate = null;
-        await backend.release().catch(() => {});
+        this.candidateRelease = Promise.resolve().then(() => backend.release())
+          .catch((releaseError: PlaybackPortError) => {
+          this.releaseFailure = this.asPortError(releaseError);
+          throw this.releaseFailure;
+          });
+        await this.candidateRelease;
       }
       throw error as Error;
     }
@@ -287,10 +314,13 @@ export class AdaptivePlaybackPort implements PlaybackPort {
     return this.backend;
   }
 
-  private async releaseResolved(): Promise<void> {
+  private releaseResolved(): Promise<void> {
+    if (this.resolvedRelease !== null) return this.resolvedRelease;
     const resolved: ResolvedPlaybackSource | null = this.resolved;
     this.resolved = null;
-    await resolved?.release();
+    if (resolved === null) return Promise.resolve();
+    this.resolvedRelease = Promise.resolve().then(() => resolved.release());
+    return this.resolvedRelease;
   }
 
   private cancelledError(): PlaybackPortError {

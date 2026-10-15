@@ -135,6 +135,7 @@ class DeferredPausePort extends FakePlaybackPort {
 
 class DeferredReleasePort extends FakePlaybackPort {
   private finish: (() => void) | null = null;
+  private rejectRelease: ((error: PlaybackPortError) => void) | null = null;
   private signalReleaseStarted: (() => void) | null = null;
   readonly releaseStarted: Promise<void>;
 
@@ -149,8 +150,10 @@ class DeferredReleasePort extends FakePlaybackPort {
     this.released = true;
     this.signalReleaseStarted?.();
     this.signalReleaseStarted = null;
-    await new Promise<void>((resolve: () => void) => {
+    await new Promise<void>((resolve: () => void,
+      reject: (error: PlaybackPortError) => void) => {
       this.finish = resolve;
+      this.rejectRelease = reject;
     });
     this.observer.onStateChange(PortPlaybackState.RELEASED);
   }
@@ -159,6 +162,11 @@ class DeferredReleasePort extends FakePlaybackPort {
     const finish: (() => void) | null = this.finish;
     this.finish = null;
     finish?.();
+  }
+
+  failRelease(): void {
+    this.rejectRelease?.(new PlaybackPortError(5400104, 'deferred disposal failed'));
+    this.rejectRelease = null;
   }
 }
 
@@ -174,6 +182,66 @@ function latest(snapshots: PlaybackSnapshot[]): PlaybackSnapshot {
 
 export default function playbackEngineTest(): void {
   describe('PlaybackEngine', () => {
+    it('waitsForFailedPortDisposalBeforeReentrantOpen', 0, async () => {
+      const snapshots: PlaybackSnapshot[] = [];
+      const ports: FakePlaybackPort[] = [];
+      let retry: (() => void) | null = null;
+      let nextOpen: Promise<void> | null = null;
+      const engine = new PlaybackEngine((snapshot: PlaybackSnapshot) => {
+        snapshots.push(snapshot);
+        if (snapshot.status === PlaybackStatus.ERROR) retry?.();
+      }, async (observer: PlaybackPortObserver) => {
+        const port: FakePlaybackPort = ports.length === 0 ?
+          new DeferredReleasePort(observer) : new FakePlaybackPort(observer);
+        ports.push(port);
+        return port;
+      });
+      await engine.open(MediaSource.fromLocalDocument('file://first.mp4'), 'surface');
+      retry = () => {
+        retry = null;
+        nextOpen = engine.open(MediaSource.fromLocalDocument('file://retry.mp4'), 'surface');
+      };
+      ports[0].emitError(5400104, 'native playback failed');
+      const oldPort = ports[0] as DeferredReleasePort;
+      await oldPort.releaseStarted;
+      const allocatedBeforeDisposal: number = ports.length;
+      oldPort.finishRelease();
+      await nextOpen;
+      expect(allocatedBeforeDisposal).assertEqual(1);
+      expect(ports.length).assertEqual(2);
+      expect(latest(snapshots).status).assertEqual(PlaybackStatus.PLAYING);
+      await engine.release();
+    });
+
+    it('sharesPendingFailedDisposalWithReleaseAndReplacement', 0, async () => {
+      const snapshots: PlaybackSnapshot[] = [];
+      const ports: FakePlaybackPort[] = [];
+      const engine = new PlaybackEngine((snapshot: PlaybackSnapshot) => snapshots.push(snapshot),
+        async (observer: PlaybackPortObserver) => {
+          const port: FakePlaybackPort = ports.length === 0 ?
+            new DeferredReleasePort(observer) : new FakePlaybackPort(observer);
+          ports.push(port);
+          return port;
+        });
+      await engine.open(MediaSource.fromLocalDocument('file://first.mp4'), 'surface');
+      ports[0].emitError(5400104, 'native playback failed');
+      const oldPort = ports[0] as DeferredReleasePort;
+      await oldPort.releaseStarted;
+      let rejected: boolean = false;
+      const pendingRelease: Promise<void> = engine.release().catch((_error: PlaybackPortError) => {
+        rejected = true;
+      });
+      const nextOpen: Promise<void> =
+        engine.open(MediaSource.fromLocalDocument('file://retry.mp4'), 'surface');
+      oldPort.failRelease();
+      await pendingRelease;
+      await nextOpen;
+      expect(rejected).assertTrue();
+      expect(ports.length).assertEqual(1);
+      expect(latest(snapshots).status).assertEqual(PlaybackStatus.ERROR);
+      expect(latest(snapshots).failure!.diagnosticCode).assertEqual('LNK-PLAY-003/5400104');
+    });
+
     it('doesNotReportReleasedWhenNativeReleaseFails', 0, async () => {
       const snapshots: PlaybackSnapshot[] = [];
       const engine = new PlaybackEngine((snapshot: PlaybackSnapshot) => snapshots.push(snapshot),
@@ -485,9 +553,11 @@ export default function playbackEngineTest(): void {
       await engine.open(MediaSource.fromLocalDocument('file://first.mp4'), 'surface');
       const staleOpen: Promise<void> =
         engine.open(MediaSource.fromLocalDocument('file://second.mp4'), 'surface');
-      await engine.release();
+      const finalRelease: Promise<void> = engine.release();
+      await (ports[0] as DeferredReleasePort).releaseStarted;
       (ports[0] as DeferredReleasePort).finishRelease();
       await staleOpen;
+      await finalRelease;
 
       expect(ports.length).assertEqual(1);
       expect(latest(snapshots).status).assertEqual(PlaybackStatus.RELEASED);
@@ -505,9 +575,13 @@ export default function playbackEngineTest(): void {
         });
       await engine.open(MediaSource.fromLocalDocument('file://first.mp4'), 'surface');
       const staleRelease: Promise<void> = engine.release();
-      await engine.open(MediaSource.fromLocalDocument('file://second.mp4'), 'surface');
+      await (ports[0] as DeferredReleasePort).releaseStarted;
+      const nextOpen: Promise<void> =
+        engine.open(MediaSource.fromLocalDocument('file://second.mp4'), 'surface');
+      expect(ports.length).assertEqual(1);
       (ports[0] as DeferredReleasePort).finishRelease();
       await staleRelease;
+      await nextOpen;
 
       expect(ports.length).assertEqual(2);
       expect(ports[1].released).assertFalse();
@@ -542,11 +616,13 @@ export default function playbackEngineTest(): void {
       const oldPort: DeferredReleaseFailingPreparePort = await firstPortCreated;
       // The rejected prepare has entered open() catch and its disposal is pending.
       await oldPort.releaseStarted;
-      await engine.open(MediaSource.fromLocalDocument('file://new-healthy.mp4'), 'surface');
-      expect(latest(snapshots).status).assertEqual(PlaybackStatus.PLAYING);
+      const nextOpen: Promise<void> =
+        engine.open(MediaSource.fromLocalDocument('file://new-healthy.mp4'), 'surface');
+      expect(ports.length).assertEqual(1);
 
       oldPort.finishRelease();
       await failedOpen;
+      await nextOpen;
 
       expect(ports.length).assertEqual(2);
       expect(oldPort.released).assertTrue();
@@ -572,7 +648,6 @@ export default function playbackEngineTest(): void {
       expect(latest(snapshots).status).assertEqual(PlaybackStatus.ERROR);
       expect(latest(snapshots).failure!.message).assertEqual('视频或音频编码超出当前设备的系统解码能力。');
       expect(latest(snapshots).failure!.diagnosticCode).assertEqual('LNK-PLAY-001/5400106');
-      expect(port.released).assertTrue();
 
       await engine.release();
       expect(port.released).assertTrue();

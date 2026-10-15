@@ -123,10 +123,14 @@ test('release fences events before awaiting native disposal', async () => {
   let finish;
   f.backends[0].release = () => new Promise(resolve => { finish = resolve; });
   const pending = port.release(), before = f.trace.length;
+  let secondCompleted = false;
+  const second = port.release().then(() => { secondCompleted = true; });
   try {
+    await new Promise(setImmediate);
+    assert.equal(secondCompleted, false, 'concurrent callers must wait for pending disposal');
     f.backends[0].events.onPositionChange(88000);
     assert.equal(f.trace.length, before);
-  } finally { finish(); await pending; }
+  } finally { finish(); await pending; await second; }
   assert.equal(f.trace.filter(item => item[1] === 'released').length, 1);
 });
 
@@ -135,7 +139,30 @@ test('native release failure still closes lease and cannot claim RELEASED', asyn
   const port = f.port(f.factory('system'), f.factory('mpv'));
   await port.prepare();
   f.backends[0].release = async () => { throw new f.core.PlaybackPortError(5400104, 'native disposal failed'); };
+  const failedRelease = port.release();
+  const concurrentFailure = assert.rejects(port.release(), error => error.code === 5400104);
+  await assert.rejects(failedRelease, error => error.code === 5400104);
+  await concurrentFailure;
   await assert.rejects(port.release(), error => error.code === 5400104);
+  assert.equal(f.sourceCloses, 1);
+  assert.equal(f.trace.some(item => item[1] === 'released'), false);
+});
+
+test('failed candidate disposal blocks fallback and remains a release failure', async () => {
+  const f = fixture();
+  let fallbacks = 0;
+  const port = f.port(f.factory('system', async () => {
+    f.backends[0].release = async () => {
+      f.backends[0].closes++;
+      throw new f.core.PlaybackPortError(5400104, 'candidate disposal failed');
+    };
+    throw new f.core.PlaybackPortError(5400106, 'unsupported');
+  }), async () => { fallbacks++; throw Error('unsafe fallback'); });
+  await assert.rejects(port.prepare(), error => error.detail === 'candidate disposal failed');
+  assert.equal(fallbacks, 0);
+  await assert.rejects(port.release(), error => error.detail === 'candidate disposal failed');
+  await assert.rejects(port.release(), error => error.detail === 'candidate disposal failed');
+  assert.equal(f.backends[0].closes, 1);
   assert.equal(f.sourceCloses, 1);
   assert.equal(f.trace.some(item => item[1] === 'released'), false);
 });
@@ -160,4 +187,61 @@ test('release from backend-change callback stops the rest of the commit events',
   await port.prepare(); await released;
   assert.equal(f.trace.some(item => ['duration', 'size', 'info'].includes(item[0])), false);
   assert.equal(f.trace.filter(item => item[1] === 'released').length, 1);
+});
+
+for (const fails of [false, true]) {
+  test(`release waits for failed-prepare candidate disposal (reject=${fails})`, async () => {
+    const f = fixture('system');
+    let finish, fail, started;
+    const began = new Promise(resolve => { started = resolve; });
+    const port = f.port(f.factory('system', async () => {
+      f.backends[0].release = () => {
+        f.backends[0].closes++;
+        started();
+        return new Promise((resolve, reject) => { finish = resolve; fail = reject; });
+      };
+      throw new f.core.PlaybackPortError(5400106, 'unsupported');
+    }), f.factory('mpv'));
+    const preparation = assert.rejects(port.prepare(), error =>
+      error.code === (fails ? 5400104 : 5400106));
+    await began;
+    let settled = false, closeError;
+    const closed = port.release().then(() => { settled = true; }, error => {
+      settled = true; closeError = error;
+    });
+    // Drain ready Promise jobs while native disposal is deliberately unresolved.
+    await new Promise(setImmediate);
+    const sourceClosesBeforeDisposal = f.sourceCloses;
+    const settledBeforeDisposal = settled;
+    if (fails) fail(new f.core.PlaybackPortError(5400104, 'candidate disposal failed'));
+    else finish();
+    await preparation; await closed;
+    assert.equal(sourceClosesBeforeDisposal, 0);
+    assert.equal(settledBeforeDisposal, false);
+    assert.equal(closeError?.code, fails ? 5400104 : undefined);
+    assert.equal(f.backends[0].closes, 1);
+    assert.equal(f.sourceCloses, 1);
+    assert.equal(f.trace.some(item => item[1] === 'released'), !fails);
+  });
+}
+
+test('release shares source cleanup already owned by failed preparation', async () => {
+  const f = fixture('system');
+  let finish, started;
+  const began = new Promise(resolve => { started = resolve; });
+  const port = f.port(f.factory('system', async () => {
+    f.lease.release = () => {
+      started();
+      return new Promise(resolve => { finish = resolve; });
+    };
+    throw new f.core.PlaybackPortError(5400106, 'unsupported');
+  }), f.factory('mpv'));
+  const preparation = assert.rejects(port.prepare(), error => error.code === 5400106);
+  await began;
+  let disposed = false;
+  const closed = port.release().then(() => { disposed = true; });
+  await new Promise(setImmediate);
+  const completedBeforeLease = disposed;
+  finish(); await preparation; await closed;
+  assert.equal(completedBeforeLease, false);
 });

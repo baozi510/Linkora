@@ -15,7 +15,7 @@ import { PlaybackObserver, PlaybackSnapshot, PlaybackStatus } from './PlaybackMo
 
 export class PlaybackEngine {
   private port: PlaybackPort | null = null;
-  private releaseFailure: PlaybackPortError | null = null;
+  private releasePromise: Promise<void> | null = null;
   private observer: PlaybackObserver;
   private portFactory: PlaybackPortFactory;
   private sessionId: number = 0;
@@ -59,6 +59,7 @@ export class PlaybackEngine {
         return;
       }
 
+      this.releasePromise = null;
       this.port = port;
       port.configure(source, surfaceId);
       if (this.surfaceWidth > 0 && this.surfaceHeight > 0) {
@@ -353,14 +354,10 @@ export class PlaybackEngine {
 
   private failActivePort(error: PlaybackPortError): void {
     ++this.sessionId;
-    const port: PlaybackPort | null = this.port;
-    this.port = null;
+    // Publish disposal ownership before an error observer can retry open().
+    const release: Promise<void> = this.releaseCurrentPort();
     this.failWith(error);
-    if (port !== null) {
-      port.release().catch((releaseError: PlaybackPortError) => {
-        this.releaseFailure = this.portError(releaseError);
-      });
-    }
+    release.catch((_releaseError: PlaybackPortError) => {});
   }
 
   private failWith(error: PlaybackPortError): void {
@@ -380,21 +377,17 @@ export class PlaybackEngine {
     return sessionId === this.sessionId;
   }
 
-  private async releaseCurrentPort(): Promise<void> {
+  private releaseCurrentPort(): Promise<void> {
+    if (this.releasePromise !== null) return this.releasePromise;
     const port: PlaybackPort | null = this.port;
     this.port = null;
     if (port === null) {
-      if (this.releaseFailure !== null) throw this.releaseFailure;
-      return;
+      return Promise.resolve();
     }
-    try {
-      await port.release();
-    } catch (error) {
-      // Failed disposal cannot become a later successful release or replacement.
-      this.releaseFailure = this.portError(error);
-      throw this.releaseFailure;
-    }
-    if (this.releaseFailure !== null) throw this.releaseFailure;
+    // Keep the settled rejection too: a failed native close cannot become success.
+    this.releasePromise = Promise.resolve().then(() => port.release())
+      .catch((error: PlaybackPortError) => { throw this.portError(error); });
+    return this.releasePromise;
   }
 
   private resetSnapshot(): void {
