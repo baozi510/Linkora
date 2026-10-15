@@ -3,7 +3,7 @@ import { ComponentContent } from '@kit.ArkUI';
 import { deviceInfo } from '@kit.BasicServicesKit';
 import { image } from '@kit.ImageKit';
 import { FileSizeFormatter, LocalFileCategory, LocalFileFilter, LocalMediaAsset, MediaFormatDetector,
-  MediaSource } from 'linkora_core';
+  MediaSource, PlaybackPlaylist } from 'linkora_core';
 import { NetworkDirectoryEntry, NetworkDirectoryEntryKind,
   NetworkDirectoryLoadGuard } from '../models/NetworkDirectoryState';
 import { NetworkDirectoryService } from '../services/NetworkDirectoryService';
@@ -26,6 +26,7 @@ import { NetworkMediaLoader } from '../services/NetworkMediaLoader';
 import { CachedNetworkMedia } from '../services/NetworkMediaCache';
 import { AppLifecycleEvents } from '../services/AppLifecycleEvents';
 import { NetworkMediaSourceFactory } from '../services/NetworkMediaSourceFactory';
+import { NetworkPlaybackPlaylist } from '../services/NetworkPlaybackPlaylist';
 
 class NetworkRefreshIndicatorParams {
   accentColor: string;
@@ -350,6 +351,7 @@ export struct NetworkDirectoryBrowser {
   @Event onOpenDirectory: (path: string) => void = () => {};
   @Event onBack: () => void = () => {};
   @Event onOpenSource: (source: MediaSource) => void = () => {};
+  @Event onOpenPlaylist: (playlist: PlaybackPlaylist) => void = () => {};
   @Event onGridViewChange: (gridView: boolean) => void = () => {};
 
   @Local private currentPath: string = '';
@@ -532,6 +534,10 @@ export struct NetworkDirectoryBrowser {
     if (this.service === null) {
       return;
     }
+    if (this.loading || this.renderedPath !== this.currentPath || this.failure.length > 0) {
+      this.showToast('目录尚未读取完成，请稍后重试');
+      return;
+    }
     const category: LocalFileCategory = this.fileFilter.categoryOf(entry.displayName);
     if (category !== LocalFileCategory.VIDEO && category !== LocalFileCategory.AUDIO) {
       this.showToast('当前文件类型暂不支持直接打开');
@@ -539,7 +545,13 @@ export struct NetworkDirectoryBrowser {
     }
 
     this.mediaLoader?.reset(this.entries, false);
-    this.onOpenSource(NetworkMediaSourceFactory.fromEntry(this.server, entry));
+    if (category === LocalFileCategory.VIDEO) {
+      const playlist = NetworkPlaybackPlaylist.build(this.server, this.renderedPath, this.entries,
+        entry.path, true);
+      if (playlist !== null) this.onOpenPlaylist(playlist);
+    } else {
+      this.onOpenSource(NetworkMediaSourceFactory.fromEntry(this.server, entry));
+    }
   }
 
   private showToast(message: string): void {

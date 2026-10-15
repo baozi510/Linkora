@@ -19,6 +19,7 @@ import appNavigationTest from './AppNavigation.test';
 import networkDirectoryStateTest from './NetworkDirectoryState.test';
 import networkFileProxyTest from './NetworkFileProxy.test';
 import localPlaybackPlaylistTest from './LocalPlaybackPlaylist.test';
+import networkPlaybackPlaylistTest from './NetworkPlaybackPlaylist.test';
 
 export default function testsuite(): void {
   ffmpegAnalysisTest();
@@ -36,6 +37,7 @@ export default function testsuite(): void {
   networkAddressParserTest();
   localMediaOrderingTest();
   localPlaybackPlaylistTest();
+  networkPlaybackPlaylistTest();
   appNavigationTest();
   networkDirectoryStateTest();
   networkFileProxyTest();

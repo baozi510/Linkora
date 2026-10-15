@@ -533,6 +533,10 @@ struct Index {
           },
           onOpenSource: (source: MediaSource) => {
             this.openSource(source);
+          },
+          onOpenPlaylist: (playlist: PlaybackPlaylist) => {
+            const current = playlist.currentItem();
+            if (current !== null) this.openSource(current.source, playlist);
           }
         })
       }

@@ -1,5 +1,5 @@
 import { common } from '@kit.AbilityKit';
-import { MediaSource, RemoteProtocol } from 'linkora_core';
+import { MediaSource, PlaybackPlaylist, RemoteProtocol } from 'linkora_core';
 import { NetworkDirectoryBrowser } from '../components/NetworkDirectoryBrowser';
 import { AppToolbar } from '../components/AppToolbar';
 import { NetworkServerEntry, NetworkServerStore } from '../services/NetworkServerStore';
@@ -13,6 +13,7 @@ export struct NetworkBrowserPage {
   @Event onOpenDirectory: (path: string) => void = () => {};
   @Event onBack: () => void = () => {};
   @Event onOpenSource: (source: MediaSource) => void = () => {};
+  @Event onOpenPlaylist: (playlist: PlaybackPlaylist) => void = () => {};
 
   @Local private server: NetworkServerEntry | null = null;
   @Local private loading: boolean = true;
@@ -104,6 +105,7 @@ export struct NetworkBrowserPage {
     } else if ((this.server as NetworkServerEntry).protocol !== RemoteProtocol.HTTP) {
       NetworkDirectoryBrowser({ server: this.server as NetworkServerEntry, path: this.path, gridView: this.gridView,
         onOpenDirectory: this.onOpenDirectory, onBack: this.onBack, onOpenSource: this.onOpenSource,
+        onOpenPlaylist: this.onOpenPlaylist,
         onGridViewChange: (gridView: boolean) => this.updateGridView(gridView) })
     } else {
       this.message('该服务器不支持目录浏览')
