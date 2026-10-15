@@ -88,6 +88,52 @@ export class PlaybackPortError extends Error {
   }
 }
 
+export enum PortStreamEndReason {
+  EOF = 'eof',
+  STOP = 'stop',
+  UNKNOWN = 'unknown'
+}
+
+export class PortStreamEnd {
+  readonly reason: PortStreamEndReason;
+  readonly looping: boolean;
+  readonly detail: string;
+  constructor(reason: PortStreamEndReason, looping: boolean = false, detail: string = '') {
+    this.reason = reason;
+    this.looping = looping;
+    this.detail = detail;
+  }
+}
+
+export enum PortInterruptionHint {
+  UNKNOWN = 'unknown',
+  RESUME = 'resume',
+  PAUSE = 'pause',
+  STOP = 'stop',
+  DUCK = 'duck',
+  UNDUCK = 'unduck'
+}
+
+export class PortAudioInterruption {
+  readonly hint: PortInterruptionHint;
+  readonly forced: boolean;
+  readonly eventType: number;
+  constructor(hint: PortInterruptionHint, forced: boolean, eventType: number) {
+    this.hint = hint;
+    this.forced = forced;
+    this.eventType = eventType;
+  }
+}
+
+export class PortAudioOutputChange {
+  readonly deviceTypes: number[];
+  readonly reason: number;
+  constructor(deviceTypes: number[], reason: number) {
+    this.deviceTypes = deviceTypes.slice();
+    this.reason = reason;
+  }
+}
+
 export type PortStateObserver = (state: PortPlaybackState) => void;
 export type PortErrorObserver = (error: PlaybackPortError) => void;
 export type PortNumberObserver = (value: number) => void;
@@ -97,6 +143,11 @@ export type PortVideoSizeObserver = (width: number, height: number) => void;
 export type PortTrackObserver = (tracks: PortTrack[]) => void;
 export type PortVideoInfoObserver = (info: PortVideoInfo) => void;
 export type PortVoidObserver = () => void;
+export type PortBooleanObserver = (value: boolean) => void;
+export type PortStreamEndObserver = (event: PortStreamEnd) => void;
+export type PortInterruptionObserver = (event: PortAudioInterruption) => void;
+export type PortAudioOutputObserver = (event: PortAudioOutputChange) => void;
+export type PortWarningObserver = (operation: string, error: PlaybackPortError) => void;
 
 export class PlaybackPortObserver {
   readonly onStateChange: PortStateObserver;
@@ -111,6 +162,13 @@ export class PlaybackPortObserver {
   readonly onTracksChange: PortTrackObserver;
   readonly onVideoInfoChange: PortVideoInfoObserver;
   readonly onBackendChange: PortStringObserver;
+  readonly onPlaybackRateChange: PortNumberObserver;
+  readonly onVolumeChange: PortNumberObserver;
+  readonly onLoopChange: PortBooleanObserver;
+  readonly onStreamEnd: PortStreamEndObserver;
+  readonly onAudioInterruption: PortInterruptionObserver;
+  readonly onAudioOutputChange: PortAudioOutputObserver;
+  readonly onWarning: PortWarningObserver;
 
   constructor(onStateChange: PortStateObserver, onError: PortErrorObserver,
     onDurationChange: PortNumberObserver, onPositionChange: PortNumberObserver,
@@ -119,7 +177,14 @@ export class PlaybackPortObserver {
     onSeekComplete: PortNumberObserver = () => {},
     onTracksChange: PortTrackObserver = () => {},
     onVideoInfoChange: PortVideoInfoObserver = () => {},
-    onBackendChange: PortStringObserver = () => {}) {
+    onBackendChange: PortStringObserver = () => {},
+    onPlaybackRateChange: PortNumberObserver = () => {},
+    onVolumeChange: PortNumberObserver = () => {},
+    onLoopChange: PortBooleanObserver = () => {},
+    onStreamEnd: PortStreamEndObserver = () => {},
+    onAudioInterruption: PortInterruptionObserver = () => {},
+    onAudioOutputChange: PortAudioOutputObserver = () => {},
+    onWarning: PortWarningObserver = () => {}) {
     this.onStateChange = onStateChange;
     this.onError = onError;
     this.onDurationChange = onDurationChange;
@@ -132,6 +197,13 @@ export class PlaybackPortObserver {
     this.onTracksChange = onTracksChange;
     this.onVideoInfoChange = onVideoInfoChange;
     this.onBackendChange = onBackendChange;
+    this.onPlaybackRateChange = onPlaybackRateChange;
+    this.onVolumeChange = onVolumeChange;
+    this.onLoopChange = onLoopChange;
+    this.onStreamEnd = onStreamEnd;
+    this.onAudioInterruption = onAudioInterruption;
+    this.onAudioOutputChange = onAudioOutputChange;
+    this.onWarning = onWarning;
   }
 }
 
@@ -142,9 +214,12 @@ export interface PlaybackPort {
   prepare(): Promise<void>;
   play(): Promise<void>;
   pause(): Promise<void>;
+  stop(): Promise<void>;
   seek(position: number): void;
   setPlaybackRate(rate: number): void;
   setVolume(volume: number): void;
+  setLoop(loop: boolean): void;
+  selectAudioTrack(id: string): Promise<void>;
   release(): Promise<void>;
 }
 

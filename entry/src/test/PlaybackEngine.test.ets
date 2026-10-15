@@ -53,6 +53,17 @@ class FakePlaybackPort implements PlaybackPort {
     this.observer.onStateChange(PortPlaybackState.PAUSED);
   }
 
+  async stop(): Promise<void> {
+    this.observer.onStateChange(PortPlaybackState.STOPPED);
+  }
+
+  setLoop(loop: boolean): void {
+    this.observer.onLoopChange(loop);
+  }
+
+  async selectAudioTrack(_id: string): Promise<void> {
+  }
+
   seek(position: number): void {
     this.seekPosition = position;
     this.observer.onPositionChange(position);

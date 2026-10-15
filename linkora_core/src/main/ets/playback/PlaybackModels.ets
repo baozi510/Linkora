@@ -1,5 +1,6 @@
 import { AppFailure } from '../errors/AppFailure';
-import { PortTrack, PortVideoInfo } from './PlaybackPort';
+import { PlaybackPortError, PortAudioInterruption, PortAudioOutputChange, PortStreamEnd,
+  PortTrack, PortVideoInfo } from './PlaybackPort';
 
 export enum PlaybackStatus {
   IDLE = 'idle',
@@ -10,6 +11,7 @@ export enum PlaybackStatus {
   SEEKING = 'seeking',
   BUFFERING = 'buffering',
   COMPLETED = 'completed',
+  STOPPED = 'stopped',
   ERROR = 'error',
   RELEASED = 'released'
 }
@@ -27,11 +29,23 @@ export class PlaybackSnapshot {
   readonly backend: string;
   readonly tracks: PortTrack[];
   readonly videoInfo: PortVideoInfo;
+  readonly playbackRate: number;
+  readonly volume: number;
+  readonly loop: boolean;
+  readonly streamEnd: PortStreamEnd | null;
+  readonly audioInterruption: PortAudioInterruption | null;
+  readonly audioOutput: PortAudioOutputChange | null;
+  readonly warning: PlaybackPortError | null;
+  readonly warningOperation: string;
 
   constructor(status: PlaybackStatus, position: number, duration: number, bufferedPercent: number,
     videoWidth: number, videoHeight: number, failure: AppFailure | null, firstFrameRendered: boolean,
     bufferedDuration: number = 0, backend: string = '', tracks: PortTrack[] = [],
-    videoInfo: PortVideoInfo = new PortVideoInfo()) {
+    videoInfo: PortVideoInfo = new PortVideoInfo(),
+    playbackRate: number = 1, volume: number = 1, loop: boolean = false,
+    streamEnd: PortStreamEnd | null = null, audioInterruption: PortAudioInterruption | null = null,
+    audioOutput: PortAudioOutputChange | null = null, warning: PlaybackPortError | null = null,
+    warningOperation: string = '') {
     this.status = status;
     this.position = position;
     this.duration = duration;
@@ -44,6 +58,14 @@ export class PlaybackSnapshot {
     this.backend = backend;
     this.tracks = tracks;
     this.videoInfo = videoInfo;
+    this.playbackRate = playbackRate;
+    this.volume = volume;
+    this.loop = loop;
+    this.streamEnd = streamEnd;
+    this.audioInterruption = audioInterruption;
+    this.audioOutput = audioOutput;
+    this.warning = warning;
+    this.warningOperation = warningOperation;
   }
 }
 

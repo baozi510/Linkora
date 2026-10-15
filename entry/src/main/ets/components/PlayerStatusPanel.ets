@@ -26,6 +26,9 @@ export struct PlayerStatusPanel {
     if (this.snapshot.status === PlaybackStatus.COMPLETED) {
       return $r('app.string.status_completed');
     }
+    if (this.snapshot.status === PlaybackStatus.STOPPED) {
+      return $r('app.string.status_stopped');
+    }
     if (this.snapshot.status === PlaybackStatus.RELEASED) {
       return $r('app.string.status_closed');
     }
@@ -47,6 +50,12 @@ export struct PlayerStatusPanel {
           .fontColor(this.snapshot.status === PlaybackStatus.ERROR ? '#FF9F96' : PlayerColors.TEXT_STATUS)
       }
       .width('100%')
+
+      if (this.snapshot.warning !== null) {
+        Text($r('app.string.player_control_warning'))
+          .fontSize(13)
+          .fontColor(PlayerColors.TEXT_SECONDARY)
+      }
 
       if (this.snapshot.videoWidth > 0 && this.snapshot.videoHeight > 0) {
         Row() {

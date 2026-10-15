@@ -1,5 +1,6 @@
 import { describe, expect, it } from '@ohos/hypium';
 import {
+  AppFailure, FailureCatalog, MediaFormat, MediaSourceKind, NetworkAccessPolicyPort,
   AppAccentColor,
   AppSettings,
   AppThemeMode,
@@ -298,6 +299,7 @@ class FakeNetworkProbe implements NetworkProbePort {
 }
 
 class FakePlaybackPort implements PlaybackPort {
+  acknowledgeSettings: boolean = true;
   readonly observer: PlaybackPortObserver;
   seekPosition: number = -1;
   surfaceWidth: number = 0;
@@ -333,19 +335,41 @@ class FakePlaybackPort implements PlaybackPort {
     this.observer.onStateChange(PortPlaybackState.PAUSED);
   }
 
+  async stop(): Promise<void> {
+    this.observer.onStateChange(PortPlaybackState.STOPPED);
+  }
+
+  setLoop(loop: boolean): void {
+    this.observer.onLoopChange(loop);
+  }
+
+  async selectAudioTrack(_id: string): Promise<void> {
+  }
+
   seek(position: number): void {
     this.seekPosition = position;
     this.observer.onPositionChange(position);
   }
 
-  setPlaybackRate(_rate: number): void {
+  setPlaybackRate(rate: number): void {
+    if (this.acknowledgeSettings) this.observer.onPlaybackRateChange(rate);
   }
 
-  setVolume(_volume: number): void {
+  setVolume(volume: number): void {
+    if (this.acknowledgeSettings) this.observer.onVolumeChange(volume);
   }
 
   async release(): Promise<void> {
     this.observer.onStateChange(PortPlaybackState.RELEASED);
+  }
+}
+
+class MutablePlaybackPolicy implements NetworkAccessPolicyPort {
+  blocked: boolean = false;
+  calls: number = 0;
+  async check(): Promise<AppFailure | null> {
+    ++this.calls;
+    return this.blocked ? FailureCatalog.fromNetworkError(2300007) : null;
   }
 }
 
@@ -1147,6 +1171,57 @@ export default function featureModulesTest(): void {
       controller.handleBackground();
       await settle();
       expect(controller.currentState().playback.status).assertEqual(PlaybackStatus.PAUSED);
+      controller.stop();
+    });
+
+    it('showsOnlyConfirmedSettingsAndRoutesStopThroughTheEngine', 0, async () => {
+      let port: FakePlaybackPort | null = null;
+      const controller = new PlayerFeatureController(
+        MediaSource.fromLocalDocument('file://controls.mp4'),
+        (observer: PlaybackObserver) => new PlaybackEngine(observer,
+          async (events: PlaybackPortObserver): Promise<PlaybackPort> => {
+            port = new FakePlaybackPort(events);
+            port.acknowledgeSettings = false;
+            return port;
+          }),
+        new FakeBookmarkRepository(), new AppSettings(), () => {}
+      );
+      controller.attachSurface('surface'); await settle();
+      controller.setPlaybackRate(1.5); controller.setVolume(0.25);
+      expect(controller.currentState().playbackRate).assertEqual(1);
+      expect(controller.currentState().volume).assertEqual(1);
+      port!.observer.onPlaybackRateChange(1.5); port!.observer.onVolumeChange(0.25);
+      expect(controller.currentState().playbackRate).assertEqual(1.5);
+      expect(controller.currentState().volume).assertEqual(0.25);
+      controller.toggleLoop();
+      expect(controller.currentState().playback.loop).assertTrue();
+      controller.stopPlayback(); await settle();
+      expect(controller.currentState().playback.status).assertEqual(PlaybackStatus.STOPPED);
+      controller.togglePlayback(); await settle();
+      expect(port!.seekPosition).assertEqual(-1);
+      expect(controller.currentState().playback.status).assertEqual(PlaybackStatus.PLAYING);
+      controller.stop();
+    });
+
+    it('rechecksNetworkPolicyBeforeStoppedReplay', 0, async () => {
+      const policy = new MutablePlaybackPolicy();
+      let factoryCalls: number = 0;
+      const controller = new PlayerFeatureController(
+        new MediaSource(MediaSourceKind.NETWORK_LINK, 'https://fixture/movie.mp4', 'movie.mp4', '', MediaFormat.MP4),
+        (observer: PlaybackObserver) => new PlaybackEngine(observer,
+          async (events: PlaybackPortObserver): Promise<PlaybackPort> => {
+            ++factoryCalls; return new FakePlaybackPort(events);
+          }),
+        new FakeBookmarkRepository(), new AppSettings(), () => {}, policy
+      );
+      controller.attachSurface('surface'); await settle();
+      expect(factoryCalls).assertEqual(1);
+      controller.stopPlayback(); await settle();
+      policy.blocked = true;
+      controller.togglePlayback(); await settle();
+      expect(policy.calls).assertEqual(2);
+      expect(factoryCalls).assertEqual(1);
+      expect(controller.currentState().playback.status).assertEqual(PlaybackStatus.ERROR);
       controller.stop();
     });
 

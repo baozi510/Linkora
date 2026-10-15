@@ -36,7 +36,8 @@ function fixture(preference = 'auto') {
     return module.exports;
   }
   const core = Object.assign({}, ...['models/MediaSource', 'playback/PlaybackPort',
-    'playback/PlaybackBackend', 'playback/PlaybackBackendSelector'].map(name => load('linkora_core/src/main/ets/' + name + '.ets')));
+    'playback/PlaybackBackend', 'playback/PlaybackBackendSelector', 'playback/PlaybackEngine',
+    'playback/PlaybackModels'].map(name => load('linkora_core/src/main/ets/' + name + '.ets')));
   const { AdaptivePlaybackPort } = load('entry/src/main/ets/playback/AdaptivePlaybackPort.ets');
   const observer = new core.PlaybackPortObserver(
     state => trace.push(['state', state]), error => trace.push(['error', error.code]),
@@ -53,6 +54,8 @@ function fixture(preference = 'auto') {
         configure() {}, setSurfaceSize() {}, getDuration: () => 120000,
         prepare: () => prepare(events), play: async () => events.onStateChange('playing'),
         pause: async () => events.onStateChange('paused'), seek: value => events.onSeekComplete(value),
+        stop: async () => events.onStateChange('stopped'),
+        setLoop: value => events.onLoopChange(value), selectAudioTrack: async () => {},
         setPlaybackRate() {}, setVolume() {},
         release: async () => { backend.closes++; events.onStateChange('released'); }
       };
@@ -81,6 +84,47 @@ test('Auto disposes failed System candidate and commits only MPV events', async 
   assert.equal(port.getDuration(), 120000);
   await port.release();
   assert.equal(f.backends[1].closes, 1); assert.equal(f.sourceCloses, 1);
+});
+
+test('Engine snapshots use acknowledged settings and fence old settings events', async () => {
+  const f = fixture(), snapshots = [];
+  const engine = new f.core.PlaybackEngine(value => snapshots.push(value), f.factory('system'));
+  await engine.open(f.core.MediaSource.fromLocalDocument('file://one.mp4'), 'surface');
+  engine.setPlaybackRate(1.5); engine.setVolume(0.25);
+  assert.equal(snapshots.at(-1).playbackRate, 1); assert.equal(snapshots.at(-1).volume, 1);
+  f.backends[0].events.onPlaybackRateChange(1.5); f.backends[0].events.onVolumeChange(0.25);
+  assert.equal(snapshots.at(-1).playbackRate, 1.5); assert.equal(snapshots.at(-1).volume, 0.25);
+  await engine.open(f.core.MediaSource.fromLocalDocument('file://two.mp4'), 'surface');
+  const before = snapshots.length;
+  f.backends[0].events.onPlaybackRateChange(2); f.backends[0].events.onVolumeChange(1);
+  assert.equal(snapshots.length, before);
+  await engine.release();
+});
+
+test('Engine stop/replay allocates only after disposal and preserves requested loop', async () => {
+  const f = fixture(), snapshots = [];
+  const engine = new f.core.PlaybackEngine(value => snapshots.push(value), f.factory('system'));
+  await engine.open(f.core.MediaSource.fromLocalDocument('file://one.mp4'), 'surface');
+  engine.setLoop(true);
+  assert.equal(snapshots.at(-1).loop, true);
+  await engine.stop(); assert.equal(snapshots.at(-1).status, 'stopped');
+  await engine.togglePlayback();
+  assert.equal(f.backends.length, 2); assert.equal(f.backends[0].closes, 1);
+  assert.equal(snapshots.at(-1).status, 'playing'); assert.equal(snapshots.at(-1).loop, true);
+  await engine.release();
+});
+
+test('Adaptive forwards settings only from the committed current candidate', async () => {
+  const f = fixture(); const rates = [];
+  f.observer.onPlaybackRateChange = value => rates.push(value);
+  const port = f.port(f.factory('system', async events => {
+    events.onPlaybackRateChange(1.25);
+    throw new f.core.PlaybackPortError(5400106, 'unsupported');
+  }), f.factory('mpv'));
+  await port.prepare(); f.backends[1].events.onPlaybackRateChange(1.5);
+  assert.deepEqual(rates, [1.5]);
+  await port.release(); f.backends[1].events.onPlaybackRateChange(2);
+  assert.deepEqual(rates, [1.5]);
 });
 
 test('explicit System failure does not invoke MPV fallback', async () => {
@@ -244,4 +288,38 @@ test('release shares source cleanup already owned by failed preparation', async 
   const completedBeforeLease = disposed;
   finish(); await preparation; await closed;
   assert.equal(completedBeforeLease, false);
+});
+
+
+test('invalid settings and rejected audio selection do not destroy active playback', async () => {
+  const f = fixture(), snapshots = [];
+  const engine = new f.core.PlaybackEngine(value => snapshots.push(value), f.factory('system'));
+  await engine.open(f.core.MediaSource.fromLocalDocument('file://one.mp4'), 'surface');
+  engine.setPlaybackRate(NaN); engine.setVolume(NaN); engine.seek(NaN);
+  const backend = f.backends[0];
+  backend.events.onTracksChange([new f.core.PortTrack('2', f.core.PortTrackKind.AUDIO)]);
+  backend.selectAudioTrack = async () => { throw new f.core.PlaybackPortError(5400102); };
+  await engine.selectAudioTrack('2');
+  assert.equal(snapshots.at(-1).status, 'playing');
+  assert.equal(snapshots.at(-1).warningOperation, 'audio-track');
+  assert.equal(backend.closes, 0);
+  await engine.release();
+});
+
+
+test('live playback does not require optional loop support', async () => {
+  const f = fixture(), snapshots = [];
+  const make = f.factory('system');
+  const engine = new f.core.PlaybackEngine(value => snapshots.push(value), async observer => {
+    const port = await make(observer);
+    port.setLoop = () => { throw new f.core.PlaybackPortError(5400102); };
+    return port;
+  });
+  await engine.open(f.core.MediaSource.fromLocalDocument('file://live.m3u8'), 'surface');
+  assert.equal(snapshots.at(-1).status, 'playing');
+  engine.setLoop(true);
+  assert.equal(snapshots.at(-1).status, 'playing');
+  assert.equal(snapshots.at(-1).warningOperation, 'loop');
+  assert.equal(f.backends[0].closes, 0);
+  await engine.release();
 });

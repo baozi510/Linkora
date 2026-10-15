@@ -2,6 +2,7 @@ import {
   EventObserver,
   Media,
   MpvEvent,
+  PlaylistMode,
   Player,
   Track,
   Tracks
@@ -16,6 +17,8 @@ import {
   PlayerBackendKind,
   PortBufferingEvent,
   PortPlaybackState,
+  PortStreamEnd,
+  PortStreamEndReason,
   PortTrack,
   PortTrackKind,
   PortVideoInfo
@@ -37,6 +40,10 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
   private prepareTimer: number = -1;
   private seekPending: boolean = false;
   private latestErrorLog: string = '';
+  private loop: boolean = false;
+  private stopRequested: boolean = false;
+  private endSignaled: boolean = false;
+  private releasePromise: Promise<void> | null = null;
 
   private constructor(observer: PlaybackPortObserver) {
     this.observer = observer;
@@ -134,6 +141,15 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
     }
   }
 
+  async stop(): Promise<void> {
+    this.ensureReady();
+    this.stopRequested = true;
+    this.endSignaled = false;
+    this.player.stop();
+    this.prepared = false;
+    this.observer.onStateChange(PortPlaybackState.STOPPED);
+  }
+
   seek(position: number): void {
     this.ensureReady();
     this.completed = false;
@@ -143,36 +159,58 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
 
   setPlaybackRate(rate: number): void {
     this.ensureReady();
-    this.player.setSpeed(Math.max(0.1, rate));
+    if (!Number.isFinite(rate) || rate < 0.5 || rate > 2) throw new PlaybackPortError(401, 'Invalid playback rate');
+    this.player.setSpeed(rate);
   }
 
   setVolume(volume: number): void {
     this.ensureReady();
+    if (!Number.isFinite(volume)) throw new PlaybackPortError(401, 'Invalid volume');
     this.player.setVolume(Math.max(0, Math.min(volume, 1)) * 100);
   }
 
-  async release(): Promise<void> {
-    if (this.released) {
-      return;
-    }
+  setLoop(loop: boolean): void {
+    this.ensureReady();
+    this.player.setLoopMode(loop ? PlaylistMode.File : PlaylistMode.None);
+  }
+
+  async selectAudioTrack(id: string): Promise<void> {
+    this.ensureReady();
+    const track = this.player.state.tracks.audio.find((item) => item.id === id);
+    if (track === undefined) throw new PlaybackPortError(401, 'Audio track is unavailable');
+    this.player.setAudioTrack(track);
+  }
+
+  release(): Promise<void> {
+    if (this.releasePromise !== null) return this.releasePromise;
     this.released = true;
     this.clearPrepareTimer();
     this.failPrepare(new PlaybackPortError(0, 'MPV backend released'));
+    this.releasePromise = Promise.resolve().then(() => this.releaseNative());
+    return this.releasePromise;
+  }
+
+  private releaseNative(): void {
+    let failure: PlaybackPortError | null = null;
     try {
       this.player.native.removeEventObserver(this);
-    } catch (_error) {
+    } catch (error) {
+      failure = new PlaybackPortError(0, `Unable to remove MPV observer: ${String(error)}`);
     }
     if (this.surfaceAttached) {
       try {
         this.player.native.detachSurface();
-      } catch (_error) {
+      } catch (error) {
+        failure = failure ?? new PlaybackPortError(0, `Unable to detach MPV surface: ${String(error)}`);
       }
       this.surfaceAttached = false;
     }
     try {
       this.player.destroy();
-    } catch (_error) {
+    } catch (error) {
+      failure = failure ?? new PlaybackPortError(0, `Unable to destroy MPV player: ${String(error)}`);
     }
+    if (failure !== null) throw failure;
     this.observer.onStateChange(PortPlaybackState.RELEASED);
   }
 
@@ -185,12 +223,34 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
     }
     if (id === MpvEvent.MPV_EVENT_FILE_LOADED) {
       this.prepared = true;
+      this.endSignaled = false;
+      this.stopRequested = false;
       const resolve: (() => void) | null = this.prepareResolve;
       this.prepareResolve = null;
       this.prepareReject = null;
       this.clearPrepareTimer();
       this.observer.onStateChange(PortPlaybackState.PREPARED);
       resolve?.();
+    } else if (id === MpvEvent.MPV_EVENT_END_FILE) {
+      if (this.prepareReject !== null) {
+        this.failPrepare(new PlaybackPortError(0, `MPV file ended before preparation: ${this.latestErrorLog}`));
+      } else if (this.stopRequested) {
+        this.stopRequested = false;
+        this.emitEnd(PortStreamEndReason.STOP);
+      } else if (this.completed || this.player.state.eof) {
+        this.emitEnd(PortStreamEndReason.EOF);
+      } else {
+        // The current ArkTS binding supplies no END_FILE reason/error payload.
+        this.prepared = false;
+        this.emitEnd(PortStreamEndReason.UNKNOWN);
+        this.observer.onStateChange(PortPlaybackState.STOPPED);
+      }
+    } else if (id === MpvEvent.MPV_EVENT_SHUTDOWN) {
+      const error = new PlaybackPortError(5400105, 'MPV unexpectedly shut down');
+      this.failPrepare(error);
+      this.observer.onError(error);
+    } else if (id === MpvEvent.MPV_EVENT_SEEK) {
+      this.seekPending = true;
     } else if (id === MpvEvent.MPV_EVENT_PLAYBACK_RESTART) {
       if (!this.firstFrameSignaled) {
         this.firstFrameSignaled = true;
@@ -205,9 +265,11 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
 
   private bindStreams(): void {
     this.player.stream.duration.listen((seconds: number) => {
+      if (this.released) return;
       this.observer.onDurationChange(Math.max(0, Math.round(seconds * 1000)));
     });
     this.player.stream.position.listen((seconds: number) => {
+      if (this.released) return;
       this.observer.onPositionChange(Math.max(0, Math.round(seconds * 1000)));
     });
     this.player.stream.playing.listen((playing: boolean) => {
@@ -216,39 +278,44 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
       }
       // mpv-arkts emits eof=true and then playing=false. Once EOF is terminal,
       // that trailing false must not downgrade COMPLETED to PAUSED.
-      if (!playing && this.completed) {
+      if (!playing && (this.completed || (this.loop && this.endSignaled))) {
         return;
       }
       this.observer.onStateChange(playing ? PortPlaybackState.PLAYING : PortPlaybackState.PAUSED);
     });
     this.player.stream.eof.listen((eof: boolean) => {
-      if (this.released) {
+      if (this.released || this.stopRequested || !this.prepared) {
         return;
       }
-      this.completed = eof;
+      this.completed = eof && !this.loop;
       if (eof) {
-        this.observer.onStateChange(PortPlaybackState.COMPLETED);
-      }
+        this.emitEnd(PortStreamEndReason.EOF);
+        if (!this.loop) this.observer.onStateChange(PortPlaybackState.COMPLETED);
+      } else this.endSignaled = false;
     });
     this.player.stream.buffering.listen((buffering: boolean) => {
+      if (this.released) return;
       this.observer.onBufferingChange(
         buffering ? PortBufferingEvent.START : PortBufferingEvent.END,
         0
       );
     });
     this.player.stream.bufferingPercentage.listen((percent: number) => {
+      if (this.released) return;
       this.observer.onBufferingChange(
         PortBufferingEvent.PERCENT,
         Math.max(0, Math.min(100, percent))
       );
     });
     this.player.stream.buffer.listen((seconds: number) => {
+      if (this.released) return;
       this.observer.onBufferingChange(
         PortBufferingEvent.CACHED_DURATION,
         Math.max(0, Math.round(seconds * 1000))
       );
     });
     this.player.stream.videoParams.listen((params) => {
+      if (this.released) return;
       const width: number = params.dw > 0 ? params.dw : params.w;
       const height: number = params.dh > 0 ? params.dh : params.h;
       if (width > 0 && height > 0) {
@@ -265,17 +332,38 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
       ));
     });
     this.player.stream.tracks.listen((tracks: Tracks) => {
+      if (this.released) return;
       this.observer.onTracksChange(this.mapTracks(tracks, this.player.state.track));
     });
     this.player.stream.track.listen((track: Track) => {
+      if (this.released) return;
       this.observer.onTracksChange(this.mapTracks(this.player.state.tracks, track));
+    });
+    this.player.stream.speed.listen((rate: number) => {
+      if (!this.released) this.observer.onPlaybackRateChange(rate);
+    });
+    this.player.stream.volume.listen((volume: number) => {
+      if (!this.released) this.observer.onVolumeChange(Math.max(0, Math.min(1, volume / 100)));
+    });
+    this.player.stream.playlistMode.listen((mode: PlaylistMode) => {
+      if (this.released) return;
+      this.loop = mode === PlaylistMode.File;
+      this.observer.onLoopChange(this.loop);
     });
     this.player.stream.error.listen((detail: string) => {
       // The wrapper emits error-level log lines, not structured fatal errors.
       if (!this.released) {
         this.latestErrorLog = detail;
+        this.observer.onWarning('native-log', new PlaybackPortError(0, detail));
       }
     });
+  }
+
+  private emitEnd(reason: PortStreamEndReason): void {
+    if (this.endSignaled) return;
+    this.endSignaled = true;
+    this.observer.onStreamEnd(new PortStreamEnd(reason, this.loop,
+      reason === PortStreamEndReason.UNKNOWN ? this.latestErrorLog : ''));
   }
 
   private mapTracks(tracks: Tracks, selected: Track): PortTrack[] {

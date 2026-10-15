@@ -9,7 +9,8 @@ import {
   PortBufferingEvent,
   PortPlaybackState,
   PortTrack,
-  PortVideoInfo
+  PortVideoInfo,
+  PortTrackKind, PortStreamEnd, PortAudioInterruption, PortAudioOutputChange
 } from './PlaybackPort';
 import { PlaybackObserver, PlaybackSnapshot, PlaybackStatus } from './PlaybackModels';
 
@@ -35,6 +36,19 @@ export class PlaybackEngine {
   private videoInfo: PortVideoInfo = new PortVideoInfo();
   private surfaceWidth: number = 0;
   private surfaceHeight: number = 0;
+  private source: MediaSource | null = null;
+  private surfaceId: string = '';
+  private playbackRate: number = 1;
+  private volume: number = 1;
+  private loop: boolean = false;
+  private requestedRate: number = 1;
+  private requestedVolume: number = 1;
+  private requestedLoop: boolean = false;
+  private streamEnd: PortStreamEnd | null = null;
+  private audioInterruption: PortAudioInterruption | null = null;
+  private audioOutput: PortAudioOutputChange | null = null;
+  private warning: PlaybackPortError | null = null;
+  private warningOperation: string = '';
 
   constructor(observer: PlaybackObserver, portFactory: PlaybackPortFactory) {
     this.observer = observer;
@@ -50,6 +64,8 @@ export class PlaybackEngine {
         return;
       }
       this.resetSnapshot();
+      this.source = source;
+      this.surfaceId = surfaceId;
       this.status = PlaybackStatus.PREPARING;
       this.notify();
 
@@ -70,6 +86,12 @@ export class PlaybackEngine {
         return;
       }
       this.duration = Math.max(this.duration, port.getDuration());
+      if (this.requestedLoop) this.setLoop(true);
+      if (!this.isCurrent(sessionId) || this.port !== port) return;
+      if (this.requestedRate !== 1) this.setPlaybackRate(this.requestedRate);
+      if (!this.isCurrent(sessionId) || this.port !== port) return;
+      if (this.requestedVolume !== 1) this.setVolume(this.requestedVolume);
+      if (!this.isCurrent(sessionId) || this.port !== port) return;
       if (Number.isFinite(startPosition) && startPosition > 0) {
         // Prepared backends can seek before duration metadata arrives.
         const position: number = Math.round(startPosition);
@@ -105,6 +127,10 @@ export class PlaybackEngine {
   }
 
   async togglePlayback(): Promise<void> {
+    if (this.status === PlaybackStatus.STOPPED && this.source !== null) {
+      await this.open(this.source, this.surfaceId);
+      return;
+    }
     const port: PlaybackPort | null = this.port;
     if (port === null) {
       return;
@@ -133,7 +159,8 @@ export class PlaybackEngine {
 
   seek(position: number): void {
     const port: PlaybackPort | null = this.port;
-    if (port === null || this.duration <= 0) {
+    if (port === null || this.duration <= 0 || !Number.isFinite(position) ||
+      this.status === PlaybackStatus.STOPPED) {
       return;
     }
     const target: number = Math.max(0, Math.min(Math.round(position), this.duration));
@@ -153,25 +180,62 @@ export class PlaybackEngine {
 
   setPlaybackRate(rate: number): void {
     const port: PlaybackPort | null = this.port;
-    if (port === null) {
+    if (port === null || !Number.isFinite(rate) || rate < 0.5 || rate > 2) {
       return;
     }
     try {
       port.setPlaybackRate(rate);
+      this.requestedRate = rate;
     } catch (error) {
-      this.failActivePort(this.portError(error));
+      this.warn('rate', this.portError(error));
     }
   }
 
   setVolume(volume: number): void {
     const port: PlaybackPort | null = this.port;
-    if (port === null) {
+    if (port === null || !Number.isFinite(volume)) {
       return;
     }
     try {
       port.setVolume(Math.max(0, Math.min(volume, 1)));
+      this.requestedVolume = Math.max(0, Math.min(volume, 1));
     } catch (error) {
-      this.failActivePort(this.portError(error));
+      this.warn('volume', this.portError(error));
+    }
+  }
+
+  setLoop(loop: boolean): void {
+    if (this.port === null) return;
+    try {
+      this.port.setLoop(loop);
+      this.requestedLoop = loop;
+    } catch (error) {
+      this.warn('loop', this.portError(error));
+    }
+  }
+
+  async stop(): Promise<void> {
+    const port: PlaybackPort | null = this.port;
+    if (port === null) return;
+    const sessionId: number = this.sessionId;
+    try {
+      await port.stop();
+    } catch (error) {
+      if (this.isCurrent(sessionId) && this.port === port) this.failActivePort(this.portError(error));
+    }
+  }
+
+  async selectAudioTrack(id: string): Promise<void> {
+    const port: PlaybackPort | null = this.port;
+    if (port === null) return;
+    const sessionId: number = this.sessionId;
+    try {
+      if (!this.tracks.some((track: PortTrack) => track.kind === PortTrackKind.AUDIO && track.id === id)) {
+        throw new PlaybackPortError(401, 'Unknown audio track');
+      }
+      await port.selectAudioTrack(id);
+    } catch (error) {
+      if (this.isCurrent(sessionId) && this.port === port) this.warn('audio-track', this.portError(error));
     }
   }
 
@@ -263,6 +327,33 @@ export class PlaybackEngine {
           this.backend = backend;
           this.notify();
         }
+      },
+      (rate: number) => {
+        if (this.isCurrent(sessionId) && Number.isFinite(rate) && rate > 0) {
+          this.playbackRate = rate;
+          this.notify();
+        }
+      },
+      (volume: number) => {
+        if (this.isCurrent(sessionId) && Number.isFinite(volume)) {
+          this.volume = Math.max(0, Math.min(volume, 1));
+          this.notify();
+        }
+      },
+      (loop: boolean) => {
+        if (this.isCurrent(sessionId)) { this.loop = loop; this.notify(); }
+      },
+      (end: PortStreamEnd) => {
+        if (this.isCurrent(sessionId)) { this.streamEnd = end; this.notify(); }
+      },
+      (event: PortAudioInterruption) => {
+        if (this.isCurrent(sessionId)) { this.audioInterruption = event; this.notify(); }
+      },
+      (event: PortAudioOutputChange) => {
+        if (this.isCurrent(sessionId)) { this.audioOutput = event; this.notify(); }
+      },
+      (operation: string, error: PlaybackPortError) => {
+        if (this.isCurrent(sessionId)) this.warn(operation, error);
       }
     );
   }
@@ -312,6 +403,8 @@ export class PlaybackEngine {
     } else if (state === PortPlaybackState.COMPLETED) {
       this.status = PlaybackStatus.COMPLETED;
       this.position = this.duration;
+    } else if (state === PortPlaybackState.STOPPED) {
+      this.status = PlaybackStatus.STOPPED;
     } else if (state === PortPlaybackState.ERROR) {
       this.status = PlaybackStatus.ERROR;
       if (this.failure === null) {
@@ -350,6 +443,12 @@ export class PlaybackEngine {
 
   private fail(error: PlaybackPortError): void {
     this.failWith(error);
+  }
+
+  private warn(operation: string, error: PlaybackPortError): void {
+    this.warningOperation = operation;
+    this.warning = error;
+    this.notify();
   }
 
   private failActivePort(error: PlaybackPortError): void {
@@ -405,6 +504,14 @@ export class PlaybackEngine {
     this.backend = '';
     this.tracks = [];
     this.videoInfo = new PortVideoInfo();
+    this.playbackRate = 1;
+    this.volume = 1;
+    this.loop = false;
+    this.streamEnd = null;
+    this.audioInterruption = null;
+    this.audioOutput = null;
+    this.warning = null;
+    this.warningOperation = '';
   }
 
   private notify(): void {
@@ -420,7 +527,9 @@ export class PlaybackEngine {
       this.bufferedDuration,
       this.backend,
       this.tracks,
-      this.videoInfo
+      this.videoInfo,
+      this.playbackRate, this.volume, this.loop, this.streamEnd,
+      this.audioInterruption, this.audioOutput, this.warning, this.warningOperation
     ));
   }
 }

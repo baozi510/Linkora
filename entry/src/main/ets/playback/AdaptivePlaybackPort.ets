@@ -11,7 +11,8 @@ import {
   PortBufferingEvent,
   PortPlaybackState,
   PortTrack,
-  PortVideoInfo
+  PortVideoInfo,
+  PortStreamEnd, PortAudioInterruption, PortAudioOutputChange
 } from 'linkora_core';
 import { NetworkFileProxy } from 'linkora_proxy';
 import { MpvPlaybackPort } from './MpvPlaybackPort';
@@ -83,6 +84,15 @@ class CandidateObserver {
       },
       (backend: string) => {
         if (this.committed) target.onBackendChange(backend);
+      },
+      (rate: number) => { if (this.committed) target.onPlaybackRateChange(rate); },
+      (volume: number) => { if (this.committed) target.onVolumeChange(volume); },
+      (loop: boolean) => { if (this.committed) target.onLoopChange(loop); },
+      (end: PortStreamEnd) => { if (this.committed) target.onStreamEnd(end); },
+      (event: PortAudioInterruption) => { if (this.committed) target.onAudioInterruption(event); },
+      (event: PortAudioOutputChange) => { if (this.committed) target.onAudioOutputChange(event); },
+      (operation: string, error: PlaybackPortError) => {
+        if (this.committed) target.onWarning(operation, error);
       }
     );
   }
@@ -213,6 +223,18 @@ export class AdaptivePlaybackPort implements PlaybackPort {
 
   async pause(): Promise<void> {
     await this.requireBackend().pause();
+  }
+
+  async stop(): Promise<void> {
+    await this.requireBackend().stop();
+  }
+
+  setLoop(loop: boolean): void {
+    this.requireBackend().setLoop(loop);
+  }
+
+  async selectAudioTrack(id: string): Promise<void> {
+    await this.requireBackend().selectAudioTrack(id);
   }
 
   seek(position: number): void {

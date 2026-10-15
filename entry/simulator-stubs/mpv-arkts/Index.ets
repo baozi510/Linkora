@@ -3,9 +3,14 @@ export interface EventObserver {
 }
 
 export enum MpvEvent {
+  MPV_EVENT_SHUTDOWN = 1,
+  MPV_EVENT_END_FILE = 7,
   MPV_EVENT_FILE_LOADED = 8,
+  MPV_EVENT_SEEK = 20,
   MPV_EVENT_PLAYBACK_RESTART = 21
 }
+
+export enum PlaylistMode { None = 0, File = 1, Playlist = 2, Random = 3 }
 
 export class Media {
   readonly uri: string;
@@ -58,12 +63,16 @@ export class VideoParams {
   light: string = '';
 }
 export class PlayerState {
+  eof: boolean = false;
   duration: number = 0;
   position: number = 0;
   tracks: Tracks = new Tracks();
   track: Track = new Track();
 }
 export class PlayerStream {
+  speed: StubStream<number> = new StubStream<number>();
+  volume: StubStream<number> = new StubStream<number>();
+  playlistMode: StubStream<PlaylistMode> = new StubStream<PlaylistMode>();
   duration: StubStream<number> = new StubStream<number>();
   position: StubStream<number> = new StubStream<number>();
   playing: StubStream<boolean> = new StubStream<boolean>();
@@ -95,6 +104,9 @@ export class Player {
   open(_media: Media, _play: boolean = true): void {}
   play(): void {}
   pause(): void {}
+  stop(): void {}
+  setLoopMode(_mode: PlaylistMode): void {}
+  setAudioTrack(_track: AudioTrack): void {}
   seek(_seconds: number): void {}
   setSpeed(_speed: number): void {}
   setVolume(_volume: number): void {}

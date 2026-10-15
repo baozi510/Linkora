@@ -13,7 +13,8 @@ const root = path.resolve(__dirname, '..');
 function fixture() {
   const timers = new Map();
   let timerId = 0, player;
-  const events = { MPV_EVENT_FILE_LOADED: 8, MPV_EVENT_PLAYBACK_RESTART: 21 };
+  const events = { MPV_EVENT_FILE_LOADED: 8, MPV_EVENT_PLAYBACK_RESTART: 21,
+    MPV_EVENT_END_FILE: 7, MPV_EVENT_SHUTDOWN: 1 };
   class Player {
     constructor() {
       player = this;
@@ -21,9 +22,12 @@ function fixture() {
       this.playCalls = 0;
       this.pauseCalls = 0;
       this.seekCalls = 0;
-      this.state = { duration: 60, position: 0 };
+      this.state = { duration: 60, position: 0, eof: false,
+        tracks: { audio: [{ id: '2' }, { id: '3' }], video: [], subs: [] },
+        track: { audio: { id: '2' }, video: { id: 'no' }, subs: { id: 'no' } } };
       this.stream = Object.fromEntries(['duration', 'position', 'playing', 'eof', 'buffering',
-        'bufferingPercentage', 'buffer', 'videoParams', 'tracks', 'track', 'error'].map(name => {
+        'bufferingPercentage', 'buffer', 'videoParams', 'tracks', 'track', 'error',
+        'volume', 'speed', 'playlistMode'].map(name => {
         let listener;
         return [name, { listen(callback) { listener = callback; }, add(value) { listener(value); } }];
       }));
@@ -33,6 +37,11 @@ function fixture() {
     open() {}
     play() { this.playCalls++; }
     pause() { this.pauseCalls++; }
+    stop() { this.stopped = true; }
+    setSpeed(value) { this.requestedSpeed = value; }
+    setVolume(value) { this.requestedVolume = value; }
+    setLoopMode(value) { this.requestedLoop = value; }
+    setAudioTrack(track) { this.requestedAudioTrack = track; }
     seek(seconds) {
       this.seekCalls++;
       this.state.position = seconds;
@@ -57,7 +66,8 @@ function fixture() {
       clearTimeout(id) { timers.delete(id); }
     }, { filename: file })(name => {
       if (name.startsWith('.')) return load(path.relative(root, path.resolve(path.dirname(file), name + '.ets')));
-      if (name === '@mpv-ohos/mpv-arkts') return { Player, Media: class {}, MpvEvent: events };
+      if (name === '@mpv-ohos/mpv-arkts') return { Player, Media: class {}, MpvEvent: events,
+        PlaylistMode: { None: 0, File: 1, Playlist: 2, Random: 3 } };
       if (name === 'linkora_core') return core;
       throw new Error(`Unexpected adapter dependency: ${name}`);
     }, module, module.exports);
@@ -77,7 +87,7 @@ function fixture() {
       port.configure(core.MediaSource.fromLocalDocument('file://fixture.mp4'), 'surface');
       return port;
     },
-    get player() { return player; }, states, errors, core, timers,
+    get player() { return player; }, states, errors, core, timers, observer,
     loaded() { player.events.onEvent(events.MPV_EVENT_FILE_LOADED, 'file-loaded'); },
     timeout() { assert.equal(timers.size, 1); [...timers.values()][0](); }
   };
@@ -93,6 +103,48 @@ test('error log before FILE_LOADED leaves prepare pending', async () => {
   assert.equal(f.errors.length, 0);
   assert.equal(f.timers.size, 1);
   await port.release(); await pending;
+});
+
+test('MPV maps confirmed property values and loop mode, not requested controls', async () => {
+  const f = fixture(), port = await f.create(), rates = [], volumes = [], loops = [];
+  f.observer.onPlaybackRateChange = value => rates.push(value);
+  f.observer.onVolumeChange = value => volumes.push(value);
+  f.observer.onLoopChange = value => loops.push(value);
+  const pending = port.prepare(); f.loaded(); await pending;
+  port.setPlaybackRate(1.5); port.setVolume(0.25); port.setLoop(true);
+  assert.deepEqual(rates, []); assert.deepEqual(volumes, []); assert.deepEqual(loops, []);
+  f.player.stream.speed.add(1.5); f.player.stream.volume.add(25); f.player.stream.playlistMode.add(1);
+  assert.deepEqual(rates, [1.5]); assert.deepEqual(volumes, [0.25]); assert.deepEqual(loops, [true]);
+  await port.release();
+  f.player.stream.speed.add(2); f.player.stream.volume.add(100); f.player.stream.playlistMode.add(0);
+  assert.deepEqual(rates, [1.5]); assert.deepEqual(volumes, [0.25]); assert.deepEqual(loops, [true]);
+});
+
+test('MPV selects an existing native audio track and rejects unknown ids', async () => {
+  const f = fixture(), port = await f.create();
+  const pending = port.prepare(); f.loaded(); await pending;
+  await port.selectAudioTrack('3');
+  assert.equal(f.player.requestedAudioTrack.id, '3');
+  await assert.rejects(port.selectAudioTrack('file://injected'));
+  await port.release();
+});
+
+test('MPV unload before FILE_LOADED rejects preparation without waiting for timeout', { timeout: 1000 }, async () => {
+  const f = fixture(), port = await f.create();
+  const pending = assert.rejects(port.prepare(), error => error.detail.includes('before preparation'));
+  f.player.events.onEvent(7, 'end-file');
+  await pending; assert.equal(f.timers.size, 0);
+  await port.release();
+});
+
+test('MPV unknown unload is not misreported as EOF or a guessed fatal error', async () => {
+  const f = fixture(), port = await f.create(), ends = [];
+  f.observer.onStreamEnd = value => ends.push(value);
+  const pending = port.prepare(); f.loaded(); await pending; await port.play();
+  f.player.events.onEvent(7, 'end-file');
+  assert.equal(ends.at(-1).reason, 'unknown');
+  assert.equal(f.states.at(-1), 'stopped'); assert.equal(f.errors.length, 0);
+  await port.release();
 });
 
 test('FILE_LOADED after error log succeeds and clears prepare timer', async () => {
@@ -172,5 +224,51 @@ test('unverified advanced capabilities are reported conservatively', async () =>
   const caps = port.capabilities();
   for (const name of ['assSubtitle', 'pgsSubtitle', 'hdr10', 'hlg', 'dolbyVisionAware',
     'nativeDolbyVisionOutput', 'audioPassthrough']) assert.equal(caps[name], false, name);
+  await port.release();
+});
+
+
+test('MPV late streams are fenced and release failure remains a failure', async () => {
+  const f = fixture(), port = await f.create(), positions = [];
+  f.observer.onPositionChange = value => positions.push(value);
+  f.player.native.detachSurface = () => { throw Error('detach failed'); };
+  await assert.rejects(port.release());
+  await assert.rejects(port.release());
+  f.player.stream.position.add(2);
+  assert.deepEqual(positions, []);
+  assert.equal(f.states.includes('released'), false);
+  assert.equal(f.player.destroyed, true);
+});
+
+test('MPV file loop reports EOF without one-shot completion', async () => {
+  const f = fixture(), port = await f.create(), ends = [];
+  f.observer.onStreamEnd = value => ends.push(value);
+  const preparing = port.prepare(); f.loaded(); await preparing;
+  await port.play(); port.setLoop(true); f.player.stream.playlistMode.add(1);
+  f.player.stream.eof.add(true); f.player.stream.playing.add(false);
+  assert.equal(f.states.at(-1), 'playing');
+  assert.equal(ends.at(-1).reason, 'eof'); assert.equal(ends.at(-1).looping, true);
+  assert.notEqual(f.states.at(-1), 'completed');
+  await port.release();
+});
+
+
+test('explicit MPV stop after EOF publishes its own distinct end reason', async () => {
+  const f = fixture(), port = await f.create(), ends = [];
+  f.observer.onStreamEnd = value => ends.push(value.reason);
+  const preparing = port.prepare(); f.loaded(); await preparing;
+  await port.play(); f.player.stream.eof.add(true);
+  await port.stop(); f.player.events.onEvent(7, 'end-file');
+  assert.deepEqual(ends, ['eof', 'stop']);
+  await port.release();
+});
+
+
+test('MPV EOF arriving after an unknown unload cannot make an unprepared port replayable', async () => {
+  const f = fixture(), port = await f.create();
+  const preparing = port.prepare(); f.loaded(); await preparing;
+  await port.play(); f.player.events.onEvent(7, 'end-file');
+  f.player.stream.eof.add(true);
+  assert.equal(f.states.at(-1), 'stopped');
   await port.release();
 });

@@ -1,4 +1,4 @@
-import { PlaybackSnapshot, PlaybackStatus } from 'linkora_core';
+import { PlaybackSnapshot, PlaybackStatus, PortTrack, PortTrackKind } from 'linkora_core';
 import { AppTypography, PlayerColors, PlayerRadius } from '../ui/AppTheme';
 
 @ComponentV2
@@ -16,6 +16,19 @@ export struct PlayerControls {
   @Event onChangePlaybackRate: () => void = () => {};
   @Event onChangeVolume: (value: number) => void = () => {};
   @Event onToggleFullScreen: () => void = () => {};
+  @Event onStopPlayback: () => void = () => {};
+  @Event onToggleLoop: () => void = () => {};
+  @Event onSelectAudioTrack: (id: string) => void = () => {};
+
+  private audioTracks(): PortTrack[] {
+    return this.snapshot.tracks.filter((track: PortTrack) => track.kind === PortTrackKind.AUDIO);
+  }
+
+  private audioOptions(): SelectOption[] {
+    return this.audioTracks().map((track: PortTrack): SelectOption => ({
+      value: track.title || track.language || `${track.id} ${track.codec}`
+    }));
+  }
 
   private isPlaying(): boolean {
     return this.snapshot.status === PlaybackStatus.PLAYING ||
@@ -91,7 +104,7 @@ export struct PlayerControls {
           .fontSize(this.isPlaying() ? 19 : 23)
           .fontColor('#FFFFFF')
           .backgroundColor(PlayerColors.PRIMARY)
-          .enabled(this.canControl())
+          .enabled(this.canControl() || this.snapshot.status === PlaybackStatus.STOPPED)
           .onClick(() => {
             this.onTogglePlayback();
           })
@@ -112,6 +125,27 @@ export struct PlayerControls {
       .width('100%')
 
       Row({ space: 10 }) {
+        Button($r('app.string.player_stop'))
+          .enabled(this.canControl())
+          .onClick(() => this.onStopPlayback())
+        Button(this.snapshot.loop ? $r('app.string.player_loop_on') : $r('app.string.player_loop_off'))
+          .enabled(this.canControl())
+          .onClick(() => this.onToggleLoop())
+        if (this.audioTracks().length > 0) {
+          Select(this.audioOptions())
+            .selected(this.audioTracks().findIndex((track: PortTrack) => track.selected))
+            .accessibilityText($r('app.string.player_audio_track'))
+            .layoutWeight(1)
+            .enabled(this.canControl())
+            .onSelect((index: number) => {
+              const track: PortTrack | undefined = this.audioTracks()[index];
+              if (track !== undefined) this.onSelectAudioTrack(track.id);
+            })
+        }
+      }
+      .width('100%')
+
+      Row({ space: 10 }) {
         Text(this.volume === 0 ? $r('app.string.player_mute') : $r('app.string.player_volume'))
           .fontSize(AppTypography.CAPTION)
           .fontColor(PlayerColors.TEXT_SECONDARY)
@@ -127,6 +161,7 @@ export struct PlayerControls {
           .blockColor('#FFFFFF')
           .selectedColor(PlayerColors.PRIMARY_SOFT)
           .trackColor(PlayerColors.TRACK)
+          .enabled(this.canControl())
           .onChange((value: number) => {
             this.onChangeVolume(value);
           })

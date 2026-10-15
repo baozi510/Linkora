@@ -3,7 +3,9 @@ import { fileIo } from '@kit.CoreFileKit';
 import { media } from '@kit.MediaKit';
 import { audio } from '@kit.AudioKit';
 import { MediaSource, MediaSourceKind, PlaybackBackend, PlaybackPortError, PlaybackPortObserver,
-  PlayerBackendCapabilities, PlayerBackendKind, PortBufferingEvent, PortPlaybackState } from 'linkora_core';
+  PlayerBackendCapabilities, PlayerBackendKind, PortAudioInterruption, PortAudioOutputChange,
+  PortBufferingEvent, PortInterruptionHint, PortPlaybackState, PortStreamEnd, PortStreamEndReason,
+  PortTrack, PortTrackKind } from 'linkora_core';
 import { ProgressiveDownloadRegistry, ProgressiveDownloadTask } from './ProgressiveDownloadRegistry';
 
 const INITIALIZATION_TIMEOUT: number = 12000;
@@ -29,6 +31,8 @@ export class SystemPlaybackPort implements PlaybackBackend {
   private nativePreparedNotified: boolean = false;
   private released: boolean = false;
   private releasePromise: Promise<void> | null = null;
+  private tracks: PortTrack[] = [];
+  private trackRequestId: number = 0;
 
   private constructor(player: media.AVPlayer, observer: PlaybackPortObserver) {
     this.player = player;
@@ -119,6 +123,8 @@ export class SystemPlaybackPort implements PlaybackBackend {
         this.failPreparation(SystemPlaybackPort.platformError(error));
       }
       await preparation;
+      // Optional metadata must not delay the prepared/play path.
+      this.refreshTracks().catch(() => {});
     } catch (error) {
       if (error instanceof PlaybackPortError) {
         throw error;
@@ -144,16 +150,49 @@ export class SystemPlaybackPort implements PlaybackBackend {
     }
   }
 
+  async stop(): Promise<void> {
+    try {
+      await this.player.stop();
+    } catch (error) {
+      throw SystemPlaybackPort.platformError(error);
+    }
+  }
+
   seek(position: number): void {
     this.player.seek(position, media.SeekMode.SEEK_CLOSEST);
   }
 
   setPlaybackRate(rate: number): void {
-    this.player.setSpeed(this.playbackSpeed(rate));
+    if (!Number.isFinite(rate) || rate < 0.5 || rate > 2 || this.released) {
+      throw new PlaybackPortError(401, 'Invalid playback rate or released player');
+    }
+    this.player.setPlaybackRate(rate);
   }
 
   setVolume(volume: number): void {
-    this.player.setVolume(volume);
+    if (!Number.isFinite(volume) || this.released) {
+      throw new PlaybackPortError(401, 'Invalid volume or released player');
+    }
+    this.player.setVolume(Math.max(0, Math.min(1, volume)));
+  }
+
+  setLoop(loop: boolean): void {
+    if (this.released) throw new PlaybackPortError(5400104, 'Player released');
+    this.player.loop = loop;
+    this.observer.onLoopChange(this.player.loop);
+  }
+
+  async selectAudioTrack(id: string): Promise<void> {
+    if (this.released || !this.tracks.some((track: PortTrack) =>
+      track.id === id && track.kind === PortTrackKind.AUDIO)) {
+      throw new PlaybackPortError(401, 'Audio track is unavailable');
+    }
+    try {
+      await this.player.selectTrack(Number(id));
+      await this.refreshTracks();
+    } catch (error) {
+      throw SystemPlaybackPort.platformError(error);
+    }
   }
 
   release(): Promise<void> {
@@ -164,6 +203,7 @@ export class SystemPlaybackPort implements PlaybackBackend {
 
   private async releasePlayer(): Promise<void> {
     this.released = true;
+    ++this.trackRequestId;
     const cancelled: PlaybackPortError = new PlaybackPortError(5400104,
       'AVPlayer released during preparation');
     this.failInitialization(cancelled);
@@ -195,6 +235,7 @@ export class SystemPlaybackPort implements PlaybackBackend {
         this.failPreparation(this.lastError ?? new PlaybackPortError(5400104,
           'AVPlayer left preparation without becoming prepared'));
       }
+      if (state === 'stopped') this.observer.onStreamEnd(new PortStreamEnd(PortStreamEndReason.STOP, this.player.loop));
       this.observer.onStateChange(this.portState(state));
     });
     this.player.on('error', (error) => {
@@ -230,13 +271,79 @@ export class SystemPlaybackPort implements PlaybackBackend {
       if (this.released) return;
       this.observer.onVideoSizeChange(width, height);
     });
+    this.player.on('volumeChange', (volume: number) => {
+      if (!this.released) this.observer.onVolumeChange(volume);
+    });
+    this.player.on('playbackRateDone', (rate: number) => {
+      if (!this.released) this.observer.onPlaybackRateChange(rate);
+    });
+    this.player.on('speedDone', (speed: number) => {
+      const rates: number[] = [0.75, 1, 1.25, 1.75, 2, 0.5, 1.5, 3, 0.25, 0.125];
+      if (!this.released && Number.isInteger(speed) && speed >= 0 && speed < rates.length) {
+        this.observer.onPlaybackRateChange(rates[speed]);
+      }
+    });
+    this.player.on('endOfStream', () => {
+      if (!this.released) this.observer.onStreamEnd(new PortStreamEnd(PortStreamEndReason.EOF, this.player.loop));
+    });
+    this.player.on('trackInfoUpdate', (descriptions: media.MediaDescription[]) => {
+      this.refreshTracks(descriptions).catch(() => {});
+    });
+    this.player.on('trackChange', (_index: number, _selected: boolean) => {
+      this.refreshTracks().catch(() => {});
+    });
+    this.player.on('audioOutputDeviceChangeWithInfo', (event: audio.AudioStreamDeviceChangeInfo) => {
+      if (this.released) return;
+      const types: number[] = [];
+      for (const device of event.devices) types.push(device.deviceType);
+      this.observer.onAudioOutputChange(new PortAudioOutputChange(types, event.changeReason));
+    });
     this.player.on('audioInterrupt', (event: audio.InterruptEvent) => {
       if (this.released) return;
+      let hint: PortInterruptionHint = PortInterruptionHint.UNKNOWN;
+      if (event.hintType === audio.InterruptHint.INTERRUPT_HINT_PAUSE) hint = PortInterruptionHint.PAUSE;
+      else if (event.hintType === audio.InterruptHint.INTERRUPT_HINT_STOP) hint = PortInterruptionHint.STOP;
+      else if (event.hintType === audio.InterruptHint.INTERRUPT_HINT_RESUME) hint = PortInterruptionHint.RESUME;
+      else if (event.hintType === audio.InterruptHint.INTERRUPT_HINT_DUCK) hint = PortInterruptionHint.DUCK;
+      else if (event.hintType === audio.InterruptHint.INTERRUPT_HINT_UNDUCK) hint = PortInterruptionHint.UNDUCK;
+      this.observer.onAudioInterruption(new PortAudioInterruption(hint,
+        event.forceType === audio.InterruptForceType.INTERRUPT_FORCE, event.eventType));
       if (event.hintType === audio.InterruptHint.INTERRUPT_HINT_PAUSE ||
         event.hintType === audio.InterruptHint.INTERRUPT_HINT_STOP) {
         this.observer.onInterruptionPause();
       }
     });
+  }
+
+  private async refreshTracks(descriptions?: media.MediaDescription[]): Promise<void> {
+    if (this.released) return;
+    const requestId: number = ++this.trackRequestId;
+    try {
+      const description: media.MediaDescription[] = descriptions ?? await this.player.getTrackDescription();
+      const selected: number[] = await this.player.getSelectedTracks();
+      if (this.released || requestId !== this.trackRequestId) return;
+      const tracks: PortTrack[] = [];
+      for (const item of description) {
+        const index: number = item['track_index'] as number;
+        const type: number = item['track_type'] as number;
+        if (!Number.isInteger(index) || index < 0 || (type !== 0 && type !== 1 && type !== 2)) continue;
+        const kind: PortTrackKind = type === 0 ? PortTrackKind.AUDIO :
+          (type === 1 ? PortTrackKind.VIDEO : PortTrackKind.SUBTITLE);
+        tracks.push(new PortTrack(index.toString(), kind, this.trackText(item, 'codec_mime'),
+          this.trackText(item, 'language'), this.trackText(item, 'track_name'), selected.includes(index)));
+      }
+      this.tracks = tracks;
+      this.observer.onTracksChange(tracks);
+    } catch (error) {
+      if (!this.released && requestId === this.trackRequestId) {
+        this.observer.onWarning('tracks', SystemPlaybackPort.platformError(error));
+      }
+    }
+  }
+
+  private trackText(description: media.MediaDescription, key: string): string {
+    const value: Object = description[key];
+    return typeof value === 'string' ? value : '';
   }
 
   private completeInitialization(): void {
@@ -429,19 +536,6 @@ export class SystemPlaybackPort implements PlaybackBackend {
       fileIo.closeSync(sourceFile.fd);
     } catch (_error) {
     }
-  }
-
-  private playbackSpeed(rate: number): media.PlaybackSpeed {
-    if (rate >= 2) {
-      return media.PlaybackSpeed.SPEED_FORWARD_2_00_X;
-    }
-    if (rate >= 1.5) {
-      return media.PlaybackSpeed.SPEED_FORWARD_1_50_X;
-    }
-    if (rate >= 1.25) {
-      return media.PlaybackSpeed.SPEED_FORWARD_1_25_X;
-    }
-    return media.PlaybackSpeed.SPEED_FORWARD_1_00_X;
   }
 
   private portState(state: media.AVPlayerState): PortPlaybackState {

@@ -83,6 +83,10 @@ export class PlayerFeatureController {
   }
 
   togglePlayback(): void {
+    if (this.state.playback.status === PlaybackStatus.STOPPED && this.surfaceId.length > 0) {
+      this.open(++this.requestId, false).catch(() => {});
+      return;
+    }
     this.engine.togglePlayback().catch(() => {});
   }
 
@@ -131,17 +135,28 @@ export class PlayerFeatureController {
   }
 
   setPlaybackRate(rate: number): void {
+    if (!Number.isFinite(rate)) return;
     const normalized: number = Math.max(0.5, Math.min(rate, 2));
     this.engine.setPlaybackRate(normalized);
-    this.update(this.state.playback, this.state.sliderPosition, this.state.seeking,
-      normalized, this.state.volume, this.state.keepScreenOn);
   }
 
   setVolume(volume: number): void {
+    if (!Number.isFinite(volume)) return;
     const normalized: number = Math.max(0, Math.min(volume, 1));
     this.engine.setVolume(normalized);
-    this.update(this.state.playback, this.state.sliderPosition, this.state.seeking,
-      this.state.playbackRate, normalized, this.state.keepScreenOn);
+  }
+
+  toggleLoop(): void {
+    this.engine.setLoop(!this.state.playback.loop);
+  }
+
+  stopPlayback(): void {
+    this.persistBookmark(this.state.playback, true);
+    this.engine.stop().catch(() => {});
+  }
+
+  selectAudioTrack(id: string): void {
+    this.engine.selectAudioTrack(id).catch(() => {});
   }
 
   handleBackground(): void {
@@ -173,7 +188,7 @@ export class PlayerFeatureController {
     this.engine.release().catch(() => {});
   }
 
-  private async open(requestId: number): Promise<void> {
+  private async open(requestId: number, resumeBookmark: boolean = true): Promise<void> {
     if ((this.source.kind === MediaSourceKind.NETWORK_LINK || this.source.kind === MediaSourceKind.REMOTE_FILE) &&
       this.accessPolicy !== null) {
       const failure: AppFailure | null = await this.accessPolicy.check();
@@ -188,7 +203,7 @@ export class PlayerFeatureController {
         return;
       }
     }
-    const bookmark: PlaybackBookmark | null = this.settings.rememberPlaybackPosition ?
+    const bookmark: PlaybackBookmark | null = this.settings.rememberPlaybackPosition && resumeBookmark ?
       await this.bookmarkRepository.load(this.source) : null;
     if (!this.active || requestId !== this.requestId || this.surfaceId.length === 0) {
       return;
@@ -211,8 +226,8 @@ export class PlayerFeatureController {
     const sliderPosition: number = this.state.seeking ? this.state.sliderPosition : playback.position;
     const keepScreenOn: boolean = this.settings.keepScreenOnDuringPlayback &&
       (playback.status === PlaybackStatus.PLAYING || playback.status === PlaybackStatus.BUFFERING);
-    this.update(playback, sliderPosition, this.state.seeking, this.state.playbackRate,
-      this.state.volume, keepScreenOn);
+    this.update(playback, sliderPosition, this.state.seeking, playback.playbackRate,
+      playback.volume, keepScreenOn);
   }
 
   private persistBookmark(playback: PlaybackSnapshot, force: boolean): void {

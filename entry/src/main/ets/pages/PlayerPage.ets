@@ -357,6 +357,9 @@ export struct PlayerPage {
             onTogglePlayback: () => {
               this.togglePlayback();
             },
+            onStopPlayback: () => { this.controller?.stopPlayback(); },
+            onToggleLoop: () => { this.controller?.toggleLoop(); },
+            onSelectAudioTrack: (id: string) => { this.controller?.selectAudioTrack(id); },
             onChangePlaybackRate: () => {
               this.nextPlaybackRate();
             },
@@ -452,6 +455,9 @@ export struct PlayerPage {
           onTogglePlayback: () => {
             this.togglePlayback();
           },
+          onStopPlayback: () => { this.controller?.stopPlayback(); },
+          onToggleLoop: () => { this.controller?.toggleLoop(); },
+          onSelectAudioTrack: (id: string) => { this.controller?.selectAudioTrack(id); },
           onChangePlaybackRate: () => {
             this.nextPlaybackRate();
           },
