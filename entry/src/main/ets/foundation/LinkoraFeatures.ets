@@ -1,8 +1,10 @@
 import { common } from '@kit.AbilityKit';
+import { deviceInfo } from '@kit.BasicServicesKit';
 import { AppSettings, LibraryFeatureController, LibraryFeatureObserver, MediaSource, NetworkLinkController,
   NetworkLinkObserver, PlaybackEngine, PlaybackEngineFactory, PlaybackObserver,
   PlayerFeatureController, PlayerFeatureObserver, SettingsFeatureController,
-  SettingsFeatureObserver, SourcePluginRegistry, PlayerBrightnessPort } from 'linkora_core';
+  SettingsFeatureObserver, SourcePluginRegistry, PlayerBrightnessPort, PlaybackPlaylist,
+  MediaSourceKind, PlayerBackendPreference } from 'linkora_core';
 import { HarmonyLocalFilePickerGateway } from '../adapters/HarmonyLocalFilePickerGateway';
 import { HarmonyMediaLibraryGateway } from '../adapters/HarmonyMediaLibraryGateway';
 import { HarmonyNetworkProbe } from '../adapters/HarmonyNetworkProbe';
@@ -73,7 +75,11 @@ export class LinkoraFeatures {
   }
 
   static createPlayer(context: common.UIAbilityContext, source: MediaSource,
-    settings: AppSettings, observer: PlayerFeatureObserver): PlayerFeatureController {
+    settings: AppSettings, observer: PlayerFeatureObserver, playlist: PlaybackPlaylist | null = null): PlayerFeatureController {
+    // Network lists remain prepared snapshots until lazy native-source ownership is implemented.
+    const nativePlaylist: PlaybackPlaylist | null = playlist !== null && playlist.items.length > 0 &&
+      playlist.items.every((item) => item.source.kind === MediaSourceKind.LOCAL_DOCUMENT && item.source.progressiveKey.length === 0) &&
+      (deviceInfo.sdkApiVersion >= 26 || settings.playerBackendPreference === PlayerBackendPreference.MPV) ? playlist : null;
     const engineFactory: PlaybackEngineFactory = (playbackObserver: PlaybackObserver) =>
       new PlaybackEngine(playbackObserver, async (portObserver) =>
         createPlaybackPort(context, LinkoraFeatures.sharedMediaProxy(), portObserver,
@@ -84,7 +90,8 @@ export class LinkoraFeatures {
       new PlaybackBookmarkStore(context),
       settings,
       observer,
-      new HarmonyNetworkAccessPolicy(settings)
+      new HarmonyNetworkAccessPolicy(settings),
+      nativePlaylist
     );
   }
 

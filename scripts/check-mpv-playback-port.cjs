@@ -37,8 +37,10 @@ function fixture() {
         getPropertyString: name => this.properties.get(name),
         addEventObserver: observer => { this.events = observer; },
         removeEventObserver() {}, attachSurface() {}, detachSurface() {}, setProperty: (name, value) => this.properties.set(name, value) };
+      this.native.observeProperty = () => {};
     }
-    open() {}
+    open(media, play) { this.opened = media; this.autoPlay = play; }
+    jump(index) { this.requestedIndex = index; }
     play() { this.playCalls++; }
     pause() { this.pauseCalls++; }
     stop() { this.stopped = true; }
@@ -70,8 +72,9 @@ function fixture() {
       clearTimeout(id) { timers.delete(id); }
     }, { filename: file })(name => {
       if (name.startsWith('.')) return load(path.relative(root, path.resolve(path.dirname(file), name + '.ets')));
-      if (name === '@mpv-ohos/mpv-arkts') return { Player, Media: class {}, MpvEvent: events,
-        PlaylistMode: { None: 0, File: 1, Playlist: 2, Random: 3 } };
+      if (name === '@mpv-ohos/mpv-arkts') return { Player, Media: class { constructor(uri) { this.uri = uri; } },
+        Playlist: class { constructor(medias, index) { this.medias = medias; this.index = index; } }, MpvEvent: events,
+        PlaylistMode: { None: 0, File: 1, Playlist: 2, Random: 3 }, MpvFormat: { MPV_FORMAT_FLAG: 3 } };
       if (name === 'linkora_core') return core;
       throw new Error(`Unexpected adapter dependency: ${name}`);
     }, module, module.exports);
@@ -79,6 +82,7 @@ function fixture() {
   }
   const core = Object.assign({},
     load('linkora_core/src/main/ets/models/MediaSource.ets'),
+    load('linkora_core/src/main/ets/models/PlaybackPlaylist.ets'),
     load('linkora_core/src/main/ets/playback/PlaybackPort.ets'),
     load('linkora_core/src/main/ets/playback/PlaybackBackend.ets'));
   const { MpvPlaybackPort } = load('entry/src/main/ets/playback/MpvPlaybackPort.ets');
@@ -86,9 +90,9 @@ function fixture() {
   const observer = new core.PlaybackPortObserver(state => states.push(state), error => errors.push(error),
     () => {}, () => {}, () => {}, () => {}, () => {}, () => {});
   return {
-    async create() {
+    async create(playlist = null) {
       const port = await MpvPlaybackPort.create(observer);
-      port.configure(core.MediaSource.fromLocalDocument('file://fixture.mp4'), 'surface');
+      port.configure(playlist?.currentItem().source ?? core.MediaSource.fromLocalDocument('file://fixture.mp4'), 'surface', playlist);
       return port;
     },
     get player() { return player; }, states, errors, core, timers, observer,
@@ -96,6 +100,41 @@ function fixture() {
     timeout() { assert.equal(timers.size, 1); [...timers.values()][0](); }
   };
 }
+
+test('MPV opens the native ordered list and reports only native playing-position changes', async () => {
+  const f = fixture(), c = f.core, indices = [];
+  const items = ['a', 'b', 'c'].map(id => new c.PlaybackPlaylistItem(id, c.MediaSource.fromLocalDocument('file://' + id + '.mp4')));
+  const port = await f.create(new c.PlaybackPlaylist(items, 1, true));
+  f.observer.onPlaylistIndexChange = value => indices.push(value);
+  const prepared = port.prepare();
+  assert.equal(f.player.opened.index, 1);
+  assert.deepEqual(Array.from(f.player.opened.medias, item => item.uri), ['file://a.mp4', 'file://b.mp4', 'file://c.mp4']);
+  assert.deepEqual(indices, []);
+  port.onPropertyChanged('playlist-playing-pos', 1);
+  f.loaded(); await prepared;
+  await port.selectPlaylistItem(2);
+  assert.equal(f.player.requestedIndex, 2);
+  assert.deepEqual(indices, [1]);
+  port.onPropertyChanged('playlist-playing-pos', 2);
+  assert.deepEqual(indices, [1, 2]);
+  await assert.rejects(port.selectPlaylistItem(3));
+  await port.release();
+  port.onPropertyChanged('playlist-playing-pos', 0);
+  assert.deepEqual(indices, [1, 2]);
+});
+
+test('MPV exhausted failed queued item cannot remain in a permanent handoff state', async () => {
+  const f = fixture(), c = f.core;
+  const items = ['good', 'missing'].map(id => new c.PlaybackPlaylistItem(id, c.MediaSource.fromLocalDocument('file://' + id + '.mp4')));
+  const port = await f.create(new c.PlaybackPlaylist(items, 0, true));
+  const prepared = port.prepare(); f.loaded(); await prepared;
+  port.onPropertyChanged('playlist-playing-pos', 1);
+  f.player.events.onEvent(7, 'end-file');
+  assert.equal(f.errors.length, 0, 'a handoff alone is not a terminal failure');
+  port.onPropertyChanged('idle-active', true);
+  assert.equal(f.errors.length, 1, 'native idle without FILE_LOADED must leave the handoff');
+  await port.release();
+});
 
 test('error log before FILE_LOADED leaves prepare pending', async () => {
   const f = fixture(), port = await f.create();

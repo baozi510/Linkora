@@ -1,11 +1,11 @@
-import { BusinessError } from '@kit.BasicServicesKit';
+import { BusinessError, deviceInfo } from '@kit.BasicServicesKit';
 import { fileIo } from '@kit.CoreFileKit';
 import { media } from '@kit.MediaKit';
 import { audio } from '@kit.AudioKit';
 import { MediaSource, MediaSourceKind, PlaybackBackend, PlaybackPortError, PlaybackPortObserver,
   PlayerBackendCapabilities, PlayerBackendKind, PortAudioInterruption, PortAudioOutputChange,
   PortBufferingEvent, PortInterruptionHint, PortPlaybackState, PortStreamEnd, PortStreamEndReason,
-  PortTrack, PortTrackKind, VideoDisplayMode } from 'linkora_core';
+  PortTrack, PortTrackKind, VideoDisplayMode, PlaybackPlaylist } from 'linkora_core';
 import { ProgressiveDownloadRegistry, ProgressiveDownloadTask } from './ProgressiveDownloadRegistry';
 
 const INITIALIZATION_TIMEOUT: number = 12000;
@@ -33,6 +33,14 @@ export class SystemPlaybackPort implements PlaybackBackend {
   private releasePromise: Promise<void> | null = null;
   private tracks: PortTrack[] = [];
   private trackRequestId: number = 0;
+  private playlist: PlaybackPlaylist | null = null;
+  private playlistIds: string[] = [];
+  private playlistFiles: fileIo.File[] = [];
+  private pendingContentId: string = '';
+  private reportedContentId: string = '';
+  private playlistReady: boolean = false;
+  private initialSelectionId: string = '';
+  private loopRequestId: number = 0;
 
   private constructor(player: media.AVPlayer, observer: PlaybackPortObserver) {
     this.player = player;
@@ -65,9 +73,21 @@ export class SystemPlaybackPort implements PlaybackBackend {
     return new PlayerBackendCapabilities(true, true, true, false, false, false, false, false, false, false);
   }
 
-  configure(source: MediaSource, surfaceId: string): void {
+  configure(source: MediaSource, surfaceId: string, playlist: PlaybackPlaylist | null = null): void {
     try {
       this.pendingSurfaceId = surfaceId;
+      if (playlist !== null) {
+        if (deviceInfo.sdkApiVersion < 26 || playlist.items.length === 0) {
+          throw new PlaybackPortError(801, 'Native System playlists require API26 and a nonempty list');
+        }
+        this.playlist = playlist;
+        this.player.onPlaybackContentChanged((id: string) => {
+          if (this.released) return;
+          this.pendingContentId = id;
+          this.notifyPlaylistIndex();
+        });
+        return;
+      }
       this.startInitializationTimeout();
       if (source.kind === MediaSourceKind.NETWORK_LINK) {
         this.player.url = source.locator;
@@ -93,6 +113,7 @@ export class SystemPlaybackPort implements PlaybackBackend {
 
   async prepare(): Promise<void> {
     try {
+      if (this.playlist !== null) await this.preparePlaylist(this.playlist);
       await this.initializationPromise;
       if (this.released) {
         throw new PlaybackPortError(5400104, 'AVPlayer released before preparation');
@@ -123,6 +144,12 @@ export class SystemPlaybackPort implements PlaybackBackend {
         this.failPreparation(SystemPlaybackPort.platformError(error));
       }
       await preparation;
+      if (this.playlist !== null) {
+        await this.selectInitialPlaylistItem(this.playlist.startIndex);
+        this.playlistReady = true;
+        this.pendingContentId = this.player.getCurrentMediaSource()?.getID() ?? this.pendingContentId;
+        this.notifyPlaylistIndex();
+      }
       // Optional metadata must not delay the prepared/play path.
       this.refreshTracks().catch(() => {});
     } catch (error) {
@@ -136,6 +163,10 @@ export class SystemPlaybackPort implements PlaybackBackend {
 
   async play(): Promise<void> {
     try {
+      if (this.player.state === 'playing') {
+        this.observer.onStateChange(PortPlaybackState.PLAYING);
+        return;
+      }
       await this.player.play();
     } catch (error) {
       throw SystemPlaybackPort.platformError(error);
@@ -147,6 +178,80 @@ export class SystemPlaybackPort implements PlaybackBackend {
       await this.player.pause();
     } catch (error) {
       throw SystemPlaybackPort.platformError(error);
+    }
+  }
+
+  async selectPlaylistItem(index: number): Promise<void> {
+    if (this.released || !this.playlistReady || !Number.isInteger(index) ||
+      index < 0 || index >= this.playlistIds.length) {
+      throw new PlaybackPortError(401, 'Unavailable playlist item');
+    }
+    try {
+      await this.player.advanceToMediaSource(this.playlistIds[index]);
+    } catch (error) {
+      throw SystemPlaybackPort.platformError(error);
+    }
+  }
+
+  private async preparePlaylist(playlist: PlaybackPlaylist): Promise<void> {
+    const items = playlist.items;
+    this.playlistIds = new Array<string>(items.length).fill('');
+    this.startInitializationTimeout();
+    this.player.playlistLoopMode = media.PlaylistLoopMode.PLAYLIST_LOOP_MODE_NONE;
+    for (let index: number = 0; index < items.length; index++) {
+      if (this.released) throw new PlaybackPortError(5400104, 'Playlist preparation cancelled');
+      const source = items[index].source;
+      let nativeSource: media.MediaSource;
+      if (source.kind === MediaSourceKind.NETWORK_LINK) {
+        nativeSource = media.createMediaSourceWithUrl(source.locator);
+      } else if (source.kind === MediaSourceKind.LOCAL_DOCUMENT && source.progressiveKey.length === 0) {
+        const file = fileIo.openSync(source.locator, fileIo.OpenMode.READ_ONLY);
+        this.playlistFiles.push(file);
+        const size: number = fileIo.statSync(file.fd).size;
+        const value = media.createMediaSourceWithFd({ fd: file.fd, offset: 0, length: size });
+        if (size <= 0 || value === undefined) throw new PlaybackPortError(5400103, 'Invalid playlist file');
+        nativeSource = value;
+      } else {
+        throw new PlaybackPortError(801, 'Playlist source must be resolved before native preparation');
+      }
+      this.playlistIds[index] = await this.player.addPlaybackMediaSource(nativeSource);
+    }
+    if (this.released) throw new PlaybackPortError(5400104, 'Playlist preparation cancelled');
+  }
+
+  private async selectInitialPlaylistItem(index: number): Promise<void> {
+    const id: string = this.playlistIds[index];
+    if (this.player.getCurrentMediaSource()?.getID() === id) return;
+    // API26 prepare selects the first native item. Move to the clicked ID
+    // before the engine's play/seek path, waiting for real native readiness.
+    this.initialSelectionId = id;
+    this.nativePrepareCompleted = false;
+    this.nativePreparedNotified = false;
+    const waiting: Promise<void> = new Promise<void>((resolve, reject) => {
+      this.resolvePreparation = resolve;
+      this.rejectPreparation = reject;
+    });
+    this.startPreparationTimeout();
+    Promise.resolve().then(() => this.player.advanceToMediaSource(id)).then(() => {
+      this.nativePrepareCompleted = true;
+      this.completePreparation();
+    }, (error: Object) => this.failPreparation(SystemPlaybackPort.platformError(error)));
+    try { await waiting; } finally { this.initialSelectionId = ''; }
+  }
+
+  private notifyPlaylistIndex(): void {
+    if (this.initialSelectionId.length > 0) this.completePreparation();
+    if (!this.playlistReady || this.released || this.pendingContentId === this.reportedContentId) return;
+    const index: number = this.playlistIds.indexOf(this.pendingContentId);
+    if (index < 0) return;
+    this.reportedContentId = this.pendingContentId;
+    ++this.trackRequestId;
+    this.tracks = [];
+    this.observer.onPlaylistIndexChange(index);
+    this.observer.onDurationChange(Math.max(0, this.player.duration));
+    this.observer.onStateChange(this.portState(this.player.state));
+    if (this.player.state === 'playing' || this.player.state === 'paused' || this.player.state === 'prepared') {
+      this.refreshTracks().catch(() => {});
     }
   }
 
@@ -178,8 +283,22 @@ export class SystemPlaybackPort implements PlaybackBackend {
 
   setLoop(loop: boolean): void {
     if (this.released) throw new PlaybackPortError(5400104, 'Player released');
-    this.player.loop = loop;
-    this.observer.onLoopChange(this.player.loop);
+    if (this.playlist !== null) {
+      const requestId: number = ++this.loopRequestId;
+      this.player.playlistLoopMode = loop ? media.PlaylistLoopMode.PLAYLIST_LOOP_MODE_ONE :
+        media.PlaylistLoopMode.PLAYLIST_LOOP_MODE_NONE;
+      // This read-only native task is queued after the asynchronous mode setter.
+      this.player.getTrackDescription().then(() => {
+        if (!this.released && requestId === this.loopRequestId) this.observer.onLoopChange(this.isLooping());
+      }).catch((error: Object) => {
+        if (!this.released && requestId === this.loopRequestId) {
+          this.observer.onWarning('loop', SystemPlaybackPort.platformError(error));
+        }
+      });
+    } else {
+      this.player.loop = loop;
+      this.observer.onLoopChange(this.player.loop);
+    }
   }
 
   setDisplayMode(mode: VideoDisplayMode): void {
@@ -236,6 +355,10 @@ export class SystemPlaybackPort implements PlaybackBackend {
       this.clearInitializationTimeout();
       this.clearPreparationTimeout();
       this.closeSourceFile();
+      for (const file of this.playlistFiles) {
+        try { fileIo.closeSync(file.fd); } catch (_error) {}
+      }
+      this.playlistFiles = [];
       this.progressiveTask = null;
       this.progressiveCursor = 0;
     }
@@ -253,7 +376,8 @@ export class SystemPlaybackPort implements PlaybackBackend {
         this.failPreparation(this.lastError ?? new PlaybackPortError(5400104,
           'AVPlayer left preparation without becoming prepared'));
       }
-      if (state === 'stopped') this.observer.onStreamEnd(new PortStreamEnd(PortStreamEndReason.STOP, this.player.loop));
+      if (state === 'stopped') this.observer.onStreamEnd(new PortStreamEnd(PortStreamEndReason.STOP, this.isLooping()));
+      if (this.initialSelectionId.length > 0) this.completePreparation();
       this.observer.onStateChange(this.portState(state));
     });
     this.player.on('error', (error) => {
@@ -302,7 +426,7 @@ export class SystemPlaybackPort implements PlaybackBackend {
       }
     });
     this.player.on('endOfStream', () => {
-      if (!this.released) this.observer.onStreamEnd(new PortStreamEnd(PortStreamEndReason.EOF, this.player.loop));
+      if (!this.released) this.observer.onStreamEnd(new PortStreamEnd(PortStreamEndReason.EOF, this.isLooping()));
     });
     this.player.on('trackInfoUpdate', (descriptions: media.MediaDescription[]) => {
       this.refreshTracks(descriptions).catch(() => {});
@@ -331,6 +455,11 @@ export class SystemPlaybackPort implements PlaybackBackend {
         this.observer.onInterruptionPause();
       }
     });
+  }
+
+  private isLooping(): boolean {
+    return this.playlist !== null ?
+      this.player.playlistLoopMode === media.PlaylistLoopMode.PLAYLIST_LOOP_MODE_ONE : this.player.loop;
   }
 
   private async refreshTracks(descriptions?: media.MediaDescription[]): Promise<void> {
@@ -387,8 +516,13 @@ export class SystemPlaybackPort implements PlaybackBackend {
   }
 
   private completePreparation(): void {
-    if (this.released || !this.nativePrepareCompleted || !this.nativePreparedNotified ||
-      this.player.state !== 'prepared') {
+    const selecting: boolean = this.initialSelectionId.length > 0;
+    const ready: boolean = selecting ? this.pendingContentId === this.initialSelectionId &&
+      (this.player.state === 'playing' || this.player.state === 'paused' ||
+        (this.nativePreparedNotified && this.player.state === 'prepared')) &&
+      this.player.getCurrentMediaSource()?.getID() === this.initialSelectionId :
+      this.nativePreparedNotified && this.player.state === 'prepared';
+    if (this.released || !this.nativePrepareCompleted || !ready) {
       return;
     }
     const resolve: (() => void) | null = this.resolvePreparation;

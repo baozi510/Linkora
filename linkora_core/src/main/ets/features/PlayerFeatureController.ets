@@ -1,5 +1,6 @@
 import { PlaybackBookmarkRepository } from '../contracts/FeaturePorts';
 import { MediaSource } from '../models/MediaSource';
+import { PlaybackPlaylist } from '../models/PlaybackPlaylist';
 import { PlaybackBookmark } from '../models/PlaybackBookmark';
 import { AppSettings } from '../models/AppSettings';
 import { PlaybackEngine } from '../playback/PlaybackEngine';
@@ -44,11 +45,14 @@ export class PlayerFeatureController {
   private surfaceId: string = '';
   private requestId: number = 0;
   private lastSavedPosition: number = 0;
+  private readonly playlist: PlaybackPlaylist | null;
 
   constructor(source: MediaSource, engineFactory: PlaybackEngineFactory,
     bookmarkRepository: PlaybackBookmarkRepository, settings: AppSettings,
-    observer: PlayerFeatureObserver, accessPolicy: NetworkAccessPolicyPort | null = null) {
+    observer: PlayerFeatureObserver, accessPolicy: NetworkAccessPolicyPort | null = null,
+    playlist: PlaybackPlaylist | null = null) {
     this.source = source;
+    this.playlist = playlist;
     this.bookmarkRepository = bookmarkRepository;
     this.settings = settings;
     this.accessPolicy = accessPolicy;
@@ -151,6 +155,20 @@ export class PlayerFeatureController {
     this.engine.setLoop(!this.state.playback.loop);
   }
 
+  nextPlaylistItem(): void {
+    this.selectPlaylistItem(this.state.playback.playlistIndex + 1);
+  }
+
+  previousPlaylistItem(): void {
+    this.selectPlaylistItem(this.state.playback.playlistIndex - 1);
+  }
+
+  selectPlaylistItem(index: number): void {
+    if (this.active && this.state.playback.playlistIndex >= 0) {
+      this.engine.selectPlaylistItem(index).catch(() => {});
+    }
+  }
+
   cycleDisplayMode(): void {
     const mode: VideoDisplayMode | null = this.state.playback.displayMode;
     this.engine.setDisplayMode(mode === VideoDisplayMode.FIT ? VideoDisplayMode.CROP :
@@ -217,12 +235,22 @@ export class PlayerFeatureController {
     }
     const resumePosition: number = bookmark === null ? 0 : bookmark.resumePosition();
     this.lastSavedPosition = resumePosition;
-    await this.engine.open(this.source, this.surfaceId, resumePosition);
+    const index: number = this.state.playback.playlistIndex;
+    const playlist: PlaybackPlaylist | null = this.playlist === null ? null :
+      new PlaybackPlaylist(this.playlist.items, index >= 0 ? index : this.playlist.startIndex, this.playlist.complete);
+    await this.engine.open(this.source, this.surfaceId, resumePosition, playlist);
   }
 
   private applyPlayback(playback: PlaybackSnapshot): void {
     if (!this.active) {
       return;
+    }
+    const changed: boolean = this.playlist !== null && playback.playlistIndex >= 0 &&
+      playback.playlistIndex !== this.state.playback.playlistIndex;
+    if (changed && this.playlist !== null) {
+      this.persistBookmark(this.state.playback, true);
+      this.source = this.playlist.items[playback.playlistIndex].source;
+      this.lastSavedPosition = 0;
     }
     if (playback.status === PlaybackStatus.COMPLETED) {
       this.bookmarkRepository.clear(this.source).catch(() => {});
@@ -230,10 +258,11 @@ export class PlayerFeatureController {
     } else {
       this.persistBookmark(playback, false);
     }
-    const sliderPosition: number = this.state.seeking ? this.state.sliderPosition : playback.position;
+    const seeking: boolean = this.state.seeking && !changed;
+    const sliderPosition: number = seeking ? this.state.sliderPosition : playback.position;
     const keepScreenOn: boolean = this.settings.keepScreenOnDuringPlayback &&
       (playback.status === PlaybackStatus.PLAYING || playback.status === PlaybackStatus.BUFFERING);
-    this.update(playback, sliderPosition, this.state.seeking, playback.playbackRate,
+    this.update(playback, sliderPosition, seeking, playback.playbackRate,
       playback.volume, keepScreenOn);
   }
 

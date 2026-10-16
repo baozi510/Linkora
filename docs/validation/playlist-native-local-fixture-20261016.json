@@ -1,0 +1,78 @@
+{
+  "directories": [
+    ".",
+    "tv",
+    "tv/Season-01",
+    "movie",
+    "empty"
+  ],
+  "files": [
+    {
+      "path": "movie/movie-01.mp4",
+      "bytes": 7201,
+      "sha256": "4a48f2c04a6b5bb448d42c819ae97d8341b59a6b4f5d2835fa66621791f39d21"
+    },
+    {
+      "path": "movie/readme.txt",
+      "bytes": 36,
+      "sha256": "37ae8883af5f348df4c8750be60cf1e1d238918a55cfbe194169e2e21d11e462"
+    },
+    {
+      "path": "note.txt",
+      "bytes": 55,
+      "sha256": "638098fb40ddb30e7f17b5053ecdc506b0609186a915c6654a6cf0b86f863981"
+    },
+    {
+      "path": "photo.png",
+      "bytes": 2253726,
+      "sha256": "d3b1d8df561cbc5137ef7474585f5eafe49ef62096e5c9d3d0050760e1452182"
+    },
+    {
+      "path": "root-01.mp4",
+      "bytes": 7201,
+      "sha256": "8a61bcc8648eb599dacb970aaa7f3184ff7ab6898fb11f41e2cce478592163ad"
+    },
+    {
+      "path": "root-02.mp4",
+      "bytes": 7201,
+      "sha256": "e97b87e90727fa4a985aad222aa60c9f5788ba60e5d1af9175bbf54f7a7c7500"
+    },
+    {
+      "path": "tv/episode-01.mp4",
+      "bytes": 7201,
+      "sha256": "e97b87e90727fa4a985aad222aa60c9f5788ba60e5d1af9175bbf54f7a7c7500"
+    },
+    {
+      "path": "tv/Season-01/episode-01.mp4",
+      "bytes": 7201,
+      "sha256": "4a48f2c04a6b5bb448d42c819ae97d8341b59a6b4f5d2835fa66621791f39d21"
+    },
+    {
+      "path": "tv/Season-01/episode-02.mp4",
+      "bytes": 7201,
+      "sha256": "8a61bcc8648eb599dacb970aaa7f3184ff7ab6898fb11f41e2cce478592163ad"
+    }
+  ],
+  "fixture": "native-local-playlist-nested-20261016",
+  "physical_device_empty_directory": "NOT_CREATED_HDC_OMITS_EMPTY_SHELL_MKDIR_DENIED",
+  "application_empty_folder": "CREATED_AND_VERIFIED",
+  "application_folders_are_virtual": true,
+  "video": {
+    "container": "mp4",
+    "codec": "H264",
+    "pixelFormat": "yuv420p",
+    "width": 640,
+    "height": 360,
+    "fps": 24,
+    "durationSeconds": 12,
+    "audio": false
+  },
+  "direct_video_counts": {
+    "root": 2,
+    "tv": 1,
+    "tv/Season-01": 2,
+    "movie": 1
+  },
+  "device_roundtrip_hashes": "9_OF_9_MATCH",
+  "application_import": "ACTUAL_DOCUMENT_VIEW_PICKER"
+}

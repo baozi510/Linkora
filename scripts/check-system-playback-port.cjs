@@ -8,7 +8,8 @@ const ts = require(path.join(studio, 'sdk/default/openharmony/ets/build-tools/et
 const root = path.resolve(__dirname, '..');
 function fixture() {
   const cache = new Map(), listeners = new Map(), timers = new Map(), states = [], positions = [];
-  let timerId = 0, observer;
+  let timerId = 0, observer, nextFd = 10, currentId = '';
+  const closedFiles = [], queue = [];
   const receiver = { closes: 0, getReceivingSurfaceId: async () => 'surface',
     release: async () => { receiver.closes++; } };
   const player = {
@@ -19,7 +20,20 @@ function fixture() {
       listeners.get(name)(...args);
     },
     set url(value) { this.source = value; this.emit('stateChange', 'initialized'); },
-    prepare: async () => player.emit('stateChange', 'prepared'),
+    onPlaybackContentChanged(callback) { this.contentChanged = callback; },
+    async addPlaybackMediaSource(source, before) {
+      const id = 'native-' + source.fdSrc.fd;
+      const index = before === undefined ? queue.length : queue.findIndex(item => item.id === before);
+      queue.splice(index, 0, { id, source });
+      if (queue.length === 1) { currentId = id; this.emit('stateChange', 'initialized'); this.contentChanged(id); }
+      return id;
+    },
+    getCurrentMediaSource() { return { getID: () => currentId }; },
+    async advanceToMediaSource(id) {
+      this.requestedId = id; currentId = id;
+      if (!this.deferAdvanceEvents) { this.contentChanged(id); this.emit('stateChange', 'prepared'); }
+    },
+    prepare: async () => { if (queue.length) currentId = queue[0].id; player.emit('stateChange', 'prepared'); },
     play: async () => player.emit('stateChange', 'playing'),
     pause: async () => player.emit('stateChange', 'paused'),
     stop: async () => player.emit('stateChange', 'stopped'),
@@ -42,8 +56,12 @@ function fixture() {
       clearTimeout: id => timers.delete(id)
     }, { filename: file })(name => {
       if (name === 'linkora_core') return core;
-      if (name === '@kit.MediaKit') return { media: { createAVPlayer: async () => player, SeekMode: { SEEK_CLOSEST: 0 }, VideoScaleType: { VIDEO_SCALE_TYPE_FIT: 0, VIDEO_SCALE_TYPE_FIT_CROP: 1, VIDEO_SCALE_TYPE_SCALED_ASPECT: 2 } } };
-      if (name === '@kit.CoreFileKit') return { fileIo: {} };
+      if (name === '@kit.MediaKit') return { media: { createAVPlayer: async () => player,
+        createMediaSourceWithFd: fdSrc => ({ fdSrc }), PlaylistLoopMode: { PLAYLIST_LOOP_MODE_NONE: 4, PLAYLIST_LOOP_MODE_ONE: 2 },
+        SeekMode: { SEEK_CLOSEST: 0 }, VideoScaleType: { VIDEO_SCALE_TYPE_FIT: 0, VIDEO_SCALE_TYPE_FIT_CROP: 1, VIDEO_SCALE_TYPE_SCALED_ASPECT: 2 } } };
+      if (name === '@kit.BasicServicesKit') return { deviceInfo: { sdkApiVersion: 26 } };
+      if (name === '@kit.CoreFileKit') return { fileIo: { OpenMode: { READ_ONLY: 0 },
+        openSync: uri => ({ fd: ++nextFd, uri }), statSync: () => ({ size: 3000 }), closeSync: fd => closedFiles.push(fd) } };
       if (name === '@kit.AudioKit') return { audio: { InterruptHint: {
         INTERRUPT_HINT_PAUSE: 2, INTERRUPT_HINT_STOP: 3, INTERRUPT_HINT_RESUME: 1,
         INTERRUPT_HINT_DUCK: 4, INTERRUPT_HINT_UNDUCK: 5 }, InterruptForceType: { INTERRUPT_FORCE: 0 } } };
@@ -56,19 +74,157 @@ function fixture() {
     }, module, module.exports);
     return module.exports;
   }
-  const core = Object.assign({}, ...['models/MediaSource', 'models/MediaLink', 'playback/PlaybackPort', 'playback/PlaybackBackend']
+  const core = Object.assign({}, ...['models/MediaSource', 'models/MediaLink', 'models/PlaybackPlaylist', 'playback/PlaybackPort', 'playback/PlaybackBackend']
     .map(name => load('linkora_core/src/main/ets/' + name + '.ets')));
   const { SystemPlaybackPort } = load('entry/src/main/ets/playback/SystemPlaybackPort.ets');
-  return { player, receiver, states, positions, timers, get observer() { return observer; },
+  return { player, receiver, states, positions, timers, core, queue, closedFiles, get observer() { return observer; },
     hlsHarness: () => load('entry/src/simulator/ets/diagnostics/MediaFunctionSmoke.ets').MediaFunctionSmoke,
-    async create() {
+    async create(playlist = null) {
     observer = new core.PlaybackPortObserver(value => states.push(value), () => {}, () => {},
       value => positions.push(value), () => {}, () => {}, () => {}, () => {});
     const port = await SystemPlaybackPort.create(observer);
-    port.configure(new core.MediaSource(core.MediaSourceKind.NETWORK_LINK, 'http://fixture/video.mp4', 'video.mp4', '', 'mp4'), 'surface');
+    port.configure(playlist?.currentItem().source ?? new core.MediaSource(core.MediaSourceKind.NETWORK_LINK, 'http://fixture/video.mp4', 'video.mp4', '', 'mp4'), 'surface', playlist);
     return port;
   } };
 }
+
+test('System native queue preserves source order and selected start, uses real IDs and closes every FD', async () => {
+  const f = fixture(), c = f.core, changes = [];
+  const items = ['a', 'b', 'c'].map(id => new c.PlaybackPlaylistItem(id, c.MediaSource.fromLocalDocument('file://' + id + '.mp4')));
+  const port = await f.create(new c.PlaybackPlaylist(items, 1, true));
+  f.observer.onPlaylistIndexChange = index => changes.push(index);
+  await port.prepare();
+  assert.equal(f.queue.length, 3);
+  assert.deepEqual(f.queue.map(item => item.source.fdSrc.fd), [11, 12, 13]);
+  assert.deepEqual(changes, [1]);
+  assert.equal(f.player.playlistLoopMode, 4);
+  f.player.advanceToMediaSource = async id => { f.player.requestedId = id; };
+  await port.selectPlaylistItem(2);
+  assert.equal(f.player.requestedId, f.queue[2].id);
+  assert.deepEqual(changes, [1], 'a request is not a native acknowledgement');
+  f.player.state = 'playing';
+  const stateCount = f.states.length;
+  f.player.contentChanged(f.queue[2].id);
+  assert.deepEqual(changes, [1, 2]);
+  assert.deepEqual(f.states.slice(stateCount), ['playing'], 'a seamless change must restore actual native playback state');
+  await assert.rejects(port.selectPlaylistItem(-1));
+  await assert.rejects(port.selectPlaylistItem(3));
+  port.setLoop(true); assert.equal(f.player.playlistLoopMode, 2);
+  await port.release();
+  assert.deepEqual(f.closedFiles.sort(), [11, 12, 13]);
+  f.player.contentChanged(f.queue[0].id);
+  assert.deepEqual(changes, [1, 2]);
+});
+
+test('System failed native append closes all files already owned by that queue', async () => {
+  const f = fixture(), c = f.core;
+  const items = ['a', 'b'].map(id => new c.PlaybackPlaylistItem(id, c.MediaSource.fromLocalDocument('file://' + id + '.mp4')));
+  const port = await f.create(new c.PlaybackPlaylist(items, 0, true));
+  const add = f.player.addPlaybackMediaSource.bind(f.player);
+  let calls = 0;
+  f.player.addPlaybackMediaSource = async (...args) => {
+    if (++calls === 2) throw { code: 5400103, message: 'Unavailable file' };
+    return add(...args);
+  };
+  const preparing = port.prepare();
+  await new Promise(setImmediate);
+  for (const [id, timer] of f.timers) {
+    if (timer.ms === 80) { f.timers.delete(id); timer.callback(); }
+  }
+  await assert.rejects(preparing);
+  await port.release();
+  assert.deepEqual(f.closedFiles.sort(), [11, 12]);
+});
+
+test('System confirms initial current source with the native query when no initial change event arrives', async () => {
+  const f = fixture(), c = f.core, changes = [];
+  f.player.onPlaybackContentChanged = () => { f.player.contentChanged = () => {}; };
+  const items = ['a', 'b'].map(id => new c.PlaybackPlaylistItem(id, c.MediaSource.fromLocalDocument('file://' + id + '.mp4')));
+  const port = await f.create(new c.PlaybackPlaylist(items, 0, true));
+  f.observer.onPlaylistIndexChange = value => changes.push(value);
+  await port.prepare();
+  assert.deepEqual(changes, [0]);
+  await port.release();
+});
+
+test('System selected-start barrier cannot treat the old prepared state as readiness of the new source', async () => {
+  const f = fixture(), c = f.core;
+  f.player.deferAdvanceEvents = true;
+  const items = ['a', 'b'].map(id => new c.PlaybackPlaylistItem(id, c.MediaSource.fromLocalDocument('file://' + id + '.mp4')));
+  const port = await f.create(new c.PlaybackPlaylist(items, 1, true));
+  let settled = false;
+  const preparing = port.prepare().then(() => { settled = true; });
+  await new Promise(setImmediate);
+  assert.equal(settled, false);
+  f.player.contentChanged(f.player.requestedId);
+  await new Promise(setImmediate);
+  assert.equal(settled, false, 'content ID alone does not confirm that the new source prepared');
+  f.player.emit('stateChange', 'prepared');
+  await preparing;
+  await port.release();
+});
+
+test('System queue repeat reads back after the queued native setter, not its old value', async () => {
+  const f = fixture(), c = f.core, loops = [];
+  const item = new c.PlaybackPlaylistItem('a', c.MediaSource.fromLocalDocument('file://a.mp4'));
+  const port = await f.create(new c.PlaybackPlaylist([item], 0, true));
+  await port.prepare();
+  let applied = 4, pending = 4;
+  Object.defineProperty(f.player, 'playlistLoopMode', { get: () => applied, set: value => { pending = value; } });
+  f.player.getTrackDescription = async () => { applied = pending; return []; };
+  f.observer.onLoopChange = value => loops.push(value);
+  port.setLoop(true);
+  assert.deepEqual(loops, []);
+  await new Promise(setImmediate);
+  assert.deepEqual(loops, [true]);
+  await port.release();
+});
+
+test('System release rejects the pending initial selected-source barrier and closes its descriptors', async () => {
+  const f = fixture(), c = f.core;
+  f.player.deferAdvanceEvents = true;
+  const items = ['a', 'b'].map(id => new c.PlaybackPlaylistItem(id, c.MediaSource.fromLocalDocument('file://' + id + '.mp4')));
+  const port = await f.create(new c.PlaybackPlaylist(items, 1, true));
+  const preparing = port.prepare(), rejected = assert.rejects(preparing);
+  await new Promise(setImmediate);
+  await port.release(); await rejected;
+  assert.deepEqual(f.closedFiles.sort(), [11, 12]);
+  assert.equal(f.timers.size, 0);
+});
+
+test('System loop readback ignores superseded and released native queries', async () => {
+  const f = fixture(), c = f.core, loops = [], finish = [];
+  const item = new c.PlaybackPlaylistItem('a', c.MediaSource.fromLocalDocument('file://a.mp4'));
+  const port = await f.create(new c.PlaybackPlaylist([item], 0, true));
+  await port.prepare(); await new Promise(setImmediate);
+  f.player.getTrackDescription = () => new Promise(resolve => finish.push(resolve));
+  f.observer.onLoopChange = value => loops.push(value);
+  port.setLoop(true); port.setLoop(false);
+  finish[1]([]); await new Promise(setImmediate);
+  finish[0]([]); await new Promise(setImmediate);
+  assert.deepEqual(loops, [false]);
+  port.setLoop(true); await port.release();
+  finish[2]([]); await new Promise(setImmediate);
+  assert.deepEqual(loops, [false]);
+});
+
+test('System release during an awaited native append fences acknowledgements and owns each FD once', async () => {
+  const f = fixture(), c = f.core, changes = [];
+  const items = ['a', 'b'].map(id => new c.PlaybackPlaylistItem(id, c.MediaSource.fromLocalDocument('file://' + id + '.mp4')));
+  const port = await f.create(new c.PlaybackPlaylist(items, 0, true));
+  f.observer.onPlaylistIndexChange = value => changes.push(value);
+  let finish;
+  const add = f.player.addPlaybackMediaSource.bind(f.player);
+  f.player.addPlaybackMediaSource = async (...args) => {
+    const id = await add(...args); await new Promise(resolve => { finish = resolve; }); return id;
+  };
+  const preparing = port.prepare(); preparing.catch(() => {});
+  await new Promise(setImmediate);
+  await port.release(); finish();
+  await assert.rejects(preparing);
+  assert.deepEqual(changes, []);
+  assert.deepEqual(f.closedFiles, [11]);
+});
 test('System controls use milliseconds and preserve play/pause states', async () => {
   const f = fixture(), port = await f.create();
   await port.prepare(); await port.play(); await port.pause();

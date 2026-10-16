@@ -2,7 +2,9 @@ import {
   EventObserver,
   Media,
   MpvEvent,
+  MpvFormat,
   PlaylistMode,
+  Playlist,
   Player,
   Track,
   Tracks
@@ -10,6 +12,7 @@ import {
 import {
   MediaSource,
   MediaSourceKind,
+  PlaybackPlaylist,
   PlaybackBackend,
   PlaybackPortError,
   PlaybackPortObserver,
@@ -31,6 +34,9 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
   private readonly observer: PlaybackPortObserver;
   private readonly player: Player;
   private source: MediaSource | null = null;
+  private playlist: PlaybackPlaylist | null = null;
+  private playlistIndex: number = -1;
+  private playlistHandoff: boolean = false;
   private surfaceAttached: boolean = false;
   private released: boolean = false;
   private prepared: boolean = false;
@@ -50,6 +56,7 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
     this.observer = observer;
     this.player = new Player();
     this.player.native.addEventObserver(this);
+    this.player.native.observeProperty('idle-active', MpvFormat.MPV_FORMAT_FLAG);
     this.bindStreams();
   }
 
@@ -70,7 +77,7 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
     return new PlayerBackendCapabilities();
   }
 
-  configure(source: MediaSource, surfaceId: string): void {
+  configure(source: MediaSource, surfaceId: string, playlist: PlaybackPlaylist | null = null): void {
     if (this.released || surfaceId.length === 0) {
       throw new PlaybackPortError(0, 'MPV backend is unavailable');
     }
@@ -78,6 +85,7 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
       throw new PlaybackPortError(0, 'Remote file must be resolved before MPV configure');
     }
     this.source = source;
+    this.playlist = playlist;
     try {
       this.player.native.attachSurface(surfaceId);
       this.surfaceAttached = true;
@@ -116,7 +124,12 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
       this.failPrepare(new PlaybackPortError(0, `MPV prepare timed out${diagnostic}`));
     }, MPV_PREPARE_TIMEOUT_MS);
     try {
-      this.player.open(new Media(source.locator), false);
+      if (this.playlist === null) {
+        this.player.open(new Media(source.locator), false);
+      } else {
+        this.player.open(new Playlist(this.playlist.items.map((item) => new Media(item.source.locator)),
+          this.playlist.startIndex), false);
+      }
       await waiting;
     } finally {
       this.clearPrepareTimer();
@@ -140,6 +153,14 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
     if (!this.completed) {
       this.observer.onStateChange(PortPlaybackState.PAUSED);
     }
+  }
+
+  async selectPlaylistItem(index: number): Promise<void> {
+    this.ensureReady();
+    if (this.playlist === null || !Number.isInteger(index) || index < 0 || index >= this.playlist.items.length) {
+      throw new PlaybackPortError(401, 'Unavailable playlist item');
+    }
+    this.player.jump(index);
   }
 
   async stop(): Promise<void> {
@@ -233,7 +254,20 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
     this.observer.onStateChange(PortPlaybackState.RELEASED);
   }
 
-  onPropertyChanged(_property: string, _value?: string | number | boolean): void {
+  onPropertyChanged(property: string, value?: string | number | boolean): void {
+    if (property === 'idle-active' && value === true) {
+      this.failIdlePlaylist();
+      return;
+    }
+    if (this.released || this.playlist === null || property !== 'playlist-playing-pos' ||
+      typeof value !== 'number' || !Number.isInteger(value) || value < 0 ||
+      value >= this.playlist.items.length || value === this.playlistIndex) return;
+    this.playlistIndex = value;
+    this.completed = false;
+    this.endSignaled = false;
+    this.firstFrameSignaled = false;
+    this.seekPending = false;
+    this.observer.onPlaylistIndexChange(value);
   }
 
   onEvent(id: number, _name: string): void {
@@ -244,11 +278,15 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
       this.prepared = true;
       this.endSignaled = false;
       this.stopRequested = false;
+      this.playlistHandoff = false;
       const resolve: (() => void) | null = this.prepareResolve;
       this.prepareResolve = null;
       this.prepareReject = null;
       this.clearPrepareTimer();
       this.observer.onStateChange(PortPlaybackState.PREPARED);
+      if (resolve === null && this.playlist !== null && !this.player.native.getPropertyBool('pause')) {
+        this.observer.onStateChange(PortPlaybackState.PLAYING);
+      }
       resolve?.();
     } else if (id === MpvEvent.MPV_EVENT_END_FILE) {
       if (this.prepareReject !== null) {
@@ -262,7 +300,12 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
         // The current ArkTS binding supplies no END_FILE reason/error payload.
         this.prepared = false;
         this.emitEnd(PortStreamEndReason.UNKNOWN);
-        this.observer.onStateChange(PortPlaybackState.STOPPED);
+        if (this.playlist === null) {
+          this.observer.onStateChange(PortPlaybackState.STOPPED);
+        } else {
+          this.playlistHandoff = true;
+          if (this.player.native.getPropertyBool('idle-active')) this.failIdlePlaylist();
+        }
       }
     } else if (id === MpvEvent.MPV_EVENT_SHUTDOWN) {
       const error = new PlaybackPortError(5400105, 'MPV unexpectedly shut down');
@@ -376,6 +419,12 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
         this.observer.onWarning('native-log', new PlaybackPortError(0, detail));
       }
     });
+  }
+
+  private failIdlePlaylist(): void {
+    if (this.released || !this.playlistHandoff) return;
+    this.playlistHandoff = false;
+    this.observer.onError(new PlaybackPortError(5400105, 'MPV became idle before the next playlist item loaded'));
   }
 
   private emitEnd(reason: PortStreamEndReason): void {

@@ -1,4 +1,5 @@
 import { MediaSource } from '../models/MediaSource';
+import { PlaybackPlaylist } from '../models/PlaybackPlaylist';
 
 export enum PortPlaybackState {
   IDLE = 'idle',
@@ -177,6 +178,7 @@ export class PlaybackPortObserver {
   readonly onAudioOutputChange: PortAudioOutputObserver;
   readonly onWarning: PortWarningObserver;
   readonly onDisplayModeChange: PortDisplayModeObserver;
+  readonly onPlaylistIndexChange: PortNumberObserver;
 
   constructor(onStateChange: PortStateObserver, onError: PortErrorObserver,
     onDurationChange: PortNumberObserver, onPositionChange: PortNumberObserver,
@@ -193,7 +195,8 @@ export class PlaybackPortObserver {
     onAudioInterruption: PortInterruptionObserver = () => {},
     onAudioOutputChange: PortAudioOutputObserver = () => {},
     onWarning: PortWarningObserver = () => {},
-    onDisplayModeChange: PortDisplayModeObserver = () => {}) {
+    onDisplayModeChange: PortDisplayModeObserver = () => {},
+    onPlaylistIndexChange: PortNumberObserver = () => {}) {
     this.onStateChange = onStateChange;
     this.onError = onError;
     this.onDurationChange = onDurationChange;
@@ -214,11 +217,13 @@ export class PlaybackPortObserver {
     this.onAudioOutputChange = onAudioOutputChange;
     this.onWarning = onWarning;
     this.onDisplayModeChange = onDisplayModeChange;
+    this.onPlaylistIndexChange = onPlaylistIndexChange;
   }
 }
 
 export interface PlaybackPort {
-  configure(source: MediaSource, surfaceId: string): void;
+  configure(source: MediaSource, surfaceId: string, playlist?: PlaybackPlaylist | null): void;
+  selectPlaylistItem(index: number): Promise<void>;
   setSurfaceSize(width: number, height: number): void;
   getDuration(): number;
   prepare(): Promise<void>;

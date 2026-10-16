@@ -69,6 +69,8 @@ class FakePlaybackPort implements PlaybackPort {
   async selectAudioTrack(_id: string): Promise<void> {
   }
 
+  async selectPlaylistItem(_index: number): Promise<void> {}
+
   seek(position: number): void {
     this.seekPosition = position;
     this.observer.onPositionChange(position);

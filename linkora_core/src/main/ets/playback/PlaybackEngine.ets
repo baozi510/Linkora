@@ -1,4 +1,5 @@
 import { MediaSource } from '../models/MediaSource';
+import { PlaybackPlaylist } from '../models/PlaybackPlaylist';
 import { AppFailure } from '../errors/AppFailure';
 import { FailureCatalog } from '../errors/FailureCatalog';
 import {
@@ -37,6 +38,8 @@ export class PlaybackEngine {
   private surfaceWidth: number = 0;
   private surfaceHeight: number = 0;
   private source: MediaSource | null = null;
+  private playlist: PlaybackPlaylist | null = null;
+  private playlistIndex: number = -1;
   private surfaceId: string = '';
   private playbackRate: number = 1;
   private volume: number = 1;
@@ -57,7 +60,8 @@ export class PlaybackEngine {
     this.portFactory = portFactory;
   }
 
-  async open(source: MediaSource, surfaceId: string, startPosition: number = 0): Promise<void> {
+  async open(source: MediaSource, surfaceId: string, startPosition: number = 0,
+    playlist: PlaybackPlaylist | null = null): Promise<void> {
     const sessionId: number = ++this.sessionId;
     try {
       await this.releaseCurrentPort();
@@ -67,6 +71,7 @@ export class PlaybackEngine {
       }
       this.resetSnapshot();
       this.source = source;
+      this.playlist = playlist;
       this.surfaceId = surfaceId;
       this.status = PlaybackStatus.PREPARING;
       this.notify();
@@ -79,7 +84,7 @@ export class PlaybackEngine {
 
       this.releasePromise = null;
       this.port = port;
-      port.configure(source, surfaceId);
+      port.configure(source, surfaceId, playlist);
       if (this.surfaceWidth > 0 && this.surfaceHeight > 0) {
         port.setSurfaceSize(this.surfaceWidth, this.surfaceHeight);
       }
@@ -132,7 +137,10 @@ export class PlaybackEngine {
 
   async togglePlayback(): Promise<void> {
     if (this.status === PlaybackStatus.STOPPED && this.source !== null) {
-      await this.open(this.source, this.surfaceId);
+      const playlist: PlaybackPlaylist | null = this.playlist === null ? null :
+        new PlaybackPlaylist(this.playlist.items, this.playlistIndex >= 0 ? this.playlistIndex :
+          this.playlist.startIndex, this.playlist.complete);
+      await this.open(this.source, this.surfaceId, 0, playlist);
       return;
     }
     const port: PlaybackPort | null = this.port;
@@ -179,6 +187,18 @@ export class PlaybackEngine {
       this.notify();
     } catch (error) {
       this.failActivePort(this.portError(error));
+    }
+  }
+
+  async selectPlaylistItem(index: number): Promise<void> {
+    const port: PlaybackPort | null = this.port;
+    if (port === null || this.playlist === null || !Number.isInteger(index) ||
+      index < 0 || index >= this.playlist.items.length) return;
+    const sessionId: number = this.sessionId;
+    try {
+      await port.selectPlaylistItem(index);
+    } catch (error) {
+      if (this.isCurrent(sessionId) && this.port === port) this.warn('playlist', this.portError(error));
     }
   }
 
@@ -380,6 +400,25 @@ export class PlaybackEngine {
           }
           this.notify();
         }
+      },
+      (index: number) => {
+        if (!this.isCurrent(sessionId) || this.playlist === null || !Number.isInteger(index) ||
+          index < 0 || index >= this.playlist.items.length || index === this.playlistIndex) return;
+        this.playlistIndex = index;
+        this.source = this.playlist.items[index].source;
+        this.position = 0;
+        this.duration = 0;
+        this.bufferedPercent = 0;
+        this.bufferedDuration = 0;
+        this.firstFrameRendered = false;
+        this.videoWidth = 0;
+        this.videoHeight = 0;
+        this.tracks = [];
+        this.videoInfo = new PortVideoInfo();
+        this.streamEnd = null;
+        this.failure = null;
+        this.status = PlaybackStatus.PREPARING;
+        this.notify();
       }
     );
   }
@@ -516,6 +555,7 @@ export class PlaybackEngine {
   }
 
   private resetSnapshot(): void {
+    this.playlistIndex = -1;
     this.status = PlaybackStatus.IDLE;
     this.statusBeforeBuffering = PlaybackStatus.READY;
     this.statusBeforeSeeking = PlaybackStatus.READY;
@@ -556,7 +596,7 @@ export class PlaybackEngine {
       this.tracks,
       this.videoInfo,
       this.playbackRate, this.volume, this.loop, this.streamEnd,
-      this.audioInterruption, this.audioOutput, this.warning, this.warningOperation, this.displayMode
+      this.audioInterruption, this.audioOutput, this.warning, this.warningOperation, this.displayMode, this.playlistIndex
     ));
   }
 }

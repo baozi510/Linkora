@@ -35,9 +35,10 @@ function fixture(preference = 'auto') {
     }, module, module.exports);
     return module.exports;
   }
-  const core = Object.assign({}, ...['models/MediaSource', 'playback/PlaybackPort',
+  const core = Object.assign({}, ...['models/MediaSource', 'models/PlaybackPlaylist', 'playback/PlaybackPort',
     'playback/PlaybackBackend', 'playback/PlaybackBackendSelector', 'playback/PlaybackEngine',
-    'playback/PlaybackModels'].map(name => load('linkora_core/src/main/ets/' + name + '.ets')));
+    'playback/PlaybackModels', 'models/AppSettings', 'features/PlayerFeatureController']
+    .map(name => load('linkora_core/src/main/ets/' + name + '.ets')));
   const { AdaptivePlaybackPort } = load('entry/src/main/ets/playback/AdaptivePlaybackPort.ets');
   const observer = new core.PlaybackPortObserver(
     state => trace.push(['state', state]), error => trace.push(['error', error.code]),
@@ -51,7 +52,8 @@ function fixture(preference = 'auto') {
       const backend = {
         events, closes: 0, backendKind: () => kind,
         capabilities: () => new core.PlayerBackendCapabilities(),
-        configure() {}, setSurfaceSize() {}, getDuration: () => 120000,
+        configure(source, surface, playlist) { backend.playlist = playlist; }, setSurfaceSize() {}, getDuration: () => 120000,
+        selectPlaylistItem: async index => { backend.requestedIndex = index; },
         prepare: () => prepare(events), play: async () => events.onStateChange('playing'),
         pause: async () => events.onStateChange('paused'), seek: value => events.onSeekComplete(value),
         stop: async () => events.onStateChange('stopped'),
@@ -72,6 +74,64 @@ function fixture(preference = 'auto') {
     }
   };
 }
+
+test('Engine native playlist index follows acknowledgements, resets item state and fences old callbacks', async () => {
+  const f = fixture(), snapshots = [], c = f.core;
+  const items = ['a', 'b', 'c'].map(id => new c.PlaybackPlaylistItem(id, c.MediaSource.fromLocalDocument('file://' + id + '.mp4')));
+  const playlist = new c.PlaybackPlaylist(items, 1, true);
+  const engine = new c.PlaybackEngine(value => snapshots.push(value), f.factory('system'));
+  await engine.open(items[1].source, 'surface', 0, playlist);
+  assert.equal(f.backends[0].playlist, playlist);
+  assert.equal(snapshots.at(-1).playlistIndex, -1);
+  f.backends[0].events.onPlaylistIndexChange(1);
+  f.backends[0].events.onPositionChange(800);
+  f.backends[0].events.onDurationChange(2000);
+  f.backends[0].events.onFirstFrame();
+  await engine.selectPlaylistItem(2);
+  assert.equal(f.backends[0].requestedIndex, 2);
+  assert.equal(snapshots.at(-1).playlistIndex, 1);
+  f.backends[0].events.onPlaylistIndexChange(2);
+  assert.equal(snapshots.at(-1).playlistIndex, 2);
+  assert.equal(snapshots.at(-1).position, 0);
+  assert.equal(snapshots.at(-1).duration, 0);
+  assert.equal(snapshots.at(-1).firstFrameRendered, false);
+  await engine.selectPlaylistItem(99);
+  assert.equal(f.backends[0].requestedIndex, 2);
+  await engine.stop(); await engine.togglePlayback();
+  assert.equal(f.backends[1].playlist.startIndex, 2);
+  await engine.release();
+  const count = snapshots.length;
+  f.backends[0].events.onPlaylistIndexChange(0);
+  assert.equal(snapshots.length, count);
+});
+
+test('Player queue controls use acknowledged index and save bookmarks against the departing item', async () => {
+  const f = fixture(), c = f.core, saved = [], cleared = [];
+  const items = ['a', 'b', 'c'].map(id => new c.PlaybackPlaylistItem(id, c.MediaSource.fromLocalDocument('file://' + id + '.mp4')));
+  const controller = new c.PlayerFeatureController(items[1].source,
+    observer => new c.PlaybackEngine(observer, f.factory('system')),
+    { load: async () => null, save: async (source, bookmark) => saved.push([source.locator, bookmark.position]),
+      clear: async source => cleared.push(source.locator) }, new c.AppSettings(), () => {}, null,
+    new c.PlaybackPlaylist(items, 1, true));
+  controller.attachSurface('surface');
+  await new Promise(setImmediate);
+  assert.equal(f.backends[0].playlist.startIndex, 1);
+  f.backends[0].events.onPlaylistIndexChange(1);
+  f.backends[0].events.onDurationChange(120000);
+  f.backends[0].events.onPositionChange(20000);
+  controller.nextPlaylistItem(); await new Promise(setImmediate);
+  assert.equal(f.backends[0].requestedIndex, 2);
+  assert.equal(controller.currentState().playback.playlistIndex, 1);
+  f.backends[0].events.onPlaylistIndexChange(2);
+  assert.equal(saved.at(-1)[0], 'file://b.mp4');
+  f.backends[0].events.onDurationChange(120000);
+  f.backends[0].events.onPositionChange(30000);
+  controller.stopPlayback(); await new Promise(setImmediate);
+  assert.equal(saved.at(-1)[0], 'file://c.mp4');
+  controller.togglePlayback(); await new Promise(setImmediate);
+  assert.equal(f.backends[1].playlist.startIndex, 2);
+  controller.stop();
+});
 
 test('Auto disposes failed System candidate and commits only MPV events', async () => {
   const f = fixture();

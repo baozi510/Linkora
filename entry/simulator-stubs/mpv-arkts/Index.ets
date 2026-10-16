@@ -11,10 +11,17 @@ export enum MpvEvent {
 }
 
 export enum PlaylistMode { None = 0, File = 1, Playlist = 2, Random = 3 }
+export enum MpvFormat { MPV_FORMAT_FLAG = 3 }
 
 export class Media {
   readonly uri: string;
   constructor(uri: string) { this.uri = uri; }
+}
+
+export class Playlist {
+  readonly medias: Media[];
+  readonly index: number;
+  constructor(medias: Media[], index: number = 0) { this.medias = medias; this.index = index; }
 }
 
 export class StubStream<T> {
@@ -87,6 +94,7 @@ export class PlayerStream {
 }
 export class StubNativePlayer {
   addEventObserver(_observer: EventObserver): void {}
+  observeProperty(_name: string, _format: MpvFormat): void {}
   removeEventObserver(_observer: EventObserver): void {}
   attachSurface(_surfaceId: string): void {}
   detachSurface(): void {}
@@ -104,7 +112,8 @@ export class Player {
     throw new Error('MPV is intentionally unavailable in the x86_64 simulator validation target.');
   }
 
-  open(_media: Media, _play: boolean = true): void {}
+  open(_media: Media | Playlist, _play: boolean = true): void {}
+  jump(_index: number): void {}
   play(): void {}
   pause(): void {}
   stop(): void {}

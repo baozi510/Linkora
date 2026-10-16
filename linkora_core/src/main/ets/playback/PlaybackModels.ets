@@ -38,6 +38,7 @@ export class PlaybackSnapshot {
   readonly warning: PlaybackPortError | null;
   readonly warningOperation: string;
   readonly displayMode: VideoDisplayMode | null;
+  readonly playlistIndex: number;
 
   constructor(status: PlaybackStatus, position: number, duration: number, bufferedPercent: number,
     videoWidth: number, videoHeight: number, failure: AppFailure | null, firstFrameRendered: boolean,
@@ -46,7 +47,7 @@ export class PlaybackSnapshot {
     playbackRate: number = 1, volume: number = 1, loop: boolean = false,
     streamEnd: PortStreamEnd | null = null, audioInterruption: PortAudioInterruption | null = null,
     audioOutput: PortAudioOutputChange | null = null, warning: PlaybackPortError | null = null,
-    warningOperation: string = '', displayMode: VideoDisplayMode | null = null) {
+    warningOperation: string = '', displayMode: VideoDisplayMode | null = null, playlistIndex: number = -1) {
     this.status = status;
     this.position = position;
     this.duration = duration;
@@ -68,6 +69,7 @@ export class PlaybackSnapshot {
     this.warning = warning;
     this.warningOperation = warningOperation;
     this.displayMode = displayMode;
+    this.playlistIndex = playlistIndex;
   }
 }
 

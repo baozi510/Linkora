@@ -1,6 +1,7 @@
 import { common } from '@kit.AbilityKit';
 import {
   MediaSource,
+  PlaybackPlaylist,
   PlaybackBackend,
   PlaybackBackendSelector,
   PlaybackPort,
@@ -35,6 +36,7 @@ class CandidateObserver {
   private videoHeight: number = 0;
   private tracks: PortTrack[] = [];
   private videoInfo: PortVideoInfo = new PortVideoInfo();
+  private playlistIndex: number = -1;
   readonly observer: PlaybackPortObserver;
 
   constructor(target: PlaybackPortObserver) {
@@ -96,6 +98,10 @@ class CandidateObserver {
       },
       (mode: VideoDisplayMode) => {
         if (this.committed) target.onDisplayModeChange(mode);
+      },
+      (index: number) => {
+        this.playlistIndex = index;
+        if (this.committed) target.onPlaylistIndexChange(index);
       }
     );
   }
@@ -103,6 +109,7 @@ class CandidateObserver {
   commit(backend: string): void {
     this.committed = true;
     this.target.onBackendChange(backend);
+    if (this.committed && this.playlistIndex >= 0) this.target.onPlaylistIndexChange(this.playlistIndex);
     if (this.committed && this.duration > 0) this.target.onDurationChange(this.duration);
     if (this.committed && this.videoWidth > 0 && this.videoHeight > 0) {
       this.target.onVideoSizeChange(this.videoWidth, this.videoHeight);
@@ -120,6 +127,7 @@ export class AdaptivePlaybackPort implements PlaybackPort {
   private readonly systemFactory: BackendFactory;
   private readonly mpvFactory: BackendFactory;
   private source: MediaSource | null = null;
+  private playlist: PlaybackPlaylist | null = null;
   private surfaceId: string = '';
   private resolved: ResolvedPlaybackSource | null = null;
   private backend: PlaybackBackend | null = null;
@@ -147,11 +155,12 @@ export class AdaptivePlaybackPort implements PlaybackPort {
     this.mpvFactory = mpvFactory;
   }
 
-  configure(source: MediaSource, surfaceId: string): void {
+  configure(source: MediaSource, surfaceId: string, playlist: PlaybackPlaylist | null = null): void {
     if (this.released || surfaceId.length === 0) {
       throw new PlaybackPortError(0, 'Adaptive playback backend is unavailable');
     }
     this.source = source;
+    this.playlist = playlist;
     this.surfaceId = surfaceId;
     this.observer.onStateChange(PortPlaybackState.INITIALIZED);
   }
@@ -232,6 +241,10 @@ export class AdaptivePlaybackPort implements PlaybackPort {
     await this.requireBackend().stop();
   }
 
+  async selectPlaylistItem(index: number): Promise<void> {
+    await this.requireBackend().selectPlaylistItem(index);
+  }
+
   setLoop(loop: boolean): void {
     this.requireBackend().setLoop(loop);
   }
@@ -308,7 +321,7 @@ export class AdaptivePlaybackPort implements PlaybackPort {
       if (this.released) {
         throw this.cancelledError();
       }
-      backend.configure(source, this.surfaceId);
+      backend.configure(source, this.surfaceId, this.playlist);
       if (this.surfaceWidth > 0 && this.surfaceHeight > 0) {
         backend.setSurfaceSize(this.surfaceWidth, this.surfaceHeight);
       }

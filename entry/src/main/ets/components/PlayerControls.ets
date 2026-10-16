@@ -1,4 +1,4 @@
-import { PlaybackSnapshot, PlaybackStatus, PortTrack, PortTrackKind, VideoDisplayMode } from 'linkora_core';
+import { PlaybackSnapshot, PlaybackStatus, PortTrack, PortTrackKind, VideoDisplayMode, PlaybackPlaylist } from 'linkora_core';
 import { AppTypography, PlayerColors, PlayerRadius } from '../ui/AppTheme';
 
 @ComponentV2
@@ -10,6 +10,10 @@ export struct PlayerControls {
   @Param playbackRate: number = 1;
   @Param volume: number = 1;
   @Param fullScreen: boolean = false;
+  @Param playlist: PlaybackPlaylist | null = null;
+  @Event onPrevious: () => void = () => {};
+  @Event onNext: () => void = () => {};
+  @Event onSelectPlaylistItem: (index: number) => void = () => {};
 
   @Event onSeekChange: (value: number, mode: SliderChangeMode) => void = () => {};
   @Event onTogglePlayback: () => void = () => {};
@@ -35,6 +39,12 @@ export struct PlayerControls {
   private audioOptions(): SelectOption[] {
     return this.audioTracks().map((track: PortTrack): SelectOption => ({
       value: track.title || track.language || `${track.id} ${track.codec}`
+    }));
+  }
+
+  private playlistOptions(): SelectOption[] {
+    return this.playlist === null ? [] : this.playlist.items.map((item): SelectOption => ({
+      value: item.source.displayName
     }));
   }
 
@@ -162,6 +172,29 @@ export struct PlayerControls {
         }
       }
       .width('100%')
+
+      if (this.playlist !== null && this.snapshot.playlistIndex >= 0) {
+        Row({ space: 10 }) {
+          Button('上一项')
+            .enabled(this.canControl() && this.snapshot.playlistIndex > 0)
+            .onClick(() => this.onPrevious())
+          Select(this.playlistOptions())
+            .selected(this.snapshot.playlistIndex)
+            .value(this.playlist.items[this.snapshot.playlistIndex].source.displayName)
+            .fontColor(PlayerColors.TEXT_CONTROL)
+            .backgroundColor(PlayerColors.CONTROL_SURFACE)
+            .optionFontColor(PlayerColors.TEXT_CONTROL)
+            .optionBgColor(PlayerColors.CONTROL_SURFACE)
+            .accessibilityText('播放列表')
+            .layoutWeight(1)
+            .enabled(this.canControl())
+            .onSelect((index: number) => this.onSelectPlaylistItem(index))
+          Button('下一项')
+            .enabled(this.canControl() && this.snapshot.playlistIndex < this.playlist.items.length - 1)
+            .onClick(() => this.onNext())
+        }
+        .width('100%')
+      }
 
       Row({ space: 10 }) {
         Text(this.volume === 0 ? $r('app.string.player_mute') : $r('app.string.player_volume'))

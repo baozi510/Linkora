@@ -65,7 +65,7 @@ export struct PlayerPage {
       if (this.active) {
         this.applyFeatureState(state);
       }
-    });
+    }, this.playlist);
     this.gestureController = new PlayerGestureController(new PlayerGestureCallbacks(
       () => {
         if (this.fullScreen) {
@@ -271,10 +271,18 @@ export struct PlayerPage {
   }
 
   private sourceLabel(): string {
-    const label: string = this.source.originLabel.length > 0 ? this.source.originLabel : this.source.displayName;
+    const source: MediaSource = this.currentSource();
+    const label: string = source.originLabel.length > 0 ? source.originLabel : source.displayName;
     if (this.playlist === null) return label;
-    return `${label} · ${this.playlist.startIndex + 1}/${this.playlist.items.length}` +
+    const index: number = this.snapshot.playlistIndex >= 0 ? this.snapshot.playlistIndex : this.playlist.startIndex;
+    return `${label} · ${index + 1}/${this.playlist.items.length}` +
+      (this.snapshot.playlistIndex < 0 ? ' · 已整理' : '') +
       (this.playlist.complete ? '' : ' · 清单未确认完整');
+  }
+
+  private currentSource(): MediaSource {
+    return this.playlist !== null && this.snapshot.playlistIndex >= 0 ?
+      this.playlist.items[this.snapshot.playlistIndex].source : this.source;
   }
 
   @Builder
@@ -339,7 +347,7 @@ export struct PlayerPage {
 
       if (this.fullScreen && this.controlsVisible) {
         PlayerTopBar({
-          title: this.source.displayName,
+          title: this.currentSource().displayName,
           showSubtitle: false,
           overlayMode: true,
           onBack: () => {
@@ -355,6 +363,10 @@ export struct PlayerPage {
             playbackRate: this.playbackRate,
             volume: this.volume,
             fullScreen: this.fullScreen,
+            playlist: this.playlist,
+            onPrevious: () => this.controller?.previousPlaylistItem(),
+            onNext: () => this.controller?.nextPlaylistItem(),
+            onSelectPlaylistItem: (index: number) => this.controller?.selectPlaylistItem(index),
             onSeekChange: (value: number, mode: SliderChangeMode) => {
               this.changePosition(value, mode);
             },
@@ -455,6 +467,10 @@ export struct PlayerPage {
           playbackRate: this.playbackRate,
           volume: this.volume,
           fullScreen: this.fullScreen,
+          playlist: this.playlist,
+          onPrevious: () => this.controller?.previousPlaylistItem(),
+          onNext: () => this.controller?.nextPlaylistItem(),
+          onSelectPlaylistItem: (index: number) => this.controller?.selectPlaylistItem(index),
           onSeekChange: (value: number, mode: SliderChangeMode) => {
             this.changePosition(value, mode);
           },
