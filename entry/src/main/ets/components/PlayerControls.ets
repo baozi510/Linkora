@@ -10,7 +10,6 @@ export struct PlayerControls {
   @Param sliderPosition: number = 0;
   @Param playbackRate: number = 1;
   @Param volume: number = 1;
-  @Param fullScreen: boolean = false;
   @Param playlist: PlaybackPlaylist | null = null;
   @Event onPrevious: () => void = () => {};
   @Event onNext: () => void = () => {};
@@ -20,7 +19,6 @@ export struct PlayerControls {
   @Event onTogglePlayback: () => void = () => {};
   @Event onChangePlaybackRate: () => void = () => {};
   @Event onChangeVolume: (value: number) => void = () => {};
-  @Event onToggleFullScreen: () => void = () => {};
   @Event onStopPlayback: () => void = () => {};
   @Event onChangeLoopMode: () => void = () => {};
   @Event onSelectAudioTrack: (id: string) => void = () => {};
@@ -145,17 +143,6 @@ export struct PlayerControls {
           })
         Blank()
 
-        Button(this.fullScreen ? $r('app.string.player_exit_fullscreen') : $r('app.string.player_fullscreen'))
-          .type(ButtonType.Normal)
-          .width(58)
-          .height(38)
-          .fontSize(13)
-          .fontColor(PlayerColors.TEXT_CONTROL)
-          .backgroundColor(PlayerColors.CONTROL_SURFACE)
-          .borderRadius(PlayerRadius.CONTROL)
-          .onClick(() => {
-            this.onToggleFullScreen();
-          })
       }
       .width('100%')
 
@@ -229,6 +216,6 @@ export struct PlayerControls {
     }
     .padding({ left: 20, right: 20, top: 14, bottom: 14 })
     .width('100%')
-    .backgroundColor(this.fullScreen ? '#B30B0D12' : PlayerColors.BACKGROUND)
+    .backgroundColor(PlayerColors.BACKGROUND)
   }
 }

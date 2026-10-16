@@ -11,6 +11,7 @@ import { PlayerTopBar } from '../components/PlayerTopBar';
 import { LinkoraFeatures } from '../foundation/LinkoraFeatures';
 import { AppLifecycleEvents } from '../services/AppLifecycleEvents';
 import { PlayerColors } from '../ui/AppTheme';
+import { PlayerScreenDirection, WindowOrientationController } from '../playback/WindowOrientationController';
 
 @ComponentV2
 export struct PlayerPage {
@@ -28,17 +29,21 @@ export struct PlayerPage {
   @Local private isSeeking: boolean = false;
   @Local private playbackRate: number = 1;
   @Local private volume: number = 1;
-  @Local private fullScreen: boolean = false;
-  @Local private controlsVisible: boolean = true;
+  @Local private screenDirection: PlayerScreenDirection | null = null;
+  @Local private directionBusy: boolean = false;
+  @Local private directionFailed: boolean = false;
   @Local private gestureState: PlayerGestureState = new PlayerGestureState();
   @Local private surfaceWidth: number = 1;
   @Local private surfaceHeight: number = 1;
+  @Local private contentViewportHeight: number = 800;
 
   private surfaceController: XComponentController = new XComponentController();
   private controller: PlayerFeatureController | null = null;
   private gestureController: PlayerGestureController | null = null;
   private brightnessController: PlayerBrightnessPort | null = null;
+  private orientationController: WindowOrientationController | null = null;
   private active: boolean = false;
+  private closing: boolean = false;
   private abilityContext: common.UIAbilityContext | null = null;
   private backgroundObserver: () => void = () => {
     this.handleAppBackground();
@@ -48,6 +53,7 @@ export struct PlayerPage {
 
   aboutToAppear(): void {
     this.active = true;
+    this.closing = false;
     if (this.previewMode) {
       this.snapshot = new PlaybackSnapshot(
         PlaybackStatus.PAUSED, 96000, 454000, 63, 1920, 1080, null, true
@@ -57,6 +63,8 @@ export struct PlayerPage {
     }
     const context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
     this.abilityContext = context;
+    this.orientationController = new WindowOrientationController(context);
+    this.changeScreenDirection(PlayerScreenDirection.FOLLOW_SYSTEM);
     this.brightnessController = LinkoraFeatures.createPlayerBrightness(context);
     this.brightnessController.initialize().catch(() => {});
     context.eventHub.on(AppLifecycleEvents.BACKGROUND, this.backgroundObserver);
@@ -67,11 +75,7 @@ export struct PlayerPage {
       }
     }, this.playlist);
     this.gestureController = new PlayerGestureController(new PlayerGestureCallbacks(
-      () => {
-        if (this.fullScreen) {
-          this.controlsVisible = !this.controlsVisible;
-        }
-      },
+      () => {},
       () => {
         this.controller?.togglePlayback();
       },
@@ -125,9 +129,10 @@ export struct PlayerPage {
     if (context !== null) {
       context.eventHub.off(AppLifecycleEvents.BACKGROUND, this.backgroundObserver);
     }
-    if (this.fullScreen) {
-      this.restoreWindowMode();
-    }
+    this.orientationController?.restore().catch((error: Object) => {
+      console.error(`[PlayerWindow] Restore failed: ${String(error)}`);
+    });
+    this.orientationController = null;
     this.controller?.stop();
     this.controller = null;
   }
@@ -226,42 +231,29 @@ export struct PlayerPage {
     this.controller?.setVolume(value);
   }
 
-  private toggleFullScreen(): void {
-    this.setWindowMode(!this.fullScreen).catch(() => {});
-  }
-
-  private async setWindowMode(fullScreen: boolean): Promise<void> {
-    const context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
-    try {
-      const appWindow: window.Window = await window.getLastWindow(context);
-      await appWindow.setWindowSystemBarEnable(fullScreen ? [] : ['status', 'navigation']);
-      await appWindow.setPreferredOrientation(fullScreen ?
-        window.Orientation.AUTO_ROTATION_LANDSCAPE : window.Orientation.UNSPECIFIED);
-      if (this.active) {
-        this.fullScreen = fullScreen;
-      }
-    } catch (_error) {
-    }
-  }
-
-  private restoreWindowMode(): void {
-    const context: common.UIAbilityContext = this.getUIContext().getHostContext() as common.UIAbilityContext;
-    window.getLastWindow(context).then((appWindow: window.Window) => {
-      appWindow.setWindowSystemBarEnable(['status', 'navigation']).catch(() => {});
-      appWindow.setPreferredOrientation(window.Orientation.UNSPECIFIED).catch(() => {});
-    }).catch(() => {});
+  private changeScreenDirection(direction: PlayerScreenDirection): void {
+    const owner: WindowOrientationController | null = this.orientationController;
+    if (owner === null || this.directionBusy) return;
+    this.directionBusy = true;
+    this.directionFailed = false;
+    owner.set(direction).then((confirmed: PlayerScreenDirection) => {
+      if (this.active && this.orientationController === owner) this.screenDirection = confirmed;
+    }).catch(() => {
+      if (this.active && this.orientationController === owner) this.directionFailed = true;
+    }).finally(() => {
+      if (this.active && this.orientationController === owner) this.directionBusy = false;
+    });
   }
 
   private close(): void {
-    if (this.fullScreen) {
-      this.setWindowMode(false).then(() => {
-        this.onBack();
-      }).catch(() => {
-        this.onBack();
-      });
-      return;
-    }
-    this.onBack();
+    if (this.closing || !this.active) return;
+    this.closing = true;
+    const owner: WindowOrientationController | null = this.orientationController;
+    this.orientationController = null;
+    this.directionBusy = true;
+    (owner?.restore() ?? Promise.resolve()).catch((error: Object) => {
+      console.error(`[PlayerWindow] Restore failed: ${String(error)}`);
+    }).then(() => { if (this.active) this.onBack(); });
   }
 
   private isLoading(): boolean {
@@ -345,56 +337,13 @@ export struct PlayerPage {
 
       PlayerGestureFeedback({ state: this.gestureState })
 
-      if (this.fullScreen && this.controlsVisible) {
-        PlayerTopBar({
-          title: this.currentSource().displayName,
-          showSubtitle: false,
-          overlayMode: true,
-          onBack: () => {
-            this.close();
-          }
-        })
-        .align(Alignment.Top)
 
-        Column() {
-          PlayerControls({
-            snapshot: this.snapshot,
-            sliderPosition: this.sliderPosition,
-            playbackRate: this.playbackRate,
-            volume: this.volume,
-            fullScreen: this.fullScreen,
-            playlist: this.playlist,
-            onPrevious: () => this.controller?.previousPlaylistItem(),
-            onNext: () => this.controller?.nextPlaylistItem(),
-            onSelectPlaylistItem: (index: number) => this.controller?.selectPlaylistItem(index),
-            onSeekChange: (value: number, mode: SliderChangeMode) => {
-              this.changePosition(value, mode);
-            },
-            onTogglePlayback: () => {
-              this.togglePlayback();
-            },
-            onChangeDisplayMode: () => { this.controller?.cycleDisplayMode(); },
-            onStopPlayback: () => { this.controller?.stopPlayback(); },
-            onChangeLoopMode: () => { this.controller?.cycleLoopMode(); },
-            onSelectAudioTrack: (id: string) => { this.controller?.selectAudioTrack(id); },
-            onChangePlaybackRate: () => {
-              this.nextPlaybackRate();
-            },
-            onChangeVolume: (value: number) => {
-              this.changeVolume(value);
-            },
-            onToggleFullScreen: () => {
-              this.toggleFullScreen();
-            }
-          })
-        }
-        .width('100%')
-        .align(Alignment.Bottom)
-      }
     }
     .width('100%')
-    .height(this.fullScreen ? '100%' : 'auto')
-    .aspectRatio(this.fullScreen ? 0 : 16 / 9)
+    .height('auto')
+    .aspectRatio(16 / 9)
+    // Leave a scrolling region outside the video's brightness/volume pan gestures.
+    .constraintSize({ maxHeight: Math.max(1, this.contentViewportHeight * 0.6) })
     .backgroundColor('#000000')
     .onAreaChange((_oldArea: Area, newArea: Area) => {
       // ArkUI Area dimensions are vp; mpv-ohos ohos-surface-size expects
@@ -438,10 +387,6 @@ export struct PlayerPage {
           })
           .onActionCancel(() => {
             this.gestureController?.cancelPan();
-          }),
-        TapGesture({ count: 1, fingers: 1 })
-          .onAction(() => {
-            this.gestureController?.singleTap();
           })
       )
     )
@@ -449,60 +394,81 @@ export struct PlayerPage {
 
   build() {
     Column() {
-      if (!this.fullScreen) {
-        PlayerTopBar({
-          title: $r('app.string.player_now_playing'),
-          subtitle: this.sourceLabel(),
-          onBack: () => {
-            this.close();
-          }
-        })
+      PlayerTopBar({
+        title: $r('app.string.player_now_playing'),
+        subtitle: this.sourceLabel(),
+        onBack: () => this.close()
+      })
+      Row({ space: 12 }) {
+        Text($r('app.string.player_screen_direction'))
+          .fontSize(13)
+          .fontColor(PlayerColors.TEXT_SECONDARY)
+        Select([
+          { value: $r('app.string.player_direction_system') },
+          { value: $r('app.string.player_direction_landscape') },
+          { value: $r('app.string.player_direction_portrait') }
+        ])
+          .selected(this.screenDirection === PlayerScreenDirection.LANDSCAPE ? 1 :
+            (this.screenDirection === PlayerScreenDirection.PORTRAIT ? 2 : 0))
+          .value(this.screenDirection === null ? $r('app.string.player_screen_direction') :
+            (this.screenDirection === PlayerScreenDirection.LANDSCAPE ? $r('app.string.player_direction_landscape') :
+              (this.screenDirection === PlayerScreenDirection.PORTRAIT ? $r('app.string.player_direction_portrait') :
+                $r('app.string.player_direction_system'))))
+          .accessibilityText($r('app.string.player_screen_direction'))
+          .fontColor(PlayerColors.TEXT_CONTROL)
+          .backgroundColor(PlayerColors.CONTROL_SURFACE)
+          .optionFontColor(PlayerColors.TEXT_CONTROL)
+          .optionBgColor(PlayerColors.CONTROL_SURFACE)
+          .enabled(!this.directionBusy && !this.previewMode)
+          .onSelect((index: number) => {
+            const directions: PlayerScreenDirection[] = [PlayerScreenDirection.FOLLOW_SYSTEM,
+              PlayerScreenDirection.LANDSCAPE, PlayerScreenDirection.PORTRAIT];
+            if (index >= 0 && index < directions.length) this.changeScreenDirection(directions[index]);
+          })
       }
-
-      this.videoSurface()
-      if (!this.fullScreen) {
-        PlayerControls({
-          snapshot: this.snapshot,
-          sliderPosition: this.sliderPosition,
-          playbackRate: this.playbackRate,
-          volume: this.volume,
-          fullScreen: this.fullScreen,
-          playlist: this.playlist,
-          onPrevious: () => this.controller?.previousPlaylistItem(),
-          onNext: () => this.controller?.nextPlaylistItem(),
-          onSelectPlaylistItem: (index: number) => this.controller?.selectPlaylistItem(index),
-          onSeekChange: (value: number, mode: SliderChangeMode) => {
-            this.changePosition(value, mode);
-          },
-          onTogglePlayback: () => {
-            this.togglePlayback();
-          },
-          onChangeDisplayMode: () => { this.controller?.cycleDisplayMode(); },
-          onStopPlayback: () => { this.controller?.stopPlayback(); },
-          onChangeLoopMode: () => { this.controller?.cycleLoopMode(); },
-          onSelectAudioTrack: (id: string) => { this.controller?.selectAudioTrack(id); },
-          onChangePlaybackRate: () => {
-            this.nextPlaybackRate();
-          },
-          onChangeVolume: (value: number) => {
-            this.changeVolume(value);
-          },
-          onToggleFullScreen: () => {
-            this.toggleFullScreen();
-          }
-        })
+      .width('100%')
+      .padding({ left: 20, right: 20, bottom: 8 })
+      if (this.directionFailed) {
+        Text($r('app.string.player_direction_failed'))
+          .fontSize(12)
+          .fontColor('#FFB4AB')
       }
-
-      if (!this.fullScreen) {
-        PlayerStatusPanel({ snapshot: this.snapshot })
+      Scroll() {
+        Column() {
+          this.videoSurface()
+          PlayerControls({
+            snapshot: this.snapshot,
+            sliderPosition: this.sliderPosition,
+            playbackRate: this.playbackRate,
+            volume: this.volume,
+            playlist: this.playlist,
+            onPrevious: () => this.controller?.previousPlaylistItem(),
+            onNext: () => this.controller?.nextPlaylistItem(),
+            onSelectPlaylistItem: (index: number) => this.controller?.selectPlaylistItem(index),
+            onSeekChange: (value: number, mode: SliderChangeMode) => this.changePosition(value, mode),
+            onTogglePlayback: () => this.togglePlayback(),
+            onChangeDisplayMode: () => this.controller?.cycleDisplayMode(),
+            onStopPlayback: () => this.controller?.stopPlayback(),
+            onChangeLoopMode: () => this.controller?.cycleLoopMode(),
+            onSelectAudioTrack: (id: string) => this.controller?.selectAudioTrack(id),
+            onChangePlaybackRate: () => this.nextPlaybackRate(),
+            onChangeVolume: (value: number) => this.changeVolume(value)
+          })
+          PlayerStatusPanel({ snapshot: this.snapshot })
+        }
+        .width('100%')
       }
-
-      Blank()
+      .width('100%')
+      .layoutWeight(1)
+      .onAreaChange((_oldArea: Area, newArea: Area) => {
+        this.contentViewportHeight = Number(newArea.height);
+      })
     }
     .width('100%')
     .height('100%')
     .backgroundColor(PlayerColors.BACKGROUND)
   }
+
 }
 
 @Preview
