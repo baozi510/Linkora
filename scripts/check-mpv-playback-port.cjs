@@ -29,9 +29,9 @@ function fixture() {
         'bufferingPercentage', 'buffer', 'videoParams', 'tracks', 'track', 'error',
         'volume', 'speed', 'playlistMode'].map(name => {
         let listener;
-        return [name, { listen(callback) { listener = callback; }, add(value) { listener(value); } }];
+        return [name, { listen(callback) { listener = callback; }, add(value) { listener?.(value); } }];
       }));
-      this.properties = new Map();
+      this.properties = new Map([['loop-file', 'no'], ['loop-playlist', 'no']]);
       this.native = { getProperty: name => this.properties.get(name),
         getPropertyBool: name => this.properties.get(name),
         getPropertyString: name => this.properties.get(name),
@@ -152,15 +152,39 @@ test('MPV maps confirmed property values and loop mode, not requested controls',
   const f = fixture(), port = await f.create(), rates = [], volumes = [], loops = [];
   f.observer.onPlaybackRateChange = value => rates.push(value);
   f.observer.onVolumeChange = value => volumes.push(value);
-  f.observer.onLoopChange = value => loops.push(value);
+  f.observer.onLoopModeChange = value => loops.push(value);
   const pending = port.prepare(); f.loaded(); await pending;
-  port.setPlaybackRate(1.5); port.setVolume(0.25); port.setLoop(true);
+  port.setPlaybackRate(1.5); port.setVolume(0.25); port.setLoopMode('single');
   assert.deepEqual(rates, []); assert.deepEqual(volumes, []); assert.deepEqual(loops, []);
-  f.player.stream.speed.add(1.5); f.player.stream.volume.add(25); f.player.stream.playlistMode.add(1);
-  assert.deepEqual(rates, [1.5]); assert.deepEqual(volumes, [0.25]); assert.deepEqual(loops, [true]);
+  f.player.stream.speed.add(1.5); f.player.stream.volume.add(25); f.player.events.onPropertyChanged('loop-file', 'inf');
+  assert.deepEqual(rates, [1.5]); assert.deepEqual(volumes, [0.25]); assert.deepEqual(loops, ['single']);
   await port.release();
   f.player.stream.speed.add(2); f.player.stream.volume.add(100); f.player.stream.playlistMode.add(0);
-  assert.deepEqual(rates, [1.5]); assert.deepEqual(volumes, [0.25]); assert.deepEqual(loops, [true]);
+  assert.deepEqual(rates, [1.5]); assert.deepEqual(volumes, [0.25]); assert.deepEqual(loops, ['single']);
+});
+
+test('MPV maps three modes to native properties and ignores optimistic wrapper mode events', async () => {
+  const f = fixture(), port = await f.create(), modes = [], ends = [];
+  f.observer.onLoopModeChange = value => modes.push(value);
+  f.observer.onStreamEnd = value => ends.push(value);
+  const pending = port.prepare(); f.loaded(); await pending;
+  for (const [mode, file, list] of [['single', 'inf', 'no'], ['list', 'no', 'inf'], ['sequence', 'no', 'no']]) {
+    const before = modes.length;
+    port.setLoopMode(mode);
+    assert.equal(f.player.properties.get('loop-file'), file);
+    assert.equal(f.player.properties.get('loop-playlist'), list);
+    f.player.stream.playlistMode.add(1);
+    assert.equal(modes.length, before, 'wrapper announcement is not a native acknowledgement');
+    f.player.events.onPropertyChanged('loop-file', file);
+    assert.equal(modes.at(-1), mode);
+  }
+  assert.throws(() => port.setLoopMode('shuffle'));
+  port.setLoopMode('list'); f.player.events.onPropertyChanged('loop-playlist', 'inf');
+  await port.play(); f.player.stream.eof.add(true); f.player.stream.playing.add(false);
+  assert.notEqual(f.states.at(-1), 'completed');
+  assert.equal(ends.at(-1).looping, true);
+  await port.release(); const count = modes.length;
+  f.player.events.onPropertyChanged('loop-file', 'no'); assert.equal(modes.length, count);
 });
 
 test('MPV selects an existing native audio track and rejects unknown ids', async () => {
@@ -287,7 +311,7 @@ test('MPV file loop reports EOF without one-shot completion', async () => {
   const f = fixture(), port = await f.create(), ends = [];
   f.observer.onStreamEnd = value => ends.push(value);
   const preparing = port.prepare(); f.loaded(); await preparing;
-  await port.play(); port.setLoop(true); f.player.stream.playlistMode.add(1);
+  await port.play(); port.setLoopMode('single'); f.player.events.onPropertyChanged('loop-file', 'inf');
   f.player.stream.eof.add(true); f.player.stream.playing.add(false);
   assert.equal(f.states.at(-1), 'playing');
   assert.equal(ends.at(-1).reason, 'eof'); assert.equal(ends.at(-1).looping, true);

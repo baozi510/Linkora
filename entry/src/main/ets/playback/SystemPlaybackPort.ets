@@ -5,7 +5,7 @@ import { audio } from '@kit.AudioKit';
 import { MediaSource, MediaSourceKind, PlaybackBackend, PlaybackPortError, PlaybackPortObserver,
   PlayerBackendCapabilities, PlayerBackendKind, PortAudioInterruption, PortAudioOutputChange,
   PortBufferingEvent, PortInterruptionHint, PortPlaybackState, PortStreamEnd, PortStreamEndReason,
-  PortTrack, PortTrackKind, VideoDisplayMode, PlaybackPlaylist } from 'linkora_core';
+  PortTrack, PortTrackKind, VideoDisplayMode, PlaybackPlaylist, PlaybackLoopMode } from 'linkora_core';
 import { ProgressiveDownloadRegistry, ProgressiveDownloadTask } from './ProgressiveDownloadRegistry';
 
 const INITIALIZATION_TIMEOUT: number = 12000;
@@ -41,6 +41,7 @@ export class SystemPlaybackPort implements PlaybackBackend {
   private playlistReady: boolean = false;
   private initialSelectionId: string = '';
   private loopRequestId: number = 0;
+  private singleSourceLoopMode: PlaybackLoopMode = PlaybackLoopMode.SEQUENCE;
 
   private constructor(player: media.AVPlayer, observer: PlaybackPortObserver) {
     this.player = player;
@@ -281,23 +282,31 @@ export class SystemPlaybackPort implements PlaybackBackend {
     this.player.setVolume(Math.max(0, Math.min(1, volume)));
   }
 
-  setLoop(loop: boolean): void {
+  setLoopMode(mode: PlaybackLoopMode): void {
     if (this.released) throw new PlaybackPortError(5400104, 'Player released');
+    if (mode !== PlaybackLoopMode.SEQUENCE && mode !== PlaybackLoopMode.SINGLE && mode !== PlaybackLoopMode.LIST) {
+      throw new PlaybackPortError(401, 'Invalid loop mode');
+    }
     if (this.playlist !== null) {
       const requestId: number = ++this.loopRequestId;
-      this.player.playlistLoopMode = loop ? media.PlaylistLoopMode.PLAYLIST_LOOP_MODE_ONE :
-        media.PlaylistLoopMode.PLAYLIST_LOOP_MODE_NONE;
+      this.player.playlistLoopMode = mode === PlaybackLoopMode.SINGLE ? media.PlaylistLoopMode.PLAYLIST_LOOP_MODE_ONE :
+        (mode === PlaybackLoopMode.LIST ? media.PlaylistLoopMode.PLAYLIST_LOOP_MODE_ALL :
+          media.PlaylistLoopMode.PLAYLIST_LOOP_MODE_NONE);
       // This read-only native task is queued after the asynchronous mode setter.
       this.player.getTrackDescription().then(() => {
-        if (!this.released && requestId === this.loopRequestId) this.observer.onLoopChange(this.isLooping());
+        if (!this.released && requestId === this.loopRequestId) this.observer.onLoopModeChange(this.currentLoopMode());
       }).catch((error: Object) => {
         if (!this.released && requestId === this.loopRequestId) {
           this.observer.onWarning('loop', SystemPlaybackPort.platformError(error));
         }
       });
     } else {
+      const loop: boolean = mode !== PlaybackLoopMode.SEQUENCE;
       this.player.loop = loop;
-      this.observer.onLoopChange(this.player.loop);
+      if (this.player.loop !== loop) throw new PlaybackPortError(5400102, 'Loop mode not applied');
+      // With one source, single repeat and list repeat have the same native behavior.
+      this.singleSourceLoopMode = mode;
+      this.observer.onLoopModeChange(mode);
     }
   }
 
@@ -458,8 +467,14 @@ export class SystemPlaybackPort implements PlaybackBackend {
   }
 
   private isLooping(): boolean {
-    return this.playlist !== null ?
-      this.player.playlistLoopMode === media.PlaylistLoopMode.PLAYLIST_LOOP_MODE_ONE : this.player.loop;
+    return this.currentLoopMode() !== PlaybackLoopMode.SEQUENCE;
+  }
+
+  private currentLoopMode(): PlaybackLoopMode {
+    if (this.playlist === null) return this.player.loop ? this.singleSourceLoopMode : PlaybackLoopMode.SEQUENCE;
+    if (this.player.playlistLoopMode === media.PlaylistLoopMode.PLAYLIST_LOOP_MODE_ONE) return PlaybackLoopMode.SINGLE;
+    if (this.player.playlistLoopMode === media.PlaylistLoopMode.PLAYLIST_LOOP_MODE_ALL) return PlaybackLoopMode.LIST;
+    return PlaybackLoopMode.SEQUENCE;
   }
 
   private async refreshTracks(descriptions?: media.MediaDescription[]): Promise<void> {

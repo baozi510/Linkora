@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@ohos/hypium';
 import { MediaSource, PlaybackEngine, PlaybackSnapshot, PlaybackStatus } from 'linkora_core';
 import {
-  VideoDisplayMode,
+  VideoDisplayMode, PlaybackLoopMode,
   PlaybackPort,
   PlaybackPortError,
   PlaybackPortFactory,
@@ -58,8 +58,8 @@ class FakePlaybackPort implements PlaybackPort {
     this.observer.onStateChange(PortPlaybackState.STOPPED);
   }
 
-  setLoop(loop: boolean): void {
-    this.observer.onLoopChange(loop);
+  setLoopMode(mode: PlaybackLoopMode): void {
+    this.observer.onLoopModeChange(mode);
   }
 
   setDisplayMode(mode: VideoDisplayMode): void {

@@ -8,7 +8,7 @@ import { PlaybackObserver, PlaybackSnapshot, PlaybackStatus } from '../playback/
 import { NetworkAccessPolicyPort } from '../contracts/NetworkPorts';
 import { AppFailure } from '../errors/AppFailure';
 import { MediaSourceKind } from '../models/MediaSource';
-import { VideoDisplayMode } from '../playback/PlaybackPort';
+import { VideoDisplayMode, PlaybackLoopMode } from '../playback/PlaybackPort';
 
 export type PlaybackEngineFactory = (observer: PlaybackObserver) => PlaybackEngine;
 
@@ -151,8 +151,14 @@ export class PlayerFeatureController {
     this.engine.setVolume(normalized);
   }
 
-  toggleLoop(): void {
-    this.engine.setLoop(!this.state.playback.loop);
+  cycleLoopMode(): void {
+    const mode: PlaybackLoopMode = this.state.playback.loopMode;
+    this.setLoopMode(mode === PlaybackLoopMode.SEQUENCE ? PlaybackLoopMode.SINGLE :
+      (mode === PlaybackLoopMode.SINGLE ? PlaybackLoopMode.LIST : PlaybackLoopMode.SEQUENCE));
+  }
+
+  setLoopMode(mode: PlaybackLoopMode): void {
+    if (this.active) this.engine.setLoopMode(mode);
   }
 
   nextPlaylistItem(): void {

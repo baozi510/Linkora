@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@ohos/hypium';
 import {
-  AppFailure, FailureCatalog, MediaFormat, MediaSourceKind, NetworkAccessPolicyPort,
+  AppFailure, FailureCatalog, MediaFormat, MediaSourceKind, NetworkAccessPolicyPort, PlaybackLoopMode,
   AppAccentColor,
   AppSettings,
   AppThemeMode,
@@ -344,8 +344,8 @@ class FakePlaybackPort implements PlaybackPort {
     this.observer.onStateChange(PortPlaybackState.STOPPED);
   }
 
-  setLoop(loop: boolean): void {
-    this.observer.onLoopChange(loop);
+  setLoopMode(mode: PlaybackLoopMode): void {
+    this.observer.onLoopModeChange(mode);
   }
 
   setDisplayMode(mode: VideoDisplayMode): void {
@@ -1273,8 +1273,12 @@ export default function featureModulesTest(): void {
       port!.observer.onPlaybackRateChange(1.5); port!.observer.onVolumeChange(0.25);
       expect(controller.currentState().playbackRate).assertEqual(1.5);
       expect(controller.currentState().volume).assertEqual(0.25);
-      controller.toggleLoop();
-      expect(controller.currentState().playback.loop).assertTrue();
+      controller.cycleLoopMode();
+      expect(controller.currentState().playback.loopMode).assertEqual(PlaybackLoopMode.SINGLE);
+      controller.cycleLoopMode();
+      expect(controller.currentState().playback.loopMode).assertEqual(PlaybackLoopMode.LIST);
+      controller.cycleLoopMode();
+      expect(controller.currentState().playback.loopMode).assertEqual(PlaybackLoopMode.SEQUENCE);
       controller.stopPlayback(); await settle();
       expect(controller.currentState().playback.status).assertEqual(PlaybackStatus.STOPPED);
       controller.togglePlayback(); await settle();

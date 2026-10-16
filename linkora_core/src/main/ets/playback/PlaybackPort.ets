@@ -32,6 +32,12 @@ export enum VideoDisplayMode {
   STRETCH = 'stretch'
 }
 
+export enum PlaybackLoopMode {
+  SEQUENCE = 'sequence',
+  SINGLE = 'single',
+  LIST = 'list'
+}
+
 export class PortTrack {
   readonly id: string;
   readonly kind: PortTrackKind;
@@ -150,7 +156,7 @@ export type PortVideoSizeObserver = (width: number, height: number) => void;
 export type PortTrackObserver = (tracks: PortTrack[]) => void;
 export type PortVideoInfoObserver = (info: PortVideoInfo) => void;
 export type PortVoidObserver = () => void;
-export type PortBooleanObserver = (value: boolean) => void;
+export type PortLoopModeObserver = (mode: PlaybackLoopMode) => void;
 export type PortStreamEndObserver = (event: PortStreamEnd) => void;
 export type PortInterruptionObserver = (event: PortAudioInterruption) => void;
 export type PortAudioOutputObserver = (event: PortAudioOutputChange) => void;
@@ -172,7 +178,7 @@ export class PlaybackPortObserver {
   readonly onBackendChange: PortStringObserver;
   readonly onPlaybackRateChange: PortNumberObserver;
   readonly onVolumeChange: PortNumberObserver;
-  readonly onLoopChange: PortBooleanObserver;
+  readonly onLoopModeChange: PortLoopModeObserver;
   readonly onStreamEnd: PortStreamEndObserver;
   readonly onAudioInterruption: PortInterruptionObserver;
   readonly onAudioOutputChange: PortAudioOutputObserver;
@@ -190,7 +196,7 @@ export class PlaybackPortObserver {
     onBackendChange: PortStringObserver = () => {},
     onPlaybackRateChange: PortNumberObserver = () => {},
     onVolumeChange: PortNumberObserver = () => {},
-    onLoopChange: PortBooleanObserver = () => {},
+    onLoopModeChange: PortLoopModeObserver = () => {},
     onStreamEnd: PortStreamEndObserver = () => {},
     onAudioInterruption: PortInterruptionObserver = () => {},
     onAudioOutputChange: PortAudioOutputObserver = () => {},
@@ -211,7 +217,7 @@ export class PlaybackPortObserver {
     this.onBackendChange = onBackendChange;
     this.onPlaybackRateChange = onPlaybackRateChange;
     this.onVolumeChange = onVolumeChange;
-    this.onLoopChange = onLoopChange;
+    this.onLoopModeChange = onLoopModeChange;
     this.onStreamEnd = onStreamEnd;
     this.onAudioInterruption = onAudioInterruption;
     this.onAudioOutputChange = onAudioOutputChange;
@@ -233,7 +239,7 @@ export interface PlaybackPort {
   seek(position: number): void;
   setPlaybackRate(rate: number): void;
   setVolume(volume: number): void;
-  setLoop(loop: boolean): void;
+  setLoopMode(mode: PlaybackLoopMode): void;
   setDisplayMode(mode: VideoDisplayMode): void;
   selectAudioTrack(id: string): Promise<void>;
   release(): Promise<void>;

@@ -11,7 +11,7 @@ import {
   PortPlaybackState,
   PortTrack,
   PortVideoInfo,
-  PortTrackKind, PortStreamEnd, PortAudioInterruption, PortAudioOutputChange, VideoDisplayMode
+  PortTrackKind, PortStreamEnd, PortAudioInterruption, PortAudioOutputChange, VideoDisplayMode, PlaybackLoopMode
 } from './PlaybackPort';
 import { PlaybackObserver, PlaybackSnapshot, PlaybackStatus } from './PlaybackModels';
 
@@ -43,10 +43,10 @@ export class PlaybackEngine {
   private surfaceId: string = '';
   private playbackRate: number = 1;
   private volume: number = 1;
-  private loop: boolean = false;
+  private loopMode: PlaybackLoopMode = PlaybackLoopMode.SEQUENCE;
   private requestedRate: number = 1;
   private requestedVolume: number = 1;
-  private requestedLoop: boolean = false;
+  private requestedLoopMode: PlaybackLoopMode = PlaybackLoopMode.SEQUENCE;
   private displayMode: VideoDisplayMode | null = null;
   private requestedDisplayMode: VideoDisplayMode = VideoDisplayMode.FIT;
   private streamEnd: PortStreamEnd | null = null;
@@ -95,7 +95,7 @@ export class PlaybackEngine {
       this.duration = Math.max(this.duration, port.getDuration());
       this.setDisplayMode(this.requestedDisplayMode);
       if (!this.isCurrent(sessionId) || this.port !== port) return;
-      if (this.requestedLoop) this.setLoop(true);
+      if (this.requestedLoopMode !== PlaybackLoopMode.SEQUENCE) this.setLoopMode(this.requestedLoopMode);
       if (!this.isCurrent(sessionId) || this.port !== port) return;
       if (this.requestedRate !== 1) this.setPlaybackRate(this.requestedRate);
       if (!this.isCurrent(sessionId) || this.port !== port) return;
@@ -228,11 +228,14 @@ export class PlaybackEngine {
     }
   }
 
-  setLoop(loop: boolean): void {
+  setLoopMode(mode: PlaybackLoopMode): void {
     if (this.port === null) return;
     try {
-      this.port.setLoop(loop);
-      this.requestedLoop = loop;
+      if (mode !== PlaybackLoopMode.SEQUENCE && mode !== PlaybackLoopMode.SINGLE && mode !== PlaybackLoopMode.LIST) {
+        throw new PlaybackPortError(401, 'Invalid loop mode');
+      }
+      this.port.setLoopMode(mode);
+      this.requestedLoopMode = mode;
     } catch (error) {
       this.warn('loop', this.portError(error));
     }
@@ -376,8 +379,8 @@ export class PlaybackEngine {
           this.notify();
         }
       },
-      (loop: boolean) => {
-        if (this.isCurrent(sessionId)) { this.loop = loop; this.notify(); }
+      (mode: PlaybackLoopMode) => {
+        if (this.isCurrent(sessionId)) { this.loopMode = mode; this.notify(); }
       },
       (end: PortStreamEnd) => {
         if (this.isCurrent(sessionId)) { this.streamEnd = end; this.notify(); }
@@ -572,7 +575,7 @@ export class PlaybackEngine {
     this.videoInfo = new PortVideoInfo();
     this.playbackRate = 1;
     this.volume = 1;
-    this.loop = false;
+    this.loopMode = PlaybackLoopMode.SEQUENCE;
     this.streamEnd = null;
     this.audioInterruption = null;
     this.audioOutput = null;
@@ -595,7 +598,7 @@ export class PlaybackEngine {
       this.backend,
       this.tracks,
       this.videoInfo,
-      this.playbackRate, this.volume, this.loop, this.streamEnd,
+      this.playbackRate, this.volume, this.loopMode, this.streamEnd,
       this.audioInterruption, this.audioOutput, this.warning, this.warningOperation, this.displayMode, this.playlistIndex
     ));
   }

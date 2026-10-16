@@ -61,7 +61,7 @@ function fixture(preference = 'auto') {
         prepare: () => prepare(events), play: async () => events.onStateChange('playing'),
         pause: async () => events.onStateChange('paused'), seek: value => events.onSeekComplete(value),
         stop: async () => events.onStateChange('stopped'),
-        setLoop: value => events.onLoopChange(value),
+        setLoopMode: value => events.onLoopModeChange(value),
         setDisplayMode: value => events.onDisplayModeChange(value), selectAudioTrack: async () => {},
         setPlaybackRate() {}, setVolume() {},
         release: async () => { backend.closes++; events.onStateChange('released'); }
@@ -186,16 +186,52 @@ test('Engine snapshots use acknowledged settings and fence old settings events',
   await engine.release();
 });
 
+test('Engine loop mode waits for acknowledgement, survives replay and fences stale callbacks', async () => {
+  const f = fixture(), snapshots = [], requested = [];
+  const factory = f.factory('system');
+  const engine = new f.core.PlaybackEngine(value => snapshots.push(value), async events => {
+    const backend = await factory(events);
+    backend.setLoopMode = mode => requested.push(mode);
+    return backend;
+  });
+  const source = f.core.MediaSource.fromLocalDocument('file://one.mp4');
+  await engine.open(source, 'surface');
+  engine.setLoopMode('list');
+  assert.equal(snapshots.at(-1).loopMode, 'sequence');
+  f.backends[0].events.onLoopModeChange('list');
+  assert.equal(snapshots.at(-1).loopMode, 'list');
+  await engine.stop(); await engine.togglePlayback();
+  assert.deepEqual(requested, ['list', 'list']);
+  const before = snapshots.length;
+  f.backends[0].events.onLoopModeChange('single'); assert.equal(snapshots.length, before);
+  f.backends[1].events.onLoopModeChange('list');
+  assert.equal(snapshots.at(-1).loopMode, 'list');
+  await engine.release();
+});
+
+test('Controller cycles sequence, single and list through acknowledged playback state', async () => {
+  const f = fixture(), c = f.core;
+  const controller = new c.PlayerFeatureController(c.MediaSource.fromLocalDocument('file://one.mp4'),
+    observer => new c.PlaybackEngine(observer, f.factory('system')), { load: async () => null, save: async () => {} },
+    new c.AppSettings(), () => {});
+  controller.attachSurface('surface'); await new Promise(setImmediate);
+  for (const mode of ['single', 'list', 'sequence']) {
+    controller.cycleLoopMode();
+    assert.equal(controller.currentState().playback.loopMode, mode);
+  }
+  controller.stop(); await new Promise(setImmediate);
+});
+
 test('Engine stop/replay allocates only after disposal and preserves requested loop', async () => {
   const f = fixture(), snapshots = [];
   const engine = new f.core.PlaybackEngine(value => snapshots.push(value), f.factory('system'));
   await engine.open(f.core.MediaSource.fromLocalDocument('file://one.mp4'), 'surface');
-  engine.setLoop(true);
-  assert.equal(snapshots.at(-1).loop, true);
+  engine.setLoopMode('single');
+  assert.equal(snapshots.at(-1).loopMode, 'single');
   await engine.stop(); assert.equal(snapshots.at(-1).status, 'stopped');
   await engine.togglePlayback();
   assert.equal(f.backends.length, 2); assert.equal(f.backends[0].closes, 1);
-  assert.equal(snapshots.at(-1).status, 'playing'); assert.equal(snapshots.at(-1).loop, true);
+  assert.equal(snapshots.at(-1).status, 'playing'); assert.equal(snapshots.at(-1).loopMode, 'single');
   await engine.release();
 });
 
@@ -397,12 +433,12 @@ test('live playback does not require optional loop support', async () => {
   const make = f.factory('system');
   const engine = new f.core.PlaybackEngine(value => snapshots.push(value), async observer => {
     const port = await make(observer);
-    port.setLoop = () => { throw new f.core.PlaybackPortError(5400102); };
+    port.setLoopMode = () => { throw new f.core.PlaybackPortError(5400102); };
     return port;
   });
   await engine.open(f.core.MediaSource.fromLocalDocument('file://live.m3u8'), 'surface');
   assert.equal(snapshots.at(-1).status, 'playing');
-  engine.setLoop(true);
+  engine.setLoopMode('single');
   assert.equal(snapshots.at(-1).status, 'playing');
   assert.equal(snapshots.at(-1).warningOperation, 'loop');
   assert.equal(f.backends[0].closes, 0);

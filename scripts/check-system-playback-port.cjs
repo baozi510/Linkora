@@ -57,7 +57,7 @@ function fixture() {
     }, { filename: file })(name => {
       if (name === 'linkora_core') return core;
       if (name === '@kit.MediaKit') return { media: { createAVPlayer: async () => player,
-        createMediaSourceWithFd: fdSrc => ({ fdSrc }), PlaylistLoopMode: { PLAYLIST_LOOP_MODE_NONE: 4, PLAYLIST_LOOP_MODE_ONE: 2 },
+        createMediaSourceWithFd: fdSrc => ({ fdSrc }), PlaylistLoopMode: { PLAYLIST_LOOP_MODE_NONE: 4, PLAYLIST_LOOP_MODE_ONE: 2, PLAYLIST_LOOP_MODE_ALL: 1 },
         SeekMode: { SEEK_CLOSEST: 0 }, VideoScaleType: { VIDEO_SCALE_TYPE_FIT: 0, VIDEO_SCALE_TYPE_FIT_CROP: 1, VIDEO_SCALE_TYPE_SCALED_ASPECT: 2 } } };
       if (name === '@kit.BasicServicesKit') return { deviceInfo: { sdkApiVersion: 26 } };
       if (name === '@kit.CoreFileKit') return { fileIo: { OpenMode: { READ_ONLY: 0 },
@@ -109,11 +109,43 @@ test('System native queue preserves source order and selected start, uses real I
   assert.deepEqual(f.states.slice(stateCount), ['playing'], 'a seamless change must restore actual native playback state');
   await assert.rejects(port.selectPlaylistItem(-1));
   await assert.rejects(port.selectPlaylistItem(3));
-  port.setLoop(true); assert.equal(f.player.playlistLoopMode, 2);
+  port.setLoopMode('single'); assert.equal(f.player.playlistLoopMode, 2);
   await port.release();
   assert.deepEqual(f.closedFiles.sort(), [11, 12, 13]);
   f.player.contentChanged(f.queue[0].id);
   assert.deepEqual(changes, [1, 2]);
+});
+
+test('System maps all three loop modes and acknowledges the native queue readback', async () => {
+  const f = fixture(), c = f.core, modes = [], ends = [];
+  const items = ['a', 'b'].map(id => new c.PlaybackPlaylistItem(id, c.MediaSource.fromLocalDocument('file://' + id + '.mp4')));
+  const port = await f.create(new c.PlaybackPlaylist(items, 1, true));
+  f.observer.onLoopModeChange = value => modes.push(value);
+  f.observer.onStreamEnd = value => ends.push(value);
+  await port.prepare();
+  for (const [mode, native] of [['list', 1], ['single', 2], ['sequence', 4]]) {
+    port.setLoopMode(mode);
+    assert.equal(f.player.playlistLoopMode, native);
+    await new Promise(setImmediate);
+    assert.equal(modes.at(-1), mode);
+    f.player.emit('endOfStream');
+    assert.equal(ends.at(-1).looping, mode !== 'sequence');
+  }
+  assert.throws(() => port.setLoopMode('shuffle'));
+  await port.release();
+  assert.throws(() => port.setLoopMode('list'));
+});
+
+test('System single-source list repeat uses native repeat and preserves the selected mode', async () => {
+  const f = fixture(), port = await f.create(), modes = [];
+  f.observer.onLoopModeChange = value => modes.push(value);
+  await port.prepare();
+  for (const mode of ['single', 'list', 'sequence']) {
+    port.setLoopMode(mode);
+    assert.equal(f.player.loop, mode !== 'sequence');
+    assert.equal(modes.at(-1), mode);
+  }
+  await port.release();
 });
 
 test('System failed native append closes all files already owned by that queue', async () => {
@@ -172,11 +204,11 @@ test('System queue repeat reads back after the queued native setter, not its old
   let applied = 4, pending = 4;
   Object.defineProperty(f.player, 'playlistLoopMode', { get: () => applied, set: value => { pending = value; } });
   f.player.getTrackDescription = async () => { applied = pending; return []; };
-  f.observer.onLoopChange = value => loops.push(value);
-  port.setLoop(true);
+  f.observer.onLoopModeChange = value => loops.push(value);
+  port.setLoopMode('single');
   assert.deepEqual(loops, []);
   await new Promise(setImmediate);
-  assert.deepEqual(loops, [true]);
+  assert.deepEqual(loops, ['single']);
   await port.release();
 });
 
@@ -198,14 +230,14 @@ test('System loop readback ignores superseded and released native queries', asyn
   const port = await f.create(new c.PlaybackPlaylist([item], 0, true));
   await port.prepare(); await new Promise(setImmediate);
   f.player.getTrackDescription = () => new Promise(resolve => finish.push(resolve));
-  f.observer.onLoopChange = value => loops.push(value);
-  port.setLoop(true); port.setLoop(false);
+  f.observer.onLoopModeChange = value => loops.push(value);
+  port.setLoopMode('single'); port.setLoopMode('sequence');
   finish[1]([]); await new Promise(setImmediate);
   finish[0]([]); await new Promise(setImmediate);
-  assert.deepEqual(loops, [false]);
-  port.setLoop(true); await port.release();
+  assert.deepEqual(loops, ['sequence']);
+  port.setLoopMode('single'); await port.release();
   finish[2]([]); await new Promise(setImmediate);
-  assert.deepEqual(loops, [false]);
+  assert.deepEqual(loops, ['sequence']);
 });
 
 test('System release during an awaited native append fences acknowledgements and owns each FD once', async () => {
@@ -270,10 +302,10 @@ test('System discovers and selects only actual audio track ids', async () => {
 
 test('System loop/EOS and stop stay distinct from one-shot completion', async () => {
   const f = fixture(), port = await f.create(), loops = [], ends = [];
-  f.observer.onLoopChange = value => loops.push(value);
+  f.observer.onLoopModeChange = value => loops.push(value);
   f.observer.onStreamEnd = value => ends.push(value);
-  await port.prepare(); port.setLoop(true);
-  assert.equal(f.player.loop, true); assert.deepEqual(loops, [true]);
+  await port.prepare(); port.setLoopMode('single');
+  assert.equal(f.player.loop, true); assert.deepEqual(loops, ['single']);
   f.player.emit('endOfStream');
   assert.equal(ends.at(-1).reason, 'eof'); assert.equal(ends.at(-1).looping, true);
   assert.notEqual(f.states.at(-1), 'completed');

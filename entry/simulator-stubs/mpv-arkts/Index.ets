@@ -11,7 +11,7 @@ export enum MpvEvent {
 }
 
 export enum PlaylistMode { None = 0, File = 1, Playlist = 2, Random = 3 }
-export enum MpvFormat { MPV_FORMAT_FLAG = 3 }
+export enum MpvFormat { MPV_FORMAT_STRING = 1, MPV_FORMAT_FLAG = 3 }
 
 export class Media {
   readonly uri: string;

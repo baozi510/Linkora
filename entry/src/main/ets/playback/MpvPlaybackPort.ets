@@ -3,7 +3,6 @@ import {
   Media,
   MpvEvent,
   MpvFormat,
-  PlaylistMode,
   Playlist,
   Player,
   Track,
@@ -25,7 +24,8 @@ import {
   PortTrack,
   PortTrackKind,
   PortVideoInfo,
-  VideoDisplayMode
+  VideoDisplayMode,
+  PlaybackLoopMode
 } from 'linkora_core';
 
 const MPV_PREPARE_TIMEOUT_MS: number = 12000;
@@ -47,7 +47,7 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
   private prepareTimer: number = -1;
   private seekPending: boolean = false;
   private latestErrorLog: string = '';
-  private loop: boolean = false;
+  private loopMode: PlaybackLoopMode = PlaybackLoopMode.SEQUENCE;
   private stopRequested: boolean = false;
   private endSignaled: boolean = false;
   private releasePromise: Promise<void> | null = null;
@@ -57,6 +57,8 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
     this.player = new Player();
     this.player.native.addEventObserver(this);
     this.player.native.observeProperty('idle-active', MpvFormat.MPV_FORMAT_FLAG);
+    this.player.native.observeProperty('loop-file', MpvFormat.MPV_FORMAT_STRING);
+    this.player.native.observeProperty('loop-playlist', MpvFormat.MPV_FORMAT_STRING);
     this.bindStreams();
   }
 
@@ -191,9 +193,13 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
     this.player.setVolume(Math.max(0, Math.min(volume, 1)) * 100);
   }
 
-  setLoop(loop: boolean): void {
+  setLoopMode(mode: PlaybackLoopMode): void {
     this.ensureReady();
-    this.player.setLoopMode(loop ? PlaylistMode.File : PlaylistMode.None);
+    if (mode !== PlaybackLoopMode.SEQUENCE && mode !== PlaybackLoopMode.SINGLE && mode !== PlaybackLoopMode.LIST) {
+      throw new PlaybackPortError(401, 'Invalid loop mode');
+    }
+    this.player.native.setProperty('loop-file', mode === PlaybackLoopMode.SINGLE ? 'inf' : 'no');
+    this.player.native.setProperty('loop-playlist', mode === PlaybackLoopMode.LIST ? 'inf' : 'no');
   }
 
   setDisplayMode(mode: VideoDisplayMode): void {
@@ -255,6 +261,20 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
   }
 
   onPropertyChanged(property: string, value?: string | number | boolean): void {
+    if (this.released) return;
+    if (property === 'loop-file' || property === 'loop-playlist') {
+      try {
+        const file: string = this.player.native.getPropertyString('loop-file');
+        const list: string = this.player.native.getPropertyString('loop-playlist');
+        if ((file !== 'no' && file !== 'inf') || (list !== 'no' && list !== 'inf')) return;
+        this.loopMode = file === 'inf' ? PlaybackLoopMode.SINGLE :
+          (list === 'inf' ? PlaybackLoopMode.LIST : PlaybackLoopMode.SEQUENCE);
+        this.observer.onLoopModeChange(this.loopMode);
+      } catch (error) {
+        this.observer.onWarning('loop', new PlaybackPortError(0, String(error)));
+      }
+      return;
+    }
     if (property === 'idle-active' && value === true) {
       this.failIdlePlaylist();
       return;
@@ -340,7 +360,7 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
       }
       // mpv-arkts emits eof=true and then playing=false. Once EOF is terminal,
       // that trailing false must not downgrade COMPLETED to PAUSED.
-      if (!playing && (this.completed || (this.loop && this.endSignaled))) {
+      if (!playing && (this.completed || (this.isLooping() && this.endSignaled))) {
         return;
       }
       this.observer.onStateChange(playing ? PortPlaybackState.PLAYING : PortPlaybackState.PAUSED);
@@ -349,10 +369,10 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
       if (this.released || this.stopRequested || !this.prepared) {
         return;
       }
-      this.completed = eof && !this.loop;
+      this.completed = eof && !this.isLooping();
       if (eof) {
         this.emitEnd(PortStreamEndReason.EOF);
-        if (!this.loop) this.observer.onStateChange(PortPlaybackState.COMPLETED);
+        if (!this.isLooping()) this.observer.onStateChange(PortPlaybackState.COMPLETED);
       } else this.endSignaled = false;
     });
     this.player.stream.buffering.listen((buffering: boolean) => {
@@ -407,11 +427,6 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
     this.player.stream.volume.listen((volume: number) => {
       if (!this.released) this.observer.onVolumeChange(Math.max(0, Math.min(1, volume / 100)));
     });
-    this.player.stream.playlistMode.listen((mode: PlaylistMode) => {
-      if (this.released) return;
-      this.loop = mode === PlaylistMode.File;
-      this.observer.onLoopChange(this.loop);
-    });
     this.player.stream.error.listen((detail: string) => {
       // The wrapper emits error-level log lines, not structured fatal errors.
       if (!this.released) {
@@ -430,8 +445,12 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
   private emitEnd(reason: PortStreamEndReason): void {
     if (this.endSignaled) return;
     this.endSignaled = true;
-    this.observer.onStreamEnd(new PortStreamEnd(reason, this.loop,
+    this.observer.onStreamEnd(new PortStreamEnd(reason, this.isLooping(),
       reason === PortStreamEndReason.UNKNOWN ? this.latestErrorLog : ''));
+  }
+
+  private isLooping(): boolean {
+    return this.loopMode !== PlaybackLoopMode.SEQUENCE;
   }
 
   private mapTracks(tracks: Tracks, selected: Track): PortTrack[] {

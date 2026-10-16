@@ -1,6 +1,6 @@
 import { AppFailure } from '../errors/AppFailure';
 import { PlaybackPortError, PortAudioInterruption, PortAudioOutputChange, PortStreamEnd,
-  PortTrack, PortVideoInfo, VideoDisplayMode } from './PlaybackPort';
+  PortTrack, PortVideoInfo, VideoDisplayMode, PlaybackLoopMode } from './PlaybackPort';
 
 export enum PlaybackStatus {
   IDLE = 'idle',
@@ -31,7 +31,7 @@ export class PlaybackSnapshot {
   readonly videoInfo: PortVideoInfo;
   readonly playbackRate: number;
   readonly volume: number;
-  readonly loop: boolean;
+  readonly loopMode: PlaybackLoopMode;
   readonly streamEnd: PortStreamEnd | null;
   readonly audioInterruption: PortAudioInterruption | null;
   readonly audioOutput: PortAudioOutputChange | null;
@@ -44,7 +44,7 @@ export class PlaybackSnapshot {
     videoWidth: number, videoHeight: number, failure: AppFailure | null, firstFrameRendered: boolean,
     bufferedDuration: number = 0, backend: string = '', tracks: PortTrack[] = [],
     videoInfo: PortVideoInfo = new PortVideoInfo(),
-    playbackRate: number = 1, volume: number = 1, loop: boolean = false,
+    playbackRate: number = 1, volume: number = 1, loopMode: PlaybackLoopMode = PlaybackLoopMode.SEQUENCE,
     streamEnd: PortStreamEnd | null = null, audioInterruption: PortAudioInterruption | null = null,
     audioOutput: PortAudioOutputChange | null = null, warning: PlaybackPortError | null = null,
     warningOperation: string = '', displayMode: VideoDisplayMode | null = null, playlistIndex: number = -1) {
@@ -62,7 +62,7 @@ export class PlaybackSnapshot {
     this.videoInfo = videoInfo;
     this.playbackRate = playbackRate;
     this.volume = volume;
-    this.loop = loop;
+    this.loopMode = loopMode;
     this.streamEnd = streamEnd;
     this.audioInterruption = audioInterruption;
     this.audioOutput = audioOutput;

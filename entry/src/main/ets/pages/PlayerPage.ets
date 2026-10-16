@@ -375,7 +375,7 @@ export struct PlayerPage {
             },
             onChangeDisplayMode: () => { this.controller?.cycleDisplayMode(); },
             onStopPlayback: () => { this.controller?.stopPlayback(); },
-            onToggleLoop: () => { this.controller?.toggleLoop(); },
+            onChangeLoopMode: () => { this.controller?.cycleLoopMode(); },
             onSelectAudioTrack: (id: string) => { this.controller?.selectAudioTrack(id); },
             onChangePlaybackRate: () => {
               this.nextPlaybackRate();
@@ -479,7 +479,7 @@ export struct PlayerPage {
           },
           onChangeDisplayMode: () => { this.controller?.cycleDisplayMode(); },
           onStopPlayback: () => { this.controller?.stopPlayback(); },
-          onToggleLoop: () => { this.controller?.toggleLoop(); },
+          onChangeLoopMode: () => { this.controller?.cycleLoopMode(); },
           onSelectAudioTrack: (id: string) => { this.controller?.selectAudioTrack(id); },
           onChangePlaybackRate: () => {
             this.nextPlaybackRate();

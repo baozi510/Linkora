@@ -1,4 +1,5 @@
-import { PlaybackSnapshot, PlaybackStatus, PortTrack, PortTrackKind, VideoDisplayMode, PlaybackPlaylist } from 'linkora_core';
+import { PlaybackSnapshot, PlaybackStatus, PortTrack, PortTrackKind, VideoDisplayMode, PlaybackPlaylist,
+  PlaybackLoopMode } from 'linkora_core';
 import { AppTypography, PlayerColors, PlayerRadius } from '../ui/AppTheme';
 
 @ComponentV2
@@ -21,7 +22,7 @@ export struct PlayerControls {
   @Event onChangeVolume: (value: number) => void = () => {};
   @Event onToggleFullScreen: () => void = () => {};
   @Event onStopPlayback: () => void = () => {};
-  @Event onToggleLoop: () => void = () => {};
+  @Event onChangeLoopMode: () => void = () => {};
   @Event onSelectAudioTrack: (id: string) => void = () => {};
   @Event onChangeDisplayMode: () => void = () => {};
 
@@ -30,6 +31,12 @@ export struct PlayerControls {
     if (this.snapshot.displayMode === VideoDisplayMode.CROP) return $r('app.string.player_display_crop');
     if (this.snapshot.displayMode === VideoDisplayMode.STRETCH) return $r('app.string.player_display_stretch');
     return $r('app.string.player_display_mode');
+  }
+
+  private loopModeText(): Resource {
+    if (this.snapshot.loopMode === PlaybackLoopMode.SINGLE) return $r('app.string.player_loop_single');
+    if (this.snapshot.loopMode === PlaybackLoopMode.LIST) return $r('app.string.player_loop_list');
+    return $r('app.string.player_loop_sequence');
   }
 
   private audioTracks(): PortTrack[] {
@@ -156,9 +163,10 @@ export struct PlayerControls {
         Button($r('app.string.player_stop'))
           .enabled(this.canControl())
           .onClick(() => this.onStopPlayback())
-        Button(this.snapshot.loop ? $r('app.string.player_loop_on') : $r('app.string.player_loop_off'))
+        Button(this.loopModeText())
           .enabled(this.canControl())
-          .onClick(() => this.onToggleLoop())
+          .accessibilityText(this.loopModeText())
+          .onClick(() => this.onChangeLoopMode())
         if (this.audioTracks().length > 0) {
           Select(this.audioOptions())
             .selected(this.audioTracks().findIndex((track: PortTrack) => track.selected))
