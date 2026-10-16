@@ -110,8 +110,9 @@
     },
     {"name": "player_screen_direction", "value": "屏幕方向"},
     {"name": "player_direction_system", "value": "跟随系统"},
-    {"name": "player_direction_landscape", "value": "锁定横屏"},
-    {"name": "player_direction_portrait", "value": "锁定竖屏"},
+    {"name": "player_direction_lock", "value": "锁定当前方向"},
+    {"name": "player_direction_unlock", "value": "解除方向锁定"},
+    {"name": "player_direction_locked", "value": "已锁定当前方向"},
     {"name": "player_direction_failed", "value": "屏幕方向切换失败，请重试"},
     {
       "name": "player_volume",

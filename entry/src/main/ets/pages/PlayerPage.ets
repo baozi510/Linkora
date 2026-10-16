@@ -406,30 +406,22 @@ export struct PlayerPage {
           onBack: () => this.close()
         })
         Row({ space: 12 }) {
-          Text($r('app.string.player_screen_direction'))
+          Text(this.screenDirection === null ? $r('app.string.player_screen_direction') :
+            (this.screenDirection === PlayerScreenDirection.LOCK_CURRENT ?
+              $r('app.string.player_direction_locked') : $r('app.string.player_direction_system')))
             .fontSize(13)
             .fontColor(PlayerColors.TEXT_SECONDARY)
-          Select([
-            { value: $r('app.string.player_direction_system') },
-            { value: $r('app.string.player_direction_landscape') },
-            { value: $r('app.string.player_direction_portrait') }
-          ])
-            .selected(this.screenDirection === PlayerScreenDirection.LANDSCAPE ? 1 :
-              (this.screenDirection === PlayerScreenDirection.PORTRAIT ? 2 : 0))
-            .value(this.screenDirection === null ? $r('app.string.player_screen_direction') :
-              (this.screenDirection === PlayerScreenDirection.LANDSCAPE ? $r('app.string.player_direction_landscape') :
-                (this.screenDirection === PlayerScreenDirection.PORTRAIT ? $r('app.string.player_direction_portrait') :
-                  $r('app.string.player_direction_system'))))
-            .accessibilityText($r('app.string.player_screen_direction'))
+          Button(this.screenDirection === PlayerScreenDirection.LOCK_CURRENT ?
+            $r('app.string.player_direction_unlock') : $r('app.string.player_direction_lock'))
+            .type(ButtonType.Normal)
+            .height(40)
+            .fontSize(13)
             .fontColor(PlayerColors.TEXT_CONTROL)
             .backgroundColor(PlayerColors.CONTROL_SURFACE)
-            .optionFontColor(PlayerColors.TEXT_CONTROL)
-            .optionBgColor(PlayerColors.CONTROL_SURFACE)
             .enabled(!this.directionBusy && !this.previewMode)
-            .onSelect((index: number) => {
-              const directions: PlayerScreenDirection[] = [PlayerScreenDirection.FOLLOW_SYSTEM,
-                PlayerScreenDirection.LANDSCAPE, PlayerScreenDirection.PORTRAIT];
-              if (index >= 0 && index < directions.length) this.changeScreenDirection(directions[index]);
+            .onClick(() => {
+              this.changeScreenDirection(this.screenDirection === PlayerScreenDirection.LOCK_CURRENT ?
+                PlayerScreenDirection.FOLLOW_SYSTEM : PlayerScreenDirection.LOCK_CURRENT);
             })
         }
         .width('100%')

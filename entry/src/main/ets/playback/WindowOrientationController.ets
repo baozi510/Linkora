@@ -3,8 +3,7 @@ import { window } from '@kit.ArkUI';
 
 export enum PlayerScreenDirection {
   FOLLOW_SYSTEM = 'follow_system',
-  LANDSCAPE = 'landscape',
-  PORTRAIT = 'portrait'
+  LOCK_CURRENT = 'lock_current'
 }
 
 /** Owns the playback window policy, never video pixels or player state. */
@@ -30,8 +29,8 @@ export class WindowOrientationController {
   set(direction: PlayerScreenDirection): Promise<PlayerScreenDirection> {
     const operation: Promise<PlayerScreenDirection> = this.tail.then(async () => {
       if (this.closed) throw new Error('Playback window owner closed');
-      if (direction !== PlayerScreenDirection.FOLLOW_SYSTEM && direction !== PlayerScreenDirection.LANDSCAPE &&
-        direction !== PlayerScreenDirection.PORTRAIT) throw new Error('Invalid screen direction');
+      if (direction !== PlayerScreenDirection.FOLLOW_SYSTEM && direction !== PlayerScreenDirection.LOCK_CURRENT)
+        throw new Error('Invalid screen direction');
       const appWindow: window.Window = await this.ready;
       if (this.closed) throw new Error('Playback window owner closed');
       if (!this.immersive) {
@@ -40,8 +39,7 @@ export class WindowOrientationController {
         if (this.closed) throw new Error('Playback window owner closed');
       }
       const policy: window.Orientation = direction === PlayerScreenDirection.FOLLOW_SYSTEM ?
-        window.Orientation.AUTO_ROTATION_RESTRICTED : (direction === PlayerScreenDirection.LANDSCAPE ?
-          window.Orientation.LANDSCAPE : window.Orientation.PORTRAIT);
+        window.Orientation.AUTO_ROTATION_RESTRICTED : window.Orientation.LOCKED;
       await appWindow.setPreferredOrientation(policy);
       if (this.closed) throw new Error('Playback window owner closed');
       if (appWindow.getPreferredOrientation() !== policy) throw new Error('Screen direction policy not applied');
