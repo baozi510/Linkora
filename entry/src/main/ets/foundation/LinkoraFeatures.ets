@@ -76,9 +76,9 @@ export class LinkoraFeatures {
 
   static createPlayer(context: common.UIAbilityContext, source: MediaSource,
     settings: AppSettings, observer: PlayerFeatureObserver, playlist: PlaybackPlaylist | null = null): PlayerFeatureController {
-    // Network lists remain prepared snapshots until lazy native-source ownership is implemented.
     const nativePlaylist: PlaybackPlaylist | null = playlist !== null && playlist.items.length > 0 &&
-      playlist.items.every((item) => item.source.kind === MediaSourceKind.LOCAL_DOCUMENT && item.source.progressiveKey.length === 0) &&
+      (playlist.items.every((item) => item.source.kind === MediaSourceKind.LOCAL_DOCUMENT && item.source.progressiveKey.length === 0) ||
+        playlist.items.every((item) => item.source.kind === MediaSourceKind.REMOTE_FILE)) &&
       (deviceInfo.sdkApiVersion >= 26 || settings.playerBackendPreference === PlayerBackendPreference.MPV) ? playlist : null;
     const engineFactory: PlaybackEngineFactory = (playbackObserver: PlaybackObserver) =>
       new PlaybackEngine(playbackObserver, async (portObserver) =>

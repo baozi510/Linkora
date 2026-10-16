@@ -2,21 +2,27 @@ import { common } from '@kit.AbilityKit';
 import {
   MediaFormat,
   MediaSource,
-  MediaSourceKind
+  MediaSourceKind,
+  PlaybackPlaylist,
+  PlaybackPlaylistItem
 } from 'linkora_core';
-import { NetworkFileProxy, ProxyUrlLease } from 'linkora_proxy';
+import { NetworkFileProxy, NetworkFileProxyConfig, ProxyUrlLease } from 'linkora_proxy';
 import { NetworkDirectoryService } from '../services/NetworkDirectoryService';
 import { NetworkServerEntry, NetworkServerStore } from '../services/NetworkServerStore';
 import { NetworkMediaSourceFactory } from '../services/NetworkMediaSourceFactory';
+import { NetworkPlaylistSources } from './NetworkPlaylistSources';
 
 export class ResolvedPlaybackSource {
   readonly source: MediaSource;
+  readonly playlist: PlaybackPlaylist | null;
   private readonly releaseAction: () => Promise<void>;
   private released: boolean = false;
 
-  constructor(source: MediaSource, releaseAction: () => Promise<void> = async () => {}) {
+  constructor(source: MediaSource, releaseAction: () => Promise<void> = async () => {},
+    playlist: PlaybackPlaylist | null = null) {
     this.source = source;
     this.releaseAction = releaseAction;
+    this.playlist = playlist;
   }
 
   async release(): Promise<void> {
@@ -37,7 +43,10 @@ export class NetworkPlaybackSourceResolver {
     this.proxy = proxy;
   }
 
-  async resolve(source: MediaSource): Promise<ResolvedPlaybackSource> {
+  async resolve(source: MediaSource, playlist: PlaybackPlaylist | null = null): Promise<ResolvedPlaybackSource> {
+    if (playlist !== null && source.kind === MediaSourceKind.REMOTE_FILE) {
+      return this.resolvePlaylist(playlist);
+    }
     if (source.kind !== MediaSourceKind.REMOTE_FILE) {
       return new ResolvedPlaybackSource(source);
     }
@@ -58,25 +67,52 @@ export class NetworkPlaybackSourceResolver {
     let lease: ProxyUrlLease | null = null;
     try {
       lease = await this.proxy.buildSourceUrl(randomAccess, this.contentType(source.format));
-      const resolved = new MediaSource(
-        MediaSourceKind.NETWORK_LINK,
-        lease.url,
-        source.displayName,
-        source.originLabel,
-        source.format,
-        source.localCategory,
-        source.sizeBytes,
-        '',
-        source.sourceId,
-        source.credentialRef,
-        source.fingerprint
-      );
+      const resolved: MediaSource = this.withUrl(source, lease.url);
       return new ResolvedPlaybackSource(resolved, () => lease!.release());
     } catch (error) {
       randomAccess.cancel();
       await randomAccess.close().catch(() => {});
       throw error as Error;
     }
+  }
+
+  private async resolvePlaylist(playlist: PlaybackPlaylist): Promise<ResolvedPlaybackSource> {
+    const items: PlaybackPlaylistItem[] = playlist.items;
+    const serverId: number = items.length === 0 ? 0 : NetworkMediaSourceFactory.serverId(items[0].source);
+    if (serverId <= 0 || items.some((item) => item.source.kind !== MediaSourceKind.REMOTE_FILE ||
+      NetworkMediaSourceFactory.serverId(item.source) !== serverId)) {
+      throw new Error('Network playlist must belong to one saved server');
+    }
+    const servers: NetworkServerEntry[] = await new NetworkServerStore(this.context).load();
+    const server: NetworkServerEntry | undefined = servers.find((entry) => entry.id === serverId);
+    if (server === undefined) throw new Error('Remote media server no longer exists');
+    const service = new NetworkDirectoryService(server);
+    const owner = new NetworkPlaylistSources(items.map((item) => item.source),
+      (index: number, setupObserver: (settled: Promise<void>) => void) =>
+        service.openSource(items[index].source.locator, '', setupObserver));
+    // Slots are metadata-only URLs. The owner, not this slot count, bounds live upstream readers to one.
+    const proxy = new NetworkFileProxy(new NetworkFileProxyConfig(256 * 1024, 8000, items.length));
+    const close = async (): Promise<void> => {
+      try { await owner.release(); } finally { await proxy.close(); }
+    };
+    try {
+      const sources = owner.sources();
+      const resolved: PlaybackPlaylistItem[] = [];
+      for (let index: number = 0; index < items.length; index++) {
+        const lease = await proxy.buildSourceUrl(sources[index], this.contentType(items[index].source.format));
+        resolved.push(new PlaybackPlaylistItem(items[index].id, this.withUrl(items[index].source, lease.url)));
+      }
+      const queue = new PlaybackPlaylist(resolved, playlist.startIndex, playlist.complete);
+      return new ResolvedPlaybackSource(resolved[playlist.startIndex].source, close, queue);
+    } catch (error) {
+      await close();
+      throw error as Error;
+    }
+  }
+
+  private withUrl(source: MediaSource, url: string): MediaSource {
+    return new MediaSource(MediaSourceKind.NETWORK_LINK, url, source.displayName, source.originLabel,
+      source.format, source.localCategory, source.sizeBytes, '', source.sourceId, source.credentialRef, source.fingerprint);
   }
 
   private contentType(format: MediaFormat): string {

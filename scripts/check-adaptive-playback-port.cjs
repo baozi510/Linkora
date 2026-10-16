@@ -10,11 +10,15 @@ const root = path.resolve(__dirname, '..');
 
 function fixture(preference = 'auto') {
   const cache = new Map(), trace = [], backends = [];
-  let sourceCloses = 0, lease;
+  let sourceCloses = 0, lease, resolvedPlaylist = null;
   function load(relative) {
     if (relative.endsWith('/NetworkPlaybackSourceResolver.ets')) return {
       NetworkPlaybackSourceResolver: class {
-        async resolve(source) { lease = { source, release: async () => { sourceCloses++; } }; return lease; }
+        async resolve(source, playlist) {
+          lease = { source: resolvedPlaylist?.currentItem().source ?? source,
+            playlist: resolvedPlaylist, originalPlaylist: playlist, release: async () => { sourceCloses++; } };
+          return lease;
+        }
       }
     };
     for (const name of ['SystemPlaybackPort', 'MpvPlaybackPort']) {
@@ -52,7 +56,7 @@ function fixture(preference = 'auto') {
       const backend = {
         events, closes: 0, backendKind: () => kind,
         capabilities: () => new core.PlayerBackendCapabilities(),
-        configure(source, surface, playlist) { backend.playlist = playlist; }, setSurfaceSize() {}, getDuration: () => 120000,
+        configure(source, surface, playlist) { backend.source = source; backend.playlist = playlist; }, setSurfaceSize() {}, getDuration: () => 120000,
         selectPlaylistItem: async index => { backend.requestedIndex = index; },
         prepare: () => prepare(events), play: async () => events.onStateChange('playing'),
         pause: async () => events.onStateChange('paused'), seek: value => events.onSeekComplete(value),
@@ -67,6 +71,7 @@ function fixture(preference = 'auto') {
   }
   return {
     core, observer, trace, backends, factory, get sourceCloses() { return sourceCloses; }, get lease() { return lease; },
+    set resolvedPlaylist(value) { resolvedPlaylist = value; },
     port(system, mpv, extension = 'mp4') {
       const port = new AdaptivePlaybackPort({}, {}, observer, preference, undefined, system, mpv);
       port.configure(core.MediaSource.fromLocalDocument('file://fixture.' + extension), 'surface');
@@ -74,6 +79,25 @@ function fixture(preference = 'auto') {
     }
   };
 }
+
+test('Adaptive passes the resolved remote queue to native while retaining original item identities', async () => {
+  const f = fixture('system'), c = f.core;
+  const items = [0, 1].map(index => new c.PlaybackPlaylistItem('remote-' + index,
+    c.MediaSource.fromRemoteFile('/video-' + index + '.mp4', 'video-' + index + '.mp4', 'Saved server',
+      100, 'network-server:7')));
+  const original = new c.PlaybackPlaylist(items, 1, true);
+  const resolved = new c.PlaybackPlaylist(items.map(item => new c.PlaybackPlaylistItem(item.id,
+    new c.MediaSource(c.MediaSourceKind.NETWORK_LINK, 'http://127.0.0.1/opaque-' + item.id,
+      item.source.displayName, item.source.originLabel, item.source.format))), 1, true);
+  f.resolvedPlaylist = resolved;
+  const port = f.port(f.factory('system'), f.factory('mpv'));
+  port.configure(items[1].source, 'surface', original);
+  await port.prepare();
+  assert.equal(f.lease.originalPlaylist, original);
+  assert.equal(f.backends[0].playlist, resolved);
+  assert.equal(f.backends[0].source, resolved.currentItem().source);
+  await port.release(); assert.equal(f.sourceCloses, 1);
+});
 
 test('Engine native playlist index follows acknowledgements, resets item state and fences old callbacks', async () => {
   const f = fixture(), snapshots = [], c = f.core;

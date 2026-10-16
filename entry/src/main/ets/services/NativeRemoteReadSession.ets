@@ -62,6 +62,7 @@ export async function openNativeRemoteReader(host: string, open: (address: strin
   cancel: (handle: number) => void, close: (handle: number) => Promise<void>,
   setupObserver: (settled: Promise<void>) => void = () => {}): Promise<RemoteReadSession> {
   let expired: boolean = false;
+  let cleanupFailure: Error | null = null;
   let timer: number = -1;
   const timeout: Promise<RemoteReadSession> = new Promise((_resolve, reject) => {
     timer = setTimeout(() => { expired = true; reject(new Error('Remote reader setup timed out')); }, 8000);
@@ -76,11 +77,22 @@ export async function openNativeRemoteReader(host: string, open: (address: strin
     if (expired) throw new Error('Remote setup expired');
     const file: NativeRemoteFile = await open(address);
     if (expired || !Number.isSafeInteger(file.size) || file.size < 0) {
-      cancel(file.handle); await close(file.handle); throw new Error('Remote setup expired');
+      try {
+        try { cancel(file.handle); } finally { await close(file.handle); }
+      } catch (error) {
+        cleanupFailure = error as Error;
+        throw cleanupFailure;
+      }
+      throw new Error('Remote setup expired');
     }
     return new NativeRemoteReadSession(file, read, cancel, close);
   })();
-  setupObserver(work.then(() => {}, () => {}));
+  const settled: Promise<void> = work.then(() => {}, () => {
+    if (cleanupFailure !== null) throw cleanupFailure;
+  });
+  // Callers without a setup observer still have the public open rejection path.
+  settled.catch(() => {});
+  setupObserver(settled);
   try { return await Promise.race([work, timeout]); }
   finally { clearTimeout(timer); }
 }

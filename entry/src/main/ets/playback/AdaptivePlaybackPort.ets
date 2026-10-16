@@ -185,7 +185,7 @@ export class AdaptivePlaybackPort implements PlaybackPort {
 
     // Resolver completion can also race with a page leave. Never retain a
     // source lease returned after release().
-    const resolved: ResolvedPlaybackSource = await this.resolver.resolve(source);
+    const resolved: ResolvedPlaybackSource = await this.resolver.resolve(source, this.playlist);
     if (this.released) {
       try {
         await resolved.release();
@@ -321,7 +321,7 @@ export class AdaptivePlaybackPort implements PlaybackPort {
       if (this.released) {
         throw this.cancelledError();
       }
-      backend.configure(source, this.surfaceId, this.playlist);
+      backend.configure(source, this.surfaceId, this.resolved?.playlist ?? this.playlist);
       if (this.surfaceWidth > 0 && this.surfaceHeight > 0) {
         backend.setSurfaceSize(this.surfaceWidth, this.surfaceHeight);
       }
