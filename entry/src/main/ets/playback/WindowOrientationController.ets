@@ -38,8 +38,15 @@ export class WindowOrientationController {
         this.immersive = true;
         if (this.closed) throw new Error('Playback window owner closed');
       }
-      const policy: window.Orientation = direction === PlayerScreenDirection.FOLLOW_SYSTEM ?
-        window.Orientation.AUTO_ROTATION_RESTRICTED : window.Orientation.LOCKED;
+      let policy: window.Orientation = window.Orientation.AUTO_ROTATION_RESTRICTED;
+      if (direction === PlayerScreenDirection.LOCK_CURRENT) {
+        const rect: window.Rect = appWindow.getWindowProperties().windowRect;
+        if (!(rect.width > 0 && rect.height > 0) || rect.width === rect.height)
+          throw new Error('Playback window size cannot identify an axis');
+        // Lock the axis while leaving 180-degree sensor rotation to the platform.
+        policy = rect.width > rect.height ? window.Orientation.AUTO_ROTATION_LANDSCAPE :
+          window.Orientation.AUTO_ROTATION_PORTRAIT;
+      }
       await appWindow.setPreferredOrientation(policy);
       if (this.closed) throw new Error('Playback window owner closed');
       if (appWindow.getPreferredOrientation() !== policy) throw new Error('Screen direction policy not applied');

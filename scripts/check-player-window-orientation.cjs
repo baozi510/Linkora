@@ -9,6 +9,8 @@ function fixture() {
   const file = path.resolve(__dirname, '../entry/src/main/ets/playback/WindowOrientationController.ets');
   assert.ok(fs.existsSync(file), 'Screen direction controller is not implemented');
   const calls = [], bars = [], appWindow = { orientation: 3,
+    rect: { width: 2760, height: 1256 },
+    getWindowProperties() { return { windowRect: this.rect }; },
     getPreferredOrientation() { return this.orientation; },
     async setWindowSystemBarEnable(names) { bars.push(Array.from(names)); },
     async setPreferredOrientation(value) { calls.push(value); this.orientation = value; } };
@@ -20,13 +22,37 @@ function fixture() {
   vm.runInNewContext(`(function(require,module,exports){${code}\n})`, {}, { filename: file })(name => {
     if (name === '@kit.ArkUI') return { window: {
       getLastWindow: context => { assert.equal(context, 'context'); return lookup(); },
-      Orientation: { LOCKED: 11, AUTO_ROTATION_RESTRICTED: 8 }
+      Orientation: { LOCKED: 11, AUTO_ROTATION_LANDSCAPE: 7, AUTO_ROTATION_PORTRAIT: 6,
+        AUTO_ROTATION_RESTRICTED: 8 }
     } };
     throw Error('Unexpected dependency: ' + name);
   }, module, module.exports);
   return { calls, bars, appWindow, set lookup(value) { lookup = value; },
     create: () => new module.exports.WindowOrientationController('context') };
 }
+
+test('Lock current selects the native sensor policy for its axis, permitting 180-degree flips', async () => {
+  for (const [width, height, policy] of [[2760, 1256, 7], [1256, 2760, 6]]) {
+    const f = fixture(), owner = f.create();
+    f.appWindow.rect = { width, height };
+    assert.equal(await owner.set('lock_current'), 'lock_current');
+    assert.deepEqual(f.calls, [policy]);
+    await owner.set('follow_system');
+    assert.equal(f.appWindow.orientation, 8);
+    await owner.restore();
+    assert.equal(f.appWindow.orientation, 3);
+  }
+});
+
+test('An unavailable or ambiguous window size cannot acknowledge an axis lock', async () => {
+  for (const [width, height] of [[0, 1256], [2760, 0], [100, 100]]) {
+    const f = fixture(), owner = f.create();
+    f.appWindow.rect = { width, height };
+    await assert.rejects(owner.set('lock_current'), /window size/i);
+    assert.deepEqual(f.calls, []);
+    await owner.restore();
+  }
+});
 
 test('Follow and current-direction lock remain immersive; leaving restores normal app bars', async () => {
   const f = fixture(), owner = f.create();
@@ -47,12 +73,12 @@ test('Orientation restoration failure still restores normal app system bars', as
 
 test('Direction policies respect the system rotation lock and restore the exact entry policy', async () => {
   const f = fixture(), owner = f.create();
-  for (const [mode, native] of [['follow_system', 8], ['lock_current', 11], ['follow_system', 8]]) {
+  for (const [mode, native] of [['follow_system', 8], ['lock_current', 7], ['follow_system', 8]]) {
     assert.equal(await owner.set(mode), mode);
     assert.equal(f.appWindow.orientation, native);
   }
   await owner.restore(); await owner.restore();
-  assert.deepEqual(f.calls, [8, 11, 8, 3]);
+  assert.deepEqual(f.calls, [8, 7, 8, 3]);
   await assert.rejects(owner.set('lock_current'));
 });
 
@@ -60,22 +86,22 @@ test('Rapid direction requests serialize and acknowledge only after the native o
   const f = fixture(), owner = f.create(); let finish, confirmed = false;
   f.appWindow.setPreferredOrientation = value => {
     f.calls.push(value);
-    if (value === 11) return new Promise(resolve => { finish = () => { f.appWindow.orientation = value; resolve(); }; });
+    if (value === 7) return new Promise(resolve => { finish = () => { f.appWindow.orientation = value; resolve(); }; });
     f.appWindow.orientation = value; return Promise.resolve();
   };
   const first = owner.set('lock_current').then(() => { confirmed = true; });
   const second = owner.set('follow_system');
   await new Promise(setImmediate);
-  assert.equal(confirmed, false); assert.deepEqual(f.calls, [11]);
+  assert.equal(confirmed, false); assert.deepEqual(f.calls, [7]);
   finish(); await first; await second;
-  assert.deepEqual(f.calls, [11, 8]);
+  assert.deepEqual(f.calls, [7, 8]);
   await owner.restore();
 });
 
 test('Leave during a pending rotation drains it, fences queued writes, then restores', async () => {
   const f = fixture(), owner = f.create(); let finish;
   const original = f.appWindow.setPreferredOrientation.bind(f.appWindow);
-  f.appWindow.setPreferredOrientation = value => value === 11 ? new Promise(resolve => {
+  f.appWindow.setPreferredOrientation = value => value === 7 ? new Promise(resolve => {
     f.calls.push(value); finish = () => { f.appWindow.orientation = value; resolve(); };
   }) : original(value);
   const first = assert.rejects(owner.set('lock_current'));
@@ -84,7 +110,7 @@ test('Leave during a pending rotation drains it, fences queued writes, then rest
   let restored = false; const closing = owner.restore().then(() => { restored = true; });
   await new Promise(setImmediate); assert.equal(restored, false);
   finish(); await first; await queued; await closing;
-  assert.deepEqual(f.calls, [11, 3]);
+  assert.deepEqual(f.calls, [7, 3]);
 });
 
 test('Leave before window lookup finishes prevents a late requested orientation', async () => {
@@ -119,23 +145,23 @@ test('Restoration failure stays rejected and is never retried as a false success
   f.appWindow.setPreferredOrientation = async value => { f.calls.push(value); throw Error('restore denied'); };
   await assert.rejects(owner.restore(), /restore denied/);
   await assert.rejects(owner.restore(), /restore denied/);
-  assert.deepEqual(f.calls, [11, 3]);
+  assert.deepEqual(f.calls, [7, 3]);
 });
 
 test('A reopened player waits for the preceding page restoration before capturing or changing policy', async () => {
   const f = fixture(), first = f.create(); let finish;
   const original = f.appWindow.setPreferredOrientation.bind(f.appWindow);
-  f.appWindow.setPreferredOrientation = value => value === 11 ? new Promise(resolve => {
+  f.appWindow.setPreferredOrientation = value => value === 7 ? new Promise(resolve => {
     f.calls.push(value); finish = () => { f.appWindow.orientation = value; resolve(); };
   }) : original(value);
   const setting = assert.rejects(first.set('lock_current'));
   await new Promise(setImmediate);
   const closing = first.restore(), second = f.create(), next = second.set('follow_system');
   await new Promise(setImmediate);
-  assert.deepEqual(f.calls, [11], 'a new page cannot interleave with a pending old window write');
+  assert.deepEqual(f.calls, [7], 'a new page cannot interleave with a pending old window write');
   finish(); await setting; await closing; await next;
-  assert.deepEqual(f.calls, [11, 3, 8]);
-  await second.restore(); assert.deepEqual(f.calls, [11, 3, 8, 3]);
+  assert.deepEqual(f.calls, [7, 3, 8]);
+  await second.restore(); assert.deepEqual(f.calls, [7, 3, 8, 3]);
 });
 
 test('Repeated page Back waits for restoration and navigates only once', async () => {
