@@ -216,6 +216,5 @@ export struct PlayerControls {
     }
     .padding({ left: 20, right: 20, top: 14, bottom: 14 })
     .width('100%')
-    .backgroundColor(PlayerColors.BACKGROUND)
   }
 }

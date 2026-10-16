@@ -14,6 +14,7 @@ export class WindowOrientationController {
   private original: window.Orientation | null = null;
   private tail: Promise<void> = Promise.resolve();
   private closed: boolean = false;
+  private immersive: boolean = false;
   private restoring: Promise<void> | null = null;
 
   constructor(context: common.UIAbilityContext) {
@@ -33,6 +34,11 @@ export class WindowOrientationController {
         direction !== PlayerScreenDirection.PORTRAIT) throw new Error('Invalid screen direction');
       const appWindow: window.Window = await this.ready;
       if (this.closed) throw new Error('Playback window owner closed');
+      if (!this.immersive) {
+        await appWindow.setWindowSystemBarEnable([]);
+        this.immersive = true;
+        if (this.closed) throw new Error('Playback window owner closed');
+      }
       const policy: window.Orientation = direction === PlayerScreenDirection.FOLLOW_SYSTEM ?
         window.Orientation.AUTO_ROTATION_RESTRICTED : (direction === PlayerScreenDirection.LANDSCAPE ?
           window.Orientation.LANDSCAPE : window.Orientation.PORTRAIT);
@@ -51,9 +57,14 @@ export class WindowOrientationController {
     // Drain a pending native change before restoring, so it cannot rotate a departed page later.
     this.restoring = this.tail.then(async () => {
       const appWindow: window.Window = await this.ready;
-      if (this.original !== null) {
-        await appWindow.setPreferredOrientation(this.original);
-        if (appWindow.getPreferredOrientation() !== this.original) throw new Error('Original screen direction not restored');
+      try {
+        if (this.original !== null) {
+          await appWindow.setPreferredOrientation(this.original);
+          if (appWindow.getPreferredOrientation() !== this.original) throw new Error('Original screen direction not restored');
+        }
+      } finally {
+        // The surrounding app always shows its normal status/navigation bars.
+        await appWindow.setWindowSystemBarEnable(['status', 'navigation']);
       }
     });
     WindowOrientationController.previousRestore = this.restoring;

@@ -8,8 +8,9 @@ const ts = require('C:/Program Files/Huawei/DevEco Studio/sdk/default/openharmon
 function fixture() {
   const file = path.resolve(__dirname, '../entry/src/main/ets/playback/WindowOrientationController.ets');
   assert.ok(fs.existsSync(file), 'Screen direction controller is not implemented');
-  const calls = [], appWindow = { orientation: 3,
+  const calls = [], bars = [], appWindow = { orientation: 3,
     getPreferredOrientation() { return this.orientation; },
+    async setWindowSystemBarEnable(names) { bars.push(Array.from(names)); },
     async setPreferredOrientation(value) { calls.push(value); this.orientation = value; } };
   let lookup = async () => appWindow;
   const code = ts.transpileModule(fs.readFileSync(file, 'utf8'), {
@@ -23,9 +24,26 @@ function fixture() {
     } };
     throw Error('Unexpected dependency: ' + name);
   }, module, module.exports);
-  return { calls, appWindow, set lookup(value) { lookup = value; },
+  return { calls, bars, appWindow, set lookup(value) { lookup = value; },
     create: () => new module.exports.WindowOrientationController('context') };
 }
+
+test('Both screen directions enter immersive playback and leaving restores normal app bars', async () => {
+  const f = fixture(), owner = f.create();
+  await owner.set('portrait');
+  await owner.set('landscape');
+  assert.deepEqual(f.bars, [[]], 'hide system bars once, independently of direction');
+  await owner.restore();
+  assert.deepEqual(f.bars, [[], ['status', 'navigation']]);
+});
+
+test('Orientation restoration failure still restores normal app system bars', async () => {
+  const f = fixture(), owner = f.create();
+  await owner.set('landscape');
+  f.appWindow.setPreferredOrientation = async () => { throw Error('restore denied'); };
+  await assert.rejects(owner.restore(), /restore denied/);
+  assert.deepEqual(f.bars, [[], ['status', 'navigation']]);
+});
 
 test('Direction policies respect the system rotation lock and restore the exact entry policy', async () => {
   const f = fixture(), owner = f.create();

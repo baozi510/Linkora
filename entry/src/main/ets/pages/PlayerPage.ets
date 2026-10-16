@@ -32,10 +32,11 @@ export struct PlayerPage {
   @Local private screenDirection: PlayerScreenDirection | null = null;
   @Local private directionBusy: boolean = false;
   @Local private directionFailed: boolean = false;
+  @Local private controlsVisible: boolean = true;
   @Local private gestureState: PlayerGestureState = new PlayerGestureState();
   @Local private surfaceWidth: number = 1;
   @Local private surfaceHeight: number = 1;
-  @Local private contentViewportHeight: number = 800;
+  @Local private viewportHeight: number = 800;
 
   private surfaceController: XComponentController = new XComponentController();
   private controller: PlayerFeatureController | null = null;
@@ -54,6 +55,7 @@ export struct PlayerPage {
   aboutToAppear(): void {
     this.active = true;
     this.closing = false;
+    this.controlsVisible = true;
     if (this.previewMode) {
       this.snapshot = new PlaybackSnapshot(
         PlaybackStatus.PAUSED, 96000, 454000, 63, 1920, 1080, null, true
@@ -75,7 +77,7 @@ export struct PlayerPage {
       }
     }, this.playlist);
     this.gestureController = new PlayerGestureController(new PlayerGestureCallbacks(
-      () => {},
+      () => { this.controlsVisible = !this.controlsVisible; },
       () => {
         this.controller?.togglePlayback();
       },
@@ -327,7 +329,7 @@ export struct PlayerPage {
             this.controller?.retry();
           },
           onEditSource: () => {
-            this.onBack();
+            this.close();
           },
           onOpenSettings: () => {
             this.onOpenSettings();
@@ -340,10 +342,8 @@ export struct PlayerPage {
 
     }
     .width('100%')
-    .height('auto')
-    .aspectRatio(16 / 9)
-    // Leave a scrolling region outside the video's brightness/volume pan gestures.
-    .constraintSize({ maxHeight: Math.max(1, this.contentViewportHeight * 0.6) })
+    .height('100%')
+    .id('player-video-viewport')
     .backgroundColor('#000000')
     .onAreaChange((_oldArea: Area, newArea: Area) => {
       // ArkUI Area dimensions are vp; mpv-ohos ohos-surface-size expects
@@ -387,55 +387,65 @@ export struct PlayerPage {
           })
           .onActionCancel(() => {
             this.gestureController?.cancelPan();
+          }),
+        TapGesture({ count: 1, fingers: 1 })
+          .onAction(() => {
+            this.gestureController?.singleTap();
           })
       )
     )
   }
 
-  build() {
+  @Builder
+  private playbackOverlay() {
     Column() {
-      PlayerTopBar({
-        title: $r('app.string.player_now_playing'),
-        subtitle: this.sourceLabel(),
-        onBack: () => this.close()
-      })
-      Row({ space: 12 }) {
-        Text($r('app.string.player_screen_direction'))
-          .fontSize(13)
-          .fontColor(PlayerColors.TEXT_SECONDARY)
-        Select([
-          { value: $r('app.string.player_direction_system') },
-          { value: $r('app.string.player_direction_landscape') },
-          { value: $r('app.string.player_direction_portrait') }
-        ])
-          .selected(this.screenDirection === PlayerScreenDirection.LANDSCAPE ? 1 :
-            (this.screenDirection === PlayerScreenDirection.PORTRAIT ? 2 : 0))
-          .value(this.screenDirection === null ? $r('app.string.player_screen_direction') :
-            (this.screenDirection === PlayerScreenDirection.LANDSCAPE ? $r('app.string.player_direction_landscape') :
-              (this.screenDirection === PlayerScreenDirection.PORTRAIT ? $r('app.string.player_direction_portrait') :
-                $r('app.string.player_direction_system'))))
-          .accessibilityText($r('app.string.player_screen_direction'))
-          .fontColor(PlayerColors.TEXT_CONTROL)
-          .backgroundColor(PlayerColors.CONTROL_SURFACE)
-          .optionFontColor(PlayerColors.TEXT_CONTROL)
-          .optionBgColor(PlayerColors.CONTROL_SURFACE)
-          .enabled(!this.directionBusy && !this.previewMode)
-          .onSelect((index: number) => {
-            const directions: PlayerScreenDirection[] = [PlayerScreenDirection.FOLLOW_SYSTEM,
-              PlayerScreenDirection.LANDSCAPE, PlayerScreenDirection.PORTRAIT];
-            if (index >= 0 && index < directions.length) this.changeScreenDirection(directions[index]);
-          })
+      Column() {
+        PlayerTopBar({
+          title: $r('app.string.player_now_playing'),
+          subtitle: this.sourceLabel(),
+          onBack: () => this.close()
+        })
+        Row({ space: 12 }) {
+          Text($r('app.string.player_screen_direction'))
+            .fontSize(13)
+            .fontColor(PlayerColors.TEXT_SECONDARY)
+          Select([
+            { value: $r('app.string.player_direction_system') },
+            { value: $r('app.string.player_direction_landscape') },
+            { value: $r('app.string.player_direction_portrait') }
+          ])
+            .selected(this.screenDirection === PlayerScreenDirection.LANDSCAPE ? 1 :
+              (this.screenDirection === PlayerScreenDirection.PORTRAIT ? 2 : 0))
+            .value(this.screenDirection === null ? $r('app.string.player_screen_direction') :
+              (this.screenDirection === PlayerScreenDirection.LANDSCAPE ? $r('app.string.player_direction_landscape') :
+                (this.screenDirection === PlayerScreenDirection.PORTRAIT ? $r('app.string.player_direction_portrait') :
+                  $r('app.string.player_direction_system'))))
+            .accessibilityText($r('app.string.player_screen_direction'))
+            .fontColor(PlayerColors.TEXT_CONTROL)
+            .backgroundColor(PlayerColors.CONTROL_SURFACE)
+            .optionFontColor(PlayerColors.TEXT_CONTROL)
+            .optionBgColor(PlayerColors.CONTROL_SURFACE)
+            .enabled(!this.directionBusy && !this.previewMode)
+            .onSelect((index: number) => {
+              const directions: PlayerScreenDirection[] = [PlayerScreenDirection.FOLLOW_SYSTEM,
+                PlayerScreenDirection.LANDSCAPE, PlayerScreenDirection.PORTRAIT];
+              if (index >= 0 && index < directions.length) this.changeScreenDirection(directions[index]);
+            })
+        }
+        .width('100%')
+        .padding({ left: 20, right: 20, bottom: 8 })
+        if (this.directionFailed) {
+          Text($r('app.string.player_direction_failed'))
+            .fontSize(12)
+            .fontColor('#FFB4AB')
+        }
       }
       .width('100%')
-      .padding({ left: 20, right: 20, bottom: 8 })
-      if (this.directionFailed) {
-        Text($r('app.string.player_direction_failed'))
-          .fontSize(12)
-          .fontColor('#FFB4AB')
-      }
+      .backgroundColor('#990B0D12')
+      Blank()
+        .hitTestBehavior(HitTestMode.None)
       Scroll() {
         Column() {
-          this.videoSurface()
           PlayerControls({
             snapshot: this.snapshot,
             sliderPosition: this.sliderPosition,
@@ -459,14 +469,28 @@ export struct PlayerPage {
         .width('100%')
       }
       .width('100%')
-      .layoutWeight(1)
-      .onAreaChange((_oldArea: Area, newArea: Area) => {
-        this.contentViewportHeight = Number(newArea.height);
-      })
+      .height(Math.min(330, this.viewportHeight * 0.5))
+      .backgroundColor('#990B0D12')
     }
     .width('100%')
     .height('100%')
-    .backgroundColor(PlayerColors.BACKGROUND)
+    .hitTestBehavior(HitTestMode.Transparent)
+  }
+
+  build() {
+    Stack() {
+      this.videoSurface()
+      if (this.controlsVisible && this.snapshot.status !== PlaybackStatus.ERROR) {
+        this.playbackOverlay()
+      }
+    }
+    .width('100%')
+    .height('100%')
+    .backgroundColor('#000000')
+    .expandSafeArea([SafeAreaType.SYSTEM], [SafeAreaEdge.TOP, SafeAreaEdge.BOTTOM])
+    .onAreaChange((_oldArea: Area, newArea: Area) => {
+      this.viewportHeight = Number(newArea.height);
+    })
   }
 
 }
