@@ -251,6 +251,7 @@ export interface PlaybackPort {
   setLoopMode(mode: PlaybackLoopMode): void;
   setDisplayMode(mode: VideoDisplayMode): void;
   selectAudioTrack(id: string): Promise<void>;
+  setAudioDelay?(milliseconds: number): number;
   release(): Promise<void>;
 }
 

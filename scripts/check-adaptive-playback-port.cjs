@@ -80,6 +80,39 @@ function fixture(preference = 'auto') {
   };
 }
 
+test('Adaptive forwards audio delay only to a backend that supports it', async () => {
+  const f = fixture('mpv'), port = f.port(f.factory('system'), f.factory('mpv'));
+  await port.prepare();
+  const backend = f.backends.at(-1); backend.setAudioDelay = value => value;
+  assert.equal(port.setAudioDelay(-50), -50);
+  delete backend.setAudioDelay;
+  assert.throws(() => port.setAudioDelay(0), error => error.code === 801);
+  await port.release(); assert.throws(() => port.setAudioDelay(0));
+});
+
+test('Engine rejects invalid or unsupported delay without stopping playback or inventing readback', async () => {
+  const f = fixture(), snapshots = [], requests = []; let events, readback;
+  const port = { configure() {}, getDuration: () => 10000,
+    async prepare() { events.onStateChange('prepared'); }, async play() { events.onStateChange('playing'); },
+    setDisplayMode() {}, async release() {},
+    setAudioDelay(value) { requests.push(value); return readback === undefined ? value : readback; } };
+  const engine = new f.core.PlaybackEngine(value => snapshots.push(value), async observer => { events = observer; return port; });
+  await engine.open(f.core.MediaSource.fromLocalDocument('file://test.mp4'), 'surface');
+  assert.equal(engine.setAudioDelay(-50), -50);
+  readback = 0; assert.equal(engine.setAudioDelay(50), null);
+  assert.equal(snapshots.at(-1).warningOperation, 'audio-delay');
+  assert.equal(snapshots.at(-1).status, 'playing');
+  readback = undefined; assert.equal(engine.setAudioDelay(50), 50);
+  assert.equal(snapshots.at(-1).warningOperation, '');
+  assert.equal(snapshots.at(-1).warning, null);
+  const count=requests.length;
+  assert.equal(engine.setAudioDelay(NaN), null); assert.equal(engine.setAudioDelay(10001), null);
+  assert.equal(requests.length,count);
+  delete port.setAudioDelay; assert.equal(engine.setAudioDelay(0), null);
+  assert.equal(snapshots.at(-1).warning.code, 801);
+  await engine.release(); assert.equal(engine.setAudioDelay(0), null);
+});
+
 test('Adaptive passes the resolved remote queue to native while retaining original item identities', async () => {
   const f = fixture('system'), c = f.core;
   const items = [0, 1].map(index => new c.PlaybackPlaylistItem('remote-' + index,

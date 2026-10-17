@@ -10,7 +10,7 @@ function fixture(overrides = {}) {
   function load(file) {
     file = path.resolve(root, file);
     if (cache.has(file)) return cache.get(file);
-    assert.ok(fs.existsSync(file), 'Audio track preferences are not implemented: ' + file);
+    assert.ok(fs.existsSync(file), 'Audio track memory is not implemented: ' + file);
     const module = { exports: {} }; cache.set(file, module.exports);
     const code = ts.transpileModule(fs.readFileSync(file, 'utf8'), {
       compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 }
@@ -21,36 +21,23 @@ function fixture(overrides = {}) {
     }, { filename: file })(name => {
       if (Object.hasOwn(overrides, name)) return overrides[name];
       if (name === 'linkora_core') return { ...load('linkora_core/src/main/ets/playback/PlaybackPort.ets'),
-        ...load('linkora_core/src/main/ets/playback/AudioTrackPreferences.ets') };
+        ...load('linkora_core/src/main/ets/playback/AudioTrackMemory.ets') };
       if (name.startsWith('.')) return load(path.resolve(path.dirname(file), name + '.ets'));
       throw Error('Unexpected dependency: ' + name);
     }, module, module.exports);
     return module.exports;
   }
   return { load, timers, ...load('linkora_core/src/main/ets/playback/PlaybackPort.ets'),
-    ...load('linkora_core/src/main/ets/playback/AudioTrackPreferences.ets') };
+    ...load('linkora_core/src/main/ets/playback/AudioTrackMemory.ets') };
 }
 
-test('Ordered languages normalize ISO tags and select the first available preference', () => {
-  const f = fixture(), p = new f.AudioTrackPreferences(['eng', 'zh-CN', 'en']);
-  assert.deepEqual(Array.from(p.languages), ['en', 'zh-cn']);
-  const en = new f.PortTrack('9', 'audio', 'aac', 'en-US');
-  const zh = new f.PortTrack('2', 'audio', 'aac', 'zho');
-  assert.equal(p.choose([zh, en], null)?.id, '9');
-  assert.equal(new f.AudioTrackPreferences(['ja', 'zh']).choose([en, zh], null)?.id, '2');
-  assert.equal(new f.AudioTrackPreferences(['fr']).choose([zh, en], null), null);
-  assert.throws(() => new f.AudioTrackPreferences(['http://unexpected']));
-  assert.throws(() => new f.AudioTrackPreferences(Array(9).fill('en')));
-});
-
 test('Memory matches semantic audio metadata across backend IDs and never guesses ambiguous tracks', () => {
-  const f = fixture(), p = new f.AudioTrackPreferences(['en']);
+  const f = fixture();
   const remembered = f.AudioTrackChoice.from(new f.PortTrack('3', 'audio', 'audio/ac3', 'zho', 'Main', true, 6));
   const same = new f.PortTrack('21', 'audio', 'ac3', 'zh', 'Main', false, 6);
   const other = new f.PortTrack('3', 'audio', 'aac', 'en', 'English');
-  assert.equal(p.choose([other, same], remembered)?.id, '21');
-  assert.equal(p.choose([same, new f.PortTrack('22', 'audio', 'ac3', 'zh', 'Main', false, 6)], remembered), null);
-  assert.equal(new f.AudioTrackPreferences(['en'], false).choose([other, same], remembered)?.id, '3');
+  assert.equal(remembered.match([other, same])?.id, '21');
+  assert.equal(remembered.match([same, new f.PortTrack('22', 'audio', 'ac3', 'zh', 'Main', false, 6)]), null);
   assert.equal(f.AudioTrackChoice.from(new f.PortTrack('1', 'audio')).match([new f.PortTrack('2', 'audio')]), null);
 });
 
@@ -67,8 +54,8 @@ test('Track details preserve unknowns and remembered choices cannot contain exec
   assert.equal(f.AudioTrackChoice.decode('{"language":1,"title":"Main","channels":2}'), null);
 });
 
-async function playerFixture(preferences, memory = null, withPlaylist = false) {
-  const f = fixture(), choices = [], requests = [], savedPreferences = [];
+async function playerFixture(memory = null, withPlaylist = false, initialStatus = 'playing') {
+  const f = fixture(), choices = [], requests = [], delays = [];
   const { MediaSource } = f.load('linkora_core/src/main/ets/models/MediaSource.ets');
   const { AppSettings } = f.load('linkora_core/src/main/ets/models/AppSettings.ets');
   const { PlaybackSnapshot } = f.load('linkora_core/src/main/ets/playback/PlaybackModels.ets');
@@ -79,41 +66,57 @@ async function playerFixture(preferences, memory = null, withPlaylist = false) {
   const playlist = withPlaylist ? new PlaybackPlaylist([
     new PlaybackPlaylistItem('a', source), new PlaybackPlaylistItem('b', sourceB)], 0, true) : null;
   let notify, current, acknowledge = true, accepted = true, choiceLoader = async () => memory;
-  let activeIndex = withPlaylist ? 0 : -1;
+  let activeIndex = withPlaylist ? 0 : -1, backend = 'system', delayResult, status = initialStatus;
   const tracks = [new f.PortTrack('2', 'audio', 'aac', 'en', 'Main', true),
     new f.PortTrack('3', 'audio', 'ac3', 'zh', 'Main')];
   function emit(selected = '2', index = activeIndex) {
     activeIndex = index;
-    current = new PlaybackSnapshot('playing', 10000, 120000, 0, 1920, 1080, null, true, 0, 'system',
+    current = new PlaybackSnapshot(status, 10000, 120000, 0, 1920, 1080, null, true, 0, backend,
       tracks.map(track => new f.PortTrack(track.id, track.kind, track.codec, track.language, track.title,
         track.id === selected, track.channels, track.sampleRate, track.bitrate, track.isDefault)));
     current.playlistIndex = index;
     notify(current);
   }
   const engine = { setSurfaceSize() {}, async open() { emit(); }, async release() {},
+    setAudioDelay(value) { delays.push(value); return delayResult === undefined ? value : delayResult; },
     async selectAudioTrack(id) {
       requests.push(id);
       if (acknowledge && accepted) emit(id === 'auto' ? '2' : id);
       return accepted;
     } };
-  const repository = { async loadPreferences() { return preferences ?? new f.AudioTrackPreferences(); },
-    async savePreferences(value) { savedPreferences.push(value); }, async loadChoice() { return choiceLoader(); },
+  const repository = { async loadPreferences() { throw Error('Removed global settings must never be read'); },
+    async loadChoice() { return choiceLoader(); },
     async saveChoice(source, value) { choices.push({ source, value }); } };
   const feature = new PlayerFeatureController(source, observer => { notify = observer; return engine; },
     { async load() { return null; }, async save() {}, async clear() {} }, new AppSettings(), () => {}, null, playlist, repository);
   feature.attachSurface('surface'); await new Promise(setImmediate);
-  return { ...f, feature, source, sourceB, choices, requests, savedPreferences, emit, notify, tracks,
+  return { ...f, feature, source, sourceB, choices, requests, delays, emit, notify, tracks,
+    set status(value) { status = value; }, set backend(value) { backend = value; }, set delayResult(value) { delayResult = value; },
     set choiceLoader(value) { choiceLoader = value; },
     set acknowledge(value) { acknowledge = value; }, set accepted(value) { accepted = value; } };
 }
 
-test('Player applies language preference once; native selection updates do not loop', async () => {
-  const f = fixture(), p = await playerFixture(new f.AudioTrackPreferences(['zh']));
-  assert.deepEqual(p.requests, ['3']);
-  assert.equal(p.feature.currentState().audioSelection, 'auto');
+test('Fresh media retains the native default and a saved manual choice restores once', async () => {
+  const p = await playerFixture();
+  assert.deepEqual(p.requests, []);
   assert.equal(p.feature.currentState().audioBusy, false);
-  p.emit('3'); await new Promise(setImmediate);
-  assert.deepEqual(p.requests, ['3']); assert.equal(p.choices.length, 0);
+  assert.equal(p.feature.currentState().audioError, false);
+  assert.equal(p.feature.currentState().playback.tracks.find(t => t.selected).id, '2');
+  p.feature.stop();
+  const f = fixture(), restored = await playerFixture(new f.AudioTrackChoice('zh', 'Main', 0));
+  assert.deepEqual(restored.requests, ['3']);
+  restored.emit('3'); await new Promise(setImmediate);
+  assert.deepEqual(restored.requests, ['3']);
+  assert.equal(restored.choices.length, 0);
+  restored.feature.stop();
+});
+
+test('Saved audio waits for native readiness even when metadata arrives during preparation', async () => {
+  const f = fixture(), p = await playerFixture(new f.AudioTrackChoice('zh', 'Main', 0), false, 'preparing');
+  assert.deepEqual(p.requests, []);
+  p.status = 'ready'; p.emit(); await new Promise(setImmediate);
+  assert.deepEqual(p.requests, ['3']);
+  assert.equal(p.feature.currentState().audioError, false);
   p.feature.stop();
 });
 
@@ -124,18 +127,6 @@ test('Manual track memory is saved only after a native selected-track acknowledg
   p.emit('3'); await new Promise(setImmediate);
   assert.equal(p.choices.length, 1); assert.equal(p.choices[0].source, p.source);
   assert.equal(p.choices[0].value.language, 'zh');
-  assert.equal(p.feature.currentState().audioSelection, '3');
-  p.feature.stop();
-});
-
-test('Auto clears the current file memory and asks the native default when no language matches', async () => {
-  const f = fixture(), memory = new f.AudioTrackChoice('zh', 'Main', 0);
-  const p = await playerFixture(new f.AudioTrackPreferences(), memory);
-  assert.deepEqual(p.requests, ['3']);
-  p.feature.selectAudioTrack('auto'); await new Promise(setImmediate);
-  assert.equal(p.requests.at(-1), 'auto');
-  assert.equal(p.choices.at(-1).value, null);
-  assert.equal(p.feature.currentState().audioSelection, 'auto');
   p.feature.stop();
 });
 
@@ -151,62 +142,49 @@ test('Rejected, unacknowledged, or departed selections never become remembered s
   assert.equal(p.choices.length, 0);
 });
 
-test('Invalid preference input is rejected and remember=false prevents manual persistence', async () => {
-  const p = await playerFixture();
-  p.feature.setAudioPreferences('not a tag', true); await new Promise(setImmediate);
-  assert.equal(p.savedPreferences.length, 0); assert.equal(p.feature.currentState().audioError, true);
-  p.feature.setAudioPreferences('eng,zh', false); await new Promise(setImmediate);
-  assert.deepEqual(Array.from(p.savedPreferences[0].languages), ['en', 'zh']);
-  p.feature.selectAudioTrack('3'); await new Promise(setImmediate);
-  assert.equal(p.choices.length, 0);
-  p.feature.stop();
-});
-
 test('A native playlist transition fences an old manual selection before persistence', async () => {
-  const p = await playerFixture(null, null, true); p.acknowledge = false;
+  const p = await playerFixture(null, true); p.acknowledge = false;
   p.feature.selectAudioTrack('3');
   p.emit('3', 1); await new Promise(setImmediate);
   assert.equal(p.choices.length, 0, 'old track id must not be saved for either playlist source');
   p.feature.stop();
 });
 
-test('Editing preferences during a delayed playlist load keeps the latest value and remember policy', async () => {
-  const p = await playerFixture(null, null, true);
-  let finishLoad;
-  p.choiceLoader = () => new Promise(resolve => { finishLoad = resolve; });
-  p.emit('2', 1);
-  p.feature.setAudioPreferences('zh', false);
-  await new Promise(setImmediate);
-  finishLoad(new p.AudioTrackChoice('en', 'Main', 0));
-  await new Promise(setImmediate);
-  assert.deepEqual(Array.from(p.feature.currentState().audioPreferences.languages), ['zh']);
-  assert.equal(p.feature.currentState().audioPreferences.remember, false);
-  assert.equal(p.requests.at(-1), '3');
-  assert.equal(p.feature.currentState().audioBusy, false);
-  p.feature.stop();
+test('Only MPV applies signed delay and resets each new video; rejected changes keep the last value', async () => {
+  const p = await playerFixture(null, true);
+  p.feature.setAudioDelay(50); assert.deepEqual(p.delays, []);
+  p.backend = 'mpv'; p.emit();
+  assert.deepEqual(p.delays, [0]);
+  p.feature.setAudioDelay(-50); assert.equal(p.feature.currentState().audioDelay, -50);
+  p.feature.setAudioDelay(50); assert.equal(p.feature.currentState().audioDelay, 50);
+  p.delayResult = null; p.feature.setAudioDelay(100);
+  assert.equal(p.feature.currentState().audioDelay, 50);
+  assert.equal(p.feature.currentState().audioDelayError, true);
+  p.delayResult = undefined; p.emit('2', 1); await new Promise(setImmediate);
+  assert.equal(p.delays.at(-1), 0); assert.equal(p.feature.currentState().audioDelay, 0);
+  p.emit('2', 1); assert.equal(p.delays.filter(v => v === 0).length, 2);
+  p.feature.setAudioDelay(50);
+  p.delayResult = null; p.emit('2', 0); await new Promise(setImmediate);
+  assert.equal(p.feature.currentState().audioDelay, null, 'a rejected reset must not present zero as confirmed');
+  assert.equal(p.feature.currentState().audioDelayError, true);
+  p.delayResult = undefined; p.feature.setAudioDelay(0);
+  assert.equal(p.feature.currentState().audioDelay, 0);
+  assert.equal(p.feature.currentState().audioDelayError, false);
+  const before=p.delays.length;
+  p.feature.setAudioDelay(NaN); p.feature.setAudioDelay(10001);
+  assert.equal(p.delays.length,before);
+  p.feature.stop(); p.feature.setAudioDelay(50); assert.equal(p.delays.length,before);
 });
 
-test('Enriched default flags reevaluate automatic language selection', async () => {
-  const f = fixture(), p = await playerFixture(new f.AudioTrackPreferences(['en']));
-  p.tracks[1] = new p.PortTrack('3', 'audio', 'aac', 'eng', 'Main');
-  p.emit(); await new Promise(setImmediate);
-  assert.equal(p.requests.at(-1), '2');
-  p.tracks[1] = new p.PortTrack('3', 'audio', 'aac', 'eng', 'Main', false, 0, 0, 0, true);
-  p.emit(); await new Promise(setImmediate);
-  assert.equal(p.requests.at(-1), '3');
-  p.feature.stop();
+test('A late saved-choice load cannot cross a playlist transition', async () => {
+  const p=await playerFixture(null,true);let finish;
+  p.choiceLoader=()=>new Promise(resolve=>{finish=resolve;});p.emit('2',1);
+  p.choiceLoader=async()=>new p.AudioTrackChoice('en','Main',0);p.emit('2',0);
+  await new Promise(setImmediate);finish(new p.AudioTrackChoice('zh','Main',0));
+  await new Promise(setImmediate);assert.deepEqual(p.requests,['2']);p.feature.stop();
 });
 
-test('ISO 639-2 terminology and bibliographic tags match two-letter preferences', () => {
-  const f = fixture();
-  for (const [preference, language] of [['it', 'ita'], ['nl', 'nld'], ['nl', 'dut'], ['cs', 'ces'],
-    ['cs', 'cze'], ['el', 'ell'], ['el', 'gre'], ['sv', 'swe'], ['ar', 'ara'], ['he', 'heb'], ['uk', 'ukr']]) {
-    assert.equal(new f.AudioTrackPreferences([preference]).choose([
-      new f.PortTrack('1', 'audio', 'aac', language)], null)?.id, '1', `${preference}/${language}`);
-  }
-});
-
-test('Preferences store isolates media keys, serializes writes, and clears a saved choice', async () => {
+test('Memory store isolates media keys, serializes writes, and clears a saved choice', async () => {
   const values = new Map(); let fail = false;
   const store = { async get(key, fallback) { return values.get(key) ?? fallback; },
     async put(key, value) { values.set(key, value); }, async delete(key) { values.delete(key); },
@@ -214,20 +192,16 @@ test('Preferences store isolates media keys, serializes writes, and clears a sav
   const f = fixture({ '@kit.ArkData': { preferences: { getPreferences: async () => store } },
     './SourceIdentity': { SourceIdentity: { key: async source => require('node:crypto').createHash('sha256')
       .update(source.sourceId + ':' + source.locator).digest('hex') } } });
-  const { AudioTrackPreferencesStore } = f.load('entry/src/main/ets/services/AudioTrackPreferencesStore.ets');
-  const repository = new AudioTrackPreferencesStore({});
+  const { AudioTrackMemoryStore } = f.load('entry/src/main/ets/services/AudioTrackMemoryStore.ets');
+  const repository = new AudioTrackMemoryStore({});
   const a = { sourceId: 'server-a', locator: '/video.mkv', fingerprint: '' };
   const b = { sourceId: 'server-b', locator: '/video.mkv', fingerprint: '' };
-  await Promise.all([repository.savePreferences(new f.AudioTrackPreferences(['en'])),
-    repository.savePreferences(new f.AudioTrackPreferences(['zh'], false))]);
-  assert.deepEqual(Array.from((await repository.loadPreferences()).languages), ['zh']);
-  assert.equal((await repository.loadPreferences()).remember, false);
   await repository.saveChoice(a, new f.AudioTrackChoice('en', 'Main', 2));
   assert.equal((await repository.loadChoice(a)).language, 'en');
   assert.equal(await repository.loadChoice(b), null);
   assert.equal(Array.from(values.keys()).some(key => key.includes('video.mkv')), false);
   await repository.saveChoice(a, null); assert.equal(await repository.loadChoice(a), null);
-  fail = true; await assert.rejects(repository.savePreferences(new f.AudioTrackPreferences(['ja'])));
-  fail = false; await repository.savePreferences(new f.AudioTrackPreferences(['en']));
-  assert.equal((await repository.loadPreferences()).languages[0], 'en');
+  fail = true; await assert.rejects(repository.saveChoice(a, new f.AudioTrackChoice('ja', 'Main', 2)));
+  fail = false; await repository.saveChoice(a, new f.AudioTrackChoice('en', 'Main', 2));
+  assert.equal((await repository.loadChoice(a)).language, 'en');
 });

@@ -264,6 +264,30 @@ export class PlaybackEngine {
     }
   }
 
+  setAudioDelay(milliseconds: number): number | null {
+    const port: PlaybackPort | null = this.port;
+    if (port === null) return null;
+    const sessionId: number = this.sessionId;
+    try {
+      if (!Number.isInteger(milliseconds) || Math.abs(milliseconds) > 10000) {
+        throw new PlaybackPortError(401, 'Invalid audio delay');
+      }
+      if (port.setAudioDelay === undefined) throw new PlaybackPortError(801, 'Audio delay is unavailable');
+      const actual: number = port.setAudioDelay(milliseconds);
+      if (!Number.isFinite(actual) || Math.abs(actual - milliseconds) > 0.5) {
+        throw new PlaybackPortError(5400102, 'Audio delay not applied');
+      }
+      if (!this.isCurrent(sessionId) || this.port !== port) return null;
+      if (this.warningOperation === 'audio-delay') {
+        this.warning = null; this.warningOperation = ''; this.notify();
+      }
+      return this.isCurrent(sessionId) && this.port === port ? actual : null;
+    } catch (error) {
+      if (this.isCurrent(sessionId) && this.port === port) this.warn('audio-delay', this.portError(error));
+      return null;
+    }
+  }
+
   async selectAudioTrack(id: string): Promise<boolean> {
     const port: PlaybackPort | null = this.port;
     if (port === null) return false;

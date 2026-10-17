@@ -2,7 +2,7 @@ import { common } from '@kit.AbilityKit';
 import { window } from '@kit.ArkUI';
 import { AppSettings, MediaSource, PlaybackPlaylist, PlaybackSnapshot, PlaybackStatus, PlayerFeatureController,
   PlayerBrightnessPort, PlayerFeatureState, PlayerGestureCallbacks, PlayerGestureController,
-  PlayerGestureState, AudioTrackPreferences } from 'linkora_core';
+  PlayerGestureState } from 'linkora_core';
 import { PlayerControls } from '../components/PlayerControls';
 import { PlayerFailureOverlay } from '../components/PlayerFailureOverlay';
 import { PlayerGestureFeedback } from '../components/PlayerGestureFeedback';
@@ -29,8 +29,8 @@ export struct PlayerPage {
   @Local private isSeeking: boolean = false;
   @Local private playbackRate: number = 1;
   @Local private volume: number = 1;
-  @Local private audioPreferences: AudioTrackPreferences = new AudioTrackPreferences();
-  @Local private audioSelection: string = 'auto';
+  @Local private audioDelay: number | null = null;
+  @Local private audioDelayError: boolean = false;
   @Local private audioBusy: boolean = false;
   @Local private audioError: boolean = false;
   @Local private screenDirection: PlayerScreenDirection | null = null;
@@ -149,8 +149,8 @@ export struct PlayerPage {
     this.isSeeking = state.seeking;
     this.playbackRate = state.playbackRate;
     this.volume = state.volume;
-    this.audioPreferences = state.audioPreferences;
-    this.audioSelection = state.audioSelection;
+    this.audioDelay = state.audioDelay;
+    this.audioDelayError = state.audioDelayError;
     this.audioBusy = state.audioBusy;
     this.audioError = state.audioError;
     this.setKeepScreenOn(state.keepScreenOn);
@@ -451,8 +451,8 @@ export struct PlayerPage {
             sliderPosition: this.sliderPosition,
             playbackRate: this.playbackRate,
             volume: this.volume,
-            audioPreferences: this.audioPreferences,
-            audioSelection: this.audioSelection,
+            audioDelay: this.audioDelay,
+            audioDelayError: this.audioDelayError,
             audioBusy: this.audioBusy,
             audioError: this.audioError,
             playlist: this.playlist,
@@ -465,8 +465,7 @@ export struct PlayerPage {
             onStopPlayback: () => this.controller?.stopPlayback(),
             onChangeLoopMode: () => this.controller?.cycleLoopMode(),
             onSelectAudioTrack: (id: string) => this.controller?.selectAudioTrack(id),
-            onSetAudioPreferences: (languages: string, remember: boolean) =>
-              this.controller?.setAudioPreferences(languages, remember),
+            onSetAudioDelay: (milliseconds: number) => this.controller?.setAudioDelay(milliseconds),
             onChangePlaybackRate: () => this.nextPlaybackRate(),
             onChangeVolume: (value: number) => this.changeVolume(value)
           })

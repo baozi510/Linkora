@@ -89,6 +89,38 @@ function fixture() {
   } };
 }
 
+test('System refreshes late playlist audio metadata when the new item starts rendering', async () => {
+  const f = fixture(), c = f.core, updates = [];
+  const items = ['a', 'b'].map(id => new c.PlaybackPlaylistItem(id, c.MediaSource.fromLocalDocument('file://' + id + '.mp4')));
+  const port = await f.create(new c.PlaybackPlaylist(items, 0, true));
+  f.observer.onTracksChange = value => updates.push(value);
+  await port.prepare();
+  await port.selectPlaylistItem(1);
+  await new Promise(setImmediate);
+  assert.equal(updates.at(-1).length, 0, 'metadata is not ready at the content-change callback');
+  f.player.trackDescriptions = [{ track_index: 2, track_type: 0, language: 'en' }];
+  f.player.selectedTracks = [2];
+  f.player.emit('startRenderFrame');
+  await new Promise(setImmediate);
+  assert.equal(updates.at(-1)[0]?.id, '2');
+  assert.equal(updates.at(-1)[0]?.selected, true);
+  await port.release();
+});
+
+test('System invalidates cached track metadata synchronously on a playlist source change', async () => {
+  const f = fixture(), c = f.core, updates = [];
+  const items = ['a', 'b'].map(id => new c.PlaybackPlaylistItem(id, c.MediaSource.fromLocalDocument('file://' + id + '.mp4')));
+  const port = await f.create(new c.PlaybackPlaylist(items, 0, true));
+  f.player.trackDescriptions = [{ track_index: 2, track_type: 0, language: 'en' }];
+  f.observer.onTracksChange = value => updates.push(value);
+  await port.prepare(); await new Promise(setImmediate);
+  assert.equal(updates.at(-1).length, 1);
+  f.player.trackDescriptions = [];
+  f.player.contentChanged(f.queue[1].id);
+  assert.equal(updates.at(-1).length, 0, 'candidate cache must not replay the previous item tracks');
+  await port.release();
+});
+
 test('System native queue preserves source order and selected start, uses real IDs and closes every FD', async () => {
   const f = fixture(), c = f.core, changes = [];
   const items = ['a', 'b', 'c'].map(id => new c.PlaybackPlaylistItem(id, c.MediaSource.fromLocalDocument('file://' + id + '.mp4')));

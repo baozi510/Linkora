@@ -101,6 +101,20 @@ function fixture() {
   };
 }
 
+test('MPV audio delay writes signed seconds, returns native milliseconds and rejects failed readback', async () => {
+  const f = fixture(), port = await f.create();
+  const ready = port.prepare(); f.loaded(); await ready;
+  for (const value of [-500, 50, 0]) {
+    assert.equal(port.setAudioDelay(value), value);
+    assert.equal(f.player.properties.get('audio-delay'), value / 1000);
+  }
+  for (const value of [NaN, Infinity, 10001, -10001]) assert.throws(() => port.setAudioDelay(value));
+  f.player.native.setProperty = () => {};
+  assert.throws(() => port.setAudioDelay(50));
+  await port.release();
+  assert.throws(() => port.setAudioDelay(0));
+});
+
 test('MPV opens the native ordered list and reports only native playing-position changes', async () => {
   const f = fixture(), c = f.core, indices = [];
   const items = ['a', 'b', 'c'].map(id => new c.PlaybackPlaylistItem(id, c.MediaSource.fromLocalDocument('file://' + id + '.mp4')));

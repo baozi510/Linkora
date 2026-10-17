@@ -231,6 +231,19 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
     this.player.setAudioTrack(track);
   }
 
+  setAudioDelay(milliseconds: number): number {
+    this.ensureReady();
+    if (!Number.isInteger(milliseconds) || Math.abs(milliseconds) > 10000) {
+      throw new PlaybackPortError(401, 'Invalid audio delay');
+    }
+    this.player.native.setProperty('audio-delay', milliseconds / 1000);
+    const seconds: number = this.player.native.getProperty('audio-delay');
+    if (!Number.isFinite(seconds) || Math.abs(seconds * 1000 - milliseconds) > 0.5) {
+      throw new PlaybackPortError(5400102, 'Audio delay not applied');
+    }
+    return Math.round(seconds * 1000);
+  }
+
   release(): Promise<void> {
     if (this.releasePromise !== null) return this.releasePromise;
     this.released = true;

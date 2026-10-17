@@ -257,6 +257,12 @@ export class AdaptivePlaybackPort implements PlaybackPort {
     await this.requireBackend().selectAudioTrack(id);
   }
 
+  setAudioDelay(milliseconds: number): number {
+    const backend: PlaybackBackend = this.requireBackend();
+    if (backend.setAudioDelay === undefined) throw new PlaybackPortError(801, 'Audio delay is unavailable');
+    return backend.setAudioDelay(milliseconds);
+  }
+
   seek(position: number): void {
     this.requireBackend().seek(position);
   }

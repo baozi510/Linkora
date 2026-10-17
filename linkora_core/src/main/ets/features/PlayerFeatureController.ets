@@ -10,7 +10,7 @@ import { AppFailure } from '../errors/AppFailure';
 import { MediaSourceKind } from '../models/MediaSource';
 import { VideoDisplayMode, PlaybackLoopMode } from '../playback/PlaybackPort';
 import { PortTrack, PortTrackKind } from '../playback/PlaybackPort';
-import { AudioTrackChoice, AudioTrackPreferences, AudioTrackRepository } from '../playback/AudioTrackPreferences';
+import { AudioTrackChoice, AudioTrackRepository } from '../playback/AudioTrackMemory';
 
 class PendingAudioSelection {
   accepted: boolean = false;
@@ -18,11 +18,9 @@ class PendingAudioSelection {
   readonly backend: string;
   readonly id: string;
   readonly manual: boolean;
-  readonly automatic: boolean;
-  readonly reset: boolean;
-  constructor(source: MediaSource, backend: string, id: string, manual: boolean, automatic: boolean, reset: boolean) {
+  constructor(source: MediaSource, backend: string, id: string, manual: boolean) {
     this.source = source; this.backend = backend; this.id = id;
-    this.manual = manual; this.automatic = automatic; this.reset = reset;
+    this.manual = manual;
   }
 }
 
@@ -35,25 +33,23 @@ export class PlayerFeatureState {
   readonly playbackRate: number;
   readonly volume: number;
   readonly keepScreenOn: boolean;
-  readonly audioPreferences: AudioTrackPreferences;
-  readonly audioSelection: string;
   readonly audioBusy: boolean;
   readonly audioError: boolean;
+  readonly audioDelay: number | null;
+  readonly audioDelayError: boolean;
 
   constructor(playback: PlaybackSnapshot, sliderPosition: number = 0, seeking: boolean = false,
     playbackRate: number = 1, volume: number = 1, keepScreenOn: boolean = false,
-    audioPreferences: AudioTrackPreferences = new AudioTrackPreferences(), audioSelection: string = 'auto',
-    audioBusy: boolean = false, audioError: boolean = false) {
+    audioBusy: boolean = false, audioError: boolean = false, audioDelay: number | null = null, audioDelayError: boolean = false) {
     this.playback = playback;
     this.sliderPosition = sliderPosition;
     this.seeking = seeking;
     this.playbackRate = playbackRate;
     this.volume = volume;
     this.keepScreenOn = keepScreenOn;
-    this.audioPreferences = audioPreferences;
-    this.audioSelection = audioSelection;
     this.audioBusy = audioBusy;
     this.audioError = audioError;
+    this.audioDelay = audioDelay; this.audioDelayError = audioDelayError;
   }
 }
 
@@ -73,13 +69,13 @@ export class PlayerFeatureController {
   private lastSavedPosition: number = 0;
   private readonly playlist: PlaybackPlaylist | null;
   private readonly audioRepository: AudioTrackRepository | null;
-  private audioPreferences: AudioTrackPreferences = new AudioTrackPreferences();
   private audioMemory: AudioTrackChoice | null = null;
-  private audioSelection: string = 'auto';
   private audioLoaded: boolean = false;
-  private audioPreferencesLoaded: boolean = false;
+  private audioRestored: boolean = false;
+  private audioDelayInitialized: boolean = false;
+  private audioDelay: number | null = null;
+  private audioDelayError: boolean = false;
   private audioGeneration: number = 0;
-  private audioAttempt: string = '';
   private audioError: boolean = false;
   private audioStorageError: boolean = false;
   private pendingAudio: PendingAudioSelection | null = null;
@@ -228,38 +224,19 @@ export class PlayerFeatureController {
   }
 
   selectAudioTrack(id: string): void {
-    if (!this.active || !this.audioLoaded || this.pendingAudio !== null) return;
-    if (id === 'auto') {
-      const preferred: PortTrack | null = this.audioPreferences.choose(this.state.playback.tracks, null);
-      this.startAudioSelection(preferred?.id ?? 'auto', false, true, true);
-    } else {
-      this.startAudioSelection(id, true, false, false);
-    }
+    if (!this.active || !this.audioLoaded || this.pendingAudio !== null ||
+      !this.state.playback.tracks.some((track: PortTrack) => track.kind === PortTrackKind.AUDIO && track.id === id)) return;
+    this.audioRestored = true;
+    this.startAudioSelection(id, true);
   }
 
-  setAudioPreferences(languages: string, remember: boolean): void {
-    if (!this.active || this.pendingAudio !== null) return;
-    try {
-      const value: AudioTrackPreferences = new AudioTrackPreferences(
-        languages.trim().length === 0 ? [] : languages.split(','), remember);
-      this.audioPreferences = value;
-      this.audioPreferencesLoaded = true;
-      this.audioError = false;
-      this.audioAttempt = '';
-      this.audioRepository?.savePreferences(value).then(() => {
-        if (this.active) { this.audioStorageError = false; this.refreshAudioState(); }
-      }).catch(() => { if (this.active) { this.audioStorageError = true; this.refreshAudioState(); } });
-      if (!this.audioLoaded) {
-        this.loadAudioPreferences(this.source).then(() => this.applyAudioPreference(this.state.playback));
-      } else {
-        const preferred: PortTrack | null = value.choose(this.state.playback.tracks, this.audioMemory);
-        this.startAudioSelection(preferred?.id ?? 'auto', false, true, false);
-      }
-      this.refreshAudioState();
-    } catch (_error) {
-      this.audioError = true;
-      this.refreshAudioState();
-    }
+  setAudioDelay(milliseconds: number): void {
+    if (!this.active || this.state.playback.backend !== 'mpv' || !Number.isInteger(milliseconds) ||
+      Math.abs(milliseconds) > 10000) return;
+    const actual: number | null = this.engine.setAudioDelay(milliseconds);
+    this.audioDelayError = actual === null;
+    if (actual !== null) this.audioDelay = actual;
+    this.refreshAudioState();
   }
 
   handleBackground(): void {
@@ -294,7 +271,7 @@ export class PlayerFeatureController {
   }
 
   private async open(requestId: number, resumeBookmark: boolean = true): Promise<void> {
-    await this.loadAudioPreferences(this.source);
+    await this.loadAudioMemory(this.source);
     if (!this.active || requestId !== this.requestId) return;
     if ((this.source.kind === MediaSourceKind.NETWORK_LINK || this.source.kind === MediaSourceKind.REMOTE_FILE) &&
       this.accessPolicy !== null) {
@@ -333,11 +310,12 @@ export class PlayerFeatureController {
       this.persistBookmark(this.state.playback, true);
       this.source = this.playlist.items[playback.playlistIndex].source;
       this.lastSavedPosition = 0;
-      this.loadAudioPreferences(this.source).then(() => this.applyAudioPreference(this.state.playback));
+      this.loadAudioMemory(this.source).then(() => this.restoreAudioMemory(this.state.playback));
     } else if (playback.backend !== this.state.playback.backend) {
       this.cancelAudioSelection();
-      this.audioSelection = 'auto';
-      this.audioAttempt = '';
+      this.audioRestored = false;
+      this.audioDelayInitialized = false;
+      this.audioDelay = null; this.audioDelayError = false;
     }
     if (playback.status === PlaybackStatus.COMPLETED) {
       this.bookmarkRepository.clear(this.source).catch(() => {});
@@ -352,25 +330,25 @@ export class PlayerFeatureController {
     this.update(playback, sliderPosition, seeking, playback.playbackRate,
       playback.volume, keepScreenOn);
     this.completeAudioSelection();
-    this.applyAudioPreference(playback);
+    this.restoreAudioMemory(playback);
+    if (!this.audioDelayInitialized && playback.backend === 'mpv' &&
+      (playback.status === PlaybackStatus.READY || playback.status === PlaybackStatus.PLAYING ||
+        playback.status === PlaybackStatus.PAUSED)) {
+      this.audioDelayInitialized = true;
+      this.setAudioDelay(0);
+    }
   }
 
-  private async loadAudioPreferences(source: MediaSource): Promise<void> {
+  private async loadAudioMemory(source: MediaSource): Promise<void> {
     const generation: number = ++this.audioGeneration;
     this.cancelAudioSelection();
-    this.audioLoaded = false;
-    this.audioSelection = 'auto';
-    this.audioMemory = null;
-    this.audioAttempt = '';
+    this.audioLoaded = false; this.audioRestored = false;
+    this.audioMemory = null; this.audioError = false; this.audioStorageError = false;
+    this.audioDelayInitialized = false; this.audioDelay = null; this.audioDelayError = false;
     this.refreshAudioState();
     try {
-      const preferences: AudioTrackPreferences = this.audioPreferencesLoaded ? this.audioPreferences :
-        await this.audioRepository?.loadPreferences() ?? new AudioTrackPreferences();
-      const memory: AudioTrackChoice | null = preferences.remember ?
-        await this.audioRepository?.loadChoice(source) ?? null : null;
+      const memory: AudioTrackChoice | null = await this.audioRepository?.loadChoice(source) ?? null;
       if (!this.active || generation !== this.audioGeneration || source !== this.source) return;
-      this.audioPreferences = preferences;
-      this.audioPreferencesLoaded = true;
       this.audioMemory = memory;
     } catch (_error) {
       if (!this.active || generation !== this.audioGeneration) return;
@@ -382,24 +360,20 @@ export class PlayerFeatureController {
     }
   }
 
-  private applyAudioPreference(playback: PlaybackSnapshot): void {
-    if (!this.active || !this.audioLoaded || this.pendingAudio !== null || this.audioSelection !== 'auto') return;
-    const tracks: PortTrack[] = playback.tracks.filter((track: PortTrack) => track.kind === PortTrackKind.AUDIO);
-    if (tracks.length === 0) return;
-    const signature: string = playback.backend + JSON.stringify(tracks.map((track: PortTrack) =>
-      [track.id, track.language, track.title, track.channels, track.isDefault]));
-    if (signature === this.audioAttempt) return;
-    this.audioAttempt = signature;
-    const preferred: PortTrack | null = this.audioPreferences.choose(tracks, this.audioMemory);
-    const restored: boolean = this.audioPreferences.remember && preferred !== null &&
-      this.audioMemory?.match(tracks)?.id === preferred.id;
-    this.startAudioSelection(preferred?.id ?? 'auto', false, !restored, false);
+  private restoreAudioMemory(playback: PlaybackSnapshot): void {
+    if (!this.active || !this.audioLoaded || this.pendingAudio !== null || this.audioRestored) return;
+    if (playback.status !== PlaybackStatus.READY && playback.status !== PlaybackStatus.PLAYING &&
+      playback.status !== PlaybackStatus.PAUSED) return;
+    const track: PortTrack | null = this.audioMemory?.match(playback.tracks) ?? null;
+    if (track === null) return;
+    this.audioRestored = true;
+    this.startAudioSelection(track.id, false);
   }
 
-  private startAudioSelection(id: string, manual: boolean, automatic: boolean, reset: boolean): void {
+  private startAudioSelection(id: string, manual: boolean): void {
     if (!this.audioLoaded || this.pendingAudio !== null) return;
     const pending: PendingAudioSelection = new PendingAudioSelection(this.source, this.state.playback.backend,
-      id, manual, automatic, reset);
+      id, manual);
     this.pendingAudio = pending;
     this.audioError = false;
     this.audioTimer = setTimeout(() => {
@@ -427,13 +401,17 @@ export class PlayerFeatureController {
       pending.backend !== this.state.playback.backend) return;
     const selected: PortTrack | undefined = this.state.playback.tracks.find((track: PortTrack) =>
       track.kind === PortTrackKind.AUDIO && track.selected && track.id === pending.id);
-    if (pending.id !== 'auto' && selected === undefined) return;
+    if (selected === undefined) return;
     this.cancelAudioSelection();
-    this.audioSelection = pending.automatic ? 'auto' : pending.id;
-    if (pending.reset || (pending.manual && this.audioPreferences.remember && selected !== undefined)) {
-      this.audioMemory = pending.reset ? null : AudioTrackChoice.from(selected as PortTrack);
-      this.audioRepository?.saveChoice(pending.source, this.audioMemory).catch(() => {
-        if (this.active && this.source === pending.source) {
+    if (pending.manual) {
+      this.audioMemory = AudioTrackChoice.from(selected);
+      const generation: number = this.audioGeneration;
+      this.audioRepository?.saveChoice(pending.source, this.audioMemory).then(() => {
+        if (this.active && generation === this.audioGeneration) {
+          this.audioStorageError = false; this.refreshAudioState();
+        }
+      }).catch(() => {
+        if (this.active && generation === this.audioGeneration) {
           this.audioStorageError = true; this.refreshAudioState();
         }
       });
@@ -470,8 +448,9 @@ export class PlayerFeatureController {
   private update(playback: PlaybackSnapshot, sliderPosition: number, seeking: boolean,
     playbackRate: number, volume: number, keepScreenOn: boolean): void {
     this.state = new PlayerFeatureState(playback, sliderPosition, seeking,
-      playbackRate, volume, keepScreenOn, this.audioPreferences, this.audioSelection,
-      !this.audioLoaded || this.pendingAudio !== null, this.audioError || this.audioStorageError);
+      playbackRate, volume, keepScreenOn,
+      !this.audioLoaded || this.pendingAudio !== null, this.audioError || this.audioStorageError,
+      this.audioDelay, this.audioDelayError);
     if (this.active) {
       this.observer(this.state);
     }

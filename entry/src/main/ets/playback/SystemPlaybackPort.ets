@@ -249,6 +249,7 @@ export class SystemPlaybackPort implements PlaybackBackend {
     ++this.trackRequestId;
     this.tracks = [];
     this.observer.onPlaylistIndexChange(index);
+    this.observer.onTracksChange([]);
     this.observer.onDurationChange(Math.max(0, this.player.duration));
     this.observer.onStateChange(this.portState(this.player.state));
     if (this.player.state === 'playing' || this.player.state === 'paused' || this.player.state === 'prepared') {
@@ -346,7 +347,9 @@ export class SystemPlaybackPort implements PlaybackBackend {
       }
       await this.refreshTracks();
     } catch (error) {
-      throw SystemPlaybackPort.platformError(error);
+      const failure: PlaybackPortError = SystemPlaybackPort.platformError(error);
+      console.warn(`[SystemPlaybackPort] Audio track selection failed code=${failure.code}, state=${this.player.state}`);
+      throw failure;
     }
   }
 
@@ -426,6 +429,8 @@ export class SystemPlaybackPort implements PlaybackBackend {
     this.player.on('startRenderFrame', () => {
       if (this.released) return;
       this.observer.onFirstFrame();
+      // Playlist metadata may still be empty at the content-change callback.
+      if (this.tracks.length === 0) this.refreshTracks().catch(() => {});
     });
     this.player.on('videoSizeChange', (width: number, height: number) => {
       if (this.released) return;
