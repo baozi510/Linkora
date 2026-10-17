@@ -13,6 +13,7 @@ import { createPlaybackPort } from 'entry/PlaybackComposition';
 import { PlaybackBookmarkStore } from '../services/PlaybackBookmarkStore';
 import { RecentMediaStore } from '../services/RecentMediaStore';
 import { AppSettingsStore } from '../services/AppSettingsStore';
+import { AudioTrackPreferencesStore } from '../services/AudioTrackPreferencesStore';
 import { LocalMediaThumbnailLoader } from '../services/LocalMediaThumbnailLoader';
 import { ManualMediaStore } from '../services/ManualMediaStore';
 import { WindowBrightnessController } from '../playback/WindowBrightnessController';
@@ -91,7 +92,8 @@ export class LinkoraFeatures {
       settings,
       observer,
       new HarmonyNetworkAccessPolicy(settings),
-      nativePlaylist
+      nativePlaylist,
+      new AudioTrackPreferencesStore(context)
     );
   }
 

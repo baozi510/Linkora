@@ -20,6 +20,7 @@ import networkDirectoryStateTest from './NetworkDirectoryState.test';
 import networkFileProxyTest from './NetworkFileProxy.test';
 import localPlaybackPlaylistTest from './LocalPlaybackPlaylist.test';
 import networkPlaybackPlaylistTest from './NetworkPlaybackPlaylist.test';
+import audioTrackPreferencesTest from './AudioTrackPreferences.test';
 
 export default function testsuite(): void {
   ffmpegAnalysisTest();
@@ -38,6 +39,7 @@ export default function testsuite(): void {
   localMediaOrderingTest();
   localPlaybackPlaylistTest();
   networkPlaybackPlaylistTest();
+  audioTrackPreferencesTest();
   appNavigationTest();
   networkDirectoryStateTest();
   networkFileProxyTest();

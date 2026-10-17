@@ -329,12 +329,21 @@ export class SystemPlaybackPort implements PlaybackBackend {
   }
 
   async selectAudioTrack(id: string): Promise<void> {
-    if (this.released || !this.tracks.some((track: PortTrack) =>
-      track.id === id && track.kind === PortTrackKind.AUDIO)) {
+    if (this.released || (id !== 'auto' && !this.tracks.some((track: PortTrack) =>
+      track.id === id && track.kind === PortTrackKind.AUDIO))) {
       throw new PlaybackPortError(401, 'Audio track is unavailable');
     }
     try {
-      await this.player.selectTrack(Number(id));
+      if (id === 'auto') {
+        const contentId: string = this.reportedContentId;
+        const selected: number[] = await this.player.getSelectedTracks();
+        if (this.released || contentId !== this.reportedContentId) throw new PlaybackPortError(5400104, 'Audio source changed');
+        const current: PortTrack | undefined = this.tracks.find((track: PortTrack) =>
+          track.kind === PortTrackKind.AUDIO && selected.includes(Number(track.id)));
+        if (current !== undefined) await this.player.deselectTrack(Number(current.id));
+      } else {
+        await this.player.selectTrack(Number(id));
+      }
       await this.refreshTracks();
     } catch (error) {
       throw SystemPlaybackPort.platformError(error);
@@ -492,7 +501,9 @@ export class SystemPlaybackPort implements PlaybackBackend {
         const kind: PortTrackKind = type === 0 ? PortTrackKind.AUDIO :
           (type === 1 ? PortTrackKind.VIDEO : PortTrackKind.SUBTITLE);
         tracks.push(new PortTrack(index.toString(), kind, this.trackText(item, 'codec_mime'),
-          this.trackText(item, 'language'), this.trackText(item, 'track_name'), selected.includes(index)));
+          this.trackText(item, 'language'), this.trackText(item, 'track_name'), selected.includes(index),
+          this.trackNumber(item, 'channel_count'), this.trackNumber(item, 'sample_rate'),
+          this.trackNumber(item, 'bitrate')));
       }
       this.tracks = tracks;
       this.observer.onTracksChange(tracks);
@@ -506,6 +517,11 @@ export class SystemPlaybackPort implements PlaybackBackend {
   private trackText(description: media.MediaDescription, key: string): string {
     const value: Object = description[key];
     return typeof value === 'string' ? value : '';
+  }
+
+  private trackNumber(description: media.MediaDescription, key: string): number {
+    const value: Object = description[key];
+    return typeof value === 'number' ? value : 0;
   }
 
   private completeInitialization(): void {

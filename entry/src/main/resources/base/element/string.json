@@ -114,6 +114,12 @@
     {"name": "player_direction_unlock", "value": "解除方向锁定"},
     {"name": "player_direction_locked", "value": "已锁定，可翻转"},
     {"name": "player_direction_failed", "value": "屏幕方向切换失败，请重试"},
+    {"name": "player_audio_auto", "value": "自动（语言偏好／默认）"},
+    {"name": "player_audio_languages", "value": "语言优先级，例如 zh,en；留空用默认"},
+    {"name": "player_audio_apply", "value": "应用"},
+    {"name": "player_audio_remember", "value": "记住此视频手选的音轨"},
+    {"name": "player_audio_switching", "value": "正在切换音轨…"},
+    {"name": "player_audio_failed", "value": "音轨切换或偏好保存失败，请检查语言代码并重试"},
     {
       "name": "player_volume",
       "value": "音量"

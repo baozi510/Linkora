@@ -45,15 +45,24 @@ export class PortTrack {
   readonly language: string;
   readonly title: string;
   readonly selected: boolean;
+  readonly channels: number;
+  readonly sampleRate: number;
+  readonly bitrate: number;
+  readonly isDefault: boolean | null;
 
   constructor(id: string, kind: PortTrackKind, codec: string = '',
-    language: string = '', title: string = '', selected: boolean = false) {
+    language: string = '', title: string = '', selected: boolean = false, channels: number = 0,
+    sampleRate: number = 0, bitrate: number = 0, isDefault: boolean | null = null) {
     this.id = id;
     this.kind = kind;
     this.codec = codec;
     this.language = language;
     this.title = title;
     this.selected = selected;
+    this.channels = Number.isFinite(channels) && channels > 0 ? Math.floor(channels) : 0;
+    this.sampleRate = Number.isFinite(sampleRate) && sampleRate > 0 ? Math.floor(sampleRate) : 0;
+    this.bitrate = Number.isFinite(bitrate) && bitrate > 0 ? Math.floor(bitrate) : 0;
+    this.isDefault = isDefault;
   }
 }
 

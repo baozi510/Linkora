@@ -1,5 +1,5 @@
 import { PlaybackSnapshot, PlaybackStatus, PortTrack, PortTrackKind, VideoDisplayMode, PlaybackPlaylist,
-  PlaybackLoopMode } from 'linkora_core';
+  PlaybackLoopMode, AudioTrackPreferences } from 'linkora_core';
 import { AppTypography, PlayerColors, PlayerRadius } from '../ui/AppTheme';
 
 @ComponentV2
@@ -10,6 +10,11 @@ export struct PlayerControls {
   @Param sliderPosition: number = 0;
   @Param playbackRate: number = 1;
   @Param volume: number = 1;
+  @Param audioPreferences: AudioTrackPreferences = new AudioTrackPreferences();
+  @Param audioSelection: string = 'auto';
+  @Param audioBusy: boolean = false;
+  @Param audioError: boolean = false;
+  @Local private languageInput: string = '';
   @Param playlist: PlaybackPlaylist | null = null;
   @Event onPrevious: () => void = () => {};
   @Event onNext: () => void = () => {};
@@ -22,6 +27,7 @@ export struct PlayerControls {
   @Event onStopPlayback: () => void = () => {};
   @Event onChangeLoopMode: () => void = () => {};
   @Event onSelectAudioTrack: (id: string) => void = () => {};
+  @Event onSetAudioPreferences: (languages: string, remember: boolean) => void = () => {};
   @Event onChangeDisplayMode: () => void = () => {};
 
   private displayModeText(): ResourceStr {
@@ -42,9 +48,30 @@ export struct PlayerControls {
   }
 
   private audioOptions(): SelectOption[] {
-    return this.audioTracks().map((track: PortTrack): SelectOption => ({
-      value: track.title || track.language || `${track.id} ${track.codec}`
-    }));
+    return [{ value: $r('app.string.player_audio_auto') }, ...this.audioTracks().map((track: PortTrack): SelectOption => ({
+      value: `${track.title || track.id} · ${this.audioDetails(track)}`
+    }))];
+  }
+
+  private audioDetails(track: PortTrack): string {
+    const parts: string[] = [track.language, track.codec].filter((value: string) => value.length > 0);
+    if (track.channels > 0) parts.push(`${track.channels}ch`);
+    if (track.sampleRate > 0) parts.push(`${track.sampleRate / 1000}kHz`);
+    if (track.bitrate > 0) parts.push(`${Math.round(track.bitrate / 1000)}kbps`);
+    if (track.isDefault === true) parts.push('default');
+    return parts.join(' · ');
+  }
+
+  private selectedAudioDetails(): string {
+    const track: PortTrack | undefined = this.audioTracks().find((value: PortTrack) => value.selected);
+    return track === undefined ? '' : `${track.title || track.id} · ${this.audioDetails(track)}`;
+  }
+
+  aboutToAppear(): void { this.languageInput = this.audioPreferences.languages.join(','); }
+
+  @Monitor('audioPreferences')
+  private audioPreferencesChanged(): void {
+    this.languageInput = this.audioPreferences.languages.join(',');
   }
 
   private playlistOptions(): SelectOption[] {
@@ -156,17 +183,62 @@ export struct PlayerControls {
           .onClick(() => this.onChangeLoopMode())
         if (this.audioTracks().length > 0) {
           Select(this.audioOptions())
-            .selected(this.audioTracks().findIndex((track: PortTrack) => track.selected))
+            .selected(this.audioSelection === 'auto' ? 0 :
+              this.audioTracks().findIndex((track: PortTrack) => track.id === this.audioSelection) + 1)
+            .value(this.audioSelection === 'auto' ? $r('app.string.player_audio_auto') : this.selectedAudioDetails())
+            .fontColor(PlayerColors.TEXT_CONTROL)
+            .backgroundColor(PlayerColors.CONTROL_SURFACE)
+            .optionFontColor(PlayerColors.TEXT_CONTROL)
+            .optionBgColor(PlayerColors.CONTROL_SURFACE)
             .accessibilityText($r('app.string.player_audio_track'))
             .layoutWeight(1)
-            .enabled(this.canControl())
+            .enabled(this.canControl() && !this.audioBusy)
             .onSelect((index: number) => {
-              const track: PortTrack | undefined = this.audioTracks()[index];
-              if (track !== undefined) this.onSelectAudioTrack(track.id);
+              const track: PortTrack | undefined = this.audioTracks()[index - 1];
+              if (index === 0) this.onSelectAudioTrack('auto');
+              else if (track !== undefined) this.onSelectAudioTrack(track.id);
             })
         }
       }
       .width('100%')
+
+      if (this.audioTracks().length > 0) {
+        Text(this.selectedAudioDetails())
+          .fontSize(12)
+          .fontColor(PlayerColors.TEXT_SECONDARY)
+          .width('100%')
+        Row({ space: 8 }) {
+          TextInput({ text: this.languageInput, placeholder: $r('app.string.player_audio_languages') })
+            .layoutWeight(1)
+            .fontColor(PlayerColors.TEXT_CONTROL)
+            .placeholderColor(PlayerColors.TEXT_SECONDARY)
+            .backgroundColor(PlayerColors.CONTROL_SURFACE)
+            .maxLength(64)
+            .enabled(!this.audioBusy)
+            .onChange((value: string) => { this.languageInput = value; })
+            .onSubmit(() => this.onSetAudioPreferences(this.languageInput, this.audioPreferences.remember))
+          Button($r('app.string.player_audio_apply'))
+            .enabled(!this.audioBusy)
+            .onClick(() => this.onSetAudioPreferences(this.languageInput, this.audioPreferences.remember))
+        }
+        Row() {
+          Checkbox({ name: 'remember-audio-track' })
+            .select(this.audioPreferences.remember)
+            .enabled(!this.audioBusy)
+            .accessibilityText($r('app.string.player_audio_remember'))
+            .onChange((remember: boolean) =>
+              this.onSetAudioPreferences(this.audioPreferences.languages.join(','), remember))
+          Text($r('app.string.player_audio_remember'))
+            .fontSize(12)
+            .fontColor(PlayerColors.TEXT_SECONDARY)
+        }
+        .width('100%')
+        if (this.audioBusy || this.audioError) {
+          Text(this.audioBusy ? $r('app.string.player_audio_switching') : $r('app.string.player_audio_failed'))
+            .fontSize(12)
+            .fontColor(this.audioError ? '#FFB4AB' : PlayerColors.TEXT_SECONDARY)
+        }
+      }
 
       if (this.playlist !== null && this.snapshot.playlistIndex >= 0) {
         Row({ space: 10 }) {

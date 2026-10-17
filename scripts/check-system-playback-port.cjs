@@ -40,6 +40,7 @@ function fixture() {
     getTrackDescription: async () => player.trackDescriptions,
     getSelectedTracks: async () => player.selectedTracks,
     selectTrack: async index => { player.selectedTracks = [index]; },
+    deselectTrack: async index => { player.deselectedTrack = index; player.selectedTracks = [2]; },
     setPlaybackRate: rate => { player.requestedRate = rate; },
     seek: value => { player.seekMs = value; }, setSpeed() {}, setVolume() {},
     release: async () => { player.closes++; player.emit('stateChange', 'released'); }
@@ -297,6 +298,23 @@ test('System discovers and selects only actual audio track ids', async () => {
   assert.equal(updates.at(-1).find(track => track.id === '3').selected, true);
   await assert.rejects(port.selectAudioTrack('0'));
   await assert.rejects(port.selectAudioTrack('999'));
+  await port.release();
+});
+
+test('System exposes native audio details and auto restores the default rather than muting', async () => {
+  const f = fixture(), port = await f.create(), updates = [];
+  f.observer.onTracksChange = value => updates.push(value);
+  f.player.trackDescriptions = [{ track_index: 2, track_type: 0, language: 'en',
+    channel_count: 6, sample_rate: 48000, bitrate: 384000 }, { track_index: 3, track_type: 0, language: 'zh' }];
+  f.player.selectedTracks = [3];
+  await port.prepare(); await new Promise(setImmediate);
+  assert.equal(updates.at(-1)[0].channels, 6);
+  assert.equal(updates.at(-1)[0].sampleRate, 48000);
+  assert.equal(updates.at(-1)[0].bitrate, 384000);
+  assert.equal(updates.at(-1)[0].isDefault, null, 'the SDK does not expose a container-default flag here');
+  await port.selectAudioTrack('auto');
+  assert.equal(f.player.deselectedTrack, 3);
+  assert.equal(updates.at(-1).find(track => track.id === '2').selected, true);
   await port.release();
 });
 

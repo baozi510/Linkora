@@ -48,6 +48,7 @@ export { RecentMediaItem } from './src/main/ets/models/RecentMediaItem';
 export { AdapterRuntime, DiscoveryMethod, NETWORK_PROTOCOL_CAPABILITIES, ProtocolCapability,
   RemoteProtocol, SourceFamily } from './src/main/ets/models/RemoteSource';
 export { PlaybackEngine } from './src/main/ets/playback/PlaybackEngine';
+export { AudioTrackChoice, AudioTrackPreferences, AudioTrackRepository } from './src/main/ets/playback/AudioTrackPreferences';
 export { PlayerBackendCapabilities, PlayerBackendKind, PlayerBackendPreference,
   PlaybackBackend } from './src/main/ets/playback/PlaybackBackend';
 export { PlaybackBackendSelector } from './src/main/ets/playback/PlaybackBackendSelector';

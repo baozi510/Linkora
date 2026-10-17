@@ -264,17 +264,19 @@ export class PlaybackEngine {
     }
   }
 
-  async selectAudioTrack(id: string): Promise<void> {
+  async selectAudioTrack(id: string): Promise<boolean> {
     const port: PlaybackPort | null = this.port;
-    if (port === null) return;
+    if (port === null) return false;
     const sessionId: number = this.sessionId;
     try {
-      if (!this.tracks.some((track: PortTrack) => track.kind === PortTrackKind.AUDIO && track.id === id)) {
+      if (id !== 'auto' && !this.tracks.some((track: PortTrack) => track.kind === PortTrackKind.AUDIO && track.id === id)) {
         throw new PlaybackPortError(401, 'Unknown audio track');
       }
       await port.selectAudioTrack(id);
+      return this.isCurrent(sessionId) && this.port === port;
     } catch (error) {
       if (this.isCurrent(sessionId) && this.port === port) this.warn('audio-track', this.portError(error));
+      return false;
     }
   }
 

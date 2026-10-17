@@ -222,6 +222,10 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
 
   async selectAudioTrack(id: string): Promise<void> {
     this.ensureReady();
+    if (id === 'auto') {
+      this.player.native.setProperty('aid', 'auto');
+      return;
+    }
     const track = this.player.state.tracks.audio.find((item) => item.id === id);
     if (track === undefined) throw new PlaybackPortError(401, 'Audio track is unavailable');
     this.player.setAudioTrack(track);
@@ -455,19 +459,47 @@ export class MpvPlaybackPort implements PlaybackBackend, EventObserver {
 
   private mapTracks(tracks: Tracks, selected: Track): PortTrack[] {
     const result: PortTrack[] = [];
+    const details: Map<string, PortTrack> = this.audioTrackDetails();
     for (const track of tracks.video) {
       result.push(new PortTrack(track.id, PortTrackKind.VIDEO, track.codec, track.lang,
         track.title, selected.video.id === track.id));
     }
     for (const track of tracks.audio) {
+      const info: PortTrack | undefined = details.get(track.id);
       result.push(new PortTrack(track.id, PortTrackKind.AUDIO, track.codec, track.lang,
-        track.title, selected.audio.id === track.id));
+        track.title, selected.audio.id === track.id, info?.channels ?? 0, info?.sampleRate ?? 0,
+        info?.bitrate ?? 0, info?.isDefault ?? null));
     }
     for (const track of tracks.subs) {
       result.push(new PortTrack(track.id, PortTrackKind.SUBTITLE, track.codec, track.lang,
         track.title, selected.subs.id === track.id));
     }
     return result;
+  }
+
+  private audioTrackDetails(): Map<string, PortTrack> {
+    const result: Map<string, PortTrack> = new Map();
+    const count: number = this.audioPropertyNumber('track-list/count');
+    if (!Number.isInteger(count) || count > 512) return result;
+    for (let index: number = 0; index < count; index++) {
+      const prefix: string = `track-list/${index}/`;
+      if (this.audioPropertyText(`${prefix}type`) !== 'audio') continue;
+      const id: string = this.audioPropertyText(`${prefix}id`);
+      const flag: string = this.audioPropertyText(`${prefix}default`);
+      result.set(id, new PortTrack(id, PortTrackKind.AUDIO, '', '', '', false,
+        this.audioPropertyNumber(`${prefix}demux-channel-count`),
+        this.audioPropertyNumber(`${prefix}demux-samplerate`), this.audioPropertyNumber(`${prefix}demux-bitrate`),
+        flag === 'yes' ? true : (flag === 'no' ? false : null)));
+    }
+    return result;
+  }
+
+  private audioPropertyText(name: string): string {
+    try { return this.player.native.getPropertyString(name) ?? ''; } catch (_error) { return ''; }
+  }
+
+  private audioPropertyNumber(name: string): number {
+    try { return this.player.native.getProperty(name) ?? 0; } catch (_error) { return 0; }
   }
 
   private failPrepare(error: PlaybackPortError): void {

@@ -196,6 +196,24 @@ test('MPV selects an existing native audio track and rejects unknown ids', async
   await port.release();
 });
 
+test('MPV auto and optional track metadata use the native properties', async () => {
+  const f = fixture(), port = await f.create();
+  const pending = port.prepare(); f.loaded(); await pending;
+  await port.selectAudioTrack('auto');
+  assert.equal(f.player.properties.get('aid'), 'auto');
+  let tracks;
+  f.observer.onTracksChange = value => { tracks = value; };
+  for (const [name, value] of Object.entries({ 'track-list/count': 1, 'track-list/0/type': 'audio',
+    'track-list/0/id': '3', 'track-list/0/demux-channel-count': 6, 'track-list/0/demux-samplerate': 48000,
+    'track-list/0/demux-bitrate': 384000, 'track-list/0/default': 'yes' })) f.player.properties.set(name, value);
+  f.player.stream.tracks.add(f.player.state.tracks);
+  assert.equal(tracks.find(track => track.id === '3').channels, 6);
+  assert.equal(tracks.find(track => track.id === '3').sampleRate, 48000);
+  assert.equal(tracks.find(track => track.id === '3').isDefault, true);
+  assert.equal(tracks.find(track => track.id === '2').isDefault, null);
+  await port.release();
+});
+
 test('MPV unload before FILE_LOADED rejects preparation without waiting for timeout', { timeout: 1000 }, async () => {
   const f = fixture(), port = await f.create();
   const pending = assert.rejects(port.prepare(), error => error.detail.includes('before preparation'));
