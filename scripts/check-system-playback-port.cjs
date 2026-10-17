@@ -460,6 +460,37 @@ test('System display modes use native enums, not the misleading FIT name', async
   assert.equal(modes.length, 4);
 });
 
+test('System restores default fit and user-selected scale after native first-frame resets', async () => {
+  const f = fixture(), c = f.core, modes = [];
+  const items = ['a', 'b'].map(id => new c.PlaybackPlaylistItem(id, c.MediaSource.fromLocalDocument('file://' + id + '.mp4')));
+  const port = await f.create(new c.PlaybackPlaylist(items, 0, true));
+  f.observer.onDisplayModeChange = value => modes.push(value);
+  await port.prepare();
+  f.player.videoScaleType = 0;
+  f.player.emit('startRenderFrame');
+  assert.equal(f.player.videoScaleType, 2, 'first frame must use proportional fit by default');
+  for (const [mode, native] of [['fit', 2], ['crop', 1], ['stretch', 0]]) {
+    port.setDisplayMode(mode);
+    await port.selectPlaylistItem(1);
+    f.player.videoScaleType = 0;
+    f.player.emit('startRenderFrame');
+    assert.equal(f.player.videoScaleType, native);
+    assert.equal(modes.at(-1), mode);
+  }
+  await port.release();
+});
+
+test('System reports failed first-frame scale recovery without stopping playback', async () => {
+  const f = fixture(), port = await f.create(), warnings = [];
+  f.observer.onWarning = (operation, error) => warnings.push([operation, error.code]);
+  await port.prepare();
+  Object.defineProperty(f.player, 'videoScaleType', { get: () => 0, set() {} });
+  f.player.emit('startRenderFrame');
+  assert.deepEqual(warnings, [['display-mode', 5400102]]);
+  await port.play(); assert.equal(f.player.state, 'playing');
+  await port.release();
+});
+
 test('System cannot acknowledge a display mode the backend did not accept', async () => {
   const f = fixture(), port = await f.create(), modes = [];
   f.observer.onDisplayModeChange = value => modes.push(value);

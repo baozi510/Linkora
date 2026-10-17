@@ -485,6 +485,8 @@ test('display mode defaults to fit, survives reopening, and fences old callbacks
   const source = f.core.MediaSource.fromLocalDocument('file://one.mp4');
   await engine.open(source, 'surface');
   assert.equal(snapshots.at(-1).displayMode, 'fit');
+  f.backends.at(-1).events.onWarning('display-mode', new f.core.PlaybackPortError(5400102));
+  assert.equal(snapshots.at(-1).displayMode, null, 'failed native recovery must invalidate earlier acknowledgement');
   engine.setDisplayMode('crop'); assert.equal(snapshots.at(-1).displayMode, 'crop');
   await engine.open(source, 'surface'); assert.equal(snapshots.at(-1).displayMode, 'crop');
   const before = snapshots.length;

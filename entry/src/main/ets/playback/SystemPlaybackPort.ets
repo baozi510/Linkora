@@ -41,6 +41,7 @@ export class SystemPlaybackPort implements PlaybackBackend {
   private playlistReady: boolean = false;
   private initialSelectionId: string = '';
   private loopRequestId: number = 0;
+  private displayMode: VideoDisplayMode = VideoDisplayMode.FIT;
   private singleSourceLoopMode: PlaybackLoopMode = PlaybackLoopMode.SEQUENCE;
 
   private constructor(player: media.AVPlayer, observer: PlaybackPortObserver) {
@@ -323,6 +324,7 @@ export class SystemPlaybackPort implements PlaybackBackend {
     try {
       this.player.videoScaleType = scale;
       if (this.player.videoScaleType !== scale) throw new PlaybackPortError(5400102, 'Display mode not applied');
+      this.displayMode = mode;
       this.observer.onDisplayModeChange(mode);
     } catch (error) {
       throw SystemPlaybackPort.platformError(error);
@@ -428,6 +430,10 @@ export class SystemPlaybackPort implements PlaybackBackend {
     });
     this.player.on('startRenderFrame', () => {
       if (this.released) return;
+      // Native playlist transitions can reset scaling after preparation.
+      try { this.setDisplayMode(this.displayMode); } catch (error) {
+        this.observer.onWarning('display-mode', SystemPlaybackPort.platformError(error));
+      }
       this.observer.onFirstFrame();
       // Playlist metadata may still be empty at the content-change callback.
       if (this.tracks.length === 0) this.refreshTracks().catch(() => {});

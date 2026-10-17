@@ -418,7 +418,10 @@ export class PlaybackEngine {
         if (this.isCurrent(sessionId)) { this.audioOutput = event; this.notify(); }
       },
       (operation: string, error: PlaybackPortError) => {
-        if (this.isCurrent(sessionId)) this.warn(operation, error);
+        if (this.isCurrent(sessionId)) {
+          if (operation === 'display-mode') this.displayMode = null;
+          this.warn(operation, error);
+        }
       },
       (mode: VideoDisplayMode) => {
         if (this.isCurrent(sessionId)) {
