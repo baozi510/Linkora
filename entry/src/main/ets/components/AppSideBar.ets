@@ -80,6 +80,6 @@ export struct AppSideBar {
     }
     .width(AppLayout.SIDE_BAR_WIDTH)
     .height('100%')
-    .backgroundColor(AppColors.NAVIGATION_BACKGROUND)
+    .background(AppColors.NAVIGATION_BACKGROUND, { ignoresLayoutSafeAreaEdges: [LayoutSafeAreaEdge.ALL] })
   }
 }

@@ -761,7 +761,7 @@ export struct LibraryPage {
     .width('100%')
     .height(AppLayout.BOTTOM_BAR_HEIGHT)
     .justifyContent(FlexAlign.Center)
-    .backgroundColor(AppColors.NAVIGATION_BACKGROUND)
+    .background(AppColors.NAVIGATION_BACKGROUND, { ignoresLayoutSafeAreaEdges: [LayoutSafeAreaEdge.BOTTOM] })
   }
 
   @Builder
@@ -792,7 +792,7 @@ export struct LibraryPage {
     .width('100%')
     .height(AppLayout.TOP_BAR_HEIGHT)
     .padding({ left: AppSpacing.PAGE_HORIZONTAL, right: AppSpacing.PAGE_HORIZONTAL })
-    .backgroundColor(AppColors.NAVIGATION_BACKGROUND)
+    .background(AppColors.NAVIGATION_BACKGROUND, { ignoresLayoutSafeAreaEdges: [LayoutSafeAreaEdge.TOP] })
   }
 
   private selectBrowseMode(mode: LocalBrowseMode): void {

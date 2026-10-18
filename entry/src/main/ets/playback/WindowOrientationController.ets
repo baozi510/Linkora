@@ -1,5 +1,6 @@
 import { common } from '@kit.AbilityKit';
 import { window } from '@kit.ArkUI';
+import { AppThemeController } from '../ui/AppThemeController';
 
 export enum PlayerScreenDirection {
   FOLLOW_SYSTEM = 'follow_system',
@@ -14,6 +15,7 @@ export class WindowOrientationController {
   private tail: Promise<void> = Promise.resolve();
   private closed: boolean = false;
   private immersive: boolean = false;
+  private controlsVisible: boolean = true;
   private restoring: Promise<void> | null = null;
 
   constructor(context: common.UIAbilityContext) {
@@ -34,7 +36,7 @@ export class WindowOrientationController {
       const appWindow: window.Window = await this.ready;
       if (this.closed) throw new Error('Playback window owner closed');
       if (!this.immersive) {
-        await appWindow.setWindowSystemBarEnable([]);
+        await AppThemeController.setPlaybackSystemBars(appWindow, true, this.controlsVisible);
         this.immersive = true;
         if (this.closed) throw new Error('Playback window owner closed');
       }
@@ -56,6 +58,18 @@ export class WindowOrientationController {
     return operation;
   }
 
+  setControlsVisible(visible: boolean): Promise<void> {
+    this.controlsVisible = visible;
+    const operation: Promise<void> = this.tail.then(async () => {
+      if (this.closed) throw new Error('Playback window owner closed');
+      const appWindow: window.Window = await this.ready;
+      if (this.closed) throw new Error('Playback window owner closed');
+      await AppThemeController.setPlaybackSystemBars(appWindow, true, this.controlsVisible);
+    });
+    this.tail = operation.catch(() => {});
+    return operation;
+  }
+
   restore(): Promise<void> {
     if (this.restoring !== null) return this.restoring;
     this.closed = true;
@@ -68,8 +82,8 @@ export class WindowOrientationController {
           if (appWindow.getPreferredOrientation() !== this.original) throw new Error('Original screen direction not restored');
         }
       } finally {
-        // The surrounding app always shows its normal status/navigation bars.
-        await appWindow.setWindowSystemBarEnable(['status', 'navigation']);
+        // Leaving playback restores ordinary-page layout and visible system bars.
+        await AppThemeController.setPlaybackSystemBars(appWindow, false);
       }
     });
     WindowOrientationController.previousRestore = this.restoring;

@@ -62,7 +62,7 @@ export struct AdaptiveAppShell {
     }
     .width('100%')
     .height('100%')
-    .backgroundColor(AppColors.BACKGROUND)
+    .background(AppColors.BACKGROUND, { ignoresLayoutSafeAreaEdges: [LayoutSafeAreaEdge.ALL] })
     .onAreaChange((_oldValue: Area, newValue: Area) => {
       const width: number = Number(newValue.width);
       if (width > 0 && width !== this.windowWidth) {

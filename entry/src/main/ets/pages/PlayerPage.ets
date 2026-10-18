@@ -15,6 +15,10 @@ import { PlayerScreenDirection, WindowOrientationController } from '../playback/
 
 @ComponentV2
 export struct PlayerPage {
+  @Consumer('linkoraSafeAreaTop') private safeAreaTop: number = 0;
+  @Consumer('linkoraSafeAreaBottom') private safeAreaBottom: number = 0;
+  @Consumer('linkoraSafeAreaLeft') private safeAreaLeft: number = 0;
+  @Consumer('linkoraSafeAreaRight') private safeAreaRight: number = 0;
   @Param source: MediaSource = MediaSource.empty();
   @Param playlist: PlaybackPlaylist | null = null;
   @Param settings: AppSettings = new AppSettings();
@@ -49,6 +53,7 @@ export struct PlayerPage {
   private orientationController: WindowOrientationController | null = null;
   private active: boolean = false;
   private closing: boolean = false;
+  private controlsRequestId: number = 0;
   private abilityContext: common.UIAbilityContext | null = null;
   private backgroundObserver: () => void = () => {
     this.handleAppBackground();
@@ -81,7 +86,7 @@ export struct PlayerPage {
       }
     }, this.playlist);
     this.gestureController = new PlayerGestureController(new PlayerGestureCallbacks(
-      () => { this.controlsVisible = !this.controlsVisible; },
+      () => { this.setControlsVisible(!this.controlsVisible); },
       () => {
         this.controller?.togglePlayback();
       },
@@ -143,7 +148,24 @@ export struct PlayerPage {
     this.controller = null;
   }
 
+  private setControlsVisible(visible: boolean): void {
+    this.controlsVisible = visible;
+    const requestId: number = ++this.controlsRequestId;
+    const owner: WindowOrientationController | null = this.orientationController;
+    owner?.setControlsVisible(visible).catch((error: Object) => {
+      console.error('[PlayerWindow] System bars failed: ' + String(error));
+      if (!this.active || this.orientationController !== owner || requestId !== this.controlsRequestId) return;
+      this.controlsVisible = true;
+      owner?.setControlsVisible(true).catch((recoveryError: Object) => {
+        console.error('[PlayerWindow] System bars restore failed: ' + String(recoveryError));
+      });
+    });
+  }
+
   private applyFeatureState(state: PlayerFeatureState): void {
+    if (state.playback.status === PlaybackStatus.ERROR && this.snapshot.status !== PlaybackStatus.ERROR) {
+      this.setControlsVisible(true);
+    }
     this.snapshot = state.playback;
     this.sliderPosition = state.sliderPosition;
     this.isSeeking = state.seeking;
@@ -441,6 +463,7 @@ export struct PlayerPage {
         }
       }
       .width('100%')
+      .padding({ top: this.safeAreaTop })
       .backgroundColor('#990B0D12')
       Blank()
         .hitTestBehavior(HitTestMode.None)
@@ -479,6 +502,7 @@ export struct PlayerPage {
     }
     .width('100%')
     .height('100%')
+    .padding({ left: this.safeAreaLeft, right: this.safeAreaRight, bottom: this.safeAreaBottom })
     .hitTestBehavior(HitTestMode.Transparent)
   }
 

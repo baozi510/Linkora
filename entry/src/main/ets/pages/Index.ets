@@ -24,6 +24,7 @@ import { SystemComponentDemoPage } from './SystemComponentDemoPage';
 import { image } from '@kit.ImageKit';
 import { LocalMediaThumbnailLoader } from '../services/LocalMediaThumbnailLoader';
 import { HiddenLocalItem, HiddenLocalItemStore } from '../services/HiddenLocalItemStore';
+import { AppColors } from '../ui/AppTheme';
 import { AppThemeController } from '../ui/AppThemeController';
 
 @Entry
@@ -48,8 +49,10 @@ struct Index {
   @Local private selectedLocalEntryKeys: string[] = [];
   @Local private settings: AppSettings = new AppSettings();
   @Local private settingsSaving: boolean = false;
-  @Local private safeAreaTop: number = 0;
-  @Local private safeAreaBottom: number = 0;
+  @Provider('linkoraSafeAreaTop') private safeAreaTop: number = 0;
+  @Provider('linkoraSafeAreaBottom') private safeAreaBottom: number = 0;
+  @Provider('linkoraSafeAreaLeft') private safeAreaLeft: number = 0;
+  @Provider('linkoraSafeAreaRight') private safeAreaRight: number = 0;
   @Provider('linkoraAccentColor') private accentColor: string = AppAccentColor.SYSTEM;
 
   private navigationStack: NavPathStack = new NavPathStack();
@@ -101,17 +104,22 @@ struct Index {
     }
     try {
       const systemArea: window.AvoidArea = appWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM);
+      const cutout: window.AvoidArea = appWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_CUTOUT);
       const navigationArea: window.AvoidArea =
         appWindow.getWindowAvoidArea(window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR);
-      const top: number = this.getUIContext().px2vp(systemArea.visible ? systemArea.topRect.height : 0);
-      const bottom: number = this.getUIContext().px2vp(Math.max(
-        systemArea.visible ? systemArea.bottomRect.height : 0,
-        navigationArea.visible ? navigationArea.bottomRect.height : 0));
-      this.safeAreaTop = top;
-      this.safeAreaBottom = bottom;
+      const ui = this.getUIContext();
+      this.safeAreaTop = ui.px2vp(Math.max(systemArea.visible ? systemArea.topRect.height : 0,
+        cutout.topRect.top + cutout.topRect.height));
+      this.safeAreaBottom = ui.px2vp(Math.max(systemArea.visible ? systemArea.bottomRect.height : 0,
+        navigationArea.visible ? navigationArea.bottomRect.height : 0, cutout.bottomRect.height));
+      this.safeAreaLeft = ui.px2vp(Math.max(systemArea.visible ? systemArea.leftRect.width : 0,
+        cutout.leftRect.left + cutout.leftRect.width));
+      this.safeAreaRight = ui.px2vp(Math.max(systemArea.visible ? systemArea.rightRect.width : 0,
+        cutout.rightRect.width));
     } catch (_error) {
       this.safeAreaTop = 0;
       this.safeAreaBottom = 0;
+      this.safeAreaLeft = 0; this.safeAreaRight = 0;
     }
   }
 
@@ -628,6 +636,6 @@ struct Index {
     .navDestination(this.destinationBuilder)
     .width('100%')
     .height('100%')
-    .padding({ top: this.safeAreaTop, bottom: this.safeAreaBottom })
+    .background(AppColors.BACKGROUND, { ignoresLayoutSafeAreaEdges: [LayoutSafeAreaEdge.ALL] })
   }
 }

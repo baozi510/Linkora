@@ -40,6 +40,6 @@ export struct AppBottomBar {
     .width('100%')
     .height(AppLayout.BOTTOM_BAR_HEIGHT)
     .padding({ left: 8, right: 8 })
-    .backgroundColor(AppColors.NAVIGATION_BACKGROUND)
+    .background(AppColors.NAVIGATION_BACKGROUND, { ignoresLayoutSafeAreaEdges: [LayoutSafeAreaEdge.BOTTOM] })
   }
 }

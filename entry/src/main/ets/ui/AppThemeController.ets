@@ -5,6 +5,10 @@ import { deviceInfo } from '@kit.BasicServicesKit';
 import { AppThemeMode } from 'linkora_core';
 
 export class AppThemeController {
+  private static systemBars: Promise<void> = Promise.resolve();
+  private static playback: boolean = false;
+  private static controlsVisible: boolean = true;
+  private static normalContent: string = '#171A21';
   private static currentMode: AppThemeMode = AppThemeMode.SYSTEM;
 
   static apply(context: common.UIAbilityContext, mode: AppThemeMode): void {
@@ -18,6 +22,13 @@ export class AppThemeController {
       // API 12-17 continues to follow the system resource qualifier.
     }
     AppThemeController.updateSystemBars(context, effectiveMode).catch(() => {});
+  }
+
+  static setPlaybackSystemBars(appWindow: window.Window, playback: boolean,
+    controlsVisible: boolean = true): Promise<void> {
+    AppThemeController.playback = playback;
+    AppThemeController.controlsVisible = controlsVisible;
+    return AppThemeController.enqueueSystemBars(() => AppThemeController.applySystemBars(appWindow));
   }
 
   static supportsManualMode(): boolean {
@@ -38,21 +49,32 @@ export class AppThemeController {
     return ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET;
   }
 
-  private static async updateSystemBars(context: common.UIAbilityContext, mode: AppThemeMode): Promise<void> {
-    try {
+  private static updateSystemBars(context: common.UIAbilityContext, mode: AppThemeMode): Promise<void> {
+    return AppThemeController.enqueueSystemBars(async () => {
       const dark: boolean = AppThemeController.isDark(context, mode);
-      const content: string = await AppThemeController.resourceColor(context,
+      AppThemeController.normalContent = await AppThemeController.resourceColor(context,
         $r('sys.color.font_primary'), dark, dark ? '#F4F5F7' : '#171A21');
       const appWindow: window.Window = await window.getLastWindow(context);
-      await appWindow.setWindowLayoutFullScreen(true);
-      await appWindow.setWindowSystemBarProperties({
-        statusBarColor: '#00000000',
-        navigationBarColor: '#00000000',
-        statusBarContentColor: content,
-        navigationBarContentColor: content
-      });
-    } catch (_error) {
-    }
+      await AppThemeController.applySystemBars(appWindow);
+    });
+  }
+
+  private static async applySystemBars(appWindow: window.Window): Promise<void> {
+    await appWindow.setWindowLayoutFullScreen(AppThemeController.playback);
+    const content: string = AppThemeController.playback ? '#F4F5F7' : AppThemeController.normalContent;
+    await appWindow.setWindowSystemBarProperties({
+      statusBarColor: '#00000000', navigationBarColor: '#00000000',
+      statusBarContentColor: content, navigationBarContentColor: content
+    });
+    const visible: boolean = !AppThemeController.playback || AppThemeController.controlsVisible;
+    await appWindow.setWindowSystemBarEnable(visible ? ['status', 'navigation'] : []);
+    await appWindow.setSpecificSystemBarEnabled('navigationIndicator', visible);
+  }
+
+  private static enqueueSystemBars(operation: () => Promise<void>): Promise<void> {
+    const result: Promise<void> = AppThemeController.systemBars.then(operation);
+    AppThemeController.systemBars = result.catch(() => {});
+    return result;
   }
 
   private static async resourceColor(context: common.UIAbilityContext, resource: Resource,

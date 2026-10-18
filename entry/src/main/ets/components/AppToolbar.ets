@@ -57,6 +57,6 @@ export struct AppToolbar {
     .width('100%')
     .height(AppLayout.TOP_BAR_HEIGHT)
     .padding({ left: this.showBack ? 0 : AppSpacing.PAGE_HORIZONTAL, right: AppSpacing.PAGE_HORIZONTAL })
-    .backgroundColor(AppColors.NAVIGATION_BACKGROUND)
+    .background(AppColors.NAVIGATION_BACKGROUND, { ignoresLayoutSafeAreaEdges: [LayoutSafeAreaEdge.TOP] })
   }
 }
